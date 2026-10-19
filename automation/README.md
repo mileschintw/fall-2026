@@ -10,5 +10,8 @@ Claude desktop app 的四個排程任務（app 的 Scheduled 頁面）都在這�
 | fall-2026-deadline-alert | [deadline-alert.md](deadline-alert.md) | 每天 08:00、18:00 | 推播 + `state/alerts_sent.json` |
 | fall-2026-lecture-notes | [lecture-notes.md](lecture-notes.md) | 週二、三、四 10:00 | `<course>/lectures/<日期>/notes.md` |
 
+## 看結果
+每次執行都會登記到 [`digests/INDEX.md`](../digests/INDEX.md)，最新的在最上面；有新東西時還會推播。共同收尾的規則在 [_finish.md](_finish.md)。
+
 ## 學期至今版
 排程產生的是日報和週報。要從開學到某一天的完整版本，在 session 裡說「做一份學期至今版」，輸出放在 `digests/semester-to-date/<日期>-{brief,plan,deadlines}.md`。第一份是 2026-10-18。
