@@ -13,15 +13,17 @@
 | Canvas ICS（不用登入） | ✅ 通 | 原始 GPU 8 / DSA 126 筆（和 BOOTSTRAP 一致）；過濾後 GPU 2 / DSA 41；11/1 後的換算已確認（A5 `2026-11-07T07:59:59Z` → 11/06 11:59 PM PST） |
 | GitHub（gh） | ✅ 通 | 4 個 repo：in-class-code、assignment-1/2/3 |
 | GPU SharePoint 逐字稿 | ✅ 通 | L1、L2 的 VTT 都抓到了：254,150 / 332,408 字元，1897 / 2554 cues，SHA-256 和瀏覽器端一致 |
-| DSA Panopto 字幕 | ✅ 通（**不需要 OAuth**） | `Data.svc/GetSessions` 列出 6 個 session；5 堂課的 SRT 都存了（831–1066 cues），SHA-256 一致 |
+| DSA Panopto 字幕 | ✅ 通（目前 Panopto session 有效） | `Data.svc/GetSessions` 列出 6 個 session；5 堂課的 SRT 都存了（831–1066 cues），SHA-256 一致。Canvas 的「Panopto Recordings」分頁截圖顯示可以直接載入錄影清單，**沒有出現 OAuth 確認頁**（§10.2 那一頁應該已經授權過）。session 過期後如果又跳出確認頁，要你自己按授權 |
 | Piazza | ✅ 通 | feed 12 篇；已讀重點貼文，基準寫在 `dsa/piazza/` |
 | Teams General | ✅ 通（只讀 UI） | 載入約 12 秒；讀到 7 則頂層貼文，基準寫在 `gpu/announcements/` |
-| 排程任務 + 內建瀏覽器 | ✅ 通（有前提） | 手動觸發晨報，約 2 分鐘跑完，Canvas、Piazza、SharePoint、Teams 都讀到了，產出 `digests/2026-10-18.md` |
+| 排程任務 + 內建瀏覽器 | ✅ 通（有前提） | 手動觸發晨報，約 2 分鐘跑完，產出 `digests/2026-10-18.md`；查了該 session 的 transcript，確實有呼叫 `mcp__Claude_Browser__javascript_tool`，Canvas、Piazza、SharePoint、Teams 都讀到了 |
 | GitHub private repo + push | ⏸ 等使用者 | 依 §9.10 還沒建，也還沒 push；本機已有一個 commit |
 
 **排程的前提**：這次是在 app 開著、這個 session 也開著瀏覽器的情況下觸發的。早上 07:00 無人值守時會不會一樣，要看明天第一次自動執行的晨報，它的「資料來源狀態」那一段會寫明瀏覽器能不能用。如果不行，就退回 BOOTSTRAP §8 的兩層設計：排程只跑 ICS 和 gh（`scripts/digest_base.py` 本來就能獨立跑），瀏覽器的部分等你開 session 說「更新」時再抓。
 
 ## 和 BOOTSTRAP §2 的差異
+- **Syllabus**：GPU syllabus 的時程、配分、遲交規則、AI 政策都和 §2.1 一致。DSA syllabus 寫「Final Exam … taken during finals week」，但依 §3（課堂口述 > syllabus），還是以 12/9（三）最後一週上課日、實體考試為準。DSA syllabus 寫的是「More Hall」（應為 Moore Hall）。
+- **GPU L1 講義**：file `154353784` 就是 `Au26_GPU-Compute_Lecture1_updated.pdf`（10/14 更新），所以 `slides.txt` 是更正後的版本。
 - **GPU**：HW2 之後的作業在 Canvas 上都**還沒發布**（只有 Task 0 和 HW1）。HW1 的 `due_at` 和 §2 一致。Canvas 沒有新公告。
 - **GPU L1 錄影**從 18:48 才開始錄，前面約 18 分鐘沒有逐字稿。
 - **GPU L2**：老師口頭提到作業裡有 Gaussian blur，但 HW1 的標題是 SAXPY / Matrix addition，去年 blur 是 HW2。已列為待釐清。
@@ -36,6 +38,8 @@
 - `gpu/assignments.md`、`dsa/assignments.md`、`dsa/repos.md`、公告與 Teams／Piazza 的基準
 - 逐字稿：`gpu/lectures/2026-10-06|13/transcript.vtt` + `slides.txt`；`dsa/lectures/2026-09-30…10-14/transcript.srt`
 - `/lecture-notes` skill（`.claude/skills/lecture-notes/SKILL.md`），用 GPU L2 試做了一份：`gpu/lectures/2026-10-13/notes.md`（254 行、80 個時間戳，抽查都對得上 VTT）
+- 偵測新教材的基準：`state/canvas_seen.json`，涵蓋 GPU Files 4 個、DSA module items 23 個、Panopto 6 個、syllabus 長度。晨報會比對並報告新講義和新錄影。
+- `.gitattributes`：VTT/SRT 不做換行轉換，clone 下來的檔案 SHA 不會變
 - 腳本：`scripts/tz.py`、`ics_fetch.py`、`digest_base.py`、`condense_transcript.py`、`save_browser_result.py`、`write_transcripts.py`、`github_assignments.ps1`、`browser/{canvas,sharepoint,sharepoint_list,panopto,piazza}.js`
 - 排程任務（cron 用本機時間，這台電腦本來就設 Pacific）：
 
