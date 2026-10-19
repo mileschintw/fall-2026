@@ -6,6 +6,7 @@
    a. Canvas：用 preview_start 開 https://canvas.uw.edu/courses/1917398 ，在該分頁用 javascript_tool 跑 scripts/browser/canvas.js 的內容（結果大時 harness 會存到 tool-results 檔，用 python 讀）。和 state/canvas_seen.json 比對並報告：
       - posted_at 在過去 24 小時內、且非 null 的公告（id 不在 gpu_announcement_ids）；
       - 新的作業 id 或 due_at 變動（和 gpu/assignments.md、dsa/assignments.md 比對；有變動就更新這兩個檔）；
+      - 繳交狀態：每個作業的 `sub`（含已過截止的）和 state/deadlines.json 同 `canvas_id` 那一列比對。`submitted` / `pending_review` → `status: "已交"`、`done: true`；`graded` → `status: "已評分"`、`done: true`（原本已寫分數就保留）；`unsubmitted` 不動。以 Canvas 為準，不另外標遲交。有變動就同步改 gpu/assignments.md、dsa/assignments.md 的「繳交狀態」欄，並在晨報列出；
       - GPU 新檔案（files 的 id 不在 gpu_file_ids，例如新講義 PDF、新 HW 說明）；
       - DSA 新 module item（item_id 不在 dsa_module_item_ids；ExternalTool = 新錄影、File = 新講義/筆記、Page = 新說明頁）；
       - syllabus_len 和基準不同 → 標「syllabus 有修改，請人工比對」。
