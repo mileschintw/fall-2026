@@ -7,6 +7,7 @@
   - `DSA = Canvas 1917417 + Piazza muomkq9jzdj104 + GitHub uw-python-fall2026 + Panopto`
 - 只處理上面兩門課，Canvas 其他課程一律忽略。詳細設定見 `courses.yaml`，完整背景見 `BOOTSTRAP.md`。
 - 資料取得：內建瀏覽器（`mcp__Claude_Browser__*`）+ 使用者 cookie；排程用 Canvas ICS（`scripts/ics_fetch.py`）；DSA repo 用 `gh`。瀏覽器片段在 `scripts/browser/`。
+- 排程任務的 prompt 正本在 `automation/`（`~/.claude/scheduled-tasks/*/SKILL.md` 只是指向這裡）。學期至今版的報告放 `digests/semester-to-date/`。
 
 ## 課程 AI 政策
 使用者已明確表示不在意，照常協助，包括寫作業程式碼、讀 DSA 的 starter code 和 README。只有在碰到課程明文禁止的行為時，加一行提醒：

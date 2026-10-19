@@ -1,0 +1,426 @@
+# L1_Fall2026_ee590a.pdf（Canvas file 153729203，51 頁）
+
+
+===== p1 =====
+Data Structures, 
+Algorithms and Python 
+Lecture 1: Intro to Python, Data Structures and Algorithms 
+EE 590a 
+Fall 2026 
+Seattle 
+Adrienne Slaughter, Ph.D.
+===== p2 =====
+Agenda 
+   Course Intro 
+   Intro to Data Structures 
+   Coding demo/Intro to tools
+===== p3 =====
+Course Intro
+===== p4 =====
+Overview 
+   Lectures:   Monday, Wednesday, 4:30 - 6:20 
+   Mondays: Moore 220 
+   Wednesdays: Zoom (unless there’s a test!) 
+   Instructor:   Adrienne Slaughter ( ahandrew@uw.edu ) 
+   Office hours: 
+   Saturday 9:30am - 11am, Zoom 
+   Other times by Appointment 
+   Course material:   Canvas and GitHub 
+   Course discussion board:   Piazza 
+   Assignment grades:   Canvas 
+   Course assignment submission:   Canvas and GitHub
+===== p5 =====
+Contacting Me 
+   Piazza: 
+o   Private, personal message to me for personal stuff 
+o   Otherwise, tag appropriately (#hw1, #midterm,   etc ) 
+o   You can be anonymous, as long as use is appropriate 
+   Email: 
+o   ahandrew@uw.edu 
+o   BUT:   You have a better chance of a quicker reply if you send me a 
+message on Piazza!
+===== p6 =====
+Course 
+Objectives 
+This course will introduce techniques for solving 
+programming problems with fundamental algorithms and 
+data structures. This course will be taught with the Python 
+programming language. 
+By the end of the quarter, you will: 
+▪   Be able to enumerate, describe, and compare common 
+data structures 
+▪   Describe run time for algorithms 
+▪   Compare run time tradeoffs when using different data 
+structures and algorithms 
+▪   Implement algorithms in the Python language 
+▪   Be comfortable running substantial Python programs with 
+multiple components
+===== p7 =====
+Course 
+Overview 
+Week   Topic   Assignment Due 
+0: Sept 30   Intro to Course, Intro to Python   A1: My First Python Assignment 
+1: Oct 5   Big - O, Arrays, Linked Lists; 
+2: Oct 12   Stacks, Queues, Dynamics Arrays, Testing.   A2: Lists, lists and more lists. 
+3: Oct 19   Trees, Binary Search Trees   A3: Stacks, Queues and Testing 
+4: Oct 26   Trees: AVL, Red/Black Trees   A4: Bug Hunt 
+5: Nov 2   Hashtables   A5: BSTs and AVLs 
+6: Nov 9   MIDTERM   <No Class Wednesday> 
+7: Nov 16   Heaps 
+8: Nov 23   Graphs   Thanksgiving –   No Class Wed; probably   aync   class 
+A6: Heaps 
+9: Nov 3o   Advanced Data Structures: Tries, Skip - 
+lists, LRU cache 
+10: Dec 7   Summary/Review, FINAL   A7: TBD (Due Dec 11)
+===== p8 =====
+Grading 
+•   65%: Programming/Writing Assignments 
+•   15%: Midterm 
+•   20%: Final Exam 
+Grade Components 
+•   All assignments are due by 11:59pm on the assigned day 
+•   Late assignments will be dropped 25% per calendar day, and 
+no submissions will be accepted after 4 days 
+•   If you have a meaningful reason for delay (e.g., illness)   – 
+let me know 
+•   Exception to the late turn in policy : The final assignment 
+needs to be submitted on time 
+Late Policy
+===== p9 =====
+What if there's 
+a mistake? 
+   Request a regrade from Adrienne! 
+o   Grading will be done 1 week after submission 
+o   When grades are released, you will be given a deadline for regrade 
+requests 
+o   Request a regrade from Adrienne directly — Send a private note to 
+Adrienne tagged “Regrade Request” (on Piazza) 
+   DO NOT: 
+o   Ask the grader to change your grade 
+▪   ONLY ask the grader for clarification on a comment or feedback 
+o   Wait until the end of the quarter
+===== p10 =====
+Programming 
+Assignments 
+   Primary Goal: Put the ideas into practice 
+   Secondary Goal: 
+o   Become confident engineers 
+o   Get comfortable with Python 
+o   Master tools such as IDEs, git, GitHub, testing
+===== p11 =====
+Final Exam 
+   Goal: Review all the topics from the quarter 
+   "In - class" on the Tuesday of Finals Week (June 10, 2025) 
+o   Online (in Canvas) 
+o   Easy enough that it's harder to cheat than just answering   the 
+questions 
+o   Mostly multiple - choice, some short answers/writing
+===== p12 =====
+Cheating/ 
+Academic 
+Dishonesty 
+   DO talk to friends and classmates when you're stuck 
+o   Scenario:   You're stuck on a part of the   assigment .   You ask your friend 
+how they implemented it. 
+▪   Talk, without looking at code (maybe using paper to jot   psuedo - code) 
+▪   You look at their code 
+   DO NOT copy and paste someone else's work 
+o   Including from Stack Overflow or other sources 
+o   If you write code based on something you looked up, include a 
+citation in your code
+===== p13 =====
+Use of AI 
+   Official Course Policy   is: For the first 3 weeks, DO NOT USE AI TO 
+COMPLETE WORK FOR THIS COURSE. 
+o   Please DO NOT put provided starter code into any AI agent or 
+tool. 
+   Please do not use advanced code completion in your IDE 
+o   "Basic" code completion is fine 
+   Appropriate use: 
+o   "Explain to me" 
+o   "Alternatives to" 
+o   Syntax lookup 
+   Suggestions? Talk to me! 
+o   This is a rapidly evolving area. How you use AI
+===== p14 =====
+Motivation 
+behind my AI 
+Policy 
+   This is a pretty foundational course 
+o   The code is not difficult; the value is in you as a student thinking 
+through the problems and coming up with solutions 
+▪   You're building your problem solving skills — the core of being a good 
+engineer ! 
+o   People taking this course are doing it to learn basics and details that 
+you need to be a good software engineer 
+▪   And to ace interviews! 
+o   AFTER you take this course, it's reasonable to use AI tools to help 
+you with the code 
+▪   At that point, you'll have the experience to be critical about the output
+===== p15 =====
+Learning How 
+to Program 
+•   Be curious 
+•   Be open to "doing the wrong thing" 
+•   Type in and run examples 
+o   As opposed to copy/pasting 
+•   Ask questions 
+o   Answer other's questions! 
+o   Asking questions gives others opportunity to learn too
+===== p16 =====
+Materials and 
+Resources 
+   Grokking Algorithms —   Available free from UW Libraries 
+   PyCharm —   Available free for students from JetBrains 
+   GitHub
+===== p17 =====
+ If you have not been able to register for 
+this class, go to this link to be notified if 
+any spots open up: 
+ https://itconnect.uw.edu/tools - services - 
+support/academic - planning/notify - uw/
+===== p18 =====
+Intro to Data Structures
+===== p19 =====
+What are Data 
+Structures? 
+•   A structure used to store data. 
+•   Stores data called   elements 
+•   Typical operations: 
+•   add() 
+•   remove() 
+•   clear() 
+•   size() 
+•   contains() 
+•   isEmpty ()
+===== p20 =====
+Examples of 
+data structures 
+Why so many? 
+   Stack 
+   Lists (Array, Linked) 
+   Queue 
+   Maps 
+   Sets 
+   Trees 
+   Graphs
+===== p21 =====
+Set   Queue   Stack
+===== p22 =====
+Eventually, we will: 
+   Compare data structures based on: 
+   Characteristics 
+   LIFO? FIFO? Random Access? Can there be many copies of an element? 
+   Operations   we can perform on a data structure 
+   Performance and efficiency : 
+   How long does it take to put a piece of data in a data structure? 
+   How long does it take to get data out of a data structure? 
+   How much memory does the data structure use?
+===== p23 =====
+Arrays
+===== p24 =====
+What are 
+arrays? 
+   Contiguous chunk of memory 
+   Must hold the same type in every slot 
+   Element indices map to physical addresses in memory
+===== p25 =====
+Memory in 
+Computers
+===== p26 =====
+a[0]   15 
+a[1]   75 
+a[2]   - 14 
+a[3]   2 
+a[4]   0 
+a[5]   1 
+a[6]   - 7 
+a[7]   25 
+a[8]   100 
+a[9]   32 
+The name of the 
+array is   a . 
+Position number of 
+element within the array. 
+Value of element 0 in 
+array   a .
+===== p27 =====
+Declaring an 
+array 
+   Arrays occupy space in memory, so we have to declare the: 
+   name 
+   Type 
+   Python   dynamically resizes   arrays 
+   Many languages require you to specify how many items in the array 
+   When you want to add more than it was declared for, the developer 
+needs to re - declare and “move” the array to a new, bigger array
+===== p28 =====
+   >>>   my_array   = array(' i ', [1,2,3,4]) 
+Type   Optional Starting Values
+===== p29 =====
+Python types 
+in arrays 
+https://realpython.com/python - array/#arrays - in - python
+===== p30 =====
+Linked Lists
+===== p31 =====
+What is a Linked List? 
+A 
+Node 
+Data 
+Pointer to the 
+next Node
+===== p32 =====
+What is a Linked List? 
+A   6   2   K 4
+===== p33 =====
+Adding a Node to a Linked List 
+A   6   2   K 4 
+9 insert(9   )
+===== p34 =====
+An Alternative Way to Add a Node 
+A   6   2   K 4 
+9   insert(9   )
+===== p35 =====
+Another Alternative Way to Add a Node 
+A   6   2   K 4 
+9   insertBefore (9   ,   2   )
+===== p36 =====
+Deleting a 
+Node A   6   2   K 4 
+9 delete( 4   )
+===== p37 =====
+Deleting a Node 
+A   6   2   K 
+4 
+9 delete( 4   ) 
+? 
+What do we do with this rogue 
+node? 
+The short answer is I don’t know: 
+it depends! But you as the 
+developer need to consider if you 
+need to do something.
+===== p38 =====
+Deleting a Node:   The Algorithm 
+A   6   2   K 4 
+9 
+delete( 4   ) 
+node * myList 
+delete( 4   ): 
+Point   the   prev   node to the node 
+this node is   pointing at.
+===== p39 =====
+What if I know which   *data*   I 
+want to remove ( 4   ), 
+but I don’t know which 
+*NODE*   it is?
+===== p40 =====
+Deleting a Node:   The Algorithm 
+A   6   2   K 4 
+9 
+delete( 4   ) 
+node   myList 
+curNode   = the first node 
+while ( curNode   is not null): 
+If the data for the   curNode   is   4   : 
+Point   the   prev   node to the node this node   is 
+pointing at. 
+else:   curNode   = the node the   curNode   is   pointing   at.
+===== p41 =====
+Solving some problems: a Doubly Linked List 
+A 
+6 
+2 
+4 
+K 
+node   =   { 
+'data':   " - ", 
+' prev ':   None, 
+'next':   None 
+};
+===== p42 =====
+Solving some problems: a Doubly Linked List 
+A 
+6 
+2 
+4 
+K 
+linked_list   =   { 
+'head'   :   None 
+} 
+node   =   { 
+'data':   " - ", 
+' prev ':   None, 
+'next':   None 
+}
+===== p43 =====
+From Python 
+Visualizer
+===== p44 =====
+   Suppose you need to store a million numbers and you'll mostly be 
+reading them by index and rarely inserting or deleting. Which 
+structure, and why? 
+   Now flip it: you'll be constantly inserting and deleting from the 
+middle and rarely reading by position. Same question.
+===== p45 =====
+   Claude claims "linked lists are always better for insertion because 
+you don't have to shift anything." 
+   What's wrong or incomplete about that claim?
+===== p46 =====
+Intro to Python
+===== p47 =====
+What is 
+Python? 
+   Python is an   interpreted ,   object - oriented ,   high - level 
+programming language   with   dynamic semantics . 
+   Its   high - level built - in data structures , combined with 
+dynamic typing   and   dynamic binding , make it very 
+attractive for   Rapid Application Development , as well 
+as for use as a   scripting   or glue language to connect 
+existing components together. 
+   Python's   simple, easy to learn syntax   emphasizes 
+readability and therefore reduces the cost of program 
+maintenance. 
+https://www.python.org/doc/essays/blurb/
+===== p48 =====
+What is 
+Python? 
+   Python supports modules and packages, which 
+encourages program modularity   and   code reuse . The 
+Python interpreter and the extensive standard library 
+are available in source or binary form without charge 
+for all major platforms, and can be freely distributed. 
+https://www.python.org/doc/essays/blurb/
+===== p49 =====
+What is 
+Python? 
+   Developers like it because   it's easy to be productive 
+   There is no compilation step: the edit - test - debug cycle is 
+incredibly fast 
+   Debugging Python programs is easy: a bug or bad input will 
+never cause a segmentation fault. 
+   Instead, when the interpreter discovers an error, it raises an 
+exception. 
+   When the program doesn't catch the exception, the 
+interpreter prints a stack trace. 
+   A source level debugger allows inspection of local and global 
+variables, evaluation of arbitrary expressions, setting 
+breakpoints, stepping through the code a line at a time, and 
+so on. 
+   Print() is often the fastest way to debug: the fast edit - test - 
+debug cycle makes this simple approach very effective. 
+https://www.python.org/doc/essays/blurb/
+===== p50 =====
+What is Python 
+used for?
+===== p51 =====
+Working with 
+IDEs 
+   There are a million ways to run Python, and it can sometimes get 
+complicated 
+   In this class, we'll use PyCharm 
+   If you want to use something else, that's fine — but   I'll use PyCharm 
+for examples and we will   ensure support with PyCharm 
+   We'll also use notebooks 
+   Eventually, we'll talk about environments

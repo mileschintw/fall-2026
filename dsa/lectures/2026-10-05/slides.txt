@@ -1,0 +1,101 @@
+# Mod1_LInkedListsArrays_Monday.pdf（Canvas file 153960101，11 頁）
+
+
+===== p1 =====
+
+===== p2 =====
+Announcements   / restions 
+· 
+Github/Assignments . 
+· 
+Hongyr   OH 
+Last   Week 
+· 
+Arrays ·   Linked   Lists
+===== p3 =====
+Array -S 
+·   index   [   -   -   - 
+,   7 
+figrors   chunks *   con 
+of   memory   & 
+·   fixed   size 
+· 
+type :   same   type 
+[ A   : size :   3   A[O] 
+capacity   :   5
+===== p4 =====
+Resize   : 
+* 
+A   :   [ =   b(62(gm   -   - 
+] 
+Resize : 
+O(n)   - 
+Allocate   new 
+array   of   In   O(D 
+- 
+for   i   in   0   - 
+n   : N . 
+-A'[i]   =   A[i]   2 *   0() 
+0x)   +   n   . 
+0()   =   = 
+0() 
+& )   +   0(n)   = 
+O(n)
+===== p5 =====
+Insert   :   O(n) 
+A   : de 
+A   &   4 
+Remove/Shift   :   O(n)   * 
+A   :   [b de   --]
+===== p6 =====
+Linked 
+· 
+Node   : 
+- 
+Element/data 
+- 
+Pointer   to   next 
+·   Not   contig   vors-can 
+store   a list   who   giant 
+block   of   memory 
+.
+===== p7 =====
+Head Head 
+to Test capacity : 
+size :   3   F 
+Lookup   undex   :   O (v) 
+Insert :   -(1) 
+Insert   before   'C   :
+===== p8 =====
+Head I 
+[to Toyota 
+Remove'T' :   O (n)   F 
+Comman   Mistakes : 
+- 
+· 
+Updating   size 
+g
+===== p9 =====
+-Array vs 
+. Lk 
+·   Get   value   of   index   500 
+· 
+Insert   of   front   :   LL 
+·   Remove   a   front   :
+===== p10 =====
+Insert   5   at   index 2 . 
+[3   ,   7   ,   1   ,   9   ,   4) 
+I   [3   , ,   5 , 
+9   ,   4   - ] 
+* 
+to 
+· 
+Insert   S   · between   711   ↑ 
+Tail 
+#
+===== p11 =====
+
+
+# Canvas Page: Weekly Overview: Intro to Data Structures and Python
+
+This week is an intro to the course. We start by reviewing the course details, and then discuss what it means to study Data Structures and Algorithms. We then give a short introduction to Python, why it's so appealing, and give a short introduction to running Python. 

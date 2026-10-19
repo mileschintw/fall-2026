@@ -5,7 +5,7 @@
 
 | 項目 | 截止（Pacific） | 分數 | Canvas 狀態 | 繳交狀態 | 備註 |
 |---|---|---|---|---|---|
-| Task 0 - self introductions | 10/9（五）11:59 PM PDT | 0 | 已發布（id 11810624），lock 12/18 | **unsubmitted（已過期，lock 前仍可交）** | online_url |
+| Task 0 - self introductions | 10/9（五）11:59 PM PDT | 0 | 已發布（id 11810624），lock 12/18 | unsubmitted | online_url；**不計分**（omit_from_final_grade）；內容是在 Teams 貼自介；L1 老師說 task zero 不用交 [00:57:05] |
 | HW1 SAXPY, 2D & 3D Matrix addition | **10/20（二）5:59 PM PDT** | 11 | 已發布（id 11810625），lock 12/11 | unsubmitted | online_upload；Canvas 與 §2 一致 |
 | HW2 | 10/27（二）5:59 PM | 12 | 未發布 | — | 去年題目：Gaussian Blur Kernels（僅預告） |
 | HW3 | 11/3（二）5:59 PM PST | 12 | 未發布 | — | 去年：Control Divergence & Tiled MMULT & NCU profiling |

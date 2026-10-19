@@ -1,0 +1,510 @@
+# EE 590a Class outline, wrapping up stacks, queues and runtimes.pdf（Canvas file 154547849，11 頁）
+
+
+===== p1 =====
+
+
+
+ 
+EE   590 a :   C l a ss   outl i n e ,   wr a pp i n g   up   st ack s ,   qu e u e s   a n d 
+runt i m e s 
+O c t   14,   2026   ·   A d r ie nn e 
+P l a n   a t   a   g l a n ce 
+T o da y   c los e s   out   t he   l a st   t h r ee   c l a ss e s   a roun d   on e   idea :   a n   i nt e r face   ca n   ha v e   m a ny   i mpl e m e nt a t i ons . 
+O p e n i n g :   w h y   loo k   a t   diffe r e nt   i mpl e m e nt a t i ons ? 
+B ig - O ,   t he   s h ort   v e rs i on 
+S t ack s   a n d   qu e u e s   a s   ab str ac t   da t a   typ e s 
+O ur   two   st ack s   s ide   b y   s ide ,   w i t h   t he   f ull   runt i m e   t ab l e 
+W ha t   a   P yt h on   l i st   c osts 
+S t ack s   a n d   qu e u e s   i n   P yt h on :   l i st ,   de qu e ,   qu e u e . Q u e u e 
+D e qu e s   a s   qu e u e s ,   w i t h   a   t i m i n g   de mo 
+B e yon d   P yt h on :   ot he r   l a n g u age s 
+W r a p - up ,   chea t   s hee t ,   check   qu e st i ons 
+B y   t he   e n d ,   stu de nts   ca n : 
+E xpl ai n   w h y   on e   i nt e r face   ge ts   s e v e r a l   i mpl e m e nt a t i ons ,   a n d   w ha t   each   on e   tr ade s   a w a y . 
+R ead   o ff   t he   pus h   a n d   pop   c ost   o f   t he   a rr a y   st ack   a n d   t he   l i n ked   st ack ,   a n d   s a y   w hich   c osts   a r e   a mort i z ed . 
+P ick   be tw ee n   a   l i st   a n d   a   de qu e   f or   a   st ack   or   a   qu e u e ,   a n d   defe n d   t he   ch o ice   w i t h   a   runt i m e . 
+A nsw e r   t he   i nt e rv ie w   v e rs i on   o f   each   o f   t he s e   i n   two   s e nt e n ce s . 
+O p e n i n g :   w h y   d o   w e   loo k   a t   diffe r e nt   i mpl e m e nt a t i ons ? 
+W e   loo k   a t   s e v e r a l   i mpl e m e nt a t i ons   to   high l igh t   t he   tr ade o ff s :   e v e ry   i mpl e m e nt a t i on   m ake s   som e   op e r a t i ons   chea p   b y
+m aki n g   ot he rs   e xp e ns i v e ,   a n d   w hich   op e r a t i ons   your   pro g r a m   d o e s   most   decide s   t he   w i nn e r . 
+1:   S e p a r a t i n g   t he   prom i s e   f rom   t he   m achi n e ry .   A   st ack   prom i s e s   pus h ,   pop ,   p eek   a n d   i s - e mpty ,   a n d   LIFO :   t he   l a st   t hi n g
+i n   i s   t he   fi rst   t hi n g   out .   T ha t   prom i s e   i s   t he   i nt e r face ,   or   ab str ac t   da t a   typ e .   A n   a rr a y   a n d   a   li n ked   li st   a r e   two   w a ys   to   kee p
+t he   prom i s e .   C o de   t ha t   only   us e s   t he   i nt e r face   ca nnot   t e ll   t he m   a p a rt ,   w hich   i s   w h y   a   s i n g l e   t e st   su i t e   c oul d   run   agai nst 
+b ot h   st ack   i mpl e m e nt a t i ons . 
+2:   T he   a nsw e rs   m a t ch ,   b ut   t he   c osts   d on ' t 
+3:   T he   r ea sons   i mpl e m e nt a t i ons   diffe r . 
+T i m e :   w hich   op e r a t i ons   a r e   fa st ,   a n d   w he t he r   fa st   m ea ns   e v e ry   t i m e   or   on   a v e r age . 
+P a us e s :   a n   a rr a y   st ack   som e t i m e s   stops   to   c opy   e v e ryt hi n g ,   a   l i n ked   st ack   n e v e r   d o e s .   A   ga m e   loop   or   a n   a u di o   b u ffe r 
+ca r e s ;   a   ba t ch   j o b   d o e s   not . 
+M e mory :   a   l i n ked   no de   ca rr ie s   two   or   t h r ee   e xtr a   r efe r e n ce s ,   a n   a rr a y   ca rr ie s   unus ed   ca p aci ty ,   a n d   a rr a ys   s i t   s ide   b y
+s ide   i n   m e mory   w hi l e   no de s   a r e   s ca tt e r ed . 
+B ig - O ,   t he   s h ort   v e rs i on 
+10/17/26, 11:43 AM   EE 590a Class outline, wrapping up stacks, queues and runtimes 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/178.html   1/11
+===== p2 =====
+ 
+B ig - O   de s c r ibe s   h ow   a n   op e r a t i on ' s   runn i n g   t i m e   g rows   a s   i ts   i nput   g rows 
+T ha t   l e ts   us   c omp a r e   i mpl e m e nt a t i ons   . 
+W ha t   i t   s a ys . 
+C ount   i nstru c t i ons   or   op e r a t i ons ,   not   c lo ck   s ec on d s ,   a s   a   f un c t i on   o f   $ n $ 
+t he n   d rop   c onst a nt   fac tors   a n d   sm a ll e r   t e rms 
+A   loop   t ha t   d o e s   $ 3 n   +   20 $   st e ps   i s   $ O ( n ) $ . 
+C l a ss   N a m e   I f   n   d ou b l e s ,   t he   wor k ...   E x a mpl e   f rom   t hi s   c ours e 
+O (1)   c onst a nt   st a ys   t he   s a m e   a rr a y   or   l i n ked   st ack   pus h   a n d   pop ,   lst[i] 
+O ( lo g   n )   lo ga r i t h m ic   g o e s   up   b y   on e   st e p   bi n a ry   s ea r ch   ( a   l a t e r   top ic ) 
+O ( n )   l i n ea r   d ou b l e s   x   in   lst   ,   fi n d   i n   a   st ack 
+O ( n   lo g   n )   l i n ea r i t h m ic   a   bi t   mor e   t ha n   d ou b l e s   lst.sort() 
+O ( n ² )   qu ad r a t ic   qu ad rupl e s   e mpty i n g   a   l i st   w i t h   pop(0)   i n   a   loop 
+T h r ee   w a ys   to   s a y   " h ow   lon g "   E ach   a nsw e rs   a   diffe r e nt   qu e st i on ,   a n d   a ll   t h r ee   a pp ea r   i n   t he   P yt h on   d o c s : 
+W orst   ca s e :   t he   most   a ny   s i n g l e   ca ll   ca n   c ost .   A   pus h   onto   a   f ull   a rr a y   st ack   t ha t   must   g row   i s   O ( n ). 
+A v e r age   ca s e :   t he   c ost   ov e r   typ ica l   i nputs .   A   dic t   loo k up   i s   $ O (1) $   on   a v e r age ,   a n d   $ O ( n ) $   if   e v e ry   ke y   c oll ide s . 
+A m ort i z ed :   t he   c ost   p e r   ca ll   ov e r   a   w h ol e   s e qu e n ce   o f   ca lls ,   w i t h   a   g u a r a nt ee   ab out   t he   tot a l . 
+D ou b l i n g   m ake s   $ n $   pus he s   c ost   a t   most   ab out   $ 2 n $   c op ie s ,   so   pus h   i s   $ O (1) $   a mort i z ed   e v e n   t h ou gh   on e   pus h
+i s   $ O ( n ) $ . 
+T hi s   i s   not   a n   a v e r age   ov e r   r a n d om   i nputs ,   w hich   i s   t he   usu a l   c on f us i on . 
+O n e - s e nt e n ce   f ootnot e   on   t he   not a t i on 
+F orm a lly ,   O   i s   a n   upp e r   b oun d ,   a n d   $ Θ $   i s   a   t igh t   b oun d ,   b ut   n ea rly   e v e ryon e ,   i n c lu di n g   t he   P yt h on   d o c s   a n d   most 
+i nt e rv ie w e rs ,   s a ys   " O "   a n d   m ea ns   " ab out   t hi s   fa st ,   no   be tt e r   a n d   no   wors e ." 
+I f   a n   i nt e rv ie w e r   a s k s   f or   t he   t igh t   b oun d ,   s a y   Θ   (" B ig   T he t a "). 
+S t ack s   a n d   qu e u e s   a s   ab str ac t   da t a   typ e s 
+A   st ack   a n d   a   qu e u e   h ol d   t he   s a m e   t hi n g s   a n d   diffe r   only   i n   w hich   i t e m   l ea v e s   n e xt 
+a   st ack   gi v e s   back   t he   n e w e st   ( l a st   i n ,   fi rst   out ;   LIFO ) 
+a   qu e u e   gi v e s   back   t he   ol de st   ( fi rst   i n ,   fi rst   out ;   FIFO ). 
+T hi s   i s   t he   i nt e r face ,   t he   prom i s e , 
+T he   r e st   o f   t he   c l a ss   i s   ab out   w a ys   to   kee p   t he   prom i s e . 
+O p e r a t i on   S t ack   Q u e u e 
+A dd   a n   i t e m   pus h   e nqu e u e   ( add   a t   t he   back ) 
+R e mov e   a n   i t e m   pop   ( t ake s   t he   n e w e st )   de qu e u e   ( t ake s   t he   ol de st ) 
+L oo k   w i t h out   r e mov i n g   p eek   ( t he   top )   p eek   ( t he   f ront ) 
+I s   i t   e mpty ,   h ow   big   i s   i t   i s _ e mpty ,   s i z e   i s _ e mpty ,   s i z e 
+A   t hi r d   i nt e r face ,   t he   de qu e   ( d ou b l e - e n ded   qu e u e ,   s aid   " deck "),   a llows   addi n g   a n d   r e mov i n g   a t   b ot h   e n d s . 
+I t   ca n   ac t   a s   a   st ack   or   a   qu e u e ,   w hich   i s   w h y   i t   t ake s   ov e r   l a t e r   i n   t he   c l a ss . 
+W he r e   each   on e   m igh t   be   us ed 
+10/17/26, 11:43 AM   EE 590a Class outline, wrapping up stacks, queues and runtimes 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/178.html   2/11
+===== p3 =====
+ 
+S t ack : 
+t he   ca ll   st ack   o f   a   runn i n g   pro g r a m 
+un d o 
+P us h   ac t i ons   t ha t   s h oul d   be   un d o ab l e   onto   t he   st ack ;   w he n   t he   us e r   c l ick s   " U n d o ",   pop   t he m   o ff   a n d   e x ec ut e 
+t he   oppos i t e   o f   t he   ac t i on   to   un d o 
+t he   b rows e r ' s   back   b utton 
+P us h   each   p age / U RL   onto   t he   st ack ;   pop   o ff   each   t i m e   t he   us e r   c l ick s   " back " 
+m a t chi n g   b r acke ts 
+I t e r a t e   t h rou gh   a   str i n g ,   loo ki n g   a t   each   cha r ac t e r .   W he n   a   cha r ac t e r   i s   a   l ef t   b r acke t   ('(',   '[',   '{'--   w ha t e v e r
+w e ' r e   tr acki n g ),   pus h   i t   on   t he   st ack .   W he n   w e   s ee   a   r igh t   b r acke t   (')',   ']',   '}'),   pop   f rom   t he   st ack .   T ha t   pop () 
+m ea ns   t he   l ef t   b r acke t   ha s   bee n   m a t ched   w i t h   a   r igh t   b r acke t .   I f   a nyt hi n g   i s   l ef t   i n   t he   st ack   a t   t he   e n d   o f   t he 
+str i n g ,   t he   b r acke ts   w e r e   un ba l a n ced . 
+de pt h - fi rst   s ea r ch 
+W e ' ll   s ee   n e xt   w eek ! 
+Q u e u e : 
+a   pr i nt   spool e r 
+E nqu e u e   a   pr i nt   j o b ;   d o c s   a r e   pr i nt ed   i n   t he   or de r   t he y   a rr i v e   to   t he   pr i nt e r . 
+t a s k s   w ai t i n g   f or   a   wor ke r 
+T a s k s   ge t   e x ec ut ed   i n   t he   or de r   t he y   a rr i v e 
+b r ead t h - fi rst   s ea r ch 
+W e ' ll   s ee   n e xt   w eek ! 
+b u ffe r i n g   da t a   t ha t   a rr i v e s   fa st e r   t ha n   i t   i s   pro ce ss ed 
+T he   s a m e   i nt e r face ,   s e v e r a l   i mpl e m e nt a t i ons : 
+I nt e r face   W a ys   to   b u i l d   i t   T he   ca t ch 
+S t ack   a rr a y   ( our   a rr a y   st ack ),   l i n ked   l i st   ( our   l i n ked 
+st ack ),   P yt h on   list   ,   deque 
+a n   a rr a y   n eed s   g rowt h ;   a   l i n ked   l i st   n eed s   a   no de 
+p e r   v a lu e 
+Q u e u e   l i n ked   l i st   w i t h   a   head   a n d   a   t ai l ,   ci r c ul a r   a rr a y   ( r i n g
+b u ffe r ),   deque   ,   queue.Queue 
+us i n g   a   pl ai n   a rr a y   f or   a   qu e u e   m ea ns   t he 
+dequeue   op e r a t i on   ha s   to   s hif t   e v e ryt hi n g 
+D e qu e   d ou b ly   l i n ked   l i st ,   a   chai n   o f   sm a ll   a rr a ys   ( w ha t 
+P yt h on   d o e s )   i n de x i n g   i nto   t he   m idd l e   i s   slow 
+M or e   Q u e u e   de t ai ls : 
+O ur   l i n ked - l i st - ba s ed   st ack   only   kee ps   a   head   po i nt e r . 
+A   qu e u e   add s   a t   on e   e n d   a n d   r e mov e s   a t   t he   ot he r ,   so   a   l i n ked - l i st   qu e u e   n eed s   a   t ail   po i nt e r   too ,   or   each   enqueue 
+op e r a t i on   w a l k s   t he   w h ol e   chai n . 
+A n   a rr a y   ha s   t he   oppos i t e   pro b l e m :   addi n g   a t   t he   back   i s   ea sy ,   b ut   r e mov i n g   t he   f ront   s hif ts   e v e ry   v a lu e   l ef t . 
+C Y K Q u e st i ons 
+W hich   i nt e r face   fi ts   t he   back   b utton ,   a n d   w hich   fi ts   a   pr i nt   spool e r ? 
+C a n   a   pro g r a m   t ha t   only   us e s   push   a n d   pop   t e ll   w he t he r   our   st ack   i s   b u i lt   on   a n   a rr a y   or   a   l i n ked   l i st ? 
+I t   ca nnot ,   a n d   t ha t   i s   t he   po i nt   o f   a n   i nt e r face . 
+O ur   two   st ack s   s ide   b y   s ide 
+B ot h   o f   our   st ack s   push   ,   pop   a n d   peek   i n   c onst a nt   t i m e 
+T he y   diffe r   i n   w ha t   ha pp e ns   a t   t he   edge s   ( f ull ,   g row i n g ): 
+r eachi n g   a   v a lu e   b y   pos i t i on 
+10/17/26, 11:43 AM   EE 590a Class outline, wrapping up stacks, queues and runtimes 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/178.html   3/11
+===== p4 =====
+i n   m e mory 
+O p e r a t i on   A rr a y   st ack , 
+fi x ed   ca p aci ty 
+A rr a y   st ack   t ha t 
+g rows   ( d ou b l i n g )   L i n ked   st ack   W h y 
+pus h   O (1),   r ai s e s
+w he n   f ull 
+O (1)   a mort i z ed ;   t he 
+pus h   t ha t   tr igge rs 
+g rowt h   i s   O ( n ) 
+O (1) 
+t he   a rr a y   wr i t e s   on e   slot ;   t he 
+l i n ked   st ack   m ake s   on e   no de
+a n d   cha n ge s   two   r efe r e n ce s 
+pop   O (1)   O (1)   O (1)   not hi n g   ha s   to   s hif t   a t   t he   top 
+p eek   O (1)   O (1)   O (1)   r ead   t he   top   slot   or   t he   head 
+no de 
+i s _ e mpty ,   s i z e   O (1)   O (1)   O (1)   b ot h   st ack s   stor e   size 
+fi n d ( v a lu e )   O ( n )   O ( n )   O ( n )   s ca n   f rom   on e   e n d ;   t he   l i n ked 
+s ca n   c osts   mor e   p e r   st e p 
+ge t   t he   i - t h 
+v a lu e   O (1)   O (1)   O ( i )   a n   a rr a y   j umps   b y   i n de x ,   a   chai n 
+ha s   to   be   w a l ked 
+sw a p   two
+v a lu e s   b y
+pos i t i on 
+O (1)   O (1)   O ( n )   t he   chai n   must   be   w a l ked   to
+r each   b ot h 
+r e v e rs e 
+O ( n ), 
+sw a pp i n g   i n
+pl ace 
+O ( n )   O ( n ),   f l i pp i n g   each 
+next   e v e ry   v a lu e   ha s   to   mov e   on ce 
+C a n   i t   be   f ull ?   y e s   no ,   unt i l   m e mory   runs
+out 
+no ,   unt i l   m e mory
+runs   out 
+M e mory   n   slots   ch os e n 
+i n   ad v a n ce 
+be tw ee n   n   a n d   2 n
+slots 
+on e   no de   p e r
+v a lu e ,   w i t h   i ts
+r efe r e n ce s 
+" a mort i z ed   O (1)"   i s   t he   a nsw e r   f or   t he   g row i n g   st ack 
+T he   c ost   o f   a   r e s i z e   ( O ( n ))   i s   a v e r aged   ac ross   a ll   t he   non - r e s i z e   ( O (1))   op e r a t i ons 
+" O (1)"   i s   t he   a nsw e r   f or   t he   l i n ked   st ack   ( e v e n   t h ou gh   b ot h   a r e   usu a lly   de s c r ibed   a s   c onst a nt   t i m e ). 
+T he   l i n ked   st ack   n e v e r   p a us e s ;   t he   a rr a y   st ack   ei t he r   ha s   a   ha r d   l i m i t   on   ca p aci ty   OR   p a us e s   o cca s i on a lly . 
+T he   t ab l e   s h ows   no   w i nn e r : 
+A rr a ys   w i n   on   pos i t i on   a n d   m e mory 
+T he   l i n ked   st ack   w i ns   on   n e v e r   ha v i n g   a   g rowt h   p a us e 
+M ea sur ed ,   so   t he   t ab l e   i s   not   j ust   c l ai ms .   W e   r a n   t hi s   i n   c l a ss   to   c omp a r e   our   i mpl e m e nt a t i ons : 
+S tru c tur e   1,000,000   pus he s   t he n   pops   ( s ec on d s )   M e mory   f or   100,000   v a lu e s   ( MB ) 
+A rr a y   st ack ,   fi x ed   ca p aci ty   0.65   0.80 
+A rr a y   st ack   t ha t   g rows   0.57   1.05 
+L i n ked   st ack   ( dic ts   a s   no de s )   1.35   18.4 
+P yt h on   list   us ed   a s   a   st ack   0.084   0.80 
+A ll   f our   a r e   O (1)   p e r   pus h ,   y e t   t he   l i n ked   st ack   i s   two   to   t h r ee   t i m e s   slow e r   t ha n   t he   a rr a y   st ack   beca us e   e v e ry   pus h
+a llo ca t e s   a   no de . 
+10/17/26, 11:43 AM   EE 590a Class outline, wrapping up stacks, queues and runtimes 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/178.html   4/11
+===== p5 =====
+ 
+M e mory   i s   t he   bigge r   ga p :   each   l i n ked   no de   he r e   i s   a   dic t   h ol di n g   two   r efe r e n ce s ,   ab out   184   b yt e s   p e r   v a lu e   agai nst   8 
+b yt e s   p e r   a rr a y   slot   ( a   no de   m ade   f rom   a   tupl e   or   a   c l a ss   w i t h   __slots__   woul d   be   sm a ll e r ,   b ut   st i ll   s e v e r a l   t i m e s   a n 
+a rr a y   slot ). 
+P yt h on ' s   own   l i st   bea ts   our   a rr a y   st ack   b y   rou gh ly   5   to   8   t i m e s   w i t h   t he   s a m e   big - O 
+append   a n d   pop   run   i n   C   w hi l e   ours   run   a s   P yt h on   f un c t i on   ca lls . 
+T ha t   i s   t he   " big - O   hide s   c onst a nts "   po i nt   f rom   ea rl ie r ,   i n   num be rs . 
+I f   t he r e ' s   su ch   a   big   diffe r e n ce   i n   c lo ck - run - t i m e ,   w ha t   v a lu e   d o e s   B ig - O   ha v e ? 
+T he   diffe r e n ce   be tw ee n   c lo ck   runt i m e s   i s   ( rou gh ly )   c onst a nt . 
+D e p e n di n g   on   t he   s i z e   o f   $ n $ ,   t ha t   ca n   be   s ig n ifica nt 
+B ig - O   ca ptur e s   t he   g rowt h   o f   runt i m e --   a s   $ n $   ge ts   bigge r ,   h ow   d o e s   t he   ac tu a l   runt i m e   g row ? 
+O ( n )   m ea ns   t ha t   t he   runt i m e   g rows   t he   s a m e   a mount   a s   n   ge ts   bigge r ;   i t ' s   l i n ea r . 
+O ( n ^2)   m ea ns   t ha t   a s   $ n $   ge ts   bigge r ,   t he   runt i m e   ge ts   bigge r   e v e n   fa st e r . 
+W ha t   a   P yt h on   l i st   c osts 
+A P yt h on   l i st   i s   a n   a rr a y   o f   po i nt e rs : 
+on e   b lo ck   o f   slots ,   each   slot   h ol di n g   t he   add r e ss   o f   a n   o bjec t   stor ed   som e w he r e   e ls e . 
+T ha t   on e   fac t   e xpl ai ns   most   o f   t he   c osts   i n   t he   t ab l e   be low 
+lst[i]   i s   O (1)   beca us e   t he   add r e ss   o f   slot   i   i s   t he   st a rt   o f   t he   b lo ck   plus   8   t i m e s   i ,   a n d   t he n   you   f ollow   on e   po i nt e r . 
+T hi s   c osts   t he   s a m e   f or   i nts ,   str i n g s   a n d   ot he r   l i sts . 
+A   l i st   ca n   h ol d   m i x ed   typ e s   beca us e   e v e ry   slot   i s   t he   s a m e   s i z e :   a   po i nt e r ,   8   b yt e s   on   a   64- bi t   P yt h on . 
+insert(0,   x)   a n d   pop(0)   s hif t   po i nt e rs ,   not   o bjec ts .   T he   v a lu e s   n e v e r   mov e ,   b ut   n   −   1   slots   d o . 
+T he   8   b yt e s   p e r   v a lu e   w e   m ea sur ed   (0.80   MB   f or   100,000   v a lu e s )   i s   t he   po i nt e rs   a lon e .   T he   o bjec ts   t he y   po i nt   to   a r e
+e xtr a :   ab out   28   b yt e s   f or   most   i nts ,   mor e   f or   str i n g s . 
+C opy i n g   w i t h   b   =   a[:]   c op ie s   t he   po i nt e rs ,   so   b ot h   l i sts   now   po i nt   a t   t he   s a m e   i nn e r   o bjec ts .   b   =   a   c op ie s   not hi n g : 
+i t   m ake s   a   s ec on d   n a m e   f or   on e   l i st . 
+T he   tr a p   f rom   l a st   c l a ss   i s   t hi s   p ic tur e   agai n .   [[0]   *   3]   *   3   m ake s   t h r ee   slots   t ha t   a ll   h ol d   t he   s a m e   po i nt e r   to   on e
+i nn e r   l i st . 
+T he s e   l i n k s   op e n   P yt h on   T utor   w i t h   t he   c o de   a lr ead y   fi ll ed   i n ;   c l ick   N e xt   to   st e p   t h rou gh   a n d   w a t ch   t he   a rrows .   I f   t he
+i nt ege rs   a pp ea r   i ns ide   t he   slots   i nst ead   o f   a s   s e p a r a t e   b ox e s   w i t h   a rrows ,   sw i t ch   P yt h on   T utor ' s   opt i on   f or   show   strings 
+and   numbers   as   objects   af t e r   c l icki n g   " E di t   t hi s   c o de " 
+A l ia s i n g :   alias   =   nums   ,   t he n   append   t h rou gh   t he   a l ia s 
+T he   g r id   tr a p :   [[0]   *   3]   *   3   agai nst   a   l i st   c ompr ehe ns i on 
+A   l i st   us ed   a s   a   qu e u e :   pop(0)   a n d   t he n   append 
+T he   P yt h on   d o c s   de s c r ibe   t he   c ost   t he   s a m e   w a y :   " T he   l a r ge st   c osts   c om e   f rom   g row i n g   be yon d   t he   c urr e nt   a llo ca t i on
+s i z e   ( beca us e   e v e ryt hi n g   must   mov e ),   or   f rom   i ns e rt i n g   or   de l e t i n g   som e w he r e   n ea r   t he   begi nn i n g   ( beca us e
+e v e ryt hi n g   af t e r   t ha t   must   mov e )." 
+T he   c osts   T he s e   a r e   f rom   t he   P yt h on   d o c um e nt a t i on ' s   t ab l e   o f   t i m e   c ompl e x i ty   f or   b u i lt - i n   typ e s ,   w he r e   n   i s   t he   num be r   o f
+e l e m e nts   a n d   k   i s   a n   i n de x .   S tu de nts   n eed   t he   fi rst   t h r ee   rows   a n d   t he   pop(0)   row ;   t he   r e st   i s   r efe r e n ce . 
+O p e r a t i on   C ost   W ha t   i t   m ea ns   f or   us 
+lst.append(x)   O (1),   a mort i z ed   st ack   pus h ;   a   r a r e   r e s i z e   c op ie s   t he   po i nt e rs 
+lst.pop()   O (1)   st ack   pop ;   a t   t he   e n d ,   not hi n g   mov e s 
+lst[k]   ,   lst[k]   =   x   O (1)   j ump   str aigh t   to   slot   k 
+10/17/26, 11:43 AM   EE 590a Class outline, wrapping up stacks, queues and runtimes 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/178.html   5/11
+===== p6 =====
+ 
+O p e r a t i on   C ost   W ha t   i t   m ea ns   f or   us 
+len(lst)   O (1)   t he   s i z e   i s   stor ed 
+lst.pop(k)   ,   del   lst[k]   O ( n   −   k )   t he   po i nt e rs   af t e r   k   s hif t   l ef t 
+lst.insert(k,   x)   O ( n   −   k ),   a mort i z ed   t he   po i nt e rs   f rom   k   on   s hif t   r igh t 
+lst.pop(0)   ,   lst.insert(0,   x)   O ( n )   k   =   0   i s   t he   worst   ca s e :   e v e ryt hi n g   s hif ts 
+x   in   lst   ,   min(lst)   , 
+max(lst)   O ( n )   loo k s   a t   slots   on e   b y   on e 
+lst.copy()   ,   i t e r a t i on   O ( n )   tou che s   e v e ry   po i nt e r 
+lst[i:j]   O ( j   −   i )   c op ie s   j   −   i   po i nt e rs   i nto   a   n e w   l i st 
+lst.extend(t)   O ( l e n ( t )),   a mort i z ed   plus   t he   c ost   o f   w a l ki n g   t 
+lst.sort()   O ( n   lo g   n )   worst   ca s e ;   a lr ead y - sort ed   i nput   t ake s   O ( n ) 
+c omp a r i sons 
+lst1   +   lst2   O ( l e n ( lst 1)   + 
+l e n ( lst 2))   b u i l d s   a   n e w   l i st 
+T he   d o c s   p age   a lso   not e s   t ha t   i ts   c osts   de s c r ibe   CP yt h on ,   t he   st a n da r d   i mpl e m e nt a t i on ,   a n d   t ha t   ot he r   P yt h on 
+i mpl e m e nt a t i ons   m a y   diffe r .   K ee p   t ha t   s e nt e n ce   f or   t he   " be yon d   P yt h on "   s ec t i on . 
+S t ack s   a n d   qu e u e s   i n   P yt h on 
+P yt h on   ha s   no   c l a ss   ca ll ed   S t ack   or   Q u e u e   i n   e v e ry da y   us e :   us e   a   list   f or   a   st ack ,   a   collections.deque   f or   a   qu e u e , 
+a n d   queue.Queue   only   w he n   t h r ead s   a r e   p a ss i n g   wor k   to   each   ot he r .   T he   P yt h on   tutor ia l   s a ys   t he   s a m e ,   a n d   t he   runt i m e s 
+e xpl ai n   w h y . 
+T he   tutor ia l ' s   e x a mpl e s 
+U s i n g   L i sts   a s   S t ack s : 
+T o   add   a n   i t e m   to   t he   top   o f   t he   st ack ,   us e   append()   . 
+T o   r e tr ie v e   a n   i t e m   f rom   t he   top   o f   t he   st ack ,   us e   pop()   w i t h out   a n   e xpl ici t   i n de x . 
+U s i n g   L i sts   a s   Q u e u e s : 
+" l i sts   a r e   not   efficie nt   f or   t hi s   purpos e ." 
+W hi l e   a pp e n d s   a n d   pops   f rom   t he   e n d   o f   l i st   a r e   fa st ,   d o i n g   i ns e rts   or   pops   f rom   t he   begi nn i n g   o f   a   l i st   i s   slow 
+( beca us e   a ll   o f   t he   ot he r   e l e m e nts   ha v e   to   be   s hif t ed   b y   on e ). 
+T o   i mpl e m e nt   a   qu e u e ,   us e   collections.deque   w hich   w a s   de s ig n ed   to   ha v e   fa st   a pp e n d s   a n d   pops   f rom   b ot h
+e n d s . 
+Y ou   n eed   U s e   A dd   R e mov e   C ost   p e r
+op e r a t i on   N ot e s 
+A   st ack ,   on e 
+t h r ead   list   append(x)   pop() 
+O (1), 
+append 
+a mort i z ed 
+p eek   i s   s[-1]   ,   e mpty   i s   not 
+s 
+A   qu e u e ,   on e 
+t h r ead   collections.deque   append(x)   popleft()   O (1)   b ot h 
+p eek   i s   q[0]   ;   t he   d o c s
+prom i s e   " a pprox i m a t e ly   t he 
+s a m e   O (1)   p e r f orm a n ce   i n 
+ei t he r   di r ec t i on " 
+10/17/26, 11:43 AM   EE 590a Class outline, wrapping up stacks, queues and runtimes 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/178.html   6/11
+===== p7 =====
+ 
+Y ou   n eed   U s e   A dd   R e mov e   C ost   p e r
+op e r a t i on   N ot e s 
+A   qu e u e 
+m ade   f rom   a 
+l i st   ( a vo id ) 
+list   append(x)   pop(0)   O (1),   t he n 
+O ( n ) 
+e v e ry   de qu e u e   s hif ts   t he 
+w h ol e   l i st 
+A   st ack   f rom 
+a   de qu e   collections.deque   append(x)   pop()   O (1)   b ot h   fi n e ,   b ut   a   l i st   i s   s i mpl e r   f or   a 
+st ack 
+T he   l a st   k
+i t e ms   only   deque(maxlen=k)   append(x)   a utom a t ic   O (1)   on ce   f ull ,   addi n g   d rops   a n 
+i t e m   f rom   t he   ot he r   e n d 
+T h r ead s 
+ha n di n g 
+wor k   ov e r 
+queue.Queue   put(x)   get()   O (1)   plus
+lo ck   c ost 
+b lo ck s   w he n   e mpty   or   f ull , 
+opt i on a l   maxsize 
+T h r ead s ,   l a st 
+i n   fi rst   out   queue.LifoQueue   put(x)   get()   O (1)   plus
+lo ck   c ost   a   t h r ead - s afe   st ack 
+T h r ead s , 
+s i mpl e   a n d
+fa st 
+queue.SimpleQueue   put(x)   get()   O (1) 
+un b oun ded ,   put   n e v e r 
+b lo ck s ,   no   task_done()   or 
+join() 
+Q u i z :   w hich   on e   woul d   you   us e ? 
+1.   U n d o   hi story   i n   a   s i n g l e - t h r eaded   edi tor .   ( A   list   us ed   a s   a   st ack .) 
+2.   T he   f ront ie r   i n   a   b r ead t h - fi rst   s ea r ch .   ( A   deque   :   add   a t   t he   back ,   popleft   f rom   t he   f ront .) 
+3.   A   w eb   s e rv e r   w he r e   s e v e r a l   t h r ead s   t ake   j o b s   f rom   on e   s ha r ed   l i n e .   (   queue.Queue   .) 
+4.   K ee p   only   t he   l a st   100   l i n e s   o f   a   lo g .   (   deque(maxlen=100)   .) 
+5.   C heck   t ha t   b r acke ts   i n   a   str i n g   a r e   ba l a n ced .   ( A   list   us ed   a s   a   st ack .) 
+W h y   not   queue.Queue   e v e ryw he r e ? 
+C on c urr e n c y   a n d   t h r ead s   a r e   out   o f   s c op e   f or   t hi s   c l a ss ,   b ut   som e   o f   you   ha v e   e xp e r ie n ce   a n d   un de rst a n di n g   o f   t he 
+top ic ,   so   I ' m   i n c lu di n g   t hi s . 
+I f   t hi s   m e nt i on   ab out   " t h r ead - s afe "   d o e sn ' t   m ea n   a nyt hi n g   to   you ,   d on ' t   worry   ab out   i t ! 
+queue.Queue   i s   t h r ead - s afe   beca us e   e v e ry   put   a n d   get   t ake s   a   lo ck ,   a n d   t ha t   c osts   t i m e   e v e n   w he n   only   on e 
+t h r ead   i s   runn i n g . 
+I n   t he   c o de   w e   r a n ,   e mpty i n g   a   160,000- i t e m   qu e u e   too k   0.011   s ec on d s   w i t h   a   deque   ,   0.018   w i t h   SimpleQueue   ,   a n d 
+0.34   w i t h   Queue   ,   ab out   30   t i m e s   slow e r   t ha n   t he   de qu e . 
+T he   d o c s   a lso   w a rn   t ha t   qsize()   ,   empty()   a n d   full()   a r e   unr e l iab l e   w he n   ot he r   t h r ead s   a r e   ac t i v e :   " if   e mpty () 
+r e turns   F a ls e   i t   d o e sn ' t   g u a r a nt ee   t ha t   a   su b s e qu e nt   ca ll   to   ge t ()   w i ll   not   b lo ck ." 
+T he   s afe   p a tt e rn   i s   to   ca ll   get()   a n d   ha n d l e   t he   w ai t   or   t he   queue.Empty   e x ce pt i on ,   not   to   a s k   fi rst .   I n   CP yt h on , 
+Queue   kee ps   i ts   i t e ms   i n   a   deque   a n d   LifoQueue   i n   a   list   ,   so   t he   stru c tur e s   f rom   to da y   a r e   i ns ide   t he   t h r ead - s afe 
+wr a pp e rs . 
+Deques   a s   qu e u e s 
+A   de qu e   i s   t he   r igh t   qu e u e   i n   P yt h on   beca us e   i t   r e mov e s   f rom   t he   f ront   w i t h out   s hif t i n g   a nyt hi n g ,   a n d   i t   m a n age s   t ha t   b y 
+c om bi n i n g   t he   two   stru c tur e s   f rom   t hi s   c ours e :   a   chai n   o f   no de s   w he r e   each   no de   i s   a   sm a ll   a rr a y .   R un   t hi s   s ec t i on   a s
+pr edic t ,   m ea sur e ,   e xpl ai n . 
+10/17/26, 11:43 AM   EE 590a Class outline, wrapping up stacks, queues and runtimes 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/178.html   7/11
+===== p8 =====
+P r edic t   fi rst 
+A s k :   " W e   e mpty   a   l i st   o f   n   v a lu e s   b y   ca ll i n g   pop(0)   unt i l   i t   i s   e mpty .   W he n   n   d ou b l e s ,   w ha t   ha pp e ns   to   t he   tot a l   t i m e ?" 
+T he   cha rt   be low   s h ows   w ha t   i t   pr i nts . 
+E ach   d ou b l i n g   o f   n   m ake s   t he   l i st   ab out   4   t i m e s   slow e r ,   beca us e   t he r e   a r e   n   r e mov a ls   a n d   each   s hif ts   ab out   n /2 
+po i nt e rs ,   so   t he   tot a l   i s   O ( n ² ). 
+T he   de qu e ' s   t i m e   g rows   rou gh ly   i n   st e p   w i t h   n   (16   t i m e s   a s   m a ny   v a lu e s   too k   ab out   18   t i m e s   a s   lon g ),   w hich   i s 
+O ( n ). 
+A t   160,000   v a lu e s   t he   l i st   t ake s   2.4   s ec on d s   a n d   t he   de qu e   0.011,   ab out   200   t i m e s   fa st e r . 
+W h y   t he   l i st   los e s 
+pop(0)   mov e s   e v e ry   r e m ai n i n g   po i nt e r   on e   slot   l ef t . 
+O p e n   t he   P yt h on   T utor   l i n k   f or   pop(0)   a n d   w a t ch   t he   a rrows   sl ide . 
+W a ys   to   fi x   t hi s : 
+T he   usu a l   fi rst   idea   i s   to   l ea v e   t he   v a lu e s   w he r e   t he y   a r e   a n d   mov e   a   f ront   i n de x   to   t he   r igh t . 
+D e qu e u e   bec om e s   O (1),   b ut   t he   slots   to   t he   l ef t   a r e   n e v e r   us ed   agai n   a n d   t he   a rr a y   kee ps   g row i n g . 
+T he   be tt e r   idea   i s   to   l e t   t he   i n de x e s   wr a p   a roun d   t he   e n d   o f   t he   a rr a y ,   so   t he   f ront   a n d   back   cha s e   each   ot he r 
+a roun d   a   fi x ed   r i n g . 
+T ha t   i s   a   ci r c ul a r   a rr a y ,   or   r i n g   b u ffe r . 
+D r a w   8   slots   w i t h   a   f ront   m a r ke r   a n d   a   back   m a r ke r   a n d   st e p   t h rou gh   a   fe w   op e r a t i ons . 
+E nqu e u e   a n d   de qu e u e   a r e   O (1),   a n d   w he n   t he   r i n g   fi lls   you   g row   i t ,   j ust   a s   t he   a rr a y   st ack   did . 
+J a v a ' s   ArrayDeque   i s   d o c um e nt ed   a s   a   r e s i z ab l e - a rr a y   i mpl e m e nt a t i on   o f   e x ac tly   t hi s   i nt e r face . 
+W ha t   CP yt h on   d o e s   i nst ead 
+A   deque   i s   a   d ou b ly   l i n ked   chai n   o f   b lo ck s ,   a n d   each   b lo ck   i s   a n   a rr a y   o f   64   slots   h ol di n g   po i nt e rs . 
+Y ou   ca n   s ee   t he   64   f rom   P yt h on :   sys.getsizeof(deque(range(n)))   i s   760   b yt e s   up   to   63   v a lu e s   a n d   j umps   b y 
+528   b yt e s   (64   slots   o f   8   b yt e s ,   plus   b oo kkee p i n g )   a t   64   a n d   a t   128. 
+A pp e n di n g   wr i t e s   i nto   t he   n e xt   f r ee   slot   o f   t he   l a st   b lo ck ,   a n d   w he n   t ha t   b lo ck   fi lls ,   a   n e w   b lo ck   i s   a llo ca t ed   a n d 
+l i n ked   on . 
+popleft   t ake s   f rom   t he   fi rst   b lo ck   a n d   unl i n k s   i t   w he n   i t   e mpt ie s . 
+N o   st e p   e v e r   c op ie s   a ll   t he   v a lu e s ,   so   b ot h   e n d s   a r e   chea p . 
+L ike   a   l i st ,   each   slot   h ol d s   a   po i nt e r ,   so   100,000   v a lu e s   c ost   ab out   0.83   MB   o f   po i nt e rs . 
+T he   pr ice   i s   t he   m idd l e . 
+R eachi n g   i t e m   i   m ea ns   w a l ki n g   t he   chai n   o f   b lo ck s . 
+T he   c oll ec t i ons   d o c s   s a y   " I n de x ed   acce ss   i s   O (1)   a t   b ot h   e n d s   b ut   slows   to   O ( n )   i n   t he   m idd l e .   F or   fa st   r a n d om   acce ss , 
+us e   l i sts   i nst ead ." 
+O n   a   m i ll i on   v a lu e s ,   d[500000]   too k   35   m ic ros ec on d s   agai nst   0.08   f or   a   l i st . 
+T hi s   i s   t he   op e n i n g   qu e st i on   a nsw e r ed   w i t h   a   r ea l   e x a mpl e :   t he   de qu e   ga v e   up   fa st   i n de x i n g   to   ge t   fa st   e n d s . 
+D e qu e   op e r a t i on   C ost   S our ce 
+append   ,   appendleft   ,   pop   , 
+popleft   O (1)   c oll ec t i ons   d o c s :   " a pprox i m a t e ly   t he   s a m e   O (1)   p e r f orm a n ce   i n   ei t he r 
+di r ec t i on " 
+d[0]   ,   d[-1]   ,   len(d)   O (1)   c oll ec t i ons   d o c s ,   w iki   t ab l e 
+d[i]   i n   t he   m idd l e   O ( n )   c oll ec t i ons   d o c s 
+extend   ,   extendleft   ,   rotate(k)   O ( k )   P yt h on   w iki   t i m e   c ompl e x i ty   t ab l e 
+remove(x)   ,   x   in   d   ,   copy()   O ( n )   P yt h on   w iki   t i m e   c ompl e x i ty   t ab l e 
+10/17/26, 11:43 AM   EE 590a Class outline, wrapping up stacks, queues and runtimes 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/178.html   8/11
+===== p9 =====
+ 
+T he   o fficia l   t i m e   c ompl e x i ty   p age   f or   b u i lt - i n   typ e s   c ov e rs   l i st ,   tupl e ,   dic t ,   s e t   a n d   ot he rs ,   a n d   r efe rs   r eade rs   to 
+collections.deque   i nst ead   o f   l i st i n g   i t ,   so   t he   de qu e   c osts   c om e   f rom   t he   two   sour ce s   ab ov e . 
+T he   i nt e rv ie w   v e rs i on 
+P r ac t ice   t he   two - s e nt e n ce   a nsw e r   a lou d .   " H ow   woul d   you   b u i l d   a   qu e u e ?" 
+A   l i n ked   l i st   w i t h   a   head   a n d   a   t ai l   po i nt e r ,   e nqu e u ei n g   a t   t he   t ai l   a n d   de qu e u i n g   a t   t he   head ,   or   a   ci r c ul a r   a rr a y   t ha t
+wr a ps   a n d   g rows   w he n   f ull ;   b ot h   a r e   O (1)   p e r   op e r a t i on . 
+" W h y   not   a   pl ai n   a rr a y ?" 
+D e qu e u i n g   f rom   t he   f ront   s hif ts   e v e ryt hi n g ,   w hich   i s   O ( n )   p e r   r e mov a l   a n d   O ( n ² )   to   e mpty   i t . 
+T he   c l a ss ic   f ollow - up   i s   a   qu e u e   m ade   f rom   two   st ack s :   pus h   onto   a n   i n b ox   st ack ,   a n d   w he n   t he   out b ox   st ack   i s   e mpty , 
+pour   t he   i n b ox   i nto   i t .   E ach   v a lu e   mov e s   a t   most   tw ice ,   so   each   op e r a t i on   i s   O (1)   a mort i z ed ,   t he   s a m e   ki n d   o f   a r g um e nt 
+a s   d ou b l i n g . 
+B e yon d   P yt h on 
+T he   i nt e r face s   a r e   t he   s a m e   i n   e v e ry   l a n g u age ,   b ut   t he   defa ults   diffe r ,   a n d   most   m ai nstr ea m   l a n g u age s   l ea n   tow a r d   a rr a ys 
+a n d   a w a y   f rom   l i n ked   l i sts . 
+H e r e   a r e   som e   e x a mpl e s   o f   w ha t   ot he r   l a n g u age s   us e ;   r ead   t hi s   a n d   t hi n k   ab out   w ha t   tr ade o ff s   t he   a ut h ors '   o f   t he s e 
+l a n g u age s   m ade . 
+L a n g u age   W ha t   you   r each   f or   H ow   i t   i s   b u i lt   W ha t   to   not ice 
+P yt h on 
+list   a s   a   st ack , 
+collections.deque   a s   a 
+qu e u e 
+a rr a y   o f   po i nt e rs ;   chai n
+o f   64- slot   b lo ck s 
+t he   t i m e - c ompl e x i ty   p age   s a ys   i ts   c osts 
+de s c r ibe   CP yt h on   a n d   " ot he r   P yt h on 
+i mpl e m e nt a t i ons   m a y   diffe r " 
+J a v a   ArrayDeque   f or   b ot h   r e s i z ab l e   a rr a y 
+" l ike ly   to   be   fa st e r   t ha n   Stack   w he n   us ed   a s   a 
+st ack ,   a n d   fa st e r   t ha n   LinkedList   w he n   us ed
+a s   a   qu e u e ";   most   op e r a t i ons   a r e   a mort i z ed
+c onst a nt   t i m e ;   not   t h r ead - s afe 
+C ++   std::stack   a n d 
+std::queue 
+c ont ai n e r   ada ptors , 
+w i t h   std::deque   a s
+t he   defa ult   un de rly i n g
+c ont ai n e r 
+you   ch oos e   t he   c ont ai n e r :   a   st ack   ca n   s i t   on 
+vector   ,   deque   or   list   ;   a   qu e u e   n eed s 
+pop_front   ,   so   deque   or   list 
+R ust   Vec   a s   a   st ack , 
+VecDeque   a s   a   qu e u e 
+g row ab l e   a rr a y ; 
+g row ab l e   r i n g   b u ffe r 
+t he   d o c s   f or   LinkedList   s a y   " I t   i s   a lmost 
+a lw a ys   be tt e r   to   us e   Vec   or   VecDeque 
+beca us e   a rr a y - ba s ed   c ont ai n e rs   a r e   ge n e r a lly 
+fa st e r ,   mor e   m e mory   efficie nt ,   a n d   m ake   be tt e r
+us e   o f   CP U   cache " 
+T h r ee   diffe r e n ce s   wort h   n a m i n g ,   each   t ied   to   som e t hi n g   f rom   to da y : 
+P o i nt e rs   or   v a lu e s .   A P yt h on   list   stor e s   a   po i nt e r   p e r   slot ,   a n d   so   d o e s   J a v a ' s   ArrayList<Integer>   .   C ++' s 
+std::vector<int>   a n d   R ust ' s   Vec<i32>   stor e   t he   i nt ege rs   t he ms e lv e s ,   s ide   b y   s ide .   P yt h on ' s   array.array   d o e s
+too ,   w hich   i s   w h y   i t   us ed   l e ss   m e mory   t ha n   a   l i st   i n   t he   a ss ig nm e nt . 
+W h o   p ick s   t he   g rowt h   rul e .   CP yt h on   g rows   a   l i st   b y   rou gh ly   1.125   t i m e s   f or   l a r ge   l i sts ,   a s   w e   s a w .   T he   C ++   r efe r e n ce
+gi v e s   v ec tor ' s   push_back   a s   a mort i z ed   c onst a nt ,   a n d   t he   g rowt h   fac tor   i s   l ef t   to   each   l ib r a ry ,   so   i mpl e m e nt a t i ons 
+diffe r . 
+L i n ked   l i sts   i n   pr ac t ice .   T he   t e xt b oo k   qu e u e   i s   a   l i n ked   l i st   w i t h   a   t ai l   po i nt e r ,   a n d   i t   i s   O (1).   I n   pr ac t ice   t he   a rr a y - ba s ed 
+v e rs i ons   w i n   on   t he   c onst a nts ,   a s   our   184- b yt e s - p e r - v a lu e   l i n ked   st ack   su gge sts ,   a n d   a s   t he   J a v a   a n d   R ust   d o c s   s a y
+outr igh t .   B ig - O   c omp a r e s   g rowt h ,   a n d   ha r d w a r e   decide s   t he   r e st . 
+10/17/26, 11:43 AM   EE 590a Class outline, wrapping up stacks, queues and runtimes 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/178.html   9/11
+===== p10 =====
+ 
+F or   stu de nts   w h o   w a nt   mor e ,   t he   n e xt   st e p   i s   to   p ick   on e   ot he r   l a n g u age   a n d   check   w ha t   i ts   st a n da r d   l ib r a ry   o ffe rs   f or   a 
+qu e u e   a n d   w ha t   t he   d o c s   prom i s e   ab out   c ost ,   w hich   i s   t he   s a m e   e x e r ci s e   a s   to da y   w i t h   a   diffe r e nt   t ab l e . 
+W r a p - up 
+T he   t h rou gh - l i n e   o f   t he   l a st   fe w   c l a ss e s   i s   t ha t   on e   i nt e r face   ca n   be   b u i lt   f rom   a n   a rr a y   or   f rom   a   chai n   o f   no de s ,   P yt h on 
+gi v e s   you   a n   a rr a y   o f   po i nt e rs   (   list   )   a n d   a   chai n   o f   a rr a ys   (   deque   ),   a n d   you   ch oos e   b y   w hich   op e r a t i ons   your   pro g r a m 
+d o e s   most . 
+T he   on e - p age   chea t   s hee t   T hi s   i s   t he   t ab l e   y ' a ll   ca n   kee p   f or   t e sts   a n d   i nt e rv ie ws ! 
+Y ou   n eed   R each   f or   C ost   to   r e m e m be r 
+S t ack   list   :   append   ,   pop()   O (1)   each ;   append   i s   a mort i z ed 
+Q u e u e   collections.deque   :   append   , 
+popleft()   O (1)   each 
+Q u e u e   f rom   a   pl ai n
+l i st   append   ,   pop(0)   O ( n )   p e r   de qu e u e ,   O ( n ² )   to   e mpty   i t 
+L oo k   up   b y   pos i t i on   list[i]   O (1);   a   de qu e   i s   O (1)   a t   t he   e n d s   a n d   O ( n )   i n   t he   m idd l e 
+S ea r ch   f or   a   v a lu e   x   in   lst   O ( n ) 
+W or k   s ha r ed   be tw ee n
+t h r ead s   queue.Queue   O (1)   plus   lo ck   c ost ;   us e   get()   ,   not   empty() 
+L a st   k   i t e ms   only   deque(maxlen=k)   O (1) 
+W h y   d ou b l i n g   wor k s   tot a l   c op ie s   st a y   un de r   2   p e r
+pus h   pus h   i s   O (1)   a mort i z ed 
+W h y   big - O   i s   not   t he 
+w h ol e   story   i t   hide s   c onst a nts   s a m e   O (1),   y e t   a   l i st   bea ts   our   a rr a y   st ack ,   a n d   a   l i n ked 
+no de   i s   ab out   23   t i m e s   t he   m e mory 
+C Y K   qu e st i ons 
+U s e   t he s e   to   r e v ie w   your   un de rst a n di n g . 
+1.   W h y   i s   pus h   O (1)   a mort i z ed   w he n   w e   d ou b l e   t he   a rr a y ?   ( T he   c op ie s   a t   each   g rowt h   add   up   l ike   4   +   8   +   ...   +   c ,   w hich   i s
+l e ss   t ha n   2 c ,   w he r e   c   i s   t he   l a st   f ull   ca p aci ty   a n d   i s   be low   n ,   so   n   pus he s   c ost   fe w e r   t ha n   2 n   c op ie s   i n   tot a l ,   un de r   2   p e r
+pus h ,   on   top   o f   t he   wr i t e .) 
+2.   A   pro g r a m   d r ai ns   a   l i st   o f   1,000,000   v a lu e s   w i t h   pop(0)   .   H ow   bad   i s   i t ?   ( O ( n ² ).   B y   e xtr a pol a t i n g   t he   cha rt ,   a   fe w   d oz e n
+t i m e s   t he   2.4   s ec on d s   a t   160,000,   so   on   t he   or de r   o f   a   m i nut e   or   mor e .   S a y   t ha t   t hi s   i s   a n   e xtr a pol a t i on ,   not   a 
+m ea sur e m e nt .) 
+3.   W hich   o f   our   st ack s   woul d   you   p ick   w he n   a   p a us e   i s   un acce pt ab l e ?   ( T he   l i n ked   st ack ,   or   a   fi x ed - ca p aci ty   a rr a y   st ack . 
+T he   g row i n g   a rr a y   st ack   ha s   t he   o cca s i on a l   O ( n )   pus h .) 
+4.   W h y   ca n   a   de qu e   pop   f rom   t he   l ef t   i n   O (1)   b ut   not   i n de x   t he   m idd l e   i n   O (1)?   ( I t   i s   a   chai n   o f   b lo ck s .   T he   e n d s   a r e   on e
+h op   a w a y ,   a n d   t he   m idd l e   ha s   to   be   w a l ked   to .) 
+5.   W h y   d o e s   grid   =   [[0]   *   3]   *   3   g o   wron g ?   ( A   l i st   i s   a n   a rr a y   o f   po i nt e rs ,   a n d   t he   out e r   l i st   h ol d s   t h r ee   c op ie s   o f   t he 
+s a m e   po i nt e r   to   on e   i nn e r   l i st .) 
+6.   I nt e rv ie w :   b u i l d   a   qu e u e   f rom   two   st ack s ,   a n d   gi v e   t he   c ost .   ( P us h   onto   a n   i n b ox   st ack ;   to   de qu e u e ,   if   t he   out b ox   i s 
+e mpty ,   pop   e v e ryt hi n g   f rom   t he   i n b ox   onto   t he   out b ox ,   t he n   pop   t he   out b ox .   E ach   v a lu e   mov e s   a t   most   tw ice ,   so   e v e ry
+op e r a t i on   i s   O (1)   a mort i z ed .) 
+7.   W ha t   d o e s   O (1)   not   t e ll   you ?   ( H ow   big   t he   c onst a nt   i s ,   w hich   i s   w h y   P yt h on ' s   list   bea ts   our   a rr a y   st ack   i n   t he   s a m e 
+loop .) 
+10/17/26, 11:43 AM   EE 590a Class outline, wrapping up stacks, queues and runtimes 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/178.html   10/11
+===== p11 =====
+10/17/26, 11:43 AM   EE 590a Class outline, wrapping up stacks, queues and runtimes 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/178.html   11/11
