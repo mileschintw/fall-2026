@@ -5,4 +5,4 @@
 - 需要瀏覽器（內建瀏覽器 mcp__Claude_Browser__*，先載入 skill anthropic-skills:built-in-browser）。遇到登入頁或 OAuth 確認頁就停下，回報「需要重新登入：<來源>」，不輸入密碼、不按授權。
 - 不 commit、不 push、不發文。最後一句回報 notes.md 路徑或跳過原因。
 
-最後照 `automation/_finish.md` 做共同收尾：登記到 `digests/INDEX.md`，有新東西就推播。
+最後照 `automation/_finish.md` 做共同收尾：用 `scripts/log_run.py` 登記、更新 dashboard、有新東西就推播。

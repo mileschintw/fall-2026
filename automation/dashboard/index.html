@@ -1,0 +1,253 @@
+<style>
+  #dash-root { --dash-gutter: clamp(16px, 3vw, 32px); }
+  .fh { display: grid; gap: var(--cds-gap-lg); font-family: var(--font-anthropic-sans); max-width: 72rem; margin-inline: auto; }
+  .fh-head h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .fh-head p { margin: var(--cds-gap-xs) 0 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-body); }
+  .fh-tiles { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+  .fh-tile, .fh-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+  .fh-tile .lbl { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .fh-tile .num { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: calc(var(--cds-font-size-title) * 1.4); line-height: 1.15; font-variant-numeric: tabular-nums; }
+  .fh-tile .sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); min-height: 1.3em; }
+  .fh-tile.bad .num { color: var(--color-bad); }
+  .fh-grid { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); }
+  .fh-card h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+  .fh-card .note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-xs) 0 var(--cds-gap-sm); }
+  .fh-wide { grid-column: 1 / -1; }
+  .fh-scroll { overflow: auto; max-height: 30rem; }
+  .fh table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-body); font-variant-numeric: tabular-nums; }
+  .fh th { text-align: left; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); position: sticky; top: 0; background: var(--color-panel); }
+  .fh td { padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+  .fh td.when { white-space: nowrap; }
+  .fh td.muted, .fh .muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .pill { display: inline-block; padding: 0 var(--cds-pad-sm); border-radius: 999px; border: 1px solid var(--color-border-line); font-size: var(--cds-font-size-caption); white-space: nowrap; }
+  .pill.bad { color: var(--color-bad); border-color: currentColor; }
+  .pill.warn { color: var(--color-warn); border-color: currentColor; }
+  .pill.ok { color: var(--color-ok); border-color: currentColor; }
+  .course { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-right: var(--cds-gap-xs); }
+  .tasks { display: grid; gap: var(--cds-gap-sm); }
+  .task { display: grid; grid-template-columns: 5.5rem 1fr; gap: var(--cds-gap-sm); align-items: baseline; padding-bottom: var(--cds-gap-sm); border-bottom: 1px solid var(--color-border-line); }
+  .task:last-child { border-bottom: 0; }
+  .task .name { font-weight: var(--cds-font-weight-medium); }
+  .task .meta { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+  [data-dash-source-state=empty] { color: transparent; }
+  .fail { display: flex; align-items: center; justify-content: center; gap: var(--cds-gap-xs); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); min-height: 3rem; }
+  .fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+  @media (max-width: 40rem) { .fh .hide-narrow { display: none; } }
+</style>
+
+<div class="fh">
+  <header class="fh-head" id="top">
+    <h1>Fall 2026 學期中樞</h1>
+    <p class="fh-takeaway dash-skeleton" data-source="kpis" data-field="takeaway">—</p>
+  </header>
+
+  <section class="fh-tiles" id="kpis" aria-label="摘要">
+    <div class="fh-tile" id="tile-due7">
+      <div class="lbl">7 天內要交 / 要考</div>
+      <div class="num dash-skeleton" data-source="kpis" data-field="due7">—</div>
+      <div class="sub" data-source="kpis" data-field="due7_items"></div>
+    </div>
+    <div class="fh-tile" id="tile-overdue">
+      <div class="lbl">已過期但還沒交</div>
+      <div class="num dash-skeleton" data-source="kpis" data-field="overdue">—</div>
+      <div class="sub" data-source="kpis" data-field="overdue_items"></div>
+    </div>
+    <div class="fh-tile" id="tile-last">
+      <div class="lbl">最後一次排程</div>
+      <div class="num dash-skeleton" data-source="kpis" data-field="last_label">—</div>
+      <div class="sub" data-source="kpis" data-field="last_summary"></div>
+    </div>
+  </section>
+
+  <section class="fh-grid">
+    <article class="fh-card fh-wide" id="upcoming">
+      <h2>接下來的截止</h2>
+      <p class="note">從現在到期末，依時間排序。時間是 Pacific，11/1 起是 PST。</p>
+      <div class="fh-scroll">
+        <table data-source="upcoming" data-row-key="key">
+          <thead><tr>
+            <th data-source="upcoming" data-field="left_label">剩餘</th>
+            <th data-field="item">項目</th>
+            <th data-field="due_label">截止</th>
+            <th data-field="status">狀態</th>
+            <th class="hide-narrow" data-field="note">備註</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </article>
+
+    <article class="fh-card" id="tasks">
+      <h2>排程任務</h2>
+      <p class="note">每個任務最近一次的結果。</p>
+      <div class="tasks" data-source="latest"></div>
+    </article>
+
+    <article class="fh-card" id="runs">
+      <h2>執行紀錄</h2>
+      <p class="note">最新的在最上面。完整內容在 repo 的輸出檔。</p>
+      <div class="fh-scroll">
+        <table data-source="runs" data-row-key="at">
+          <thead><tr>
+            <th data-field="at">時間</th>
+            <th data-field="task">任務</th>
+            <th data-field="summary">重點</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </article>
+
+    <article class="fh-card fh-wide" id="past">
+      <h2>已過去的項目</h2>
+      <p class="note">截止日已過：已完成或還沒交。</p>
+      <div class="fh-scroll">
+        <table data-source="past" data-row-key="key">
+          <thead><tr>
+            <th data-field="item">項目</th>
+            <th data-field="due_label">截止</th>
+            <th data-field="status">狀態</th>
+            <th class="hide-narrow" data-field="note">備註</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </article>
+  </section>
+</div>
+
+<script>
+  const TASKS = ['晨報', '截止提醒', '週規劃', '上課筆記', '學期至今版'];
+  const ICON = { new: '🆕 有新東西', ok: '✅ 正常', skip: '⏭ 跳過', warn: '⚠️ 部分失敗', fail: '❌ 失敗' };
+
+  dash.calc('upcoming', {
+    title: '接下來的截止',
+    description: '截止時間還沒到的項目，依時間排序，加上剩餘時間。',
+    inputs: ['deadlines'],
+    fn: (deadlines) => {
+      const now = Date.now();
+      return deadlines
+        .filter((d) => new Date(d.due).getTime() >= now)
+        .sort((a, b) => new Date(a.due) - new Date(b.due))
+        .map((d) => {
+          const h = (new Date(d.due).getTime() - now) / 36e5;
+          const left_label = h < 24 ? `剩 ${Math.max(1, Math.round(h))} 小時` : `剩 ${Math.floor(h / 24)} 天`;
+          return { ...d, hours_left: Math.round(h), left_label };
+        });
+    },
+  });
+
+  dash.calc('past', {
+    title: '已過去的項目',
+    description: '截止時間已過的項目，最近的在上面。',
+    inputs: ['deadlines'],
+    fn: (deadlines) => deadlines
+      .filter((d) => new Date(d.due).getTime() < Date.now())
+      .sort((a, b) => new Date(b.due) - new Date(a.due)),
+  });
+
+  dash.calc('latest', {
+    title: '各任務最近一次',
+    description: '每個排程任務最新的一筆執行紀錄。',
+    inputs: ['runs'],
+    fn: (runs) => {
+      const seen = {};
+      [...runs].sort((a, b) => new Date(b.at) - new Date(a.at)).forEach((r) => { if (!seen[r.task]) seen[r.task] = r; });
+      return Object.values(seen);
+    },
+  });
+
+  dash.calc('kpis', {
+    title: '摘要數字',
+    description: '7 天內的截止數、已過期未交數（不計分和未發布的不算）、最後一次排程。',
+    inputs: ['deadlines', 'runs'],
+    fn: (deadlines, runs) => {
+      const now = Date.now();
+      const t = (d) => new Date(d.due).getTime();
+      const soon = deadlines.filter((d) => t(d) >= now && t(d) <= now + 7 * 864e5).sort((a, b) => t(a) - t(b));
+      const overdue = deadlines.filter((d) => t(d) < now && !d.done && d.status === '未交' && d.points);
+      const last = [...runs].sort((a, b) => new Date(b.at) - new Date(a.at))[0];
+      const next = soon[0];
+      const takeaway = overdue.length
+        ? `有 ${overdue.length} 項已過期還沒交：${overdue.map((d) => d.item).join('、')}。`
+        : next ? `下一個截止：${next.course} ${next.item}，${next.due_label}。` : '7 天內沒有截止。';
+      const fmt = new Intl.DateTimeFormat('zh-TW', { timeZone: 'America/Los_Angeles', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });
+      return [{
+        due7: soon.length,
+        due7_items: soon.map((d) => `${d.course} ${d.item.split(' ')[0]}`).join('、'),
+        overdue: overdue.length,
+        overdue_items: overdue.map((d) => `${d.course} ${d.item.split(' ')[0]}`).join('、'),
+        last_label: last ? `${last.task} ${fmt.format(new Date(last.at))}` : '—',
+        last_summary: last ? `${ICON[last.status] || last.status}：${last.summary}` : '',
+        takeaway,
+      }];
+    },
+  });
+
+  const pillClass = (s) => (s === '未交' ? 'bad' : s === '考試' ? 'warn' : /已評分|已交/.test(s) ? 'ok' : '');
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const failLine = (host) => { host.replaceChildren(el('div', 'fail', 'Failed to load')); };
+
+  function fillDeadlineTable(sel, id, withLeft) {
+    const table = document.querySelector(sel);
+    const body = table.querySelector('tbody');
+    const r = dash.data(id);
+    if (r.status !== 'ok') { body.replaceChildren(); return; }
+    body.replaceChildren(...r.data.map((d) => {
+      const tr = el('tr'); tr.dataset.key = d.key;
+      if (withLeft) {
+        const left = el('td', 'when', d.left_label);
+        if (d.hours_left < 48) left.style.color = 'var(--color-bad)';
+        else if (d.hours_left < 24 * 7) left.style.color = 'var(--color-warn)';
+        tr.append(left);
+      }
+      const item = el('td'); item.append(el('span', 'course', d.course), document.createTextNode(d.item));
+      const st = el('td'); st.append(el('span', 'pill ' + pillClass(d.status), d.status));
+      tr.append(item, el('td', 'when', d.due_label), st, el('td', 'muted hide-narrow', d.note || ''));
+      return tr;
+    }));
+  }
+
+  dash.onData(() => {
+    const k = dash.data('kpis');
+    document.querySelectorAll('[data-source="kpis"]').forEach((n) => {
+      n.classList.toggle('dash-skeleton', k.status === 'loading');
+      n.textContent = k.status === 'ok' ? String(k.data[0][n.dataset.field] ?? '') : (n.classList.contains('num') ? '—' : '');
+    });
+    document.getElementById('tile-overdue').classList.toggle('bad', k.status === 'ok' && k.data[0].overdue > 0);
+
+    fillDeadlineTable('table[data-source="upcoming"]', 'upcoming', true);
+    fillDeadlineTable('table[data-source="past"]', 'past', false);
+
+    const tasks = document.querySelector('.tasks');
+    const l = dash.data('latest');
+    if (l.status === 'error') failLine(tasks);
+    else if (l.status !== 'ok') tasks.replaceChildren();
+    else {
+      const by = Object.fromEntries(l.data.map((r) => [r.task, r]));
+      tasks.replaceChildren(...TASKS.map((t) => {
+        const r = by[t];
+        const row = el('div', 'task');
+        const right = el('div');
+        if (r) {
+          right.append(el('span', 'pill ' + ({ new: 'ok', warn: 'warn', fail: 'bad' }[r.status] || ''), ICON[r.status] || r.status));
+          right.append(el('div', 'meta', `${new Date(r.at).toLocaleString('zh-TW', { timeZone: 'America/Los_Angeles', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })}・${r.summary}`));
+          if (r.output) right.append(el('div', 'meta', r.output));
+        } else right.append(el('span', 'muted', '尚未執行'));
+        row.append(el('div', 'name', t), right);
+        return row;
+      }));
+    }
+
+    const runsBody = document.querySelector('table[data-source="runs"] tbody');
+    const rr = dash.data('runs');
+    if (rr.status !== 'ok') runsBody.replaceChildren();
+    else runsBody.replaceChildren(...[...rr.data].sort((a, b) => new Date(b.at) - new Date(a.at)).map((r) => {
+      const tr = el('tr'); tr.dataset.key = r.at;
+      const sum = el('td'); sum.append(el('span', 'course', (ICON[r.status] || r.status).split(' ')[0]), document.createTextNode(r.summary));
+      tr.append(el('td', 'when muted', new Date(r.at).toLocaleString('zh-TW', { timeZone: 'America/Los_Angeles', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })), el('td', 'when', r.task), sum);
+      return tr;
+    }));
+  });
+</script>
