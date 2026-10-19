@@ -3,7 +3,7 @@
 ## 🔴 先看這兩件事
 1. **DSA A2 今晚 10/18（日）11:59 PM PDT 到期。** Canvas 顯示 unsubmitted，`assignment-2-mileschintw` 只有老師的 Initial commit（預設分支是 `master`，不是 `main`）。如果你寫在本機還沒 push：先 push，**再到 Canvas 交 repo URL**。
 2. **GPU HW1 10/20（二）5:59 PM PDT 到期**，Canvas 顯示 unsubmitted。L2 有提到：L1 投影片 p55 的 error-checking macro 語法有錯，HW1 會用到，要看 Files 裡的「lecture 1 updated」。
-- 另外：**GPU Task 0**（自我介紹，10/9 截止）在 Canvas 也是 unsubmitted，lock 日是 12/18。它是在 Teams 的 Task 0 串回覆，再到 Canvas 交連結（online_url）。
+- 另外：**GPU Task 0**（自我介紹，10/9 截止）在 Canvas 也是 unsubmitted，lock 日是 12/18。Teams 的 Task 0 串要你回覆自介；Canvas 端是 online_url，推測是交那則回覆的連結，請自行確認。
 
 ## 各來源狀態
 
