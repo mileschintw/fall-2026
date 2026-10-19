@@ -1,0 +1,718 @@
+# Au26_GPU-Compute_Lecture1_updated.pdf (file 154353784), 62 pages (pdf.js text extraction)
+
+--- p1 ---
+EE P 524 A/B 
+Applied High - Performance 
+GPU Computing 
+LECTURE 1 : Tuesday, October 6, 2026 
+Instructor: Dr. Colin Reinhardt 
+UW ECE Professional Masters Program / GPU Certificate Track 
+Autumn 2026 
+--- p2 ---
+Lecture 1 : Outline 
+Welcome to Applied High - Performance GPU Computing 
+(EEP 524 A/B) 
+   About me 
+   Course schedule and logistics 
+   Why learn GPU computing today? 
+   GPGPU brief history 
+   Concepts of parallel execution on GPUs 
+   CUDA Introduction 
+   HW - 0 
+--- p3 ---
+About Me 
+   1 st   programmed Apple 2e (BASIC) and Commodore 64   –   early 1980s! 
+   Professional Software Engineer, Seattle (1997 - 2004) 
+   BSEE+BS Physics from UW (2005) 
+   PhD in EE from UW (2010) 
+   Committee: Profs Kuga/ Ritcey /Ishimaru/Riley 
+   Dissertation work focused on FSO laser comms, radiative transfer theory, inverse problems 
+   ASEE/DOD SMART Doctoral Fellow (2007 - 2010) 
+   DOD/US Navy Research Engineer (2011 - present) 
+   Computer vision, 3D spatial understanding/representation, vision and rendering AI/ML models 
+   EO/IR atmospheric propagation physics, modeling & simulation, characterization 
+   Physics - based (3D+T) scene simulation, computer M&S, 3D CG, ray tracing 
+   EO/IR systems and sensors, optics, imaging, image processing 
+   thermal heat transfer 
+   Affiliate Assistant Professor, UW ECE (2016 - present) 
+   teaching GPU computing, Scientific Visualization,   indep   study, undergrad capstones 
+   Fun: surfing, rock climbing, music, mountain biking, video games, movies, and 
+family! 
+https://faculty.washington.edu/colinrei 
+--- p4 ---
+UW ECE GPU Track 2026 - 27 
+   Professional Masters Program (PMP) and Certificate Program 
+*NEW* GPU - Accelerated Computing & Visualization 
+1.   Autumn ‘26:   Applied High - Performance GPU Computing 
+2.   Winter ‘27:   GPU - Accelerated Methods for Multi - GPU and Multi - Node   –   Scaling 
+Machine Learning 
+•   Multi - GPU and multi - node scaling: NCCL collective communication,   NVLink / NVSwitch   and 
+InfiniBand interconnects, 
+•   Full distributed parallelism toolkit (data, tensor, pipeline, sequence, context, and expert 
+parallelism) used to train and serve large models 
+3.   Spring ‘27:   GPU - Accelerated Machine Learning   –   In Practice and Under - the - hood 
+   Python - centric GPU programming stack: writing high - performance kernels in Triton and the 
+CuTe   DSL, and integrating custom operators with   PyTorch   and   torch.compile 
+   Applied case studies across the ML landscape:   FlashAttention , Mamba selective - scan, 3D 
+Gaussian Splatting, distributed training (Megatron - Core) and inference serving ( vLLM ), 
+quantization (FP8/FP4, GPTQ/AWQ), diffusion - model generation, and neural radiance fields 
+(Instant - NGP) 
+--- p5 ---
+This Class = ALL ONLINE 
+ REMINDER : Fully remote online class this quarter 
+   ALL online/remote via MS Teams 
+   Live Weekly Teams lectures (will be recorded and shared via Team channel) 
+   Primary focus will be NVIDIA CUDA platform and NVIDIA GPU architectures 
+   Some (limited) discussion of OpenCL and Intel/AMD/mobile GPU architectures 
+   We will use AWS cloud - based virtual workstations & GPU instances 
+   Custom - developed AWS   AppStream   VDE 
+   VDE = Virtual Desktop Environment 
+   Each has dedicated Tesla Turing T4 GPUs (Compute Capability 7.5) 
+--- p6 ---
+Course “Philosophy” 
+   Study GPU computing via a series of “passes” (repeated revisits) with progressive 
+“zoom” refinements of technical complexity/detail. 
+   Start simple and introduce more details/theory/tools and advanced GPU 
+techniques with each pass. (and some background/history where relevant) 
+   Hardware (HW) and system microarchitectural perspective 
+   Software (SW): API, fundamental code and algorithms, parallel software patterns 
+   Execution/Runtime analysis, profiling, debugging and supporting tools 
+   theoretical 
+   empirical 
+   Some preliminary exposure to advanced concepts & techniques: 
+   concurrency, synchronization, assembly language/ISAs,   etc … 
+   Homework s   will be used to build and reinforce the fundamentals 
+   Once we’ve built up sufficient breadth & depth, we’ll begin working on a   final 
+project   which pulls everything together and lets you use and practice what 
+you’ve learned. 
+--- p7 ---
+What this course   IS   and   IS NOT 
+   IS 
+   Study and use   close - to - the - metal   low - level API to write optimized algorithms for GPUs 
+   Understand the hardware - software interface ISA and related hardware microarchitecture 
+   Learn to use the practical tools to design, implement, test, tune GPU compute layer, which 
+provides the under - the - hood computation layer   used by   higher - level applications 
+   For people who want to   design/develop   the GPU layers for higher - level applications, or for 
+designing/develop GPU compute which   doesn’t exist today , or optimize to squeeze the 
+absolute maximum performance   from specific HW and/or algorithm. 
+   IS NOT 
+   an introduction to C and C++ programming 
+   a course on higher - level applications and problems which use/benefit from GPU 
+computing, 
+   such as machine - learning/deep learning frameworks, scientific, engineering, and medical software 
+applications,   etc … 
+   Although   we will look at examples of these applications and how the GPU compute layer provides 
+acceleration through massive parallel execution of key performance - critical algorithms. 
+--- p8 ---
+Class Prerequisites 
+   I ntermediate C/C++ and dev   envs   & tools, debugging skills 
+   Visual Studio 2026 Community Edition 
+   NVIDIA CUDA Toolkit (we’ll use 13.4) 
+   Casic   computer architecture: microprocessors, memory system, interconnects 
+   Basic understanding of machine learning fundamentals: multi - layer 
+perceptrons , backpropagation/stochastic gradient descent, loss functions, 
+tokenization, embeddings, attention, convolutional neural networks, LLMs 
+   Due to the class size and complexity of the cloud - based AWS environment, we will not be able to 
+provide technical support and troubleshooting of basic setup, programming, and development tools 
+usage for students using own hardware systems. 
+   At the professional Master’s level in UW ECE it is expected that   proactive problem solving skills   and 
+independent/autonomous work capacity is a given! 
+--- p9 ---
+Course Schedule* 
+   Week 1 (10/6)   : Course Intro & logistics, overview of parallel GPU computing and NVIDIA CUDA platform. 
+Parallelism concepts. 
+   Homework - 0 (not graded but important!) 
+   Week 2 ( 10/13 )   : multidimensional grids. CUDA device code. GPU HW architecture 101. 
+•   Homework - 1 DUE : 20 OCT, 5:59 PM 
+   Week 3 (10/20)   : kernel languages. Profiling and HW Arch 201 and iterative optimization. Analysis of algorithms. 
+Roofline model. 
+•   Homework - 2 DUE : 2 7   OCT, 5:59 PM 
+   Week 4 (10/27)   : GPU HW Arch 201: memory hierarchy. Parallel performance theory. GEMM kernels. 
+•   Homework - 3 DUE :   3   NOV, 5:59 PM 
+   Week 5 (11/3)   :   Introduction to parallel patterns. Advanced kernel language features and kernel performance. 
+•   Homework - 4 DUE : 10 NOV, 5:59 PM 
+   Week 6 (11/10)   : 2D/3D Convolution and stencil patterns. 
+   Week 7 (11/17)   : GPU Numerical precision. Parallel histogram. atomic operations. 
+•   Final Project :   Proposal   DUE :   17   NOV, 5:59 PM 
+   Week 8   (11/24)   :   Parallel reduction pattern 
+   Final Project :   Design Specification   DUE : 1 DEC, 5:59 PM 
+   Week 9 (12/1)   :   Parallel prefix sum/scan patterns. 
+   Week 10 (12/8)   : Parallel merge and sort. 
+•   Final Project :   Final Report and Code   DUE : Thursday 17 DEC, 11:59 PM 
+* subject to some revision as the quarter progresses to meet class needs/goals. 
+--- p10 ---
+Course Logistics 
+Course Overview: 
+   There will be 10 live lectures delivered via online Zoom. 
+   Live lectures are   Tuesday evenings 630 - 930 PM (pacific time, PST) 
+   Hands - on   programming exercises will be part of the weekly curriculum. 
+   There will be 4 homework assignments which will consist of (a) readings, (b) theory, (c) coding. 
+   The remainder of the quarter will be focused on a final project which will be comprised of a fairly significant GPU code desi gn   and 
+implementation utilizing and applying techniques learned in the class. 
+   Project Parts : Project Proposal (10%), Design specification (30%), Final report, code, and results and evaluation (60%). 
+Grading: 
+   Homework (4) 50% ( 11 / 12 / 12 / 15 pts ) 
+   Final Project 50% ( see breakdown above ) 
+Course Materials: 
+   Kirk and   Hwu ,   Programming Massively Parallel Processors , 4th Ed. Morgan Kaufmann, 2022 
+Reading materials for the course as well as a list of supplementary reading materials will be posted on the course website.   All   materials 
+available in online electronic formats, either freely available public literature, through UW Library ( www.lib.washington.edu ), or on the 
+class website (Canvas). 
+Course Policies 
+Collaboration and discussion of homework assignments and project design and implementation with your fellow classmates, profe sso r, 
+TA and others is highly encouraged! However, the work you submit must be your own, and you must write your own code(s).   Copying 
+code and plagiarizing is not allowed . 
+AI Policy 
+AI tools can be used to assist with homework and course topic understanding. They should not be used for generating homework 
+solutions or the final project report or code.   It is expected that students do their own original thinking and work! 
+--- p11 ---
+Class Schedule: details… 
+   TUES evening live lecture & meeting time 630 - 930 
+   630 - 9 technical lecture topic, live 
+   will be recorded and posted for future reference 
+   9 - 930 discussions, individualized Q&A support, HW help,   etc 
+   Additional pre - recorded technical lecture segments will be posted to the 
+courseweb   via Panopto 
+   You can watch these asynchronously on - demand on your schedule. 
+   The class   Teams   channel will be heavily used for discussions and will be 
+actively monitored by the professor and TA 
+   You should have already received an invitation link 
+--- p12 ---
+TA and Office Hours 
+Our TAs: 
+▪   Diya Shetty ( diya05@uw.edu ) 
+▪   Devika Nair( devikn@uw.edu ) 
+   TA office hours 
+   will be determined based on a class poll ( will be posted tomorrow ) 
+   additional hours can be arranged on individual basis, please contact TA 
+   PROFESSOR office hours 
+   Each week there will be time after the live lecture for discussion & questions 
+   additional hours can be arranged on individual basis, please contact Prof Reinhardt 
+directly 
+--- p13 ---
+Course Assets: Canvas and Teams 
+Course Canvas Website: AKA “ courseweb ” 
+   https://canvas.uw.edu/courses/1917398 
+   Your primary portal to all things   GPUCompute   Au26 
+   (Let’s take a quick tour…) 
+MS Teams 
+   Team name:   EEP 524 A/B   -   GPU Computing 
+   Will be used for weekly live lectures and discussion channels 
+   You should all have been added 
+   Suggest you enable notifications so you don’t miss important info 
+--- p14 ---
+Course Weekly Reading SETs 
+   Main textbook 
+   Kirk and   Hwu ,   Programming Massively Parallel Processors , 4e. Morgan Kaufmann, 2022 
+   PMPP for short! 
+•   Available through UW Libraries as online   ebook . 
+•   Get the O'Reilly App and create account using @uw.edu student SSO 
+   Weekly reading sets will be posted weekly on   courseweb   in PAGES section 
+   WEEK 1: PMPP Chapters 1 & 2 
+   UW Lib website, O’Reilly books online 
+   https://www.lib.washington.edu/ 
+   https://learning.oreilly.com/   (register for an account using your @uw.edu single - sign 
+on (SSO)) 
+--- p15 ---
+Amazon Web Services Course Cloud 
+   We will be using AWS cloud - based environment VDE for the class 
+   VDE = virtual desktop/development environment 
+   WorkSpaces   cloud VDE for registered students includes 
+   AWS   WorkSpaces   (VDE) with Windows, Visual Studio 2026, CUDA Toolkit 13.4 
+   access using any client with HTML5 browser 
+   running on AWS EC2 GPU Instances 
+   Each has dedicated NVIDIA GPU: Turing T4 Tensor GPU 
+   Details on how to access and use will be coming in next few days 
+   AWS   WorkSpaces   login emails will go out tonight after the lecture 
+   a video guide of how to setup and access will be posted 
+   If initial login is slow or fails, please try again after 5 minutes 
+   It may take a few days to get the instance scaling/spin - up configuration tuned. 
+--- p16 ---
+If you have your own compatible HW, 
+and want to use it… 
+---   THIS IS NOT REQUIRED   --- 
+Compatible HW devices 
+   NVIDIA GPU (CC 7.5 or later required) 
+Supported OS & SW 
+   Microsoft Windows 10/11 
+   Visual Studio 2022/2026 Community Edition (FREE) 
+   NVIDIA CUDA Toolkit > 12.5 (FREE) 
+   later slides at the end of Lecture 1 (L1) will have download links 
+However   –   note we cannot assist with systems which don’t meet the above specs 
+It is very possible other configurations could work, but student will be responsible 
+--- p17 ---
+Why are we studying GPUs 
+(and how to effectively use them) 
+today?? 
+--- p18 ---
+(Just a touch of) GPU History 
+Early GPUs were quietly leading a very parallel life… 
+--- p19 ---
+Doing 
+--- p20 ---
+
+--- p21 ---
+(OpenGL, DirectX, Vulcan, Metal) 
+--- p22 ---
+
+--- p23 ---
+
+--- p24 ---
+GeForce 8800 GPU 
+128 streaming processors that run at 1.35 GHz! $599! 
+--- p25 ---
+NVIDIA Ada Lovelace AD102 with 144 SM units (2023) 
+•   Each SM contains 128 CUDA cores (compute units: CUs) 
+--- p26 ---
+
+--- p27 ---
+Rough Timeline of GPGPU and NVIDIA GPU 
+Architectures 
+Year   Arch   Series   Die   Process   Flagship part 
+============================================================================= 
+2006   Tesla   GeForce 8   G80   90 nm   8800 GTX 
+2010   Fermi   GeForce 400   GF100   40 nm (TSMC)   GTX 480 
+2012   Kepler   GeForce 600   GK104   28 nm (TSMC)   GTX 680 
+2014   Maxwell   GeForce 900   GM204   28 nm (TSMC)   GTX 980 
+2016   Pascal   GeForce 10   GP102   16 nm FF+   GTX 1080 Ti 
+2018   Turing   GeForce 20   TU102   12 nm FFN   RTX 2080 Ti 
+2020   Ampere   A100 / DC   GA100   TSMC N7   A100 (826 mm², 54.2 B) 
+2020   Ampere   GeForce 30   GA102   Samsung 8N   RTX 3090 (628 mm², 28.3 B) 
+2022   Hopper   H100 / DC   GH100   TSMC 4N   H100 SXM5 (814 mm², 80 B) 
+2023   Hopper   H200 / DC   GH100   TSMC 4N   H200 (same die, HBM3e) 
+2024   Blackwell   B100/B200, GB200   2   ×   GB100   TSMC 4NP   B200 (2 dies, 208 B total) 
+2025   Blackwell   GeForce 50   GB202   TSMC 4N   RTX 5090 (750 mm², 92.2 B) 
+2025   Blackwell   B300/GB300 "Ultra" 2   ×   GB100   TSMC 4NP   B300 (208 B, 288 GB HBM3e) 
+2026   Rubin   R100 / VR200   2   ×   Rubin   TSMC N3P   Rubin GPU (336 B, HBM4) 
+--- p28 ---
+What’s Driving Parallel Computing Architecture? 
+28 
+--- p29 ---
+Image Credit: Herb Sutter, “The Free Lunch is over,” Dr. Dobbs, 2005 
+--- p30 ---
+Terms I’ll use… (hopefully consistently) 
+   multi - core : CPUs (10s of complex cores) 
+   many - core : GPU (1000s of simpler cores) 
+   heterogeneous   systems/computing: 
+   using both CPU + GPU processing resources 
+--- p31 ---
+Discrete GPUs from Current Vendors 
+NVIDIA GB202   -   Blackwell architecture 
+--- p32 ---
+Discrete GPUs from Current Vendors 
+Intel Xe architecture 
+Intel Xe3P architecture 
+•   XVE: Xe Vector Engine 
+•   XMX: Xe Matrix   Xcelerator 
+--- p33 ---
+Discrete GPUs from Current Vendors 
+AMD Instinct MI100   -   CDNA architecture 
+--- p34 ---
+AI Accelerators 
+DSIC domain - specific ICs 
+   Intel GAUDI 
+   AWS   Inferentia ,   Trainium 
+   Google TPUv4 
+   Tesla DOJO 
+   Tenstorrent 
+   META MTIA v1 
+   Microsoft Maia 1000 
+   Etc 
+   Etc ! 
+META MTIA v1 
+--- p35 ---
+There are limits to “automatic” improvement of scalar performance: 
+1.   The Power Wall:   Clock frequency and density cannot be increased without 
+exceeding air cooling. 
+2.   The Memory Wall:   Access to data is a limiting factor versus compute. 
+3.   The ILP Wall:   All the existing instruction - level parallelism (ILP) is already being 
+used. 
+→ Conclusion:   Explicit   parallel mechanisms and 
+explicit   parallel programming are   required   for 
+performance scaling. 
+→ These require specialized knowledge and skills, 
+which we’ll develop in this course 
+Summary: Parallelism and Performance 
+37 
+--- p36 ---
+Parallelism 
+Fundamental Concepts 
+--- p37 ---
+3 Goals of Parallel Computing 
+1.   Solve a given problem in less time. 
+2.   Solve a bigger problem in same (given) amount of time. 
+3.   Achieve better solutions for given problem in given 
+amount of time. 
+1.   More complex, more accurate models 
+2.   higher resolutions 
+3.   more data 
+--- p38 ---
+Good parallelism candidates 
+ Large problem sizes 
+ High modeling complexity 
+ Examples: 
+ HPC (High performance computing) 
+ physics, chemistry, genetics, biomedical, 
+engineering 
+ Machine learning (ML/DL) 
+ big data, analytics 
+--- p39 ---
+Concept of Parallel Execution 
+on GPUs 
+--- p40 ---
+Independence 
+   Definition : In a series or set of general components S(x), component S(n) 
+has no dependencies on component S(m), for all n != m 
+   Dependency classes 
+   data   dependency 
+   components access or modify the same resource 
+   control   dependency 
+   one component’s events or side - effects determine if another component executes 
+   Independent components have   no ordering requirements   for execution 
+--- p41 ---
+Example 1: vector addition 
+   Add two vectors ( A,B ) of length N 
+C   =   A   +   B 
+   Sequential (serial) code implementation = for loop 
+for( int   x = 0; x < N; x++) 
+C[x]   =   A[x]   +   B[x]; 
+   KEY:   Addition of individual vector elements is   independent 
+   Allows for data parallelism 
+--- p42 ---
+Vector Addition   –   CPU Serial C Implementation 
+void   vecadd_idx ( int   n ,   const   float   * a ,   const   float   * b ,   float   * c ) 
+{ 
+int   x = 0; 
+for   (x; x <   n ; x++) 
+c [x] =   a [x] +   b [x]; 
+} 
+//=== ALTERNATE (pointer - based) ==== 
+void   vecadd_ptr ( int   n ,   float   * a ,   float   * b ,   float   * c ) 
+{ 
+int   x = 0; 
+for   (x; x <   n ; x++,   a ++,   b ++,   c ++) 
+* c   = * a   + * b ; 
+} 
+--- p43 ---
+Brief Aside: C Refresher on Pointers*** 
+   Passing arguments to   vecadd_idx ( ) and   vecadd_ptr ( ) 
+int main( ) { 
+const int N = 256; 
+float* A1 = (float*)malloc(N* sizeof (float)); 
+float A2[N] = {0}; 
+//   declare arrays B, C 
+//   initialize values of arrays   A, B, C 
+vecadd_idx (N, A1, B, C); 
+vecadd_idx (N, &A2[0], &B[0], &C[0]);   // equivalent for arrays 
+} 
+--- p44 ---
+Loop Unrolling   for (int x = 0; x < 8; ++x) { 
+C[x] = A[x] + B[x]; 
+} 
+Instead what if we had multiple cores? C[0] = A[0] + B[0] 
+C[1] = A[1] + B[1] 
+C[2] = A[2] + B[2] 
+C[3] = A[3] + B[3] 
+C[4] = A[4] + B[4] 
+C[5] = A[5] + B[5] 
+C[6] = A[6] + B[6] 
+C[7] = A[7] + B[7] 
+time 
+sequential, single core 
+repeat 
+N times 
+Due to the   independence   of each 
+element - wise sum, 
+we can execute in parallel. 
+OR 
+A[0] + B[0]   A[1] + B[1] 
+A[2] + B[2]   A[3] + B[3] 
+… A[6] + B[6]   A[7] + B[7] 
+{ 2 - wide (2 lanes) } 
+A[0] + B[0]   A[1] + B[1]   A[2] + B[2]   A[3] + B[3] 
+A[4] + B[4]   A[5] + B[5]   A[6] + B[6]   A[7] + B[7] 
+{ 4 - wide } 
+A[0] + B[0]   A[1] + B[1]   A[2] + B[2]   A[3] + B[3]   A[7] + B[7] … 
+OR   { 8 - wide } 
+--- p45 ---
+Time versus Space 
+   General Tradeoff: Time vs Space 
+   time : serial, sequential execution on smaller spatial footprint 
+   space : parallel, concurrent execution requiring more HW / chip real 
+estate 
+   GPUs preference space 
+   But how / when can this provide benefits? 
+--- p46 ---
+Computational “Index Space” 
+In a 1D problem there is just one index: {x}, {i}, {u}, or …   A 0   A 1   A 2   A 3 
+Consider 1D vector addition 
+C   =   A   +   B 
+where input vectors are 16 
+elements long. 
+We can sub - divide into 
+4   blocks   of 4   threads   each. 
+CUDA Terminology 
+   Computational domain extent defines a   grid G 
+   sub - divide the full   grid   into a partition of Nb smaller   blocks 
+   each   block   is comprised of   Nt   threads 
+   G = Nb* Nt 
+blockDim ,   blockIdx 
+threadIdx 
+gridDim 
+CUDA built - in vars 
+--- p47 ---
+Vector Addition   –   GPU Kernel (Device - side) 
+// CUDA kernel (*.cu) 
+__global__ void   vecAdd1D( float *a, float *b, float *c) 
+{ 
+// use built - in CUDA variables to determine unique global thread index 
+int gid =   threadIdx.x   +   blockDim.x   *   blockIdx.x ; 
+// use global thread index to safely operate on independent resources 
+c[gid] = a[gid] + b[gid]; 
+} 
+--- p48 ---
+How does this all work? 
+   Host   application 
+   GPU API (e.g. CUDA or OpenCL API) 
+   kernel configuration and dispatch 
+   memory management and data transfer 
+   GPU device drivers : vendor - specific (and model specific…) 
+   Device   kernel functions 
+   execute computational work (the   heavy lifting ) 
+Device 
+Memory 
+Host Memory 
+Core Core   Core   Core   Core 
+Host 
+Application 
+GPU 
+runtime API 
+GPU 
+device 
+drivers 
+Host System (CPU)   Device System (GPU) 
+… 
+interconnect 
+Simplified System Diagram 
+Scheduling and work distribution unit 
+CUDA 
+OpenCL 
+(PCIe) 
+--- p49 ---
+CUDA Application Development Overview 
+The Basic Recipe   (which we’ll follow throughout class, and onward…) 
+   configure VS IDE to find development (API, SDK) source files and link libraries 
+   #include   appropriate API header files in host application source files 
+   implement host application using a GPU API 
+   NVIDIA CUDA 
+   Runtime API   –   simple to use but limited control 
+   Driver API   –   more complex but full control at low - level 
+   write kernel function(s) 
+   using CUDA C++ kernel extensions 
+   compile and link to runtime libraries (static or dynamically) 
+   NVCC   -   the CUDA device compiler 
+   CL.exe   -   visual studio MSCV Host compiler 
+   COMMON VS build error examples 
+   myapp_host.cpp(80,25): error C3861: “ read_source ”: identifier not found 
+   missing #include header file 
+   myapp_host.obj : error LNK2001: unresolved external symbol < some_symbol_name > 
+   missing the *.lib linker library in project/properties, Linker, Additional Dependencies field. 
+   Analyze results, debug, profile, optimize… (we’ll get to these things!) 
+--- p50 ---
+GPU Application Dev Overview 
+   In this class, we want to work as closely to HW as possible 
+   We’ll primary use the low - level GPU C/C++APIs to get “close to metal” 
+   CUDA Driver API 
+   At some points we’ll look deeper 
+   NVIDIA Intermediate Representation assembly language (PTX)   –   virtual architectures 
+   NVIDIA Device - specific assembly language (SASS)   –   real architectures 
+   Underlying hardware microarchitecture 
+   BUT for our very first GPU Homework - 0, we’ll use the simpler CUDA   Runtime   API 
+   it simplifies/eliminates some details (simplicity vs complexity & control) 
+   we’ll start with the “Hello World” of GPU programming… 
+--- p51 ---
+Basic   Host   GPU Program Template 
+This is a general guideline for a simple host GPU program structure. 
+   Not all steps are always used, and sometimes the order may be changed . 
+   Also for more advanced applications, additional steps may be added. 
+int main( ) { 
+// define/initialize static/const variables 
+// initialize GPU host API 
+// query for platform/device information 
+// setup GPU host API environment and device program(s) 
+//   allocate host memory variables _h 
+// initialize host memory vars 
+//   allocate device memory vars _d 
+// copy host memory to device memory 
+// determine GPU device kernel execution configuration 
+// launch kernel on device 
+// wait for kernel execution to complete, check for errors 
+// retrieve results from device 
+// use/verify results on host 
+} 
+--- p52 ---
+CUDA Runtime API 
+   In the simplest case, you can just have one source file < srcname >.cu 
+   The file will contain 
+#include “ cuda_runtime.h ” 
+// define your CUDA kernel below here 
+__global__ void   myKernel (   ) { 
+//   … 
+} 
+// define your host application below here 
+int main(int   argc ,   char**   argv   ) { 
+//   host   application   code   using   CUDA   runtime   API   calls   here 
+} 
+   when host and kernels get more complex, we’ll break them into separate files 
+   Compile and run the file using NVCC compiler 
+nvcc   - o < srcname > <path - to - src >/< srcname >.cu   – run 
+   you will need ensure the path to MSVC compiler CL.exe is in your env path 
+   it will be there by default on the   AppStream   VDEs if you use the VS Dev Command Prompt 
+--- p53 ---
+CUDA Runtime API 
+   We discussed the conceptual “index space” (computation domain) 
+   and how to access each kernel instance’s unique index values 
+   threadIdx.x ,   blockIdx.x ,   etc … 
+   Now let’s see how to define it in practice to launch/dispatch a GPU computation 
+   For the CUDA Runtime   API   we use 
+   The kernel   execution configuration   syntax   <<< numBlocksPerGrid ,   numThreadsPerBlock >>> 
+   ( syntax will differ somewhat for the CUDA Driver API but basic concepts same) 
+   Consider a CUDA GPU kernel named   cudaFoo 
+__global__ void   cudaFoo (int a)   { 
+int   myIdx   =   threadIdx.x   +   blockDim.x   *   blockIdx.x ;   //   for 1D   index space 
+// do kernel   calcs 
+} 
+   then in host appl 
+int   threadsPerBlock   =   32;   //   on   CUDA   devices,   warps   contain   32   threads 
+int   blocksPerGrid   =   ( numElements   +   threadsPerBlock   - 1)/   threadsPerBlock ; 
+cudaFoo <<<   blocksPerGrid ,   threadsPerBlock >>>( a_d ); 
+--- p54 ---
+GPU API Error Handling concepts 
+   In GPU applications, errors can occur   synchronously   or   asynchronously 
+   calls made from the host to the device can occur   asynchronously 
+   the call will return immediately, before the function has actually completed on GPU 
+ CUDA Runtime API   –   Error Handling 
+   cudaGetErrorName 
+   cudaGetErrorString 
+   cudaGetLastError 
+   cudaPeekAtLastError 
+--- p55 ---
+CUDA Runtime API Error Handling 
+CUDA kernels return   void   not   cudaError_t   so the error handling macro can’t be used for checking kernel launch errors directly 
+vectorAddKernel <<< numBlocks,numThreads >>>( c,b,a,N ); 
+cudaError_t   err; 
+err   =   cudaGetLastError ();   // ` cudaGetLastError ` will return the error from above. 
+if   (err   !=   cudaSuccess ) 
+{ 
+printf ( "Error: %s \ n" ,   cudaGetErrorString (err)); 
+} 
+// Error Handling Macro 
+#include < stdio.h > 
+#include < assert.h > 
+// our (updated!) standard error handling wrapper function 
+inline   static   cudaError_t   checkCuda   (   cudaError_t   result   ,   char   *   srcStr   ) 
+{ 
+if   (   result   !=   cudaSuccess   ) { 
+fprintf   (   stderr   ,   "CUDA Runtime Error (   src   : %s): %s   \   n"   ,   srcStr   ,   cudaGetErrorString   (   result   )); 
+assert   (   result   ==   cudaSuccess   ); 
+} 
+return   result   ; 
+} 
+int   main () 
+{ 
+// The macro can be wrapped around any function returning a value of type ` cudaError_t `. 
+checkCuda (   cudaDeviceSynchronize () , “ cudaDeviceSynchronize ”   ) 
+} 
+--- p56 ---
+SW Development Environment 
+   Microsoft Visual Studio 2026 Community edition (FREE) 
+   Only Dev IDE supported for the class! 
+If you want to install on your own personal system: 
+   Install   https://visualstudio.microsoft.com/downloads/ 
+   DOCS   https://docs.microsoft.com/en - us/visualstudio/windows/?view=vs - 2019 
+--- p57 ---
+GPU SDKs 
+   NVIDIA CUDA Toolkit   –   Primary for this class 
+   V13.4   https://developer.nvidia.com/cuda - downloads 
+   provides support for both CUDA (runtime & driver APIs) and OpenCL 1.2 
+   DOCS   https://docs.nvidia.com/cuda/index.html 
+--- p58 ---
+GPU Compute Environment Components 
+NVIDIA CUDA Platform 
+Host 
+application 
+source 
+CUDA   Driver API 
+headers 
+CUDA   Runtime API 
+headers 
+NVIDIA   NVCC 
+compiler 
+Host compiler 
+(CL.exe, GCC, …) 
+cuda.h 
+helper_cuda 
+_drvapi.h 
+cuda_runtime.h 
+helper_cuda.h 
+cudart.dll/.so 
+cudart_static.lib/.a 
+All CUDA support from NVIDIA CUDA Toolkit 
+cuda.dll/.so 
+cuda.lib/.a 
+--- p59 ---
+CUDA Compilation: Phases & Trajectory 
+   CUDA Toolchain 
+   nvcc , linker, PTX and Cubin assemblers 
+   NVIDIA CUDA Compiler   nvcc   :offline compilation 
+   in contrast to JIT compilation by   nvrtc 
+   NVCC basic usage 
+nvcc   example.cu   - I   path_to_include /   - L 
+path_to_library /   - lcublas   - o 
+< output_file > 
+PTX: virtual GPU architecture(s) 
+•   compute_XY 
+Cubin (SASS): real GPU architecture 
+•   sm_XY 
+# generate PTX for virtual arch compute_80 and compile it to Cubin for real arch sm_86, keep compute_80 PTX 
+nvcc   example.cu   - arch=compute_80   - gpu - code=sm_86,compute_80 # (PTX and Cubin) 
+# (1) generate PTX for virtual architecture compute_80 and compile it to Cubin for real architecture sm_86, sm_89 
+nvcc   example.cu   - gencode =arch=compute_80,code=[compute_80,sm_86,sm_89] 
+--- p60 ---
+HOST / GPU binary executable format 
+Inspecting the binary on Windows 
+Host binary .exe 
+dumpbin /headers vecadd.exe 
+NVIDIA CUDA artifacts: PTX, SASS 
+cuobjdump   – lelf   vecadd.exe 
+cuobjdump   – lptx   vecadd.exe 
+HOST object/image   –   logical structure 
+Linux: ELF, Windows: PE - COFF 
+NVIDIA:   fatbin   HOST code 
+cubin   (ELF) 
+SASS 
+sm_90 
+cubin   (ELF) 
+SASS 
+sm_75 
+ASCII text 
+PTX 
+compute_75 
+ASCII text 
+PTX 
+compute_89 
+--- p61 ---
+DEMO 
+Intro to 
+•   the AWS   WorkSpaces   Applications VDE 
+•   Visual Studio 2026 
+•   CUDA Toolkit 13.x 
+--- p62 ---
+Homework #0 
+Complete before Lecture #2 (13 OCT), so you can prepare any questions 
+See : <Canvas   Classweb >/Files/ Homeworks /Hw0 
+IMPORTANT NOTE :   Although there is no official homework due for this Hw0 set, it 
+is   critical   you work through it carefully and thoroughly, as it will provide the 
+foundation for   everything   we do in this class. 
+Without these basic skills you will surely struggle to succeed in this class. 
+•   it will also be a chance for you to self - assess that you have the necessary prerequisites 

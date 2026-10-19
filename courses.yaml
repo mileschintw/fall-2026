@@ -1,0 +1,43 @@
+term:
+  school: University of Washington
+  name: Autumn 2026
+  canvas_term_id: 4608
+  timezone: America/Los_Angeles   # DST ends 2026-11-01 (UTC-7 -> UTC-8)
+canvas_base: https://canvas.uw.edu
+
+courses:
+  gpu:
+    code: EE P 524 A
+    title: Applied High-Performance GPU Computing
+    canvas_id: 1917398
+    instructor: Colin Reinhardt (Prof R)
+    tas: [Diya Shetty, Devika Nair]
+    meetings:
+      - {day: Tue, start: "18:30", end: "21:30", where: "MS Teams - Weekly Live Lecture (all online)"}
+    office_hours:
+      - {who: Diya, day: Mon, start: "18:30", where: Teams}
+    teams_team: "EEP 524 A/B - GPU Computing"
+    sharepoint_site: https://uwnetid.sharepoint.com/sites/og_EEP_524_A_B_-_GPU_Computing
+    recordings_path: "Shared Documents/General/Recordings/"
+    textbook: PMPP 4th ed. (Hwu, Kirk, El Hajj)
+    reading_page: weekly-reading-sets
+    ics_env: CANVAS_ICS_GPU
+  dsa:
+    code: EE P 590 A
+    title: Data Structures, Algorithms & Python (Advanced Topics In Digital Computers)
+    canvas_id: 1917417
+    instructor: Adrienne Slaughter (ahandrew@uw.edu, prefers Piazza)
+    tas: [Hongyu (hongyum@uw.edu)]
+    meetings:
+      - {day: Mon, start: "16:30", end: "18:20", where: "Moore Hall 220 (in person; Zoom also open)"}
+      - {day: Wed, start: "16:30", end: "18:20", where: "Zoom (in person on test days)"}
+    office_hours:
+      - {who: Adrienne, day: Sat, start: "09:30", end: "11:00", where: Zoom}
+      - {who: Hongyu, day: Tue, start: "18:00", end: "20:00"}
+    piazza_nid: muomkq9jzdj104       # access code lives in Canvas Resources module; not stored here
+    github_org: uw-python-fall2026
+    assignment_repo_pattern: "assignment-<N>-mileschintw"
+    in_class_code: uw-python-fall2026/in-class-code
+    panopto_tab: /courses/1917417/external_tools/21130
+    textbook: Grokking Algorithms
+    ics_env: CANVAS_ICS_DSA

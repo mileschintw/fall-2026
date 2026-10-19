@@ -1,0 +1,3921 @@
+1
+00:03:53,000 --> 00:03:57,000
+[該逐字稿自動產生。為清晰起見，可能已進行編輯。]
+Okay. Can everyone hear me?
+
+2
+00:03:57,000 --> 00:04:00,000
+How's everyone doing?
+
+3
+00:04:00,000 --> 00:04:03,000
+Make sure we've got
+
+4
+00:04:03,000 --> 00:04:08,000
+Everything is set up here
+
+5
+00:04:08,000 --> 00:04:12,000
+Double checking, we've got our recording on
+
+6
+00:04:12,000 --> 00:04:15,000
+Got a thumbs up. Appreciate that.
+
+7
+00:04:15,000 --> 00:04:25,000
+I know I heard some things, so I think I can hear you if anyone says anything.
+
+8
+00:04:25,000 --> 00:04:35,000
+Let's go ahead and get started then. I'm going to start off by sharing my screen.
+
+9
+00:04:35,000 --> 00:04:41,000
+So that I can take notes.
+
+10
+00:04:41,000 --> 00:04:45,000
+There we go.
+
+11
+00:04:45,000 --> 00:04:59,000
+And we might go to the code a little bit and a couple of web pages and stuff will move around a little bit today. But I think we're going to do mostly
+
+12
+00:04:59,000 --> 00:05:15,000
+Mostly our notes today. I will also start out. This is one of the classes that I have updated, updated notes for an updated outline
+
+13
+00:05:15,000 --> 00:05:30,000
+And I would like to give you guys those notes. I don't have slides. Updated slides, so I did not put the slides in Canvas. But when we're done here tonight, I will take my notes that I am working off of
+
+14
+00:05:30,000 --> 00:05:46,000
+And I will clean them up for you guys, and I will put them on Canvas so that you have access to them. In my notes today, I have a bunch of kind of nice reference material and some links and stuff
+
+15
+00:05:46,000 --> 00:05:57,000
+And we will go over it during class, but I will put them in a document on Canvas, so you have that as a resource.
+
+16
+00:05:57,000 --> 00:05:58,000
+So
+
+17
+00:05:58,000 --> 00:06:13,000
+That's just me saying there's nothing on Canvas for you right now, but don't panic if I am going into some details or showing some stuff, and it's hard to capture it, I will share this document with you so you have it
+
+18
+00:06:13,000 --> 00:06:17,000
+For your notes going forward
+
+19
+00:06:17,000 --> 00:06:30,000
+Before we get started, anyone have any questions or anything?
+
+20
+00:06:30,000 --> 00:06:35,000
+I'm going to get us started and go
+
+21
+00:06:35,000 --> 00:06:58,000
+Let's see, just double check. Oops, that I've got that I can write. Okay. I want to go back and think about just review Monday's class and also maybe a little bit of last week as well. But for the most part, let's do a review of last time
+
+22
+00:06:58,000 --> 00:07:00,000
+What did we talk about last time?
+
+23
+00:07:00,000 --> 00:07:12,000
+And I have in my notes. Very first thing we are going to talk about after we do our review is a question that Ethan asked
+
+24
+00:07:12,000 --> 00:07:15,000
+that we will come back to.
+
+25
+00:07:15,000 --> 00:07:21,000
+What do we remember from last time? What did we do?
+
+26
+00:07:21,000 --> 00:07:28,000
+We can come off mute if you want to say something, you can drop something in the chats
+
+27
+00:07:28,000 --> 00:07:33,000
+I remember writing code
+
+28
+00:07:33,000 --> 00:07:46,000
+I think we had already done our previous implementation. Yeah, we focused on the array resize.
+
+29
+00:07:46,000 --> 00:07:53,000
+So last week, I think it was, we did our
+
+30
+00:07:53,000 --> 00:07:55,000
+Stack
+
+31
+00:07:55,000 --> 00:08:01,000
+Implementations
+
+32
+00:08:01,000 --> 00:08:06,000
+And we did two different implementations, the array
+
+33
+00:08:06,000 --> 00:08:11,000
+And the linked list.
+
+34
+00:08:11,000 --> 00:08:19,000
+And I kept on saying I don't know if I have a
+
+35
+00:08:19,000 --> 00:08:34,000
+So I'm looking for my laser pointer. I've had to change my note taking software. So I'm still looking for a good one and it doesn't quite have all of the functionality that I'm used to. So apologies.
+
+36
+00:08:34,000 --> 00:08:43,000
+But we started out with these two different implementations for our stack
+
+37
+00:08:43,000 --> 00:08:45,000
+And then
+
+38
+00:08:45,000 --> 00:08:54,000
+We started comparing them to see how they worked or how they were similar and how they were different.
+
+39
+00:08:54,000 --> 00:09:00,000
+And one of the… one of the differences we had was an array.
+
+40
+00:09:00,000 --> 00:09:07,000
+Our original implementation, we could only put, we had to specify the capacity upfront.
+
+41
+00:09:07,000 --> 00:09:18,000
+And our array-based stack could not grow, but our linked list stack could grow as long as we kept on putting stuff into it.
+
+42
+00:09:18,000 --> 00:09:33,000
+And in order to get that idea of a stack-based implementation in order that will grow as much as our linked list implementation, we had to go to our resize operation
+
+43
+00:09:33,000 --> 00:09:36,000
+And we had to look at what it looked like to resize
+
+44
+00:09:36,000 --> 00:09:51,000
+So once we did our resize, what did we learn about that resize approach?
+
+45
+00:09:51,000 --> 00:10:07,000
+We looked at three, and in fact, I think four different ways to resize our array. We looked at adding one element at a time and recopying it. Yeah, our takeaway, there you go, is to resize by double
+
+46
+00:10:07,000 --> 00:10:15,000
+And we also looked at our plus 10 and we also ended up throwing in there that times 3.
+
+47
+00:10:15,000 --> 00:10:24,000
+To see, gee, if resizing by double is good, should we go ahead and resize by triple?
+
+48
+00:10:24,000 --> 00:10:27,000
+And we saw that
+
+49
+00:10:27,000 --> 00:10:30,000
+When we got really big
+
+50
+00:10:30,000 --> 00:10:42,000
+The the benefit of tripling kind of disappeared. So a good rule of thumb is to resize by double.
+
+51
+00:10:42,000 --> 00:10:46,000
+And there was something else we talked about too.
+
+52
+00:10:46,000 --> 00:10:51,000
+We were… when we did our array implementation
+
+53
+00:10:51,000 --> 00:11:01,000
+We used in Python these square brackets, which is our traditional array
+
+54
+00:11:01,000 --> 00:11:16,000
+notation and symbols that we use for an array. And I noted for those of you who knew that this is in Python. This is a Python list
+
+55
+00:11:16,000 --> 00:11:21,000
+And I asked you, don't treat it like a list. Treat it like an array.
+
+56
+00:11:21,000 --> 00:11:41,000
+so that we can understand really what the array is, what the constraints of an array are. And then, at the end of last week we did or last Monday, the previous class, we did talk about what a Python list is, and how it relates to an array
+
+57
+00:11:41,000 --> 00:11:56,000
+Anyone remember what we said about our Python list?
+
+58
+00:11:56,000 --> 00:12:00,000
+Anyone remember? Anything about it?
+
+59
+00:12:00,000 --> 00:12:18,000
+What is our, yeah, good question, because now that I'm listening to it in my head, it sounds not a good question. What is a Python list? And how does it compare to an array that we were
+
+60
+00:12:18,000 --> 00:12:28,000
+that we were… that I said, treat the Python list like an array, but then I introduced the idea of what a Python list actually is.
+
+61
+00:12:28,000 --> 00:12:34,000
+And why it's different from an array.
+
+62
+00:12:34,000 --> 00:12:41,000
+Mutable abstraction of array type. It's
+
+63
+00:12:41,000 --> 00:12:48,000
+It's mutable. Mutable means that we can add things to it and take things away.
+
+64
+00:12:48,000 --> 00:12:54,000
+Yes, it resizes in the background. So one of the things
+
+65
+00:12:54,000 --> 00:13:09,000
+That a Python list does for us is that it's going to resize and in the in the background it is going to use a resize approach similar to what we looked at
+
+66
+00:13:09,000 --> 00:13:14,000
+So our Python list is a it's a
+
+67
+00:13:14,000 --> 00:13:18,000
+Dynamic
+
+68
+00:13:18,000 --> 00:13:21,000
+Hooray
+
+69
+00:13:21,000 --> 00:13:25,000
+Of pointers
+
+70
+00:13:25,000 --> 00:13:30,000
+Or references.
+
+71
+00:13:30,000 --> 00:13:35,000
+To items.
+
+72
+00:13:35,000 --> 00:14:01,000
+So the dynamic piece means that as programmers, we can use this list notation. We can add things onto it, we can take things out of it, and the Python implementation in the background that we don't see is going to grow the array as we need to. It might shrink it if it needs to in order to be efficient
+
+73
+00:14:01,000 --> 00:14:08,000
+and it's going to do that in a very efficient way. But it is an array behind the scenes.
+
+74
+00:14:08,000 --> 00:14:15,000
+And what's important about an array is that we've got our contiguous
+
+75
+00:14:15,000 --> 00:14:19,000
+Contiguous memory
+
+76
+00:14:19,000 --> 00:14:33,000
+And what we know we need to know about an array in order to use this contiguous memory is that we know how many items
+
+77
+00:14:33,000 --> 00:14:37,000
+And the size of those items or the type.
+
+78
+00:14:37,000 --> 00:14:52,000
+So that we always have, we know how much memory we need to store it. So the way Python gets around that, because with our Python list, we can put any type in. And we saw we put strings in, we put a double in, we put an int in. So
+
+79
+00:14:52,000 --> 00:14:56,000
+Python uses pointers or references
+
+80
+00:14:56,000 --> 00:15:00,000
+So the the data actually lives somewhere else.
+
+81
+00:15:00,000 --> 00:15:05,000
+And then the array only holds a reference. We know how big
+
+82
+00:15:05,000 --> 00:15:16,000
+references. We know the size of a reference or a pointer. which means we can then use our array
+
+83
+00:15:16,000 --> 00:15:19,000
+Our array
+
+84
+00:15:19,000 --> 00:15:23,000
+Behind the scenes that.
+
+85
+00:15:23,000 --> 00:15:24,000
+Okay.
+
+86
+00:15:24,000 --> 00:15:34,000
+Anything else from last time or any questions on this idea of a Python list?
+
+87
+00:15:34,000 --> 00:15:39,000
+Oh, I'm wondering if Python have an array data structures
+
+88
+00:15:39,000 --> 00:15:40,000
+Will you repeat that, please?
+
+89
+00:15:40,000 --> 00:15:49,000
+Sir, so that's Python have the basic data structures like array? Because I think list is
+
+90
+00:15:49,000 --> 00:15:53,000
+Agentic structures
+
+91
+00:15:53,000 --> 00:16:00,000
+Yeah, yeah, okay, great question. So does Python have an array as a data structure?
+
+92
+00:16:00,000 --> 00:16:12,000
+Few things to say there. One, yes, yes, it does. And every time I say this, I have to look it up. I don't remember it is, but there is a Python package
+
+93
+00:16:12,000 --> 00:16:21,000
+that exposes the array data structure so that it is specifically an array.
+
+94
+00:16:21,000 --> 00:16:25,000
+I'm not going to pull it up now because it's
+
+95
+00:16:25,000 --> 00:16:28,000
+not super interesting.
+
+96
+00:16:28,000 --> 00:16:33,000
+It's very limited. No one uses it in practice. But yes, it does exist.
+
+97
+00:16:33,000 --> 00:16:40,000
+And in fact, in the past, I have used it as a you have to use this array
+
+98
+00:16:40,000 --> 00:16:44,000
+in Python for anything related to an array.
+
+99
+00:16:44,000 --> 00:16:49,000
+What is used more
+
+100
+00:16:49,000 --> 00:16:54,000
+More of the time is a package called NumPy
+
+101
+00:16:54,000 --> 00:17:00,000
+NumPy provides a lot of array-based
+
+102
+00:17:00,000 --> 00:17:18,000
+Array-based access. So if the benefit that an array gives us is that it's super efficient. And if you're doing a lot of computation and you have a bunch of numbers and stuff, that's when you want to use an array. NumPy exposes that stuff and uses arrays and such
+
+103
+00:17:18,000 --> 00:17:24,000
+underneath the underneath the covers. But also our Python list
+
+104
+00:17:24,000 --> 00:17:26,000
+Is an array.
+
+105
+00:17:26,000 --> 00:17:35,000
+So the reason for the first week or so, I want to make sure that we are
+
+106
+00:17:35,000 --> 00:17:45,000
+distinguishing the difference between treating a Python list as an array versus treating it as an array and pretending, or
+
+107
+00:17:45,000 --> 00:17:48,000
+as an actual Python list
+
+108
+00:17:48,000 --> 00:17:51,000
+is so that we get this piece
+
+109
+00:17:51,000 --> 00:17:52,000
+down
+
+110
+00:17:52,000 --> 00:18:09,000
+very strong for ourselves, that we're thinking about what's happening here with an array. Because with our Python list, because we can just, you know, define our list, and then say X dot append
+
+111
+00:18:09,000 --> 00:18:20,000
+And the list implementation hides all of this stuff that we needed to do
+
+112
+00:18:20,000 --> 00:18:32,000
+All of this stuff we needed to do in order to understand what the constraints of an array is, we had to kind of hide and pretend that Python wasn't doing all this nice stuff for us.
+
+113
+00:18:32,000 --> 00:18:36,000
+That makes sense. Does that answer your question?
+
+114
+00:18:36,000 --> 00:18:47,000
+Yeah, so both the NumPy and Python list was built on top of that base structure of array in that package. I mean
+
+115
+00:18:47,000 --> 00:18:59,000
+Yeah, yep. So NumPy uses arrays in the background, just more efficient for using big arrays usually of numbers
+
+116
+00:18:59,000 --> 00:19:13,000
+And then list just kind of because it uses these references, it allows us to pretend that it doesn't really matter what we put in our list. We can put in all of those different data types.
+
+117
+00:19:13,000 --> 00:19:22,000
+And I'll show an example of that with a visualization in a little bit to be a little bit more clear.
+
+118
+00:19:22,000 --> 00:19:23,000
+Anything else? Yeah
+
+119
+00:19:23,000 --> 00:19:25,000
+Okay, thank you
+
+120
+00:19:25,000 --> 00:19:50,000
+Because Ethan, I want to go back to your other question from last week. How do I go to my next page. Next page. Okay, the question from the other day was why different implementations
+
+121
+00:19:50,000 --> 00:20:01,000
+And please correct me if this was not the crux of the question you asked at the start of class on Monday.
+
+122
+00:20:01,000 --> 00:20:06,000
+But the question was, why do we look at these different implementations?
+
+123
+00:20:06,000 --> 00:20:19,000
+Why are we bothering? We're talking about a stack and we talked about what our behavior, expected behavior of a stack was, and it's last in first out.
+
+124
+00:20:19,000 --> 00:20:24,000
+and I introduced this idea of an ADT.
+
+125
+00:20:24,000 --> 00:20:28,000
+Abstract
+
+126
+00:20:28,000 --> 00:20:31,000
+Data type
+
+127
+00:20:31,000 --> 00:20:45,000
+And in this situation, our stack was the abstract idea. It's the big idea, it's the, you know, it's the… if I'm thinking about the behavior of my data structure, what do I expect it to be doing?
+
+128
+00:20:45,000 --> 00:20:54,000
+And I expect to be able to, for a static, push onto a stack and pop off of a stack.
+
+129
+00:20:54,000 --> 00:21:00,000
+And I don't know, maybe we can ask how many things it has in it, or maybe I want to peak
+
+130
+00:21:00,000 --> 00:21:06,000
+At the top element and see what the next thing is going to be without actually removing it.
+
+131
+00:21:06,000 --> 00:21:12,000
+That's in the… in the mix. But we had two different implementations.
+
+132
+00:21:12,000 --> 00:21:34,000
+So let's go over our implementations if we remember. I'm just pulling up my notes here.
+
+133
+00:21:34,000 --> 00:21:41,000
+Let's see, we had ours not what I want.
+
+134
+00:21:41,000 --> 00:21:45,000
+We had push
+
+135
+00:21:45,000 --> 00:21:48,000
+We had POP
+
+136
+00:21:48,000 --> 00:21:50,000
+And
+
+137
+00:21:50,000 --> 00:21:52,000
+We had find
+
+138
+00:21:52,000 --> 00:22:03,000
+Which we didn't really use. I don't know, I'm not a huge fan of find as an operation for a stack, but that's okay. I'll give it. We did an implementation
+
+139
+00:22:03,000 --> 00:22:09,000
+Here, let's see
+
+140
+00:22:09,000 --> 00:22:18,000
+We did our stack. Sorry, not our stack, our array.
+
+141
+00:22:18,000 --> 00:22:20,000
+Fixed
+
+142
+00:22:20,000 --> 00:22:28,000
+That was our original implementation where we had to say that we're going to put five elements in or 10 elements in
+
+143
+00:22:28,000 --> 00:22:32,000
+And then we have our array
+
+144
+00:22:32,000 --> 00:22:37,000
+With resize
+
+145
+00:22:37,000 --> 00:22:47,000
+And then we have our linked list.
+
+146
+00:22:47,000 --> 00:22:49,000
+Okay. And
+
+147
+00:22:49,000 --> 00:22:56,000
+With our with our
+
+148
+00:22:56,000 --> 00:22:59,000
+Fixed array.
+
+149
+00:22:59,000 --> 00:23:08,000
+What… how much time did it take to what did it look like to push something into
+
+150
+00:23:08,000 --> 00:23:17,000
+are fixed array. What was our runtime? Anyone recall?
+
+151
+00:23:17,000 --> 00:23:21,000
+We had our array
+
+152
+00:23:21,000 --> 00:23:24,000
+We'll start with
+
+153
+00:23:24,000 --> 00:23:34,000
+And if we know how many things we had in there already, if we're pushing into it
+
+154
+00:23:34,000 --> 00:23:38,000
+We're just adding in… we're setting that
+
+155
+00:23:38,000 --> 00:23:44,000
+index to whatever the new value is. This was O of one.
+
+156
+00:23:44,000 --> 00:23:53,000
+Everyone with me on this?
+
+157
+00:23:53,000 --> 00:24:05,000
+When we wanted to pop, we knew exactly what the last item put into the stack was the array. We knew it was this one. So we could go directly to that index and remove it.
+
+158
+00:24:05,000 --> 00:24:10,000
+and return it back. That was also O of 1.
+
+159
+00:24:10,000 --> 00:24:15,000
+If we wanted to find something in our
+
+160
+00:24:15,000 --> 00:24:21,000
+In our stack as an array. What was the runtime?
+
+161
+00:24:21,000 --> 00:24:26,000
+To find something. I think we have to
+
+162
+00:24:26,000 --> 00:24:31,000
+if we want to check to see if a certain item exists
+
+163
+00:24:31,000 --> 00:24:38,000
+Yes, it's going to be O because we worst case scenario, have to look at every single item.
+
+164
+00:24:38,000 --> 00:24:41,000
+In the array.
+
+165
+00:24:41,000 --> 00:24:44,000
+One more note I want to put on here.
+
+166
+00:24:44,000 --> 00:24:49,000
+in our fixed array list here column.
+
+167
+00:24:49,000 --> 00:24:54,000
+when we push
+
+168
+00:24:54,000 --> 00:25:02,000
+Is it always O of 1 and what happens? What's the limitation we have here?
+
+169
+00:25:02,000 --> 00:25:09,000
+If the array is full, we cannot push icon to this array
+
+170
+00:25:09,000 --> 00:25:22,000
+Yeah, so if the array is full, we can't push into it. We raise an error, we throw an error. So we have that limitation there.
+
+171
+00:25:22,000 --> 00:25:26,000
+Let's look at our resize array.
+
+172
+00:25:26,000 --> 00:25:30,000
+So this is we
+
+173
+00:25:30,000 --> 00:25:45,000
+add the resize capability. So if we run out of space, we run out of capacity in our array. We're going to resize it by creating a new array of twice the twice the size, the current size
+
+174
+00:25:45,000 --> 00:25:51,000
+And we're going to copy everything from the original right into the new array.
+
+175
+00:25:51,000 --> 00:25:56,000
+And then we're going to push the new element into the stack.
+
+176
+00:25:56,000 --> 00:25:58,000
+So what's that runtime?
+
+177
+00:25:58,000 --> 00:26:03,000
+of pushing.
+
+178
+00:26:03,000 --> 00:26:04,000
+The oven
+
+179
+00:26:04,000 --> 00:26:06,000
+If I array. Oh, who said that?
+
+180
+00:26:06,000 --> 00:26:08,000
+Me.
+
+181
+00:26:08,000 --> 00:26:10,000
+Would you, you said oven?
+
+182
+00:26:10,000 --> 00:26:11,000
+Yes.
+
+183
+00:26:11,000 --> 00:26:18,000
+Okay. Would you be willing to explain over then?
+
+184
+00:26:18,000 --> 00:26:25,000
+Yeah, so resizing to the double, double size
+
+185
+00:26:25,000 --> 00:26:40,000
+The process is you make that new array of double the size. And then you essentially copy over all of the previous elements from the old array to the new one. And that requires going through each element in the previous array so that hence the
+
+186
+00:26:40,000 --> 00:26:43,000
+O of N. Yeah.
+
+187
+00:26:43,000 --> 00:26:51,000
+Okay, great. Yes, that gives you O of N. How many towns do we have to do that?
+
+188
+00:26:51,000 --> 00:26:53,000
+How often do we have that?
+
+189
+00:26:53,000 --> 00:26:58,000
+The copying between the previous array and the new the new one
+
+190
+00:26:58,000 --> 00:27:00,000
+Yes.
+
+191
+00:27:00,000 --> 00:27:16,000
+It is just the… the size of the previous array. So like if the previous array has capacity 5 and it has 5 elements, then you would have to do 5 copies.
+
+192
+00:27:16,000 --> 00:27:25,000
+All right, yeah, okay, five copies. But how many times do we have to call… do we have to resize every time we push something into our array?
+
+193
+00:27:25,000 --> 00:27:27,000
+No, we do not.
+
+194
+00:27:27,000 --> 00:27:38,000
+Okay, so we don't have to do it every time. So this is a case where we get to do something called amortized
+
+195
+00:27:38,000 --> 00:27:39,000
+Cost.
+
+196
+00:27:39,000 --> 00:27:43,000
+M.Ortized
+
+197
+00:27:43,000 --> 00:27:44,000
+Cost.
+
+198
+00:27:44,000 --> 00:27:51,000
+So for our resized array
+
+199
+00:27:51,000 --> 00:27:58,000
+If our current capacity is 5, we're going to we can push in
+
+200
+00:27:58,000 --> 00:28:02,000
+And our push is going to be O of 1.
+
+201
+00:28:02,000 --> 00:28:06,000
+But that fifth one that we try to push in
+
+202
+00:28:06,000 --> 00:28:14,000
+At that point, we have to do our resize and our resize is O of N.
+
+203
+00:28:14,000 --> 00:28:26,000
+So we do our O of N at that point, and then we double it. We double the size. So then the next n items that we put into the that we push into our array
+
+204
+00:28:26,000 --> 00:28:31,000
+Are going to be O of 1 again.
+
+205
+00:28:31,000 --> 00:28:32,000
+So
+
+206
+00:28:32,000 --> 00:28:39,000
+If we were to average out, I'm just gonna, let's see.
+
+207
+00:28:39,000 --> 00:28:41,000
+I can.
+
+208
+00:28:41,000 --> 00:28:44,000
+One second, let me making a mess over here.
+
+209
+00:28:44,000 --> 00:28:47,000
+If I were to write down the runtimes
+
+210
+00:28:47,000 --> 00:28:58,000
+First one is O one of one for the second time, O of one for the third time, O of one for the 4th time
+
+211
+00:28:58,000 --> 00:29:02,000
+Both one for the fifth time, but oh, what did I do
+
+212
+00:29:02,000 --> 00:29:06,000
+Sorry about that. One sec. I think I lost my
+
+213
+00:29:06,000 --> 00:29:10,000
+Share. Is it coming back
+
+214
+00:29:10,000 --> 00:29:14,000
+There we go. Sorry about that.
+
+215
+00:29:14,000 --> 00:29:16,000
+I think it's the space here.
+
+216
+00:29:16,000 --> 00:29:25,000
+Okay, so we just put 5 things in. It's O of one, and then the next one needs a resize. So that one's going to be O of N.
+
+217
+00:29:25,000 --> 00:29:32,000
+But then from then on, I've got again one of O of N. O of 1.
+
+218
+00:29:32,000 --> 00:29:36,000
+Dot dot, dot 5 times
+
+219
+00:29:36,000 --> 00:29:41,000
+And then I need to resize again. So I'm going to have O of N.
+
+220
+00:29:41,000 --> 00:29:47,000
+So now I can average my time
+
+221
+00:29:47,000 --> 00:29:55,000
+I can average all these calls. And here, this is N
+
+222
+00:29:55,000 --> 00:29:58,000
+This is O of N.
+
+223
+00:29:58,000 --> 00:30:00,000
+This is N.
+
+224
+00:30:00,000 --> 00:30:03,000
+This is O of N.
+
+225
+00:30:03,000 --> 00:30:07,000
+So I have
+
+226
+00:30:07,000 --> 00:30:09,000
+O of N
+
+227
+00:30:09,000 --> 00:30:12,000
+I can divide it by the number of
+
+228
+00:30:12,000 --> 00:30:18,000
+times the number of push operations I was able to do. And
+
+229
+00:30:18,000 --> 00:30:24,000
+Overall, I can say I have an amortized cost, or an average cost
+
+230
+00:30:24,000 --> 00:30:28,000
+Of my push is going to be O of 1.
+
+231
+00:30:28,000 --> 00:30:33,000
+Does that make sense? Are y'all following me?
+
+232
+00:30:33,000 --> 00:30:39,000
+All I have is black squares, so I can't tell if people are nodding along and it's landing, or if I'm losing anyone.
+
+233
+00:30:39,000 --> 00:30:47,000
+Let me know if that makes sense.
+
+234
+00:30:47,000 --> 00:30:51,000
+Can I get some thumbs up or something?
+
+235
+00:30:51,000 --> 00:31:00,000
+Just to I want to know if you're following me or if I should go in a little bit deeper. Okay, thank you.
+
+236
+00:31:00,000 --> 00:31:02,000
+Couple
+
+237
+00:31:02,000 --> 00:31:08,000
+Okay, so anyone who's not putting your thumbs up, anyone want to ask a question
+
+238
+00:31:08,000 --> 00:31:13,000
+Or if you're not sure what question to ask
+
+239
+00:31:13,000 --> 00:31:22,000
+You can even put something in the chat directly to me. If it's so it's not public.
+
+240
+00:31:22,000 --> 00:31:32,000
+I have a question regard the end, because in the first the end may be 5, but as a grown up, the end is different. How can
+
+241
+00:31:32,000 --> 00:31:39,000
+specified N is a constant value. How to calculate the complexity
+
+242
+00:31:39,000 --> 00:31:41,000
+In this case
+
+243
+00:31:41,000 --> 00:31:56,000
+Yeah, okay, so we said O of N, but n's changing over time, right? First, O of N is the first time we resize n equals 5
+
+244
+00:31:56,000 --> 00:32:02,000
+Because we had five if our capacity was originally five. So
+
+245
+00:32:02,000 --> 00:32:04,000
+Then we resize
+
+246
+00:32:04,000 --> 00:32:17,000
+And let's say we doubled it and the next time we have to resize and has now become 10 because we now have 10 items in the array.
+
+247
+00:32:17,000 --> 00:32:20,000
+And we have to copy 10 items in
+
+248
+00:32:20,000 --> 00:32:28,000
+And then next time it's 20, and we've got 20 items in there. So so how do we really know what N is?
+
+249
+00:32:28,000 --> 00:32:31,000
+Did I capture that correctly?
+
+250
+00:32:31,000 --> 00:32:32,000
+Yes
+
+251
+00:32:32,000 --> 00:32:44,000
+Yeah, so you're right. N is changing over time. I found myself just wanting to say, well, n is whatever n is at that point in time.
+
+252
+00:32:44,000 --> 00:32:47,000
+That's not a helpful statement.
+
+253
+00:32:47,000 --> 00:32:51,000
+But
+
+254
+00:32:51,000 --> 00:32:58,000
+N is
+
+255
+00:32:58,000 --> 00:33:07,000
+It is changing and it is going to grow.
+
+256
+00:33:07,000 --> 00:33:23,000
+feel like all I can come up with to say right now is and is however many items we have in the array at a time. Does anyone have better words or different words to express that idea?
+
+257
+00:33:23,000 --> 00:33:27,000
+Because I admit, sometimes I get stuck in my
+
+258
+00:33:27,000 --> 00:33:43,000
+These are the only words I can think at the moment.
+
+259
+00:33:43,000 --> 00:33:44,000
+Yeah.
+
+260
+00:33:44,000 --> 00:33:48,000
+I don't know if I have, another saying of what you just said, but I might have something to add that I was just like thinking about. I think because initially when you explained this, I was a little confused, but
+
+261
+00:33:48,000 --> 00:33:50,000
+I think
+
+262
+00:33:50,000 --> 00:34:05,000
+Because we are doing the O of 1 operation more times than we are doing the resize, which is O of N operation because we're doing the O of 1 operation more times than the O of
+
+263
+00:34:05,000 --> 00:34:21,000
+I feel like the O of 1 kind of trumps the O operation, and we take the O of 1 as kind of like the general cost time. Because it's, like, kind of like a… it's like mixed. It's, like, intertwined. Like, it does have
+
+264
+00:34:21,000 --> 00:34:33,000
+both O and Operations. But I feel like more often than not, we hit the O of 1 operation, so then the output is just O one
+
+265
+00:34:33,000 --> 00:34:47,000
+Yeah, thank you for saying that in a different way. I really appreciate that. And yeah, that's the idea is it's the averaging of it. And here, I'm going to
+
+266
+00:34:47,000 --> 00:34:51,000
+I'm trying to put this on another page
+
+267
+00:34:51,000 --> 00:34:54,000
+And
+
+268
+00:34:54,000 --> 00:35:01,000
+I'm gonna go through this because I think it is important, and this is a kind of question that comes up.
+
+269
+00:35:01,000 --> 00:35:04,000
+So I'm going to say, okay, we have
+
+270
+00:35:04,000 --> 00:35:19,000
+How many elements we're putting into an array? One, two, three, four, five, six, and I'm going to do a whole bunch
+
+271
+00:35:19,000 --> 00:35:28,000
+17, 18, 19, 20. I'm gonna try to deal with this with 20. Okay, so this is how many
+
+272
+00:35:28,000 --> 00:35:44,000
+items we're putting into our array. and when we put the 1st item in, it's O of one, because it's one oven. We're saying that capacity
+
+273
+00:35:44,000 --> 00:35:49,000
+Starts out as 5.
+
+274
+00:35:49,000 --> 00:35:52,000
+So these first five
+
+275
+00:35:52,000 --> 00:36:00,000
+Each time we put one in, it's an O of one operation.
+
+276
+00:36:00,000 --> 00:36:04,000
+Okay, we go to put six in
+
+277
+00:36:04,000 --> 00:36:10,000
+We have to do our resize. So at this point, capacity
+
+278
+00:36:10,000 --> 00:36:13,000
+Becomes 10. We're going to double it
+
+279
+00:36:13,000 --> 00:36:22,000
+So we now put we resize
+
+280
+00:36:22,000 --> 00:36:24,000
+And
+
+281
+00:36:24,000 --> 00:36:30,000
+In order to resize it, we have to copy all of these things, which
+
+282
+00:36:30,000 --> 00:36:34,000
+This, let's call that N
+
+283
+00:36:34,000 --> 00:36:37,000
+So here, this is really like O of n
+
+284
+00:36:37,000 --> 00:36:39,000
+With this end
+
+285
+00:36:39,000 --> 00:36:45,000
+Plus O of 1. This is the resize. This is the put the new element in.
+
+286
+00:36:45,000 --> 00:36:48,000
+Everyone with me so far.
+
+287
+00:36:48,000 --> 00:36:49,000
+Stop me if not
+
+288
+00:36:49,000 --> 00:36:52,000
+Now that we have capacity of 10
+
+289
+00:36:52,000 --> 00:36:56,000
+We have 6 items in there
+
+290
+00:36:56,000 --> 00:37:00,000
+We go O one. That's
+
+291
+00:37:00,000 --> 00:37:02,000
+7
+
+292
+00:37:02,000 --> 00:37:05,000
+This is 01, 001.
+
+293
+00:37:05,000 --> 00:37:08,000
+O of one
+
+294
+00:37:08,000 --> 00:37:15,000
+That's our doubled size, right?
+
+295
+00:37:15,000 --> 00:37:17,000
+And then
+
+296
+00:37:17,000 --> 00:37:22,000
+When we hit, when we hit the 11th item
+
+297
+00:37:22,000 --> 00:37:24,000
+We again need to double it.
+
+298
+00:37:24,000 --> 00:37:27,000
+So here
+
+299
+00:37:27,000 --> 00:37:32,000
+So at this point
+
+300
+00:37:32,000 --> 00:37:36,000
+We have 10 items in our list.
+
+301
+00:37:36,000 --> 00:37:39,000
+Capacity is going to go up to
+
+302
+00:37:39,000 --> 00:37:41,000
+20
+
+303
+00:37:41,000 --> 00:37:51,000
+When we put that 11th item in our list. It's O of N because we have to copy all of these things.
+
+304
+00:37:51,000 --> 00:37:55,000
+And at that point, N is 10
+
+305
+00:37:55,000 --> 00:38:01,000
+Plus another O of 1.
+
+306
+00:38:01,000 --> 00:38:03,000
+Right?
+
+307
+00:38:03,000 --> 00:38:11,000
+And then I'm going to do an O of one, O of one, O of one. All of these are all O one
+
+308
+00:38:11,000 --> 00:38:24,000
+Until we get down to here, I think this one's still 01, and it's when we get to the next one that we're going to have another resize. So at this point in time, if I were to
+
+309
+00:38:24,000 --> 00:38:26,000
+If I were to
+
+310
+00:38:26,000 --> 00:38:32,000
+calculate out or average out
+
+311
+00:38:32,000 --> 00:38:35,000
+For the first 11 items.
+
+312
+00:38:35,000 --> 00:38:44,000
+average out what the operating time is, or the operational cost. It's going to be
+
+313
+00:38:44,000 --> 00:38:52,000
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11. I've done 11 pushes.
+
+314
+00:38:52,000 --> 00:38:54,000
+And
+
+315
+00:38:54,000 --> 00:39:03,000
+At this point, it's O of N, which we said was 10
+
+316
+00:39:03,000 --> 00:39:07,000
+Over 11 operations.
+
+317
+00:39:07,000 --> 00:39:19,000
+So this the cost of this gets what we say amortized or averaged out over all of our operations.
+
+318
+00:39:19,000 --> 00:39:21,000
+So fuzzy.
+
+319
+00:39:21,000 --> 00:39:24,000
+Kind of waving my hands a little bit on this.
+
+320
+00:39:24,000 --> 00:39:27,000
+But that's the idea.
+
+321
+00:39:27,000 --> 00:39:37,000
+Is that we have one really expensive operations. But that one expensive operation gives us a whole bunch of very cheap operations.
+
+322
+00:39:37,000 --> 00:39:40,000
+And that's where that amortized idea comes from.
+
+323
+00:39:40,000 --> 00:39:58,000
+Does that help?
+
+324
+00:39:58,000 --> 00:40:05,000
+Feels quiet, so I'm not quite sure.
+
+325
+00:40:05,000 --> 00:40:09,000
+I'm going to move on or go back to our
+
+326
+00:40:09,000 --> 00:40:16,000
+our table, but if anyone does have further questions, feel free to put it in the chat or something.
+
+327
+00:40:16,000 --> 00:40:17,000
+Are we on time?
+
+328
+00:40:17,000 --> 00:40:19,000
+Okay, let's
+
+329
+00:40:19,000 --> 00:40:22,000
+Okay, so we are at
+
+330
+00:40:22,000 --> 00:40:29,000
+Our resize, we are saying is amortized O of 1.
+
+331
+00:40:29,000 --> 00:40:30,000
+Our PO
+
+332
+00:40:30,000 --> 00:40:40,000
+Is still for our array is 01. It's the same thing. We know the index. We go directly to it and remove it.
+
+333
+00:40:40,000 --> 00:40:44,000
+Our
+
+334
+00:40:44,000 --> 00:40:48,000
+Let our find on here, our find is still
+
+335
+00:40:48,000 --> 00:40:53,000
+O of N.
+
+336
+00:40:53,000 --> 00:40:57,000
+Okay, our linked list
+
+337
+00:40:57,000 --> 00:41:15,000
+Our linked list when we push something in and we said we are going to push at the head of the list so that we create a new node with the new data and then we point at the existing head and we update the head. This is also O of
+
+338
+00:41:15,000 --> 00:41:17,000
+Our pop
+
+339
+00:41:17,000 --> 00:41:24,000
+From our linked list, we take the head element off the linked list and return that value back. Reset the head
+
+340
+00:41:24,000 --> 00:41:27,000
+That's also O of 1.
+
+341
+00:41:27,000 --> 00:41:30,000
+And our find operation
+
+342
+00:41:30,000 --> 00:41:41,000
+Again, with our linked list, we have to iterate through the entire linked list. So that is also going to be O of N.
+
+343
+00:41:41,000 --> 00:41:44,000
+Okay, looking at this
+
+344
+00:41:44,000 --> 00:41:54,000
+This table right now of our operation costs for our different implementations, and they look the same
+
+345
+00:41:54,000 --> 00:41:58,000
+Are those two implementations equivalent?
+
+346
+00:41:58,000 --> 00:42:09,000
+Why might we… What are some of the differences?
+
+347
+00:42:09,000 --> 00:42:19,000
+That are not visible here.
+
+348
+00:42:19,000 --> 00:42:27,000
+I don't know about not being visible here, but I think one kind of obvious one is with the linked list, you don't have to resize.
+
+349
+00:42:27,000 --> 00:42:30,000
+So you don't have to
+
+350
+00:42:30,000 --> 00:42:33,000
+Have an inexpensive operation.
+
+351
+00:42:33,000 --> 00:42:38,000
+Whenever you want to push an element
+
+352
+00:42:38,000 --> 00:42:42,000
+onto the chain
+
+353
+00:42:42,000 --> 00:43:00,000
+Yeah, yeah, so what our link list gives us is that ability to this O is always O of 1. It has no constraints. With our array, we either have the constraint that we can only put so many items in
+
+354
+00:43:00,000 --> 00:43:07,000
+Or we have a constraint that we're going to have a very expensive operation occasionally.
+
+355
+00:43:07,000 --> 00:43:09,000
+That's nice. What else?
+
+356
+00:43:09,000 --> 00:43:25,000
+Oh, I think the array solution is more faster because there's a continuous protocol memories. You just look through the next value in order. But in linkless, you have to pointer. The pointer is called low cost
+
+357
+00:43:25,000 --> 00:43:37,000
+Local array solutions, so it'd be pointer 1, then find in the different location of the memory. It may cause lots of time, I think
+
+358
+00:43:37,000 --> 00:43:57,000
+Yeah, okay. So with our array, our contiguous chunk of memory, and we know exactly those addresses, we can jump to exactly I'm trying to figure out how to put this on my page right here
+
+359
+00:43:57,000 --> 00:44:10,000
+I'm going to, I'll draw a new picture. So array contiguous chunk chunk of memory. We have our data. Even though we have to resize, we know this address
+
+360
+00:44:10,000 --> 00:44:14,000
+And so we can go directly to it in memory and find the data
+
+361
+00:44:14,000 --> 00:44:30,000
+And so that could be faster versus our linked list if this is our memory. We have different pieces here and we still have some jumping around to do
+
+362
+00:44:30,000 --> 00:44:35,000
+So I'm going to wave my hands on this just a little bit
+
+363
+00:44:35,000 --> 00:44:39,000
+So it's true
+
+364
+00:44:39,000 --> 00:44:46,000
+Like, if we were to say, do a find through our entire array.
+
+365
+00:44:46,000 --> 00:44:49,000
+We would expect that the clock time
+
+366
+00:44:49,000 --> 00:44:56,000
+is going to be smaller and faster than the clock time of
+
+367
+00:44:56,000 --> 00:44:59,000
+iterating through and our
+
+368
+00:44:59,000 --> 00:45:06,000
+Iterating through our entire linked list because there is some amount of time of
+
+369
+00:45:06,000 --> 00:45:21,000
+Okay, we're at this point in memory, we have to look up the next one and go to another place in memory, look up the next one, and go to another place in memory. That's just… there's a little bit of… a little bit more going on there
+
+370
+00:45:21,000 --> 00:45:27,000
+I'm going to argue that it's negligible
+
+371
+00:45:27,000 --> 00:45:33,000
+And that negligibility, that's why
+
+372
+00:45:33,000 --> 00:45:44,000
+That's why we talk about use this O notation as opposed to actual clock time.
+
+373
+00:45:44,000 --> 00:45:47,000
+Did I capture that?
+
+374
+00:45:47,000 --> 00:45:49,000
+Properly.
+
+375
+00:45:49,000 --> 00:46:00,000
+Yeah, I think so.
+
+376
+00:46:00,000 --> 00:46:07,000
+You're like, oh, oh yeah, okay. Anything else?
+
+377
+00:46:07,000 --> 00:46:16,000
+With the, correct me if I'm wrong, but with the link list, can't you store different data types? And with the
+
+378
+00:46:16,000 --> 00:46:21,000
+array, structure, you can't. It has to be the same
+
+379
+00:46:21,000 --> 00:46:28,000
+Data type
+
+380
+00:46:28,000 --> 00:46:33,000
+Trying to decide. Anyone have an answer to that?
+
+381
+00:46:33,000 --> 00:46:36,000
+Trying to decide how to answer that
+
+382
+00:46:36,000 --> 00:46:43,000
+Another thing I feel like I want to wave my hands on. So generally speaking, yes.
+
+383
+00:46:43,000 --> 00:46:46,000
+That is the case.
+
+384
+00:46:46,000 --> 00:46:54,000
+In our toy problem here, let's assume we're using the same data type all over the place.
+
+385
+00:46:54,000 --> 00:47:02,000
+And we did just see that with Python lists, for example, Python uses
+
+386
+00:47:02,000 --> 00:47:17,000
+pointers. It what it stores as the data in the array is a pointer as opposed to the actual data. So that's how it kind of gets around and makes it look like it's not that it's storing different
+
+387
+00:47:17,000 --> 00:47:45,000
+kinds of data types in an array, because it just stores the pointer, and that pointer is always the same size no matter what it's pointing to.
+
+388
+00:47:45,000 --> 00:48:05,000
+Check my notes before we move on.
+
+389
+00:48:05,000 --> 00:48:22,000
+One moment, please.
+
+390
+00:48:22,000 --> 00:48:28,000
+We did not talk about memory. That's what I wanted to
+
+391
+00:48:28,000 --> 00:48:31,000
+pull out here. Okay, so we have
+
+392
+00:48:31,000 --> 00:48:39,000
+We have our big O
+
+393
+00:48:39,000 --> 00:48:42,000
+Our big O r run times
+
+394
+00:48:42,000 --> 00:48:46,000
+What about memory?
+
+395
+00:48:46,000 --> 00:48:52,000
+So
+
+396
+00:48:52,000 --> 00:48:57,000
+With our fixed array
+
+397
+00:48:57,000 --> 00:49:02,000
+With our fixed array, how much memory are we using?
+
+398
+00:49:02,000 --> 00:49:14,000
+with our fixed array.
+
+399
+00:49:14,000 --> 00:49:19,000
+We're fixed it right, I'm going to say it's going to be O of N.
+
+400
+00:49:19,000 --> 00:49:24,000
+Because we say that our capacity is 5.
+
+401
+00:49:24,000 --> 00:49:30,000
+We put aside our we put aside our
+
+402
+00:49:30,000 --> 00:49:34,000
+Our chunk of memory that's going to hold it.
+
+403
+00:49:34,000 --> 00:49:41,000
+And that's five five items, five elements, five memory locations.
+
+404
+00:49:41,000 --> 00:49:45,000
+Our array of resize
+
+405
+00:49:45,000 --> 00:49:52,000
+All right, implementation that does the resizing. How much memory do we use?
+
+406
+00:49:52,000 --> 00:49:56,000
+This one's tricky
+
+407
+00:49:56,000 --> 00:50:04,000
+Because we start off with O of N, but n equals 5.
+
+408
+00:50:04,000 --> 00:50:07,000
+We double it and
+
+409
+00:50:07,000 --> 00:50:18,000
+Now we are still O of N, but O is 10
+
+410
+00:50:18,000 --> 00:50:23,000
+We double it. And
+
+411
+00:50:23,000 --> 00:50:29,000
+O of N, and is now 20.
+
+412
+00:50:29,000 --> 00:50:33,000
+So our ends getting bigger and bigger and bigger.
+
+413
+00:50:33,000 --> 00:50:41,000
+What happens if we push something on the stack over and over again? We push 20 items onto the stack
+
+414
+00:50:41,000 --> 00:50:49,000
+And then we pop everything off.
+
+415
+00:50:49,000 --> 00:50:51,000
+Hello, Ben.
+
+416
+00:50:51,000 --> 00:50:56,000
+Yeah, well, that's gonna be Oven, but what happens to the memory that we're using?
+
+417
+00:50:56,000 --> 00:51:05,000
+And I'm not asking for an O related to it. I'm just just asking for like
+
+418
+00:51:05,000 --> 00:51:09,000
+How much
+
+419
+00:51:09,000 --> 00:51:13,000
+What am I asking? How much memory are we using?
+
+420
+00:51:13,000 --> 00:51:15,000
+So
+
+421
+00:51:15,000 --> 00:51:31,000
+Once we start growing our array, we grow it up, we put 20 items into it once, and then if we take everything out and only put one or two things in at a time. Yeah, our array cannot shrink
+
+422
+00:51:31,000 --> 00:51:34,000
+We never shrink our array.
+
+423
+00:51:34,000 --> 00:51:38,000
+So if we ever have a whole bunch of stuff
+
+424
+00:51:38,000 --> 00:51:51,000
+In that array and that array based stack, and then we take everything out and then only ever put one or two items in it again. We're holding a bunch of memory
+
+425
+00:51:51,000 --> 00:51:55,000
+We have a really high capacity and we might be
+
+426
+00:51:55,000 --> 00:52:02,000
+holding on to storage that we're not actually using, so it can't be used elsewhere.
+
+427
+00:52:02,000 --> 00:52:10,000
+So our ray is still going to be O of N, but it's O of the biggest n we've ever seen
+
+428
+00:52:10,000 --> 00:52:17,000
+As opposed to N being the current number of items in our stack.
+
+429
+00:52:17,000 --> 00:52:20,000
+Does that make sense?
+
+430
+00:52:20,000 --> 00:52:25,000
+Which is in contrast to our linked list.
+
+431
+00:52:25,000 --> 00:52:31,000
+I want to put here n equals biggest
+
+432
+00:52:31,000 --> 00:52:33,000
+Ever.
+
+433
+00:52:33,000 --> 00:52:35,000
+And never shrinks.
+
+434
+00:52:35,000 --> 00:52:37,000
+And then our linked list
+
+435
+00:52:37,000 --> 00:52:43,000
+is going to be O of N. Again
+
+436
+00:52:43,000 --> 00:52:50,000
+Plus, maybe a little overhead for the node
+
+437
+00:52:50,000 --> 00:52:53,000
+the node
+
+438
+00:52:53,000 --> 00:52:59,000
+metadata, like the next, the next item. But
+
+439
+00:52:59,000 --> 00:53:03,000
+It's always going to be O of N of
+
+440
+00:53:03,000 --> 00:53:13,000
+whatever current N is.
+
+441
+00:53:13,000 --> 00:53:22,000
+So what we wanted to see here was that with our use of memory
+
+442
+00:53:22,000 --> 00:53:25,000
+That
+
+443
+00:53:25,000 --> 00:53:28,000
+it all looks like O of N
+
+444
+00:53:28,000 --> 00:53:36,000
+But for our fixed array, that n is actually, it's not the number of items we have, it's the capacity.
+
+445
+00:53:36,000 --> 00:53:48,000
+And for our resize array, it's not N as in the current number of items we have, it's N, whatever the max number we ever stored
+
+446
+00:53:48,000 --> 00:54:01,000
+And then for our linked list, our O of N is it does represent exactly how many items we are storing in our list at that point in time.
+
+447
+00:54:01,000 --> 00:54:05,000
+Any questions?
+
+448
+00:54:05,000 --> 00:54:09,000
+So, it looks like linkless is
+
+449
+00:54:09,000 --> 00:54:28,000
+solution for this problem, because even for complexity and memory complexity should be the best solution already. So if it is default implementation of stack in Python
+
+450
+00:54:28,000 --> 00:54:38,000
+So is this a linked list, the default implementation? Actually, I'm going to put a pin in that, because we are going to talk about that specifically
+
+451
+00:54:38,000 --> 00:54:40,000
+in the second half of class.
+
+452
+00:54:40,000 --> 00:54:42,000
+So we're
+
+453
+00:54:42,000 --> 00:54:48,000
+521 now, let's take our break, and we're gonna go through specifically
+
+454
+00:54:48,000 --> 00:54:56,000
+Python and stacks and queues and lists
+
+455
+00:54:56,000 --> 00:54:59,000
+So let's take a break.
+
+456
+00:54:59,000 --> 00:55:07,000
+Ethan always asking exactly the question leading us to the next step. I love it.
+
+457
+00:55:07,000 --> 00:55:13,000
+5. I'm going to call it 532. So take about 10 minutes.
+
+458
+00:55:13,000 --> 00:55:25,000
+And then we'll be back
+
+459
+00:55:36,000 --> 00:55:43,000
+Okay, I'm going to start talking. We've got a few seconds left. But
+
+460
+00:55:43,000 --> 00:55:54,000
+I'm going off script just a little bit. I had a thought that, so we were talking about the
+
+461
+00:55:54,000 --> 00:56:04,000
+our run times for our array versus linked list linked list implementations for a stack
+
+462
+00:56:04,000 --> 00:56:12,000
+And I thought we had questions about what is the actual runtime and what's going to be better.
+
+463
+00:56:12,000 --> 00:56:16,000
+So
+
+464
+00:56:16,000 --> 00:56:22,000
+I did ask Claude to whip up, hey, could you just
+
+465
+00:56:22,000 --> 00:56:38,000
+But write a little bit of code that's going to call our stacks as we've already created them. And do some runtime computation for us, and some memory computation for us, so that we measure it, so that we have something
+
+466
+00:56:38,000 --> 00:56:44,000
+To compare it to, to put behind these theoretical numbers.
+
+467
+00:56:44,000 --> 00:56:59,000
+This is something that I would not have done if I didn't ask, if I didn't have Claude to throw something together for us to explore. But because we have it, I thought, hey, let's do it and let's see what we
+
+468
+00:56:59,000 --> 00:57:04,000
+up with, and let's see if we can, prove or disprove anything.
+
+469
+00:57:04,000 --> 00:57:09,000
+Are y'all up for a little exploration?
+
+470
+00:57:09,000 --> 00:57:14,000
+I will put this code in
+
+471
+00:57:14,000 --> 00:57:20,000
+I'll put this code in Github when we
+
+472
+00:57:20,000 --> 00:57:26,000
+When we're done, I will share this now
+
+473
+00:57:26,000 --> 00:57:41,000
+And because I did this in like 3 min on the break, I will acknowledge I haven't looked through it carefully. But I have
+
+474
+00:57:41,000 --> 00:57:49,000
+Glanced through it, I ran it. Let's see what we've got. And
+
+475
+00:57:49,000 --> 00:57:59,000
+Let's, let's see how we can use AI to our advantage. And as a learning tool.
+
+476
+00:57:59,000 --> 00:58:03,000
+Okay, so I put in here
+
+477
+00:58:03,000 --> 00:58:06,000
+This is
+
+478
+00:58:06,000 --> 00:58:17,000
+This is our stack, our array stack implementation. We've got a couple extra methods in here.
+
+479
+00:58:17,000 --> 00:58:24,000
+And then we have our linked. We have our create node, and we have our linked implementation.
+
+480
+00:58:24,000 --> 00:58:27,000
+And then we've got
+
+481
+00:58:27,000 --> 00:58:30,000
+the benchmark.
+
+482
+00:58:30,000 --> 00:58:43,000
+I'm not going to go through this right now, just because I don't think it's going to be that interesting thing. But what we will see is that it is going to push and then pop
+
+483
+00:58:43,000 --> 00:58:47,000
+So many items.
+
+484
+00:58:47,000 --> 00:58:51,000
+And it's going to do that for both our array stack
+
+485
+00:58:51,000 --> 00:58:57,000
+And our linked stack.
+
+486
+00:58:57,000 --> 00:59:04,000
+I don't think it has a resized stack in there. Let me double check if this is using our
+
+487
+00:59:04,000 --> 00:59:12,000
+Reset
+
+488
+00:59:12,000 --> 00:59:26,000
+Does anyone see here? Let's see where our push. I'm not seeing a resize. Yeah, so I think this does not have a resize option.
+
+489
+00:59:26,000 --> 00:59:32,000
+We do have a growing push. We've got the growing push. That's what that is. Okay.
+
+490
+00:59:32,000 --> 00:59:39,000
+I'm going to hit run on this
+
+491
+00:59:39,000 --> 00:59:49,000
+And let's see what we've got down here.
+
+492
+00:59:49,000 --> 00:59:51,000
+Okay, so our first
+
+493
+00:59:51,000 --> 00:59:53,000
+test
+
+494
+00:59:53,000 --> 00:59:56,000
+You guys can see everything, right? I'm sharing my screen properly.
+
+495
+00:59:56,000 --> 01:00:05,000
+We pushed and then popped for 10,000, 100,000 and 1 million items. We had our fixed array.
+
+496
+01:00:05,000 --> 01:00:14,000
+And as we put more items in, it grew
+
+497
+01:00:14,000 --> 01:00:18,000
+linearly
+
+498
+01:00:18,000 --> 01:00:20,000
+Yeah.
+
+499
+01:00:20,000 --> 01:00:25,000
+That looks about right, as we expected.
+
+500
+01:00:25,000 --> 01:00:33,000
+With our growing array, this is the one that we said it's O of N sometimes, but O of 1 most of the time.
+
+501
+01:00:33,000 --> 01:00:41,000
+And what we see here is our growing array little bit slower than our fixed array
+
+502
+01:00:41,000 --> 01:00:47,000
+But not a whole lot more, just a little bit more.
+
+503
+01:00:47,000 --> 01:00:57,000
+And then we have our linked array. This is the linked list based arrays. Listen to me. Linked list based stack.
+
+504
+01:00:57,000 --> 01:00:59,000
+And
+
+505
+01:00:59,000 --> 01:01:04,000
+A little slower, a little slower.
+
+506
+01:01:04,000 --> 01:01:08,000
+A little slower. It's about
+
+507
+01:01:08,000 --> 01:01:10,000
+Twice
+
+508
+01:01:10,000 --> 01:01:11,000
+Well
+
+509
+01:01:11,000 --> 01:01:29,000
+But I linked implementation is just a little bit slower. And Ethan I think that's what you were hypothesizing, right? That even though the O of 1s and the O of ns all looked the same, that the linked implementation would be a little bit slower in practice
+
+510
+01:01:29,000 --> 01:01:32,000
+Is that right?
+
+511
+01:01:32,000 --> 01:01:34,000
+Yeah
+
+512
+01:01:34,000 --> 01:01:40,000
+Okay, I feel good. You see this
+
+513
+01:01:40,000 --> 01:01:48,000
+And then over here, I'm going to double check the
+
+514
+01:01:48,000 --> 01:01:54,000
+Double to check the code on this. It looks like it's just using a list, a Python list.
+
+515
+01:01:54,000 --> 01:01:56,000
+Yep, okay.
+
+516
+01:01:56,000 --> 01:02:08,000
+Cool. This might be a nice transition. It's using a Python list. So rather than creating a stack, create late stacked
+
+517
+01:02:08,000 --> 01:02:18,000
+Rather than creating a list and using one of our stack implementations, it is using a Python list as a stack.
+
+518
+01:02:18,000 --> 01:02:30,000
+And we can do this, and Python even recommends how we do it. And we're just calling append to a Python list, and then we are popping off
+
+519
+01:02:30,000 --> 01:02:32,000
+the last item
+
+520
+01:02:32,000 --> 01:02:45,000
+And this is, is anyone surprised the most efficient. That's definitely the fastest.
+
+521
+01:02:45,000 --> 01:02:48,000
+Oh, because think about this
+
+522
+01:02:48,000 --> 01:03:05,000
+We take away. Do we like this? Is this interesting? Is this helpful?
+
+523
+01:03:05,000 --> 01:03:15,000
+Is it not interesting and helpful?
+
+524
+01:03:15,000 --> 01:03:18,000
+Okay, we got one thumbs up, so I will take it.
+
+525
+01:03:18,000 --> 01:03:24,000
+Actually, I guess I'm not, I don't have everything shown on my screen right now.
+
+526
+01:03:24,000 --> 01:03:30,000
+Hopefully. So we also have the memory.
+
+527
+01:03:30,000 --> 01:03:44,000
+How much memory is being used? And what we see here is that with our exact capacity array
+
+528
+01:03:44,000 --> 01:03:48,000
+We're using 0.8 megs
+
+529
+01:03:48,000 --> 01:03:57,000
+A little bit more for the array that grows a lot for our linked stack
+
+530
+01:03:57,000 --> 01:04:05,000
+And that's because while we have smaller nodes and we can kind of scare them across memory, there's still this overhead.
+
+531
+01:04:05,000 --> 01:04:13,000
+And then again, our Python list is the same amount of memory as for our array.
+
+532
+01:04:13,000 --> 01:04:20,000
+Now we've got another item in here, this deck. I'm going to come back to that in a in a few minutes.
+
+533
+01:04:20,000 --> 01:04:29,000
+Okay, and then Claude added in this queue stuff. So I'm not going to
+
+534
+01:04:29,000 --> 01:04:31,000
+I'm not going to go into that right now
+
+535
+01:04:31,000 --> 01:04:35,000
+So and I will
+
+536
+01:04:35,000 --> 01:04:41,000
+commit this code so you guys can take a look at it and and kind of question and see what's what's going on.
+
+537
+01:04:41,000 --> 01:04:51,000
+But our takeaway here is that we saw with our — and I don't know how to share all of my things all at once
+
+538
+01:04:51,000 --> 01:04:57,000
+But we saw that that table we had
+
+539
+01:04:57,000 --> 01:05:00,000
+are linked in our array
+
+540
+01:05:00,000 --> 01:05:17,000
+Looked like it had the same theoretical runtimes, but we can see in practice, it's just a little bit different.
+
+541
+01:05:17,000 --> 01:05:47,000
+Just like it in my notes so I can remember what I wanted to take away from this.
+
+542
+01:05:51,000 --> 01:06:07,000
+So we were asking why we look at these different implementations. And the takeaway here is that we have the promise of our abstract data type or what behavior we expect
+
+543
+01:06:07,000 --> 01:06:13,000
+It would be what behavior we expect to
+
+544
+01:06:13,000 --> 01:06:15,000
+our data structure to have
+
+545
+01:06:15,000 --> 01:06:19,000
+But then the underlying implementation can be different
+
+546
+01:06:19,000 --> 01:06:32,000
+And what this means for for us as developers overall is that whatever language we're working in, we need to know something about the best way to
+
+547
+01:06:32,000 --> 01:06:40,000
+to utilize that language, and so we need to go and we need to look up
+
+548
+01:06:40,000 --> 01:06:50,000
+And no, for that language exactly what it I'm resharing my screen.
+
+549
+01:06:50,000 --> 01:06:51,000
+What that language provides.
+
+550
+01:06:51,000 --> 01:07:05,000
+When it comes to Python, for example, we're going to look at this. And I had this link. I'll put this link in the notes I give to you guys
+
+551
+01:07:05,000 --> 01:07:19,000
+Python tells us exactly what the runtimes are. We're looking at a list. That list is that
+
+552
+01:07:19,000 --> 01:07:22,000
+that growing
+
+553
+01:07:22,000 --> 01:07:28,000
+that dynamic array of references
+
+554
+01:07:28,000 --> 01:07:32,000
+I'm going to go over these just real quick
+
+555
+01:07:32,000 --> 01:07:37,000
+And it notes out here that the largest cost comes from
+
+556
+01:07:37,000 --> 01:07:44,000
+The fact that we have to resize that array and everything needs to move, everything needs to copy
+
+557
+01:07:44,000 --> 01:07:54,000
+And it also calls out that the costs come from inserting or deleting near the beginning of the list.
+
+558
+01:07:54,000 --> 01:08:02,000
+So if you're pulling something off the beginning of the list at index 0 or 1, it's going to shove everything down
+
+559
+01:08:02,000 --> 01:08:13,000
+And so if you're doing something where you need to grow both ends of our list, put things at the
+
+560
+01:08:13,000 --> 01:08:25,000
+The beginning or the end, it's telling us, hey, go look at this deck over here. That's a double-ended queue, and we'll talk about that in a second
+
+561
+01:08:25,000 --> 01:08:31,000
+But we've got our runtimes here, our O of 1 append. That's what we expect.
+
+562
+01:08:31,000 --> 01:08:48,000
+Our pop, if we're popping off the end of the list, it's going to be O of 1. If we're popping off at the beginning of the list where K is zero, index 0, it's going to be longer because it's going to shift everything down
+
+563
+01:08:48,000 --> 01:08:57,000
+Same for our insert. But then our get item and our set item, as we expect with an array is going to be O of 1.
+
+564
+01:08:57,000 --> 01:09:04,000
+And so on. I'm not going to go through all of these, but I'm putting this here so that you guys know what
+
+565
+01:09:04,000 --> 01:09:08,000
+what to know about this and how you use this.
+
+566
+01:09:08,000 --> 01:09:18,000
+Okay, so this is our time complexity for Python of built-in types
+
+567
+01:09:18,000 --> 01:09:35,000
+Python tells us how we use a stack within if we need a stack, we want to use Python. It tells us how to use it. Oh, look, you can just use a list and you're going to append on the end
+
+568
+01:09:35,000 --> 01:09:38,000
+And you're going to pop off the end.
+
+569
+01:09:38,000 --> 01:09:55,000
+And that's the most efficient way. So, if we were going to just use Python for a stack, we don't have to actually implement the stack as we've done in class. We can just use a list. We always append on the end, we always pop off the end, that keeps it efficient.
+
+570
+01:09:55,000 --> 01:10:11,000
+Okay, it also points out acute. So a Q like a stack, except for its first in, first out. We can think of it as a line of people at the grocery store. You get in line, you're the first person in line, you're the first person to be
+
+571
+01:10:11,000 --> 01:10:14,000
+served so you can pay
+
+572
+01:10:14,000 --> 01:10:18,000
+The last person in line
+
+573
+01:10:18,000 --> 01:10:21,000
+is the last person served.
+
+574
+01:10:21,000 --> 01:10:22,000
+And
+
+575
+01:10:22,000 --> 01:10:26,000
+Here it says, okay, you can use a list as a queue
+
+576
+01:10:26,000 --> 01:10:27,000
+And
+
+577
+01:10:27,000 --> 01:10:35,000
+You append as people show up. You can append onto the list and then pop off the front of the list
+
+578
+01:10:35,000 --> 01:10:43,000
+That's easy code to write. But it's not very efficient because every time you pop off the front you got to shove everyone down.
+
+579
+01:10:43,000 --> 01:10:52,000
+And so it points us to using this Q, this double-ended queue.
+
+580
+01:10:52,000 --> 01:10:55,000
+I think I've got that here.
+
+581
+01:10:55,000 --> 01:10:58,000
+That is
+
+582
+01:10:58,000 --> 01:11:01,000
+Our double-ended queue
+
+583
+01:11:01,000 --> 01:11:09,000
+Haven't talked a whole lot about RQs. This is our introduction to a queue.
+
+584
+01:11:09,000 --> 01:11:14,000
+When we're using a queue in Python, we're going to use a double-ended queue.
+
+585
+01:11:14,000 --> 01:11:21,000
+And it allows us to append to either the right-hand side, the end of the list
+
+586
+01:11:21,000 --> 01:11:26,000
+or append left to the left side of the list, the beginning of the list.
+
+587
+01:11:26,000 --> 01:11:32,000
+depending on how you think about this, and then you can
+
+588
+01:11:32,000 --> 01:11:42,000
+But you pop off the end or pop left, pop off the beginning, and it's just as efficient.
+
+589
+01:11:42,000 --> 01:12:06,000
+I kind of just wandered into this queue territory. Anyone have questions about a queue and using a queue in Python?
+
+590
+01:12:06,000 --> 01:12:12,000
+Would it be helpful? Would we like to see an example of using a queue
+
+591
+01:12:12,000 --> 01:12:17,000
+and Python
+
+592
+01:12:17,000 --> 01:12:19,000
+I'd like to see an example.
+
+593
+01:12:19,000 --> 01:12:26,000
+Excellent. Then we will do that.
+
+594
+01:12:26,000 --> 01:12:29,000
+Right? We are going to
+
+595
+01:12:29,000 --> 01:12:33,000
+We're going to use Q
+
+596
+01:12:33,000 --> 01:12:44,000
+Yeah.
+
+597
+01:12:44,000 --> 01:12:46,000
+Okay?
+
+598
+01:12:46,000 --> 01:12:51,000
+And I'm still showing my screen right and you can see the code that I'm writing.
+
+599
+01:12:51,000 --> 01:12:56,000
+Okay, so first we will do
+
+600
+01:12:56,000 --> 01:13:02,000
+I'm gonna show you what we can do,
+
+601
+01:13:02,000 --> 01:13:04,000
+8
+
+602
+01:13:04,000 --> 01:13:06,000
+Cube
+
+603
+01:13:06,000 --> 01:13:10,000
+List
+
+604
+01:13:10,000 --> 01:13:15,000
+So we are going to
+
+605
+01:13:15,000 --> 01:13:20,000
+I'm just going to remind myself of
+
+606
+01:13:20,000 --> 01:13:28,000
+did here. Okay, so same as we did with our stack. First, I'm gonna my 1st implementation
+
+607
+01:13:28,000 --> 01:13:34,000
+We're going to do Python list back q.
+
+608
+01:13:34,000 --> 01:13:41,000
+And I'm going to use a dictionary where we have the
+
+609
+01:13:41,000 --> 01:13:44,000
+the data
+
+610
+01:13:44,000 --> 01:13:50,000
+Data is a list.
+
+611
+01:13:50,000 --> 01:13:57,000
+And our data is a list and our size
+
+612
+01:13:57,000 --> 01:14:00,000
+I don't think we need a size actually
+
+613
+01:14:00,000 --> 01:14:06,000
+I don't think our queue, we don't think we don't have to
+
+614
+01:14:06,000 --> 01:14:18,000
+Keep track of
+
+615
+01:14:18,000 --> 01:14:26,000
+I don't think we have to keep track of anything. Track of size. So death
+
+616
+01:14:26,000 --> 01:14:37,000
+Q list our operations for Q are NQ and dq. NQ. We go into
+
+617
+01:14:37,000 --> 01:14:39,000
+The
+
+618
+01:14:39,000 --> 01:14:44,000
+Thank you.
+
+619
+01:14:44,000 --> 01:14:47,000
+To
+
+620
+01:14:47,000 --> 01:14:51,000
+dot append
+
+621
+01:14:51,000 --> 01:14:56,000
+Because we're just using a list. So we're going to pop it on the back
+
+622
+01:14:56,000 --> 01:15:02,000
+and then death to list Eq.
+
+623
+01:15:02,000 --> 01:15:06,000
+I have a queue.
+
+624
+01:15:06,000 --> 01:15:13,000
+And return to dot top of zero.
+
+625
+01:15:13,000 --> 01:15:15,000
+Okay.
+
+626
+01:15:15,000 --> 01:15:20,000
+By default, Pop is going to take the last item in our list
+
+627
+01:15:20,000 --> 01:15:40,000
+and remove it. Pop of 0 says, take the first item in the list, and I was just noticing my my hands on the video. Am I flipped for you guys. Is this left or right? This is right, isn't it
+
+628
+01:15:40,000 --> 01:15:52,000
+Yeah, okay, sorry about that. That's got to be confusing. I will try to flip it around or something so that This is the beginning of the list, right? And this is the end of the list.
+
+629
+01:15:52,000 --> 01:16:01,000
+Is that better?
+
+630
+01:16:01,000 --> 01:16:02,000
+Yeah
+
+631
+01:16:02,000 --> 01:16:08,000
+The list at the beginning is on the beginning is on the left hand side and the end is on the right hand side. Okay, try to be consistent. So
+
+632
+01:16:08,000 --> 01:16:16,000
+Our Python list is going to grow from the left to the right. When we append, we append onto the end.
+
+633
+01:16:16,000 --> 01:16:25,000
+And then when we pop, the most efficient pop is off the end, but we can pop from anywhere in our list. So we can pop off of the beginning
+
+634
+01:16:25,000 --> 01:16:31,000
+It's just now we have to shift everything down so it's going to be less efficient.
+
+635
+01:16:31,000 --> 01:16:42,000
+So if this is our NQ and DQ, I'm going to generate a test for us.
+
+636
+01:16:42,000 --> 01:16:47,000
+And
+
+637
+01:16:47,000 --> 01:17:01,000
+Go ahead and put this in here. Get our boilerplate out of the way. This is going to let's just
+
+638
+01:17:01,000 --> 01:17:13,000
+What's a good thing to test? We like our test behavior. We like to define our test behavior, so I'm going to say this is
+
+639
+01:17:13,000 --> 01:17:18,000
+Test
+
+640
+01:17:18,000 --> 01:17:21,000
+Items
+
+641
+01:17:21,000 --> 01:17:23,000
+Thank you.
+
+642
+01:17:23,000 --> 01:17:26,000
+In order.
+
+643
+01:17:26,000 --> 01:17:30,000
+So we're going to set up
+
+644
+01:17:30,000 --> 01:17:42,000
+And to set up our test, we're going to say our Q equals create, and we've got to from
+
+645
+01:17:42,000 --> 01:17:44,000
+Import
+
+646
+01:17:44,000 --> 01:17:47,000
+Can I give you some
+
+647
+01:17:47,000 --> 01:17:52,000
+Is it going to give me my create
+
+648
+01:17:52,000 --> 01:18:03,000
+Thank you.
+
+649
+01:18:03,000 --> 01:18:21,000
+Create queues. Thank you, DQ.
+
+650
+01:18:21,000 --> 01:18:27,000
+Create queue list, no parameters. Q dot
+
+651
+01:18:27,000 --> 01:18:29,000
+Thank you.
+
+652
+01:18:29,000 --> 01:18:34,000
+list NQ
+
+653
+01:18:34,000 --> 01:18:37,000
+Thank you
+
+654
+01:18:37,000 --> 01:18:39,000
+RQ
+
+655
+01:18:39,000 --> 01:18:45,000
+I'm getting confused by saying Q all the time. What's something we… what do we want to put on our Q?
+
+656
+01:18:45,000 --> 01:18:55,000
+Let's put Pokemon in. Someone tell me their favorite Pokemon.
+
+657
+01:18:55,000 --> 01:18:57,000
+No one has a favorite Pokemon
+
+658
+01:18:57,000 --> 01:18:58,000
+Squirtle
+
+659
+01:18:58,000 --> 01:19:01,000
+It's not like a squirtle
+
+660
+01:19:01,000 --> 01:19:06,000
+And then, oops, I didn't spell that right.
+
+661
+01:19:06,000 --> 01:19:10,000
+Squirtle. We have Evie
+
+662
+01:19:10,000 --> 01:19:15,000
+Who else goes in? I need one more.
+
+663
+01:19:15,000 --> 01:19:25,000
+Pikachu. Okay, great. Okay, so Squirtle goes in first, then Evie, then Pikachu. So we're going to
+
+664
+01:19:25,000 --> 01:19:33,000
+write a test that confirms that they are dequeued appropriately and
+
+665
+01:19:33,000 --> 01:19:41,000
+Yes, I always have to, if I'm not writing this, self.assert equal, that's what we want.
+
+666
+01:19:41,000 --> 01:19:45,000
+Self-doubt search equal
+
+667
+01:19:45,000 --> 01:19:51,000
+And expected. What's our expected DQ here?
+
+668
+01:19:51,000 --> 01:19:54,000
+I expect Squirtle to
+
+669
+01:19:54,000 --> 01:19:58,000
+be removed first. And
+
+670
+01:19:58,000 --> 01:20:11,000
+You list EQ
+
+671
+01:20:11,000 --> 01:20:20,000
+That look great
+
+672
+01:20:20,000 --> 01:20:23,000
+And then Pikachu.
+
+673
+01:20:23,000 --> 01:20:25,000
+Okay
+
+674
+01:20:25,000 --> 01:20:35,000
+Yeah, feel free to call out if you see something that doesn't look right. I think I'm going to run this and see what happens.
+
+675
+01:20:35,000 --> 01:20:48,000
+Failed, why we fail?
+
+676
+01:20:48,000 --> 01:20:52,000
+Import error, what
+
+677
+01:20:52,000 --> 01:20:56,000
+Oh,
+
+678
+01:20:56,000 --> 01:21:00,000
+Cubes
+
+679
+01:21:00,000 --> 01:21:11,000
+Okay, I got a lot on it.
+
+680
+01:21:11,000 --> 01:21:16,000
+If that works
+
+681
+01:21:16,000 --> 01:21:20,000
+Okay.
+
+682
+01:21:20,000 --> 01:21:30,000
+I implemented this wrong. It's not Q.append. It's queue of data.
+
+683
+01:21:30,000 --> 01:21:33,000
+I forgot I wrapped it, which means
+
+684
+01:21:33,000 --> 01:21:35,000
+Same thing over here.
+
+685
+01:21:35,000 --> 01:21:41,000
+Because they put our data. We probably didn't really need it, but
+
+686
+01:21:41,000 --> 01:21:43,000
+We will
+
+687
+01:21:43,000 --> 01:21:48,000
+Go with that for now. Has a nice symmetry with our stack.
+
+688
+01:21:48,000 --> 01:21:51,000
+Okay.
+
+689
+01:21:51,000 --> 01:21:55,000
+Okay, cool. That one ran.
+
+690
+01:21:55,000 --> 01:22:01,000
+Okay, so that was our expected behavior first in, first out.
+
+691
+01:22:01,000 --> 01:22:04,000
+And everything
+
+692
+01:22:04,000 --> 01:22:10,000
+Everything came from there. So this is a nice, simple implementation.
+
+693
+01:22:10,000 --> 01:22:19,000
+Right? Like, oh, our our queue is just a list. We're going to append on the end
+
+694
+01:22:19,000 --> 01:22:22,000
+We're going to pop from the beginning
+
+695
+01:22:22,000 --> 01:22:39,000
+And if we were just writing some code and we knew nothing about Python and what a Python list is doing, we would think this is a great idea. And in fact, if you're coding low stakes, something that's not performant
+
+696
+01:22:39,000 --> 01:22:42,000
+This is a fine implementation.
+
+697
+01:22:42,000 --> 01:22:47,000
+It's simple. It's three lines of code. It's super easy. It's lovely
+
+698
+01:22:47,000 --> 01:22:54,000
+But if you are coding in Python for anything that's high performance
+
+699
+01:22:54,000 --> 01:22:58,000
+You do not want to be doing this pop zero thing.
+
+700
+01:22:58,000 --> 01:23:15,000
+That is going to cause you trouble over time. And you do not want to do this in a an interview either. You don't want to do pop zero. You want to show off that you know what runtime is and that you know the details of the
+
+701
+01:23:15,000 --> 01:23:22,000
+Python list and that pop of zero is inefficient and there's a better way to do a queue in Python.
+
+702
+01:23:22,000 --> 01:23:28,000
+So let's do our deaf.
+
+703
+01:23:28,000 --> 01:23:44,000
+Actually, we're going to do our, we're going to follow the instructions that Python gives us, and it says do this
+
+704
+01:23:44,000 --> 01:23:51,000
+I am using this. So I create my new deck
+
+705
+01:23:51,000 --> 01:24:05,000
+It initialized left to right.
+
+706
+01:24:05,000 --> 01:24:13,000
+Similar to a list, but optimized for the fixed length operations
+
+707
+01:24:13,000 --> 01:24:21,000
+I'm just looking to see if there's anything special in here that I want to call out while we're looking at this.
+
+708
+01:24:21,000 --> 01:24:23,000
+Yeah.
+
+709
+01:24:23,000 --> 01:24:28,000
+That's fine. Let's do let's just build
+
+710
+01:24:28,000 --> 01:24:33,000
+Oh, I got a import
+
+711
+01:24:33,000 --> 01:24:41,000
+From, I think it's from collections.
+
+712
+01:24:41,000 --> 01:24:43,000
+If it complains
+
+713
+01:24:43,000 --> 01:25:04,000
+That's okay. Q deck
+
+714
+01:25:04,000 --> 01:25:15,000
+No, now I'm blanking on it. Dec.
+
+715
+01:25:15,000 --> 01:25:19,000
+Death
+
+716
+01:25:19,000 --> 01:25:24,000
+Thank you
+
+717
+01:25:24,000 --> 01:25:28,000
+of our deck
+
+718
+01:25:28,000 --> 01:25:43,000
+And we're going to think about this. So our double-ended queue does let us either append left or append right.
+
+719
+01:25:43,000 --> 01:25:49,000
+So with our queue, we want to come in at the end
+
+720
+01:25:49,000 --> 01:25:53,000
+So we're going to append at the end, append as opposed to append left
+
+721
+01:25:53,000 --> 01:25:57,000
+So append
+
+722
+01:25:57,000 --> 01:26:01,000
+I don't
+
+723
+01:26:01,000 --> 01:26:04,000
+And then our deaf
+
+724
+01:26:04,000 --> 01:26:08,000
+Thank you. Thank you.
+
+725
+01:26:08,000 --> 01:26:11,000
+Deck
+
+726
+01:26:11,000 --> 01:26:15,000
+And we return
+
+727
+01:26:15,000 --> 01:26:17,000
+deck dot
+
+728
+01:26:17,000 --> 01:26:20,000
+top left
+
+729
+01:26:20,000 --> 01:26:23,000
+Right, so we have our append left.
+
+730
+01:26:23,000 --> 01:26:27,000
+And then we have our pop left.
+
+731
+01:26:27,000 --> 01:26:37,000
+And note our pop and our pop left and our insert these arrays are index errors if we go
+
+732
+01:26:37,000 --> 01:26:38,000
+Too far
+
+733
+01:26:38,000 --> 01:26:47,000
+One way or the other
+
+734
+01:26:47,000 --> 01:26:49,000
+Syntax error
+
+735
+01:26:49,000 --> 01:26:55,000
+Okay, think everything look okay. Let's do one more test.
+
+736
+01:26:55,000 --> 01:27:00,000
+Over here, I am going to just copy this
+
+737
+01:27:00,000 --> 01:27:21,000
+I think this one is okay to copy and paste test items
+
+738
+01:27:21,000 --> 01:27:32,000
+And here we're going to say this is our already forgotten create to
+
+739
+01:27:32,000 --> 01:27:38,000
+And we have Q and Q
+
+740
+01:27:38,000 --> 01:27:46,000
+Thank you and Q. Duck and Q.
+
+741
+01:27:46,000 --> 01:28:00,000
+So many u's and E's. I'm losing track.
+
+742
+01:28:00,000 --> 01:28:06,000
+Anyone notices me doing something wrong, let me know. I think
+
+743
+01:28:06,000 --> 01:28:11,000
+That's about what we want.
+
+744
+01:28:11,000 --> 01:28:17,000
+Does that look okay?
+
+745
+01:28:17,000 --> 01:28:20,000
+This is the same and that
+
+746
+01:28:20,000 --> 01:28:23,000
+We're testing it from the deck
+
+747
+01:28:23,000 --> 01:28:27,000
+like creating the deck, the deck and queue
+
+748
+01:28:27,000 --> 01:28:31,000
+Deck in queue, deck NQ, and then DQing.
+
+749
+01:28:31,000 --> 01:28:33,000
+I'm going to run this
+
+750
+01:28:33,000 --> 01:28:35,000
+It failed
+
+751
+01:28:35,000 --> 01:28:45,000
+Oh, because I didn't import everything
+
+752
+01:28:45,000 --> 01:29:01,000
+I import sir. Why do I forgetting that
+
+753
+01:29:01,000 --> 01:29:07,000
+Okay.
+
+754
+01:29:07,000 --> 01:29:16,000
+It passed. That's not super surprising, but because
+
+755
+01:29:16,000 --> 01:29:21,000
+Feel like this was and
+
+756
+01:29:21,000 --> 01:29:23,000
+But now we see
+
+757
+01:29:23,000 --> 01:29:39,000
+Are we on time? Okay, now we see kind of the two different ways that we can implement a queue and using Python primitives. We can use a Python list and it's nice and simple. We don't have to think about it. No imports or anything
+
+758
+01:29:39,000 --> 01:29:45,000
+But we know that this is super inefficient. And
+
+759
+01:29:45,000 --> 01:29:56,000
+So instead, what we're going to use is our double-ended queue that Python provides for us, our double-ended queue allows us to push on the
+
+760
+01:29:56,000 --> 01:30:05,000
+the left-hand side, we can append to the left or pop from the left. We can append to the end and pop from the end.
+
+761
+01:30:05,000 --> 01:30:16,000
+And it's efficient in both of those. So we
+
+762
+01:30:16,000 --> 01:30:22,000
+One of the things that we noticed when we
+
+763
+01:30:22,000 --> 01:30:24,000
+Ran this
+
+764
+01:30:24,000 --> 01:30:26,000
+Benchmark
+
+765
+01:30:26,000 --> 01:30:30,000
+Then I asked Claude to whip up for us during the break
+
+766
+01:30:30,000 --> 01:30:37,000
+Is that
+
+767
+01:30:37,000 --> 01:30:46,000
+Into the memory was that it had thrown in here
+
+768
+01:30:46,000 --> 01:30:48,000
+Is it done?
+
+769
+01:30:48,000 --> 01:30:54,000
+Almost
+
+770
+01:30:54,000 --> 01:30:58,000
+Looks like it's doing one more thing. There we go. Okay.
+
+771
+01:30:58,000 --> 01:31:17,000
+Let's doing a whole lot of doing a whole lot of competition for us. Okay, so this chunk here, we haven't talked about this. We can talk about this now. This is our Q. We looked, and what we looked at with our simple implementation up there was we implemented a queue using a Python list
+
+772
+01:31:17,000 --> 01:31:32,000
+And a queue using a Python double-ended queue. So we have two implementations here. This list one where we were popping zero, we're popping from the front of the list, which we said is super inefficient.
+
+773
+01:31:32,000 --> 01:31:43,000
+And then we use our double-ended queue, where we popped left, which is supposed to be efficient. So this little
+
+774
+01:31:43,000 --> 01:31:47,000
+Benchmarking code that was written for us
+
+775
+01:31:47,000 --> 01:31:56,000
+is showing that the pop is much less efficient than our double-ended cube pop left
+
+776
+01:31:56,000 --> 01:32:03,000
+Wow, 4 seconds. So once we got to a pretty long list
+
+777
+01:32:03,000 --> 01:32:07,000
+The difference is pretty substantial.
+
+778
+01:32:07,000 --> 01:32:13,000
+4 seconds. This is seconds. Yes, this is seconds. I'm double checking. Wow.
+
+779
+01:32:13,000 --> 01:32:19,000
+That's why it was so slow. It put 160,000
+
+780
+01:32:19,000 --> 01:32:24,000
+items into a list, and then it popped off the front every single time
+
+781
+01:32:24,000 --> 01:32:29,000
+And it took four seconds versus our pop left with our deck
+
+782
+01:32:29,000 --> 01:32:33,000
+That took less than a second. So
+
+783
+01:32:33,000 --> 01:32:37,000
+That's pretty impressive. That's a huge difference.
+
+784
+01:32:37,000 --> 01:32:42,000
+Then I was shocked, impressed
+
+785
+01:32:42,000 --> 01:32:48,000
+Is anyone is this clear to anyone why we are
+
+786
+01:32:48,000 --> 01:32:53,000
+Why? Why we're going through these these different implementations and this
+
+787
+01:32:53,000 --> 01:33:04,000
+all of this stuff with our arrays versus our linked list, and then what a Python link, what a Python list is, and how we're going to use it.
+
+788
+01:33:04,000 --> 01:33:12,000
+Because this is the thing that's going to be a huge performance suck on the code that you write.
+
+789
+01:33:12,000 --> 01:33:16,000
+So this is the kind of thing that
+
+790
+01:33:16,000 --> 01:33:17,000
+that
+
+791
+01:33:17,000 --> 01:33:20,000
+Is why data structures are so important.
+
+792
+01:33:20,000 --> 01:33:23,000
+To understand.
+
+793
+01:33:23,000 --> 01:33:30,000
+We've got two other things here.
+
+794
+01:33:30,000 --> 01:33:33,000
+I
+
+795
+01:33:33,000 --> 01:33:36,000
+Don't
+
+796
+01:33:36,000 --> 01:33:52,000
+I don't know fully what these are because, like I said, I said just write some benchmark code.
+
+797
+01:33:52,000 --> 01:34:03,000
+I can fill in some I can fill in and add some notes to the code when I push it, if you guys want that for reference.
+
+798
+01:34:03,000 --> 01:34:17,000
+These are looking like not as efficient implementations. It looks like it's showing how efficient the double-ended queue, the Python double-ended queue is.
+
+799
+01:34:17,000 --> 01:34:30,000
+Anyone have questions, comments?
+
+800
+01:34:30,000 --> 01:34:34,000
+So what we took away from this
+
+801
+01:34:34,000 --> 01:34:37,000
+The first takeaway
+
+802
+01:34:37,000 --> 01:34:44,000
+was with our our two different implementations.
+
+803
+01:34:44,000 --> 01:34:53,000
+Those two different implementations. When we looked at our runtimes, we saw the runtime
+
+804
+01:34:53,000 --> 01:35:02,000
+That we specified for push, pop. And so on for our array that was
+
+805
+01:35:02,000 --> 01:35:13,000
+fixed our array that grew, and then our linked list that we implemented with the dictionary, and then our Python list
+
+806
+01:35:13,000 --> 01:35:20,000
+based stack. All of the all of the runtimes looked the same.
+
+807
+01:35:20,000 --> 01:35:26,000
+And so when we looked at the big O values, it all looked the same. But when we did the
+
+808
+01:35:26,000 --> 01:35:30,000
+When we did the math on this
+
+809
+01:35:30,000 --> 01:35:35,000
+And we calculated the runtime, we saw that they were off a little bit
+
+810
+01:35:35,000 --> 01:35:39,000
+the details, the underlying details
+
+811
+01:35:39,000 --> 01:35:42,000
+Mattered.
+
+812
+01:35:42,000 --> 01:35:44,000
+The memory
+
+813
+01:35:44,000 --> 01:35:51,000
+We saw that our our linked stack is the thing that
+
+814
+01:35:51,000 --> 01:36:03,000
+Use the most memory. Actually, I'm looking at this. I'm going to save seems a little fishy to me. Something seems fishy about that.
+
+815
+01:36:03,000 --> 01:36:11,000
+like I said, I didn't read this code carefully before I shared it with y'all, but I look at that, and
+
+816
+01:36:11,000 --> 01:36:14,000
+I would expect it to be big, but that looks
+
+817
+01:36:14,000 --> 01:36:22,000
+too much bigger to me, so that would be a place that I would dig in and look a little bit more at that that smells a little funky.
+
+818
+01:36:22,000 --> 01:36:26,000
+But I think it's directionally correct.
+
+819
+01:36:26,000 --> 01:36:35,000
+And then we talked about our cue and our cue is our first in, first out data structure versus our stack, which is our last in first out
+
+820
+01:36:35,000 --> 01:36:50,000
+And we looked at how we could implement it very, very easily with a Python list, very simple, elegant implementation. But because that pop of zero is so inefficient
+
+821
+01:36:50,000 --> 01:37:06,000
+That once we've got a sizable list, we probably do not want to be doing that. But we have our double-ended queue that gives us pop left that is super efficient, and we want to use that instead
+
+822
+01:37:06,000 --> 01:37:09,000
+How's everyone doing
+
+823
+01:37:09,000 --> 01:37:18,000
+So far, so good, but would you mind giving a little bit more explanation between the two? Why is this so much, like, the difference between themselves baked
+
+824
+01:37:18,000 --> 01:37:23,000
+Yeah, why the difference between our POP0 and our pop left
+
+825
+01:37:23,000 --> 01:37:25,000
+These ones, these two right here
+
+826
+01:37:25,000 --> 01:37:34,000
+Yeah, like, the biggest of the queue structures, or that's why they're easier and more efficient to pop and stuff like that
+
+827
+01:37:34,000 --> 01:37:36,000
+Yeah
+
+828
+01:37:36,000 --> 01:37:37,000
+Yeah.
+
+829
+01:37:37,000 --> 01:37:38,000
+Just want to go a little bit
+
+830
+01:37:38,000 --> 01:37:41,000
+Okay, I'm going to, I'm going to
+
+831
+01:37:41,000 --> 01:37:44,000
+Let's take
+
+832
+01:37:44,000 --> 01:37:54,000
+Everyone take mental snapshot or do a screenshot or something, and remember, because I'm going to switch over to the pictures so I can
+
+833
+01:37:54,000 --> 01:38:08,000
+So I can draw a picture.
+
+834
+01:38:08,000 --> 01:38:12,000
+Okay, we got our picture. So
+
+835
+01:38:12,000 --> 01:38:17,000
+With a Python list, that's wrong color
+
+836
+01:38:17,000 --> 01:38:25,000
+State of this Python list
+
+837
+01:38:25,000 --> 01:38:28,000
+Okay, with our Python list.
+
+838
+01:38:28,000 --> 01:38:32,000
+And we're running down out of time.
+
+839
+01:38:32,000 --> 01:38:35,000
+But behind the scenes, our Python list
+
+840
+01:38:35,000 --> 01:38:41,000
+is just an array
+
+841
+01:38:41,000 --> 01:38:46,000
+And it's an array. It's an array of references. So
+
+842
+01:38:46,000 --> 01:38:55,000
+It's going to point off. This is 6. This is actually, let's let's do what we did here
+
+843
+01:38:55,000 --> 01:38:59,000
+This is, I think it was Squirtle
+
+844
+01:38:59,000 --> 01:39:01,000
+This was Evie.
+
+845
+01:39:01,000 --> 01:39:06,000
+This was Pikachu
+
+846
+01:39:06,000 --> 01:39:15,000
+One thing Python does with its list is that
+
+847
+01:39:15,000 --> 01:39:21,000
+Is So it's going to keep track of where
+
+848
+01:39:21,000 --> 01:39:34,000
+Where we are. So we did this with our stack. We said, hey, we have, you know, five items and we've got three items
+
+849
+01:39:34,000 --> 01:39:40,000
+Size equals 3. So we know that the last element in our
+
+850
+01:39:40,000 --> 01:39:45,000
+when we were using a stack, we knew that it was at index 3.
+
+851
+01:39:45,000 --> 01:39:50,000
+Or index index 2. Sorry.
+
+852
+01:39:50,000 --> 01:39:52,000
+Size minus one
+
+853
+01:39:52,000 --> 01:39:58,000
+That's very messy. So when we wanted to remove something
+
+854
+01:39:58,000 --> 01:40:13,000
+from the end of it, we could go to this location and we are going to we're going to return that. We're going to decrement this to two, and now we know that this is our last item. We can go to it directly
+
+855
+01:40:13,000 --> 01:40:15,000
+But
+
+856
+01:40:15,000 --> 01:40:24,000
+With our queue, what we were doing was we were popping off the front
+
+857
+01:40:24,000 --> 01:40:26,000
+Of
+
+858
+01:40:26,000 --> 01:40:28,000
+the front of our list here.
+
+859
+01:40:28,000 --> 01:40:31,000
+When we pop off the front of the list
+
+860
+01:40:31,000 --> 01:40:35,000
+We can't just leave this an empty box.
+
+861
+01:40:35,000 --> 01:40:41,000
+We have to come and what we do is we say, okay, this is the return value
+
+862
+01:40:41,000 --> 01:40:46,000
+And then we have to move
+
+863
+01:40:46,000 --> 01:40:55,000
+We have to move Evie here. We have to move Pikachu here. If we have anyone else, we have to move everything down
+
+864
+01:40:55,000 --> 01:40:57,000
+One spot
+
+865
+01:40:57,000 --> 01:41:04,000
+That's what we have to do when we remove from the front of a list, a Python list.
+
+866
+01:41:04,000 --> 01:41:06,000
+So
+
+867
+01:41:06,000 --> 01:41:11,000
+Does that make sense?
+
+868
+01:41:11,000 --> 01:41:16,000
+And
+
+869
+01:41:16,000 --> 01:41:25,000
+Yeah, let me stop there for a second. Does that make sense?
+
+870
+01:41:25,000 --> 01:41:34,000
+So with our list, if we are adding on to the end of the list
+
+871
+01:41:34,000 --> 01:41:37,000
+If we have
+
+872
+01:41:37,000 --> 01:41:41,000
+If we have empty spots left over
+
+873
+01:41:41,000 --> 01:41:45,000
+We can just add, we can fill something, we can fill it in
+
+874
+01:41:45,000 --> 01:41:49,000
+Occasionally, we will need to do our resize
+
+875
+01:41:49,000 --> 01:41:55,000
+Like we saw before, and we copy everything over
+
+876
+01:41:55,000 --> 01:41:58,000
+And now we have more spots.
+
+877
+01:41:58,000 --> 01:42:02,000
+And if we are popping off the end of our list
+
+878
+01:42:02,000 --> 01:42:15,000
+To doing the same thing over and over. But if we're popping off the end of our list, we can take this out, and we now know that this is now the end. We pop off the end of our list, we remove this, this is now the end.
+
+879
+01:42:15,000 --> 01:42:23,000
+Versus if we pop off the beginning, we have to move everything down.
+
+880
+01:42:23,000 --> 01:42:28,000
+And I feel like I am not drawing good pictures right now.
+
+881
+01:42:28,000 --> 01:42:33,000
+What a double-ended queue gives us
+
+882
+01:42:33,000 --> 01:42:38,000
+The implementation and I am not
+
+883
+01:42:38,000 --> 01:42:49,000
+An implementation of a double-ended queue is going to do something like this is the last one, and this is the first one.
+
+884
+01:42:49,000 --> 01:42:59,000
+And so if we pop off the front of a double-ended queue. Let's make sure I put the double-ended queue here
+
+885
+01:42:59,000 --> 01:43:02,000
+If we pop off the front here
+
+886
+01:43:02,000 --> 01:43:08,000
+We're going to remove the we're going to move the item, and we are going to
+
+887
+01:43:08,000 --> 01:43:13,000
+Move our pointer up here.
+
+888
+01:43:13,000 --> 01:43:19,000
+So now we know we're just going to leave this empty
+
+889
+01:43:19,000 --> 01:43:24,000
+And we can fill it in later if we want to.
+
+890
+01:43:24,000 --> 01:43:26,000
+If we pop off the left
+
+891
+01:43:26,000 --> 01:43:30,000
+We take this item out and we now
+
+892
+01:43:30,000 --> 01:43:34,000
+Move that pointer.
+
+893
+01:43:34,000 --> 01:43:40,000
+So our double-ended queue allows us to grow from both ends
+
+894
+01:43:40,000 --> 01:43:45,000
+As well as remove from both ends.
+
+895
+01:43:45,000 --> 01:43:52,000
+And we don't have to do this like pushing things down the whole time.
+
+896
+01:43:52,000 --> 01:44:01,000
+Does that help? But we are at time.
+
+897
+01:44:01,000 --> 01:44:07,000
+But I want to take a moment and ask if that helped answer the question.
+
+898
+01:44:07,000 --> 01:44:09,000
+Yeah, it does.
+
+899
+01:44:09,000 --> 01:44:20,000
+Okay. I will include in the notes that I share, I will include a little bit better of a picture than this.
+
+900
+01:44:20,000 --> 01:44:25,000
+But
+
+901
+01:44:25,000 --> 01:44:31,000
+Any last questions before we finish up today?
+
+902
+01:44:31,000 --> 01:44:34,000
+I have last questions.
+
+903
+01:44:34,000 --> 01:44:37,000
+If we remove
+
+904
+01:44:37,000 --> 01:44:52,000
+item in the list, can we just not remove that, just giving a special symbol means that it was deleted. So we don't need need to move the order item left either make sense
+
+905
+01:44:52,000 --> 01:44:57,000
+Yeah, so you're saying, let's say we have
+
+906
+01:44:57,000 --> 01:45:07,000
+A list, and anyone who wants to hop off, feel free to hop off. I will answer any questions that anyone has. But you're saying, okay, we have
+
+907
+01:45:07,000 --> 01:45:14,000
+I'm gonna just put letters here.
+
+908
+01:45:14,000 --> 01:45:18,000
+And let's say instead of
+
+909
+01:45:18,000 --> 01:45:29,000
+When we're working with the list, we're saying we're basically keeping track of the last item that's available and saying, okay, this is this is where the next item goes.
+
+910
+01:45:29,000 --> 01:45:39,000
+And with a double-ended queue, we're doing that in two ways at both ends.
+
+911
+01:45:39,000 --> 01:45:47,000
+But we're saying, why can't we just if I want to remove something from the list, let's
+
+912
+01:45:47,000 --> 01:45:56,000
+Remove it here. And I'm going to put what we call a sentinel value here. I'm going to put a little blue box or something.
+
+913
+01:45:56,000 --> 01:45:58,000
+to say, this is an empty spot
+
+914
+01:45:58,000 --> 01:46:00,000
+Yeah.
+
+915
+01:46:00,000 --> 01:46:01,000
+Okay.
+
+916
+01:46:01,000 --> 01:46:09,000
+So if we do this, then if we're just trying to put something we want to
+
+917
+01:46:09,000 --> 01:46:13,000
+put something in our list again.
+
+918
+01:46:13,000 --> 01:46:20,000
+What we need to do, we would need some way of finding the empty spot.
+
+919
+01:46:20,000 --> 01:46:36,000
+If I now want to put something on my list, I have to say, is this an empty spot? No. Is this empty? Is this empty? Oh, now I've found an empty spot. Okay, I'm gonna put, you know, my new value there.
+
+920
+01:46:36,000 --> 01:46:38,000
+There might be other ways to do that too. Go ahead, sorry.
+
+921
+01:46:38,000 --> 01:46:48,000
+Yes, if we want to add something, we don't need to search for it, just add to the end, or we compute using the index to compute the
+
+922
+01:46:48,000 --> 01:46:54,000
+Location instead of finding the empty spot, we don't care about the
+
+923
+01:46:54,000 --> 01:47:00,000
+The space, we just need to add it
+
+924
+01:47:00,000 --> 01:47:10,000
+Okay, so now, okay, so maybe this is what you're saying.
+
+925
+01:47:10,000 --> 01:47:12,000
+So you're saying, okay
+
+926
+01:47:12,000 --> 01:47:17,000
+It's… we're not… we don't care if we fill this space up.
+
+927
+01:47:17,000 --> 01:47:21,000
+Once we… once we delete it, we
+
+928
+01:47:21,000 --> 01:47:23,000
+We leave it empty
+
+929
+01:47:23,000 --> 01:47:29,000
+And what that means is that we are not moving
+
+930
+01:47:29,000 --> 01:47:32,000
+These things down.
+
+931
+01:47:32,000 --> 01:47:34,000
+Is that right?
+
+932
+01:47:34,000 --> 01:47:35,000
+Yeah.
+
+933
+01:47:35,000 --> 01:47:37,000
+Okay.
+
+934
+01:47:37,000 --> 01:47:38,000
+Yeah.
+
+935
+01:47:38,000 --> 01:47:39,000
+So India, yeah.
+
+936
+01:47:39,000 --> 01:47:55,000
+So yes, so I think what you're saying is the thing that takes a lot of time is that if we move something, if we remove something early in the list, either, you know, here or here, we then have to move everything down
+
+937
+01:47:55,000 --> 01:47:58,000
+How about we just don't do that?
+
+938
+01:47:58,000 --> 01:48:01,000
+We just leave empty spots in our list.
+
+939
+01:48:01,000 --> 01:48:03,000
+Sure.
+
+940
+01:48:03,000 --> 01:48:18,000
+You can do that. And if you are implementing a data structure for your own use or you know how it's going to be used, sure, you can absolutely do that. And what will happen
+
+941
+01:48:18,000 --> 01:48:23,000
+And it depends again on your use case, and this might be a useful thing for you to do
+
+942
+01:48:23,000 --> 01:48:34,000
+Is that you might end up with empty items, empty spots in your list.
+
+943
+01:48:34,000 --> 01:48:41,000
+Depending on what you're doing with your list, you might need to do something like if we're going to iterate through that list.
+
+944
+01:48:41,000 --> 01:48:59,000
+That's a very common thing we need to do with a collection of items. You know, visit every item or emit every item in the list. We would have to go through our list. Is there an item here? No, there's not. So I don't emit it. Is there an item here? Yes, there is.
+
+945
+01:48:59,000 --> 01:49:12,000
+the item here, C item here. No item here. E item here. F, and then maybe I need to keep on doing that because there might be gaps.
+
+946
+01:49:12,000 --> 01:49:17,000
+If that's something you need to do, that might be an inefficient process.
+
+947
+01:49:17,000 --> 01:49:26,000
+We might also end up with lots of spots. Lots of empty spots and lots of unused memory.
+
+948
+01:49:26,000 --> 01:49:31,000
+But maybe we're okay with that. That might be okay.
+
+949
+01:49:31,000 --> 01:49:41,000
+So I'm not going to say that it's impossible or always a terrible idea because this is engineering. And it's all trade-offs.
+
+950
+01:49:41,000 --> 01:49:44,000
+What's important to know
+
+951
+01:49:44,000 --> 01:49:58,000
+And kind of what we're looking at is with the Python list in particular, is it defines and it's clear with us that its behavior is if you remove something from the beginning of the list
+
+952
+01:49:58,000 --> 01:50:01,000
+We're moving everything down
+
+953
+01:50:01,000 --> 01:50:09,000
+So does that help? It's not that doing something like this is necessarily wrong or impossible.
+
+954
+01:50:09,000 --> 01:50:23,000
+It's that it brings up a different set of challenges. And sometimes that might be okay. And so if you have control over the implementation and you know how it's being used, that might be reasonable.
+
+955
+01:50:23,000 --> 01:50:32,000
+So, in this case, the DQ is operation is the same as
+
+956
+01:50:32,000 --> 01:50:37,000
+Just for this case, special case, the pop case
+
+957
+01:50:37,000 --> 01:50:43,000
+So in the special case of this double-ended queue
+
+958
+01:50:43,000 --> 01:50:56,000
+Yeah, probably need to ask, with this left if we don't move in from the same behavior as Python.
+
+959
+01:50:56,000 --> 01:50:58,000
+So it could be
+
+960
+01:50:58,000 --> 01:51:05,000
+O1 complexities of popping on the left element of
+
+961
+01:51:05,000 --> 01:51:06,000
+this.
+
+962
+01:51:06,000 --> 01:51:14,000
+Yes, I think I understand what you're saying, but yes, the so our double-ended queue. The pop
+
+963
+01:51:14,000 --> 01:51:24,000
+Operation is the same as the pop-up operation at the end of
+
+964
+01:51:24,000 --> 01:51:26,000
+Python list
+
+965
+01:51:26,000 --> 01:51:33,000
+So the pop at the end is still the same. And
+
+966
+01:51:33,000 --> 01:51:37,000
+But the pop left
+
+967
+01:51:37,000 --> 01:51:43,000
+For a double-ended queue. Is also O of 1.
+
+968
+01:51:43,000 --> 01:51:45,000
+Just like the pop.
+
+969
+01:51:45,000 --> 01:51:47,000
+But
+
+970
+01:51:47,000 --> 01:51:49,000
+Not like
+
+971
+01:51:49,000 --> 01:51:51,000
+Pop of zero
+
+972
+01:51:51,000 --> 01:51:54,000
+For a list.
+
+973
+01:51:54,000 --> 01:52:00,000
+For those the right words that came out of my mouth.
+
+974
+01:52:00,000 --> 01:52:01,000
+Yeah, thank you.
+
+975
+01:52:01,000 --> 01:52:02,000
+Okay.
+
+976
+01:52:02,000 --> 01:52:10,000
+Anyone else have any last questions?
+
+977
+01:52:10,000 --> 01:52:11,000
+Okay.
+
+978
+01:52:11,000 --> 01:52:29,000
+Thanks, everyone. I appreciate the the questions and the comments. I will share this code if anyone wants to play with it, and I will put my notes with all of the links on it so that you have it as a reference as well.
+
+979
+01:52:29,000 --> 01:52:33,000
+Thanks, everyone. Have a great night. See you Monday.
+
+980
+01:52:33,000 --> 01:52:36,559
+Thank you.
+

@@ -1,0 +1,402 @@
+{
+ "fetched_at": "2026-10-18T17:06:47.077699-07:00",
+ "stats": {
+  "GPU": {
+   "raw": 8,
+   "kept": 2
+  },
+  "DSA": {
+   "raw": 126,
+   "kept": 41
+  }
+ },
+ "items": [
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-09-30T16:30:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=09&year=2026#calendar_event_5120531"
+  },
+  {
+   "course": "DSA",
+   "summary": "Adrienne's OH  [EE P 590 A]",
+   "start": "2026-10-03T09:30:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5131632"
+  },
+  {
+   "course": "DSA",
+   "summary": "A1: My First Python Assignment [EE P 590 A]",
+   "start": "2026-10-04T00:00:00-07:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#assignment_11793714"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-10-05T16:30:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5120532"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-10-07T16:30:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5120533"
+  },
+  {
+   "course": "GPU",
+   "summary": "Task 0 - self introductions [EE P 524 A]",
+   "start": "2026-10-09T00:00:00-07:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917398&month=10&year=2026#assignment_11810624"
+  },
+  {
+   "course": "DSA",
+   "summary": "Adrienne's OH  [EE P 590 A]",
+   "start": "2026-10-10T09:30:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5131633"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-10-12T16:30:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5120534"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-10-14T16:30:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5120535"
+  },
+  {
+   "course": "DSA",
+   "summary": "Adrienne's OH  [EE P 590 A]",
+   "start": "2026-10-17T09:30:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5131634"
+  },
+  {
+   "course": "DSA",
+   "summary": "A2: Lists, lists and more lists [EE P 590 A]",
+   "start": "2026-10-18T00:00:00-07:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#assignment_11814777"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-10-19T16:30:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5120536"
+  },
+  {
+   "course": "GPU",
+   "summary": "Homework #1 - SAXPY, 2D & 3D Matrix addition [EE P 524 A]",
+   "start": "2026-10-20T17:59:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917398&month=10&year=2026#assignment_11810625"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-10-21T16:30:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5120537"
+  },
+  {
+   "course": "DSA",
+   "summary": "A3: Stacks, Queues and Testing  [EE P 590 A]",
+   "start": "2026-10-23T00:00:00-07:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#assignment_11814801"
+  },
+  {
+   "course": "DSA",
+   "summary": "Adrienne's OH  [EE P 590 A]",
+   "start": "2026-10-24T09:30:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5131635"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-10-26T16:30:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5120538"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-10-28T16:30:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5120539"
+  },
+  {
+   "course": "DSA",
+   "summary": "A4: Bug Hunt [EE P 590 A]",
+   "start": "2026-10-30T00:00:00-07:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#assignment_11814804"
+  },
+  {
+   "course": "DSA",
+   "summary": "Adrienne's OH  [EE P 590 A]",
+   "start": "2026-10-31T09:30:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5131636"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-11-02T16:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5120540"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-11-04T16:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5120541"
+  },
+  {
+   "course": "DSA",
+   "summary": "A5: BSTs and AVLs [EE P 590 A]",
+   "start": "2026-11-06T00:00:00-08:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#assignment_11814818"
+  },
+  {
+   "course": "DSA",
+   "summary": "Adrienne's OH  [EE P 590 A]",
+   "start": "2026-11-07T09:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5131637"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-11-09T16:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5120542"
+  },
+  {
+   "course": "DSA",
+   "summary": "Midterm [EE P 590 A]",
+   "start": "2026-11-09T18:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#assignment_11793712"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-11-11T16:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5120543"
+  },
+  {
+   "course": "DSA",
+   "summary": "Adrienne's OH  [EE P 590 A]",
+   "start": "2026-11-14T09:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5131638"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-11-16T16:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5120544"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-11-18T16:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5120545"
+  },
+  {
+   "course": "DSA",
+   "summary": "Adrienne's OH  [EE P 590 A]",
+   "start": "2026-11-21T09:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5131639"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-11-23T16:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5120547"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-11-25T16:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5120548"
+  },
+  {
+   "course": "DSA",
+   "summary": "Adrienne's OH  [EE P 590 A]",
+   "start": "2026-11-28T09:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5131640"
+  },
+  {
+   "course": "DSA",
+   "summary": "A6: Heaps [EE P 590 A]",
+   "start": "2026-11-30T00:00:00-08:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#assignment_11814820"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-11-30T16:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5120549"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-12-02T16:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=12&year=2026#calendar_event_5120550"
+  },
+  {
+   "course": "DSA",
+   "summary": "Adrienne's OH  [EE P 590 A]",
+   "start": "2026-12-05T09:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=12&year=2026#calendar_event_5131641"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-12-07T16:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=12&year=2026#calendar_event_5120551"
+  },
+  {
+   "course": "DSA",
+   "summary": "EEP 590A: Class Meeting [EE P 590 A]",
+   "start": "2026-12-09T16:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=12&year=2026#calendar_event_5120552"
+  },
+  {
+   "course": "DSA",
+   "summary": "Final Exam [EE P 590 A]",
+   "start": "2026-12-09T18:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=12&year=2026#assignment_11793720"
+  },
+  {
+   "course": "DSA",
+   "summary": "A7: Surprise [EE P 590 A]",
+   "start": "2026-12-11T00:00:00-08:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=12&year=2026#assignment_11814824"
+  },
+  {
+   "course": "DSA",
+   "summary": "Adrienne's OH  [EE P 590 A]",
+   "start": "2026-12-12T09:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "event",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=12&year=2026#calendar_event_5131642"
+  }
+ ]
+}

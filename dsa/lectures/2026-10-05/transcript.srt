@@ -1,0 +1,2089 @@
+1
+00:01:05,000 --> 00:01:12,000
+[該逐字稿自動產生。為清晰起見，可能已進行編輯。]
+Okay, there's the bell.
+
+2
+00:01:12,000 --> 00:01:18,000
+Okay, so does it recording? I think I was maybe not recording at the start, but I don't
+
+3
+00:01:18,000 --> 00:01:20,000
+No way
+
+4
+00:01:20,000 --> 00:01:25,000
+I may have missed that up. I apologize to anyone who
+
+5
+00:01:25,000 --> 00:01:26,000
+This is that
+
+6
+00:01:26,000 --> 00:01:29,000
+But I am recording now.
+
+7
+00:01:29,000 --> 00:01:35,000
+Let's see, audio, video is on. I'm sharing my screen. You guys can see my screen.
+
+8
+00:01:35,000 --> 00:01:38,000
+All right, we're gonna get back into it.
+
+9
+00:01:38,000 --> 00:01:44,000
+Did anyone question… did any questions come up in anyone's mind during the break?
+
+10
+00:01:44,000 --> 00:01:51,000
+We can go back to.
+
+11
+00:01:51,000 --> 00:01:53,000
+So
+
+12
+00:01:53,000 --> 00:01:55,000
+Let's
+
+13
+00:01:55,000 --> 00:01:57,000
+Let's see
+
+14
+00:01:57,000 --> 00:02:09,000
+Let's get back to our linked list. And one of the things that we did with our array was we went to some random element. We went to the third element
+
+15
+00:02:09,000 --> 00:02:11,000
+And
+
+16
+00:02:11,000 --> 00:02:15,000
+When we went to the third element of our array
+
+17
+00:02:15,000 --> 00:02:26,000
+We could go directly there. We said the cost is O . We know the address, so we go directly to that location. It's a very cheap thing to do to go and look and see.
+
+18
+00:02:26,000 --> 00:02:29,000
+and get the third element of our array.
+
+19
+00:02:29,000 --> 00:02:37,000
+We're looking at a linked list. How do we get the third element of our linked list?
+
+20
+00:02:37,000 --> 00:02:43,000
+All we have is the head and the size that we're keeping track of
+
+21
+00:02:43,000 --> 00:02:48,000
+So if I want to go to the third element, I start in the beginning. I say, is this
+
+22
+00:02:48,000 --> 00:02:54,000
+The third element, no, this is one or let's see, yeah, we'll call it first
+
+23
+00:02:54,000 --> 00:02:58,000
+We'll count that and then traverse
+
+24
+00:02:58,000 --> 00:03:00,000
+Okay, I found another one. That's the second.
+
+25
+00:03:00,000 --> 00:03:04,000
+Traverse. Okay, I found one. That's three
+
+26
+00:03:04,000 --> 00:03:15,000
+On the third one. So what's the runtime to go to the and the case. We'll call it the case element of a linked list.
+
+27
+00:03:15,000 --> 00:03:18,000
+Some random element
+
+28
+00:03:18,000 --> 00:03:23,000
+It's linear, which is also
+
+29
+00:03:23,000 --> 00:03:24,000
+Hold on
+
+30
+00:03:24,000 --> 00:03:36,000
+O of N, O , and that means that our worst case scenario, we have to visit every single element of the list
+
+31
+00:03:36,000 --> 00:03:41,000
+to count and either find the element that we're looking for
+
+32
+00:03:41,000 --> 00:03:49,000
+Based on the index or pop out and say we couldn't find it. If we're being smart.
+
+33
+00:03:49,000 --> 00:04:00,000
+We're gonna check the size before we go in there. And if someone says, give me the 50th element, but we see we only have 4 elements, we'll just reply back and
+
+34
+00:04:00,000 --> 00:04:05,000
+Bail at that point. I'm not going to try to go through it.
+
+35
+00:04:05,000 --> 00:04:16,000
+So that was one thing we tried to do with our array was look up a particular index.
+
+36
+00:04:16,000 --> 00:04:21,000
+So our lookup
+
+37
+00:04:21,000 --> 00:04:24,000
+Was O of N.
+
+38
+00:04:24,000 --> 00:04:30,000
+Because we can't go directly to a location. We have to traverse the whole thing.
+
+39
+00:04:30,000 --> 00:04:38,000
+What is something else that we liked to do with our
+
+40
+00:04:38,000 --> 00:04:42,000
+All right. We tried to do with our array.
+
+41
+00:04:42,000 --> 00:04:43,000
+Insert
+
+42
+00:04:43,000 --> 00:04:49,000
+We already did one. Love it. Let's do insert.
+
+43
+00:04:49,000 --> 00:04:52,000
+Okay, so our insert
+
+44
+00:04:52,000 --> 00:04:55,000
+With our array
+
+45
+00:04:55,000 --> 00:04:57,000
+We
+
+46
+00:04:57,000 --> 00:05:00,000
+Try to insert at the beginning of
+
+47
+00:05:00,000 --> 00:05:07,000
+the array, and we saw that we had to
+
+48
+00:05:07,000 --> 00:05:12,000
+We had to take our stuff. We had to move everything down
+
+49
+00:05:12,000 --> 00:05:26,000
+So it was pretty expensive to insert something towards the beginning of our array. But if we want to insert something at the beginning of our linked list
+
+50
+00:05:26,000 --> 00:05:28,000
+Let's come over here.
+
+51
+00:05:28,000 --> 00:05:34,000
+Our insert. First thing we're going to do
+
+52
+00:05:34,000 --> 00:05:41,000
+We want to insert. We're inserting Z at the beginning of our list. So I'm going to create a node
+
+53
+00:05:41,000 --> 00:05:45,000
+And I'm going to put Z in there
+
+54
+00:05:45,000 --> 00:05:52,000
+And then I'm going to say I want to put this at the start of our list
+
+55
+00:05:52,000 --> 00:06:00,000
+And the trick is all in our ordering here. And I say, okay, this is going to be the head of my list.
+
+56
+00:06:00,000 --> 00:06:06,000
+If it's the head of my list, it needs to be pointing at something
+
+57
+00:06:06,000 --> 00:06:14,000
+What's it going to be pointing at by the time it becomes ahead of my list? It's going to be pointing at whatever the first thing in the list is right now.
+
+58
+00:06:14,000 --> 00:06:17,000
+So I'm going to
+
+59
+00:06:17,000 --> 00:06:19,000
+Do that
+
+60
+00:06:19,000 --> 00:06:20,000
+And then
+
+61
+00:06:20,000 --> 00:06:23,000
+Oopsie, don't want to win.
+
+62
+00:06:23,000 --> 00:06:30,000
+We hope that that does not happen. Okay, so now you have a new element. But this head
+
+63
+00:06:30,000 --> 00:06:34,000
+Is the thing that's keeping track of the first element of our list.
+
+64
+00:06:34,000 --> 00:06:39,000
+But we now have a new head, so we now
+
+65
+00:06:39,000 --> 00:06:41,000
+Pointless
+
+66
+00:06:41,000 --> 00:06:43,000
+So the new thing
+
+67
+00:06:43,000 --> 00:06:48,000
+So that now we can find that new element we just added in. Oh, that's weird.
+
+68
+00:06:48,000 --> 00:06:50,000
+Let's do this again
+
+69
+00:06:50,000 --> 00:06:52,000
+And
+
+70
+00:06:52,000 --> 00:07:00,000
+We are keeping track of our size here, so we are going to increment this and we now have 5 elements in our list.
+
+71
+00:07:00,000 --> 00:07:10,000
+So what's our runtime to insert an element into our list here?
+
+72
+00:07:10,000 --> 00:07:14,000
+That's O of one
+
+73
+00:07:14,000 --> 00:07:16,000
+It's O of 1.
+
+74
+00:07:16,000 --> 00:07:20,000
+And we'll call that constant time.
+
+75
+00:07:20,000 --> 00:07:27,000
+Because it doesn't matter how many elements we have in the list
+
+76
+00:07:27,000 --> 00:07:41,000
+It always takes the same amount of time, the same number of instructions, the same number of lines of code in order to add a new item at the beginning of the list. So we call that constant time. That's our O of 1.
+
+77
+00:07:41,000 --> 00:07:49,000
+So this is one of the benefits we get, right? With of our array versus our linked list. To insert something
+
+78
+00:07:49,000 --> 00:07:56,000
+It's going to be less time than our array where we have to move everything.
+
+79
+00:07:56,000 --> 00:08:00,000
+If I want to insert something in the middle.
+
+80
+00:08:00,000 --> 00:08:06,000
+Let's say I want to insert
+
+81
+00:08:06,000 --> 00:08:09,000
+At
+
+82
+00:08:09,000 --> 00:08:15,000
+Three, I'll just say insert at three
+
+83
+00:08:15,000 --> 00:08:21,000
+Now
+
+84
+00:08:21,000 --> 00:08:27,000
+Let's see, do I like insert at 3? Does that mean?
+
+85
+00:08:27,000 --> 00:08:30,000
+Insert at three
+
+86
+00:08:30,000 --> 00:08:34,000
+I'm gonna… I'm gonna change what my insert is here for
+
+87
+00:08:34,000 --> 00:08:43,000
+I'm going to say instead of insert at 3, I'm going to say insert before
+
+88
+00:08:43,000 --> 00:08:49,000
+C.
+
+89
+00:08:49,000 --> 00:08:54,000
+And so what I'm doing here
+
+90
+00:08:54,000 --> 00:09:04,000
+I'm kind of specifying. I could use an index or something, but I'm going to say I just… I want to put something right before
+
+91
+00:09:04,000 --> 00:09:10,000
+The node that holds this piece of data.
+
+92
+00:09:10,000 --> 00:09:12,000
+What's my process
+
+93
+00:09:12,000 --> 00:09:15,000
+I start up my head
+
+94
+00:09:15,000 --> 00:09:22,000
+And I go to the first element and I say, does this hold the data I'm looking for?
+
+95
+00:09:22,000 --> 00:09:24,000
+No
+
+96
+00:09:24,000 --> 00:09:30,000
+So I follow it. Does this hold the data I'm looking for? No. So I follow it.
+
+97
+00:09:30,000 --> 00:09:36,000
+Does this hold the data I'm looking for? Nope. So I follow it. And now I'm here.
+
+98
+00:09:36,000 --> 00:09:41,000
+And I see this does have the data I'm looking for
+
+99
+00:09:41,000 --> 00:09:48,000
+So now, what do I do next?
+
+100
+00:09:48,000 --> 00:09:56,000
+So now I'm going to wave my hands a little bit. We're not going to be cold about it, but if we're just looking at the picture
+
+101
+00:09:56,000 --> 00:10:00,000
+What would happen is I'm going to draw a new node
+
+102
+00:10:00,000 --> 00:10:04,000
+And
+
+103
+00:10:04,000 --> 00:10:11,000
+What data do I want to put in there? No one. Give me a letter. What's your favorite letter?
+
+104
+00:10:11,000 --> 00:10:16,000
+Teeth, I like it. Okay. Well, that is not orange.
+
+105
+00:10:16,000 --> 00:10:27,000
+Some orange tea in there. Okay. We are putting our tea in here. So we've made our new node. This is the the new data we want to put in before the C node
+
+106
+00:10:27,000 --> 00:10:30,000
+What do I point
+
+107
+00:10:30,000 --> 00:10:34,000
+This pointer to
+
+108
+00:10:34,000 --> 00:10:35,000
+Let's see
+
+109
+00:10:35,000 --> 00:10:37,000
+I'm going to point here
+
+110
+00:10:37,000 --> 00:10:42,000
+And then what else has to change here?
+
+111
+00:10:42,000 --> 00:10:45,000
+The B pointer points to T.
+
+112
+00:10:45,000 --> 00:10:53,000
+I'm going to change and I'm going to put this in blue to share that we're getting this
+
+113
+00:10:53,000 --> 00:10:56,000
+So now we're going to
+
+114
+00:10:56,000 --> 00:11:06,000
+Take the node that was here before. Point it at the new element that we've inserted in the middle. And make sure that this
+
+115
+00:11:06,000 --> 00:11:10,000
+Let me see I'm not liking
+
+116
+00:11:10,000 --> 00:11:19,000
+Not really there
+
+117
+00:11:19,000 --> 00:11:26,000
+So now we've inserted an element into the middle of our list.
+
+118
+00:11:26,000 --> 00:11:29,000
+When we wanted to insert
+
+119
+00:11:29,000 --> 00:11:34,000
+something into our array at a random place in our array
+
+120
+00:11:34,000 --> 00:11:38,000
+was our runtime?
+
+121
+00:11:38,000 --> 00:11:40,000
+Hello, Ben
+
+122
+00:11:40,000 --> 00:11:56,000
+Yes, it was… and where did we do that? It's right here. It was O of N because we had to, we could go directly to that spot, but we had to shift everything down
+
+123
+00:11:56,000 --> 00:11:59,000
+To give us a place to put it.
+
+124
+00:11:59,000 --> 00:12:11,000
+So that was O of N, because worst case scenario, we're inserting at the very beginning here, and we have an almost full array, so we have to touch every single thing.
+
+125
+00:12:11,000 --> 00:12:18,000
+And now we're looking at our linked list where we inserted in the middle
+
+126
+00:12:18,000 --> 00:12:24,000
+Middle. And here we had to again
+
+127
+00:12:24,000 --> 00:12:35,000
+It's a little bit different. It's still O of N, but we had to traverse and go through our list until we found the thing we wanted to put before it. And then we could kind of
+
+128
+00:12:35,000 --> 00:12:39,000
+create a new thing and just move the pointers around
+
+129
+00:12:39,000 --> 00:12:45,000
+So still O n because worst case, we have to go all the way through the list.
+
+130
+00:12:45,000 --> 00:12:50,000
+But we're doing it a little bit differently.
+
+131
+00:12:50,000 --> 00:12:53,000
+Questions, comments
+
+132
+00:12:53,000 --> 00:12:56,000
+Did I say anything wrong, anyone?
+
+133
+00:12:56,000 --> 00:12:58,000
+Okay.
+
+134
+00:12:58,000 --> 00:13:07,000
+Right on. Okay, so we looked at putting something in the beginning. We looked at putting something in the end, or in the middle
+
+135
+00:13:07,000 --> 00:13:13,000
+What if we want to remove something? Let's
+
+136
+00:13:13,000 --> 00:13:16,000
+I'm gonna copy this
+
+137
+00:13:16,000 --> 00:13:23,000
+And we will walk through
+
+138
+00:13:23,000 --> 00:13:29,000
+We're moving something.
+
+139
+00:13:29,000 --> 00:13:33,000
+From our list here. So now if we want to
+
+140
+00:13:33,000 --> 00:13:38,000
+Let's remove the T, because it's clearly in the wrong place
+
+141
+00:13:38,000 --> 00:13:49,000
+What do we do? So if we want to remove T
+
+142
+00:13:49,000 --> 00:13:51,000
+And here
+
+143
+00:13:51,000 --> 00:14:04,000
+Again, I could specify an index where we count the number of items we're going through until we find the nth element, or I can specify the data and say, keep going through the list until you find this piece of data.
+
+144
+00:14:04,000 --> 00:14:09,000
+Either way, it's your choice. You're designing the you're implementing this. It's your choice.
+
+145
+00:14:09,000 --> 00:14:12,000
+We have options.
+
+146
+00:14:12,000 --> 00:14:20,000
+I'm going to start at the head though, always. I'm going to do my iteration. This is not T.
+
+147
+00:14:20,000 --> 00:14:30,000
+So I go on. This is not T. So I go on. This is not T. So I go on. This is my T. I want to get rid of this
+
+148
+00:14:30,000 --> 00:14:38,000
+How do I get rid of this? What do I have to do here?
+
+149
+00:14:38,000 --> 00:14:43,000
+Okay, we're going to bring this guy back.
+
+150
+00:14:43,000 --> 00:14:50,000
+I'm going to raise it and I'm going to make it green to show that this is what we're doing here. So we have to do this.
+
+151
+00:14:50,000 --> 00:14:57,000
+And now, oh, and we have to… When we do that, we get rid of that
+
+152
+00:14:57,000 --> 00:14:58,000
+So now
+
+153
+00:14:58,000 --> 00:15:00,000
+My list
+
+154
+00:15:00,000 --> 00:15:04,000
+If I'm iterating through my list, I'm going to start at the head
+
+155
+00:15:04,000 --> 00:15:13,000
+I got Z, follow the arrow A, follow the arrow B, follow the arrow C, follow the arrow D.
+
+156
+00:15:13,000 --> 00:15:17,000
+What happens to this guy?
+
+157
+00:15:17,000 --> 00:15:20,000
+Garbage collected, yeah.
+
+158
+00:15:20,000 --> 00:15:36,000
+Yeah, what do we do with this guy kind of depends on what language we're in, and if we have to think about it directly or not. Python is a very forgiving language, so it's going to realize that nothing is paying attention to it, and so it will just go away.
+
+159
+00:15:36,000 --> 00:15:42,000
+If we are in a less forgiving language, we're going to have to clean this guy up.
+
+160
+00:15:42,000 --> 00:15:47,000
+But Python is very nice for us.
+
+161
+00:15:47,000 --> 00:15:49,000
+So remove
+
+162
+00:15:49,000 --> 00:15:55,000
+We walk until we find the element we're going to. And
+
+163
+00:15:55,000 --> 00:16:01,000
+How did we know? So we created an arrow from B to C
+
+164
+00:16:01,000 --> 00:16:06,000
+How did we know
+
+165
+00:16:06,000 --> 00:16:14,000
+We knew that we had to change this pointer because we're keeping B
+
+166
+00:16:14,000 --> 00:16:23,000
+And so this is going to have to point to the next one. But how do we know where B is going to be pointing to? What do we see on here that
+
+167
+00:16:23,000 --> 00:16:28,000
+Yeah, so we looked and we said, where is T pointing?
+
+168
+00:16:28,000 --> 00:16:33,000
+And we're going to make B point to wherever T was pointing.
+
+169
+00:16:33,000 --> 00:16:42,000
+Just gonna pull that out a little bit, because that that becomes important for us to think about when we're writing the code on this
+
+170
+00:16:42,000 --> 00:16:50,000
+Let's see.
+
+171
+00:16:50,000 --> 00:16:59,000
+And let's see, what was our runtime on removing an element from our
+
+172
+00:16:59,000 --> 00:17:00,000
+Our list
+
+173
+00:17:00,000 --> 00:17:05,000
+That's again going to be a oven
+
+174
+00:17:05,000 --> 00:17:20,000
+Because worst case scenario, we have to go through the entire list to find our item.
+
+175
+00:17:20,000 --> 00:17:34,000
+Okay. Common mistakes. I'm going to just call out a couple of common mistakes real quick.
+
+176
+00:17:34,000 --> 00:17:38,000
+Our common mistakes are
+
+177
+00:17:38,000 --> 00:17:53,000
+The second hour always goes faster than the first hour, so I found myself having to keep track of it a little bit more. Our common mistakes. What are most common mistakes? And I have been guilty of this as we've just been going through looking at our sample operations
+
+178
+00:17:53,000 --> 00:18:03,000
+What did I fail to do? What did I screw up when we removed here and when we inserted over here
+
+179
+00:18:03,000 --> 00:18:10,000
+Why screw up?
+
+180
+00:18:10,000 --> 00:18:20,000
+We didn't keep track of the size.
+
+181
+00:18:20,000 --> 00:18:33,000
+I started forgetting to keep track of the size. We added that in there so that we would know how many elements we have without having to iterate through the entire list.
+
+182
+00:18:33,000 --> 00:18:44,000
+And then I failed to keep it up to date. That's one of our trade-offs with these kinds of things. It's like metadata that's helping us keep track of the state of our of our structures.
+
+183
+00:18:44,000 --> 00:18:47,000
+If we are storing that state
+
+184
+00:18:47,000 --> 00:18:49,000
+We have to make sure to update it
+
+185
+00:18:49,000 --> 00:18:51,000
+We have to make sure to use it
+
+186
+00:18:51,000 --> 00:18:58,000
+But so there's this kind of overhead, right? This overhead more stuff to think about.
+
+187
+00:18:58,000 --> 00:19:01,000
+But it gives us the benefit in that
+
+188
+00:19:01,000 --> 00:19:13,000
+We have a single lookup, a single check to do to see how many elements we have in our list, as opposed to having to go through the entire list. So again, trade-offs. These are trade-offs.
+
+189
+00:19:13,000 --> 00:19:19,000
+Because what we're looking for when we're talking about our data structures. Okay.
+
+190
+00:19:19,000 --> 00:19:23,000
+Another kind of common
+
+191
+00:19:23,000 --> 00:19:27,000
+That's another common mistake.
+
+192
+00:19:27,000 --> 00:19:29,000
+Mike, Meg
+
+193
+00:19:29,000 --> 00:19:32,000
+The biggest thing with
+
+194
+00:19:32,000 --> 00:19:36,000
+The biggest thing is keeping track of our
+
+195
+00:19:36,000 --> 00:19:38,000
+Our pointers.
+
+196
+00:19:38,000 --> 00:19:41,000
+And
+
+197
+00:19:41,000 --> 00:19:46,000
+accidentally rewriting one before reading it.
+
+198
+00:19:46,000 --> 00:19:49,000
+So we'll give you an example. Remember
+
+199
+00:19:49,000 --> 00:19:54,000
+When we inserted at the beginning here
+
+200
+00:19:54,000 --> 00:20:00,000
+And I was very careful that we're going to create the new element
+
+201
+00:20:00,000 --> 00:20:04,000
+We had put this in here just as a
+
+202
+00:20:04,000 --> 00:20:07,000
+We had a head pointing here.
+
+203
+00:20:07,000 --> 00:20:12,000
+And that's very particular, we create the new element, put their data in there
+
+204
+00:20:12,000 --> 00:20:19,000
+And then we tell this to point to whatever head was pointing at.
+
+205
+00:20:19,000 --> 00:20:22,000
+And then change head
+
+206
+00:20:22,000 --> 00:20:25,000
+To point to the new element.
+
+207
+00:20:25,000 --> 00:20:27,000
+Most common mistake
+
+208
+00:20:27,000 --> 00:20:33,000
+Is that I change head and tell it to point here.
+
+209
+00:20:33,000 --> 00:20:42,000
+And then I go to update this, and I say, okay, I'm going to put this wherever head is looking. I look at head, oh, it's now pointing at myself.
+
+210
+00:20:42,000 --> 00:20:46,000
+So I end up with
+
+211
+00:20:46,000 --> 00:20:50,000
+I end up with something like this
+
+212
+00:20:50,000 --> 00:20:52,000
+Does that make sense?
+
+213
+00:20:52,000 --> 00:20:54,000
+Okay.
+
+214
+00:20:54,000 --> 00:21:02,000
+I'm not gonna go into it too much because y'all are going to do this in your assignment. I guarantee, if you implement a linked list, you're going to do this at least once.
+
+215
+00:21:02,000 --> 00:21:12,000
+If you haven't done it before and you know for yourself to not do it anyway
+
+216
+00:21:12,000 --> 00:21:17,000
+Oh, thank you.
+
+217
+00:21:17,000 --> 00:21:28,000
+I'll do my best to fix that, especially for Wednesday, because we are remote on Wednesday, and I do not want to be clicking admit the whole time. So I will try to make sure that that's fixed.
+
+218
+00:21:28,000 --> 00:21:30,000
+Let's see
+
+219
+00:21:30,000 --> 00:21:41,000
+The other thing that, as we're going through and using linked lists, the other thing that's kind of common is to stop a node early or a node late
+
+220
+00:21:41,000 --> 00:21:49,000
+As we're iterating through, depending what we're doing. So just heads up to be aware of that.
+
+221
+00:21:49,000 --> 00:21:53,000
+Okay, we're gonna do some
+
+222
+00:21:53,000 --> 00:22:01,000
+Oh, I put the comment error in the wrong place. Couple questions. Okay, so one
+
+223
+00:22:01,000 --> 00:22:03,000
+We'll do array
+
+224
+00:22:03,000 --> 00:22:07,000
+Versus linked
+
+225
+00:22:07,000 --> 00:22:12,000
+List.
+
+226
+00:22:12,000 --> 00:22:21,000
+Question number one. I want y'all to tell me I'll do a show of hands. We'll do that
+
+227
+00:22:21,000 --> 00:22:28,000
+And I want to know which
+
+228
+00:22:28,000 --> 00:22:32,000
+Less work
+
+229
+00:22:32,000 --> 00:22:39,000
+I want to get the value
+
+230
+00:22:39,000 --> 00:22:44,000
+At index 500.
+
+231
+00:22:44,000 --> 00:22:56,000
+Okay. Think in your head. Let's see. It's the easiest way to who says
+
+232
+00:22:56,000 --> 00:22:58,000
+Let's see
+
+233
+00:22:58,000 --> 00:23:03,000
+This isn't fun in the classroom. I need a pole.
+
+234
+00:23:03,000 --> 00:23:10,000
+We will try left hand for array and right hand for linked list
+
+235
+00:23:10,000 --> 00:23:16,000
+Okay, look. Which one's less work, left stand or right hand?
+
+236
+00:23:16,000 --> 00:23:20,000
+Okay. I'm seeing a bunch of left hands. Excellent. Excellent.
+
+237
+00:23:20,000 --> 00:23:30,000
+That's array. Why is the array less work to get the value at index 500?
+
+238
+00:23:30,000 --> 00:23:41,000
+Because it's an index, we know that that index value, we go directly to that location in memory. Why is a linked list not
+
+239
+00:23:41,000 --> 00:23:44,000
+Good for that.
+
+240
+00:23:44,000 --> 00:23:52,000
+You gotta iterate through. Gotta visit every single node. And 500 is a lot of nodes to visit through. I'm not going to draw it on the board.
+
+241
+00:23:52,000 --> 00:23:59,000
+Inserting at the front
+
+242
+00:23:59,000 --> 00:24:05,000
+Which one is less work? Left hand array, right hand linked list.
+
+243
+00:24:05,000 --> 00:24:08,000
+Okay, that was easy. Linked lists.
+
+244
+00:24:08,000 --> 00:24:13,000
+Great. And remove at the front.
+
+245
+00:24:13,000 --> 00:24:19,000
+This is tricky 'cause we didn't talk about this
+
+246
+00:24:19,000 --> 00:24:22,000
+Left-hand array
+
+247
+00:24:22,000 --> 00:24:23,000
+Right-hand linked list
+
+248
+00:24:23,000 --> 00:24:29,000
+Okay, I gotta go this way to see which stands. Okay, right hands.
+
+249
+00:24:29,000 --> 00:24:40,000
+Okay, what's it look like when we're removing at the front with our linked list?
+
+250
+00:24:40,000 --> 00:24:41,000
+Yeah
+
+251
+00:24:41,000 --> 00:24:47,000
+especially if we're in language as easy as Python. All we do is take this and point it here.
+
+252
+00:24:47,000 --> 00:24:50,000
+And then nothing's pointing
+
+253
+00:24:50,000 --> 00:24:56,000
+here anymore. So this eventually gets garbage collected, goes away.
+
+254
+00:24:56,000 --> 00:24:58,000
+Aren't y'all glad you're not
+
+255
+00:24:58,000 --> 00:25:02,000
+using C in this class
+
+256
+00:25:02,000 --> 00:25:05,000
+Because in C, you have to clean that up
+
+257
+00:25:05,000 --> 00:25:06,000
+So
+
+258
+00:25:06,000 --> 00:25:12,000
+If anyone in here doesn't know that they should be glad to not be using Z, be glad you're not using C.
+
+259
+00:25:12,000 --> 00:25:21,000
+Okay, so remove that the front. And what happens when we are removing at the front of an array? And we did look at this one.
+
+260
+00:25:21,000 --> 00:25:26,000
+This one. We have to take one out, but then we have to move everything down.
+
+261
+00:25:26,000 --> 00:25:27,000
+Nice.
+
+262
+00:25:27,000 --> 00:25:33,000
+obnoxious.
+
+263
+00:25:33,000 --> 00:25:45,000
+Hey
+
+264
+00:25:45,000 --> 00:26:03,000
+I've got 20 minutes left. Okay.
+
+265
+00:26:03,000 --> 00:26:10,000
+Let's see.
+
+266
+00:26:10,000 --> 00:26:17,000
+And I set up an example here for us to walk through
+
+267
+00:26:17,000 --> 00:26:21,000
+3 7 1
+
+268
+00:26:21,000 --> 00:26:36,000
+One.
+
+269
+00:26:36,000 --> 00:26:43,000
+And thanks for the best three
+
+270
+00:26:43,000 --> 00:26:46,000
+7
+
+271
+00:26:46,000 --> 00:26:53,000
+9…
+
+272
+00:26:53,000 --> 00:26:59,000
+Or
+
+273
+00:26:59,000 --> 00:27:04,000
+I want
+
+274
+00:27:04,000 --> 00:27:08,000
+How are y'all feeling about taking a couple minutes to walk through a problem on your own?
+
+275
+00:27:08,000 --> 00:27:11,000
+Or do you want me to walk through a problem?
+
+276
+00:27:11,000 --> 00:27:16,000
+Yes, yeah.
+
+277
+00:27:16,000 --> 00:27:30,000
+Thumbs up. Okay, let's do I did not draw my linked list correctly. I'll update that. Okay, so we're going to use this
+
+278
+00:27:30,000 --> 00:27:38,000
+But I'm going to fix this so that it's the right linked list
+
+279
+00:27:38,000 --> 00:27:42,000
+9
+
+280
+00:27:42,000 --> 00:27:45,000
+Okay, so we have an array
+
+281
+00:27:45,000 --> 00:27:49,000
+And we have a linked list. And
+
+282
+00:27:49,000 --> 00:27:52,000
+We want to
+
+283
+00:27:52,000 --> 00:27:59,000
+And we want to insert
+
+284
+00:27:59,000 --> 00:28:02,000
+Concert…
+
+285
+00:28:02,000 --> 00:28:04,000
+Five
+
+286
+00:28:04,000 --> 00:28:06,000
+at index
+
+287
+00:28:06,000 --> 00:28:12,000
+2.
+
+288
+00:28:12,000 --> 00:28:15,000
+And
+
+289
+00:28:15,000 --> 00:28:19,000
+Here we want to insert
+
+290
+00:28:19,000 --> 00:28:24,000
+5 between
+
+291
+00:28:24,000 --> 00:28:29,000
+7 and 1.
+
+292
+00:28:29,000 --> 00:28:34,000
+Okay, so what we want to do. We're given an array.
+
+293
+00:28:34,000 --> 00:28:37,000
+And, a linked list
+
+294
+00:28:37,000 --> 00:28:43,000
+And with our array. We want to walk through how would it
+
+295
+00:28:43,000 --> 00:28:50,000
+What changes when we're going to insert five at index 2? What needs to change and why?
+
+296
+00:28:50,000 --> 00:28:54,000
+So think through, walk through this and
+
+297
+00:28:54,000 --> 00:28:58,000
+Identify what moves and why it moves.
+
+298
+00:28:58,000 --> 00:29:03,000
+For our linked list, we're going to insert 5 between 7 and 1.
+
+299
+00:29:03,000 --> 00:29:06,000
+And
+
+300
+00:29:06,000 --> 00:29:12,000
+Compare that to what changes for the array and do that.
+
+301
+00:29:12,000 --> 00:29:14,000
+That makes sense.
+
+302
+00:29:14,000 --> 00:29:21,000
+If y'all want, you can turn into your neighbor and talk through it.
+
+303
+00:29:21,000 --> 00:29:26,000
+Or you can scratch it out on a piece of paper or
+
+304
+00:29:26,000 --> 00:29:56,000
+Anyone want paper or anything? People don't have paper as much as we used to. Surely there's scratch this and
+
+305
+00:31:45,000 --> 00:31:52,000
+Hey, how's everyone doing? You need a minute or two?
+
+306
+00:31:52,000 --> 00:32:03,000
+We have an answer.
+
+307
+00:32:03,000 --> 00:32:10,000
+So for… for our array
+
+308
+00:32:10,000 --> 00:32:19,000
+Those are green or the array. We're going to insert 5 at index 2. What has to happen?
+
+309
+00:32:19,000 --> 00:32:23,000
+What moves, what changes
+
+310
+00:32:23,000 --> 00:32:30,000
+1, the 9 and the 4 had to… Well, actually, we have to double the size of the array.
+
+311
+00:32:30,000 --> 00:32:39,000
+Yeah, so you were going to start with, I mean, you caught yourself
+
+312
+00:32:39,000 --> 00:32:44,000
+1, 9, and 4 need to move, because we want to insert something here.
+
+313
+00:32:44,000 --> 00:32:49,000
+But as we started to go through, we saw, oh, hey.
+
+314
+00:32:49,000 --> 00:32:54,000
+Four, we need to shift for over. We don't have anywhere for it to go
+
+315
+00:32:54,000 --> 00:32:57,000
+So we've got to resize
+
+316
+00:32:57,000 --> 00:33:08,000
+So first thing we're going to do, resize everything. And then I'm not going to do the whole thing right here. R194 right
+
+317
+00:33:08,000 --> 00:33:10,000
+And then
+
+318
+00:33:10,000 --> 00:33:14,000
+Does he want to continue?
+
+319
+00:33:14,000 --> 00:33:19,000
+Yeah, so then we would
+
+320
+00:33:19,000 --> 00:33:26,000
+Well, I guess we could, yeah, keep everything else the same and then just insert the five at the second index.
+
+321
+00:33:26,000 --> 00:33:28,000
+Yeah
+
+322
+00:33:28,000 --> 00:33:33,000
+So answering what needs to change is
+
+323
+00:33:33,000 --> 00:33:41,000
+kind of everything needs to change, because we have to move everything. We have to create a new array and move it, move everything.
+
+324
+00:33:41,000 --> 00:33:45,000
+We're moving everything to its new location.
+
+325
+00:33:45,000 --> 00:33:58,000
+And then once we move everything to its new location, we shift the one nine and four down and we then can put 5 in its spot.
+
+326
+00:33:58,000 --> 00:34:03,000
+Good question. Do we shift first or insert?
+
+327
+00:34:03,000 --> 00:34:05,000
+Is it that's the question, right?
+
+328
+00:34:05,000 --> 00:34:09,000
+No idea.
+
+329
+00:34:09,000 --> 00:34:10,000
+What if
+
+330
+00:34:10,000 --> 00:34:14,000
+Someone shout it out. Shift first or insert.
+
+331
+00:34:14,000 --> 00:34:15,000
+Shift.
+
+332
+00:34:15,000 --> 00:34:25,000
+Shift. Okay, we're gonna say shift. What if we don't shift first? What if we insert first? So we
+
+333
+00:34:25,000 --> 00:34:30,000
+copied, I'm going to say, what if
+
+334
+00:34:30,000 --> 00:34:37,000
+We copied our array over 1, 9, 4, and a bunch of spot
+
+335
+00:34:37,000 --> 00:34:41,000
+And we're at index 2.
+
+336
+00:34:41,000 --> 00:34:47,000
+And if we put our new value here now
+
+337
+00:34:47,000 --> 00:34:49,000
+Five
+
+338
+00:34:49,000 --> 00:34:51,000
+And then we shift.
+
+339
+00:34:51,000 --> 00:34:52,000
+Yeah.
+
+340
+00:34:52,000 --> 00:34:54,000
+But our shifts
+
+341
+00:34:54,000 --> 00:35:00,000
+means we go to the end, move one thing over, one over, and here
+
+342
+00:35:00,000 --> 00:35:03,000
+And we've lost our one because we wrote over it
+
+343
+00:35:03,000 --> 00:35:05,000
+So
+
+344
+00:35:05,000 --> 00:35:17,000
+We're going to shift first and then insert. This is the same problem we identified that same idea with our linked lists when we have our pointers that we're trying to make sure that
+
+345
+00:35:17,000 --> 00:35:19,000
+We put in the right order
+
+346
+00:35:19,000 --> 00:35:23,000
+Any other questions, comments?
+
+347
+00:35:23,000 --> 00:35:27,000
+How does it compare with our inserting
+
+348
+00:35:27,000 --> 00:35:32,000
+5 between 7 and 1.
+
+349
+00:35:32,000 --> 00:35:34,000
+Not as much work.
+
+350
+00:35:34,000 --> 00:35:37,000
+Not as much work.
+
+351
+00:35:37,000 --> 00:35:40,000
+Okay, what is the work? What needs to change?
+
+352
+00:35:40,000 --> 00:35:45,000
+And it could be someone else. Because Rudy just told us.
+
+353
+00:35:45,000 --> 00:35:54,000
+Someone else.
+
+354
+00:35:54,000 --> 00:35:57,000
+So here
+
+355
+00:35:57,000 --> 00:36:04,000
+What's different about how we insert five in this one
+
+356
+00:36:04,000 --> 00:36:11,000
+And this one, we have to iterate until we find we know that we're going between 7 and 1.
+
+357
+00:36:11,000 --> 00:36:13,000
+So maybe we
+
+358
+00:36:13,000 --> 00:36:16,000
+Iterating through till we find seven
+
+359
+00:36:16,000 --> 00:36:18,000
+We
+
+360
+00:36:18,000 --> 00:36:24,000
+Create our new node here holding five
+
+361
+00:36:24,000 --> 00:36:27,000
+I'm trying to be so smart.
+
+362
+00:36:27,000 --> 00:36:38,000
+And we create our new node 5. And we then say 5 is going to be pointing at whatever seven is pointing at
+
+363
+00:36:38,000 --> 00:36:47,000
+So we'll add our arrow there, and then we need to change 7 and make sure points at the new element 5
+
+364
+00:36:47,000 --> 00:36:51,000
+So
+
+365
+00:36:51,000 --> 00:36:55,000
+Nothing
+
+366
+00:36:55,000 --> 00:36:58,000
+Nothing needs to
+
+367
+00:36:58,000 --> 00:37:02,000
+We don't have to change everything other than
+
+368
+00:37:02,000 --> 00:37:08,000
+Creating our new node and then those pointers, changing those pointers so that our list
+
+369
+00:37:08,000 --> 00:37:26,000
+Puts things in the right place.
+
+370
+00:37:26,000 --> 00:37:27,000
+Okay.
+
+371
+00:37:27,000 --> 00:37:32,000
+Questions, comments?
+
+372
+00:37:32,000 --> 00:37:35,000
+Okay, what if someone says
+
+373
+00:37:35,000 --> 00:37:45,000
+Linked lists are always better for insertion because you don't have to shift anything. We saw that here, right? It's kind of nice. Rudy said it. It's easier.
+
+374
+00:37:45,000 --> 00:37:50,000
+Because we're inserting into the middle lift, middle of the list.
+
+375
+00:37:50,000 --> 00:37:55,000
+So therefore, we didn't have to shift things around
+
+376
+00:37:55,000 --> 00:38:05,000
+So our statement is someone says linked lists are always better for insertion because you don't have to shift any.
+
+377
+00:38:05,000 --> 00:38:06,000
+Got it.
+
+378
+00:38:06,000 --> 00:38:09,000
+Complete statement, not a true statement.
+
+379
+00:38:09,000 --> 00:38:22,000
+It's missing there.
+
+380
+00:38:22,000 --> 00:38:26,000
+You're selling
+
+381
+00:38:26,000 --> 00:38:37,000
+Okay, so if we are inserting at a location in our array that is empty or at the array or at the end, so we don't have to
+
+382
+00:38:37,000 --> 00:38:41,000
+move anything around. Our array is going to be faster
+
+383
+00:38:41,000 --> 00:38:45,000
+What else?
+
+384
+00:38:45,000 --> 00:38:51,000
+Is that the only case?
+
+385
+00:38:51,000 --> 00:38:55,000
+Doesn't matter if we're so yeah, someone go ahead.
+
+386
+00:38:55,000 --> 00:39:00,000
+rating and element is also like much faster with the array.
+
+387
+00:39:00,000 --> 00:39:04,000
+Yeah, reading an element is faster. Yep.
+
+388
+00:39:04,000 --> 00:39:16,000
+But does that make the insertion into a linked list always better than the insertion into an array?
+
+389
+00:39:16,000 --> 00:39:22,000
+We've found one case where it's not. If we are inserting at the end
+
+390
+00:39:22,000 --> 00:39:33,000
+And we have space left over, so we don't have a resize. The array is going to be quicker
+
+391
+00:39:33,000 --> 00:39:36,000
+For some linked list, you have a tail
+
+392
+00:39:36,000 --> 00:39:43,000
+And you can insert a node at the end. It's going to be the same amount of time with the array if it has a space at the end
+
+393
+00:39:43,000 --> 00:39:52,000
+Okay, so I like that. You are fighting against the okay, sure, in an array
+
+394
+00:39:52,000 --> 00:40:00,000
+If we are… if we have the case where we're able to insert something at the end there, and we don't have to resize, then that's O of one
+
+395
+00:40:00,000 --> 00:40:07,000
+And you are saying, well, that also counts for we can we can
+
+396
+00:40:07,000 --> 00:40:12,000
+Do the same thing with the linked list. If
+
+397
+00:40:12,000 --> 00:40:14,000
+If we also
+
+398
+00:40:14,000 --> 00:40:17,000
+Keep track of the end of the tail
+
+399
+00:40:17,000 --> 00:40:19,000
+We can do that
+
+400
+00:40:19,000 --> 00:40:24,000
+That makes it super easy to put something at the end of our list
+
+401
+00:40:24,000 --> 00:40:30,000
+We no longer have to iterate through the entire list.
+
+402
+00:40:30,000 --> 00:40:38,000
+We have a pointer to the tail. So we go directly to the tail, add a new element on here, point it
+
+403
+00:40:38,000 --> 00:40:40,000
+Update our tail
+
+404
+00:40:40,000 --> 00:40:42,000
+To point to the new thing
+
+405
+00:40:42,000 --> 00:40:44,000
+And there we've got
+
+406
+00:40:44,000 --> 00:40:50,000
+So we can do that. And that's one of those trade-offs that we can make
+
+407
+00:40:50,000 --> 00:40:56,000
+We can say we're going to store more metadata about our linked list
+
+408
+00:40:56,000 --> 00:41:04,000
+And as we store more metadata. Some of our operations can become more efficient.
+
+409
+00:41:04,000 --> 00:41:05,000
+But
+
+410
+00:41:05,000 --> 00:41:14,000
+Let's roll back from that for just a second, and go back to our original inserting into the middle of a linked list
+
+411
+00:41:14,000 --> 00:41:16,000
+Is it always better
+
+412
+00:41:16,000 --> 00:41:19,000
+Because you don't have to shift elements
+
+413
+00:41:19,000 --> 00:41:21,000
+Let's go back to that statement.
+
+414
+00:41:21,000 --> 00:41:26,000
+What are we missing? What else are we missing? We found one case where it's not true.
+
+415
+00:41:26,000 --> 00:41:28,000
+An array is better.
+
+416
+00:41:28,000 --> 00:41:32,000
+Fantastic.
+
+417
+00:41:32,000 --> 00:41:36,000
+The link is always better.
+
+418
+00:41:36,000 --> 00:41:41,000
+The thing is, with the linked list, you still have to iterate through the whole list
+
+419
+00:41:41,000 --> 00:41:44,000
+to find your element.
+
+420
+00:41:44,000 --> 00:41:46,000
+So
+
+421
+00:41:46,000 --> 00:41:49,000
+Yeah
+
+422
+00:41:49,000 --> 00:41:52,000
+It's a different kind of work we have to do
+
+423
+00:41:52,000 --> 00:41:59,000
+Instead of shifting everything with our array. We instead we have to iterate through
+
+424
+00:41:59,000 --> 00:42:00,000
+that whole list
+
+425
+00:42:00,000 --> 00:42:03,000
+So that could still be O of N
+
+426
+00:42:03,000 --> 00:42:08,000
+Just like our resize and our shift is O of M.
+
+427
+00:42:08,000 --> 00:42:10,000
+So that means
+
+428
+00:42:10,000 --> 00:42:11,000
+Sometimes
+
+429
+00:42:11,000 --> 00:42:23,000
+It's just, it's not a complete statement. It's not an always true statement. It's a sometimes true statement. Depending on how we're using our array, what we're putting in it, and how we're using our linked list.
+
+430
+00:42:23,000 --> 00:42:35,000
+Sometimes it could be true, sometimes it could be false.
+
+431
+00:42:35,000 --> 00:42:37,000
+Here's another question.
+
+432
+00:42:37,000 --> 00:42:41,000
+Arrays give us that direct access to an element
+
+433
+00:42:41,000 --> 00:42:50,000
+So and then our linked list, we have to go through and we have to find, we have to pop through memory.
+
+434
+00:42:50,000 --> 00:42:52,000
+And so we find the right element
+
+435
+00:42:52,000 --> 00:42:56,000
+So since we have an array.
+
+436
+00:42:56,000 --> 00:43:15,000
+And we can go directly to a given element. Why would we ever use a linked list?
+
+437
+00:43:15,000 --> 00:43:23,000
+If we know we want to access the first element
+
+438
+00:43:23,000 --> 00:43:25,000
+Of the link list
+
+439
+00:43:25,000 --> 00:43:36,000
+We want to remove that. Okay, so when we're in the situation that we may be frequently want to remove the first element of our linked list
+
+440
+00:43:36,000 --> 00:43:41,000
+I like it. Yes, that would be a great
+
+441
+00:43:41,000 --> 00:43:44,000
+great place to use a linked list.
+
+442
+00:43:44,000 --> 00:43:52,000
+Because with our array, if we're always removing the first element of our list, of our array
+
+443
+00:43:52,000 --> 00:43:57,000
+We removed the first one. We have to move everything down.
+
+444
+00:43:57,000 --> 00:44:03,000
+That's going to be slow and efficient. And if you have to write the code to do that, it's going to be annoying
+
+445
+00:44:03,000 --> 00:44:07,000
+My computer scientists are lazy, so we don't want to do that.
+
+446
+00:44:07,000 --> 00:44:11,000
+So if we're always using the first
+
+447
+00:44:11,000 --> 00:44:19,000
+Element we can do that easier with our linked list. What else?
+
+448
+00:44:19,000 --> 00:44:23,000
+Maybe for different element types
+
+449
+00:44:23,000 --> 00:44:25,000
+Yeah, different.
+
+450
+00:44:25,000 --> 00:44:28,000
+say a little bit more on that.
+
+451
+00:44:28,000 --> 00:44:34,000
+I guess if you have an integer versus a string, you can potentially use a linked list to pull
+
+452
+00:44:34,000 --> 00:44:36,000
+different items.
+
+453
+00:44:36,000 --> 00:44:45,000
+Oh, I love this. Okay, we're getting fancy. It's cool. It's 6:15. We can get fancy now. So you're saying
+
+454
+00:44:45,000 --> 00:44:48,000
+In my linked list
+
+455
+00:44:48,000 --> 00:44:56,000
+I could do something like I'm going to just scribble on this. This here instead of
+
+456
+00:44:56,000 --> 00:45:05,000
+copying and pasting anything. Okay, we don't have any other blue. Instead of just putting numbers into my
+
+457
+00:45:05,000 --> 00:45:11,000
+in my notes here, I could do something like put
+
+458
+00:45:11,000 --> 00:45:14,000
+I'm gonna put a happy face.
+
+459
+00:45:14,000 --> 00:45:16,000
+Maybe it's a cat
+
+460
+00:45:16,000 --> 00:45:20,000
+I could put over here
+
+461
+00:45:20,000 --> 00:45:33,000
+I'm going to say… I'm gonna say Apollo. It doesn't really fit here, but I'm going to do it. And over here, I might want to put
+
+462
+00:45:33,000 --> 00:45:42,000
+3.14159. I'll stop there because it's too small. Is that what you had in mind, Bo?
+
+463
+00:45:42,000 --> 00:45:44,000
+That is, yes.
+
+464
+00:45:44,000 --> 00:45:47,000
+Yeah, okay. So
+
+465
+00:45:47,000 --> 00:45:51,000
+we can get fancy with our linked lists
+
+466
+00:45:51,000 --> 00:46:05,000
+And I will allow it. I'm going to stick with, it kind of depends what language you're on and some of the other constraints, but I will allow it. Our linked list and more easily store
+
+467
+00:46:05,000 --> 00:46:11,000
+Different data types that have different sizes associated with them.
+
+468
+00:46:11,000 --> 00:46:13,000
+We cannot do that with an array
+
+469
+00:46:13,000 --> 00:46:22,000
+We lose all of our benefits if we try to do that with an array. Impossible.
+
+470
+00:46:22,000 --> 00:46:24,000
+I will not give a
+
+471
+00:46:24,000 --> 00:46:32,000
+an alternative to that today, but I will give an alternative. I will… I have a rebuttal for that on Wednesday.
+
+472
+00:46:32,000 --> 00:46:34,000
+Let's see that I have
+
+473
+00:46:34,000 --> 00:46:38,000
+We'll see how we could set up and do kind of
+
+474
+00:46:38,000 --> 00:46:41,000
+The same thing for for
+
+475
+00:46:41,000 --> 00:46:44,000
+linked list versus arrays.
+
+476
+00:46:44,000 --> 00:46:48,000
+I think that's fair. What else?
+
+477
+00:46:48,000 --> 00:46:55,000
+I'm watching my time. I'm watching my time. We're getting close to standing here.
+
+478
+00:46:55,000 --> 00:47:01,000
+So our linked list already gives us direct access, but our linked list, if we know
+
+479
+00:47:01,000 --> 00:47:16,000
+Where we need to put Like if we've already iterated our list and we know where we're putting something, it's going to be more efficient to insert something into the middle of the list. And that could sometimes be the
+
+480
+00:47:16,000 --> 00:47:24,000
+But that expensive part is finding that place in the list
+
+481
+00:47:24,000 --> 00:47:28,000
+Another thing we like about our linked list
+
+482
+00:47:28,000 --> 00:47:34,000
+I'm going to draw a quick picture here. Let's say we have a giant array
+
+483
+00:47:34,000 --> 00:47:37,000
+And
+
+484
+00:47:37,000 --> 00:47:39,000
+This is our memory.
+
+485
+00:47:39,000 --> 00:47:41,000
+I'm just going to
+
+486
+00:47:41,000 --> 00:47:43,000
+Dra
+
+487
+00:47:43,000 --> 00:47:50,000
+And that's something like this. And if I
+
+488
+00:47:50,000 --> 00:47:53,000
+allocate a giant array.
+
+489
+00:47:53,000 --> 00:48:02,000
+I need to come in here, and if this is my memory, I need to allocate a whole bunch of space.
+
+490
+00:48:02,000 --> 00:48:05,000
+I need one giant, oh, you can barely see that, huh?
+
+491
+00:48:05,000 --> 00:48:08,000
+Let's try this. Not better
+
+492
+00:48:08,000 --> 00:48:12,000
+So, this green says
+
+493
+00:48:12,000 --> 00:48:20,000
+This is a space that I need for my linked list. Now, I also have some other stuff because my memory is
+
+494
+00:48:20,000 --> 00:48:24,000
+Keeping track of everything that's running on my machine. I've got
+
+495
+00:48:24,000 --> 00:48:40,000
+The file system over here. I've got, I don't know, something here, something here. And as I start using my machine, more things are using the memory of my machine. And it's going to be more and more difficult
+
+496
+00:48:40,000 --> 00:48:45,000
+to find a really big chunk of memory
+
+497
+00:48:45,000 --> 00:48:48,000
+That I can store my array in.
+
+498
+00:48:48,000 --> 00:48:52,000
+But my linked list very nicely
+
+499
+00:48:52,000 --> 00:48:57,000
+A linked list is in yellow. I'm going to put one note here.
+
+500
+00:48:57,000 --> 00:49:06,000
+And then I have another node. I'm going to put another node here. Let me get that up high so y'all can see. I'm trying
+
+501
+00:49:06,000 --> 00:49:20,000
+And then I can put another note here. And I can put another node here and another node here, and another node here. So I don't need one big chunk of contiguous memory. I can use little pieces throughout
+
+502
+00:49:20,000 --> 00:49:25,000
+My memory space. Which can sometimes be nice.
+
+503
+00:49:25,000 --> 00:49:28,000
+Okay.
+
+504
+00:49:28,000 --> 00:49:31,000
+I'm gonna take a step back. Any questions?
+
+505
+00:49:31,000 --> 00:49:35,000
+I think I've got 40 seconds until the bell ends.
+
+506
+00:49:35,000 --> 00:49:38,000
+Is there a clock over there that bounce down?
+
+507
+00:49:38,000 --> 00:49:40,000
+So
+
+508
+00:49:40,000 --> 00:49:42,000
+We spent today
+
+509
+00:49:42,000 --> 00:49:57,000
+Going deep into array versus linked list, what our operations look like? How much work they take. And on Wednesday, we'll be remote on Zoom and we will go through and look at some implementations. We'll look at some code
+
+510
+00:49:57,000 --> 00:50:15,000
+running this, we'll get familiar with our unit testing, which is a nice way. It's part of next assignment, but also a nice way to experiment with some of our data structures as we start implementing
+
+511
+00:50:15,000 --> 00:50:17,000
+She asked for questions
+
+512
+00:50:17,000 --> 00:50:20,000
+for the bell rings
+
+513
+00:50:20,000 --> 00:50:23,000
+Is there a classic rule
+
+514
+00:50:23,000 --> 00:50:26,000
+Okay.
+
+515
+00:50:26,000 --> 00:50:34,000
+Not the big clock with the red second hand that you watched on as a kid and watch it
+
+516
+00:50:34,000 --> 00:50:35,000
+I don't know, maybe that
+
+517
+00:50:35,000 --> 00:50:45,000
+I'm old, I'm old, that's why we did it when I was a kid. You had to watch the red line go down to the top of the hour. Okay, going to ring any second. I'll let you guys go.
+
+518
+00:50:45,000 --> 00:50:54,000
+Great seeing everyone again. I'll see you online on Wednesday. I will make sure that we get the recording
+
+519
+00:50:54,000 --> 00:50:59,000
+From the beginning, and get rid of the waiting room.
+
+520
+00:50:59,000 --> 00:51:01,000
+So wait
+
+521
+00:51:01,000 --> 00:51:07,000
+Okay. Thanks everyone online. Have a great night.
+
+522
+00:51:07,000 --> 00:51:15,000
+Thanks, Professor.
+

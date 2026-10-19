@@ -1,0 +1,4265 @@
+1
+00:05:57,000 --> 00:06:18,000
+[該逐字稿自動產生。為清晰起見，可能已進行編輯。]
+And we talked a little bit about we focused on the concept of them, so we drew the pictures, we asked questions, we kind of very informally walked through how you did different things with an array and a linked list
+
+2
+00:06:18,000 --> 00:06:26,000
+toss some stuff in the chat of something specific. Yeah, so we talked about O of N and O of one
+
+3
+00:06:26,000 --> 00:06:42,000
+And, I think it's next week that we go a little bit deeper into what that means, but what it is is a measure of how long it takes to perform an operation. How many instructions we need to run
+
+4
+00:06:42,000 --> 00:07:00,000
+That's what it kind of boils down to. And we identified a bunch of operations for both our array and our linked list. And they had different runtimes or different O associated with them. Some of our operations were O of
+
+5
+00:07:00,000 --> 00:07:02,000
+Some were O of N.
+
+6
+00:07:02,000 --> 00:07:06,000
+What else?
+
+7
+00:07:06,000 --> 00:07:30,000
+For those of you who are just joining, we're remembering things about what we talked about on Monday related to array and our linked list. And if you want, you can come off mute and say something out loud. Or you can drop something in the chat
+
+8
+00:07:30,000 --> 00:07:32,000
+Anything else?
+
+9
+00:07:32,000 --> 00:07:44,000
+Big or small, specific, broad. Okay, insert and delete. And we talked about what it meant to insert or delete items to both our array and our linked list.
+
+10
+00:07:44,000 --> 00:07:54,000
+One thing is that on our linked list, it seems to make sense, insert and delete because we have these nodes
+
+11
+00:07:54,000 --> 00:07:58,000
+that we add nodes on or delete nodes
+
+12
+00:07:58,000 --> 00:08:14,000
+Array feels a little funny because it's that the space we set aside to hold our data. And we have to kind of put something in and then take it out and shift things down a bunch of
+
+13
+00:08:14,000 --> 00:08:22,000
+A bunch of bookkeeping we have to do in order to insert or delete into our array.
+
+14
+00:08:22,000 --> 00:08:29,000
+What else?
+
+15
+00:08:29,000 --> 00:08:33,000
+Anyone else? Not Gus.
+
+16
+00:08:33,000 --> 00:08:35,000
+Not David
+
+17
+00:08:35,000 --> 00:08:45,000
+Someone else drop something in the chat.
+
+18
+00:08:45,000 --> 00:08:53,000
+Anything else we remember about arrays or linked lists from the other day?
+
+19
+00:08:53,000 --> 00:09:03,000
+I'm going to wait for one more thing to show up.
+
+20
+00:09:03,000 --> 00:09:05,000
+Anything?
+
+21
+00:09:05,000 --> 00:09:10,000
+Anything
+
+22
+00:09:10,000 --> 00:09:26,000
+Okay, now we're in a standoff. There we go. Yeah, that's beautiful. Yes. Arrays have to be the same type of element. An array very specifically, you have to know what type it is and how many things
+
+23
+00:09:26,000 --> 00:09:42,000
+You can… you're going to hold in order to create the array ahead of time. And link lists. I'm going to give it to you that it can hold different types. It might depend on our implementation
+
+24
+00:09:42,000 --> 00:09:55,000
+might depend on some details, but it's much easier and within the realm of possibility that a linked list can hold different types, whereas it's not the case for an array
+
+25
+00:09:55,000 --> 00:10:01,000
+So if anyone has anything else, go ahead and drop it in the in the chat.
+
+26
+00:10:01,000 --> 00:10:06,000
+But I'll start talking about what we're going to do today.
+
+27
+00:10:06,000 --> 00:10:12,000
+Building on what we talked about Monday about our array and our linked list
+
+28
+00:10:12,000 --> 00:10:27,000
+We are going to start writing some Python code that shows us how to use an array, how we're going to use a linked list. And hopefully this will set you up very nicely for your
+
+29
+00:10:27,000 --> 00:10:34,000
+assignment 2, which is implementing an array and a linked list, and
+
+30
+00:10:34,000 --> 00:10:37,000
+doing some analysis on the
+
+31
+00:10:37,000 --> 00:10:40,000
+Today
+
+32
+00:10:40,000 --> 00:10:56,000
+Let's see, I'm going to share just this picture. I don't have slides for today, but I am going to share one of our slides from the other day
+
+33
+00:10:56,000 --> 00:11:04,000
+Okay, our one slide
+
+34
+00:11:04,000 --> 00:11:17,000
+Our one slide is this stack. So we talked about last week, a queue and a stack, a set, but what we're going to talk about today is a stack.
+
+35
+00:11:17,000 --> 00:11:34,000
+We're not going to go super deep into it. But we're going to talk about it in the context of going deeper with an arrays and a linked list. And our stack, what we need to keep in mind is like this stack of cookies. We can put the cookies in the jar
+
+36
+00:11:34,000 --> 00:11:47,000
+And then we can take cookies out of the jar, but it's what we call a last in first out data structure. That's all you can do. Your insert puts
+
+37
+00:11:47,000 --> 00:11:52,000
+puts a cookie on top of the previous cookie, and
+
+38
+00:11:52,000 --> 00:12:07,000
+are remove or our pop is going to take the last cookie out of the jar. And, I joked that if you want the bottom cookie in the jar, you have to touch every single cookie in the jar
+
+39
+00:12:07,000 --> 00:12:13,000
+But really, the
+
+40
+00:12:13,000 --> 00:12:28,000
+the way we really want to think about our stack is we have no idea what's in the bottom here. All we know is what's in the top. We can see what's in the top. We can take the top one off. We can put a new thing on a new thing in a new thing on top
+
+41
+00:12:28,000 --> 00:12:31,000
+Or we can take the top item off
+
+42
+00:12:31,000 --> 00:12:38,000
+And that's all we really care about when it comes with our when it comes to our stock
+
+43
+00:12:38,000 --> 00:12:44,000
+Any questions on a stack and concept right now?
+
+44
+00:12:44,000 --> 00:12:49,000
+I want to think about it last out, or sorry, last in first out.
+
+45
+00:12:49,000 --> 00:12:58,000
+So the last thing that got put into our stack is the first thing we're going to take out
+
+46
+00:12:58,000 --> 00:13:08,000
+Okay, feel free to shout out, raise a hand, put it into the chat if you have any questions. But I'm going to go ahead and
+
+47
+00:13:08,000 --> 00:13:10,000
+Share
+
+48
+00:13:10,000 --> 00:13:15,000
+My pi term, if I can find it
+
+49
+00:13:15,000 --> 00:13:17,000
+Okay.
+
+50
+00:13:17,000 --> 00:13:26,000
+Let me see my PyCharm. Okay.
+
+51
+00:13:26,000 --> 00:13:29,000
+Yep, we can see it
+
+52
+00:13:29,000 --> 00:13:36,000
+And sorry, I'm rearranging. We're going to
+
+53
+00:13:36,000 --> 00:13:53,000
+In a little bit, we will be using our files, but for right now, I'm going to use the Python console. Let's put it away. Our Python console to show us what it is we're doing.
+
+54
+00:13:53,000 --> 00:13:56,000
+Let's see.
+
+55
+00:13:56,000 --> 00:14:00,000
+Let's start off with
+
+56
+00:14:00,000 --> 00:14:11,000
+Just a couple of basics here to… these are going to be the building blocks that we'll use to work with our array and build our linked lists that we will use
+
+57
+00:14:11,000 --> 00:14:18,000
+to power our stack. So our goal, what we're moving towards is we're going to be implementing a stack
+
+58
+00:14:18,000 --> 00:14:24,000
+We're gonna do it with both an array and a linked list.
+
+59
+00:14:24,000 --> 00:14:25,000
+So first
+
+60
+00:14:25,000 --> 00:14:39,000
+I'm going to start with
+
+61
+00:14:39,000 --> 00:14:41,000
+And
+
+62
+00:14:41,000 --> 00:14:46,000
+Can y'all, how is the legibility of this
+
+63
+00:14:46,000 --> 00:14:58,000
+I guess we're all on Zoom, so it's probably not too bad. I worry about it when we're in the classroom and it's projected, but we're probably okay here.
+
+64
+00:14:58,000 --> 00:15:04,000
+But whoops. Before I hit enter on that, I was going to ask
+
+65
+00:15:04,000 --> 00:15:17,000
+What can anyone tell me about this line of code that I just typed?
+
+66
+00:15:17,000 --> 00:15:24,000
+Anything you know about it, feel free to drop something into the chat, or if anyone wants to say something.
+
+67
+00:15:24,000 --> 00:15:36,000
+So, I'm noticing… so you have, like, stack equals curly braces and then I'm noticing you have two different fields. The first field is data, and then the second field is size.
+
+68
+00:15:36,000 --> 00:15:45,000
+So the size, I think, is pretty explanatory, self-explanatory. The data I'm a little
+
+69
+00:15:45,000 --> 00:15:55,000
+I'm wondering a little bit about that, because, like, I'm wondering if that field is designated to specify like the data type or like something else.
+
+70
+00:15:55,000 --> 00:15:58,000
+But I think the size field is… makes sense to me.
+
+71
+00:15:58,000 --> 00:16:23,000
+Okay, great. Thank you. Anyone have anything to add or can anyone say something about the data field here?
+
+72
+00:16:23,000 --> 00:16:25,000
+So
+
+73
+00:16:25,000 --> 00:16:28,000
+Yeah, okay, so an array
+
+74
+00:16:28,000 --> 00:16:37,000
+With Capacity 5 and size 0. So close. We are going to wave our hands on these square brackets.
+
+75
+00:16:37,000 --> 00:16:39,000
+here.
+
+76
+00:16:39,000 --> 00:16:46,000
+We're in Python, so this is technically using our square brackets like this. This is a list
+
+77
+00:16:46,000 --> 00:16:49,000
+But we are pretending
+
+78
+00:16:49,000 --> 00:16:58,000
+They're gonna live with a veil of wishing that the world will be a little different. We are going to pretend that this is an array
+
+79
+00:16:58,000 --> 00:17:09,000
+And I'll dig into this a little bit more. But yes, we want to think of this as an array. This is the thing that is going to hold our data.
+
+80
+00:17:09,000 --> 00:17:14,000
+So we are creating
+
+81
+00:17:14,000 --> 00:17:30,000
+a container that is going to hold 5 data elements. That's our capacity, our expected capacity. And we also have to keep track of the size. This is us keeping track of how many things we've actually put into our
+
+82
+00:17:30,000 --> 00:17:32,000
+our container.
+
+83
+00:17:32,000 --> 00:17:42,000
+So I hinted at this the other day when we're talking about an array that we had to keep or sorry, I think we were talking about it with our linked list
+
+84
+00:17:42,000 --> 00:17:49,000
+that we were going to keep track of how many nodes. This is that idea of
+
+85
+00:17:49,000 --> 00:18:00,000
+We're holding some metadata, keeping track of our metadata that makes it easier for us to do something like ask how many elements are in our list
+
+86
+00:18:00,000 --> 00:18:04,000
+Or yeah, our linked list.
+
+87
+00:18:04,000 --> 00:18:13,000
+So here, this is if I fall into Python speak a little bit
+
+88
+00:18:13,000 --> 00:18:21,000
+Our stack, we are representing it with a dictionary. This is called a dictionary in Python.
+
+89
+00:18:21,000 --> 00:18:24,000
+We know it's a dictionary because of the curly braces
+
+90
+00:18:24,000 --> 00:18:31,000
+And our dictionary is a key, a set of key value pairs.
+
+91
+00:18:31,000 --> 00:18:39,000
+So we have a bunch of keys. In this case, we have our data and we have our size. Those are our keys.
+
+92
+00:18:39,000 --> 00:18:41,000
+And then we have the values
+
+93
+00:18:41,000 --> 00:18:47,000
+So our data is that that array, I'm going to call it an array
+
+94
+00:18:47,000 --> 00:19:00,000
+With that caveat, that's holding our data. And then our size field is keeping track of how many things we've put into our data collection.
+
+95
+00:19:00,000 --> 00:19:07,000
+And then our stack is defining it. That's just our variable so that we can reference it
+
+96
+00:19:07,000 --> 00:19:10,000
+I'm going to point out
+
+97
+00:19:10,000 --> 00:19:13,000
+Over here. Now
+
+98
+00:19:13,000 --> 00:19:19,000
+So now that so I'm working my console. Once I've run this line of code
+
+99
+00:19:19,000 --> 00:19:29,000
+ISON has declared this variable and populated it. We can see we have our stack variable
+
+100
+00:19:29,000 --> 00:19:36,000
+And it's a dict. Got this dict. It's telling us right there. So it's our Python dictionary.
+
+101
+00:19:36,000 --> 00:19:42,000
+And the items in it, we've got our data
+
+102
+00:19:42,000 --> 00:19:43,000
+field
+
+103
+00:19:43,000 --> 00:19:45,000
+That's populated
+
+104
+00:19:45,000 --> 00:19:47,000
+with this
+
+105
+00:19:47,000 --> 00:19:51,000
+array that has nothing in any of the spots
+
+106
+00:19:51,000 --> 00:19:55,000
+And then we also have our size.
+
+107
+00:19:55,000 --> 00:20:07,000
+Then this is a Python thing. We know that it's a Python thing because it's got these. This is actually two underscores right here. We'll call it a dunder score.
+
+108
+00:20:07,000 --> 00:20:18,000
+And when you see this underscore, this is something special to Python, specific to Python. We, the programmers, didn't define it.
+
+109
+00:20:18,000 --> 00:20:21,000
+Any questions, comments?
+
+110
+00:20:21,000 --> 00:20:28,000
+Anything anyone wants to add before we move on.
+
+111
+00:20:28,000 --> 00:20:54,000
+I'm taking this as our first full week of class to get some just kind of get the lay of the land and get some vocabulary out there so that we are all on the same page of what some of this very specific vocabulary for Python is. If anyone ever has anything to add or expand on, feel free to put something in the chat or raise your hand and join
+
+112
+00:20:54,000 --> 00:21:00,000
+Okay, so we have our stack. We have now declared our stack.
+
+113
+00:21:00,000 --> 00:21:02,000
+that we can see.
+
+114
+00:21:02,000 --> 00:21:06,000
+So we've talked about this none times five
+
+115
+00:21:06,000 --> 00:21:11,000
+That gives us 5 empty slots
+
+116
+00:21:11,000 --> 00:21:22,000
+That's our capacity. And we've talked about this field that gives us or that is keeping track of how many things we put in there. That's zero.
+
+117
+00:21:22,000 --> 00:21:23,000
+Okay.
+
+118
+00:21:23,000 --> 00:21:24,000
+I had a question real quick.
+
+119
+00:21:24,000 --> 00:21:25,000
+Yeah, please.
+
+120
+00:21:25,000 --> 00:21:32,000
+That bracket non bracket. Did you say that that was that was initializing an array or is that a list?
+
+121
+00:21:32,000 --> 00:21:33,000
+Okay.
+
+122
+00:21:33,000 --> 00:21:39,000
+Great question. In Python speak, it is a list
+
+123
+00:21:39,000 --> 00:21:43,000
+As far as Python is concerned, this is a list.
+
+124
+00:21:43,000 --> 00:22:03,000
+For our purposes of conversation today, we are going to pretend it's an array.
+
+125
+00:22:03,000 --> 00:22:04,000
+Yeah.
+
+126
+00:22:04,000 --> 00:22:05,000
+I see, I see. Very briefly, do you think you can help differentiate the difference between a list and array? I more commonly familiar with like arrays. I don't really use Python, and so I don't like the whole list
+
+127
+00:22:05,000 --> 00:22:09,000
+data type or structure is new. Okay.
+
+128
+00:22:09,000 --> 00:22:10,000
+Okay.
+
+129
+00:22:10,000 --> 00:22:14,000
+I cannot. I cannot do that briefly. But I promise
+
+130
+00:22:14,000 --> 00:22:21,000
+We probably won't get to it today, but we definitely will go into what exactly a Python list is next Monday.
+
+131
+00:22:21,000 --> 00:22:22,000
+Okay, great.
+
+132
+00:22:22,000 --> 00:22:31,000
+So yeah, this is this is one of the things that makes it Python kind of tricky for talking about
+
+133
+00:22:31,000 --> 00:22:38,000
+data structures, and specifically arrays, because Python doesn't really do arrays, so we kind of have to pretend.
+
+134
+00:22:38,000 --> 00:22:40,000
+Mmm, I see.
+
+135
+00:22:40,000 --> 00:22:43,000
+But we will go deep into
+
+136
+00:22:43,000 --> 00:22:46,000
+exactly what a Python list is
+
+137
+00:22:46,000 --> 00:22:52,000
+and how it relates to an array as well as a linked list.
+
+138
+00:22:52,000 --> 00:23:03,000
+I see. Okay, so we have the list that's kind of acting as our makeshift array. And then inside all of that is the curly brace brackets
+
+139
+00:23:03,000 --> 00:23:06,000
+Which is the dictionary you said, correct?
+
+140
+00:23:06,000 --> 00:23:07,000
+Yeah.
+
+141
+00:23:07,000 --> 00:23:08,000
+Yep.
+
+142
+00:23:08,000 --> 00:23:09,000
+Okay, I see.
+
+143
+00:23:09,000 --> 00:23:21,000
+Yes. And just to point out too, so because over here on the right hand side where we have the environment as we start
+
+144
+00:23:21,000 --> 00:23:27,000
+declaring things and doing things in the Python environment. It shows us what we've done
+
+145
+00:23:27,000 --> 00:23:33,000
+And this here, the dict where it's
+
+146
+00:23:33,000 --> 00:23:35,000
+Showing that our stack is a dict.
+
+147
+00:23:35,000 --> 00:23:44,000
+That's what Python thinks it is. Our data, it's saying a list, because that's what Python thinks it is, as far as Python is concerned.
+
+148
+00:23:44,000 --> 00:23:48,000
+I see. And, another question. So
+
+149
+00:23:48,000 --> 00:24:05,000
+From, like, my previous experience, it's been a while since I've used like a dictionary, but what I remember it being used for is like you said again, it has that like key value pair. So like normally whenever I think of a dictionary, I think of like, oh.
+
+150
+00:24:05,000 --> 00:24:20,000
+You know, if I want to store people's names and then attach to that, I want to store their age value. So like if I wanted to look up my name, Rudy, it would bring up my age as like the value that's
+
+151
+00:24:20,000 --> 00:24:28,000
+connected to that, key-value pair. For this instance, like using it as a stack
+
+152
+00:24:28,000 --> 00:24:41,000
+What is it? What exactly is, like, the correlation between the key value pair? Is it like, is the key like the index and then the value is like
+
+153
+00:24:41,000 --> 00:24:42,000
+Yeah
+
+154
+00:24:42,000 --> 00:24:43,000
+the value that's at that index, or like what would
+
+155
+00:24:43,000 --> 00:24:48,000
+I'm so glad you asked that question. This is an excellent question. So
+
+156
+00:24:48,000 --> 00:24:59,000
+So the example you gave of, like, name and ages is a dictionary. You can think of it as I'm looking something up. I'm looking a value up
+
+157
+00:24:59,000 --> 00:25:08,000
+Another way we can think about a dictionary, just generally speaking, is it's a collection of stuff
+
+158
+00:25:08,000 --> 00:25:15,000
+So a dictionary in Python very frequently is used as like a very lightweight
+
+159
+00:25:15,000 --> 00:25:23,000
+class, for example, what, what programming languages are you more familiar with, or do you use more regularly?
+
+160
+00:25:23,000 --> 00:25:25,000
+I'm more familiar with C
+
+161
+00:25:25,000 --> 00:25:30,000
+Okay, that's
+
+162
+00:25:30,000 --> 00:25:31,000
+Yeah.
+
+163
+00:25:31,000 --> 00:25:44,000
+C doesn't quite have classes, but it's like a struct. You can think of it as a struct, right? You might make a struct where you have one field that holds, say, an array or and another field that holds the size
+
+164
+00:25:44,000 --> 00:25:52,000
+So it's a struct is kind of it just, and we can think of a dict as this lightweight
+
+165
+00:25:52,000 --> 00:26:05,000
+Structure that holds some stuff together for us. So what it's going to do for us here is that we can do something like stack.data
+
+166
+00:26:05,000 --> 00:26:10,000
+That is not the right thing to do
+
+167
+00:26:10,000 --> 00:26:15,000
+That is not the right thing to do. What am I doing?
+
+168
+00:26:15,000 --> 00:26:19,000
+Stack of data. I am not
+
+169
+00:26:19,000 --> 00:26:26,000
+I'm not typing in Python is what I'm doing. Okay, so
+
+170
+00:26:26,000 --> 00:26:30,000
+So here we're going to reference this by doing stack
+
+171
+00:26:30,000 --> 00:26:34,000
+Colleen Stack and then specifying that key
+
+172
+00:26:34,000 --> 00:26:39,000
+It's going to allow us to access that
+
+173
+00:26:39,000 --> 00:26:46,000
+data list that we're using. Does that help to think of it as kind of like a lightweight
+
+174
+00:26:46,000 --> 00:26:49,000
+class or a struct.
+
+175
+00:26:49,000 --> 00:26:54,000
+Yes, that does. And that's interesting that the notation to
+
+176
+00:26:54,000 --> 00:27:05,000
+to call on the, the list, or, like, our makeshift array is very different because like I would, I would have also thought to do the stack dot data to get to that field to get to the data field
+
+177
+00:27:05,000 --> 00:27:09,000
+But it's just interesting that Python does it a little differently.
+
+178
+00:27:09,000 --> 00:27:13,000
+Yeah, and I think
+
+179
+00:27:13,000 --> 00:27:19,000
+Different versions, you can set it up different ways
+
+180
+00:27:19,000 --> 00:27:22,000
+something, something. Yeah.
+
+181
+00:27:22,000 --> 00:27:23,000
+Okay.
+
+182
+00:27:23,000 --> 00:27:27,000
+I see.
+
+183
+00:27:27,000 --> 00:27:37,000
+Okay, any other questions or anything anyone else would add?
+
+184
+00:27:37,000 --> 00:27:41,000
+Okay. I'm going to do one more thing here.
+
+185
+00:27:41,000 --> 00:27:44,000
+Actually, maybe a couple more
+
+186
+00:27:44,000 --> 00:27:55,000
+2 3 more things, three things we're going to do and then we're going to get into our implementation. We are going to first do a range
+
+187
+00:27:55,000 --> 00:28:08,000
+And I'm going to do stack of size.
+
+188
+00:28:08,000 --> 00:28:17,000
+Actually, that's not what I want to do. I want to do. Okay, so range is going to, if I do for
+
+189
+00:28:17,000 --> 00:28:20,000
+high end range
+
+190
+00:28:20,000 --> 00:28:32,000
+stack of size
+
+191
+00:28:32,000 --> 00:28:45,000
+Oh, yes.
+
+192
+00:28:45,000 --> 00:28:52,000
+I'm waiting for it to do something. Why did it not do anything?
+
+193
+00:28:52,000 --> 00:28:58,000
+What's our size? What's our stack of size right now?
+
+194
+00:28:58,000 --> 00:28:59,000
+Zero.
+
+195
+00:28:59,000 --> 00:29:08,000
+Yeah, our stack size is zero. So what I'm trying to do is showcase range
+
+196
+00:29:08,000 --> 00:29:18,000
+And then also referencing what, referencing the size of our stack
+
+197
+00:29:18,000 --> 00:29:24,000
+That's not gonna work. So let me, for I in range
+
+198
+00:29:24,000 --> 00:29:39,000
+And I'm going to do minus one. Minus one
+
+199
+00:29:39,000 --> 00:29:46,000
+So before we then go into our stack, okay.
+
+200
+00:29:46,000 --> 00:29:47,000
+range
+
+201
+00:29:47,000 --> 00:29:51,000
+What range is going to do is
+
+202
+00:29:51,000 --> 00:29:56,000
+Start at the number
+
+203
+00:29:56,000 --> 00:29:59,000
+You give it the 1st number
+
+204
+00:29:59,000 --> 00:30:08,000
+And it's going to go down until the number, or it's going to
+
+205
+00:30:08,000 --> 00:30:15,000
+Iterate to the number that you provide it. Given the value.
+
+206
+00:30:15,000 --> 00:30:20,000
+I should have probably done something more like I and range.
+
+207
+00:30:20,000 --> 00:30:22,000
+Or
+
+208
+00:30:22,000 --> 00:30:37,000
+Aye
+
+209
+00:30:37,000 --> 00:30:38,000
+Okay.
+
+210
+00:30:38,000 --> 00:30:44,000
+So we'll start with this one for I in range four
+
+211
+00:30:44,000 --> 00:30:50,000
+We are going to print each number. We start with 0.
+
+212
+00:30:50,000 --> 00:30:56,000
+Hit print I, or we print 1, we print two, we print three, and then we stop.
+
+213
+00:30:56,000 --> 00:31:04,000
+So range is going to by default, start at 0 and go up to the number that we
+
+214
+00:31:04,000 --> 00:31:08,000
+We specify, but it's going to stop right before that.
+
+215
+00:31:08,000 --> 00:31:19,000
+So
+
+216
+00:31:19,000 --> 00:31:23,000
+Now I'm specifying a start
+
+217
+00:31:23,000 --> 00:31:25,000
+place of zero
+
+218
+00:31:25,000 --> 00:31:33,000
+We're going to go up to 4, but not including 4, and we're going to increment by one
+
+219
+00:31:33,000 --> 00:31:35,000
+And
+
+220
+00:31:35,000 --> 00:31:38,000
+That will give us the same behavior.
+
+221
+00:31:38,000 --> 00:31:40,000
+as what we saw here.
+
+222
+00:31:40,000 --> 00:31:46,000
+We're just being explicit in our starting point and our ending point.
+
+223
+00:31:46,000 --> 00:31:53,000
+Or our chunk of what we're adding each time.
+
+224
+00:31:53,000 --> 00:32:06,000
+So this comes into play. We will see this when we start iterating through our data. Our data array in our stack.
+
+225
+00:32:06,000 --> 00:32:17,000
+This is counting up and then we can also count down by doing something like 4i in range.
+
+226
+00:32:17,000 --> 00:32:31,000
+Gonna go the minus one and then I'm going to count down the minus one means I'm going to count down rather than counting up.
+
+227
+00:32:31,000 --> 00:32:33,000
+So here we started at 4.
+
+228
+00:32:33,000 --> 00:32:38,000
+and we continued by going minus one each time
+
+229
+00:32:38,000 --> 00:32:41,000
+Until we get to the step right
+
+230
+00:32:41,000 --> 00:32:51,000
+Once we hit minus one, we didn't. We didn't go into our loop. We didn't print that minus one.
+
+231
+00:32:51,000 --> 00:32:56,000
+Questions on range?
+
+232
+00:32:56,000 --> 00:33:10,000
+We'll see more examples of this shortly. And then I'm going to show another thing. We're going to look at raising errors.
+
+233
+00:33:10,000 --> 00:33:13,000
+These are just a couple of things we're going to use
+
+234
+00:33:13,000 --> 00:33:16,000
+to
+
+235
+00:33:16,000 --> 00:33:20,000
+Put our stacks together
+
+236
+00:33:20,000 --> 00:33:25,000
+We've got a
+
+237
+00:33:25,000 --> 00:33:30,000
+Amber Alerts, if we were in the classroom, everyone would be buzzing.
+
+238
+00:33:30,000 --> 00:33:32,000
+Everything would be going off
+
+239
+00:33:32,000 --> 00:33:43,000
+Okay, so here I'm introducing this idea of using raising an error early this quarter
+
+240
+00:33:43,000 --> 00:33:47,000
+We're going to use a raise index error
+
+241
+00:33:47,000 --> 00:33:57,000
+This is how we basically throw an error in Python, and here we're giving it a custom message saying that our stack is empty.
+
+242
+00:33:57,000 --> 00:34:04,000
+We're going to use this when we build our stack. You can see by calling raise error
+
+243
+00:34:04,000 --> 00:34:18,000
+It told us exactly where this error was thrown and it gave me a message that the stack is empty, and that's what I passed in here.
+
+244
+00:34:18,000 --> 00:34:22,000
+Okay.
+
+245
+00:34:22,000 --> 00:34:32,000
+So I'm going to use these pieces. We're going to use this to start building our stack.
+
+246
+00:34:32,000 --> 00:34:38,000
+I am going to start out in with
+
+247
+00:34:38,000 --> 00:34:39,000
+An assignment to
+
+248
+00:34:39,000 --> 00:34:53,000
+We are using tests, unit tests to confirm that our implementation is doing the right thing
+
+249
+00:34:53,000 --> 00:34:57,000
+I have two choices.
+
+250
+00:34:57,000 --> 00:35:09,000
+I can either start with my implementation, or I can start with my test. I'm going to start first by writing a test
+
+251
+00:35:09,000 --> 00:35:35,000
+And I've got a starter point here. I'm going to rename this
+
+252
+00:35:35,000 --> 00:35:39,000
+Okay
+
+253
+00:35:39,000 --> 00:35:43,000
+I'm checking my test here
+
+254
+00:35:43,000 --> 00:35:45,000
+So
+
+255
+00:35:45,000 --> 00:35:55,000
+I'm looking at this and one first thing I'm going to do, I notice is that I've declared a class test and I'm defining this test here.
+
+256
+00:35:55,000 --> 00:35:57,000
+And it's
+
+257
+00:35:57,000 --> 00:36:09,000
+It's pretty verbose, right? I'm trying to be very clear about what I want to see what behavior I want to see with my stack before I start building it.
+
+258
+00:36:09,000 --> 00:36:15,000
+So that first piece of
+
+259
+00:36:15,000 --> 00:36:24,000
+behavior that I'm expecting is that if I push something into the stack and then I pop it off
+
+260
+00:36:24,000 --> 00:36:32,000
+I expect to see the newest values before the older values.
+
+261
+00:36:32,000 --> 00:36:39,000
+So we might have something like
+
+262
+00:36:39,000 --> 00:36:53,000
+Second
+
+263
+00:36:53,000 --> 00:36:57,000
+I'm going to do
+
+264
+00:36:57,000 --> 00:37:05,000
+something like, oh, look, it's going to suggest for me exactly what I want to put into my stack.
+
+265
+00:37:05,000 --> 00:37:18,000
+I'm going to try to ignore this, and I will turn this off eventually. I suggest for… I would like you all for the first, the next two assignments to turn off
+
+266
+00:37:18,000 --> 00:37:23,000
+the feature in PyCharm or whichever editor you're using.
+
+267
+00:37:23,000 --> 00:37:26,000
+Turn off this
+
+268
+00:37:26,000 --> 00:37:36,000
+Code suggest, because in our first… first chunks here, this is when we are handwriting code so that we can get our sense for it.
+
+269
+00:37:36,000 --> 00:37:43,000
+I'm going to say here, I'm going to create array
+
+270
+00:37:43,000 --> 00:38:06,000
+And I'm going to make it three things. When it told three things, you can tell I'm making some assumptions right now about how we create a stat.
+
+271
+00:38:06,000 --> 00:38:09,000
+As I'm typing this out
+
+272
+00:38:09,000 --> 00:38:23,000
+Y'all can either follow along at home and type at the same time. I will also push this to the code repo so that you have it later. But or
+
+273
+00:38:23,000 --> 00:38:30,000
+You can start saying out loud or in the chat
+
+274
+00:38:30,000 --> 00:38:33,000
+what, what assumptions
+
+275
+00:38:33,000 --> 00:39:00,000
+We are seeing from this code that I'm writing right now.
+
+276
+00:39:00,000 --> 00:39:10,000
+Or what behavior do I expect?
+
+277
+00:39:10,000 --> 00:39:11,000
+Oops.
+
+278
+00:39:11,000 --> 00:39:15,000
+And what have I gotten wrong?
+
+279
+00:39:15,000 --> 00:39:16,000
+That's right.
+
+280
+00:39:16,000 --> 00:39:19,000
+Hi, I'm
+
+281
+00:39:19,000 --> 00:39:26,000
+Assuming last in, first out
+
+282
+00:39:26,000 --> 00:39:29,000
+What else?
+
+283
+00:39:29,000 --> 00:39:35,000
+As we see, I haven't written any code yet.
+
+284
+00:39:35,000 --> 00:39:40,000
+And anyone say anything about
+
+285
+00:39:40,000 --> 00:39:56,000
+What we observe with the the test framework
+
+286
+00:39:56,000 --> 00:40:00,000
+We're going to start with this. Save this.
+
+287
+00:40:00,000 --> 00:40:01,000
+So
+
+288
+00:40:01,000 --> 00:40:14,000
+We noticed that I have a very verbose name here that that is describing exactly what behavior I'm expecting
+
+289
+00:40:14,000 --> 00:40:26,000
+When I write a test, I'm going to. I have to set up the set up the test
+
+290
+00:40:26,000 --> 00:40:42,000
+And to set up the test that I'm pushing, I'm testing that I'm going to push and then pop returns the newest value first. I have to set up my stack. So I have to create a stack. I have to push something into my stack
+
+291
+00:40:42,000 --> 00:40:49,000
+And then I start and then I do the test assert.
+
+292
+00:40:49,000 --> 00:40:56,000
+So after I've set everything up, I've set up my stack that I put A in first and then B
+
+293
+00:40:56,000 --> 00:41:00,000
+I've got these assert statements.
+
+294
+00:41:00,000 --> 00:41:02,000
+And
+
+295
+00:41:02,000 --> 00:41:03,000
+What
+
+296
+00:41:03,000 --> 00:41:16,000
+What goes inside here. This is that first parameter is what I expect out. It's my expected value if the test passes.
+
+297
+00:41:16,000 --> 00:41:25,000
+If my stack does what I'm supposed to do. And then here I have the call that I'm making
+
+298
+00:41:25,000 --> 00:41:33,000
+That if this function array stack pop is doing what it's supposed to be doing, it's going to return B.
+
+299
+00:41:33,000 --> 00:41:44,000
+So this is my let's see, it was going on there. This is my expected value. And this is my actual value.
+
+300
+00:41:44,000 --> 00:41:47,000
+So every assert statement
+
+301
+00:41:47,000 --> 00:41:53,000
+Get the expected value and the actual value.
+
+302
+00:41:53,000 --> 00:41:57,000
+So then if my actual value
+
+303
+00:41:57,000 --> 00:41:58,000
+fails
+
+304
+00:41:58,000 --> 00:42:12,000
+Then my test is going to fail and it's going to tell me exactly where it failed. So I'm going to go ahead. I'm going to hit run on this. Anyone have a guess what's going to happen?
+
+305
+00:42:12,000 --> 00:42:18,000
+Okay.
+
+306
+00:42:18,000 --> 00:42:27,000
+I've got a name error because I have not actually defined any of these functions yet.
+
+307
+00:42:27,000 --> 00:42:36,000
+So let's go and define these functions. Any questions before I flip over and start defining my functions?
+
+308
+00:42:36,000 --> 00:42:43,000
+I had a question. Is the A and B that's supposed to be like a universal
+
+309
+00:42:43,000 --> 00:42:49,000
+like, test, right? So, like, whenever… so, like, because this is testing the functionality
+
+310
+00:42:49,000 --> 00:42:55,000
+Of the stack, but we don't have to, like, necessarily push an A and a B
+
+311
+00:42:55,000 --> 00:43:05,000
+in our stack, right? This is just a universal check.
+
+312
+00:43:05,000 --> 00:43:06,000
+Okay.
+
+313
+00:43:06,000 --> 00:43:10,000
+Oh, this is just I just chose A and B. I could just as easily put like one and two
+
+314
+00:43:10,000 --> 00:43:13,000
+And then change this over here
+
+315
+00:43:13,000 --> 00:43:14,000
+It's
+
+316
+00:43:14,000 --> 00:43:23,000
+I see. But whenever we write our, like, actual stack function and we test it, we don't have to push A and B or like one and two
+
+317
+00:43:23,000 --> 00:43:24,000
+-
+
+318
+00:43:24,000 --> 00:43:27,000
+In order to like
+
+319
+00:43:27,000 --> 00:43:28,000
+Yeah.
+
+320
+00:43:28,000 --> 00:43:29,000
+use this test. It's like a universal test.
+
+321
+00:43:29,000 --> 00:43:30,000
+Okay.
+
+322
+00:43:30,000 --> 00:43:41,000
+Yes, yes, absolutely. Great question. Yeah. So because our stack. So what we're going to do, we're going to go off and we are going to define stack create array stack. We're going to define that function
+
+323
+00:43:41,000 --> 00:43:48,000
+We're going to define this function. The push, and we're going to define our pop function.
+
+324
+00:43:48,000 --> 00:43:49,000
+I see, okay.
+
+325
+00:43:49,000 --> 00:43:59,000
+And then once we define that, we can run this test and see if they perform the way we are expecting them to.
+
+326
+00:43:59,000 --> 00:44:02,000
+Oh, I see, I see. Okay.
+
+327
+00:44:02,000 --> 00:44:03,000
+I understand
+
+328
+00:44:03,000 --> 00:44:04,000
+Yeah
+
+329
+00:44:04,000 --> 00:44:14,000
+We're doing the test first here, because I want us to kind of think about ahead of time, what do we expect that behavior to be?
+
+330
+00:44:14,000 --> 00:44:22,000
+So I'm jumping the gun by putting the test here, given that we haven't even written actual code and run it yet.
+
+331
+00:44:22,000 --> 00:44:25,000
+But we will do that right now.
+
+332
+00:44:25,000 --> 00:44:32,000
+I see. Okay, I think I initially assumed that the, these functions were part of, like, a standard template library.
+
+333
+00:44:32,000 --> 00:44:34,000
+Yeah.
+
+334
+00:44:34,000 --> 00:44:37,000
+Yeah.
+
+335
+00:44:37,000 --> 00:44:38,000
+Yeah, let's do it.
+
+336
+00:44:38,000 --> 00:44:39,000
+But I guess we have yet to define what these functions are. So makes sense.
+
+337
+00:44:39,000 --> 00:44:45,000
+Okay, so our first one was create array stack. See, I already named it differently.
+
+338
+00:44:45,000 --> 00:45:03,000
+Okay, we're gonna create Ray Stack, and I'm just going to put here, this was array stack pop
+
+339
+00:45:03,000 --> 00:45:14,000
+And I am noticing already that I got it wrong because I have to, my pop needs to take a stack.
+
+340
+00:45:14,000 --> 00:45:24,000
+So my push needs, my pop needs to take a stack. My push needs to take a stack and an LM. Data value or something.
+
+341
+00:45:24,000 --> 00:45:27,000
+So
+
+342
+00:45:27,000 --> 00:45:32,000
+Couple things here. So each of these, the pink deaf
+
+343
+00:45:32,000 --> 00:45:37,000
+is saying, I'm going to define a function, defining a function
+
+344
+00:45:37,000 --> 00:45:42,000
+The green names, those are the functions I'm defining
+
+345
+00:45:42,000 --> 00:45:58,000
+the parentheses are showing what my parameters to that function are, and the colon says, okay, now I'm ready to start defining the instructions for that function
+
+346
+00:45:58,000 --> 00:46:01,000
+I am putting a pass in here
+
+347
+00:46:01,000 --> 00:46:15,000
+And all that means is that it's kind of my acknowledgement that I didn't implement anything yet. I left this empty. So that means
+
+348
+00:46:15,000 --> 00:46:19,000
+I'm going to come back to it at some point.
+
+349
+00:46:19,000 --> 00:46:32,000
+My IDE as I'm looking at it, it's complaining here with this little squiggling line about stack because I'm not actually using it.
+
+350
+00:46:32,000 --> 00:46:48,000
+We know that we expect to see that now because we haven't written any instructions, but that's something to keep in mind as you are writing code or reading code in an environment in a IDE, as you should be. When you see a little visual indicator
+
+351
+00:46:48,000 --> 00:46:49,000
+of something like
+
+352
+00:46:49,000 --> 00:46:56,000
+something like this. That's a cue that you as a developer should be doing something about it.
+
+353
+00:46:56,000 --> 00:46:59,000
+At least before it goes to production.
+
+354
+00:46:59,000 --> 00:47:04,000
+What's this complaining about? This is complaining about
+
+355
+00:47:04,000 --> 00:47:06,000
+My linting
+
+356
+00:47:06,000 --> 00:47:12,000
+I like to have things formatted, so I have rules that tell me, so now it's happy.
+
+357
+00:47:12,000 --> 00:47:13,000
+Okay.
+
+358
+00:47:13,000 --> 00:47:20,000
+We now have our create array stack
+
+359
+00:47:20,000 --> 00:47:23,000
+wants to help me implement this.
+
+360
+00:47:23,000 --> 00:47:36,000
+We've already seen what we're going to start with
+
+361
+00:47:36,000 --> 00:47:46,000
+So I am, this is we are representing our stack with a dictionary.
+
+362
+00:47:46,000 --> 00:47:51,000
+So if we're going to create our stack, I'm going to return
+
+363
+00:47:51,000 --> 00:47:56,000
+my dictionary, where I have data
+
+364
+00:47:56,000 --> 00:47:57,000
+Is
+
+365
+00:47:57,000 --> 00:48:00,000
+None times
+
+366
+00:48:00,000 --> 00:48:03,000
+Times 5.
+
+367
+00:48:03,000 --> 00:48:12,000
+Not 55 and size 0.
+
+368
+00:48:12,000 --> 00:48:18,000
+Does that seem reasonable? If I'm going to create a stack
+
+369
+00:48:18,000 --> 00:48:21,000
+All I need to do is
+
+370
+00:48:21,000 --> 00:48:27,000
+create that dictionary that is basically our lightweight struct that
+
+371
+00:48:27,000 --> 00:48:31,000
+that container to hold
+
+372
+00:48:31,000 --> 00:48:36,000
+Our data and the size data, size metadata.
+
+373
+00:48:36,000 --> 00:48:41,000
+Seem okay?
+
+374
+00:48:41,000 --> 00:48:42,000
+Yeah
+
+375
+00:48:42,000 --> 00:48:43,000
+That makes sense. I had another question.
+
+376
+00:48:43,000 --> 00:48:53,000
+So we we are giving it capacity 5
+
+377
+00:48:53,000 --> 00:48:54,000
+Such an excellent question
+
+378
+00:48:54,000 --> 00:48:56,000
+Is there a way to, like, dynamically change the size as it grows, or is our dictionaries like static size?
+
+379
+00:48:56,000 --> 00:48:59,000
+Excellent, excellent question. So
+
+380
+00:48:59,000 --> 00:49:02,000
+Once again, I have 2 answers.
+
+381
+00:49:02,000 --> 00:49:13,000
+First answer is if we are actually working with this as a list like Python really does.
+
+382
+00:49:13,000 --> 00:49:18,000
+Then we can dynamically resize it
+
+383
+00:49:18,000 --> 00:49:19,000
+But
+
+384
+00:49:19,000 --> 00:49:23,000
+We are pretending it's an array. An array
+
+385
+00:49:23,000 --> 00:49:31,000
+does not dynamically resize if we decide that we want it to be bigger, what do we have to do?
+
+386
+00:49:31,000 --> 00:49:32,000
+Crayed in
+
+387
+00:49:32,000 --> 00:49:35,000
+Someone else talked about this on Wednesday or Monday.
+
+388
+00:49:35,000 --> 00:49:36,000
+We have to
+
+389
+00:49:36,000 --> 00:49:38,000
+Mira.
+
+390
+00:49:38,000 --> 00:49:46,000
+Yeah, we have to make a new array. We have to call our resize function, which is going to create a new array
+
+391
+00:49:46,000 --> 00:49:51,000
+generally twice as many spots. Copy everything over. So
+
+392
+00:49:51,000 --> 00:49:54,000
+Right now, we are pretending it's an array
+
+393
+00:49:54,000 --> 00:50:01,000
+So it's only We've got five elements to work with.
+
+394
+00:50:01,000 --> 00:50:04,000
+Does that answer your question, Rudy?
+
+395
+00:50:04,000 --> 00:50:05,000
+Yes, perfect, thank you.
+
+396
+00:50:05,000 --> 00:50:07,000
+Great.
+
+397
+00:50:07,000 --> 00:50:11,000
+Okay, so now
+
+398
+00:50:11,000 --> 00:50:13,000
+Now we want to think about our pop
+
+399
+00:50:13,000 --> 00:50:23,000
+And we're given a stack, we're passed in a stack. We're going to assume that it's a dictionary that looks like this.
+
+400
+00:50:23,000 --> 00:50:25,000
+Actually, let's do our push first.
+
+401
+00:50:25,000 --> 00:50:37,000
+We're given a stack, and we're given a new element. What happens when we push something into our stack?
+
+402
+00:50:37,000 --> 00:50:39,000
+Can I do something like
+
+403
+00:50:39,000 --> 00:50:45,000
+Put a piece of data into this array
+
+404
+00:50:45,000 --> 00:50:49,000
+It initializes that location with the value we are passing
+
+405
+00:50:49,000 --> 00:50:51,000
+Will you repeat that, please?
+
+406
+00:50:51,000 --> 00:50:56,000
+It initializes that index of the array with the value we pass
+
+407
+00:50:56,000 --> 00:51:03,000
+It initializes the index of the next value with the value that we pass. Which index?
+
+408
+00:51:03,000 --> 00:51:09,000
+A of 5… the next index, like, it increments the index and initializes it
+
+409
+00:51:09,000 --> 00:51:14,000
+Yeah, which where do I get the index? I know it's the next one.
+
+410
+00:51:14,000 --> 00:51:15,000
+How do I know what the next one is?
+
+411
+00:51:15,000 --> 00:51:17,000
+That is the top of the stack.
+
+412
+00:51:17,000 --> 00:51:22,000
+Oh, yes, but how do I know from my stack
+
+413
+00:51:22,000 --> 00:51:26,000
+That's passed to me.
+
+414
+00:51:26,000 --> 00:51:34,000
+Yeah, someone else?
+
+415
+00:51:34,000 --> 00:51:35,000
+Yeah.
+
+416
+00:51:35,000 --> 00:51:38,000
+Would it be the size? Because like, are we incrementing the size as we push on new elements?
+
+417
+00:51:38,000 --> 00:51:39,000
+Okay.
+
+418
+00:51:39,000 --> 00:51:41,000
+Yep. Yeah, so our data
+
+419
+00:51:41,000 --> 00:51:52,000
+So stack of data, this is going to give us the array. And then the size is keeping track of what the next index is that we can put into.
+
+420
+00:51:52,000 --> 00:51:56,000
+Sorry, I see a
+
+421
+00:51:56,000 --> 00:52:01,000
+Kevin, great point. I'm going to come back to that in just a second.
+
+422
+00:52:01,000 --> 00:52:09,000
+Okay, so here stack, I'm getting the array that's holding my data. And then I want to
+
+423
+00:52:09,000 --> 00:52:11,000
+put it in
+
+424
+00:52:11,000 --> 00:52:16,000
+The next empty index, which is going to be
+
+425
+00:52:16,000 --> 00:52:25,000
+The stack. In fact, I might do something. I don't like to nest all those things up during the break, I will turn off this code
+
+426
+00:52:25,000 --> 00:52:32,000
+suggestions, too. I'm gonna say next index
+
+427
+00:52:32,000 --> 00:52:40,000
+X equals stack of size. So that's telling me the next empty spot in my array.
+
+428
+00:52:40,000 --> 00:52:47,000
+So now I'm going to take that empty spot. Next data of next
+
+429
+00:52:47,000 --> 00:52:52,000
+Index and equals l out.
+
+430
+00:52:52,000 --> 00:53:06,000
+We are almost at break time. Should we do this real quick? Stop suggesting. What else do we need to do in order to push something onto our stack?
+
+431
+00:53:06,000 --> 00:53:10,000
+Increase the size for the next time?
+
+432
+00:53:10,000 --> 00:53:12,000
+Three is the size for the what
+
+433
+00:53:12,000 --> 00:53:14,000
+Increase the size for the next time
+
+434
+00:53:14,000 --> 00:53:20,000
+Increase the size for next time. Yeah, so stack of size
+
+435
+00:53:20,000 --> 00:53:28,000
+Plus equals one. So what that does for us is it tells us that we have one item in our array.
+
+436
+00:53:28,000 --> 00:53:34,000
+And then we can also use that as the index that is the next index to be
+
+437
+00:53:34,000 --> 00:53:40,000
+To be open for a spot.
+
+438
+00:53:40,000 --> 00:53:46,000
+That look about okay?
+
+439
+00:53:46,000 --> 00:53:56,000
+Kevin, got a point there. Are you guys okay? You want to do like five more minutes before we take our break?
+
+440
+00:53:56,000 --> 00:53:58,000
+Sure.
+
+441
+00:53:58,000 --> 00:53:59,000
+Okay.
+
+442
+00:53:59,000 --> 00:54:07,000
+Thanks everyone for being flexible. Let's do our pop real quick and then we can run our test.
+
+443
+00:54:07,000 --> 00:54:15,000
+But I see Kevin says, okay, the date I made this, and I just put a capacity of five
+
+444
+00:54:15,000 --> 00:54:25,000
+But in our test, we passed in an argument that said how big to make it
+
+445
+00:54:25,000 --> 00:54:27,000
+what capacity to make it
+
+446
+00:54:27,000 --> 00:54:30,000
+Thanks, Burke.
+
+447
+00:54:30,000 --> 00:54:32,000
+Noticing that
+
+448
+00:54:32,000 --> 00:54:39,000
+So this is what our capacity is.
+
+449
+00:54:39,000 --> 00:54:42,000
+So we did that.
+
+450
+00:54:42,000 --> 00:54:45,000
+Thank you, Kevin. Spot on.
+
+451
+00:54:45,000 --> 00:54:58,000
+Let's do a pop real quick. What do we need for our pop?
+
+452
+00:54:58,000 --> 00:55:05,000
+I've got my array, I've got to get the last item out, and then
+
+453
+00:55:05,000 --> 00:55:13,000
+I'm going to do something. I'm gonna be verbose.
+
+454
+00:55:13,000 --> 00:55:18,000
+doesn't pop return, usually
+
+455
+00:55:18,000 --> 00:55:24,000
+Well, we are doing our own implementation.
+
+456
+00:55:24,000 --> 00:55:28,000
+Right. This is not Python pop.
+
+457
+00:55:28,000 --> 00:55:35,000
+And we are pretending that this is not a list. We are pretending that it's an array.
+
+458
+00:55:35,000 --> 00:55:44,000
+So we have to implement this ourselves.
+
+459
+00:55:44,000 --> 00:55:51,000
+So I need to get go to that data array
+
+460
+00:55:51,000 --> 00:55:57,000
+And I need to get the last element that we put in.
+
+461
+00:55:57,000 --> 00:56:02,000
+And
+
+462
+00:56:02,000 --> 00:56:05,000
+This is gonna be
+
+463
+00:56:05,000 --> 00:56:12,000
+Stack of size
+
+464
+00:56:12,000 --> 00:56:29,000
+Minus one. Because we've incremented it. And then we need to set
+
+465
+00:56:29,000 --> 00:56:34,000
+We need to decrement it because we're taking something out of our stack.
+
+466
+00:56:34,000 --> 00:56:47,000
+And then we need to return the Lm. Now, I've been very verbose. You can absolutely if anyone in here is more Pythonic, you're going to be cringing at this verbosity.
+
+467
+00:56:47,000 --> 00:56:52,000
+But I'm going to leave it here for now, just for us to be clear of what's happening.
+
+468
+00:56:52,000 --> 00:56:56,000
+Does this look okay?
+
+469
+00:56:56,000 --> 00:56:58,000
+We're gonna find out.
+
+470
+00:56:58,000 --> 00:57:01,000
+Because we're gonna go run our test now.
+
+471
+00:57:01,000 --> 00:57:05,000
+But I think I've got the basics.
+
+472
+00:57:05,000 --> 00:57:07,000
+We took the piece of data out
+
+473
+00:57:07,000 --> 00:57:14,000
+We reduced our size and then we're returning that element.
+
+474
+00:57:14,000 --> 00:57:19,000
+So I'm going to save this. I'm going to go over here and run this, see what happens.
+
+475
+00:57:19,000 --> 00:57:22,000
+I don't know what's going to happen. Okay.
+
+476
+00:57:22,000 --> 00:57:26,000
+Something failed. Let's see what failed.
+
+477
+00:57:26,000 --> 00:57:29,000
+Create array stack
+
+478
+00:57:29,000 --> 00:57:39,000
+What did I call it?
+
+479
+00:57:39,000 --> 00:57:40,000
+Okay.
+
+480
+00:57:40,000 --> 00:58:10,000
+How to import everything. It's unhappy now
+
+481
+00:58:14,000 --> 00:58:18,000
+I think, hey, Anna
+
+482
+00:58:18,000 --> 00:58:26,000
+I check them real quick. I don't think it.
+
+483
+00:58:26,000 --> 00:58:33,000
+Okay. Got some mucking around with how I set up my thing, but we got a pass.
+
+484
+00:58:33,000 --> 00:58:46,000
+And we are 10 seconds away from we are 10 seconds away from the extra five minutes before our break. So I'm going to put a pin in this
+
+485
+00:58:46,000 --> 00:58:58,000
+We're going to take our break. And when we come back, we're going to implement a couple more tests that we want to see. And we're going to see if our stack
+
+486
+00:58:58,000 --> 00:59:10,000
+Implementation continues to behave as expected. Any questions before we take our break?
+
+487
+00:59:10,000 --> 00:59:11,000
+Okay.
+
+488
+00:59:11,000 --> 00:59:13,000
+take our break
+
+489
+00:59:13,000 --> 00:59:16,000
+And we will be back
+
+490
+00:59:16,000 --> 00:59:22,000
+In 10 minutes.
+
+491
+00:59:22,000 --> 00:59:24,000
+At
+
+492
+00:59:24,000 --> 00:59:32,000
+535.
+
+493
+00:59:32,000 --> 00:59:38,000
+Hey, welcome back. I'm going to resume the recording. I'm going to resume my share.
+
+494
+00:59:38,000 --> 00:59:51,000
+Let's see, I see a hand raised. Stephen, did you have a question?
+
+495
+00:59:51,000 --> 00:59:52,000
+Is that an access? Yeah.
+
+496
+00:59:52,000 --> 01:00:05,000
+I… I do have a quick question. So I'm trying to code this on the side as well. For me, it's saying that what the test case is not defined. And I was wondering if you showed that earlier
+
+497
+01:00:05,000 --> 01:00:11,000
+Yet where is it showing test cases not defined?
+
+498
+01:00:11,000 --> 01:00:15,000
+This is just on my own. I'm coding on the
+
+499
+01:00:15,000 --> 01:00:16,000
+On the side, and it's
+
+500
+01:00:16,000 --> 01:00:20,000
+Yeah, or what should I show that would be helpful?
+
+501
+01:00:20,000 --> 01:00:32,000
+I guess is, like, the class or the test case within the class of test defined anywhere separately?
+
+502
+01:00:32,000 --> 01:00:35,000
+The,
+
+503
+01:00:35,000 --> 01:00:39,000
+Well, maybe I can just poke you on the side for whatever reason, maybe I'm just being
+
+504
+01:00:39,000 --> 01:00:53,000
+Do you want to, so I will, I just I'm realizing I did not put this up. I was going to put it on GitHub during the break and I did not do that. And let me
+
+505
+01:00:53,000 --> 01:00:57,000
+I'm trying to turn off my
+
+506
+01:00:57,000 --> 01:01:03,000
+AI assistant
+
+507
+01:01:03,000 --> 01:01:08,000
+Go away, go away.
+
+508
+01:01:08,000 --> 01:01:16,000
+Is it, do you want to share your screen real quick?
+
+509
+01:01:16,000 --> 01:01:17,000
+Okay.
+
+510
+01:01:17,000 --> 01:01:18,000
+I don't want to take up too much time. I'd be happy to just touch base with you afterwards
+
+511
+01:01:18,000 --> 01:01:19,000
+Okay.
+
+512
+01:01:19,000 --> 01:01:20,000
+Yeah, thank you.
+
+513
+01:01:20,000 --> 01:01:35,000
+We'll do that then, and I will… once the repo is available to you, then you guys will have a repo that looks like mine, and it'll be a little bit easier. One thing to, just look at in your side
+
+514
+01:01:35,000 --> 01:01:45,000
+is I've got this kind of root folder, and then I've got this mod one and then this init.py file that's just empty.
+
+515
+01:01:45,000 --> 01:01:54,000
+These are two double underscore two underscores, the underscore here. And then in the test stack, then
+
+516
+01:01:54,000 --> 01:01:58,000
+It allows me to do this
+
+517
+01:01:58,000 --> 01:02:04,000
+This import like this. So those are
+
+518
+01:02:04,000 --> 01:02:15,000
+without seeing more details of what's happening on your side, those are probably the things I would look at to kind of make sure that things are in the right place, and Python can
+
+519
+01:02:15,000 --> 01:02:19,000
+Can find what it's trying to look for.
+
+520
+01:02:19,000 --> 01:02:20,000
+Got it. Okay. Thank you.
+
+521
+01:02:20,000 --> 01:02:25,000
+Any other questions?
+
+522
+01:02:25,000 --> 01:02:35,000
+Wait, sorry, what was that? The online too from mod.stack. Can you, I don't know if you went over that.
+
+523
+01:02:35,000 --> 01:02:36,000
+Hey, Miley.
+
+524
+01:02:36,000 --> 01:02:37,000
+Oh, this right here?
+
+525
+01:02:37,000 --> 01:02:41,000
+Reiterate. Yeah, like, are there just, like, libraries or
+
+526
+01:02:41,000 --> 01:02:56,000
+Yeah, so this is… this little init.py file basically is telling Python that mod one is it's a module or a package or something
+
+527
+01:02:56,000 --> 01:03:08,000
+Which then means that it's looking when it's looking to find those functions we defined here, we have to tell it mod 1.
+
+528
+01:03:08,000 --> 01:03:11,000
+Mod 1 is look in this folder
+
+529
+01:03:11,000 --> 01:03:15,000
+And dot stack is look at this stack
+
+530
+01:03:15,000 --> 01:03:18,000
+file within this folder
+
+531
+01:03:18,000 --> 01:03:20,000
+Mmm, I see.
+
+532
+01:03:20,000 --> 01:03:25,000
+Okay, and then the import create stack. Those are the functions
+
+533
+01:03:25,000 --> 01:03:32,000
+Yeah, this is because we've defined the functions in this stack.py folder or file
+
+534
+01:03:32,000 --> 01:03:37,000
+And then this is saying, oh, this is where we
+
+535
+01:03:37,000 --> 01:03:40,000
+import those go to
+
+536
+01:03:40,000 --> 01:03:42,000
+This module
+
+537
+01:03:42,000 --> 01:03:46,000
+This file and find these functions
+
+538
+01:03:46,000 --> 01:03:51,000
+And bring them bring them into this test file so that we can call them.
+
+539
+01:03:51,000 --> 01:03:54,000
+I see. Okay.
+
+540
+01:03:54,000 --> 01:04:02,000
+In the future, would we ever make, like, a header file that has all of these defined? Because like
+
+541
+01:04:02,000 --> 01:04:07,000
+I imagine if we have more and more functions, that top section is going to be really large.
+
+542
+01:04:07,000 --> 01:04:13,000
+Yes, yeah. We'll talk about how we manage stuff like that with Python eventually. Yeah.
+
+543
+01:04:13,000 --> 01:04:14,000
+Okay, great.
+
+544
+01:04:14,000 --> 01:04:15,000
+Yeah.
+
+545
+01:04:15,000 --> 01:04:17,000
+Yep
+
+546
+01:04:17,000 --> 01:04:24,000
+Okay, any other questions?
+
+547
+01:04:24,000 --> 01:04:26,000
+So
+
+548
+01:04:26,000 --> 01:04:31,000
+Let's look at our stack implementation again here.
+
+549
+01:04:31,000 --> 01:04:44,000
+And I'm gonna be kind of mindful of time because I want to do an example that I want to do a linked list example as well.
+
+550
+01:04:44,000 --> 01:04:48,000
+But are we seeing anything here?
+
+551
+01:04:48,000 --> 01:04:54,000
+That we're concerned about
+
+552
+01:04:54,000 --> 01:04:56,000
+I see one.
+
+553
+01:04:56,000 --> 01:04:59,000
+So, if we only have
+
+554
+01:04:59,000 --> 01:05:01,000
+Well, actually.
+
+555
+01:05:01,000 --> 01:05:05,000
+So this would work if we have elements in the stack
+
+556
+01:05:05,000 --> 01:05:09,000
+But if we try calling this on a stack that
+
+557
+01:05:09,000 --> 01:05:16,000
+Doesn't have anything in it, I can kind of see it running into an error, because we're decrementing
+
+558
+01:05:16,000 --> 01:05:19,000
+the size, and we're trying to return
+
+559
+01:05:19,000 --> 01:05:21,000
+An element that doesn't exist
+
+560
+01:05:21,000 --> 01:05:29,000
+Okay, so maybe the behavior that might be problematic is test pop on an empty stack
+
+561
+01:05:29,000 --> 01:05:47,000
+Yeah
+
+562
+01:05:47,000 --> 01:06:04,000
+So now we have a placeholder for a test. Let's test that. Let's see. Okay, so then the question is, so we know how to set up our test. Here we're going to say we have a stack equals
+
+563
+01:06:04,000 --> 01:06:08,000
+Create a race stack three. Sure. Stop pop.
+
+564
+01:06:08,000 --> 01:06:11,000
+I want to write the code myself
+
+565
+01:06:11,000 --> 01:06:18,000
+It's been way too eager today. Okay, so we set up our test by creating an empty stack.
+
+566
+01:06:18,000 --> 01:06:27,000
+And now here we are. We want to know that if we try to pop something off an empty stack
+
+567
+01:06:27,000 --> 01:06:33,000
+We want it to be an error, right? This is why I showed the throw
+
+568
+01:06:33,000 --> 01:06:36,000
+raising the error thing.
+
+569
+01:06:36,000 --> 01:06:41,000
+So, how do we put that into a test? We do something like with
+
+570
+01:06:41,000 --> 01:06:44,000
+Self dot assert.
+
+571
+01:06:44,000 --> 01:06:45,000
+Phrases
+
+572
+01:06:45,000 --> 01:06:49,000
+Index error
+
+573
+01:06:49,000 --> 01:06:53,000
+Array stack.
+
+574
+01:06:53,000 --> 01:06:55,000
+Step
+
+575
+01:06:55,000 --> 01:07:00,000
+Okay, so what this is saying is that
+
+576
+01:07:00,000 --> 01:07:04,000
+If… so we've created
+
+577
+01:07:04,000 --> 01:07:11,000
+A stack. We haven't put anything in it. So now if we call pop on the stack
+
+578
+01:07:11,000 --> 01:07:16,000
+This is saying that we expect it to throw an error.
+
+579
+01:07:16,000 --> 01:07:21,000
+And in particular, we want it to throw an index error.
+
+580
+01:07:21,000 --> 01:07:34,000
+And I'm choosing index error just because that's what we looked at a little while ago, and that kind of makes sense, right? If you have nothing in your array
+
+581
+01:07:34,000 --> 01:07:39,000
+You would be going to index minus one. That would be bad.
+
+582
+01:07:39,000 --> 01:07:44,000
+Does this look like a reasonable test for us to try to run?
+
+583
+01:07:44,000 --> 01:07:51,000
+I'm going to run it. If anyone sees anything we should add, let me know.
+
+584
+01:07:51,000 --> 01:08:02,000
+Okay, we failed the test. Not surprised because we didn't double check for this. And it says the test failed because it didn't get an index error.
+
+585
+01:08:02,000 --> 01:08:04,000
+So
+
+586
+01:08:04,000 --> 01:08:07,000
+We will go back to our stack.
+
+587
+01:08:07,000 --> 01:08:12,000
+And we'll type… go to our stack pop and
+
+588
+01:08:12,000 --> 01:08:15,000
+look and see how do we want to change this
+
+589
+01:08:15,000 --> 01:08:22,000
+Anyone have any suggestions?
+
+590
+01:08:22,000 --> 01:08:25,000
+Only decrement the size
+
+591
+01:08:25,000 --> 01:08:28,000
+If the size is larger than
+
+592
+01:08:28,000 --> 01:08:31,000
+One, I assume?
+
+593
+01:08:31,000 --> 01:08:40,000
+Yeah, well, even only, don't even find an element unless the size is at least one.
+
+594
+01:08:40,000 --> 01:08:41,000
+Right.
+
+595
+01:08:41,000 --> 01:08:44,000
+There. Okay, so if
+
+596
+01:08:44,000 --> 01:08:48,000
+Stack of size
+
+597
+01:08:48,000 --> 01:08:53,000
+Equals the 0.
+
+598
+01:08:53,000 --> 01:09:01,000
+We can we saw our example over here, our raise index error. So we know that we're going to raise
+
+599
+01:09:01,000 --> 01:09:04,000
+index error
+
+600
+01:09:04,000 --> 01:09:08,000
+Sure.
+
+601
+01:09:08,000 --> 01:09:14,000
+And not
+
+602
+01:09:14,000 --> 01:09:18,000
+empty stack
+
+603
+01:09:18,000 --> 01:09:22,000
+Does that look okay?
+
+604
+01:09:22,000 --> 01:09:25,000
+And anyone else have any other
+
+605
+01:09:25,000 --> 01:09:32,000
+Thanks. Let me see. Well, I'm going to save this. I'm going to run our test.
+
+606
+01:09:32,000 --> 01:09:34,000
+See if that worked.
+
+607
+01:09:34,000 --> 01:09:40,000
+Okay, that passed. What else?
+
+608
+01:09:40,000 --> 01:09:46,000
+So because we already addressed the issue with the pop
+
+609
+01:09:46,000 --> 01:09:51,000
+There's also another issue with the push concerning the capacity.
+
+610
+01:09:51,000 --> 01:10:01,000
+Love it. Yes. Okay. So the behavior we care about is that Do you want to name our test for us?
+
+611
+01:10:01,000 --> 01:10:02,000
+Sure,
+
+612
+01:10:02,000 --> 01:10:10,000
+Do you want to take the hint that whatever agent is in the browser just gave you?
+
+613
+01:10:10,000 --> 01:10:13,000
+Oh, I didn't even see it.
+
+614
+01:10:13,000 --> 01:10:18,000
+Sure, like, so, like, test, push,
+
+615
+01:10:18,000 --> 01:10:20,000
+On
+
+616
+01:10:20,000 --> 01:10:27,000
+Back
+
+617
+01:10:27,000 --> 01:10:29,000
+Throws
+
+618
+01:10:29,000 --> 01:10:32,000
+Okay.
+
+619
+01:10:32,000 --> 01:10:38,000
+Okay, so here we're going to create our stack.
+
+620
+01:10:38,000 --> 01:10:49,000
+And don't do that.
+
+621
+01:10:49,000 --> 01:10:57,000
+And I'm going to put three things in the stack. This is
+
+622
+01:10:57,000 --> 01:11:04,000
+Okay. Actually, this all seems very reasonable. I'm going to hit tab on this. I hate myself for hitting tab on this.
+
+623
+01:11:04,000 --> 01:11:08,000
+There we go.
+
+624
+01:11:08,000 --> 01:11:11,000
+I'm going to copy paste is what I'm going to do.
+
+625
+01:11:11,000 --> 01:11:23,000
+I'm gonna A, B, C, and then I'm going to, so here that was our test
+
+626
+01:11:23,000 --> 01:11:30,000
+Our setup. We're setting up the stack in order for us to be able to run the test.
+
+627
+01:11:30,000 --> 01:11:43,000
+And then I'm going to look over here and with self, not assert raises
+
+628
+01:11:43,000 --> 01:11:46,000
+Maray
+
+629
+01:11:46,000 --> 01:11:52,000
+Stack. Bush because we were trying to push something and it's already full.
+
+630
+01:11:52,000 --> 01:11:55,000
+Stack.
+
+631
+01:11:55,000 --> 01:12:00,000
+Does that look reasonable?
+
+632
+01:12:00,000 --> 01:12:04,000
+I'm going to save this
+
+633
+01:12:04,000 --> 01:12:07,000
+We'll hit run on it just because
+
+634
+01:12:07,000 --> 01:12:10,000
+I think we expected fails
+
+635
+01:12:10,000 --> 01:12:15,000
+Oh
+
+636
+01:12:15,000 --> 01:12:17,000
+It worked
+
+637
+01:12:17,000 --> 01:12:19,000
+Are we surprised about that?
+
+638
+01:12:19,000 --> 01:12:27,000
+that we expect it to run or work pass.
+
+639
+01:12:27,000 --> 01:12:31,000
+Anyone surprised?
+
+640
+01:12:31,000 --> 01:12:32,000
+I was surprised.
+
+641
+01:12:32,000 --> 01:12:35,000
+I'm surprised
+
+642
+01:12:35,000 --> 01:12:36,000
+Anyone else? Show of hands.
+
+643
+01:12:36,000 --> 01:12:38,000
+Or can anyone explain it?
+
+644
+01:12:38,000 --> 01:12:41,000
+Let's look at it. Let's look at it.
+
+645
+01:12:41,000 --> 01:12:45,000
+So we were pushing
+
+646
+01:12:45,000 --> 01:12:48,000
+And we
+
+647
+01:12:48,000 --> 01:13:00,000
+Calculate the next index, and then we put something in that next index and then we increment the size
+
+648
+01:13:00,000 --> 01:13:03,000
+So that we
+
+649
+01:13:03,000 --> 01:13:06,000
+know that next time
+
+650
+01:13:06,000 --> 01:13:09,000
+Where to put something in. So
+
+651
+01:13:09,000 --> 01:13:17,000
+But we did not. Our test specifically said, look for an index error.
+
+652
+01:13:17,000 --> 01:13:19,000
+And over here
+
+653
+01:13:19,000 --> 01:13:24,000
+When we did our pop, we had to specify our index error
+
+654
+01:13:24,000 --> 01:13:33,000
+And then it was raised in our test and we expected that. But we didn't raise an index error over here.
+
+655
+01:13:33,000 --> 01:13:37,000
+So what happened?
+
+656
+01:13:37,000 --> 01:13:42,000
+I'm gonna go to my handy-dandy Python console
+
+657
+01:13:42,000 --> 01:13:57,000
+And I'm going to basically look at this line. And here we have, actually, I'm going to create some something
+
+658
+01:13:57,000 --> 01:14:03,000
+I'm going to create a data of I'm going to put
+
+659
+01:14:03,000 --> 01:14:06,000
+Three things in it
+
+660
+01:14:06,000 --> 01:14:09,000
+Times none
+
+661
+01:14:09,000 --> 01:14:15,000
+So here
+
+662
+01:14:15,000 --> 01:14:18,000
+I did that wrong, didn't I
+
+663
+01:14:18,000 --> 01:14:21,000
+And who… Adiya, go ahead.
+
+664
+01:14:21,000 --> 01:14:31,000
+Yeah, I was wondering, does PyCharm have, like, a debugger and, like, can you just… if you've used it, like, can you show us how we… or is the console like
+
+665
+01:14:31,000 --> 01:14:33,000
+like, interactively debugging
+
+666
+01:14:33,000 --> 01:14:38,000
+Yes, thank you for bringing up that that's a great question. So
+
+667
+01:14:38,000 --> 01:14:56,000
+I am specifically using the Python console today, and I like to use the Python console early on in the quarter to show people kind of ways to explore Python in a very lightweight way
+
+668
+01:14:56,000 --> 01:15:04,000
+and kind of ask questions and kind of figure out what Python's doing, or how to… how to explore and understand it.
+
+669
+01:15:04,000 --> 01:15:07,000
+But you're right.
+
+670
+01:15:07,000 --> 01:15:19,000
+PyCharm has a debugger that we can absolutely use. We will look at how we debug this right after we do this.
+
+671
+01:15:19,000 --> 01:15:32,000
+So here I'm just going to create. This is did it backwards. But now I've got it right. I've got my data list over here that
+
+672
+01:15:32,000 --> 01:15:37,000
+We know is because we see inside of our array implementation right here
+
+673
+01:15:37,000 --> 01:15:44,000
+We know that this is the shape of the thing that we expect to happen.
+
+674
+01:15:44,000 --> 01:15:49,000
+And basically what's happening is we put
+
+675
+01:15:49,000 --> 01:15:59,000
+Are 3 things into our stack, and then we try to put the fourth thing in. And the way we try to put the fourth thing in is by saying data of four
+
+676
+01:15:59,000 --> 01:16:01,000
+equals
+
+677
+01:16:01,000 --> 01:16:03,000
+C.
+
+678
+01:16:03,000 --> 01:16:09,000
+And is that right? Or data of three equals C.
+
+679
+01:16:09,000 --> 01:16:12,000
+3 equals 3. See?
+
+680
+01:16:12,000 --> 01:16:15,000
+That's right. We're trying to put it in the
+
+681
+01:16:15,000 --> 01:16:22,000
+3rd spot. So I'm I'm gonna put it here in the console just to experiment.
+
+682
+01:16:22,000 --> 01:16:25,000
+And here it shows me
+
+683
+01:16:25,000 --> 01:16:33,000
+that it throws an index error because the list assignment index is out of range.
+
+684
+01:16:33,000 --> 01:16:36,000
+What that means is that this three
+
+685
+01:16:36,000 --> 01:16:44,000
+is bigger than the largest index that we have available in our data list right here.
+
+686
+01:16:44,000 --> 01:16:49,000
+So it throws an index error
+
+687
+01:16:49,000 --> 01:16:52,000
+And this is why I chose
+
+688
+01:16:52,000 --> 01:16:56,000
+an index error for our pop
+
+689
+01:16:56,000 --> 01:17:06,000
+That we wanted to see. So if we ever go below 0, we're going to throw an index error. And here we didn't explicitly throw an index error.
+
+690
+01:17:06,000 --> 01:17:17,000
+But our Python list is doing it for us because we tried to access an element outside of the range here.
+
+691
+01:17:17,000 --> 01:17:31,000
+So I personally would like to be more explicit about it rather than relying on knowing what's going to happen in this line of code. So I would like to say something here, something like if
+
+692
+01:17:31,000 --> 01:17:35,000
+If next
+
+693
+01:17:35,000 --> 01:17:39,000
+Next, index
+
+694
+01:17:39,000 --> 01:17:44,000
+In fact, I might even do it. I like it.
+
+695
+01:17:44,000 --> 01:17:46,000
+If
+
+696
+01:17:46,000 --> 01:17:50,000
+stack of size
+
+697
+01:17:50,000 --> 01:17:56,000
+Inquals line of stack of data
+
+698
+01:17:56,000 --> 01:18:01,000
+Then raise index error.
+
+699
+01:18:01,000 --> 01:18:03,000
+Stack is full.
+
+700
+01:18:03,000 --> 01:18:05,000
+Sure, I'll take that.
+
+701
+01:18:05,000 --> 01:18:09,000
+So I'm going to be just a little bit more explicit about it.
+
+702
+01:18:09,000 --> 01:18:11,000
+And just to show
+
+703
+01:18:11,000 --> 01:18:16,000
+This, I'm gonna come over here, and I'm gonna rerun this test.
+
+704
+01:18:16,000 --> 01:18:24,000
+And it's still going to pass because we're still throwing an index error. We're just not doing it
+
+705
+01:18:24,000 --> 01:18:26,000
+We're not relying on the
+
+706
+01:18:26,000 --> 01:18:35,000
+underline Python thing to implement this. I'm going to comment this out for just a second.
+
+707
+01:18:35,000 --> 01:18:42,000
+Because Dia asked about debugging via PyCharm, and that's super helpful.
+
+708
+01:18:42,000 --> 01:18:47,000
+So let's say I have this test
+
+709
+01:18:47,000 --> 01:18:49,000
+Oh wait, this one
+
+710
+01:18:49,000 --> 01:18:51,000
+There's one failing
+
+711
+01:18:51,000 --> 01:18:55,000
+Well, sure. Okay. Maybe I'm looking at this.
+
+712
+01:18:55,000 --> 01:19:09,000
+I'm looking at this and I'm thinking, oh gee, I thought this test would fail, but it passed, so I'm going to step through and try to figure out what's going on.
+
+713
+01:19:09,000 --> 01:19:20,000
+I'm going to put a debug point here by clicking in the line number. So I've got it right over here. Then I'm going to come over here, I'm going to pop this down
+
+714
+01:19:20,000 --> 01:19:28,000
+I'm not going to do it that way. I'm going to click on it and I'm going to say debug Python test.
+
+715
+01:19:28,000 --> 01:19:32,000
+This is going to start our debugger
+
+716
+01:19:32,000 --> 01:19:34,000
+And
+
+717
+01:19:34,000 --> 01:19:44,000
+It is going to go through here. It's showing me my call stack. I'm going to go through this just very briefly. We're at this line of code
+
+718
+01:19:44,000 --> 01:19:53,000
+That we're pushing. We're trying to push A onto the stack. I'm going to hit
+
+719
+01:19:53,000 --> 01:20:05,000
+resume, and it's going to run again until the next call. So now we're putting B on the stack, and you can see what's happening with our stack implementation right here as we go
+
+720
+01:20:05,000 --> 01:20:10,000
+I'm going to hit run again. Now we're calling it again with C.
+
+721
+01:20:10,000 --> 01:20:14,000
+And now we're calling it again with D.
+
+722
+01:20:14,000 --> 01:20:29,000
+And so now this is where I'm trying to figure out where that index error comes from. So I'm going to step over, and that means I'm not going to keep running. I'm just going to go over to the next line of code
+
+723
+01:20:29,000 --> 01:20:37,000
+So now I'm down here at this one. So I've got through this line of code. This didn't throw any errors, but now I'm in this line of code.
+
+724
+01:20:37,000 --> 01:20:47,000
+I'm gonna step over again and see what happens. And here, that's where it threw the error, and then the test passed.
+
+725
+01:20:47,000 --> 01:20:51,000
+Any questions on that? I went very quickly.
+
+726
+01:20:51,000 --> 01:20:53,000
+And
+
+727
+01:20:53,000 --> 01:21:02,000
+I will answer any questions on it, but I don't want to go too much more into the debug right now
+
+728
+01:21:02,000 --> 01:21:09,000
+But I do want to show it so that y'all can play around with it while you're doing your assignment.
+
+729
+01:21:09,000 --> 01:21:14,000
+Wait, so did PyCharm accept
+
+730
+01:21:14,000 --> 01:21:18,000
+Putting an element into an index that didn't exist or
+
+731
+01:21:18,000 --> 01:21:23,000
+Oh, no, it's through an error.
+
+732
+01:21:23,000 --> 01:21:24,000
+I just
+
+733
+01:21:24,000 --> 01:21:28,000
+Oh, okay. Wait, does it show the error in the console somewhere or
+
+734
+01:21:28,000 --> 01:21:33,000
+I don't think we
+
+735
+01:21:33,000 --> 01:21:41,000
+I don't think it showed it because it then returned. Let me, let me
+
+736
+01:21:41,000 --> 01:21:43,000
+Let me try this one more time.
+
+737
+01:21:43,000 --> 01:21:49,000
+Yeah, actually, let's try it one more time. I'll go a little slower
+
+738
+01:21:49,000 --> 01:21:57,000
+I'm going to hit this button again, or this button down here to rerun the same test.
+
+739
+01:21:57,000 --> 01:22:12,000
+Okay, so here we're pushing A onto the stack. I'm going to run again. Just keep on running the program until it comes back to this line again. So that's that one. Okay, now we're putting B on the stack
+
+740
+01:22:12,000 --> 01:22:15,000
+Now we're putting C on the stack
+
+741
+01:22:15,000 --> 01:22:24,000
+Now we're putting D on the stack. This is where I'm suspicious, so I'm going to start doing my step over
+
+742
+01:22:24,000 --> 01:22:26,000
+And
+
+743
+01:22:26,000 --> 01:22:32,000
+This is where I happen to know that the error is going to happen and
+
+744
+01:22:32,000 --> 01:22:38,000
+I don't think it's going to
+
+745
+01:22:38,000 --> 01:22:40,000
+I'm just checking here.
+
+746
+01:22:40,000 --> 01:22:51,000
+Yeah. So it's it doesn't do anything when so in general, when you're in the debugger and
+
+747
+01:22:51,000 --> 01:22:54,000
+An exception throws
+
+748
+01:22:54,000 --> 01:22:56,000
+It just
+
+749
+01:22:56,000 --> 01:23:02,000
+It just throws, you usually do see something down here. But because we're in
+
+750
+01:23:02,000 --> 01:23:08,000
+Can you say one more time, one more time, one more time.
+
+751
+01:23:08,000 --> 01:23:11,000
+A, B, C.
+
+752
+01:23:11,000 --> 01:23:13,000
+We're in D
+
+753
+01:23:13,000 --> 01:23:18,000
+Or stepping over. And I'm going to step out
+
+754
+01:23:18,000 --> 01:23:21,000
+No, it's not going to show it.
+
+755
+01:23:21,000 --> 01:23:28,000
+This is not a good scenario for us to be able to see that
+
+756
+01:23:28,000 --> 01:23:31,000
+Error being thrown
+
+757
+01:23:31,000 --> 01:23:33,000
+Hmm, I see.
+
+758
+01:23:33,000 --> 01:23:38,000
+Yeah, this is very surprising. Usually the debugger exits with, like, an error code or something
+
+759
+01:23:38,000 --> 01:23:44,000
+Yeah, it's… well, it's because it's because it's the test that's running. It's just
+
+760
+01:23:44,000 --> 01:23:48,000
+It's not
+
+761
+01:23:48,000 --> 01:23:54,000
+the test is capturing, right, the test is capturing that
+
+762
+01:23:54,000 --> 01:23:58,000
+It was expecting an error to be thrown.
+
+763
+01:23:58,000 --> 01:24:11,000
+That's why we're not saying it. If it were just an error and we weren't in the test fixture that was expecting the error, you would see more.
+
+764
+01:24:11,000 --> 01:24:14,000
+But I'm not going to dwell too much on this right now.
+
+765
+01:24:14,000 --> 01:24:21,000
+Because I want us to see some other stuff, and we will have plenty of opportunity to
+
+766
+01:24:21,000 --> 01:24:25,000
+find our errors and get very comfortable with our debugger.
+
+767
+01:24:25,000 --> 01:24:34,000
+It's only because of We are very specifically in a test that was expecting an error.
+
+768
+01:24:34,000 --> 01:24:36,000
+That we couldn't see more.
+
+769
+01:24:36,000 --> 01:24:39,000
+Okay, any other questions?
+
+770
+01:24:39,000 --> 01:24:46,000
+I'm kind of liking where we are on our stack implementation right now.
+
+771
+01:24:46,000 --> 01:24:49,000
+With our array.
+
+772
+01:24:49,000 --> 01:24:51,000
+We've got a couple of tests
+
+773
+01:24:51,000 --> 01:24:53,000
+We've got
+
+774
+01:24:53,000 --> 01:24:59,000
+A couple of functions. We've represented our stack
+
+775
+01:24:59,000 --> 01:25:07,000
+With this array that this Python list that we are pretending is an array, and it's working well for us
+
+776
+01:25:07,000 --> 01:25:09,000
+So far.
+
+777
+01:25:09,000 --> 01:25:18,000
+When we pop, we are going to check and make sure that the stack is not empty first.
+
+778
+01:25:18,000 --> 01:25:23,000
+And then we're going to put something on the… oh, sorry
+
+779
+01:25:23,000 --> 01:25:28,000
+Yes, make sure it's not empty. And then we take our thing out.
+
+780
+01:25:28,000 --> 01:25:31,000
+And then when we push on it, we're going to make sure that our
+
+781
+01:25:31,000 --> 01:25:40,000
+Stuck is not full, and then we can put something into it.
+
+782
+01:25:40,000 --> 01:25:54,000
+I'd like to move on to a linked list implementation. You guys ready for that? Any last questions?
+
+783
+01:25:54,000 --> 01:26:03,000
+Oh, that's two, two lines. So where do we start? I'm going to
+
+784
+01:26:03,000 --> 01:26:06,000
+Let's see
+
+785
+01:26:06,000 --> 01:26:09,000
+Let's start with our
+
+786
+01:26:09,000 --> 01:26:13,000
+linked list
+
+787
+01:26:13,000 --> 01:26:17,000
+I'm going to start with
+
+788
+01:26:17,000 --> 01:26:22,000
+My console over here. So
+
+789
+01:26:22,000 --> 01:26:29,000
+I'm going to come back to our stack file. We are going to
+
+790
+01:26:29,000 --> 01:26:31,000
+Come back over here.
+
+791
+01:26:31,000 --> 01:26:36,000
+So now, if you remember from our
+
+792
+01:26:36,000 --> 01:26:42,000
+Our class on Monday. Our linked list looks a little bit different.
+
+793
+01:26:42,000 --> 01:26:48,000
+It has a head and it has, and then we have those nodes.
+
+794
+01:26:48,000 --> 01:26:57,000
+Right? So we have to think about what our implementation is going to be.
+
+795
+01:26:57,000 --> 01:27:04,000
+And how we're gonna put this together. And I'm going to use a dictionary.
+
+796
+01:27:04,000 --> 01:27:24,000
+Just like we used a dictionary for our stack, I'm going to also use a dictionary for our linked list
+
+797
+01:27:24,000 --> 01:27:28,000
+I'm going to
+
+798
+01:27:28,000 --> 01:27:30,000
+I'll just put it all in here.
+
+799
+01:27:30,000 --> 01:27:39,000
+So first, we're going to create, we're going to do our
+
+800
+01:27:39,000 --> 01:27:42,000
+Create linked list.
+
+801
+01:27:42,000 --> 01:27:56,000
+Or create linked linkless stack
+
+802
+01:27:56,000 --> 01:28:00,000
+Okay, so we have our create linked stack.
+
+803
+01:28:00,000 --> 01:28:07,000
+And I'm going to show just briefly
+
+804
+01:28:07,000 --> 01:28:22,000
+For us to remember
+
+805
+01:28:22,000 --> 01:28:38,000
+Okay. This is what our linked list looks like. So we have a pointer to the head. Later, we also talked about keeping track of the size or the number of elements in here. We also have our nodes
+
+806
+01:28:38,000 --> 01:28:44,000
+Our node holds some data and then the next item. So
+
+807
+01:28:44,000 --> 01:28:50,000
+If we are looking at this, if we're going to create a linked list stack
+
+808
+01:28:50,000 --> 01:28:58,000
+What needs to go into our linked list definition to start with?
+
+809
+01:28:58,000 --> 01:29:03,000
+It's going to be a dictionary. So I'm going to start with my curly braces.
+
+810
+01:29:03,000 --> 01:29:07,000
+And
+
+811
+01:29:07,000 --> 01:29:09,000
+I want a head
+
+812
+01:29:09,000 --> 01:29:15,000
+That's going to be the first node in the list
+
+813
+01:29:15,000 --> 01:29:21,000
+And then we're going to keep track of the size as well.
+
+814
+01:29:21,000 --> 01:29:28,000
+Because that seemed helpful as we were going through it the other day in class.
+
+815
+01:29:28,000 --> 01:29:39,000
+So now I know where my head is and the size. But the question is, then what is head?
+
+816
+01:29:39,000 --> 01:29:46,000
+It is going to be a node, so I'm going to need some way of creating a node
+
+817
+01:29:46,000 --> 01:29:49,000
+And
+
+818
+01:29:49,000 --> 01:29:51,000
+Let's see.
+
+819
+01:29:51,000 --> 01:29:59,000
+Our node is going to have value associated with it.
+
+820
+01:29:59,000 --> 01:30:05,000
+And I'm going to return. I'm also going to use a dictionary to model
+
+821
+01:30:05,000 --> 01:30:07,000
+our data and hold it
+
+822
+01:30:07,000 --> 01:30:11,000
+And it's our picture here.
+
+823
+01:30:11,000 --> 01:30:13,000
+So we have some data
+
+824
+01:30:13,000 --> 01:30:19,000
+And then we have a pointer to the next thing.
+
+825
+01:30:19,000 --> 01:30:25,000
+So
+
+826
+01:30:25,000 --> 01:30:33,000
+Our payload or our data. It's going to be that value. And then
+
+827
+01:30:33,000 --> 01:30:35,000
+We have
+
+828
+01:30:35,000 --> 01:30:40,000
+The pointer to the next item.
+
+829
+01:30:40,000 --> 01:30:49,000
+The next note in our list
+
+830
+01:30:49,000 --> 01:30:52,000
+Do we want to, I'm going
+
+831
+01:30:52,000 --> 01:30:58,000
+Let y'all join in. Do we want to
+
+832
+01:30:58,000 --> 01:31:03,000
+Do we want to define our push and our pop or our create stack
+
+833
+01:31:03,000 --> 01:31:10,000
+We're pushing our pump. We want to do that first or do we want to write our tests first?
+
+834
+01:31:10,000 --> 01:31:13,000
+Anyone have a preference?
+
+835
+01:31:13,000 --> 01:31:17,000
+We can have the same tests, right?
+
+836
+01:31:17,000 --> 01:31:22,000
+The same kind of test. I'm going to separate them.
+
+837
+01:31:22,000 --> 01:31:31,000
+But I can basically copy and paste these and replace stack with linked list.
+
+838
+01:31:31,000 --> 01:31:32,000
+Should we try that?
+
+839
+01:31:32,000 --> 01:31:33,000
+Yeah
+
+840
+01:31:33,000 --> 01:31:37,000
+Let's do it
+
+841
+01:31:37,000 --> 01:31:44,000
+Still old school here.
+
+842
+01:31:44,000 --> 01:31:46,000
+Okay
+
+843
+01:31:46,000 --> 01:31:48,000
+Let's see
+
+844
+01:31:48,000 --> 01:31:50,000
+Pull that up
+
+845
+01:31:50,000 --> 01:31:54,000
+And then this test bush.
+
+846
+01:31:54,000 --> 01:31:55,000
+Test
+
+847
+01:31:55,000 --> 01:32:01,000
+Great, push them pop, returns noise first, and then
+
+848
+01:32:01,000 --> 01:32:25,000
+I'm just gonna
+
+849
+01:32:25,000 --> 01:32:31,000
+Be careful. Yes, yes, yes, yes.
+
+850
+01:32:31,000 --> 01:32:36,000
+Yes, yes, yes, yes, it's, yes, yes.
+
+851
+01:32:36,000 --> 01:32:39,000
+Okay.
+
+852
+01:32:39,000 --> 01:32:44,000
+I think that looks right, but I do want to make this test
+
+853
+01:32:44,000 --> 01:32:47,000
+Link
+
+854
+01:32:47,000 --> 01:32:51,000
+But in a whole lot of thought into this
+
+855
+01:32:51,000 --> 01:32:52,000
+A
+
+856
+01:32:52,000 --> 01:33:08,000
+Does that look okay? I just put them all in the same test class. So we have test push on stack, then test linked, push, then pop returns newest value first.
+
+857
+01:33:08,000 --> 01:33:14,000
+So that means we have to have a create linked stack, a linked stack push
+
+858
+01:33:14,000 --> 01:33:17,000
+The linked stack pop.
+
+859
+01:33:17,000 --> 01:33:20,000
+Okay, these look okay to everyone.
+
+860
+01:33:20,000 --> 01:33:25,000
+If anyone notices anything else that should be
+
+861
+01:33:25,000 --> 01:33:29,000
+I'm just going to confirm that they all fail. Then I maybe got the
+
+862
+01:33:29,000 --> 01:33:31,000
+Right? Okay.
+
+863
+01:33:31,000 --> 01:33:33,000
+Okay, so
+
+864
+01:33:33,000 --> 01:33:36,000
+Let's come over here and first
+
+865
+01:33:36,000 --> 01:33:41,000
+That's create
+
+866
+01:33:41,000 --> 01:33:43,000
+Stack.
+
+867
+01:33:43,000 --> 01:33:45,000
+And
+
+868
+01:33:45,000 --> 01:33:50,000
+We are assuming that it takes a capacity, right?
+
+869
+01:33:50,000 --> 01:33:55,000
+And then we need
+
+870
+01:33:55,000 --> 01:34:03,000
+I don't know what it is anymore. Stack push, link to stack push
+
+871
+01:34:03,000 --> 01:34:08,000
+And we need a stack and some data.
+
+872
+01:34:08,000 --> 01:34:11,000
+And death linked
+
+873
+01:34:11,000 --> 01:34:13,000
+Stack up
+
+874
+01:34:13,000 --> 01:34:15,000
+stack
+
+875
+01:34:15,000 --> 01:34:17,000
+Ellen
+
+876
+01:34:17,000 --> 01:34:21,000
+That's okay, looking okay.
+
+877
+01:34:21,000 --> 01:34:28,000
+So we're getting down to the wire here.
+
+878
+01:34:28,000 --> 01:34:32,000
+First, creating our linked stack.
+
+879
+01:34:32,000 --> 01:34:40,000
+What do we need to do? We need to create a new linked list
+
+880
+01:34:40,000 --> 01:34:54,000
+Oh, wait.
+
+881
+01:34:54,000 --> 01:34:59,000
+I'm looking at this. So I'm looking at these two
+
+882
+01:34:59,000 --> 01:35:10,000
+Oops, I wasn't paying attention. I was just kind of copying and pasting stuff around. And I ended up with two create linked stack functions
+
+883
+01:35:10,000 --> 01:35:13,000
+What's the difference between these two?
+
+884
+01:35:13,000 --> 01:35:17,000
+One takes a capacity, one does not.
+
+885
+01:35:17,000 --> 01:35:21,000
+Which one should I use?
+
+886
+01:35:21,000 --> 01:35:30,000
+And why
+
+887
+01:35:30,000 --> 01:35:47,000
+So I went around and I created this one thinking, oh, we're just going to create a link stack. And then this one came out of, oh, I was copying and pasting my array based functions or tests. And so
+
+888
+01:35:47,000 --> 01:35:57,000
+copying the array functions and my array stack was created with a capacity
+
+889
+01:35:57,000 --> 01:36:00,000
+Do I need the capacity?
+
+890
+01:36:00,000 --> 01:36:01,000
+No.
+
+891
+01:36:01,000 --> 01:36:05,000
+No, why not
+
+892
+01:36:05,000 --> 01:36:10,000
+Because we're working with a linked list, and we do not have to know the capacity for our linked list
+
+893
+01:36:10,000 --> 01:36:18,000
+Before we create it, we can just keep putting things on. That's one of the trade-offs between our linked list and our array.
+
+894
+01:36:18,000 --> 01:36:25,000
+Yeah, Ray, we have to know how many things we are putting into it. This one, we don't need the capacity.
+
+895
+01:36:25,000 --> 01:36:29,000
+My test is going to break over there. That's okay. We'll fix it in a second.
+
+896
+01:36:29,000 --> 01:36:38,000
+So now we have created. We have our create linked list, and I think that's reasonable because our linked list, all it is
+
+897
+01:36:38,000 --> 01:36:43,000
+And it, at its core is a pointer to the very first element in the list. And then
+
+898
+01:36:43,000 --> 01:36:48,000
+We are choosing to keep track of how many things we have in the list.
+
+899
+01:36:48,000 --> 01:36:51,000
+Okay.
+
+900
+01:36:51,000 --> 01:36:54,000
+Let's do our push.
+
+901
+01:36:54,000 --> 01:36:56,000
+And
+
+902
+01:36:56,000 --> 01:37:09,000
+We are adding something into the into the list. So the first thing we need to do or one thing we need to do is to create our node.
+
+903
+01:37:09,000 --> 01:37:11,000
+That holds our data
+
+904
+01:37:11,000 --> 01:37:14,000
+And then
+
+905
+01:37:14,000 --> 01:37:24,000
+And then we need to add it into our list. Where are we going to add to the list? Are we going to add to the end or the beginning?
+
+906
+01:37:24,000 --> 01:37:37,000
+Anyone have a preference, a thought?
+
+907
+01:37:37,000 --> 01:37:39,000
+I'd say probably the end.
+
+908
+01:37:39,000 --> 01:37:43,000
+We can advocate the head and update the head also.
+
+909
+01:37:43,000 --> 01:37:54,000
+Okay, we got we got a vote for the head and we've got a vote for the tail.
+
+910
+01:37:54,000 --> 01:37:58,000
+Okay, got another vote for the head.
+
+911
+01:37:58,000 --> 01:38:04,000
+I think depending if you want to push or pop to be ON or O1, it changes very
+
+912
+01:38:04,000 --> 01:38:21,000
+That's right. Whether or not we push it, put it in the beginning or the end depends. It's going to impact the runtime. So if we put it at the end, we have to start at the beginning and we have to iterate all the way through in order to put it at the end
+
+913
+01:38:21,000 --> 01:38:24,000
+We put it at the head, it's right there.
+
+914
+01:38:24,000 --> 01:38:29,000
+We've got another reason we want to put it on the head.
+
+915
+01:38:29,000 --> 01:38:33,000
+Anyone
+
+916
+01:38:33,000 --> 01:38:34,000
+Yeah.
+
+917
+01:38:34,000 --> 01:38:35,000
+I'm just going to shout out because we're almost done.
+
+918
+01:38:35,000 --> 01:38:39,000
+The access… the access time is also 01, if we put at the head
+
+919
+01:38:39,000 --> 01:38:51,000
+Yes, our access time, and this matters in particular right now because of our stack. We are implementing a stack. So we always want the thing at the front of the list.
+
+920
+01:38:51,000 --> 01:38:57,000
+And so that then makes it super, super efficient. If we know we're putting it on the front
+
+921
+01:38:57,000 --> 01:39:02,000
+It's going to be O of 1, and that's all we're ever going to use because of
+
+922
+01:39:02,000 --> 01:39:04,000
+We're making a stack.
+
+923
+01:39:04,000 --> 01:39:05,000
+Okay, so
+
+924
+01:39:05,000 --> 01:39:07,000
+We've created our new node
+
+925
+01:39:07,000 --> 01:39:24,000
+what we need to do is tell that new node to point at whatever the current head is
+
+926
+01:39:24,000 --> 01:39:26,000
+And
+
+927
+01:39:26,000 --> 01:39:31,000
+then we have to point the stack
+
+928
+01:39:31,000 --> 01:39:34,000
+To look at the new node
+
+929
+01:39:34,000 --> 01:39:44,000
+And then we also need to update the size.
+
+930
+01:39:44,000 --> 01:39:45,000
+Does that look okay?
+
+931
+01:39:45,000 --> 01:39:54,000
+We're coming down to the end of class, so I'm gonna try to be quick on this. I'm gonna implement this… oh, did it
+
+932
+01:39:54,000 --> 01:39:59,000
+Okay, I'm going to try to implement this quickly for
+
+933
+01:39:59,000 --> 01:40:05,000
+First of Renault
+
+934
+01:40:05,000 --> 01:40:13,000
+For test or pop. Again, we're popping right off the right off the head of the list.
+
+935
+01:40:13,000 --> 01:40:18,000
+So looking at our image again, when we pop, we want to find this
+
+936
+01:40:18,000 --> 01:40:22,000
+And then we want to basically point
+
+937
+01:40:22,000 --> 01:40:27,000
+move this head pointer to be whatever this is pointing at, and then return the data
+
+938
+01:40:27,000 --> 01:40:32,000
+So
+
+939
+01:40:32,000 --> 01:40:35,000
+It was a stack of
+
+940
+01:40:35,000 --> 01:40:38,000
+head
+
+941
+01:40:38,000 --> 01:40:51,000
+I want to say data node just because. And then we're going to say stack of head
+
+942
+01:40:51,000 --> 01:40:56,000
+equals data node of
+
+943
+01:40:56,000 --> 01:40:57,000
+Next
+
+944
+01:40:57,000 --> 01:41:01,000
+That's moving that head arrow
+
+945
+01:41:01,000 --> 01:41:08,000
+And then I'm going to
+
+946
+01:41:08,000 --> 01:41:16,000
+But reduce the size. And then I'm going to return
+
+947
+01:41:16,000 --> 01:41:23,000
+The data
+
+948
+01:41:23,000 --> 01:41:25,000
+Oh, our pop
+
+949
+01:41:25,000 --> 01:41:28,000
+Should not do that
+
+950
+01:41:28,000 --> 01:41:35,000
+That's it.
+
+951
+01:41:35,000 --> 01:41:46,000
+Okay, look okay. We're not scoring any errors here. I'm going to run our tests real quick and see what happens.
+
+952
+01:41:46,000 --> 01:41:51,000
+Okay, we filled our test. Let's see what we've failed here.
+
+953
+01:41:51,000 --> 01:42:15,000
+Oh, create link stack is not defined. Okay, that happens all the time. I'm going to come over here and say
+
+954
+01:42:15,000 --> 01:42:19,000
+So that's a little annoying.
+
+955
+01:42:19,000 --> 01:42:22,000
+Just doing it today
+
+956
+01:42:22,000 --> 01:42:25,000
+Still failed
+
+957
+01:42:25,000 --> 01:42:34,000
+Create linked stack. It's not supposed to take anything.
+
+958
+01:42:34,000 --> 01:42:42,000
+And now we passed. Okay, so we pushed then popped. That seemed to work.
+
+959
+01:42:42,000 --> 01:42:45,000
+This does not throw
+
+960
+01:42:45,000 --> 01:42:48,000
+Again, if we had
+
+961
+01:42:48,000 --> 01:42:56,000
+Remove this
+
+962
+01:42:56,000 --> 01:43:00,000
+Okay, got an interesting error here.
+
+963
+01:43:00,000 --> 01:43:15,000
+Just at the very last minute
+
+964
+01:43:15,000 --> 01:43:20,000
+Anyone know what's going on here?
+
+965
+01:43:20,000 --> 01:43:29,000
+So it's telling me none is not subscriptible. So our stack
+
+966
+01:43:29,000 --> 01:43:38,000
+Oh
+
+967
+01:43:38,000 --> 01:43:41,000
+Okay, I'm going to put a pause in this
+
+968
+01:43:41,000 --> 01:43:58,000
+Because we are at time and that is how this goes, of course. We're going along swimmingly until we get to the last minute of class and then we hit an error and our test fails and we need a couple more minutes to look at it
+
+969
+01:43:58,000 --> 01:44:04,000
+So I will just wrap us up for tonight.
+
+970
+01:44:04,000 --> 01:44:21,000
+I will push this code to our in-class code repository so that you guys can have this and play with this and experiment with this. And next Monday we'll come back to it and we will wrap this up
+
+971
+01:44:21,000 --> 01:44:28,000
+Where we see just the end of this and kind of make sure all of our tests pass and hit on a couple of different things.
+
+972
+01:44:28,000 --> 01:44:37,000
+But this is… this should give you, a good, a good foundation for
+
+973
+01:44:37,000 --> 01:44:40,000
+starting assignment to
+
+974
+01:44:40,000 --> 01:44:43,000
+We've seen our code
+
+975
+01:44:43,000 --> 01:45:00,000
+We've seen our code, how we can structure it and look at it within PyCharm, how we can run our tests, how we can debug them, kind of what we're looking for when we've got our array implementation for a stack versus a linked list
+
+976
+01:45:00,000 --> 01:45:10,000
+implementation for our staff, the use of this dictionary as kind of a lightweight data structure, lightweight structure, I'll say, to to hold some stuff together.
+
+977
+01:45:10,000 --> 01:45:19,000
+Any questions before we finish up tonight?
+
+978
+01:45:19,000 --> 01:45:24,000
+I'm not sure how much time, you have left, Professor or anyone else. Feel free to
+
+979
+01:45:24,000 --> 01:45:29,000
+leave anyone if you don't have any time. But I have a guess as to why
+
+980
+01:45:29,000 --> 01:45:31,000
+this error showed.
+
+981
+01:45:31,000 --> 01:45:45,000
+Okay, before you… before I do that, I'm happy to stay a couple minutes and also let anyone else go. But does anyone else have any other questions before we look at that?
+
+982
+01:45:45,000 --> 01:45:56,000
+Okay, so I will say goodnight to everyone and anyone who wants to stick around for just a couple more minutes. And Rudy, we can look at this and see what's
+
+983
+01:45:56,000 --> 01:46:00,000
+See what's work, what you got in mind
+
+984
+01:46:00,000 --> 01:46:09,000
+Awesome. Yeah, so it was back to that like the none thing for initializing the node
+
+985
+01:46:09,000 --> 01:46:13,000
+The node function. If you go to the stack dot
+
+986
+01:46:13,000 --> 01:46:15,000
+By
+
+987
+01:46:15,000 --> 01:46:23,000
+No… yeah, so the create node function. So like in C,
+
+988
+01:46:23,000 --> 01:46:38,000
+I think the way that I remember you creating a node is, you know, you would do the same thing, you would create a struct, one field with like the payload and then another field with the next. But the next field is supposed to be pointing to
+
+989
+01:46:38,000 --> 01:46:44,000
+to the same type, so it's supposed to be pointing to create node
+
+990
+01:46:44,000 --> 01:46:50,000
+Like, the next field is supposed to be pointing to a node
+
+991
+01:46:50,000 --> 01:46:56,000
+But here you have none. So I'm wondering if instead of none, you have to put create node there.
+
+992
+01:46:56,000 --> 01:47:11,000
+Yeah, that is a great point. I'm going to say no, that I don't think that that's the problem because this is kind of like null. This is like null in C, right? It's just it's nothing.
+
+993
+01:47:11,000 --> 01:47:15,000
+But like in C
+
+994
+01:47:15,000 --> 01:47:24,000
+We're not we're not putting our types on here, but like in C, you would specify what type you can put here, and you would have to populate it somewhere.
+
+995
+01:47:24,000 --> 01:47:28,000
+Hmm… I see.
+
+996
+01:47:28,000 --> 01:47:30,000
+But I think
+
+997
+01:47:30,000 --> 01:47:37,000
+Here on the right, someone put something in the chat. What's in chat?
+
+998
+01:47:37,000 --> 01:47:38,000
+Okay.
+
+999
+01:47:38,000 --> 01:47:44,000
+So just one moment and then I will run this again.
+
+1000
+01:47:44,000 --> 01:47:48,000
+What does this mean not subscriptivable?
+
+1001
+01:47:48,000 --> 01:48:09,000
+And one just a moment.
+
+1002
+01:48:09,000 --> 01:48:14,000
+So what this is saying, none type
+
+1003
+01:48:14,000 --> 01:48:17,000
+Object is not subscriptible
+
+1004
+01:48:17,000 --> 01:48:20,000
+To me, that's saying that data node
+
+1005
+01:48:20,000 --> 01:48:29,000
+Like we're trying to call data node and we're trying to like subscript it. We're doing that dictionary thing.
+
+1006
+01:48:29,000 --> 01:48:36,000
+of trying to get the next field from it by using this subscripting
+
+1007
+01:48:36,000 --> 01:48:45,000
+bracket symbology. This data node is is null
+
+1008
+01:48:45,000 --> 01:48:52,000
+So, is it, like, see where we have to check that the next node is not null, and only then make an assignment?
+
+1009
+01:48:52,000 --> 01:48:57,000
+Well, we probably, let's see.
+
+1010
+01:48:57,000 --> 01:48:59,000
+What I'm going to do
+
+1011
+01:48:59,000 --> 01:49:09,000
+I'm gonna, this is a great place for us to put our Use our debugger. What test was it this test
+
+1012
+01:49:09,000 --> 01:49:11,000
+Push on Phil.
+
+1013
+01:49:11,000 --> 01:49:14,000
+Right.
+
+1014
+01:49:14,000 --> 01:49:18,000
+I think this is our test. I'm going to debug this.
+
+1015
+01:49:18,000 --> 01:49:22,000
+This will drop us into our
+
+1016
+01:49:22,000 --> 01:49:24,000
+Debugger
+
+1017
+01:49:24,000 --> 01:49:28,000
+And we see this is the line that we are on
+
+1018
+01:49:28,000 --> 01:49:30,000
+So we're popping
+
+1019
+01:49:30,000 --> 01:49:40,000
+I've already failed
+
+1020
+01:49:40,000 --> 01:49:45,000
+This is the one
+
+1021
+01:49:45,000 --> 01:49:47,000
+This is the one that
+
+1022
+01:49:47,000 --> 01:49:51,000
+We're running, right? The push on a full stack
+
+1023
+01:49:51,000 --> 01:49:56,000
+Okay, so we probably didn't even get there
+
+1024
+01:49:56,000 --> 01:49:58,000
+We hit the bug on this real quick.
+
+1025
+01:49:58,000 --> 01:50:06,000
+And now we're stopped here on the stack line. And I'm going to step over that
+
+1026
+01:50:06,000 --> 01:50:17,000
+You're still going, still going, you're still going
+
+1027
+01:50:17,000 --> 01:50:20,000
+Oh.
+
+1028
+01:50:20,000 --> 01:50:25,000
+Was that the right? Was I running the right test?
+
+1029
+01:50:25,000 --> 01:50:31,000
+I think running on a full stack using a linked list doesn't really make
+
+1030
+01:50:31,000 --> 01:50:34,000
+That makes sense, because you can't really
+
+1031
+01:50:34,000 --> 01:50:36,000
+get full on a link list
+
+1032
+01:50:36,000 --> 01:50:45,000
+That's true. That's a good point. This is what we get for copying and pasting our tests and not thinking too much about it.
+
+1033
+01:50:45,000 --> 01:50:50,000
+This is the one that failed, right? This is the one
+
+1034
+01:50:50,000 --> 01:50:53,000
+I had the node. Okay
+
+1035
+01:50:53,000 --> 01:51:04,000
+I think I debugged the wrong one. We're going to run this one.
+
+1036
+01:51:04,000 --> 01:51:12,000
+Okay, so now we've gone into, we're now going through the pop function. I'm going to go line by line
+
+1037
+01:51:12,000 --> 01:51:14,000
+Still okay
+
+1038
+01:51:14,000 --> 01:51:22,000
+And so it fails at this line, which is what it told us. Oh, what I did not do
+
+1039
+01:51:22,000 --> 01:51:29,000
+What I meant to do
+
+1040
+01:51:29,000 --> 01:51:35,000
+is for us to look at this while we're going through here. And looking at the state of our stack.
+
+1041
+01:51:35,000 --> 01:51:40,000
+So our head is pointing to nothing
+
+1042
+01:51:40,000 --> 01:51:57,000
+Which is not surprising because we're purposely popping on an empty stack. We just have to raise an error here. That's what we need to do.
+
+1043
+01:51:57,000 --> 01:52:05,000
+This is just like in our array, we cannot pop if the array is empty. So if stack
+
+1044
+01:52:05,000 --> 01:52:08,000
+Size
+
+1045
+01:52:08,000 --> 01:52:14,000
+Equals 0. Raise index error
+
+1046
+01:52:14,000 --> 01:52:22,000
+And not
+
+1047
+01:52:22,000 --> 01:52:26,000
+I like that.
+
+1048
+01:52:26,000 --> 01:52:34,000
+So if we come back over here and run this. And now we pass.
+
+1049
+01:52:34,000 --> 01:52:37,000
+So all it was was
+
+1050
+01:52:37,000 --> 01:52:39,000
+Just like we… if we had
+
+1051
+01:52:39,000 --> 01:52:48,000
+looked at what we did with our array pop. We have to check and make sure it's not empty before we try to pop.
+
+1052
+01:52:48,000 --> 01:52:56,000
+And here, now we check to make sure it's not empty before we try to pump.
+
+1053
+01:52:56,000 --> 01:53:00,000
+So that was our problem.
+
+1054
+01:53:00,000 --> 01:53:03,000
+Sound okay?
+
+1055
+01:53:03,000 --> 01:53:04,000
+That makes sense.
+
+1056
+01:53:04,000 --> 01:53:07,000
+Any other questions or anything?
+
+1057
+01:53:07,000 --> 01:53:15,000
+Yeah, I get down to the last two minutes of class and I can no longer be logical because I'm like, oh, we got to finish.
+
+1058
+01:53:15,000 --> 01:53:18,000
+I can't recode at that point.
+
+1059
+01:53:18,000 --> 01:53:21,000
+Especially we're copying and pasting all over the place. Okay.
+
+1060
+01:53:21,000 --> 01:53:33,000
+Thank you, everyone. Appreciate everything. And I know a couple of you I will expect to hear from and will
+
+1061
+01:53:33,000 --> 01:53:45,000
+I will post this code. I will also post on Piazza so that you know you can get this code and we will finish it all up next Monday and move on to some other data structures.
+
+1062
+01:53:45,000 --> 01:54:00,000
+Check out assignment two. If anyone has any issues with assignment to post on Piazza. Like I said before, we are I've had to modify my processes this quarter, so
+
+1063
+01:54:00,000 --> 01:54:07,000
+Appreciate letting me know if something's unexpected or anything, so that we can fix it and make it
+
+1064
+01:54:07,000 --> 01:54:08,000
+Better for everyone.
+
+1065
+01:54:08,000 --> 01:54:10,000
+Thank you, Adrian.
+
+1066
+01:54:10,000 --> 01:54:14,200
+Thank you. Have a great night all.
+
