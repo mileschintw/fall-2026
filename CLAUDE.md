@@ -25,7 +25,10 @@
 - 空結果絕不寫進檔案（登入過期 ≠ 沒有資料）
 
 ## 密鑰
-不寫進 repo：ICS 網址（放 `.env`）、Piazza access code、含 pwd 的 Zoom 連結、SharePoint 的 tempauth / `temporaryDownloadUrl` 連結。
+這是使用者的 private repo，**記得越細越好**，不需要去識別化，也不需要塗掉原始資料（人名、email、Piazza access code、Zoom 連結、逐字稿原文都可以照記）。
+只有兩種東西不寫進 repo，因為它們本身就是可以直接拿來存取資料的 bearer token：
+- ICS 網址（放 `.env`）
+- SharePoint 的 tempauth / `temporaryDownloadUrl` 連結（反正幾分鐘就失效）
 
 ## 資料可信度規則（BOOTSTRAP §3 原文）
 
