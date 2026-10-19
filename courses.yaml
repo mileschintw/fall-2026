@@ -1,3 +1,17 @@
+# 學期中樞本身的設定。換 claude.ai 帳號時只改這一段，步驟見 automation/MIGRATION.md
+hub:
+  repo: mileschintw/fall-2026          # GitHub private repo
+  local_path: "D:/Repos/fall-2026"
+  dashboard_url: https://claude.ai/artifact/VaemajpQyP77JKSwxha8MG     # pinned dashboard (owned by the current claude.ai account)
+  dashboard_type_url: https://claude.ai/artifact/GZLZthZ2sQjn7T16skfdeF  # "Dashboard" Artifact type it was created from
+  # Claude desktop app scheduled tasks. cron = local time (this PC is set to Pacific).
+  # The app keeps the schedule per account; prompts live in automation/<prompt>.
+  scheduled_tasks:
+    - {id: fall-2026-morning-brief, title: Fall 2026 晨報, cron: "0 7 * * *", prompt: morning-brief.md, description: "每天 07:00 PT 產生學期中樞晨報（ICS + gh + 瀏覽器來源）"}
+    - {id: fall-2026-weekly-plan, title: Fall 2026 週規劃, cron: "0 21 * * 0", prompt: weekly-plan.md, description: "週日 21:00 PT 產生下週截止日與建議開始時間"}
+    - {id: fall-2026-deadline-alert, title: Fall 2026 截止提醒, cron: "0 8,18 * * *", prompt: deadline-alert.md, description: "每天 08:00、18:00 PT 檢查 48h/24h 內到期項目並推播"}
+    - {id: fall-2026-lecture-notes, title: Fall 2026 上課筆記, cron: "0 10 * * 2,3,4", prompt: lecture-notes.md, description: "GPU 週三、DSA 週二/週四 10:00 PT 抓新逐字稿並產出 notes.md"}
+
 term:
   school: University of Washington
   name: Autumn 2026

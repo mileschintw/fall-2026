@@ -1,7 +1,7 @@
 # 排程結果總覽
 
 > 這個檔案由 `scripts/log_run.py` 從 `state/runs.json` 產生，**不要手改**。每個排程跑完都會登記一列，最新的在最上面。
-> 手機或瀏覽器看：[Fall 2026 學期中樞 dashboard](https://claude.ai/artifact/VaemajpQyP77JKSwxha8MG)（claude.ai 側欄已 pin）。
+> 手機或瀏覽器看：[Fall 2026 學期中樞 dashboard](https://claude.ai/artifact/VaemajpQyP77JKSwxha8MG)（claude.ai 側欄已 pin；網址設定在 courses.yaml 的 hub.dashboard_url）。
 > 🆕 有新東西　✅ 正常　⏭ 跳過　⚠️ 部分來源失敗／需要重新登入　❌ 失敗
 
 ## 最新狀態

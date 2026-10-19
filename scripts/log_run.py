@@ -14,6 +14,7 @@ from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from hub_config import hub  # noqa: E402
 from tz import PACIFIC, now_pacific  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -22,7 +23,6 @@ INDEX = ROOT / "digests" / "INDEX.md"
 TASKS = ["晨報", "週規劃", "截止提醒", "上課筆記", "學期至今版"]
 ICON = {"new": "🆕", "ok": "✅", "skip": "⏭", "warn": "⚠️", "fail": "❌"}
 WEEK = "一二三四五六日"
-DASHBOARD = "https://claude.ai/artifact/VaemajpQyP77JKSwxha8MG"
 
 
 def label(iso):
@@ -46,7 +46,7 @@ def render(runs):
         "# 排程結果總覽",
         "",
         "> 這個檔案由 `scripts/log_run.py` 從 `state/runs.json` 產生，**不要手改**。每個排程跑完都會登記一列，最新的在最上面。",
-        f"> 手機或瀏覽器看：[Fall 2026 學期中樞 dashboard]({DASHBOARD})（claude.ai 側欄已 pin）。",
+        f"> 手機或瀏覽器看：[Fall 2026 學期中樞 dashboard]({hub()['dashboard_url']})（claude.ai 側欄已 pin；網址設定在 courses.yaml 的 hub.dashboard_url）。",
         "> 🆕 有新東西　✅ 正常　⏭ 跳過　⚠️ 部分來源失敗／需要重新登入　❌ 失敗",
         "",
         "## 最新狀態",
