@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-10-20T01:16:19-07:00",
+  "task": "晨報",
+  "status": "new",
+  "summary": "GPU HW1 今天 5:59 PM 到期未交；DSA Class 6 錄影+講義；Piazza @51 A3 配分疑問",
+  "output": "digests/2026-10-20.md"
+ },
+ {
   "at": "2026-10-20T01:10:38-07:00",
   "task": "週規劃",
   "status": "new",
