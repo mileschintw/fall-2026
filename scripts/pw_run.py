@@ -92,6 +92,7 @@ def main():
         return
     if sys.argv[1:2] == ["--cli"]:
         ensure_open()
+        sys.stdout.reconfigure(encoding="utf-8")  # Windows console default (cp950) garbles CJK
         print(cli(*sys.argv[2:]))
         return
     if sys.argv[1:] == ["--save"]:
