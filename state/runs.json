@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-10-20T02:15:15-07:00",
+  "task": "作業說明",
+  "status": "new",
+  "summary": "新：gpu/task0、gpu/hw1、dsa/a1、dsa/a2、dsa/a3",
+  "output": "gpu/hw/README.md"
+ },
+ {
   "at": "2026-10-20T01:45:06-07:00",
   "task": "上課筆記",
   "status": "skip",

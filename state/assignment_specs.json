@@ -1,0 +1,157 @@
+{
+ "11810624": {
+  "course": "gpu",
+  "slug": "task0",
+  "dir": "gpu/hw/task0",
+  "name": "Task 0 - self introductions",
+  "due_at": "2026-10-10T06:59:59Z",
+  "fp": {
+   "text": "bea798f529337afb",
+   "links": [],
+   "files": {},
+   "readme": null,
+   "due_at": "2026-10-10T06:59:59Z"
+  },
+  "files": [
+   "spec.md"
+  ],
+  "archived_at": "2026-10-20T02:11:37-07:00",
+  "summary_done": true,
+  "changes": [
+   "new"
+  ],
+  "history": [
+   {
+    "at": "2026-10-20T02:11:37-07:00",
+    "changes": [
+     "new"
+    ]
+   }
+  ]
+ },
+ "11810625": {
+  "course": "gpu",
+  "slug": "hw1",
+  "dir": "gpu/hw/hw1",
+  "name": "Homework #1 - SAXPY, 2D & 3D Matrix addition",
+  "due_at": "2026-10-21T00:59:59Z",
+  "fp": {
+   "text": "f71768b6acc85169",
+   "links": [],
+   "files": {
+    "154350654": "2026-10-13T23:42:20Z"
+   },
+   "readme": null,
+   "due_at": "2026-10-21T00:59:59Z"
+  },
+  "files": [
+   "spec.pdf",
+   "spec.md"
+  ],
+  "archived_at": "2026-10-20T02:11:45-07:00",
+  "summary_done": true,
+  "changes": [
+   "new"
+  ],
+  "history": [
+   {
+    "at": "2026-10-20T02:11:45-07:00",
+    "changes": [
+     "new"
+    ]
+   }
+  ]
+ },
+ "11793714": {
+  "course": "dsa",
+  "slug": "a1",
+  "dir": "dsa/hw/a1",
+  "name": "A1: My First Python Assignment",
+  "due_at": "2026-10-05T06:59:59Z",
+  "fp": {
+   "text": "6eb47b4dff806329",
+   "links": [
+    "https://canvas.uw.edu/courses/1917417/quizzes/2448356"
+   ],
+   "files": {},
+   "readme": "945a91f7b20ec5b36a1e687dbcc348515e916ca4",
+   "due_at": "2026-10-05T06:59:59Z"
+  },
+  "files": [
+   "spec.md"
+  ],
+  "archived_at": "2026-10-20T02:11:46-07:00",
+  "summary_done": true,
+  "changes": [
+   "new"
+  ],
+  "history": [
+   {
+    "at": "2026-10-20T02:11:46-07:00",
+    "changes": [
+     "new"
+    ]
+   }
+  ]
+ },
+ "11814777": {
+  "course": "dsa",
+  "slug": "a2",
+  "dir": "dsa/hw/a2",
+  "name": "A2: Lists, lists and more lists",
+  "due_at": "2026-10-19T06:59:59Z",
+  "fp": {
+   "text": "6f4b55badfbcceef",
+   "links": [],
+   "files": {},
+   "readme": "602c9863c38f2c621f1234ec09e55d446296065b",
+   "due_at": "2026-10-19T06:59:59Z"
+  },
+  "files": [
+   "spec.md"
+  ],
+  "archived_at": "2026-10-20T02:11:46-07:00",
+  "summary_done": true,
+  "changes": [
+   "new"
+  ],
+  "history": [
+   {
+    "at": "2026-10-20T02:11:46-07:00",
+    "changes": [
+     "new"
+    ]
+   }
+  ]
+ },
+ "11814801": {
+  "course": "dsa",
+  "slug": "a3",
+  "dir": "dsa/hw/a3",
+  "name": "A3: Stacks, Queues and Testing ",
+  "due_at": "2026-10-26T06:59:59Z",
+  "fp": {
+   "text": "e3b0c44298fc1c14",
+   "links": [],
+   "files": {},
+   "readme": "a169e62042eff693b89d443553f0a592bc57c91c",
+   "due_at": "2026-10-26T06:59:59Z"
+  },
+  "files": [
+   "spec.md"
+  ],
+  "archived_at": "2026-10-20T02:11:47-07:00",
+  "summary_done": true,
+  "changes": [
+   "new"
+  ],
+  "history": [
+   {
+    "at": "2026-10-20T02:11:47-07:00",
+    "changes": [
+     "new"
+    ]
+   }
+  ]
+ }
+}

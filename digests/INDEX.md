@@ -9,11 +9,13 @@
 - 週規劃：10/20 二 01:10 🆕 10/26–11/1：DSA A3→10/25、A4→11/1（日）延後；HW2 10/27、HW3 11/3 → [2026-10-20-weekly.md](2026-10-20-weekly.md)
 - 截止提醒：10/20 二 01:07 ✅ 沒有新東西（GPU HW1 48h/24h 已提醒過） → —
 - 上課筆記：10/20 二 01:45 ⏭ DSA 2026-10-19 筆記已存在 → [notes.md](../dsa/lectures/2026-10-19/notes.md)
+- 作業說明：10/20 二 02:15 🆕 新：gpu/task0、gpu/hw1、dsa/a1、dsa/a2、dsa/a3 → [README.md](../gpu/hw/README.md)
 
 ## 紀錄
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 10/20 二 02:15 | 作業說明 | 🆕 | 新：gpu/task0、gpu/hw1、dsa/a1、dsa/a2、dsa/a3 | [README.md](../gpu/hw/README.md) |
 | 10/20 二 01:45 | 上課筆記 | ⏭ | DSA 2026-10-19 筆記已存在 | [notes.md](../dsa/lectures/2026-10-19/notes.md) |
 | 10/20 二 01:20 | 上課筆記 | 🆕 | DSA Class 6（10/19 Trees/Traversals）筆記完成；課上確認作業都週日截止 | [notes.md](../dsa/lectures/2026-10-19/notes.md) |
 | 10/20 二 01:16 | 晨報 | 🆕 | GPU HW1 今天 5:59 PM 到期未交；DSA Class 6 錄影+講義；Piazza @51 A3 配分疑問 | [2026-10-20.md](2026-10-20.md) |
