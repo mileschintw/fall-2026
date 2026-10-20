@@ -17,7 +17,8 @@
 4. **衝突時的採信順序**：老師上課說的 > Teams/Piazza 上老師或 TA 的回覆 > 原文 PDF > runbook。runbook 的「實測」只代表這台電腦的結果。
 
 做的順序：
-- HW0 不計分，可以跳過。不過 HW1 原文 p2 要你「從 HW0 那樣的新專案開始」，所以至少要做過 HW0 的步驟 6–18。
+- HW0 不計分，可以跳過。不過 HW1 原文 p2 要你「從 HW0 那樣的新專案開始」，所以至少要做 HW0 的步驟 6–18。**最快的做法是 runbook §2.0 的極簡路線**（約 5 分鐘，專案直接取名 `HW1`），做完就跳到下面 HW1 的表格。
+- 書面答案用學習單「GPU HW1 書面回答學習單」（Claude Doc：https://claude.ai/artifact/TaoSHYZ9okyzCJxjVRLReK），邊做邊填，填完匯出 PDF 交。題目照原文順序排好：Q1–Q4 → printf（含 4a–c）→ 測資結果 → HW Q1、HW Q2 → 4 個 kernel。
 - HW1 照原文的順序做：Questions → Programming → SUBMIT。
 
 ---

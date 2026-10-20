@@ -125,12 +125,27 @@ Start-Process "$vs\Common7\IDE\devenv.exe" -ArgumentList '/updateconfiguration' 
 **注意**：只要 VS 2022 還是「沒有 C++」的狀態，**之後每次重裝或升級 CUDA 都會發生同樣的問題**，要重做這一節。要根治有兩個辦法：把 VS 2022 移除，或在 VS 2022 加裝 C++ workload。我沒有移除，因為它還有 .NET 的 workload，你可能會用到。
 
 ### 1.6 工作資料夾和其他注意事項
-- 這學期的 solution 照 HW0 原文放在 `C:\Au26_GPU`。不要在 repo（`D:\Repos\fall-2026`）裡 build，免得 `.exe`、`x64\` 這些產物跑進 git。
+- 這學期的 solution 放在 `D:\Repos\Au26_GPU`（private repo `mileschintw/Au26_GPU`，`.gitignore` 排除了 build 產物；做法見 §2.0）。HW0 原文寫的 `C:\Au26_GPU` 是 AWS 上的建議位置，不影響繳交。不要在 fall-2026 repo（`D:\Repos\fall-2026`）裡 build，免得 `.exe`、`x64\` 這些產物跑進 git。
 - 從 Claude Code 的終端機執行剛 build 好的 exe 時，要寫 `.\hw1.exe`，不能只寫 `hw1.exe`。這是因為它設了 `NoDefaultCurrentDirectoryInExePath=1`，cmd 不會從目前資料夾找執行檔，會回報「not recognized」。自己開的終端機不受影響，但一律加 `.\` 比較保險。
 
 ---
 
 ## 2. HW0（不計分、不用交）
+
+### 2.0 極簡路線：只為了能開始 HW1（約 5 分鐘）
+HW0 不計分，HW1 只依賴它的一件事：原文 HW1 p2 要你「從新的預設 CUDA 專案開始（像 HW0 那樣）」。所以只做下面這些，其他段落（debugger、cuobjdump、指標練習、device query）都可以之後再補。
+
+1. 開始功能表 → **Visual Studio 2026** → **建立新專案**（HW0 步驟 6–7）。
+2. 右上的語言下拉選 **CUDA** → 選 **CUDA 13.4 Runtime** → 下一步（步驟 8–9）。清單裡沒有 CUDA 的話看 §1.5。
+3. 填寫（步驟 10–12）：
+   - 位置：`D:\Repos\Au26_GPU`（已經是 private repo [mileschintw/Au26_GPU](https://github.com/mileschintw/Au26_GPU)，`.gitignore` 排除了 build 產物）。HW0 原文寫 `C:\Au26_GPU`，只是 AWS 上的整理建議，不影響繳交。
+   - **取消勾選**「將解決方案與專案放在相同目錄中」。
+   - 解決方案名稱：`Au26_GPUCompute`；專案名稱：`HW1`（直接拿來做 HW1，就不用再加一個專案）。
+4. 按**建立**（步驟 13）→ 上方工具列切成 **Release**、**x64** → **建置 → 建置方案**，輸出視窗看到「成功 1 個，失敗 0 個」（步驟 16–18）。
+5. **Ctrl+F5**，看到 `{1,2,3,4,5} + {10,20,30,40,50} = {11,22,33,44,55}`，環境就確認沒問題。
+6. 接著直接跳到 §3.2 的步驟 2（加 `cuda_check.h`、換 `kernel.cu`）。
+
+建出來的結構：`D:\Repos\Au26_GPU\Au26_GPUCompute\Au26_GPUCompute.slnx`，`HW1\` 在它旁邊。
 
 | HW0 段落 | 原文步驟 | 本機 |
 |---|---|---|
@@ -273,7 +288,7 @@ CUDA devices: 1
 - 所有 byte 數和 index 都用 `size_t`，因為 1e9 × 4 bytes 會超過 `int` 的範圍。
 
 ### 3.2 用 Visual Studio 建置（和 AWS 相同的做法）
-1. 在 `Au26_GPUCompute` solution 上按右鍵 → 加入 → 新增專案 → **CUDA 13.4 Runtime**，取名例如 `HW1`。
+1. 在 `Au26_GPUCompute` solution 上按右鍵 → 加入 → 新增專案 → **CUDA 13.4 Runtime**，取名例如 `HW1`。走 §2.0 極簡路線、專案已經叫 `HW1` 的話，跳過這步。
 2. 對 `HW1` 按右鍵 → 加入 → 新增項目 → **標頭檔 (.h)**，命名為 `cuda_check.h`，貼上參考檔的內容。
 3. 把 VS 產生的 `kernel.cu` 整份換成參考檔的 `kernel.cu`。
 4. 上方工具列 **Debug → Release**，平台 **x64**。**Code Generation 不用改**，保持預設的 `compute_75,sm_75`，和 AWS 一樣。
