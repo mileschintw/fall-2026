@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-10-18T21:16:46.715733-07:00",
+ "fetched_at": "2026-10-20T01:08:23.579941-07:00",
  "stats": {
   "GPU": {
    "raw": 8,
@@ -139,21 +139,21 @@
   },
   {
    "course": "DSA",
-   "summary": "A3: Stacks, Queues and Testing  [EE P 590 A]",
-   "start": "2026-10-23T00:00:00-07:00",
-   "all_day": true,
-   "location": null,
-   "kind": "due",
-   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#assignment_11814801"
-  },
-  {
-   "course": "DSA",
    "summary": "Adrienne's OH  [EE P 590 A]",
    "start": "2026-10-24T09:30:00-07:00",
    "all_day": false,
    "location": null,
    "kind": "event",
    "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5131635"
+  },
+  {
+   "course": "DSA",
+   "summary": "A3: Stacks, Queues and Testing  [EE P 590 A]",
+   "start": "2026-10-25T00:00:00-07:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#assignment_11814801"
   },
   {
    "course": "DSA",
@@ -175,21 +175,21 @@
   },
   {
    "course": "DSA",
-   "summary": "A4: Bug Hunt [EE P 590 A]",
-   "start": "2026-10-30T00:00:00-07:00",
-   "all_day": true,
-   "location": null,
-   "kind": "due",
-   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#assignment_11814804"
-  },
-  {
-   "course": "DSA",
    "summary": "Adrienne's OH  [EE P 590 A]",
    "start": "2026-10-31T09:30:00-07:00",
    "all_day": false,
    "location": null,
    "kind": "event",
    "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5131636"
+  },
+  {
+   "course": "DSA",
+   "summary": "A4: Bug Hunt [EE P 590 A]",
+   "start": "2026-11-01T00:00:00-07:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#assignment_11814804"
   },
   {
    "course": "DSA",
@@ -208,15 +208,6 @@
    "location": null,
    "kind": "event",
    "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5120541"
-  },
-  {
-   "course": "DSA",
-   "summary": "A5: BSTs and AVLs [EE P 590 A]",
-   "start": "2026-11-06T00:00:00-08:00",
-   "all_day": true,
-   "location": null,
-   "kind": "due",
-   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#assignment_11814818"
   },
   {
    "course": "DSA",
@@ -292,6 +283,15 @@
   },
   {
    "course": "DSA",
+   "summary": "A5: BSTs and AVLs [EE P 590 A]",
+   "start": "2026-11-22T00:00:00-08:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#assignment_11814818"
+  },
+  {
+   "course": "DSA",
    "summary": "EEP 590A: Class Meeting [EE P 590 A]",
    "start": "2026-11-23T16:30:00-08:00",
    "all_day": false,
@@ -319,15 +319,6 @@
   },
   {
    "course": "DSA",
-   "summary": "A6: Heaps [EE P 590 A]",
-   "start": "2026-11-30T00:00:00-08:00",
-   "all_day": true,
-   "location": null,
-   "kind": "due",
-   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#assignment_11814820"
-  },
-  {
-   "course": "DSA",
    "summary": "EEP 590A: Class Meeting [EE P 590 A]",
    "start": "2026-11-30T16:30:00-08:00",
    "all_day": false,
@@ -352,6 +343,15 @@
    "location": null,
    "kind": "event",
    "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=12&year=2026#calendar_event_5131641"
+  },
+  {
+   "course": "DSA",
+   "summary": "A6: Heaps [EE P 590 A]",
+   "start": "2026-12-06T00:00:00-08:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=12&year=2026#assignment_11814820"
   },
   {
    "course": "DSA",
