@@ -1,0 +1,391 @@
+# EE590a_Class_trees_and_traversals_students.pdf (10 pages, Canvas file 154647952)
+
+===== p1 =====
+
+
+EE 590a: Class Notes: Trees and Traversals
+First of the four classes on trees
+Plan at a glance
+Today we "leave the line". Every structure so far (arrays, linked lists, stacks, queues) puts values in a row-- we call them
+linear data structures, and trees let one node point to more than one next node.
+This class:
+one picture: see the tree below
+one idea: a tree is a node with smaller trees hanging off it, so recursion fits it exactly
+one payoff: depth-first order falls out of a stack, and breadth-first order falls out of a queue
+Agenda
+Opening: from lists to trees, and why branch at all
+Vocabulary and the picture
+Building a tree in code
+Recursion on trees: size, height, leaves
+Depth-first traversals: preorder, inorder, postorder
+Breadth-first, and the stack against the queue
+Costs: the runtime table
+Python and other languages
+Wrap-up, cheat sheet, check questions
+Objectives. By the end, students can:
+1. Use the tree vocabulary (root, leaf, parent, child, subtree, depth, height) and build a tree from node dicts, the same
+way we built the linked list.
+2. Write the recursive functions on a tree (size, height, leaf count) and the three depth-first traversals, say how the
+orders differ, and do a breadth-first traversal with a deque.
+3. Explain why recursion mirrors the shape of a tree, and why a stack gives depth-first order while a queue gives
+breadth-first order.
+Running example. One tree is used all class, and it comes back next class, so draw it big and keep it on the board. Its
+values are chosen on purpose: today we ignore why, and next class you reveal that the numbers follow a rule (see the
+cliffhanger at 0:50).
+10/19/26, 7:54 PM EE590a_Class_trees_and_traversals_students
+file:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/202.html 1/10
+===== p2 =====
+
+The running example: 9 nodes, 4 leaves, height 3.
+From lists to trees
+Start by tying off the last three classes in one minute, then ask a question that the rest of the course answers: what if one
+node could point to two next nodes?
+Last class ended with one idea: an interface can have several implementations, and you choose by which operations
+you do most.
+The linked list gave us cheap insertion at the front but slow search, O(n), because to find a value you walk the
+chain one node at a time.
+Today's question is how to do better than walking in a line.
+The hook
+"If I start with 1,000,000 values and each step lets me throw away half of them, how many steps until one is left?"
+The answer is about 20 (220 is 1,048,576).
+A line cannot give that, because each step off a linked list only removes one value from the search.
+A shape where each step cuts the remaining values in half can.
+That shape is a tree
+next class we will see exactly how to arrange values so that this works.
+Today is about the shape itself and how to walk it.
+Trees you already use
+Where do we already see trees used?
+A folder on your computer: folders hold files and other folders.
+A web page: HTML elements hold other elements (the DOM).
+A company org chart, a family tree, a tournament bracket.
+A Python expression like (8 - 3) * (2 + 4) : Python itself turns it into a tree before running it. We will show that live
+at the end of the segment on traversals.
+Fault analysis tree (Fun!!)
+Why a list of values does not work
+10/19/26, 7:54 PM EE590a_Class_trees_and_traversals_students
+file:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/202.html 2/10
+===== p3 =====
+
+
+How they would store a folder system in a Python list?
+A plain list cannot show which folder a file belongs to.
+A tree stores the relationship itself: each node knows its children, the same way each linked-list node knew its
+next.
+Vocabulary and the picture
+Draw the running example
+Attach each word to something on the board
+Give the one-sentence recursive definition, which is the most important thing in the whole class.
+Word Meaning In the running example
+node one box in the tree; holds a payload and links to its children each circle
+root the top node; the only one with no parent 8
+parent, child a node directly above, and the nodes directly below 3 and 10 are the children
+of 8
+leaf a node with no children 1, 4, 7, 13
+subtree a node together with everything below it the subtree at 6 holds 6,
+4, 7
+depth of a
+node how many edges from the root down to it 8 has depth 0; 13 has
+depth 3
+height of a
+tree
+the depth of its deepest node, so the length of the longest path from
+the root down 3
+binary tree every node has at most two children, called left and right all of ours today
+The recursive definition: a binary tree is either empty, or a node with a left tree and a right tree.
+"a left tree" can itself be empty, which is how leaves happen.
+Everything after this follows from that sentence:
+if the tree is defined in terms of smaller trees, then functions on trees can be written in terms of smaller trees too,
+with "empty" as the base case.
+A linked list is a tree
+A linked list is a tree where every node has exactly one child.
+That is the degenerate case, and it will matter next class
+a lopsided tree can be as bad as a linked list, which is where the worst case of a tree comes from.
+Two conventions to say out loud
+Books disagree on these and tests pick a side, so tell students to check the question.
+We count height in edges, so a single node has height 0 and the empty tree has height −1.
+Some books count nodes instead, so the same single node has height 1 and the empty tree has height 0.
+The extremes: a perfect binary tree of height h has 2h+1 − 1 nodes (1, 3, 7, 15, ...), so a million values need a height
+of at least 19 (220 − 1 = 1,048,575), while a chain of a million nodes has height 999,999.
+Building a tree in code
+We build the tree the way we built the linked list:
+10/19/26, 7:54 PM EE590a_Class_trees_and_traversals_students
+file:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/202.html 3/10
+===== p4 =====
+
+a dict per node
+created by one function
+with None meaning "no child".
+def create_tree_node(value, left=None, right=None):
+return {'payload': value, 'left': left, 'right': right}
+Compare this to last class's node, {'payload': value, 'next': None} : one next became two links, left and right .
+We can define the tree in one line of code:
+root = create_tree_node(8,
+create_tree_node(3,
+create_tree_node(1),
+create_tree_node(6, create_tree_node(4), create_tree_node(7))),
+create_tree_node(10,
+None,
+create_tree_node(14, create_tree_node(13), None)))
+Walking down by hand
+Print root['left']['right']['left']['payload'] and confirm it is 4
+What is root['right']['left'] ?
+( None )
+using it again would raise a TypeError .
+this is why every function we write today starts by asking whether the node is None .
+Where is the tree in memory?
+Like the Python list, the tree is a set of objects with references between them, not a block.
+Each node is its own dict somewhere in memory, and left and right hold references.
+That is the same picture as the linked list from last class, and it carries the same costs: no jumping to an index, and an
+object per value (our dict nodes were about 184 bytes per value when we measured the linked stack).
+Recursion on trees: size, height, leaves
+Because a tree is defined as "empty, or a node with two smaller trees," each function has the same two-case shape:
+do something simple for the empty tree
+combine the answers from the left and right subtrees for the rest.
+Size
+What the size of the empty tree is (0)
+What is the size of a node is in terms of its two subtrees (1 plus the left size plus the right size)?
+def tree_size(node):
+if node is None:
+return 0
+return 1 + tree_size(node['left']) + tree_size(node['right'])
+Height
+Have students write it before you reveal it.
+10/19/26, 7:54 PM EE590a_Class_trees_and_traversals_students
+file:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/202.html 4/10
+===== p5 =====
+
+The base case is the one that trips people: with height counted in edges, the empty tree is −1, so that a single node
+comes out as 1 + max(−1, −1) = 0.
+Other way of thinking about it: number of levels -1.
+def tree_height(node):
+if node is None:
+return -1
+return 1 + max(tree_height(node['left']), tree_height(node['right']))
+Leaves
+This one has a second base case: a node whose children are both None counts as one leaf.
+Let students find it, since leaving it out returns 0 for every tree.
+def count_leaves(node):
+if node is None:
+return 0
+if node['left'] is None and node['right'] is None:
+return 1
+return count_leaves(node['left']) + count_leaves(node['right'])
+Results on the running example: size 9, height 3, 4 leaves, and on the empty tree, size 0 and height −1.
+Trace one small tree
+Use a three-node tree (2 with children 1 and 3) and write the calls down as tree_size runs, indenting for each level
+of recursion.
+The point to land is that each call handles one node and trusts the recursive calls to handle the rest.
+Students who keep trying to follow the whole tree in their head get lost, and students who trust the smaller call get it.
+Depth-first traversals
+A traversal visits every node once.
+The three depth-first orders use the same recursive skeleton and differ in only one thing: where the line that visits the
+node goes, relative to the two recursive calls.
+Put all three on the board, one above the other, so that line is the only one that moves.
+Order The visit line goes... Read as On the running example
+preorder before both recursive calls node, left, right 8 3 1 6 4 7 10 14 13
+inorder between the two calls left, node, right 1 3 4 6 7 8 10 13 14
+postorder after both calls left, right, node 1 4 7 6 3 13 14 10 8
+def preorder(node, out):
+if node is None:
+return
+out.append(node['payload']) # visit first
+preorder(node['left'], out)
+preorder(node['right'], out)
+Inorder moves the append line between the two calls
+Postorder moves it last.
+10/19/26, 7:54 PM EE590a_Class_trees_and_traversals_students
+file:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/202.html 5/10
+===== p6 =====
+Predict, then run Before running anything:
+give the class the small tree (2 with children 1 and 3) and ask for all three orders on paper: preorder is 2 1 3, inorder is
+1 2 3, and postorder is 1 3 2.
+Then ask for the running example, and run the code to check.
+Walk the inorder trace from the small tree aloud, so they see where the visits happen ( inorder(None) returns right
+away, which is the base case doing its job):
+inorder(2)
+inorder(1)
+inorder(None) returns
+visit 1
+inorder(None) returns
+visit 2
+inorder(3)
+inorder(None) returns
+visit 3
+inorder(None) returns
+The cliffhanger
+Ask: "Look at the inorder output of the running example. Anything about it?"
+It is sorted. Do not explain it.
+This is not a coincidence
+Next class the whole structure will depend on it!
+Which order for which job Put these on the board; an interview will ask for them:
+Preorder: copy a tree, or print a folder system with each folder before its contents (Python's os.walk yields a
+directory before its subdirectories by default).
+Inorder: hold this one until next class. The output above is a hint about why it matters.
+Postorder: do something to the children before the parent, which means deleting a tree, adding up the size of a folder,
+or evaluating an expression.
+Expression trees
+Draw (8 - 3) * (2 + 4) as a tree, with operators in the inner nodes and numbers at the leaves.
+The three orders give three notations:
+Order Output What it is
+preorder * - 8 3 + 2 4 prefix notation
+inorder 8 - 3 * 2 + 4 what we write, but the parentheses are gone, so it now means something else
+postorder 8 3 - 2 4 + * postfix notation
+The inorder row:
+the tree knew the parentheses; the flat list lost them. Postfix needs none. And postfix is evaluated with a stack from
+the earlier class: push numbers, and at an operator pop two, apply it, and push the result. Running it on 8 3 - 2 4 +
+* gives 30 (the evaluator is in Appendix A). If there is time, show Python doing the same: ast.parse("(8 - 3) * (2
++ 4)", mode="eval") builds exactly this tree, and ast.dump prints it with the operators in the inner nodes and the
+numbers at the leaves.
+Breadth-first, and the stack against the queue
+10/19/26, 7:54 PM EE590a_Class_trees_and_traversals_students
+file:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/202.html 6/10
+===== p7 =====
+ Depth-first goes all the way down one side before coming back.
+Breadth-first goes level by level: the root, then its children, then their children.
+On the running example it is 8, 3, 10, 1, 6, 14, 4, 7, 13.
+Level order with a deque
+The idea: keep a list of nodes that are waiting to be visited.
+Take the node at the front, visit it, and put its children at the back.
+That is a queue, so it uses the collections.deque from last class with popleft :
+def level_order(root):
+out = []
+todo = deque()
+if root is not None:
+todo.append(root)
+while todo:
+node = todo.popleft() # queue: oldest first
+out.append(node['payload'])
+if node['left'] is not None:
+todo.append(node['left'])
+if node['right'] is not None:
+todo.append(node['right'])
+return out
+The same loop with a stack
+Now change two things:
+use a plain list
+take from the other end with pop() .
+Push the right child before the left, so that the left comes off first.
+def preorder_with_stack(root):
+out = []
+todo = []
+if root is not None:
+todo.append(root)
+while todo:
+node = todo.pop() # stack: newest first
+out.append(node['payload'])
+if node['right'] is not None:
+todo.append(node['right']) # pushed first, so popped last
+if node['left'] is not None:
+todo.append(node['left'])
+return out
+It prints 8 3 1 6 4 7 10 14 13, the same as the recursive preorder.
+This is the point:
+the two loops are the same loop with the waiting line changed.
+a stack goes deep,
+a queue goes wide.
+the recursive version was already using a stack (the one Python keeps for function calls) which is why the
+recursive traversals can be written without one.
+Two sentences to close
+When asked which to use in an interview:
+depth-first when you care about:
+10/19/26, 7:54 PM EE590a_Class_trees_and_traversals_students
+file:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/202.html 7/10
+===== p8 =====
+
+
+paths
+subtrees
+or "the whole thing below here"
+breadth-first when you care about:
+levels
+or the nearest node, such as the shortest path in an unweighted graph (coming later)
+Both visit every node once, so both cost O(n) time.
+Costs: the runtime table
+Let's build a habit of finishing with a table!
+(Put the left column on the board and let students fill the rest, then reveal)
+Operation Time Extra
+space Why
+size, height, count leaves O(n) O(h) every node is looked at once; the call stack is as deep as
+the tree is tall
+preorder, inorder, postorder
+(recursive) O(n) O(h) same reason
+level order (queue) O(n) O(w) the queue holds one level at a time, and w is the width of
+the widest level
+iterative depth-first (list as
+stack) O(n) O(h) the stack holds the nodes waiting to be visited
+find a value in a tree with no
+ordering O(n) O(h) nothing says which side to look in, so check them all
+Things to note:
+First, the height h is the number that matters, and it ranges between about log2 n for a well-packed tree (our 9-node
+example has height 3) and n − 1 for a chain.
+A million values could mean 19 levels or 999,999, and which one you get depends on the shape, which is the
+whole story of next class and the one after.
+Second, the width of a perfect tree's bottom level is about half of all the nodes, so level order can need a lot of
+memory on a bushy tree, while a depth-first walk only ever holds one path.
+The last row, and the hook
+Look at the last row:
+finding a value in this tree costs O(n), no better than a linked list.
+Why do we bother?
+"if each step could throw away half."
+That needs one more constraint, an ordering rule that tells you which side to look in ==> next class!
+Python and other languages
+Python has no tree class in the standard library
+Most of the time you build one from dicts or classes the way we did.
+Several real tools are trees in disguise, which is worth a minute.
+10/19/26, 7:54 PM EE590a_Class_trees_and_traversals_students
+file:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/202.html 8/10
+===== p9 =====
+
+
+The recursion limit:
+Python allows 1,000 nested calls by default ( sys.getrecursionlimit() ).
+On Python 3.11, tree_height on a chain of 1,000 nodes raises RecursionError , and a chain of 995 still works.
+A balanced tree of a million values is only about 20 deep and never comes close, but a lopsided tree can hit this, which
+is one more reason shape matters.
+Do not just raise the limit; use the stack-and-loop (iterative) version, which is limited by memory instead.
+ast . The module ast exposes Python's own syntax trees. ast.walk is a few lines with a deque and popleft in the
+CPython 3.11 source, so in practice breadth-first, although its docstring says "in no specified order".
+ast.NodeVisitor walks depth-first.
+Folders. os.walk is a tree walk over the file system, and it yields each directory before the ones inside it by default.
+Other languages. The same structure shows up everywhere. In Java, TreeMap is built on a tree, and in C++,
+std::map is usually one as well, which we will come back to when we cover balancing.
+Wrap-up
+A tree is a node with smaller trees hanging off it, so recursion is the natural tool
+A stack gives depth-first order and a queue gives breadth-first order
+Every cost we care about depends on the height.
+You need Reach for Cost to remember
+Size, height, or leaves of a tree recursion with the empty tree as the base case O(n) time, O(h) space
+Visit every node, parent first preorder O(n)
+Visit every node, children first postorder O(n)
+Visit level by level a deque with popleft O(n) time, O(w) space
+Depth-first without recursion a list used as a stack O(n) time
+The height of a tree with n nodes depends on the shape between about log2 n and n − 1
+A million values in a perfect tree height 19 against a chain at 999,999
+Check questions
+1. What is the height of a tree with one node, and of the empty tree?
+2. How many nodes can a binary tree of height 3 hold at most, and what does that say about a million values?
+3. Which of the three depth-first orders visits children before their parent, and what is it used for?
+4. In the iterative preorder, why does the code push the right child before the left?
+5. If you swap the stack in that loop for a queue, what changes?
+6. A chain of 5,000 nodes crashes tree_height in Python. Why?
+7. What do traversals cost in time and in extra space?
+Answer key
+Check questions.
+1. A single node has height 0, and the empty tree has height −1 (counting edges). Books that count nodes say 1 and 0.
+2. At most 24 − 1 = 15 nodes, from the formula 2h+1 − 1. A million values need at least height 19, since a perfect tree of
+height 19 holds 1,048,575 nodes, and one of height 18 holds only 524,287.
+10/19/26, 7:54 PM EE590a_Class_trees_and_traversals_students
+file:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/202.html 9/10
+===== p10 =====
+3. Postorder. It is used when you must finish with the children first: deleting a tree, adding up folder sizes, evaluating an
+expression tree, or producing postfix notation.
+4. A stack gives back the newest item first. To visit the left child first, push it last, so the right child goes in first and
+comes out second.
+5. Replace pop() with popleft() and use a deque, and the loop visits level by level instead of going deep. The order
+becomes 8 3 10 1 6 14 4 7 13 on the running example.
+6. The chain has height 4,999, so the recursive function nests about 5,000 calls deep, and Python stops at about 1,000
+by default with RecursionError .
+7. O(n) time, since every node is visited once. Extra space is O(h) for the recursive depth-first versions, because of the
+call stack, and O(w) for level order, where w is the width of the widest level.
+10/19/26, 7:54 PM EE590a_Class_trees_and_traversals_students
+file:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/202.html 10/10

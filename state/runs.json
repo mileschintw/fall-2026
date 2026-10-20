@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-10-20T01:20:21-07:00",
+  "task": "上課筆記",
+  "status": "new",
+  "summary": "DSA Class 6（10/19 Trees/Traversals）筆記完成；課上確認作業都週日截止",
+  "output": "dsa/lectures/2026-10-19/notes.md"
+ },
+ {
   "at": "2026-10-20T01:16:19-07:00",
   "task": "晨報",
   "status": "new",
