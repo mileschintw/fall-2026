@@ -153,5 +153,31 @@
     ]
    }
   ]
+ },
+ "file:154009274": {
+  "course": "gpu",
+  "slug": "hw0",
+  "dir": "gpu/hw/hw0",
+  "name": "Homework 0 - Preliminaries and Refreshers（不計分）",
+  "due_at": null,
+  "fp": null,
+  "files": [
+   "spec.pdf",
+   "spec.md"
+  ],
+  "archived_at": "2026-10-20T02:37:19-07:00",
+  "summary_done": true,
+  "changes": [
+   "new"
+  ],
+  "history": [
+   {
+    "at": "2026-10-20T02:37:19-07:00",
+    "changes": [
+     "new"
+    ]
+   }
+  ],
+  "note": "Canvas Files 裡的 PDF（Homeworks/Hw0 - Au26 - GPUCompute.pdf），不是 Canvas assignment；手動存，排程不會更新"
  }
 }

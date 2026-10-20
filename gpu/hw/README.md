@@ -6,3 +6,4 @@
 |---|---|---|---|
 | Task 0 - self introductions | 2026-10-09 (Fri) 11:59 PM PDT | [README](task0/README.md) | [spec.md](task0/spec.md) |
 | Homework #1 - SAXPY, 2D & 3D Matrix addition | 2026-10-20 (Tue) 05:59 PM PDT | [README](hw1/README.md) | [spec.md](hw1/spec.md) |
+| Homework 0 - Preliminaries and Refreshers（不計分） | — | [README](hw0/README.md) | [spec.md](hw0/spec.md) |
