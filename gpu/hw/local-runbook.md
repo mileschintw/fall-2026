@@ -25,7 +25,7 @@
 
 它們只會在兩個地方造成麻煩，§1.5 和 §1.6 會說明怎麼處理。
 
-GPU 不一樣只影響兩件事：一是 device query 和效能數字會不同，二是 1000³ 的 3D 測資在 8 GB 的卡上要分批跑（§3.1）。編譯設定和老師一樣，用 `compute_75,sm_75`。這會同時嵌入 sm_75 SASS 和 compute_75 PTX，在 RTX 3050 上由 driver 把 PTX JIT 成 sm_86 來跑。這條路需要 driver 支援 CUDA 13.4，617.42 已經實測可以。
+GPU 不一樣只影響兩件事：一是 device query 和效能數字會不同，二是 1000³ 的 3D 測資在 8 GB 的卡上要分批跑（§3.1）。編譯設定和老師一樣，用 `compute_75,sm_75`。這會同時嵌入 sm_75 SASS 和 compute_75 PTX，在 RTX 3050 上由 driver 把 PTX JIT 成 sm_86 來跑。617.42 實測可以；更舊的 driver 沒有測過，如果出現 PTX 相關的錯誤，就把 driver 更新到支援 CUDA 13.4 的版本。
 
 ---
 
