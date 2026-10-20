@@ -48,10 +48,11 @@
    - `datasets/runs` ← `runs.json`
    - `files/index.html` ← `index.html.json`
 5. 把 `courses.yaml` 的 `hub.dashboard_url` 改成新網址。如果 type 換了，`hub.dashboard_type_url` 也一起改。然後跑 `python scripts/log_run.py --rebuild`，讓 INDEX.md 的連結也更新。
+   接著馬上 commit 這兩個檔案：`git -C D:\Repos\fall-2026 add -- courses.yaml digests/INDEX.md`，再 commit。一定要在第 7 步之前做：排程任務收尾時會自己 commit 並 push，但只 stage 它自己的檔案和 INDEX.md。如果 `courses.yaml` 還沒 commit，GitHub 上的 INDEX.md 會是新網址，`courses.yaml` 卻還是舊網址。
 6. 用 Artifact `action: "pin"` 把新 dashboard pin 到側欄，再 `action: "open"` 給使用者看一次。
-7. 回到第 1 步的驗證，再跑一次截止提醒，這次應該是 ✅ 或 🆕，不會是 ⚠️。
+7. 回到第 1 步的驗證，再跑一次截止提醒，這次應該是 ✅ 或 🆕，不會是 ⚠️。這次執行會把第 5 步的 commit 一起 push 上去。
 8. 確認 repo 裡沒有其他地方寫著舊網址：`grep -rn "claude.ai/artifact/" --exclude-dir=.git .`。只有 `courses.yaml` 和自動產生的 `digests/INDEX.md` 會出現網址，其他地方都用 `hub_config.py` 讀。
-9. commit，問使用者要不要 push。
+9. 第 8 步如果有修改，commit 並 push（`git -C D:\Repos\fall-2026 push origin master`）。排程任務每次收尾本來就會 push master，所以不需要另外問使用者。
 
 舊的 dashboard 留在舊帳號，要不要刪由使用者決定。
 
@@ -68,6 +69,7 @@
 ## 第 4 步：驗收清單
 - [ ] 新帳號的 Scheduled 頁面有四個任務，時間和 `hub.scheduled_tasks` 一致
 - [ ] 截止提醒手動跑一次，INDEX.md 和 dashboard 都多了一列
+- [ ] 那次執行有 commit 並 push：`git -C D:\Repos\fall-2026 status -sb` 第一行沒有 `ahead`，GitHub 上也看得到那個 commit
 - [ ] dashboard 已 pin，`hub.dashboard_url` 是新網址
 - [ ] 四個瀏覽器來源都能讀到資料，不在登入頁
 - [ ] 隔天早上 07:00 的晨報有產生，「資料來源狀態」那一段全部是通
