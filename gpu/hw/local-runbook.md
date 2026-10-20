@@ -400,7 +400,10 @@ block 數 = ⌈8000/1024⌉ = ⌈7.8125⌉ = 8，8 × 1024 = 8192 個 thread。�
 ### 3.8 繳交（Canvas，你自己上傳）
 Canvas assignment 11810625，截止 **2026-10-20 5:59 PM PDT**。
 
-上傳前：Teams 的 **Hw1 Discussion** channel 還沒讀過（`digests/2026-10-20.md`：SharePoint 顯示 10/17 有活動）。老師或 TA 在那裡的回覆優先於 PDF，交之前花兩分鐘看一下，確認繳交格式、1e9 測資，以及 printf 題要不要書面回答有沒有改。
+Teams 的 **Hw1 Discussion**（2026-10-20 2:35 PM PDT 讀過，只有 2 篇；這個 channel 預設藏在「Hidden channels」裡）：
+- **2026-10-19 9:50 PM PDT，Colin N Reinhardt「Hw1: 4 kernels to submit」**：SUBMIT 說的「4 kernels」是 **printf、SAXPY、2D、3D**，而且 printf kernel 要**連同它的結果和 4 a–c 的回答**一起交。所以 §3.6 的三個觀察題一定要寫進答案文件，也要附 printf 的輸出截圖。
+- 另一篇是作業公告，回覆在講 AWS 的連線錯誤（重試，不行就等 20 分鐘），和本機無關。
+- 繳交格式（檔案類型、要不要 zip）老師沒有規定。General 裡 Keith Fife 10/20 3:27 AM 問過，到 2:33 PM 還沒有回覆。
 
 要交的東西：
 1. **答案文件**（PDF 或 docx）：Q1–Q4 附理由（§3.7）、兩題 HW Q 附數據、printf 三個問題的觀察，以及截圖：

@@ -76,7 +76,7 @@
 | — 建置 | §3.2 步驟 4–6（或 §3.3） | **Release、x64**，Code Generation 不用改。建置 → Ctrl+F5。命令列：`nvcc -O3 … -o hw1.exe kernel.cu` → `.\hw1.exe` |
 | p4 [L122](hw1/spec.md#L122)–[L125](hw1/spec.md#L125) printf kernel 1–2：算 GTID，tid、bid、GTID 印在同一行 | §3.1 對照表 | `printfKernel`：`gtid = blockIdx.x*blockDim.x + threadIdx.x` |
 | p4 [L128](hw1/spec.md#L128) printf kernel 3a–d：`<<<1,32>>>`、`<<<4,8>>>`、`<<<32,1>>>` 各跑約 10 次 | §3.6 | 執行 §3.6 的 PowerShell 一行指令，三種設定各一次，再用 `.\hw1.exe printf 4 8 10` 截完整輸出。預期：1,32 每次照順序；4,8 是 block 1、3、0、2；32,1 會變，有時重複 |
-| p4 [L134](hw1/spec.md#L134) printf kernel 4a–c：一致嗎？block 和 thread 有差別嗎？對計算有什麼含意？ | §3.6「(a)(b)(c)」 | ✍️ 用你自己的結果寫。重點：順序沒有保證；warp 內看起來有順序只是實作細節；kernel 不能依賴執行順序。（原文沒說這三題要不要書面回答，寫進去比較保險） |
+| p4 [L134](hw1/spec.md#L134) printf kernel 4a–c：一致嗎？block 和 thread 有差別嗎？對計算有什麼含意？ | §3.6「(a)(b)(c)」 | ✍️ 用你自己的結果寫。重點：順序沒有保證；warp 內看起來有順序只是實作細節；kernel 不能依賴執行順序。**一定要交**：老師 10/19 9:50 PM 在 Hw1 Discussion 說明，printf kernel 要連同結果和 4 a–c 的回答一起交（runbook §3.8） |
 | p4 [L138](hw1/spec.md#L138) SAXPY：`y = a·x + y`，參數要有 N，測 N = 10、1e3、1e7 | §3.1、§3.5 | `saxpyKernel(n, a, x, y)` + `if (i < n)`。`.\hw1.exe saxpy`：三個 N 在 rTol 1e-5 / aTol 1e-6 下都 PASSED，但約 25% 的元素沒有逐 bit 相同 |
 | p5 [L157](hw1/spec.md#L157) 2D add：參數 M、N，測 4×4、500×500、3024×4032 | §3.1、§3.5 | `matAdd2DKernel`，`idx = row*N + col`。`.\hw1.exe mat2d`：0 個差異 |
 | p5 [L168](hw1/spec.md#L168) 3D add：參數 M、N、P，用 `dim3`，測 3³、100³、1000³（要用 Release） | §3.1「1000³」、§3.5 | `gridAdd3DKernel`，`dim3 block(16,8,4)`。`.\hw1.exe grid3d` 跑小的兩個，`.\hw1.exe grid3d --big` 跑 1000³。⚠️ 8 GB 的卡放不下，程式會自動切成 z-slab，大約 60 秒，需要約 12 GB host RAM |
@@ -91,7 +91,7 @@
 | p6 [L198](hw1/spec.md#L198) 1：答案要有過程和理由，包含 HW Q | §3.8 第 1 項 | 一份 PDF 或 docx：Q1–Q4、兩題 HW Q、printf 觀察，加上 §3.8 列的 4 種截圖 |
 | p6 [L200](hw1/spec.md#L200) 2：只交 `.cu`、`.cpp`、`.h` | §3.8 第 2 項 | 只交 `kernel.cu`、`cuda_check.h`，不要交 `.slnx`、`.vcxproj`、`x64\` |
 | p6 [L203](hw1/spec.md#L203) 3：4 個 kernel function | §3.8 第 3 項 | 4 個都在 `kernel.cu` 裡：`printfKernel`、`saxpyKernel`、`matAdd2DKernel`、`gridAdd3DKernel` |
-| （原文沒寫）上傳前 | §3.8 開頭 | 先看 Teams 的 Hw1 Discussion 有沒有更正，再自己上傳到 Canvas assignment 11810625。截止 **5:59 PM PDT** |
+| （原文沒寫）Teams Hw1 Discussion | §3.8 開頭 | 已讀（10/20 2:35 PM）：「4 kernels」= printf + SAXPY + 2D + 3D，printf 要附結果和 4 a–c 的回答。繳交格式沒有規定。自己上傳到 Canvas assignment 11810625，截止 **5:59 PM PDT** |
 
 ---
 
