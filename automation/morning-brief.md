@@ -14,7 +14,7 @@
    b. Piazza：scripts/browser/piazza.js（--url https://piazza.com/class/muomkq9jzdj104 ）列出 feed，和 state/piazza_seen.json 比對，新的 cid 逐篇用 scripts/browser/piazza_post.js（--url https://piazza.com/class/muomkq9jzdj104/post/<cid> ）讀，摘要老師／TA 回覆；把新 cid 加進 state/piazza_seen.json。
    c. GPU SharePoint：scripts/browser/sharepoint_list.js（--url https://uwnetid.sharepoint.com/sites/og_EEP_524_A_B_-_GPU_Computing/Shared%20Documents/Forms/AllItems.aspx ），和 state/sharepoint_seen.json 的 latest_created 比對，報告新錄影（Recordings/*.mp4）與頻道新活動（.loop、截圖所在頻道），更新 state/sharepoint_seen.json。
    d. Panopto（DSA 錄影）：scripts/browser/panopto.js 加 `--pre "window.LIST_ONLY=true"`（--url https://uw.hosted.panopto.com/Panopto/Pages/Home.aspx ），DeliveryID 不在 state/canvas_seen.json 的 panopto_delivery_ids 就是新錄影，報告並加入。
-   e. Teams General 貼文只在時間允許時讀（2026-10-20 實測可用）：`python scripts/pw_run.py --cli goto https://teams.microsoft.com/v2/`（會轉到 teams.cloud.microsoft），等 10–15 秒；`--cli find "GPU Computing"` 找到團隊下的頻道按鈕（標籤是「公告」，點進去頁面標題是「一般」= General），`--cli click <ref>`，再用 `--cli eval "() => document.querySelector('main').innerText" --raw` 讀。虛擬捲動，只讀得到已載入的部分；與 gpu/announcements/teams-general-baseline-2026-10-18.md 比對只報新的。
+   e. Teams General 貼文只在時間允許時讀（2026-10-20 實測可用）：`python scripts/pw_run.py --cli goto https://teams.microsoft.com/v2/`（會轉到 teams.cloud.microsoft），等 10–15 秒；`--cli find "GPU Computing"` 找到團隊下的頻道按鈕（標籤是「公告」，點進去頁面標題是「一般」= General），`--cli click <ref>`，再用 `--cli eval "() => document.body.innerText" --raw` 讀（Teams 頁面沒有 `main` 元素；body 裡前面是側欄，接著才是貼文）。虛擬捲動，只讀得到已載入的部分；與 gpu/announcements/teams-general-baseline-2026-10-18.md 比對只報新的。
 3. 合併成 digests/<今天日期>.md，格式：
    # YYYY-MM-DD 晨報
    ## 🔴 今明兩天到期
