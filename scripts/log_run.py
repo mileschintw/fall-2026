@@ -20,7 +20,8 @@ from tz import PACIFIC, now_pacific  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 RUNS = ROOT / "state" / "runs.json"
 INDEX = ROOT / "digests" / "INDEX.md"
-TASKS = ["晨報", "週規劃", "截止提醒", "上課筆記", "學期至今版"]
+SCHEDULED = ["晨報", "週規劃", "截止提醒", "上課筆記"]  # shown under 最新狀態
+TASKS = SCHEDULED + ["學期至今版"]  # one-off runs: logged, only listed under 紀錄
 ICON = {"new": "🆕", "ok": "✅", "skip": "⏭", "warn": "⚠️", "fail": "❌"}
 WEEK = "一二三四五六日"
 
@@ -51,7 +52,7 @@ def render(runs):
         "",
         "## 最新狀態",
     ]
-    for t in TASKS:
+    for t in SCHEDULED:
         r = latest.get(t)
         lines.append(f"- {t}：" + (f"{label(r['at'])} {ICON[r['status']]} {r['summary']} → {link(r['output'])}" if r else "尚未執行"))
     lines += ["", "## 紀錄", "", "| 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |", "|---|---|---|---|---|"]
