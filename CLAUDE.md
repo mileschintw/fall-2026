@@ -6,7 +6,10 @@
   - `GPU = Canvas 1917398 + Teams/SharePoint og_EEP_524_A_B_-_GPU_Computing`
   - `DSA = Canvas 1917417 + Piazza muomkq9jzdj104 + GitHub uw-python-fall2026 + Panopto`
 - 只處理上面兩門課，Canvas 其他課程一律忽略。詳細設定見 `courses.yaml`，完整背景見 `BOOTSTRAP.md`。
-- 資料取得：內建瀏覽器（`mcp__Claude_Browser__*`）+ 使用者 cookie；排程用 Canvas ICS（`scripts/ics_fetch.py`）；DSA repo 用 `gh`。瀏覽器片段在 `scripts/browser/`。
+- 資料取得：Playwright CLI（`playwright-cli -s=uw`，skill 在 `.claude/skills/playwright-cli/`）+ 使用者自己登入的 cookie；排程用 Canvas ICS（`scripts/ics_fetch.py`）；DSA repo 用 `gh`。
+  - 瀏覽器片段在 `scripts/browser/`，一律用 `python scripts/pw_run.py <snippet.js> <out.json> --url <URL>` 跑。它會自動開瀏覽器、載入登入狀態，結果直接寫成檔案，不經過聊天。exit 3 = 登入過期，什麼都不寫。
+  - 片段沒涵蓋的 UI 操作（例如 Teams 貼文）用 `playwright-cli -s=uw goto/snapshot/click`。
+  - **不用內建瀏覽器（`mcp__Claude_Browser__*`）**：它擋 `idp.u.washington.edu`，開不了 UW 登入頁（2026-10-20 確認，不是 UW 封鎖）。
 - 排程任務的 prompt 正本在 `automation/`（`~/.claude/scheduled-tasks/*/SKILL.md` 只是指向這裡）。學期至今版的報告放 `digests/semester-to-date/`。
 - 綁 claude.ai 帳號的設定（dashboard 網址、排程表）集中在 `courses.yaml` 的 `hub` 段，程式用 `scripts/hub_config.py` 讀，**不要在別處寫死網址**。換帳號照 `automation/MIGRATION.md`。
 
@@ -24,12 +27,15 @@
 - 在晨報標記「需要重新登入：<來源>」
 - 不輸入密碼，不按授權
 - 空結果絕不寫進檔案（登入過期 ≠ 沒有資料）
+- 互動 session 裡，執行 `python scripts/pw_run.py --login [canvas sharepoint panopto piazza]` 開一個有畫面的 Chrome，請使用者自己登入或按 Authorize；使用者說好了之後，再執行 `python scripts/pw_run.py --save`。排程任務只做標記，不開視窗
 
 ## 密鑰
 這是使用者的 private repo，**記得越細越好**，不需要去識別化，也不需要塗掉原始資料（人名、email、Piazza access code、Zoom 連結、逐字稿原文都可以照記）。
 只有兩種東西不寫進 repo，因為它們本身就是可以直接拿來存取資料的 bearer token：
 - ICS 網址（放 `.env`）
 - SharePoint 的 tempauth / `temporaryDownloadUrl` 連結（反正幾分鐘就失效）
+
+另外，Playwright 的登入狀態放在 repo 外面的 `~/.fall-2026/`（`pw-profile/` 和 `uw-state.json`），裡面是 session cookie，不要複製進 repo。`.playwright-cli/`（snapshot、log）已經 gitignore。
 
 ## 資料可信度規則（BOOTSTRAP §3 原文）
 

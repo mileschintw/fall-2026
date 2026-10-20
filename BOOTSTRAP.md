@@ -37,7 +37,7 @@ Canvas 選課清單裡還有 Graduate Seminar、舊課、非課程項目，**全
 | Canvas | `https://canvas.uw.edu` |
 | 時區 | `America/Los_Angeles`。**2026-11-01 夏令時間結束**，UTC 偏移從 -7 變成 -8。一律用 tz-aware 轉換，不要寫死偏移量 |
 | 電腦 | Windows 11。已有 Python 3.13、git、GitHub CLI 2.102（已登入，帳號 `mileschintw`） |
-| 瀏覽器 | Claude app 的**內建瀏覽器**（`mcp__Claude_Browser__*`）保有使用者的 UW 登入。Chrome 擴充套件那邊沒有登入，不要用 |
+| 瀏覽器 | **Playwright CLI**（`playwright-cli -s=uw`，用系統的 Chrome），透過 `scripts/pw_run.py` 執行。登入狀態放在 `~/.fall-2026/`（repo 外面）。2026-10-20 起，Claude app 的內建瀏覽器（`mcp__Claude_Browser__*`）會擋 `idp.u.washington.edu`（直接打網址沒反應，轉址過去則顯示 `ERR_FAILED`；同一台電腦的 Chrome 和 curl 都正常，所以不是 UW 封鎖），**不要用** |
 | 適用範圍 | 以上「已驗證」只對這台 PC 和這個 Claude app 成立。換電腦就要重新驗證第 1、4 節 |
 
 ### 已確認**不能用**的路線
@@ -46,7 +46,7 @@ Canvas 選課清單裡還有 Graduate Seminar、舊課、非課程項目，**全
 - **Piazza 內部 API** `/logic/api`：回「Request not valid」
 
 ### 因此資料取得只有三條路
-1. **內建瀏覽器 + 使用者的登入 cookie**：在網頁裡用 `javascript_tool` 呼叫同源 API。適用 Canvas、SharePoint、Panopto、Piazza、Teams。這是主要管道
+1. **Playwright + 使用者的登入 cookie**：`scripts/pw_run.py` 在頁面裡執行 `scripts/browser/*.js`，片段再呼叫同源 API（用 CDP REPL mode，語意和 `javascript_tool` 相同）。適用 Canvas、SharePoint、Panopto、Piazza、Teams。這是主要管道
 2. **Canvas 行事曆 ICS（不用登入）**：只有截止日與事件，但純 HTTP 就能抓，最適合排程
 3. **`gh` CLI**：DSA 的作業 repo
 
@@ -158,7 +158,7 @@ Canvas 選課清單裡還有 Graduate Seminar、舊課、非課程項目，**全
 
 ### 4.1 Canvas（瀏覽器 cookie）
 
-先用內建瀏覽器開 `https://canvas.uw.edu/courses/<id>`，再用 `javascript_tool` 執行：
+在 `https://canvas.uw.edu/courses/<id>` 頁面執行（實際版本在 `scripts/browser/canvas.js`，用 `python scripts/pw_run.py scripts/browser/canvas.js <out> --url <URL>` 跑）：
 
 ```js
 if (location.origin !== 'https://canvas.uw.edu') throw 'LOGIN_EXPIRED';
@@ -190,7 +190,7 @@ const meta=await (await fetch('/api/v1/courses/1917398/files/154353784')).json()
 const doc=await pdfjs.getDocument({data:await (await fetch(meta.url)).arrayBuffer()}).promise;
 ```
 
-**把資料存回 repo**：瀏覽器拿到的結果可以用 `JSON.stringify` 回傳給 agent，再由 agent 寫檔。內容很大時分批回傳。
+**把資料存回 repo**：`pw_run.py` 會把片段最後一個 expression 的值直接寫成 JSON 檔，不經過聊天，再大也不用分批。
 
 ### 4.2 Canvas ICS（不用登入，排程首選）
 
@@ -337,7 +337,7 @@ D:\Repos\fall-2026\
 ## 8. 自動化（Claude desktop app 的排程任務）
 
 > 用 app 的 scheduled tasks（`mcp__scheduled-tasks__*`）。電腦要醒著，Claude app 要開著。
-> **排程任務能不能操作內建瀏覽器【未驗證】，而這是整個中樞最大的風險**，因為除了 ICS 和 gh 以外，所有來源都要靠瀏覽器。建置時一定要實測。如果不行，分成兩層：
+> 瀏覽器來源改走 Playwright（`scripts/pw_run.py`），它從 shell 執行，排程任務也能用。登入狀態會在 session 過期後失效，那時晨報標「需要重新登入」，等使用者在互動 session 裡執行 `pw_run.py --login`。原本擔心排程能不能操作內建瀏覽器，這個風險因此不存在了。如果 Playwright 也不能用，就分成兩層：
 > - 排程層：只跑 ICS 和 gh，產出截止日提醒
 > - 互動層：使用者打開中樞 session 說「更新」時，agent 用瀏覽器抓公告、討論、逐字稿
 
@@ -398,7 +398,7 @@ D:\Repos\fall-2026\
 
 ## 10. 使用者要自己做的事
 
-1. 內建瀏覽器的 UW NetID 或 Microsoft 登入過期時，自己重新登入
+1. Playwright 的 UW NetID、Microsoft 或 Piazza 登入過期時，在 agent 執行 `python scripts/pw_run.py --login` 開出的 Chrome 視窗裡自己重新登入
 2. 在 Canvas 的 Panopto OAuth 確認頁按授權（目前卡在這頁）
 3. 讓電腦不要睡眠，或用 app 的 keep-awake
 4. 決定晨報時間（預設 07:00 Pacific）和 GitHub repo 名稱
@@ -407,7 +407,7 @@ D:\Repos\fall-2026\
 
 ## 11. 尚未查證或待追蹤
 
-- 排程任務能不能操作內建瀏覽器（第 8 節）
+- Playwright 的登入狀態（`~/.fall-2026/uw-state.json`）實際能撐多久才要重新登入
 - Teams 頻道貼文能不能用 API 讀；「Weekly Live Lecture」的討論串只看過最後幾則
 - GPU 專題的題目要求、rubric、發表排程，預計第 6–7 週公布
 - DSA Piazza 有些貼文編號打不開

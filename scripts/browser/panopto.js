@@ -1,7 +1,7 @@
 // Run on any https://uw.hosted.panopto.com page (e.g. /Panopto/Pages/Home.aspx).
 // If redirected to canvas.uw.edu/login/oauth2/confirm -> STOP, user must authorize.
-// Returns {date: {sha,len,src,srt}}; large -> saved to tool-results, then
-//   python scripts/save_browser_result.py <file> state/_dsa.tmp && python scripts/write_transcripts.py state/_dsa.tmp dsa srt
+// Returns {date: {sha,len,src,srt}}:
+//   python scripts/pw_run.py scripts/browser/panopto.js state/_dsa.tmp --url <Home.aspx> && python scripts/write_transcripts.py state/_dsa.tmp dsa srt
 // NOTE: Panopto StartTime for Class 1 is the upload time (10/02); real date 09/30. Check dates before writing.
 if (location.origin !== 'https://uw.hosted.panopto.com') throw 'LOGIN_EXPIRED:' + location.origin;
 const FOLDER='9b12e253-ce65-412c-837a-b4d500342d54';

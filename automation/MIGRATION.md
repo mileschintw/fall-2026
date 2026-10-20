@@ -14,7 +14,7 @@
 | 排程的 prompt 檔 | `~/.claude/scheduled-tasks/<taskId>/SKILL.md`（只有一行，指向 `automation/<prompt>`） | 檔案還在，但新帳號的排程表看不到 |
 | **排程表**（cron、開關、cwd、權限模式） | `%APPDATA%\Claude\claude-code-sessions\<帳號 ID>\<組織 ID>\scheduled-tasks.json` | **要重建**（第 1 步） |
 | **dashboard**（claude.ai artifact） | 舊帳號名下，網址記在 `hub.dashboard_url` | **要重建**（第 2 步）；資料和頁面原始碼都在 repo |
-| 內建瀏覽器的 UW / Microsoft / Piazza 登入 | desktop app 的瀏覽器 profile | 未查證；可能要重新登入（第 3 步） |
+| Playwright 的 UW / Microsoft / Piazza 登入 | 本機 `~/.fall-2026/`（`pw-profile/`、`uw-state.json`） | 不受影響（和 claude.ai 帳號無關）；過期才要重新登入（第 3 步） |
 | 舊的 session 紀錄 | 舊帳號 | 留在舊帳號，不遷移 |
 
 ## 第 1 步：重建四個排程任務
@@ -56,15 +56,15 @@
 
 舊的 dashboard 留在舊帳號，要不要刪由使用者決定。
 
-## 第 3 步：內建瀏覽器的登入
+## 第 3 步：Playwright 的登入
 
-用內建瀏覽器打開以下四個網址，每個都檢查 `location.origin`：
+用 `python scripts/pw_run.py <片段> <out> --url <網址>` 測以下四個網址（片段見 `automation/morning-brief.md` 第 2 步）。exit 3 就是在登入頁：
 - https://canvas.uw.edu/courses/1917398
 - https://piazza.com/class/muomkq9jzdj104
 - https://uwnetid.sharepoint.com/sites/og_EEP_524_A_B_-_GPU_Computing
 - https://uw.hosted.panopto.com/Panopto/Pages/Home.aspx
 
-如果跳到登入頁（`idp.u.washington.edu`、`login.microsoftonline.com`、Piazza 登入），**停下來請使用者自己登入**，不代輸入密碼。Panopto 如果出現 Canvas OAuth 確認頁，也要由使用者自己按。
+如果在登入頁（`idp.u.washington.edu`、`login.microsoftonline.com`、Piazza 首頁的登入框），執行 `python scripts/pw_run.py --login`，**請使用者自己在 Chrome 視窗登入**，不代輸入密碼。Panopto 如果出現 Canvas OAuth 確認頁，也要由使用者自己按。使用者說好了之後，執行 `python scripts/pw_run.py --save`。
 
 ## 第 4 步：驗收清單
 - [ ] 新帳號的 Scheduled 頁面有四個任務，時間和 `hub.scheduled_tasks` 一致

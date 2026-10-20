@@ -1,4 +1,4 @@
-// Run in built-in browser on https://canvas.uw.edu/courses/<id> via javascript_tool.
+// Run on https://canvas.uw.edu/courses/<id>: python scripts/pw_run.py scripts/browser/canvas.js <out.json> --url <that URL>
 // Returns slim JSON. ICS URLs are secrets: write to .env only, never to repo/log.
 if (location.origin !== 'https://canvas.uw.edu') throw 'LOGIN_EXPIRED:' + location.origin;
 async function all(url){let out=[];while(url){const r=await fetch(url,{headers:{Accept:'application/json'}});

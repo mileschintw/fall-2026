@@ -10,17 +10,19 @@ Writes `<course>/lectures/<date>/notes.md` in 繁體中文（術語保留英文�
 
 ## 1. Get the transcript (skip if the file already exists)
 
-- **GPU**: `gpu/lectures/<date>/transcript.vtt`. If missing, open the SharePoint document library in the built-in browser, set `window.SKIP_DATES` to the dates already saved, run `scripts/browser/sharepoint.js`, then save the oversized result:
-  `python scripts/save_browser_result.py <tool-results file> state/_gpu.tmp && python scripts/write_transcripts.py state/_gpu.tmp gpu vtt`
-- **DSA**: `dsa/lectures/<date>/transcript.srt`. If missing, open any `uw.hosted.panopto.com` page, run `scripts/browser/panopto.js` (`window.LIST_ONLY=true` first to see sessions and dates), then the same two scripts with `dsa srt`. Panopto StartTime can be the upload date. Use the class date from the Canvas module title and update `dsa/lectures/README.md`.
-- Login-page check: if `location.origin` is an IdP, Microsoft login, or `canvas.uw.edu/login/oauth2/confirm`, **stop**. Report "需要重新登入：<來源>". Never type passwords or click authorize.
-- Large browser results never go through chat. The harness saves them to `tool-results/*.txt` and the scripts above extract them. Pad a result with `_pad:'x'.repeat(60000)` to force that save.
+Browser work goes through Playwright (`scripts/pw_run.py`, see CLAUDE.md), never the built-in browser: it cannot open the UW login domain.
+
+- **GPU**: `gpu/lectures/<date>/transcript.vtt`. If missing:
+  `python scripts/pw_run.py scripts/browser/sharepoint.js state/_gpu.tmp --pre "window.SKIP_DATES=[<dates already saved>]" --url "https://uwnetid.sharepoint.com/sites/og_EEP_524_A_B_-_GPU_Computing/Shared%20Documents/Forms/AllItems.aspx" && python scripts/write_transcripts.py state/_gpu.tmp gpu vtt`
+- **DSA**: `dsa/lectures/<date>/transcript.srt`. If missing, run `scripts/browser/panopto.js` the same way with `--url https://uw.hosted.panopto.com/Panopto/Pages/Home.aspx` (add `--pre "window.LIST_ONLY=true"` first to see sessions and dates), then `write_transcripts.py state/_dsa.tmp dsa srt`. Panopto StartTime can be the upload date. Use the class date from the Canvas module title and update `dsa/lectures/README.md`.
+- Login-page check: `pw_run.py` exits 3 on an IdP, Microsoft login, or `canvas.uw.edu/login/oauth2/confirm`. Then **stop** and report "需要重新登入：<來源>". Never type passwords or click authorize.
+- `pw_run.py` writes results straight to the file, so large transcripts never go through chat. Delete `state/_*.tmp` afterwards.
 
 ## 2. Get the slides
 
 - GPU: Canvas Files. Known IDs: L1 `154353784`, L2 `154353786`. Others: `/api/v1/courses/1917398/files?search_term=Lecture`.
 - DSA: Canvas module items (`/courses/1917417/files` returns 403, so use `/api/v1/courses/1917417/files/<id>` from module items).
-- Extract the text with pdf.js (cdnjs 4.0.379) in a Canvas tab, as in BOOTSTRAP §4.1. Save it to `<course>/lectures/<date>/slides.txt`.
+- Extract the text with pdf.js (cdnjs 4.0.379) on a Canvas page, as in BOOTSTRAP §4.1: put that snippet in `state/_slides.tmp` and run `python scripts/pw_run.py state/_slides.tmp state/_slides_out.tmp --url https://canvas.uw.edu/courses/<id>`. Save the text to `<course>/lectures/<date>/slides.txt`.
 
 ## 3. Read
 

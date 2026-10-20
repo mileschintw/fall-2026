@@ -1,7 +1,6 @@
 // Run on https://uwnetid.sharepoint.com/sites/og_EEP_524_A_B_-_GPU_Computing/Shared%20Documents/Forms/AllItems.aspx
-// Returns {date: {sha,len,src,vtt}} for every recording that has a transcript. The result is large:
-// the harness saves it to tool-results/*.txt; then run
-//   python scripts/save_browser_result.py <that file> state/_gpu.tmp && python scripts/write_transcripts.py state/_gpu.tmp gpu vtt
+// Returns {date: {sha,len,src,vtt}} for every recording that has a transcript (large; pw_run.py writes it to a file):
+//   python scripts/pw_run.py scripts/browser/sharepoint.js state/_gpu.tmp --pre "window.SKIP_DATES=[...]" --url <AllItems.aspx> && python scripts/write_transcripts.py state/_gpu.tmp gpu vtt
 // Never persist temporaryDownloadUrl (tempauth). Do NOT add ?format= to streamContent (400).
 if (location.origin !== 'https://uwnetid.sharepoint.com') throw 'LOGIN_EXPIRED:' + location.origin;
 const site='/sites/og_EEP_524_A_B_-_GPU_Computing', H={Accept:'application/json;odata=nometadata'}, J={Accept:'application/json'};
