@@ -22,7 +22,7 @@ dashboard 的資料是兩個檔案：`state/runs.json` 和 `state/deadlines.json
 1. 上傳 runs.json。用 Artifact 工具：`action: "publish"`、`url: "<DASHBOARD_URL>"`、`file_path: "D:\Repos\fall-2026\state\runs.json"`、`asset: true`。記下回傳的 `/_blob/<id>`。
 2. 有改 deadlines.json 的話，用同樣方式上傳 `state\deadlines.json`。JSON 檔一次只能上傳一個，所以要分兩次呼叫。
 3. 用 ArtifactData（沒有載入就先用 ToolSearch 載入）指向同一個 url：
-   - `get` collection `datasets` 的 `runs`，必要時也 `get` `deadlines`，記下 `version`，以及舊的 `source.url`。
+   - `get` collection `datasets` 的 `runs`；這次有改 `state/deadlines.json` 的話（上面第 2 點有上傳），也 `get` `deadlines`。記下 `version`，以及舊的 `source.url`。
    - 用 `batch` 做 `update`，每筆都帶 `if_version`，更新：`source: {kind: "file", url: "<新的 /_blob/...>", name: "runs.json"}` 和 `updated: {at: "<現在的 ISO 時間>", by: "排程：<任務名>"}`。
 4. 用 Artifact 工具刪掉舊的 asset：`action: "delete"`、`url` 同上、`path: "<舊 source.url 去掉 /_blob/ 的 id>"`。刪除失敗就略過。
 5. 不要動 dashboard 的 `files/index.html` 和 `dash/meta`。

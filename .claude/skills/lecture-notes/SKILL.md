@@ -20,14 +20,16 @@ Browser work goes through Playwright (`scripts/pw_run.py`, see CLAUDE.md), never
 
 ## 2. Get the slides
 
-- GPU: Canvas Files. Known IDs: L1 `154353784`, L2 `154353786`. Others: `/api/v1/courses/1917398/files?search_term=Lecture`.
-- DSA: Canvas module items (`/courses/1917417/files` returns 403, so use `/api/v1/courses/1917417/files/<id>` from module items).
-- Extract the text with pdf.js (cdnjs 4.0.379) on a Canvas page, as in BOOTSTRAP §4.1: put that snippet in `state/_slides.tmp` and run `python scripts/pw_run.py state/_slides.tmp state/_slides_out.tmp --url https://canvas.uw.edu/courses/<id>`. Save the text to `<course>/lectures/<date>/slides.txt`.
+- Find the file ID:
+  - GPU: Canvas Files. Known IDs: L1 `154353784`, L2 `154353786`. For later lectures, run `scripts/browser/canvas.js` and take the `files` entry whose name is `Au26_GPU-Compute_Lecture<N>.pdf`.
+  - DSA: `/courses/1917417/files` returns 403. Run `scripts/browser/canvas.js` and use the `mods` item of type `File` in the module item whose title names this class (e.g. "Class 6 outline…"). Its `id` is the file ID.
+  - No matching file yet: write notes from the transcript alone and say "講義尚未發布" in the 來源 line. Do not guess another lecture's file.
+- Extract the text: `python scripts/pw_run.py scripts/browser/pdf_text.js state/_slides.tmp --pre "window.COURSE=<1917398|1917417>; window.FILE_ID=<id>" --url https://canvas.uw.edu/courses/<course id>`. Write its `text` field to `<course>/lectures/<date>/slides.txt`.
 
 ## 3. Read
 
 - Condense the transcript to timestamped plain text, one line per minute, before reading it. The code is in `scripts/condense_transcript.py`.
-- Textbook mapping: GPU → PMPP 4th ed. Chapters come from the Canvas page `weekly-reading-sets`. DSA → Grokking Algorithms.
+- Textbook mapping: GPU → PMPP 4th ed. Get the chapters for this lecture from `python scripts/pw_run.py scripts/browser/canvas_page.js state/_page.tmp --pre "window.COURSE=1917398; window.PAGE='weekly-reading-sets'" --url https://canvas.uw.edu/courses/1917398`. DSA → Grokking Algorithms. The course assigns no chapters, so label any chapter mapping as your own (自行對照).
 - Cross-check against `gpu/assignments.md` / `dsa/assignments.md` for related deadlines.
 
 ## 4. Write notes.md with these sections

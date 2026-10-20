@@ -14,15 +14,19 @@
    b. Piazza：scripts/browser/piazza.js（--url https://piazza.com/class/muomkq9jzdj104 ）列出 feed，和 state/piazza_seen.json 比對，新的 cid 逐篇用 scripts/browser/piazza_post.js（--url https://piazza.com/class/muomkq9jzdj104/post/<cid> ）讀，摘要老師／TA 回覆；把新 cid 加進 state/piazza_seen.json。
    c. GPU SharePoint：scripts/browser/sharepoint_list.js（--url https://uwnetid.sharepoint.com/sites/og_EEP_524_A_B_-_GPU_Computing/Shared%20Documents/Forms/AllItems.aspx ），和 state/sharepoint_seen.json 的 latest_created 比對，報告新錄影（Recordings/*.mp4）與頻道新活動（.loop、截圖所在頻道），更新 state/sharepoint_seen.json。
    d. Panopto（DSA 錄影）：scripts/browser/panopto.js 加 `--pre "window.LIST_ONLY=true"`（--url https://uw.hosted.panopto.com/Panopto/Pages/Home.aspx ），DeliveryID 不在 state/canvas_seen.json 的 panopto_delivery_ids 就是新錄影，報告並加入。
-   e. Teams General 貼文只在時間允許時讀（2026-10-20 實測可用）：`python scripts/pw_run.py --cli goto https://teams.microsoft.com/v2/`（會轉到 teams.cloud.microsoft），等 10–15 秒；`--cli find "GPU Computing"` 找到團隊下的頻道按鈕（標籤是「公告」，點進去頁面標題是「一般」= General），`--cli click <ref>`，再用 `--cli eval "() => document.body.innerText" --raw` 讀（Teams 頁面沒有 `main` 元素；body 裡前面是側欄，接著才是貼文）。虛擬捲動，只讀得到已載入的部分；與 gpu/announcements/teams-general-baseline-2026-10-18.md 比對只報新的。
-3. 合併成 digests/<今天日期>.md，格式：
+   e. Teams GPU General（必讀）：`python scripts/pw_run.py scripts/browser/teams_general.js state/_teams.tmp --url https://teams.cloud.microsoft/`（不要用 teams.microsoft.com/v2/，它載入後會再轉址，執行會中斷）。和 state/teams_seen.json 比對：
+      - thread `id` 不在 `threads` → 新貼文，報作者、時間、標題（沒標題就用內文第一行）、重點；
+      - reply `id` 不在該 thread 的清單，而且 `at` 晚於 `as_of` → 新回覆，報作者、時間、重點。老師（Colin N Reinhardt）和 TA（Diya Shetty、Devika Nair）的回覆要寫出內容；同學的回覆只寫人數和主題；
+      - 作者是空的、內文是「This message has been deleted」或「已刪除此訊息」的 reply 不報。
+      報告後把這次所有的 thread id 和 reply id 加回 state/teams_seen.json，`as_of` 改成這次輸出的 `now`。Teams 只載入最近有動靜的幾個 thread，每個 thread 也只顯示最後 3 則回覆，所以如果某個 thread 的 3 則回覆全都是新的，要註明「可能還有更早的新回覆沒載入」。
+3. 合併成 digests/<今天日期>.md。下面每個段落都要寫，沒有內容就寫「無」，不要刪掉段落；來源失敗造成的空白寫「（<來源> 不通，見資料來源狀態）」，不要寫「無」。格式：
    # YYYY-MM-DD 晨報
    ## 🔴 今明兩天到期
    ## 📢 新公告（依課程）
    ## 💬 討論重點（過去 24h，含老師 / TA 的關鍵回覆）
    ## 🆕 新作業 / 新教材 / 新錄影 / 新 repo
    ## 📅 今天的課（地點 / 線上）
-   ## ⚠️ 資料來源狀態（每個來源標 通 / 不通 / 需要重新登入，附一行證據，例如筆數或 HTTP 狀態；**明確寫出 Playwright（pw_run.py）在這次排程執行中是否可用**）
+   ## ⚠️ 資料來源狀態（Canvas、Piazza、GPU SharePoint、Panopto、Teams、ICS GPU、ICS DSA、gh 八個來源每個都要列，標 通 / 不通 / 需要重新登入，附一行證據，例如筆數或 HTTP 狀態；**明確寫出 Playwright（pw_run.py）在這次排程執行中是否可用**）
 4. 不在任何平台發文（commit 和 push 在共同收尾做）。最後一句回報：晨報路徑、各來源狀態一行摘要。
 
 最後照 `automation/_finish.md` 做共同收尾：用 `scripts/log_run.py` 登記、更新 dashboard、有新東西就推播、commit 並 push。

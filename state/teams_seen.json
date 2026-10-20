@@ -1,0 +1,18 @@
+{
+ "_note": "Teams GPU General: thread id -> reply ids already reported (ids are creation epoch ms, from scripts/browser/teams_general.js). Seeded from the 2026-10-18 baseline.",
+ "as_of": "2026-10-18",
+ "threads": {
+  "1791566327774": [],
+  "1791230803852": [
+   "1791954193661",
+   "1791954611062",
+   "1791954945733"
+  ],
+  "1790964741163": [
+   "1792037015364",
+   "1792265810868"
+  ],
+  "1792004537731": [],
+  "1791482269842": []
+ }
+}
