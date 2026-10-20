@@ -23,6 +23,7 @@ caller runs `python scripts/pw_run.py --save`.
 """
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -43,7 +44,9 @@ TMP = Path(__file__).resolve().parent.parent / "state" / "_pw_run.tmp"
 
 
 def cli(*args):
-    exe = shutil.which("playwright-cli")
+    # scheduled runs may start with a PATH that lacks the npm global bin
+    exe = shutil.which("playwright-cli") or shutil.which(
+        "playwright-cli", path=str(Path(os.environ.get("APPDATA", "")) / "npm"))
     if not exe:
         sys.exit("playwright-cli not found: npm install -g @playwright/cli@latest")
     r = subprocess.run([exe, f"-s={SESSION}", *args], capture_output=True, text=True,
