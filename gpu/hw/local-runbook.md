@@ -2,7 +2,8 @@
 
 > 2026-10-20 PDT 改版：只保留一條環境路線，就是把這台電腦配置成和 AWS WorkSpaces 相同的版本。下面所有步驟都在這台電腦（RTX 3050）上實際執行過，「未實測」的地方會特別標出。
 > HW1 截止：**2026-10-20（二）5:59 PM PDT**。作業原文和摘要：[hw0/README.md](hw0/README.md)、[hw1/README.md](hw1/README.md)。
-> 程式碼參考檔只放在本機，**沒有進 git**：`gpu/hw/hw0/src/`（`kernel.cu` 預設範本、`devicequery.cu`）、`gpu/hw/hw1/src/`（`kernel.cu`、`cuda_check.h`）。在別台電腦上看這份文件時，這些連結會失效。
+> 程式碼參考檔（2026-10-20 起已進 git）：[`hw0/src/`](hw0/src/)（`kernel.cu` 預設範本、`devicequery.cu`）、[`hw1/src/`](hw1/src/)（`kernel.cu`、`cuda_check.h`）。
+> 照作業原文逐步對照這份 runbook 的用法：[runbook-guide.md](runbook-guide.md)。
 
 ---
 
@@ -245,7 +246,7 @@ CUDA devices: 1
 ## 3. HW1（11 分，今天 5:59 PM PDT 截止）
 
 ### 3.1 檔案與結構
-參考檔在 `gpu/hw/hw1/src/`（只在本機，沒進 git）：
+參考檔在 `gpu/hw/hw1/src/`：
 
 | 檔案 | 內容 |
 |---|---|
