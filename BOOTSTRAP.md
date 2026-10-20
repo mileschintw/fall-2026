@@ -37,7 +37,7 @@ Canvas 選課清單裡還有 Graduate Seminar、舊課、非課程項目，**全
 | Canvas | `https://canvas.uw.edu` |
 | 時區 | `America/Los_Angeles`。**2026-11-01 夏令時間結束**，UTC 偏移從 -7 變成 -8。一律用 tz-aware 轉換，不要寫死偏移量 |
 | 電腦 | Windows 11。已有 Python 3.13、git、GitHub CLI 2.102（已登入，帳號 `mileschintw`） |
-| 瀏覽器 | **Playwright CLI**（`playwright-cli -s=uw`，用系統的 Chrome），透過 `scripts/pw_run.py` 執行。登入狀態放在 `~/.fall-2026/`（repo 外面）。2026-10-20 起，Claude app 的內建瀏覽器（`mcp__Claude_Browser__*`）會擋 `idp.u.washington.edu`（直接打網址沒反應，轉址過去則顯示 `ERR_FAILED`；同一台電腦的 Chrome 和 curl 都正常，所以不是 UW 封鎖），**不要用** |
+| 瀏覽器 | **Playwright CLI**（session `uw`，用系統的 Chrome），一律透過 `scripts/pw_run.py` 執行（它固定從 `~/.fall-2026` 呼叫 playwright-cli；直接在 repo 或 worktree 裡呼叫會各開一個瀏覽器，搶同一個 profile）。登入狀態放在 `~/.fall-2026/`（repo 外面）。2026-10-20 起，Claude app 的內建瀏覽器（`mcp__Claude_Browser__*`）會擋 `idp.u.washington.edu`（直接打網址沒反應，轉址過去則顯示 `ERR_FAILED`；同一台電腦的 Chrome 和 curl 都正常，所以不是 UW 封鎖），**不要用** |
 | 適用範圍 | 以上「已驗證」只對這台 PC 和這個 Claude app 成立。換電腦就要重新驗證第 1、4 節 |
 
 ### 已確認**不能用**的路線

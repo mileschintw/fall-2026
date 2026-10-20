@@ -20,6 +20,12 @@ password for them):
   python scripts/pw_run.py --login [source ...]     (default: every source in LOGIN_URLS)
 then signs in (and clicks Canvas "Authorize" for Panopto) in the Chrome window tabs, and the
 caller runs `python scripts/pw_run.py --save`.
+
+Ad-hoc UI work (e.g. Teams posts) goes through the same session:
+  python scripts/pw_run.py --cli goto <url> | --cli snapshot | --cli click e12 ...
+Do not call `playwright-cli -s=uw` directly: playwright-cli scopes sessions by working directory,
+so the main checkout and each worktree would start their own `uw` browser on the same profile
+and fail with "Browser is already in use". pw_run.py always runs it from PW_HOME.
 """
 import argparse
 import json
@@ -30,7 +36,8 @@ import sys
 from pathlib import Path
 
 SESSION = "uw"
-PW_PROFILE = Path.home() / ".fall-2026" / "pw-profile"
+PW_HOME = Path.home() / ".fall-2026"  # fixed playwright-cli workspace; also gets .playwright-cli/ output
+PW_PROFILE = PW_HOME / "pw-profile"
 LOGIN_HOSTS = ("idp.u.washington.edu", "login.microsoftonline.com", "/login/oauth2/confirm",
                "piazza.com/account/login")
 LOGIN_URLS = {
@@ -39,7 +46,7 @@ LOGIN_URLS = {
     "panopto": "https://uw.hosted.panopto.com/Panopto/Pages/Home.aspx",
     "piazza": "https://piazza.com/class/muomkq9jzdj104",
 }
-PW_STATE = Path.home() / ".fall-2026" / "uw-state.json"
+PW_STATE = PW_HOME / "uw-state.json"
 TMP = Path(__file__).resolve().parent.parent / "state" / "_pw_run.tmp"
 
 
@@ -49,8 +56,9 @@ def cli(*args):
         "playwright-cli", path=str(Path(os.environ.get("APPDATA", "")) / "npm"))
     if not exe:
         sys.exit("playwright-cli not found: npm install -g @playwright/cli@latest")
+    PW_HOME.mkdir(exist_ok=True)
     r = subprocess.run([exe, f"-s={SESSION}", *args], capture_output=True, text=True,
-                       encoding="utf-8")
+                       encoding="utf-8", cwd=PW_HOME)
     if r.returncode != 0 or "is not open" in r.stdout:
         sys.exit(f"playwright-cli {args[0]} failed (browser not open? see PW_PROFILE in "
                  f"{Path(__file__).name}):\n{r.stdout}{r.stderr}")
@@ -81,6 +89,10 @@ def main():
         for u in urls[1:]:
             cli("tab-new", u)
         print("Chrome window open: the user signs in on each tab, then run: python scripts/pw_run.py --save")
+        return
+    if sys.argv[1:2] == ["--cli"]:
+        ensure_open()
+        print(cli(*sys.argv[2:]))
         return
     if sys.argv[1:] == ["--save"]:
         cli("state-save", str(PW_STATE))
