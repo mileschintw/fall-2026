@@ -87,7 +87,7 @@ fall-2026/
 2. **內建瀏覽器**：用使用者自己的登入狀態讀 Canvas、Piazza、Teams/SharePoint、Panopto。登入過期就停下來，在晨報上標「需要重新登入」，不會把空結果當成「沒有新東西」。
 3. **`gh` CLI**：DSA 的 GitHub Classroom repo。
 
-每個任務跑完會登記到 `state/runs.json`、重新產生 `digests/INDEX.md`、更新手機用的 dashboard，最後 commit。排程只讀資料，不會在 Piazza、Teams、Canvas 發文或交作業。
+每個任務跑完會登記到 `state/runs.json`、重新產生 `digests/INDEX.md`、更新手機用的 dashboard，最後 commit 並 push 到 GitHub，所以 GitHub 上看到的就是最新狀態。排程只讀資料，不會在 Piazza、Teams、Canvas 發文或交作業。
 
 ## 資料可以信多少
 
