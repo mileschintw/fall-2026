@@ -84,7 +84,7 @@ cl
 ```
 要顯示 `Version 19.51.36260 for x64`。
 - 顯示 `19.51.36248`：開到的是 Build Tools。
-- 結尾是 `for x86`：開到 x86 的 prompt，換一個。
+- 結尾是 `for x86`：開到 x86 的 prompt，換一個。開始選單的「Developer PowerShell for VS」預設就是 x86。在 x86 環境跑 nvcc，會出現 `nvcc error : 'cudafe++' died with status 0xC0000005 (ACCESS_VIOLATION)`（2026-10-20 實測重現；用 vcvars64 就正常）。已經開了的 PowerShell 可以執行 `Enter-VsDevShell -VsInstallPath "C:\Program Files\Microsoft Visual Studio\18\Community" -Arch amd64 -HostArch amd64 -SkipAutomaticLocation` 切到 x64。
 - 也可以直接執行 `"C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvars64.bat"` 來設定環境。
 
 ```bash
