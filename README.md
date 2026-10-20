@@ -41,16 +41,18 @@ fall-2026/
 ├── gpu/
 │   ├── assignments.md   ← 作業與專題時程、分數、繳交狀態
 │   ├── announcements/   ← Canvas 公告與 Teams 貼文摘要
+│   ├── hw/<作業>/        ← 作業說明：spec.md（原文）、原始 PDF、README.md（摘要）
 │   └── lectures/<日期>/  ← transcript.vtt（Teams 逐字稿原檔）、slides.txt（投影片文字）、notes.md（筆記）
 │
 ├── dsa/
 │   ├── assignments.md
 │   ├── repos.md         ← assignment repo 清單（老師直接邀請，不是 GitHub Classroom）
 │   ├── piazza/          ← Piazza 貼文摘要
+│   ├── hw/<作業>/        ← 作業說明：spec.md（Canvas 說明 + repo README）、README.md（摘要）
 │   └── lectures/<日期>/  ← transcript.srt（Panopto 自動字幕）、slides.txt、notes.md
 │
 ├── automation/          ← 排程任務的 prompt（見下一節）
-│   ├── morning-brief.md、weekly-plan.md、deadline-alert.md、lecture-notes.md
+│   ├── morning-brief.md、weekly-plan.md、deadline-alert.md、lecture-notes.md、assignment-specs.md
 │   ├── _finish.md       ← 每個任務共同的收尾：登記、更新 dashboard、推播、commit
 │   ├── dashboard/       ← 手機看的 dashboard 頁面原始碼
 │   └── MIGRATION.md     ← 換 claude.ai 帳號時怎麼搬
@@ -59,11 +61,12 @@ fall-2026/
 │   ├── ics_fetch.py     ← 抓 Canvas 行事曆 ICS（不用登入），濾掉往年項目
 │   ├── digest_base.py   ← 晨報裡不用登入的部分：48h 內截止、今天的課、新 repo
 │   ├── log_run.py       ← 登記一次排程執行，重新產生 digests/INDEX.md
+│   ├── assignment_specs.py ← 存作業說明原文（Canvas 說明、PDF、DSA repo README），比對改版
 │   ├── tz.py            ← 時區換算（一定要 tz-aware，不能寫死 -7/-8）
 │   ├── condense_transcript.py、write_transcripts.py ← 逐字稿處理
 │   ├── github_assignments.ps1 ← 列 DSA 的 assignment repo
 │   ├── pw_run.py        ← 用 Playwright 在已登入的頁面跑 browser/*.js，結果直接寫成檔案
-│   └── browser/*.js     ← 在瀏覽器裡跑的片段：Canvas、Piazza、Panopto、SharePoint、Teams、PDF 轉文字
+│   └── browser/*.js     ← 在瀏覽器裡跑的片段：Canvas、Piazza、Panopto、SharePoint、Teams、PDF 轉文字、作業說明
 │
 └── state/               ← 排程用來判斷「什麼是新的」的紀錄
     ├── deadlines.json   ← 全部截止項目和繳交狀態（dashboard 的資料來源）
@@ -73,7 +76,7 @@ fall-2026/
 
 ## 怎麼運作
 
-四個排程任務在 Claude desktop app 裡跑，時間如下（Pacific）：
+五個排程任務在 Claude desktop app 裡跑，時間如下（Pacific）：
 
 | 任務 | 時間 | 做什麼 |
 |---|---|---|
@@ -81,6 +84,7 @@ fall-2026/
 | 截止提醒 | 每天 08:00、18:00 | 48 小時和 24 小時內到期的項目推播到手機 |
 | 週規劃 | 週日 21:00 | 排下週的截止日和建議開始時間 |
 | 上課筆記 | 週二、三、四 10:00 | 抓前一天的錄影逐字稿和投影片，寫 `notes.md` |
+| 作業說明 | 每天 07:30 | 新的或改版的作業說明存原文（含 PDF），整理成 `hw/<作業>/README.md` |
 
 資料從三條路來：
 

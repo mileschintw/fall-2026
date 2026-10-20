@@ -1,6 +1,6 @@
 # 排程任務的 prompt
 
-Claude desktop app 的四個排程任務（app 的 Scheduled 頁面）都在這台電腦上、以 `D:\Repos\fall-2026` 為工作目錄執行。
+Claude desktop app 的五個排程任務（app 的 Scheduled 頁面）都在這台電腦上、以 `D:\Repos\fall-2026` 為工作目錄執行。
 任務本身登記在 `~/.claude/scheduled-tasks/<taskId>/SKILL.md`，這是 app 規定的位置，不能搬。那個檔案只剩一行，指向這裡的 prompt。**要改任務內容，改這個資料夾的檔案就好，會進 git。**排程時間和開關要在 app 裡改。
 
 排程時間的正本在 `courses.yaml` 的 `hub.scheduled_tasks`；下表是方便閱讀的副本。
@@ -11,6 +11,7 @@ Claude desktop app 的四個排程任務（app 的 Scheduled 頁面）都在這�
 | fall-2026-weekly-plan | [weekly-plan.md](weekly-plan.md) | 週日 21:00 | `digests/<日期>-weekly.md` |
 | fall-2026-deadline-alert | [deadline-alert.md](deadline-alert.md) | 每天 08:00、18:00 | 推播 + `state/alerts_sent.json` |
 | fall-2026-lecture-notes | [lecture-notes.md](lecture-notes.md) | 週二、三、四 10:00 | `<course>/lectures/<日期>/notes.md` |
+| fall-2026-assignment-specs | [assignment-specs.md](assignment-specs.md) | 每天 07:30 | `<course>/hw/<slug>/`（`spec.md` 原文、原始 PDF、`README.md` 摘要） |
 
 ## 看結果
 每次執行都會用 `scripts/log_run.py` 登記到 `state/runs.json`，再產生 [`digests/INDEX.md`](../digests/INDEX.md)，同時更新 pinned dashboard（網址在 `courses.yaml` 的 `hub.dashboard_url`，手機也能看）。有新東西時會推播。最後在 master 上 commit 這次執行改到的檔案，並 push 到 GitHub。dashboard 頁面原始碼在 [`automation/dashboard/index.html`](dashboard/index.html)。共同收尾規則見 [_finish.md](_finish.md)。

@@ -6,7 +6,7 @@
 
 ## 1. 登記這次執行（必做）
 ```
-python scripts/log_run.py --task <晨報|週規劃|截止提醒|上課筆記> --status <new|ok|skip|warn|fail> --summary "<一句話重點>" --output <輸出檔相對路徑或留空>
+python scripts/log_run.py --task <晨報|週規劃|截止提醒|上課筆記|作業說明> --status <new|ok|skip|warn|fail> --summary "<一句話重點>" --output <輸出檔相對路徑或留空>
 ```
 - `--status`：
   - `new`：有新東西，例如新公告、新作業、新錄影、新筆記、有推播的提醒

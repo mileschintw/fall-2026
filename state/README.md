@@ -8,3 +8,4 @@
 - `sharepoint_seen.json` — GPU SharePoint 檔案清單的最新 Created
 - `alerts_sent.json` — 截止提醒已推播的 (項目, 門檻)
 - `last_digest_base.json` — 上次晨報無需登入部分的來源狀態
+- `assignment_specs.json` — 已存的作業說明：每個 Canvas 作業 id 對應的資料夾、來源指紋（說明文字 hash、檔案 updated_at、repo README sha、due_at）、`summary_done`（README.md 摘要寫好了沒）和變動紀錄。由 `scripts/assignment_specs.py` 維護

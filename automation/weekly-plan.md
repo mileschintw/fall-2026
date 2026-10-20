@@ -1,5 +1,5 @@
 你是 Fall 2026 學期中樞的週規劃任務。工作目錄 D:\Repos\fall-2026（本機時區 America/Los_Angeles）。先讀 CLAUDE.md 並遵守（繁體中文、術語英文、時間標 Pacific）。
-1. 執行 `python scripts/ics_fetch.py --days 8 --json state/ics.json`，再讀 gpu/assignments.md、dsa/assignments.md、dsa/repos.md、state/deadlines.json。
+1. 執行 `python scripts/ics_fetch.py --days 8 --json state/ics.json`，再讀 gpu/assignments.md、dsa/assignments.md、dsa/repos.md、state/deadlines.json。下週要做的作業如果有 `<course>/hw/<slug>/README.md`（索引在 `<course>/hw/README.md`），也讀它，用「要做什麼」和「注意事項」估工作量，寫進建議開始時間的理由。
 2. 寫 digests/<今天日期>-weekly.md：下週（週一到週日）每天的課與截止項目；每個還沒交的作業（state/deadlines.json 裡 `done` 不是 true）給建議開始時間（GPU HW 至少提前 4 天，記得 AWS WorkSpaces 每週 15 小時、單次 4 小時上限；DSA 作業至少提前 3 天，push 之後還要到 Canvas 交 repo URL）；已交的只列出並標「已交」。列出 7 天內的固定提醒（11/9 DSA 期中實體 Moore 220、11/17 GPU Proposal、12/1 Design Spec、12/9 DSA 期末實體、12/15–17 發表、12/17 Final Report 不能延期）。
 3. ICS 失敗：截止項目改用 state/deadlines.json，上課時段用 courses.yaml，檔案開頭寫「ICS 不通：<原因>，截止日取自 state/deadlines.json」，status warn。不發文（commit 和 push 在共同收尾做）。最後一句回報檔案路徑。
 

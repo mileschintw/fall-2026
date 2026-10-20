@@ -11,6 +11,7 @@ hub:
     - {id: fall-2026-weekly-plan, title: Fall 2026 週規劃, cron: "0 21 * * 0", prompt: weekly-plan.md, description: "週日 21:00 PT 產生下週截止日與建議開始時間"}
     - {id: fall-2026-deadline-alert, title: Fall 2026 截止提醒, cron: "0 8,18 * * *", prompt: deadline-alert.md, description: "每天 08:00、18:00 PT 檢查 48h/24h 內到期項目並推播"}
     - {id: fall-2026-lecture-notes, title: Fall 2026 上課筆記, cron: "0 10 * * 2,3,4", prompt: lecture-notes.md, description: "GPU 週三、DSA 週二/週四 10:00 PT 抓新逐字稿並產出 notes.md"}
+    - {id: fall-2026-assignment-specs, title: Fall 2026 作業說明, cron: "30 7 * * *", prompt: assignment-specs.md, description: "每天 07:30 PT 存新的或改版的作業說明原文，並整理成 <course>/hw/<slug>/README.md"}
 
 term:
   school: University of Washington

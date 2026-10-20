@@ -309,7 +309,7 @@ gh repo list uw-python-fall2026 --limit 100 --json name,createdAt,url,visibility
    ```
    然後刪掉 `state/_ics_urls.tmp`。ICS 網址是密鑰，不要印出來，也不要寫進 repo。完成：`python scripts/ics_fetch.py --days 14` 兩門課都有項目。
 5. **瀏覽器來源**：照 `automation/morning-brief.md` 第 2 步 a–e 的五個指令各跑一次，輸出寫到 `state/_*.tmp`，看完就刪。完成：五個都是 exit 0。exit 3 就回第 3 步。這一步不更新任何 `state/*_seen.json`，那是晨報的工作。
-6. **排程任務**：照 `automation/MIGRATION.md` 第 1 步建四個任務。dashboard（`courses.yaml` 的 `hub.dashboard_url`）打得開就跳過 MIGRATION 第 2 步；打不開（例如換了 claude.ai 帳號）就照第 2 步重建。
+6. **排程任務**：照 `automation/MIGRATION.md` 第 1 步建排程任務（`hub.scheduled_tasks` 的每一筆）。dashboard（`courses.yaml` 的 `hub.dashboard_url`）打得開就跳過 MIGRATION 第 2 步；打不開（例如換了 claude.ai 帳號）就照第 2 步重建。
 7. **驗收**：用 `run_scheduled_task` 跑一次 `fall-2026-deadline-alert`，再跑一次 `fall-2026-morning-brief`。完成：`digests/INDEX.md` 最上面多了兩列，晨報的「資料來源狀態」八個來源都是通，而且寫了 Playwright 可用；`git -C D:\Repos\fall-2026 status -sb` 沒有 `ahead`。
 8. 交出驗收報告：每一步標明「通 / 不通 / 等使用者」，附上使用者待辦清單。
 

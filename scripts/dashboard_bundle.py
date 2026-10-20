@@ -27,7 +27,7 @@ DATASETS = {
     },
     "runs": {
         "title": "排程執行紀錄",
-        "description": "四個排程任務每次執行的結果，一列一次，來源檔 state/runs.json（和 repo 的 digests/INDEX.md 同步）。",
+        "description": "每個排程任務每次執行的結果，一列一次，來源檔 state/runs.json（和 repo 的 digests/INDEX.md 同步）。",
         "schedule": "每次排程任務跑完更新",
         "staleAfterHours": 36,
     },

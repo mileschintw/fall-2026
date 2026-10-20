@@ -17,11 +17,11 @@
 | Playwright 的 UW / Microsoft / Piazza 登入 | 本機 `~/.fall-2026/`（`pw-profile/`、`uw-state.json`） | 不受影響（和 claude.ai 帳號無關）；過期才要重新登入（第 3 步） |
 | 舊的 session 紀錄 | 舊帳號 | 留在舊帳號，不遷移 |
 
-## 第 1 步：重建四個排程任務
+## 第 1 步：重建排程任務
 
 1. 列出要建的任務：`python scripts/hub_config.py scheduled_tasks`。每一筆有 `id`、`title`、`cron`、`prompt`、`description`。
 2. 舊的 `~/.claude/scheduled-tasks/<id>/` 資料夾可能讓同名 taskId 建立失敗。先整個移到 `~/.claude/scheduled-tasks-old/`（**移動，不要刪除**）。
-3. 每一筆用 `mcp__scheduled-tasks__create_scheduled_task` 建立：`taskId` = `id`、`title`、`cronExpression` = `cron`、`description`，`prompt` 用下面的範本。`<prompt>` 換成該筆的檔名，`<任務名>` 換成晨報、週規劃、截止提醒或上課筆記：
+3. 每一筆用 `mcp__scheduled-tasks__create_scheduled_task` 建立：`taskId` = `id`、`title`、`cronExpression` = `cron`、`description`，`prompt` 用下面的範本。`<prompt>` 換成該筆的檔名，`<任務名>` 換成該筆 `title` 去掉「Fall 2026 」的部分（晨報、週規劃、截止提醒、上課筆記、作業說明）：
    ```
    工作目錄 D:\Repos\fall-2026。讀 D:\Repos\fall-2026\automation\<prompt>，照它的內容執行（這是 Fall 2026 學期中樞的<任務名>任務；prompt 的正本放在 repo 裡）。檔案讀不到就停下，回報「automation/<prompt> 不存在」。
    ```
@@ -63,7 +63,7 @@
 如果在登入頁（`idp.u.washington.edu`、`login.microsoftonline.com`、Piazza 首頁的登入框），執行 `python scripts/pw_run.py --login`，**請使用者自己在 Chrome 視窗登入**，不代輸入密碼。Panopto 如果出現 Canvas OAuth 確認頁，也要由使用者自己按。使用者說好了之後，執行 `python scripts/pw_run.py --save`。
 
 ## 第 4 步：驗收清單
-- [ ] 新帳號的 Scheduled 頁面有四個任務，時間和 `hub.scheduled_tasks` 一致
+- [ ] 新帳號的 Scheduled 頁面的任務和 `hub.scheduled_tasks` 一筆對一筆（目前五個），時間和 `hub.scheduled_tasks` 一致
 - [ ] 截止提醒手動跑一次，INDEX.md 和 dashboard 都多了一列
 - [ ] 那次執行有 commit 並 push：`git -C D:\Repos\fall-2026 status -sb` 第一行沒有 `ahead`，GitHub 上也看得到那個 commit
 - [ ] dashboard 已 pin，`hub.dashboard_url` 是新網址
