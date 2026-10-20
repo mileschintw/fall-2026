@@ -13,7 +13,7 @@ Claude desktop app 的四個排程任務（app 的 Scheduled 頁面）都在這�
 | fall-2026-lecture-notes | [lecture-notes.md](lecture-notes.md) | 週二、三、四 10:00 | `<course>/lectures/<日期>/notes.md` |
 
 ## 看結果
-每次執行都會用 `scripts/log_run.py` 登記到 `state/runs.json`，再產生 [`digests/INDEX.md`](../digests/INDEX.md)，同時更新 pinned dashboard（網址在 `courses.yaml` 的 `hub.dashboard_url`，手機也能看）。有新東西時會推播。dashboard 頁面原始碼在 [`automation/dashboard/index.html`](dashboard/index.html)。共同收尾規則見 [_finish.md](_finish.md)。
+每次執行都會用 `scripts/log_run.py` 登記到 `state/runs.json`，再產生 [`digests/INDEX.md`](../digests/INDEX.md)，同時更新 pinned dashboard（網址在 `courses.yaml` 的 `hub.dashboard_url`，手機也能看）。有新東西時會推播。最後在 master 上 commit 這次執行改到的檔案（不 push）。dashboard 頁面原始碼在 [`automation/dashboard/index.html`](dashboard/index.html)。共同收尾規則見 [_finish.md](_finish.md)。
 
 ## 學期至今版
 排程產生的是日報和週報。要從開學到某一天的完整版本，在 session 裡說「做一份學期至今版」，輸出放在 `digests/semester-to-date/<日期>-{brief,plan,deadlines}.md`。第一份是 2026-10-18。

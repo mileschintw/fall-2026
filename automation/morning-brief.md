@@ -23,6 +23,6 @@
    ## 🆕 新作業 / 新教材 / 新錄影 / 新 repo
    ## 📅 今天的課（地點 / 線上）
    ## ⚠️ 資料來源狀態（每個來源標 通 / 不通 / 需要重新登入，附一行證據，例如筆數或 HTTP 狀態；**明確寫出內建瀏覽器工具在這次排程執行中是否可用**）
-4. 不 commit、不 push、不在任何平台發文。最後一句回報：晨報路徑、各來源狀態一行摘要。
+4. 不 push、不在任何平台發文（commit 在共同收尾做）。最後一句回報：晨報路徑、各來源狀態一行摘要。
 
-最後照 `automation/_finish.md` 做共同收尾：用 `scripts/log_run.py` 登記、更新 dashboard、有新東西就推播。
+最後照 `automation/_finish.md` 做共同收尾：用 `scripts/log_run.py` 登記、更新 dashboard、有新東西就推播、commit（不 push）。

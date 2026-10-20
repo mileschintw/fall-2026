@@ -31,4 +31,15 @@ dashboard 的資料是兩個檔案：`state/runs.json` 和 `state/deadlines.json
 ## 3. 推播
 狀態是 new、warn、fail 時，用 PushNotification 送一則：`[<任務名>] <一句話重點>`。截止提醒照它自己的規則推播，這一步不重複送。使用者正在用電腦時，推播可能送不出去，這沒關係，INDEX.md 和 dashboard 才是正本。
 
-## 4. 不 commit、不 push。
+## 4. Commit（必做；不 push）
+這一步最後做。如果第 2 步失敗、重跑過第 1 步，重跑那次的登記也要一起 commit。
+1. 先跑 `git -C D:\Repos\fall-2026 branch --show-current`。如果不是 `master`，就不 commit，最後一句回報「沒有 commit：目前在 <branch>」。
+2. 只 stage 這次執行**自己寫或改過**的檔案，再加上 `state/runs.json`、`digests/INDEX.md`：
+   ```
+   git -C D:\Repos\fall-2026 add -- <這次寫或改的檔案…> state/runs.json digests/INDEX.md
+   ```
+   不要用 `git add -A`、`git add .` 或 `git commit -a`。使用者可能有自己還沒 commit 的修改，別的排程任務也可能同時在跑。
+3. 用 `git diff --cached --stat` 檢查一下。如果沒有 staged 的內容，就跳過 commit。staged 內容裡絕對不能有 `.env`、ICS 網址或 SharePoint tempauth 連結（見 CLAUDE.md 的「密鑰」）。
+4. commit 訊息寫成一行：`<任務名> <MM/DD HH:MM> PT: <和 log_run 相同的 summary>`，例如 `晨報 10/19 07:08 PT: GPU HW1 明天 5:59 PM 到期未交`。
+5. 如果 commit 失敗（例如 `index.lock` 已經存在，或被 hook 擋下）：不重試、不加 `--no-verify`、不 amend，最後一句回報失敗原因。檔案留在 working tree，下次執行時一起 commit，或由使用者處理。
+6. 不 push。
