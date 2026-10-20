@@ -191,6 +191,8 @@ nvcc -o vecadd kernel.cu -run
 ```
 - 兩個都輸出 `{11,22,33,44,55}`。不帶 `-arch` 時，CUDA 13.4 預設編 sm_75，在本機也是靠 PTX JIT 執行。
 - 實測**只產生 `vecadd.exe`**，沒有原文說的 `vecadd.exp`、`vecadd.lib`。
+- 會先冒出一大堆 `warning C4819`（見 §1.4），結果仍然正確。想要畫面乾淨，改用 `nvcc -o vecadd kernel.cu -run -Xcompiler "/utf-8"`，或用 `-Xcompiler /wd4819` 只關掉這個 warning。兩種寫法在 x64 環境都實測成功（2026-10-20）。
+- 加 `/utf-8` 之後如果出現 `'cudafe++' died with status 0xC0000005`，問題不在 `/utf-8`：在 x86 環境下不加 `/utf-8` 一樣會壞。這是開到 x86 prompt 了，照 §1.4 切到 x64。
 
 cuobjdump（原文 PDF 的 `-–dump-ptx` 是 en dash，要自己打兩個 `-`）：
 ```bash
@@ -440,7 +442,8 @@ Teams 的 **Hw1 Discussion**（2026-10-20 2:35 PM PDT 讀過，只有 2 篇；�
 | `checkCuda` 一堆 compile error | 用到舊版 L1 p55（只有一個參數）。用這份的 `cuda_check.h`（`const char*`） |
 | `--big` 出現 `malloc … failed` | host 記憶體不夠，需要約 12 GB 可用。先關掉其他程式 |
 | printf 沒有輸出 | launch 之後要 `cudaDeviceSynchronize()`，device printf 的 buffer 才會 flush（`CHECK_KERNEL` 已經處理） |
-| 一大堆 C4819 | 中文 Windows 的字碼頁問題，可以忽略；命令列加 `-Xcompiler /utf-8` |
+| 一大堆 C4819 | 中文 Windows 的字碼頁問題，可以忽略；命令列加 `-Xcompiler "/utf-8"` 或 `-Xcompiler /wd4819` |
+| `'cudafe++' died with status 0xC0000005 (ACCESS_VIOLATION)` | 開到 x86 的 Developer prompt（跟 `/utf-8` 無關）；照 §1.4 切 x64 |
 
 ---
 
