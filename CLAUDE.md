@@ -13,14 +13,6 @@
 - 排程任務的 prompt 正本在 `automation/`（`~/.claude/scheduled-tasks/*/SKILL.md` 只是指向這裡）。學期至今版的報告放 `digests/semester-to-date/`。
 - 綁 claude.ai 帳號的設定（dashboard 網址、排程表）集中在 `courses.yaml` 的 `hub` 段，程式用 `scripts/hub_config.py` 讀，**不要在別處寫死網址**。換帳號照 `automation/MIGRATION.md`。
 
-## 課程 AI 政策
-使用者已明確表示不在意，照常協助，包括寫作業程式碼、讀 DSA 的 starter code 和 README。只有在碰到課程明文禁止的行為時，加一行提醒：
-- GPU：用 AI 產生作業解答、專題報告或專題程式碼
-- DSA：把 starter code 交給 AI；用了 AI 卻沒有附上 chat session 或註明
-
-## 不代發訊息
-不在 Piazza、Teams、Canvas 發文、回覆或繳交作業。
-
 ## 登入過期的處理
 遇到 UW NetID 登入頁、Microsoft 登入頁、Canvas OAuth 確認頁、Piazza 登入頁時：
 - 一律停下
