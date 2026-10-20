@@ -7,8 +7,8 @@
   - `DSA = Canvas 1917417 + Piazza muomkq9jzdj104 + GitHub uw-python-fall2026 + Panopto`
 - 只處理上面兩門課，Canvas 其他課程一律忽略。詳細設定見 `courses.yaml`，完整背景見 `BOOTSTRAP.md`。
 - 資料取得：Playwright CLI（session `uw`，skill 在 `.claude/skills/playwright-cli/`）+ 使用者自己登入的 cookie；排程用 Canvas ICS（`scripts/ics_fetch.py`）；DSA repo 用 `gh`。
-  - 瀏覽器片段在 `scripts/browser/`，一律用 `python scripts/pw_run.py <snippet.js> <out.json> --url <URL>` 跑。它會自動開瀏覽器、載入登入狀態，結果直接寫成檔案，不經過聊天。exit 3 = 登入過期，什麼都不寫。
-  - 片段沒涵蓋的 UI 操作（例如 Teams 貼文）用 `python scripts/pw_run.py --cli <goto URL | snapshot | click e12 …>`，指令照 playwright-cli skill。**不要直接呼叫 `playwright-cli`**：它的 session 是依工作目錄區分的，主 checkout 和 worktree 會各開一個瀏覽器，搶同一個 profile 而失敗。
+  - 瀏覽器片段在 `scripts/browser/`，一律用 `python scripts/pw_run.py <snippet.js> <out.json> --url <URL>` 跑。它會自動開瀏覽器、載入登入狀態，結果直接寫成檔案，不經過聊天。exit 3 = 登入過期，什麼都不寫。所有呼叫共用同一個分頁，一次跑一個（同時跑的會排隊等）。
+  - 片段沒涵蓋的 UI 操作（例如點開 Teams 摺疊的討論串）用 `python scripts/pw_run.py --cli <goto URL | snapshot | click e12 …>`，指令照 playwright-cli skill。**不要直接呼叫 `playwright-cli`**：它的 session 是依工作目錄區分的，主 checkout 和 worktree 會各開一個瀏覽器，搶同一個 profile 而失敗。
   - **不用內建瀏覽器（`mcp__Claude_Browser__*`）**：它擋 `idp.u.washington.edu`，開不了 UW 登入頁（2026-10-20 確認，不是 UW 封鎖）。
 - 排程任務的 prompt 正本在 `automation/`（`~/.claude/scheduled-tasks/*/SKILL.md` 只是指向這裡）。學期至今版的報告放 `digests/semester-to-date/`。
 - 綁 claude.ai 帳號的設定（dashboard 網址、排程表）集中在 `courses.yaml` 的 `hub` 段，程式用 `scripts/hub_config.py` 讀，**不要在別處寫死網址**。換帳號照 `automation/MIGRATION.md`。

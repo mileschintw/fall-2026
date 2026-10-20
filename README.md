@@ -45,7 +45,7 @@ fall-2026/
 │
 ├── dsa/
 │   ├── assignments.md
-│   ├── repos.md         ← GitHub Classroom 的 assignment repo 清單
+│   ├── repos.md         ← assignment repo 清單（老師直接邀請，不是 GitHub Classroom）
 │   ├── piazza/          ← Piazza 貼文摘要
 │   └── lectures/<日期>/  ← transcript.srt（Panopto 自動字幕）、slides.txt、notes.md
 │
@@ -63,7 +63,7 @@ fall-2026/
 │   ├── condense_transcript.py、write_transcripts.py ← 逐字稿處理
 │   ├── github_assignments.ps1 ← 列 DSA 的 assignment repo
 │   ├── pw_run.py        ← 用 Playwright 在已登入的頁面跑 browser/*.js，結果直接寫成檔案
-│   └── browser/*.js     ← 在瀏覽器裡跑的片段：Canvas、Piazza、Panopto、SharePoint
+│   └── browser/*.js     ← 在瀏覽器裡跑的片段：Canvas、Piazza、Panopto、SharePoint、Teams、PDF 轉文字
 │
 └── state/               ← 排程用來判斷「什麼是新的」的紀錄
     ├── deadlines.json   ← 全部截止項目和繳交狀態（dashboard 的資料來源）
@@ -86,7 +86,7 @@ fall-2026/
 
 1. **Canvas ICS 行事曆**：不用登入，排程首選。網址帶有密鑰，所以放在 `.env`，不進 repo。
 2. **Playwright（`scripts/pw_run.py`）**：用使用者自己登入的狀態讀 Canvas、Piazza、Teams/SharePoint、Panopto。登入過期就停下來，在晨報上標「需要重新登入」，不會把空結果當成「沒有新東西」。
-3. **`gh` CLI**：DSA 的 GitHub Classroom repo。
+3. **`gh` CLI**：DSA 的 assignment repo。
 
 每個任務跑完會登記到 `state/runs.json`、重新產生 `digests/INDEX.md`、更新手機用的 dashboard，最後 commit 並 push 到 GitHub，所以 GitHub 上看到的就是最新狀態。排程只讀資料，不會在 Piazza、Teams、Canvas 發文或交作業。
 
@@ -108,7 +108,7 @@ fall-2026/
 
 ## 想自己架一套
 
-整個 repo 是照 [`BOOTSTRAP.md`](BOOTSTRAP.md) 建起來的。裡面有每個平台查證過的抓取方法，也寫了哪些路線不能用。大致需要：
+整個 repo 是照 [`BOOTSTRAP.md`](BOOTSTRAP.md) 建起來的，在新電腦上架設的步驟也在那裡（第 9 節）。裡面有每個平台查證過的抓取方法，也寫了哪些路線不能用。大致需要：
 
 - Claude desktop app（排程任務）
 - Node.js 和 Playwright CLI（`npm install -g @playwright/cli@latest`，再在 repo 裡執行 `playwright-cli install --skills`）

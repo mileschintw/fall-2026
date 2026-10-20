@@ -12,6 +12,10 @@ Usage:
 
 Exit codes: 0 ok; 3 login expired (nothing written: login expired != no data); 1 other error.
 
+Calls are serialized: every call holds PW_LOCK, and a second call (a parallel Bash call, or
+another task running at the same time) waits for it, up to LOCK_WAIT seconds. All calls drive
+the same page, so running two at once would navigate each other away.
+
 Login lives outside the repo (both files hold bearer cookies): PW_PROFILE (Duo device trust)
 and PW_STATE (UW/Canvas *session* cookies, which a browser restart would drop). If the `uw`
 session is not open, it is opened headless and PW_STATE is loaded; after a successful run the
@@ -33,6 +37,7 @@ import os
 import shutil
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 SESSION = "uw"
@@ -47,7 +52,28 @@ LOGIN_URLS = {
     "piazza": "https://piazza.com/class/muomkq9jzdj104",
 }
 PW_STATE = PW_HOME / "uw-state.json"
-TMP = Path(__file__).resolve().parent.parent / "state" / "_pw_run.tmp"
+TMP = Path(__file__).resolve().parent.parent / "state" / f"_pw_run.{os.getpid()}.tmp"
+PW_LOCK = PW_HOME / "pw_run.lock"
+LOCK_WAIT = 900  # transcript snippets take minutes
+
+
+def lock():
+    """Hold PW_LOCK until this process exits (the OS releases it, so a crash leaves no stale lock)."""
+    PW_HOME.mkdir(exist_ok=True)
+    f = open(PW_LOCK, "a+")
+    if os.name == "nt":
+        import msvcrt
+        take = lambda: msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
+    else:
+        import fcntl
+        take = lambda: fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    for _ in range(LOCK_WAIT):
+        try:
+            take()
+            return f
+        except OSError:
+            time.sleep(1)
+    sys.exit(f"another pw_run.py call has held {PW_LOCK} for {LOCK_WAIT}s; run pw_run.py calls one at a time")
 
 
 def cli(*args):
@@ -78,6 +104,7 @@ def ensure_open():
 
 
 def main():
+    held = lock()  # noqa: F841 (kept open for the process lifetime)
     if sys.argv[1:2] == ["--login"]:
         urls = [LOGIN_URLS[k] for k in (sys.argv[2:] or LOGIN_URLS)]
         if is_open():

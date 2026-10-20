@@ -18,13 +18,12 @@ python scripts/log_run.py --task <晨報|週規劃|截止提醒|上課筆記> --
 - 這個指令會寫進 `state/runs.json`，並重新產生 `digests/INDEX.md`。**不要手改 INDEX.md。**
 
 ## 2. 更新 dashboard（必做；失敗不影響第 1 步）
-dashboard 的資料是兩個檔案：`state/runs.json` 和 `state/deadlines.json`。晨報如果從 Canvas 看到繳交狀態或 `due_at` 變了，要先用 Edit 改 `state/deadlines.json` 裡對應 `canvas_id` 那一列的 `status` / `done` / `due` / `due_label`。
-1. 上傳 runs.json。用 Artifact 工具：`action: "publish"`、`url: "<DASHBOARD_URL>"`、`file_path: "D:\Repos\fall-2026\state\runs.json"`、`asset: true`。記下回傳的 `/_blob/<id>`。
-2. 有改 deadlines.json 的話，用同樣方式上傳 `state\deadlines.json`。JSON 檔一次只能上傳一個，所以要分兩次呼叫。
-3. 用 ArtifactData（沒有載入就先用 ToolSearch 載入）指向同一個 url：
-   - `get` collection `datasets` 的 `runs`；這次有改 `state/deadlines.json` 的話（上面第 2 點有上傳），也 `get` `deadlines`。記下 `version`，以及舊的 `source.url`。
-   - 用 `batch` 做 `update`，每筆都帶 `if_version`，更新：`source: {kind: "file", url: "<新的 /_blob/...>", name: "runs.json"}` 和 `updated: {at: "<現在的 ISO 時間>", by: "排程：<任務名>"}`。
-4. 用 Artifact 工具刪掉舊的 asset：`action: "delete"`、`url` 同上、`path: "<舊 source.url 去掉 /_blob/ 的 id>"`。刪除失敗就略過。
+dashboard 的資料是兩個檔案：`state/runs.json` 和 `state/deadlines.json`（晨報會先把 Canvas 的變動寫進 `state/deadlines.json`）。
+下面每一步對 `runs` 做一次；這次有改 `state/deadlines.json` 的話，對 `deadlines` 也做一次（兩個資料集各自上傳、各自更新、各自刪舊檔）。
+1. 上傳。用 Artifact 工具：`action: "publish"`、`url: "<DASHBOARD_URL>"`、`file_path: "D:\Repos\fall-2026\state\<runs|deadlines>.json"`、`asset: true`。JSON 檔一次只能上傳一個，所以兩個要分兩次呼叫。記下回傳的 `/_blob/<id>`。
+2. 用 ArtifactData（沒有載入就先用 ToolSearch 載入）指向同一個 url，`get` collection `datasets` 的 `runs`（和 `deadlines`）。記下各自的 `version`，以及舊的 `source.url`。
+3. 用一個 `batch` 做 `update`，每筆都帶自己的 `if_version`，更新：`source: {kind: "file", url: "<這個資料集新的 /_blob/...>", name: "<runs|deadlines>.json"}` 和 `updated: {at: "<現在的 ISO 時間>", by: "排程：<任務名>"}`。
+4. 用 Artifact 工具刪掉每個資料集舊的 asset：`action: "delete"`、`url` 同上、`path: "<舊 source.url 去掉 /_blob/ 的 id>"`。刪除失敗就略過。
 5. 不要動 dashboard 的 `files/index.html` 和 `dash/meta`。
 6. 如果 Artifact 或 ArtifactData 工具不存在或呼叫失敗，或者回傳 artifact 不存在／沒有權限（例如換了 claude.ai 帳號，見 `automation/MIGRATION.md`）：不重試，把第 1 步重跑一次，`--status warn`，`--summary` 寫「dashboard 沒更新：<原因>」。這一列會取代原本那列成為最新紀錄，原本那列保留。
 
@@ -34,7 +33,7 @@ dashboard 的資料是兩個檔案：`state/runs.json` 和 `state/deadlines.json
 ## 4. Commit 並 push（必做）
 這一步最後做。如果第 2 步失敗、重跑過第 1 步，重跑那次的登記也要一起 commit。
 1. 先跑 `git -C D:\Repos\fall-2026 branch --show-current`。如果不是 `master`，就不 commit，最後一句回報「沒有 commit：目前在 <branch>」。
-2. 只 stage 這次執行**自己寫或改過**的檔案，再加上 `state/runs.json`、`digests/INDEX.md`：
+2. 只 stage 這次執行**自己寫或改過**的檔案（各任務 prompt 最後列了可能改的檔案，用 `git status --short` 確認哪些真的有變動），再加上 `state/runs.json`、`digests/INDEX.md`：
    ```
    git -C D:\Repos\fall-2026 add -- <這次寫或改的檔案…> state/runs.json digests/INDEX.md
    ```

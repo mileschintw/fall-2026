@@ -1,18 +1,18 @@
 # Fall 2026 學期中樞：啟動文件（Bootstrap）
 
-> 版本：2026-10-18。取代 `fall-2026-hub-plan.md`。
-> 這份文件是交給新的 agent，一次性把學期中樞建起來用的。
-> 裡面的事實是 2026-09-30 到 10-18 之間，實際登入 Canvas、Teams/SharePoint、Piazza、Panopto、GitHub 查證過的。查證不了的標 **【未驗證】**。
-> Repo 位置：`D:\Repos\fall-2026`（目前是空資料夾，還沒 `git init`）。
+> 版本：2026-10-20。
+> 這份文件給在一台電腦上架設學期中樞的 agent 讀：第 1–4 節是查證過的事實與抓取方法，第 9 節是架設步驟。
+> 事實是 2026-09-30 到 10-20 之間實際登入 Canvas、Teams/SharePoint、Piazza、Panopto、GitHub 查證過的。查證不了的標 **【未驗證】**。
+> Repo：GitHub `mileschintw/fall-2026`（private），本機 `D:\Repos\fall-2026`。程式、prompt、state 都已經在 repo 裡，架設是把它們接上這台電腦，不是重寫。
 
 ---
 
 ## 0. 開場 prompt（貼到新 session）
 
 ```
-請讀 repo 根目錄的 BOOTSTRAP.md，照第 9 節「建置步驟」把學期中樞一次建好。
+請讀 repo 根目錄的 BOOTSTRAP.md，照第 9 節「架設步驟」把學期中樞在這台電腦上架好。
 規則：
-- 第 1–5 節是已查證的事實與做法，直接採用。資料互相衝突時，用第 3 節的可信度規則判斷。
+- 第 1–4 節是已查證的事實與做法，直接採用。資料互相衝突時，用第 3 節的可信度規則判斷。
 - 需要我本人做的事（UW NetID 登入、OAuth 授權）不要代做。碰到就停在那一步，把它列進最後的待辦清單，然後繼續做其他不受影響的步驟。
 - 不用每一步都等我確認。全部做完後給我一份驗收報告：哪些通了、哪些因為缺我的動作而跳過。
 - 回覆用繁體中文，術語保留英文。
@@ -95,7 +95,7 @@ Canvas 選課清單裡還有 Graduate Seminar、舊課、非課程項目，**全
 - 老師 Adrienne Slaughter（`ahandrew@uw.edu`，偏好用 Piazza 聯絡）；TA Hongyu（`hongyum@uw.edu`）
 - 上課時間是週一、三 4:30–6:20 PM。**週一在 Moore Hall 220 實體上課，週三用 Zoom**（L1 p4 寫「Wednesdays: Zoom (unless there's a test!)」）。週一也開 Zoom
 - Office Hours：老師週六 9:30–11:00，用 Zoom；TA 週二 6–8 PM
-- Piazza class 是 `muomkq9jzdj104`，使用者已加入。access code 在 Canvas 的 Resources 模組，**不要寫進 repo**
+- Piazza class 是 `muomkq9jzdj104`，使用者已加入。access code 在 Canvas 的 Resources 模組
 - 錄影放在 Panopto，連結會加到 Canvas 對應的 Module，項目類型是 `ExternalTool`
 - 教材是《Grokking Algorithms》，IDE 用 PyCharm。課堂程式碼在 `uw-python-fall2026/in-class-code`（公開 repo）
 
@@ -181,14 +181,7 @@ const ev  =await all(`/api/v1/calendar_events?context_codes[]=course_${id}&all_e
   - GPU：L1 `154353784`、L2 `154353786`、HW0 `154009274`、HW1 `154350654`
   - DSA：L1 `153729203`、Mod1 筆記 `153960101`。Mod1 筆記是手寫掃描，抽不太到文字
 
-**PDF 轉文字**：在 Canvas 頁面裡載入 pdf.js（cdnjs 4.0.379）：
-
-```js
-const pdfjs=await import('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs');
-pdfjs.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.mjs';
-const meta=await (await fetch('/api/v1/courses/1917398/files/154353784')).json();
-const doc=await pdfjs.getDocument({data:await (await fetch(meta.url)).arrayBuffer()}).promise;
-```
+**PDF 轉文字**：`scripts/browser/pdf_text.js`（在 Canvas 頁面裡載入 pdf.js 4.0.379，用法見檔頭）。Canvas wiki page 轉文字用 `scripts/browser/canvas_page.js`。
 
 **把資料存回 repo**：`pw_run.py` 會把片段最後一個 expression 的值直接寫成 JSON 檔，不經過聊天，再大也不用分批。
 
@@ -233,30 +226,25 @@ const vtt=await fetch(site+`/_api/v2.1/drives/${drv}/items/${item.id}/media/tran
   ```
   回傳 SRT（第一堂課約 98 KB），是自動字幕
 - **登入**：Panopto 用 Canvas OAuth 登入，第一次會出現「Panopto is requesting access to your account」確認頁（`canvas.uw.edu/login/oauth2/confirm`）
-  - **這一步要使用者自己按授權**，建議勾選 Remember my authorization
-  - 10/18 時正卡在這一頁，還沒授權
+  - **這一步要使用者自己按授權**（在 `pw_run.py --login panopto` 開的視窗裡），建議勾選 Remember my authorization。10/20 已授權
 - 已知錄影：Class 1（9/30）、Mod 1 週一與週三、Mod 2 週一，LTI 連結都在 modules 裡
 
 ### 4.5 Piazza（DSA 主要討論區）
 
-- 列表頁：`https://piazza.com/class/muomkq9jzdj104`。用 `get_page_text` 可以拿到標題、摘要、日期
-- 單篇：開 `…/post/<n>`，再用 `get_page_text`。貼文編號不連續，目前看到的有 @8–@12、@14、@36，有些編號打開是空白頁
-- 座標點擊常因為 pane 沒繪製而逾時。改用 JS：找到標題文字所在的葉節點，往上找 `role="link"` 或 `<a>` 的祖先，再呼叫 `.click()`；也可以直接點 `[data-id="post_group_item"]`
-- 截至 10/18 的內容：
-  - 歡迎與課務公告
-  - GitHub 邀請相關的問題
-  - @10：Zoom 和 Panopto 錄影
-  - Code from class（指向 in-class-code）
-  - @36：Rules in hw3
-- 自動化備案：在 Piazza 設定 email 通知。但信箱 connector 也被 UW 鎖住了，所以實際上只能靠瀏覽器
+- 列表：`scripts/browser/piazza.js`（在 `https://piazza.com/class/muomkq9jzdj104` 跑），回傳 feed 的 cid、標題、摘要、日期
+- 單篇：`scripts/browser/piazza_post.js`（在 `…/post/<cid>` 跑）。打開貼文會在 Piazza 上標成已讀。貼文編號不連續，有些編號打開是空白頁
+- 沒登入時 Piazza 會轉回首頁並跳出登入框，片段會丟 `LOGIN_EXPIRED`
+- 內部 API `/logic/api` 回「Request not valid」，所以只能讀頁面
+- 截至 10/18 的內容：歡迎與課務公告、GitHub 邀請相關的問題、@10 Zoom 和 Panopto 錄影、Code from class（指向 in-class-code）、@36 Rules in hw3
 
 ### 4.6 Teams 頻道貼文
 
-- 網址 `https://teams.microsoft.com/v2/` 會轉到 `teams.cloud.microsoft`，載入要 8–15 秒。偶爾會出現「Language changes detected」橫幅，可以忽略
-- 介面是虛擬捲動，`get_page_text` 只會拿到已經載入的貼文
-- 討論串會摺疊成「Open N replies」，要點開再捲動。用 `find` 取得 ref 再點擊，比用座標可靠
+- `scripts/browser/teams_general.js`（`--url https://teams.cloud.microsoft/`）讀 GPU General 頻道，回傳每個 thread 和最後幾則回覆。比對用 `state/teams_seen.json`
+- 網址用 `https://teams.cloud.microsoft/`。`teams.microsoft.com/v2/` 載入後會再轉址，片段執行會中斷。載入要 8–15 秒
+- 時間從訊息 id 讀（`message-body-<epoch ms>`）。介面語言會在英文和中文之間切換，畫面上的時間文字（「昨天」、「Yesterday」）不可靠
+- 介面是虛擬捲動，只會讀到最近有動靜的 thread，每個 thread 只顯示最後 3 則回覆。要看更早的，用 `python scripts/pw_run.py --cli snapshot` / `--cli click <ref>` 點開「Open N replies」
 - 頻道的「Shared」分頁是嵌在 iframe 裡的 SharePoint。檔案直接用第 4.3 節的方法讀，比較快
-- 讀頻道貼文的 API **【未驗證】**，目前只能從 UI 讀
+- 讀頻道貼文的 API **【未驗證】**（M365 connector 要 admin consent，見第 1 節），目前從 UI 讀
 
 ### 4.7 GitHub（已驗證）
 
@@ -286,129 +274,58 @@ gh repo list uw-python-fall2026 --limit 100 --json name,createdAt,url,visibility
 
 ## 6. Repo 結構
 
-```
-D:\Repos\fall-2026\
-├── BOOTSTRAP.md            ← 本文件
-├── CLAUDE.md               ← 精簡規則（第 7 節）
-├── courses.yaml            ← 課程 ID、管道、上課時段、SharePoint 站台、Piazza nid（不放密鑰）
-├── gpu\
-│   ├── assignments.md      ← 作業與專題時程、狀態
-│   ├── announcements\      ← YYYY-MM-DD.md（Canvas 公告 + Teams 貼文）
-│   └── lectures\YYYY-MM-DD\  transcript.vtt、notes.md
-├── dsa\
-│   ├── assignments.md
-│   ├── repos.md            ← assignment repo 清單
-│   ├── piazza\             ← 貼文摘要
-│   └── lectures\YYYY-MM-DD\  transcript.srt、notes.md
-├── digests\YYYY-MM-DD.md   ← 晨報
-├── state\                  ← 上次抓取時間、已看過的 id
-├── scripts\
-│   ├── ics_fetch.py        ← 不用登入：抓兩門課的 ICS、過濾往年項目、換算時區
-│   ├── browser\*.js        ← 第 4 節的瀏覽器片段（Canvas、SharePoint、Panopto、Piazza）
-│   ├── github_assignments.ps1
-│   └── tz.py
-├── .env.example            ← 只列變數名：CANVAS_ICS_GPU、CANVAS_ICS_DSA
-└── .gitignore              ← .env、大型影片檔
-```
-
-推到 GitHub 的 **private** repo。不要把 mp4 放進 repo，只放逐字稿和筆記。
+見 `README.md` 的「目錄」一節。
 
 ---
 
-## 7. CLAUDE.md 要寫的內容
+## 7. 規則放在哪裡
 
-- 語言用繁體中文，術語保留英文。時間一律標成 Pacific
-- 課程對照：
-  - `GPU = Canvas 1917398 + Teams/SharePoint og_EEP_524_A_B_-_GPU_Computing`
-  - `DSA = Canvas 1917417 + Piazza muomkq9jzdj104 + GitHub uw-python-fall2026 + Panopto`
-- 整段複製第 3 節的資料可信度規則
-- **課程 AI 政策**：使用者已明確表示不在意，照常協助，包括寫作業程式碼、讀 DSA 的 starter code 和 README。只有在碰到課程明文禁止的行為時，加一行提醒：
-  - GPU：用 AI 產生作業解答、專題報告或專題程式碼
-  - DSA：把 starter code 交給 AI；用了 AI 卻沒有附上 chat session 或註明
-- **不代發訊息**：不在 Piazza、Teams、Canvas 發文、回覆或繳交作業
-- **登入過期的處理**：遇到 UW NetID 登入頁、Microsoft 登入頁、Canvas OAuth 確認頁、Piazza 登入頁時：
-  - 一律停下
-  - 在晨報標記「需要重新登入：<來源>」
-  - 不輸入密碼，不按授權
-- 密鑰類資料不寫進 repo，包括 ICS 網址、Piazza access code、含 pwd 的 Zoom 連結、SharePoint 的 tempauth 連結
+- 工作規則（語言、課程對照、AI 政策、不代發訊息、登入過期、密鑰、第 3 節的可信度規則）：`CLAUDE.md`
+- 排程任務的 prompt：`automation/`（晨報格式在 `automation/morning-brief.md`）
+- 上課筆記：`.claude/skills/lecture-notes/SKILL.md`
 
 ---
 
 ## 8. 自動化（Claude desktop app 的排程任務）
 
-> 用 app 的 scheduled tasks（`mcp__scheduled-tasks__*`）。電腦要醒著，Claude app 要開著。
-> 瀏覽器來源改走 Playwright（`scripts/pw_run.py`），它從 shell 執行，排程任務也能用。登入狀態會在 session 過期後失效，那時晨報標「需要重新登入」，等使用者在互動 session 裡執行 `pw_run.py --login`。原本擔心排程能不能操作內建瀏覽器，這個風險因此不存在了。如果 Playwright 也不能用，就分成兩層：
-> - 排程層：只跑 ICS 和 gh，產出截止日提醒
-> - 互動層：使用者打開中樞 session 說「更新」時，agent 用瀏覽器抓公告、討論、逐字稿
-
-| 任務 | 時間（Pacific） | 內容 | 來源 |
-|---|---|---|---|
-| 晨報 | 每天 07:00 | 過去 24 小時的新公告、Piazza 和 Teams 重點、新作業和新 repo、48 小時內到期的項目、需要重新登入的來源 | ICS、gh、瀏覽器 |
-| 週規劃 | 週日 21:00 | 下週截止日、建議開始時間 | ICS、`assignments.md` |
-| 截止提醒 | 截止前 48h、24h | 推播 | ICS |
-| 上課筆記 | GPU：週三；DSA：週二、週四 | 抓逐字稿、對照講義，產出 `notes.md` | SharePoint（4.3）、Panopto（4.4） |
-
-**固定提醒**
-- 11/9（一）4:30 PM：DSA 期中考，實體紙筆，Moore 220
-- 11/17（二）：GPU 專題 Proposal
-- 12/1（二）5:59 PM：GPU 專題 Design Spec
-- 12/9（三）4:30 PM：DSA 期末考，實體紙筆，**當天要到校**
-- 12/15–12/17：GPU 專題發表（線上）
-- 12/17（四）11:59 PM：GPU 專題報告與程式碼，不能延期
-
-**晨報格式**
-
-```
-# YYYY-MM-DD 晨報
-## 🔴 今明兩天到期
-## 📢 新公告（依課程）
-## 💬 討論重點（過去 24h，含老師 / TA 的關鍵回覆）
-## 🆕 新作業 / 新教材 / 新錄影 / 新 repo
-## 📅 今天的課（地點 / 線上）
-## ⚠️ 資料來源狀態（需要重新登入的來源）
-```
-
-**上課筆記 skill**：`/lecture-notes <gpu|dsa> <日期>`
-1. 抓逐字稿
-2. 對照講義 PDF 和課本章節。GPU 對 PMPP（章節見 weekly-reading-sets）；DSA 對 Grokking Algorithms
-3. 產出內容：重點摘要、名詞解釋、老師強調的地方、和作業或考試的關聯、還要釐清的問題
+- 用 app 的 scheduled tasks（`mcp__scheduled-tasks__*`）。電腦要醒著，Claude app 要開著。
+- 任務、時間、輸出見 `automation/README.md`；時間的正本在 `courses.yaml` 的 `hub.scheduled_tasks`。
+- 瀏覽器來源走 Playwright（`scripts/pw_run.py`），從 shell 執行，排程任務也能用（10/20 四個任務都實測過）。
+- 登入狀態過期後，晨報標「需要重新登入」，等使用者在互動 session 裡執行 `pw_run.py --login`。
 
 ---
 
-## 9. 建置步驟（給新 agent）
+## 9. 架設步驟（給新 agent）
 
-1. 在 `D:\Repos\fall-2026` 執行 `git init`，建立第 6 節的結構，以及 `CLAUDE.md`、`courses.yaml`、`.env.example`、`.gitignore`
-2. 用內建瀏覽器開 Canvas，**先檢查 origin**：
-   - 取得兩門課的 ICS 網址，寫進 `.env`
-   - 抓兩門課的作業、公告、syllabus、modules，產生 `gpu/assignments.md` 和 `dsa/assignments.md`
-   - 和第 2 節對照，有差異就列進驗收報告（例如 GPU 的 HW2 以後是否已經發布）
-3. 寫 `scripts/tz.py` 和 `scripts/ics_fetch.py`，實測能抓到並正確過濾
-4. 用 `gh` 列出 repo，寫進 `dsa/repos.md`
-5. 用 SharePoint API（4.3）抓 GPU Lecture 1、2 的逐字稿，存成 `gpu/lectures/2026-10-06/`、`2026-10-13/` 下的 `transcript.vtt`
-6. 開 DSA 的 Panopto：
-   - 如果停在 OAuth 確認頁，就把它列進使用者待辦，跳過這步
-   - 如果能用，抓 Class 1 到 Mod 2 的字幕
-7. 讀 Piazza 列表和 Teams General 頻道，各寫一份基準摘要。之後晨報只報新增的內容
-8. 建立 `/lecture-notes` skill，用 GPU Lecture 2 試做一份
-9. 設定第 8 節的排程任務並手動觸發一次晨報。**這次觸發必須碰到至少一個只能靠瀏覽器取得的來源**，用來驗證第 8 節的風險；結果寫進驗收報告
-10. 建 private GitHub repo，**push 前先問使用者**
-11. 交出驗收報告：每個來源標明「通 / 不通 / 等使用者」，附上使用者待辦清單
+每一步都寫了「完成」的檢查方式，驗收報告逐項標「通 / 不通 / 等使用者」。
+
+1. **Repo**：`D:\Repos\fall-2026` 已經有 clone 就用它；沒有就 `gh repo clone mileschintw/fall-2026 D:\Repos\fall-2026`。完成：`git -C D:\Repos\fall-2026 status -sb` 在 `master`，和 `origin/master` 同步。
+2. **工具**：確認 `python --version`（3.13）、`gh auth status`（帳號 `mileschintw`）、`pwsh --version`、`node --version`。Playwright CLI：`npm install -g @playwright/cli@latest`，再在 repo 根目錄執行 `playwright-cli install --skills`。這會覆寫 `.claude/skills/playwright-cli/SKILL.md`，覆寫後用 `git checkout -- .claude/skills/playwright-cli/SKILL.md` 還原（repo 裡的版本有指向 `pw_run.py` 的說明）。完成：`playwright-cli --version` 有輸出，`git status` 沒有 skill 的變動。
+3. **登入**：執行 `python scripts/pw_run.py --login`，會開一個 Chrome，每個來源一個分頁。**請使用者自己登入**（UW NetID + Duo、Microsoft、Piazza），Panopto 的 Canvas OAuth 確認頁也由使用者按。使用者說好了之後執行 `python scripts/pw_run.py --save`。
+4. **`.env`**：
+   ```
+   python scripts/pw_run.py scripts/browser/ics_urls.js state/_ics_urls.tmp --url https://canvas.uw.edu/
+   python -c "import json;d=json.load(open('state/_ics_urls.tmp'));open('.env','w').write(''.join(f'{k}={v}\n' for k,v in d.items()))"
+   ```
+   然後刪掉 `state/_ics_urls.tmp`。ICS 網址是密鑰，不要印出來，也不要寫進 repo。完成：`python scripts/ics_fetch.py --days 14` 兩門課都有項目。
+5. **瀏覽器來源**：照 `automation/morning-brief.md` 第 2 步 a–e 的五個指令各跑一次，輸出寫到 `state/_*.tmp`，看完就刪。完成：五個都是 exit 0。exit 3 就回第 3 步。這一步不更新任何 `state/*_seen.json`，那是晨報的工作。
+6. **排程任務**：照 `automation/MIGRATION.md` 第 1 步建四個任務。dashboard（`courses.yaml` 的 `hub.dashboard_url`）打得開就跳過 MIGRATION 第 2 步；打不開（例如換了 claude.ai 帳號）就照第 2 步重建。
+7. **驗收**：用 `run_scheduled_task` 跑一次 `fall-2026-deadline-alert`，再跑一次 `fall-2026-morning-brief`。完成：`digests/INDEX.md` 最上面多了兩列，晨報的「資料來源狀態」八個來源都是通，而且寫了 Playwright 可用；`git -C D:\Repos\fall-2026 status -sb` 沒有 `ahead`。
+8. 交出驗收報告：每一步標明「通 / 不通 / 等使用者」，附上使用者待辦清單。
 
 ---
 
 ## 10. 使用者要自己做的事
 
-1. Playwright 的 UW NetID、Microsoft 或 Piazza 登入過期時，在 agent 執行 `python scripts/pw_run.py --login` 開出的 Chrome 視窗裡自己重新登入
-2. 在 Canvas 的 Panopto OAuth 確認頁按授權（目前卡在這頁）
-3. 讓電腦不要睡眠，或用 app 的 keep-awake
-4. 決定晨報時間（預設 07:00 Pacific）和 GitHub repo 名稱
+1. Playwright 的 UW NetID、Microsoft 或 Piazza 登入過期時，在 agent 執行 `python scripts/pw_run.py --login` 開出的 Chrome 視窗裡自己重新登入；Panopto 的 Canvas OAuth 確認頁也自己按
+2. 讓電腦不要睡眠，或用 app 的 keep-awake
 
 ---
 
 ## 11. 尚未查證或待追蹤
 
 - Playwright 的登入狀態（`~/.fall-2026/uw-state.json`）實際能撐多久才要重新登入
-- Teams 頻道貼文能不能用 API 讀；「Weekly Live Lecture」的討論串只看過最後幾則
+- Teams 討論串只讀得到最後 3 則回覆，更早的要手動點開
 - GPU 專題的題目要求、rubric、發表排程，預計第 6–7 週公布
 - DSA Piazza 有些貼文編號打不開
 - DSA 的 Canvas 考試設定會不會改成符合實體紙筆

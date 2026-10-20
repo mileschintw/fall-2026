@@ -1,10 +1,12 @@
 ---
 name: playwright-cli
-description: Automate browser interactions, test web pages and work with Playwright tests.
-allowed-tools: Bash(playwright-cli:*) Bash(npx playwright:*) Bash(npx --no-install playwright:*)
+description: Automate browser interactions, test web pages and work with Playwright tests. In this repo, run every command through `python scripts/pw_run.py --cli <command>`.
+allowed-tools: Bash(python scripts/pw_run.py:*) Bash(playwright-cli:*) Bash(npx playwright:*) Bash(npx --no-install playwright:*)
 ---
 
 # Browser Automation with playwright-cli
+
+> **This repo (fall-2026):** run each command below as `python scripts/pw_run.py --cli <command>`, e.g. `python scripts/pw_run.py --cli goto https://teams.cloud.microsoft/`, then `--cli snapshot`, `--cli click e12`. pw_run.py opens the logged-in `uw` session (UW, Microsoft, Piazza cookies) from `~/.fall-2026`, whatever the working directory. A bare `playwright-cli` call starts a separate, logged-out browser per checkout. For reading data, use the snippets in `scripts/browser/` (`python scripts/pw_run.py <snippet.js> <out> --url <URL>`, see CLAUDE.md). This note is local: re-add it after `playwright-cli install --skills`.
 
 ## Quick start
 

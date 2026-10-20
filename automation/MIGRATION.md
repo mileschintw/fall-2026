@@ -58,11 +58,7 @@
 
 ## 第 3 步：Playwright 的登入
 
-用 `python scripts/pw_run.py <片段> <out> --url <網址>` 測以下四個網址（片段見 `automation/morning-brief.md` 第 2 步）。exit 3 就是在登入頁：
-- https://canvas.uw.edu/courses/1917398
-- https://piazza.com/class/muomkq9jzdj104
-- https://uwnetid.sharepoint.com/sites/og_EEP_524_A_B_-_GPU_Computing
-- https://uw.hosted.panopto.com/Panopto/Pages/Home.aspx
+照 `automation/morning-brief.md` 第 2 步 a–e 的五個指令（Canvas、Piazza、GPU SharePoint、Panopto、Teams）各跑一次，輸出寫到 `state/_*.tmp`，看完就刪，不更新 `state/*_seen.json`。exit 3 就是在登入頁。
 
 如果在登入頁（`idp.u.washington.edu`、`login.microsoftonline.com`、Piazza 首頁的登入框），執行 `python scripts/pw_run.py --login`，**請使用者自己在 Chrome 視窗登入**，不代輸入密碼。Panopto 如果出現 Canvas OAuth 確認頁，也要由使用者自己按。使用者說好了之後，執行 `python scripts/pw_run.py --save`。
 
@@ -71,5 +67,5 @@
 - [ ] 截止提醒手動跑一次，INDEX.md 和 dashboard 都多了一列
 - [ ] 那次執行有 commit 並 push：`git -C D:\Repos\fall-2026 status -sb` 第一行沒有 `ahead`，GitHub 上也看得到那個 commit
 - [ ] dashboard 已 pin，`hub.dashboard_url` 是新網址
-- [ ] 四個瀏覽器來源都能讀到資料，不在登入頁
+- [ ] 五個瀏覽器來源（Canvas、Piazza、GPU SharePoint、Panopto、Teams）都是 exit 0
 - [ ] 隔天早上 07:00 的晨報有產生，「資料來源狀態」那一段全部是通
