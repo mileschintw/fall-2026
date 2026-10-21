@@ -179,5 +179,40 @@
    }
   ],
   "note": "Canvas Files 裡的 PDF（Homeworks/Hw0 - Au26 - GPUCompute.pdf），不是 Canvas assignment；手動存，排程不會更新"
+ },
+ "11810626": {
+  "course": "gpu",
+  "slug": "hw2",
+  "dir": "gpu/hw/hw2",
+  "name": "Homework #2 - Parallel performance theory, Gaussian blur kernels and more!",
+  "due_at": "2026-10-28T00:59:59Z",
+  "fp": {
+   "text": "1817606b1f3ea937",
+   "links": [
+    "https://canvas.uw.edu/courses/1917398/files/folder/Homeworks/Hw2_materials"
+   ],
+   "files": {
+    "154697826": "2026-10-21T00:59:12Z"
+   },
+   "readme": null,
+   "due_at": "2026-10-28T00:59:59Z"
+  },
+  "files": [
+   "spec.pdf",
+   "spec.md"
+  ],
+  "archived_at": "2026-10-21T07:43:39-07:00",
+  "summary_done": true,
+  "changes": [
+   "new"
+  ],
+  "history": [
+   {
+    "at": "2026-10-21T07:43:39-07:00",
+    "changes": [
+     "new"
+    ]
+   }
+  ]
  }
 }
