@@ -20,23 +20,36 @@
   "due": "2026-10-20T17:59:59-07:00",
   "due_label": "10/20（二） 5:59 PM PDT",
   "points": 11,
-  "status": "未交",
-  "done": false,
+  "status": "已交",
+  "done": true,
   "note": "Canvas 上傳；看 L1 updated p55 的 checkCuda",
   "canvas_id": 11810625
  },
  {
+  "key": "gpu-popquiz-l3",
+  "course": "GPU",
+  "item": "Pop Quiz - Lecture 3",
+  "kind": "小考",
+  "due": "2026-10-20T20:30:00-07:00",
+  "due_label": "10/20（二） 8:30 PM PDT",
+  "points": 3,
+  "status": "已評分",
+  "done": true,
+  "note": "課堂 pop quiz，8:20–8:30 PM 開放",
+  "canvas_id": 11860726
+ },
+ {
   "key": "gpu-hw2",
   "course": "GPU",
-  "item": "HW2",
+  "item": "HW2 Parallel performance theory, Gaussian blur kernels and more!",
   "kind": "作業",
   "due": "2026-10-27T17:59:59-07:00",
   "due_label": "10/27（二） 5:59 PM PDT",
   "points": 12,
-  "status": "未發布",
+  "status": "未交",
   "done": false,
-  "note": "去年題目 Gaussian Blur",
-  "canvas_id": null
+  "note": "10/20 Canvas 發布（HW2 PDF 同時上傳）",
+  "canvas_id": 11810626
  },
  {
   "key": "gpu-hw3",
