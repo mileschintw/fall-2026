@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-10-21T10:14:05-07:00",
+  "task": "上課筆記",
+  "status": "new",
+  "summary": "GPU L3 10/20 筆記：SIMT/warp、Amdahl、AI、roofline、tiled MMULT、HW2",
+  "output": "gpu/lectures/2026-10-20/notes.md"
+ },
+ {
   "at": "2026-10-21T08:09:09-07:00",
   "task": "截止提醒",
   "status": "ok",
