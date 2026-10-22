@@ -9,12 +9,13 @@
 - 週規劃：10/20 二 01:10 🆕 10/26–11/1：DSA A3→10/25、A4→11/1（日）延後；HW2 10/27、HW3 11/3 → [2026-10-20-weekly.md](2026-10-20-weekly.md)
 - 截止提醒：10/21 三 18:09 ✅ 48h 內沒有到期項目；下一個是 DSA A3 10/25 11:59 PM → —
 - 上課筆記：10/21 三 10:14 🆕 GPU L3 10/20 筆記：SIMT/warp、Amdahl、AI、roofline、tiled MMULT、HW2 → [notes.md](../gpu/lectures/2026-10-20/notes.md)
-- 作業說明：10/21 三 07:45 🆕 新：gpu/hw2 → [README.md](../gpu/hw/README.md)
+- 作業說明：10/22 四 07:43 ✅ 沒有新東西 → —
 
 ## 紀錄
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 10/22 四 07:43 | 作業說明 | ✅ | 沒有新東西 | — |
 | 10/22 四 07:09 | 晨報 | 🆕 | GPU HW2 starter 檔上線；DSA Class 7 錄影；Piazza @52 老師答 HW3 不含 tree | [2026-10-22.md](2026-10-22.md) |
 | 10/21 三 18:09 | 截止提醒 | ✅ | 48h 內沒有到期項目；下一個是 DSA A3 10/25 11:59 PM | — |
 | 10/21 三 10:14 | 上課筆記 | 🆕 | GPU L3 10/20 筆記：SIMT/warp、Amdahl、AI、roofline、tiled MMULT、HW2 | [notes.md](../gpu/lectures/2026-10-20/notes.md) |
