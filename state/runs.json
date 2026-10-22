@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-10-22T10:12:30-07:00",
+  "task": "上課筆記",
+  "status": "new",
+  "summary": "DSA Class 7 10/21 筆記：DFS 三順序、expression tree、BFS/deque、iterative DFS；A4 首個可用 AI",
+  "output": "dsa/lectures/2026-10-21/notes.md"
+ },
+ {
   "at": "2026-10-22T08:09:32-07:00",
   "task": "截止提醒",
   "status": "ok",

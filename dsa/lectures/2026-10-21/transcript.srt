@@ -1,0 +1,3989 @@
+1
+00:25:40,000 --> 00:25:44,000
+[該逐字稿自動產生。為清晰起見，可能已進行編輯。]
+Hey.
+
+2
+00:25:44,000 --> 00:25:46,000
+Can you all hear me?
+
+3
+00:25:46,000 --> 00:25:48,000
+How's everyone doing
+
+4
+00:25:48,000 --> 00:25:49,000
+Yes
+
+5
+00:25:49,000 --> 00:25:50,000
+Yeah, I can hear you.
+
+6
+00:25:50,000 --> 00:25:52,000
+Thank you so much.
+
+7
+00:25:52,000 --> 00:25:54,000
+like to hear from you guys.
+
+8
+00:25:54,000 --> 00:26:10,000
+I will start with, I'm going to start with a couple of announcements, but also my laptop died and it's charging, but I don't know, I'm a little nervous about it right now. Might need a few minutes.
+
+9
+00:26:10,000 --> 00:26:24,000
+If something crazy happens, like, it shuts down and kicks me out of Zoom, I will come back shortly. I have a backup plan, but I might need a couple minutes. So that happens. No one panic. I'll come back in a few minutes.
+
+10
+00:26:24,000 --> 00:26:31,000
+In the meantime, I'll start with announcements, then I'll open it up for questions.
+
+11
+00:26:31,000 --> 00:26:34,000
+Let's do
+
+12
+00:26:34,000 --> 00:26:41,000
+As people start to trickle in.
+
+13
+00:26:41,000 --> 00:26:43,000
+Announcements
+
+14
+00:26:43,000 --> 00:26:48,000
+First, A3. A3 is due Sunday.
+
+15
+00:26:48,000 --> 00:26:59,000
+If anyone needs, check your invites and your access today, please. If you haven't already looked at your repo
+
+16
+00:26:59,000 --> 00:27:14,000
+And confirmed that you have access and that you have your repo. I will hit push on the invites, but sometimes if there's already an invite or something, if I resend invites, it doesn't… it doesn't work. I don't know
+
+17
+00:27:14,000 --> 00:27:19,000
+So just everyone, please check that you have access.
+
+18
+00:27:19,000 --> 00:27:24,000
+I don't want to get to the last minute and like someone not have access
+
+19
+00:27:24,000 --> 00:27:28,000
+at the last minute, and then I'm not around to
+
+20
+00:27:28,000 --> 00:27:37,000
+to get you access. I will also post on Piazza, but for those in class right now, please make sure you have access
+
+21
+00:27:37,000 --> 00:27:50,000
+And if you don't, just drop me a private note on Piazza with your GitHub ID, and after class later tonight, I will make sure to update and make sure you have your invite and any access you need.
+
+22
+00:27:50,000 --> 00:27:52,000
+A4
+
+23
+00:27:52,000 --> 00:28:08,000
+A4 is going out… it'll go out tomorrow. I wanted to have an announcement first and kind of talk to y'all, just so that we know what's coming. So, A4 is our first AI
+
+24
+00:28:08,000 --> 00:28:14,000
+AI utilizing utilization
+
+25
+00:28:14,000 --> 00:28:22,000
+You want AI allowed, I'll say. A4 is the first assignment where
+
+26
+00:28:22,000 --> 00:28:34,000
+If you would like to utilize AI, which I think that's the best thing to do, given what's in it, you can start using AI
+
+27
+00:28:34,000 --> 00:28:42,000
+And what I will be asking for is that you do things like share your prompts
+
+28
+00:28:42,000 --> 00:28:52,000
+And something about like an explanation of how you go about
+
+29
+00:28:52,000 --> 00:28:56,000
+How you go about using AI in this assignment.
+
+30
+00:28:56,000 --> 00:29:02,000
+There's a few different ways that you can. What I'll be looking for
+
+31
+00:29:02,000 --> 00:29:19,000
+Or actually, let me take a step back. It's less about what I'm looking for, but what our goal is in using AI in these assignments is to be mindful about how we use AI to help us be better engineers
+
+32
+00:29:19,000 --> 00:29:29,000
+So just we can, and this is a course. Coursework is very well suited to
+
+33
+00:29:29,000 --> 00:29:34,000
+point in an AI at an assignment
+
+34
+00:29:34,000 --> 00:29:46,000
+and saying, hey, please do this assignment for me. And I'll be honest, I can't always tell if AI has done your assignment or not. A lot of times, too, it looks like
+
+35
+00:29:46,000 --> 00:29:50,000
+the AI did an assignment, but
+
+36
+00:29:50,000 --> 00:29:56,000
+It's also within the realm of reasonableness that a person did it
+
+37
+00:29:56,000 --> 00:30:02,000
+And I don't want to get into a place of
+
+38
+00:30:02,000 --> 00:30:07,000
+debating about whether or not you used AI or you generated something.
+
+39
+00:30:07,000 --> 00:30:18,000
+But what is important for all of us to be doing at this point in time is thinking about how we're using AI and using it in a mindful way to make us be better engineers.
+
+40
+00:30:18,000 --> 00:30:37,000
+So the kinds of things we'll be looking at are things like if AI generate something for us, can we evaluate the code and understand that it's good code or bad code? Can we identify potential bugs in it
+
+41
+00:30:37,000 --> 00:30:53,000
+Where is it useful? Where is it not useful? And I'm going to be perfectly honest with you. These are new assignments. I have not given these assignments before. So I'm not sure how easy or hard or how effective they will be
+
+42
+00:30:53,000 --> 00:31:05,000
+But this is what we're trying. I will like and appreciate your input on these as we as we start
+
+43
+00:31:05,000 --> 00:31:10,000
+Working with our first AI assignments.
+
+44
+00:31:10,000 --> 00:31:17,000
+Should I stop and ask if there's any questions on the assignments, either A3 or A4?
+
+45
+00:31:17,000 --> 00:31:25,000
+As far as you know right now
+
+46
+00:31:25,000 --> 00:31:31,000
+So make sure to pop open my chat window so I can track of that.
+
+47
+00:31:31,000 --> 00:31:47,000
+I'm sure there's going to be questions. So feel free to ask questions as we as we go through this. Ask questions on Piazza either. I encourage you to ask questions on Piazza
+
+48
+00:31:47,000 --> 00:32:02,000
+to the whole class, so we can all be a part of a discussion, and you can do that anonymously if you'd like, or you can share your name, whatever you feel comfortable with. That's why we use Piazza, for that ability to do it. But
+
+49
+00:32:02,000 --> 00:32:07,000
+We'll be looking for the looking for that over the next couple of weeks.
+
+50
+00:32:07,000 --> 00:32:09,000
+Grading
+
+51
+00:32:09,000 --> 00:32:19,000
+Just wanted to make a note. I am behind and this ties into my next
+
+52
+00:32:19,000 --> 00:32:28,000
+Announcement about people, horse people. Unfortunately, our TA
+
+53
+00:32:28,000 --> 00:32:43,000
+Will not be able to continue being an RTA, so, we do have a new grader that will be starting. In the meantime, I've got a couple weeks here where, we don't have anyone else, and so I am behind on grading
+
+54
+00:32:43,000 --> 00:32:58,000
+I have Saturday blocked out to do all of the grading, so I'm hoping on Saturday to get caught up. So, thank you for patience and understanding with this as we transition, and then hopefully
+
+55
+00:32:58,000 --> 00:33:03,000
+After next week, we will start to be
+
+56
+00:33:03,000 --> 00:33:08,000
+More timely with the grading.
+
+57
+00:33:08,000 --> 00:33:12,000
+Looking at my notes here. I think that is all my notes
+
+58
+00:33:12,000 --> 00:33:20,000
+for all the announcements I have. I might add. I have put notes on canvas.
+
+59
+00:33:20,000 --> 00:33:23,000
+So my notes from
+
+60
+00:33:23,000 --> 00:33:34,000
+From Monday are on Canvas, and that will cover part of today, so you can find those there if you're if you're so inclined.
+
+61
+00:33:34,000 --> 00:33:36,000
+So I'll pause now
+
+62
+00:33:36,000 --> 00:33:40,000
+Anyone have any questions or need anything?
+
+63
+00:33:40,000 --> 00:33:52,000
+Before we get started
+
+64
+00:33:52,000 --> 00:34:02,000
+I'm gonna take the silence as a go ahead and get started. No other questions right now.
+
+65
+00:34:02,000 --> 00:34:06,000
+And if something does come up, always feel free to
+
+66
+00:34:06,000 --> 00:34:13,000
+Raise your hand or come off mute and interrupt me, or put something in the chat.
+
+67
+00:34:13,000 --> 00:34:17,000
+And I will be paying attention.
+
+68
+00:34:17,000 --> 00:34:31,000
+Okay, let's dive in. What we talk about on Monday?
+
+69
+00:34:31,000 --> 00:34:32,000
+Shout out
+
+70
+00:34:32,000 --> 00:34:33,000
+We talked about trees
+
+71
+00:34:33,000 --> 00:34:36,000
+Breeze
+
+72
+00:34:36,000 --> 00:34:45,000
+Drop stuff in the in the chat too. What do we talk about trees?
+
+73
+00:34:45,000 --> 00:34:47,000
+Wait
+
+74
+00:34:47,000 --> 00:34:48,000
+Wait
+
+75
+00:34:48,000 --> 00:34:57,000
+We learned about the different verbiage behind the trees starting at the root, following down the various depths and branches and
+
+76
+00:34:57,000 --> 00:34:59,000
+leaves of the tree
+
+77
+00:34:59,000 --> 00:35:13,000
+Yeah, a bunch of vocabulary. We talked about our root, we talked about node leaves, our paths, parent and children, siblings, levels, height, depth
+
+78
+00:35:13,000 --> 00:35:18,000
+A whole bunch of vocab
+
+79
+00:35:18,000 --> 00:35:20,000
+What else did we talk about?
+
+80
+00:35:20,000 --> 00:35:29,000
+Mess myself, because I've now forgotten. I'm asking all of you, because I've now forgotten, even though I just looked at this, you know, 10 minutes ago.
+
+81
+00:35:29,000 --> 00:35:43,000
+We looked at how we were going to represent a tree in code. And we did it. For now, we used our We used our dictionary
+
+82
+00:35:43,000 --> 00:35:45,000
+For a node
+
+83
+00:35:45,000 --> 00:35:54,000
+Kind of like we just like we did with our linked list. Recursive calls. We talked about using recursion.
+
+84
+00:35:54,000 --> 00:36:05,000
+And trees, this is a natural place for us to get very comfortable with writing recursive code and to think about a problem recursively.
+
+85
+00:36:05,000 --> 00:36:16,000
+I said this on Monday. I'm going to repeat it now. I think being able to think recursively is a really valuable skill.
+
+86
+00:36:16,000 --> 00:36:21,000
+Even if you never write recursive code that goes into production
+
+87
+00:36:21,000 --> 00:36:26,000
+That ability to think of a problem recursively
+
+88
+00:36:26,000 --> 00:36:28,000
+is super powerful
+
+89
+00:36:28,000 --> 00:36:33,000
+There are a lot of problems that we can solve in this world
+
+90
+00:36:33,000 --> 00:36:48,000
+With a recursive approach. And just because recursive code is inefficient, and we'll see examples of that today, we'll go into specifically why recursive code is inefficient and bad for
+
+91
+00:36:48,000 --> 00:36:57,000
+production, but being able to think recursively, is really powerful, and if we can come up with a recursive solution
+
+92
+00:36:57,000 --> 00:37:01,000
+We can then write it iteratively.
+
+93
+00:37:01,000 --> 00:37:09,000
+So I'm just going to we did not talk about this on
+
+94
+00:37:09,000 --> 00:37:21,000
+On Monday, but I'm going to put that there as a that's our goal. And this is why we think recursively. In trees, because they are a recursive data structure.
+
+95
+00:37:21,000 --> 00:37:33,000
+They are defined in terms of their selves, and I'll just put here defined in terms of self.
+
+96
+00:37:33,000 --> 00:37:50,000
+Because trees are a recursive data structure. That gives us a very nice starting point to implement things recursively. And so therefore to start thinking about how we can solve problems recursively. Because once we have a recursive formulation
+
+97
+00:37:50,000 --> 00:37:55,000
+We can write it iteratively
+
+98
+00:37:55,000 --> 00:37:58,000
+Anyone else? Anyone remember anything else that we
+
+99
+00:37:58,000 --> 00:38:05,000
+Covered specifically last week, last
+
+100
+00:38:05,000 --> 00:38:08,000
+Was it the, log of N runtime?
+
+101
+00:38:08,000 --> 00:38:09,000
+Oh, yeah.
+
+102
+00:38:09,000 --> 00:38:10,000
+Or time complexity?
+
+103
+00:38:10,000 --> 00:38:16,000
+Yeah, that's I'm glad you brought that up. So our log n
+
+104
+00:38:16,000 --> 00:38:27,000
+That reminds me of something else I was going to ask before we got too far in. So
+
+105
+00:38:27,000 --> 00:38:30,000
+I'm going to put this here
+
+106
+00:38:30,000 --> 00:38:37,000
+Vlog and our log and runtime.
+
+107
+00:38:37,000 --> 00:38:51,000
+Before I say anything about that, can I see a show of hands of people online right now? Can I see a show of hands of I have been very
+
+108
+00:38:51,000 --> 00:39:00,000
+very fast and loose, or just kind of glossing over our definition of Big O.
+
+109
+00:39:00,000 --> 00:39:13,000
+And how that works and what it means and how we use it. And this is about the time in the quarter that I usually go very deep into exactly what Big O is.
+
+110
+00:39:13,000 --> 00:39:27,000
+Can I get a show of hands of who would like us to, not today, but Monday, go deeper into Big O, what it is, what it is not, and how to think about it.
+
+111
+00:39:27,000 --> 00:39:30,000
+Okay, got at least two hands. Okay, cool.
+
+112
+00:39:30,000 --> 00:39:45,000
+Love it. I am seeing enough hands and thumbs. Thank you for the input. Monday, we are going to take our time. We're going to go deep into what Big O is and what it matters and what it is not.
+
+113
+00:39:45,000 --> 00:39:53,000
+Cool, good. For today, we're going to keep waving my hands on it. What is, I think
+
+114
+00:39:53,000 --> 00:40:05,000
+gonna be kind of… well, I don't know. This login thing is weird. It's a little different. I feel like log.
+
+115
+00:40:05,000 --> 00:40:16,000
+Or sorry, O of 1 or O of N kind of seems to make a little bit more sense. And then when we started talking about O of log n, that's when
+
+116
+00:40:16,000 --> 00:40:26,000
+If we don't have a really strong grasp on Big O in general, that's when it starts to get like, wait, what? What are we doing here? So we will go into this on Monday
+
+117
+00:40:26,000 --> 00:40:28,000
+Okay.
+
+118
+00:40:28,000 --> 00:40:30,000
+I'm gonna
+
+119
+00:40:30,000 --> 00:40:34,000
+Where we left off
+
+120
+00:40:34,000 --> 00:40:39,000
+Well, I was talking about traversals.
+
+121
+00:40:39,000 --> 00:40:47,000
+And a traversal is just it's basically our iteration
+
+122
+00:40:47,000 --> 00:40:51,000
+It's basically our iteration
+
+123
+00:40:51,000 --> 00:41:06,000
+I'll say iterator. So when we talked about linked lists, we talked about iterating over our linked list. That's where we start with the first item in our linked list and we go to the next one and the next one and the next one. We iterate over the list.
+
+124
+00:41:06,000 --> 00:41:08,000
+In trees
+
+125
+00:41:08,000 --> 00:41:16,000
+We traverse, we traverse our trees. And we had started talking about a depth first traversal
+
+126
+00:41:16,000 --> 00:41:26,000
+And I can't remember exactly what we said or didn't said exactly where we got on this on Monday. So I'm going to potentially repeat myself a little bit.
+
+127
+00:41:26,000 --> 00:41:31,000
+We talked about a traversal.
+
+128
+00:41:31,000 --> 00:41:38,000
+We start with a depth first traversal. If I were to go back
+
+129
+00:41:38,000 --> 00:41:40,000
+Should have copied this
+
+130
+00:41:40,000 --> 00:41:47,000
+If I were to go back to this this tree that we
+
+131
+00:41:47,000 --> 00:41:53,000
+That we drew as our artifact for
+
+132
+00:41:53,000 --> 00:41:59,000
+For our topic of trees for a couple of days, a depth first traversal
+
+133
+00:41:59,000 --> 00:42:11,000
+is going to start at the root, or it's going to start at the root, and we're going to go down, and we're going to go down, and down, and down, and down, down and down and down.
+
+134
+00:42:11,000 --> 00:42:21,000
+And we're always going to go down before we go back up and try to go to the other side.
+
+135
+00:42:21,000 --> 00:42:24,000
+Okay, so we're always going to go depth first.
+
+136
+00:42:24,000 --> 00:42:28,000
+This is in contrast to… we'll talk about this
+
+137
+00:42:28,000 --> 00:42:44,000
+After our depth first. But this is in contrast to breadth first, where first we visit this node and then we visit this node, this node, and then we visit all the nodes on this level, and then all the nodes on this level.
+
+138
+00:42:44,000 --> 00:42:55,000
+That's our breadth first search. We visit all the nodes on a level before we go down to the next level.
+
+139
+00:42:55,000 --> 00:43:16,000
+Okay, so we started with our depth first. Actually, let me copy this while I'm here.
+
+140
+00:43:16,000 --> 00:43:19,000
+And
+
+141
+00:43:19,000 --> 00:43:30,000
+Let me, I'm going to paste it a couple times.
+
+142
+00:43:30,000 --> 00:43:44,000
+Let's where this mess off of here so we can reuse.
+
+143
+00:43:44,000 --> 00:43:53,000
+So when we talk about specifically
+
+144
+00:43:53,000 --> 00:44:04,000
+An iterator or iterating over our list when we're talking about a linked list. We're visiting each item in our list
+
+145
+00:44:04,000 --> 00:44:07,000
+One… one at a time.
+
+146
+00:44:07,000 --> 00:44:14,000
+And when we talk about a traversal in a tree, we're going to visit every node in our tree.
+
+147
+00:44:14,000 --> 00:44:27,000
+But we might visit the node and do something about that node at different points in time and in different orders. So I might start off by… first, I'm going to visit
+
+148
+00:44:27,000 --> 00:44:30,000
+the root, this node right here
+
+149
+00:44:30,000 --> 00:44:35,000
+And then I know it's depth first, so I'm always going to go down
+
+150
+00:44:35,000 --> 00:44:45,000
+And then visit this node, and then this node. And then I can go back up and visit the other node and keep going down.
+
+151
+00:44:45,000 --> 00:44:54,000
+or I can do this in some different orders. So I'm just going to write out what options we have here.
+
+152
+00:44:54,000 --> 00:44:59,000
+We have pre-order
+
+153
+00:44:59,000 --> 00:45:02,000
+And pre-order
+
+154
+00:45:02,000 --> 00:45:06,000
+We're going to go node
+
+155
+00:45:06,000 --> 00:45:08,000
+Then left
+
+156
+00:45:08,000 --> 00:45:11,000
+Then write
+
+157
+00:45:11,000 --> 00:45:15,000
+In order
+
+158
+00:45:15,000 --> 00:45:19,000
+We're gonna go left
+
+159
+00:45:19,000 --> 00:45:21,000
+Node
+
+160
+00:45:21,000 --> 00:45:23,000
+Right?
+
+161
+00:45:23,000 --> 00:45:28,000
+And then post order
+
+162
+00:45:28,000 --> 00:45:32,000
+Is going to go left
+
+163
+00:45:32,000 --> 00:45:34,000
+Right
+
+164
+00:45:34,000 --> 00:45:36,000
+Note.
+
+165
+00:45:36,000 --> 00:45:41,000
+Okay
+
+166
+00:45:41,000 --> 00:45:48,000
+A little table here.
+
+167
+00:45:48,000 --> 00:45:49,000
+So
+
+168
+00:45:49,000 --> 00:45:53,000
+What this looks like
+
+169
+00:45:53,000 --> 00:45:59,000
+What this looks like. If I am doing a depth first traversal and pre-order
+
+170
+00:45:59,000 --> 00:46:05,000
+I am going to start with my route. And I'm going to visit the node
+
+171
+00:46:05,000 --> 00:46:09,000
+And then I'm going to visit the left child
+
+172
+00:46:09,000 --> 00:46:21,000
+And then after this child is fully visited, I will go and I will visit the right child. And then everything here. And I do this recursively.
+
+173
+00:46:21,000 --> 00:46:27,000
+We're going to look at some code. But first we're going to walk through what these look like. So if I am doing
+
+174
+00:46:27,000 --> 00:46:33,000
+A pre-order traversal of this
+
+175
+00:46:33,000 --> 00:46:36,000
+I'm going to visit this node first so that
+
+176
+00:46:36,000 --> 00:46:40,000
+gets written up first. That's the first note I visit.
+
+177
+00:46:40,000 --> 00:46:43,000
+And then I'm going to go
+
+178
+00:46:43,000 --> 00:46:45,000
+To the left
+
+179
+00:46:45,000 --> 00:46:50,000
+And I'm going to depth first search on this left child
+
+180
+00:46:50,000 --> 00:47:02,000
+That will give me, again, I'm going to repeat the node. So that one goes next three. And then I'm going to do my depth first search on the left child.
+
+181
+00:47:02,000 --> 00:47:06,000
+So I come down here, I visit this node
+
+182
+00:47:06,000 --> 00:47:14,000
+And that's number one. And then once again, I'm going to depth first search on the left child.
+
+183
+00:47:14,000 --> 00:47:19,000
+This node has no left child, so I'm done with the left child.
+
+184
+00:47:19,000 --> 00:47:21,000
+And then
+
+185
+00:47:21,000 --> 00:47:26,000
+I check the right child. This node has no right child, so I'm done with this one.
+
+186
+00:47:26,000 --> 00:47:29,000
+So now, I have visited
+
+187
+00:47:29,000 --> 00:47:32,000
+The left child of this node
+
+188
+00:47:32,000 --> 00:47:36,000
+So now I'm going to visit the right child of this node
+
+189
+00:47:36,000 --> 00:47:44,000
+So now I come down and I'm going to visit six
+
+190
+00:47:44,000 --> 00:47:48,000
+And then what do I visit next?
+
+191
+00:47:48,000 --> 00:47:54,000
+Someone shout it out or put it in the chat.
+
+192
+00:47:54,000 --> 00:47:59,000
+Yeah, four
+
+193
+00:47:59,000 --> 00:48:00,000
+Then
+
+194
+00:48:00,000 --> 00:48:06,000
+No left child for four, no right child for four. Where do I go next?
+
+195
+00:48:06,000 --> 00:48:15,000
+After I visited four.
+
+196
+00:48:15,000 --> 00:48:22,000
+I'm back up at 6 and I'm going to visit the right child of six, which is 7.
+
+197
+00:48:22,000 --> 00:48:33,000
+And then once I've done that, I have visited this entire tree. That is the left child of our root
+
+198
+00:48:33,000 --> 00:48:40,000
+So now that I've visited the left child of our root, we can go visit the right child of our root.
+
+199
+00:48:40,000 --> 00:48:49,000
+So what goes next after 7?
+
+200
+00:48:49,000 --> 00:48:51,000
+Sorry?
+
+201
+00:48:51,000 --> 00:48:53,000
+10
+
+202
+00:48:53,000 --> 00:48:56,000
+And then
+
+203
+00:48:56,000 --> 00:48:59,000
+10 has no left child, so we're done.
+
+204
+00:48:59,000 --> 00:49:05,000
+So we go to the right child, we'll go to 14
+
+205
+00:49:05,000 --> 00:49:12,000
+And then we go to the left child of 14, which is 13.
+
+206
+00:49:12,000 --> 00:49:17,000
+And no right child. So we're done with 14.
+
+207
+00:49:17,000 --> 00:49:29,000
+So now we are done with the right child of our root. And so now we are done with our traversal, and we have touched every, or we have visited every node in our tree.
+
+208
+00:49:29,000 --> 00:49:31,000
+Okay.
+
+209
+00:49:31,000 --> 00:49:37,000
+Any questions?
+
+210
+00:49:37,000 --> 00:49:50,000
+Let's do it in order. I'm going to do the first one, and then I'm going to let you guys shout out or drop into the chat what the next one is at every step. Hopefully we start to see a pattern here.
+
+211
+00:49:50,000 --> 00:49:59,000
+So our in order node, we're going to do an in-order depth first traversal of the tree starting right here
+
+212
+00:49:59,000 --> 00:50:07,000
+So now we're going to visit the left child first and then visit our node and then visit the right child.
+
+213
+00:50:07,000 --> 00:50:09,000
+So here
+
+214
+00:50:09,000 --> 00:50:13,000
+We're at the node
+
+215
+00:50:13,000 --> 00:50:19,000
+But we're going to go traverse the left child first. So we go down
+
+216
+00:50:19,000 --> 00:50:20,000
+To the left child
+
+217
+00:50:20,000 --> 00:50:25,000
+And now I'm here, and once again
+
+218
+00:50:25,000 --> 00:50:28,000
+This is this is the left child.
+
+219
+00:50:28,000 --> 00:50:31,000
+This is the note I start at.
+
+220
+00:50:31,000 --> 00:50:34,000
+But I'm going to visit the left child first.
+
+221
+00:50:34,000 --> 00:50:41,000
+So this is my left child. I come down here. I'm going to visit the left first.
+
+222
+00:50:41,000 --> 00:50:44,000
+There's nothing there.
+
+223
+00:50:44,000 --> 00:50:51,000
+So now I visit this node. So now one is the first node I visited.
+
+224
+00:50:51,000 --> 00:50:56,000
+And then I visit the right child. There is no right child here.
+
+225
+00:50:56,000 --> 00:51:00,000
+So now I go back up to its parent.
+
+226
+00:51:00,000 --> 00:51:06,000
+And for three, the left child is done. So now I visit that node
+
+227
+00:51:06,000 --> 00:51:08,000
+which is 3
+
+228
+00:51:08,000 --> 00:51:12,000
+And then I visit the right child.
+
+229
+00:51:12,000 --> 00:51:19,000
+Okay, so now what comes after 3? What's the next node we visit?
+
+230
+00:51:19,000 --> 00:51:21,000
+Six
+
+231
+00:51:21,000 --> 00:51:23,000
+Well, we're going to
+
+232
+00:51:23,000 --> 00:51:25,000
+Well, there's no left
+
+233
+00:51:25,000 --> 00:51:28,000
+So you go back to right or you go to the right
+
+234
+00:51:28,000 --> 00:51:31,000
+There's
+
+235
+00:51:31,000 --> 00:51:37,000
+Like from three, there's no left node.
+
+236
+00:51:37,000 --> 00:51:38,000
+Sorry, that's true.
+
+237
+00:51:38,000 --> 00:51:49,000
+Oh, from three. Well, three, we already visited our left node. We already visited our left node for three, which was one. We've now visited the node, so now we're visiting the right child.
+
+238
+00:51:49,000 --> 00:51:52,000
+6 is the root.
+
+239
+00:51:52,000 --> 00:51:57,000
+So that's our node. So we're going to go left
+
+240
+00:51:57,000 --> 00:52:01,000
+We've got it left. So we're going to do a four.
+
+241
+00:52:01,000 --> 00:52:06,000
+And then we're going to go our node. That's the node we're at
+
+242
+00:52:06,000 --> 00:52:08,000
+And then
+
+243
+00:52:08,000 --> 00:52:13,000
+The right child. What comes next?
+
+244
+00:52:13,000 --> 00:52:14,000
+Seven.
+
+245
+00:52:14,000 --> 00:52:16,000
+So the
+
+246
+00:52:16,000 --> 00:52:20,000
+7. Okay, so now
+
+247
+00:52:20,000 --> 00:52:25,000
+This whole right child of this node is done.
+
+248
+00:52:25,000 --> 00:52:31,000
+That means this whole tree has been visited. This was the left child of eight.
+
+249
+00:52:31,000 --> 00:52:37,000
+So now what node do we visit?
+
+250
+00:52:37,000 --> 00:52:38,000
+8
+
+251
+00:52:38,000 --> 00:52:39,000
+Eight.
+
+252
+00:52:39,000 --> 00:52:55,000
+8 is that node right here. So this was the left child of eight. So now we visit the node, and now that we've visited node, we're going to visit the right child of eight
+
+253
+00:52:55,000 --> 00:52:57,000
+What goes next?
+
+254
+00:52:57,000 --> 00:53:00,000
+13
+
+255
+00:53:00,000 --> 00:53:03,000
+13, because we're going to go to 10.
+
+256
+00:53:03,000 --> 00:53:04,000
+There's no left
+
+257
+00:53:04,000 --> 00:53:10,000
+Oh, wait
+
+258
+00:53:10,000 --> 00:53:17,000
+Right child. We go to 10. There's no left.
+
+259
+00:53:17,000 --> 00:53:21,000
+Oh, I'm seeing tens come up, sorry.
+
+260
+00:53:21,000 --> 00:53:24,000
+8 to 10
+
+261
+00:53:24,000 --> 00:53:27,000
+So we visit 10 because that's our node
+
+262
+00:53:27,000 --> 00:53:33,000
+And then we visit the right child of 10
+
+263
+00:53:33,000 --> 00:53:37,000
+And then what's next?
+
+264
+00:53:37,000 --> 00:53:43,000
+Then we go down to 13 because this is the root, 13 is the left child.
+
+265
+00:53:43,000 --> 00:53:47,000
+and then we go to our node 14
+
+266
+00:53:47,000 --> 00:53:50,000
+And there is no
+
+267
+00:53:50,000 --> 00:54:05,000
+No right child. So now 14's done. That's the right child of 10. So now this tree is done. It's the right child of eight. So now we are done with our entire traversal
+
+268
+00:54:05,000 --> 00:54:08,000
+in-order traversal
+
+269
+00:54:08,000 --> 00:54:11,000
+Starting at 8.
+
+270
+00:54:11,000 --> 00:54:15,000
+Checking my notes, make sure I got that right. Just seemed like I got it right.
+
+271
+00:54:15,000 --> 00:54:19,000
+Any questions?
+
+272
+00:54:19,000 --> 00:54:29,000
+Let's look at post order. So post order says visit the left child. Visit the right child, and then visit the node.
+
+273
+00:54:29,000 --> 00:54:39,000
+So if we start at 8, we're going to visit everything here first. And then everything here. And then eight.
+
+274
+00:54:39,000 --> 00:54:41,000
+So
+
+275
+00:54:41,000 --> 00:54:49,000
+I'll give you a hint. 8 is the very last node to be visited
+
+276
+00:54:49,000 --> 00:54:54,000
+We're going to start here. We're going to go to the left child.
+
+277
+00:54:54,000 --> 00:55:01,000
+This is the root of the left child. So we start here, we go to the left child. We got this.
+
+278
+00:55:01,000 --> 00:55:12,000
+This is our route. We go to left child. Nothing's there. So we ignore it. We go to the right child, nothing's there. So we do nothing.
+
+279
+00:55:12,000 --> 00:55:15,000
+And then we visit our node, which is one.
+
+280
+00:55:15,000 --> 00:55:19,000
+So we're going to visit one.
+
+281
+00:55:19,000 --> 00:55:24,000
+That is the left child of this node, all done.
+
+282
+00:55:24,000 --> 00:55:32,000
+So now we're going to go to the right child of this node, which is this tree.
+
+283
+00:55:32,000 --> 00:55:39,000
+We're going to the left first. So we start here, we go to the child that is the left child here.
+
+284
+00:55:39,000 --> 00:55:48,000
+We go to the left, we go to the right, nothing's there. So we visit that node. We get our four.
+
+285
+00:55:48,000 --> 00:55:54,000
+The left child of this node is done. So we go to the right child of this node.
+
+286
+00:55:54,000 --> 00:56:03,000
+We come down here. There is no left, there's no right. So we visit our node 7.
+
+287
+00:56:03,000 --> 00:56:05,000
+We now have the left visited
+
+288
+00:56:05,000 --> 00:56:15,000
+We now have the right child visited. That means of this tree that we're traversing. This node is the last node to visit.
+
+289
+00:56:15,000 --> 00:56:19,000
+So at that point, we can say we've visited this node.
+
+290
+00:56:19,000 --> 00:56:20,000
+So now
+
+291
+00:56:20,000 --> 00:56:25,000
+The left child of this node has been visited
+
+292
+00:56:25,000 --> 00:56:29,000
+The right child of this node has been visited
+
+293
+00:56:29,000 --> 00:56:34,000
+So what do we do now?
+
+294
+00:56:34,000 --> 00:56:43,000
+buckets
+
+295
+00:56:43,000 --> 00:56:50,000
+Anyone?
+
+296
+00:56:50,000 --> 00:56:52,000
+Is the
+
+297
+00:56:52,000 --> 00:56:54,000
+With Node 3
+
+298
+00:56:54,000 --> 00:56:56,000
+Yes, three
+
+299
+00:56:56,000 --> 00:57:12,000
+Thank you. I wasn't sure if everyone was just being quiet and going along with it or if anyone was not sure. Okay, so we've now visited the left child of this node
+
+300
+00:57:12,000 --> 00:57:16,000
+So now we're going to visit the right child.
+
+301
+00:57:16,000 --> 00:57:25,000
+We come down here. There's no left child. So we visit the right child.
+
+302
+00:57:25,000 --> 00:57:31,000
+We come down here. This is the root. We're going to visit the left child first
+
+303
+00:57:31,000 --> 00:57:37,000
+There's no left or right, so we visit that child, which is 13.
+
+304
+00:57:37,000 --> 00:57:50,000
+And we were looking at this tree. There's no right child, so we visit we are done with the right child. So now we can visit this node.
+
+305
+00:57:50,000 --> 00:57:54,000
+We are now done with the right child of this node.
+
+306
+00:57:54,000 --> 00:57:57,000
+So we can visit that node
+
+307
+00:57:57,000 --> 00:58:05,000
+And we have now visited the left child of this node and the right child of this node.
+
+308
+00:58:05,000 --> 00:58:08,000
+Yes, thank you, Ethan.
+
+309
+00:58:08,000 --> 00:58:10,000
+8. Okay.
+
+310
+00:58:10,000 --> 00:58:13,000
+Is that correct? Does that match?
+
+311
+00:58:13,000 --> 00:58:15,000
+Does that match my notes? Okay.
+
+312
+00:58:15,000 --> 00:58:20,000
+So now we have gone and we've looked at our depth first traversal
+
+313
+00:58:20,000 --> 00:58:23,000
+And we saw our different orderings
+
+314
+00:58:23,000 --> 00:58:29,000
+And how these different orderings, visiting the nodes in these different different orders
+
+315
+00:58:29,000 --> 00:58:39,000
+Are gonna give us a different order that we visit our notes.
+
+316
+00:58:39,000 --> 00:58:42,000
+There we go.
+
+317
+00:58:42,000 --> 00:58:45,000
+Should we look at some code?
+
+318
+00:58:45,000 --> 00:58:50,000
+Any questions on this before we look at code?
+
+319
+00:58:50,000 --> 00:58:53,000
+So now we have in our minds kind of what the
+
+320
+00:58:53,000 --> 00:58:54,000
+Yes.
+
+321
+00:58:54,000 --> 00:58:58,000
+So sorry. Can you explain for post-order how you got from 1 to 4?
+
+322
+00:58:58,000 --> 00:59:10,000
+Yes. Okay, so this is the tree that I'm going down. This is the left child of eight. So it starts at 3, and I'm going down to the left child
+
+323
+00:59:10,000 --> 00:59:15,000
+Which is one. So that that's our one
+
+324
+00:59:15,000 --> 00:59:19,000
+And then we're going to go to the right child of three.
+
+325
+00:59:19,000 --> 00:59:21,000
+Which is here
+
+326
+00:59:21,000 --> 00:59:28,000
+But we're going to repeat that. So now 6 is the root. And I'm going to repeat that. I go to the left
+
+327
+00:59:28,000 --> 00:59:31,000
+Which takes me down to 4.
+
+328
+00:59:31,000 --> 00:59:33,000
+Okay, understood. Thank you.
+
+329
+00:59:33,000 --> 00:59:37,000
+Like, yes, thank you for asking.
+
+330
+00:59:37,000 --> 00:59:44,000
+Any other questions?
+
+331
+00:59:44,000 --> 00:59:55,000
+Okay, I'm gonna pop this up in some code so that we can so we can see what this code looks like. And sometimes that also helps
+
+332
+00:59:55,000 --> 01:00:01,000
+Sometimes that also helps. Just one second while I reshare my screen.
+
+333
+01:00:01,000 --> 01:00:09,000
+Yes, there are three traversal methods and what are their use cases? Great question.
+
+334
+01:00:09,000 --> 01:00:13,000
+Let's do it after
+
+335
+01:00:13,000 --> 01:00:16,000
+I will answer that question in just a couple minutes.
+
+336
+01:00:16,000 --> 01:00:27,000
+I'm going to… I'm copying my create tree node from yesterday. I'm just I'm putting it in a new a new
+
+337
+01:00:27,000 --> 01:00:31,000
+I'll just for today.
+
+338
+01:00:31,000 --> 01:00:34,000
+So we have our
+
+339
+01:00:34,000 --> 01:00:39,000
+Function that creates a tree node for us.
+
+340
+01:00:39,000 --> 01:00:42,000
+Let's
+
+341
+01:00:42,000 --> 01:00:47,000
+Start with
+
+342
+01:00:47,000 --> 01:00:50,000
+Let's do our
+
+343
+01:00:50,000 --> 01:00:53,000
+Death
+
+344
+01:00:53,000 --> 01:00:56,000
+The order
+
+345
+01:00:56,000 --> 01:00:58,000
+BFS
+
+346
+01:00:58,000 --> 01:01:04,000
+And then I'm going to start. I'm going to
+
+347
+01:01:04,000 --> 01:01:17,000
+include this out array that's going to keep track of the order that we're visiting our nodes.
+
+348
+01:01:17,000 --> 01:01:24,000
+I'm trying to decide, but is this unhappy about? Oh, yeah, it's okay. It's fine.
+
+349
+01:01:24,000 --> 01:01:29,000
+Oh, thank you. Thank you for saying that. Let me make sure
+
+350
+01:01:29,000 --> 01:01:38,000
+Let me share my screen.
+
+351
+01:01:38,000 --> 01:01:40,000
+Okay
+
+352
+01:01:40,000 --> 01:01:49,000
+Now, can you see the code?
+
+353
+01:01:49,000 --> 01:01:54,000
+Now, can we see you go? Okay, great. Thanks. Okay.
+
+354
+01:01:54,000 --> 01:01:59,000
+Let's do a pre-order. Let's do actually, I think over here too, we also
+
+355
+01:01:59,000 --> 01:02:01,000
+I created
+
+356
+01:02:01,000 --> 01:02:06,000
+Our node over here.
+
+357
+01:02:06,000 --> 01:02:17,000
+So this is our… this is our tree that matches the tree that we have in this picture on the right hand side, which matches the one that we just went through. So our pre-order
+
+358
+01:02:17,000 --> 01:02:18,000
+Let's see…
+
+359
+01:02:18,000 --> 01:02:31,000
+So, we're going to start… this is our recursive… we're going to do a recursive, definition, because we have a recursive data structure, and we are thinking of our traversals in a recursive way.
+
+360
+01:02:31,000 --> 01:02:42,000
+And what that means, what that looks like is that we start by calling depth first search on the root of the tree
+
+361
+01:02:42,000 --> 01:02:46,000
+And then on the left child
+
+362
+01:02:46,000 --> 01:02:50,000
+or the right child's kind of whatever we need
+
+363
+01:02:50,000 --> 01:02:53,000
+Depending on the order that we're going in
+
+364
+01:02:53,000 --> 01:02:55,000
+So what's our first thing?
+
+365
+01:02:55,000 --> 01:03:01,000
+If we had
+
+366
+01:03:01,000 --> 01:03:08,000
+Let's say we're thinking about this at the point where we were visiting this node one.
+
+367
+01:03:08,000 --> 01:03:13,000
+We said visit the left child.
+
+368
+01:03:13,000 --> 01:03:24,000
+Visit the right child. What happened when we visited the left child of one?
+
+369
+01:03:24,000 --> 01:03:27,000
+What is the left child of one?
+
+370
+01:03:27,000 --> 01:03:28,000
+None
+
+371
+01:03:28,000 --> 01:03:29,000
+Yeah.
+
+372
+01:03:29,000 --> 01:03:41,000
+None. Right. So if the left child and sorry, I just moved the meeting chat window. Can you guys still see the I think you can still see the you can't see
+
+373
+01:03:41,000 --> 01:03:42,000
+Yeah, we can still see it.
+
+374
+01:03:42,000 --> 01:03:56,000
+Thank you. Thank you. Okay, so that's our base case. Our base case is a case where the node is none, and we're going to account for this because our tree node, we are making things none if we don't have a child.
+
+375
+01:03:56,000 --> 01:04:01,000
+So that's our base case.
+
+376
+01:04:01,000 --> 01:04:04,000
+We're just going to return. We're not doing anything.
+
+377
+01:04:04,000 --> 01:04:11,000
+Because we don't have anything. But this gives us a nice, nice way to capture that
+
+378
+01:04:11,000 --> 01:04:13,000
+There is no child here
+
+379
+01:04:13,000 --> 01:04:25,000
+Okay. Otherwise, we're doing our pre-order. Our pre-order is that we visit this node and then the left child and then the right child.
+
+380
+01:04:25,000 --> 01:04:28,000
+So we're going to append
+
+381
+01:04:28,000 --> 01:04:30,000
+Node
+
+382
+01:04:30,000 --> 01:04:37,000
+Payload. We're going to append our payload to our out
+
+383
+01:04:37,000 --> 01:04:53,000
+And then we're going to traverse the left
+
+384
+01:04:53,000 --> 01:04:55,000
+And we're going to pass
+
+385
+01:04:55,000 --> 01:04:57,000
+that out
+
+386
+01:04:57,000 --> 01:04:58,000
+And then
+
+387
+01:04:58,000 --> 01:05:02,000
+And then, after we've
+
+388
+01:05:02,000 --> 01:05:05,000
+visited the left, we're gonna visit the right.
+
+389
+01:05:05,000 --> 01:05:18,000
+Is there a recursive call
+
+390
+01:05:18,000 --> 01:05:21,000
+I think that's okay.
+
+391
+01:05:21,000 --> 01:05:29,000
+So now we have our tree right here that we created
+
+392
+01:05:29,000 --> 01:05:40,000
+And I'm just going to run preorder DFS on our root
+
+393
+01:05:40,000 --> 01:05:43,000
+That looks right
+
+394
+01:05:43,000 --> 01:05:55,000
+Does anyone see something wrong? Let me know. It's okay. Oh, I ordered it. I did not print it or anything, so we don't know what it did.
+
+395
+01:05:55,000 --> 01:06:02,000
+Oops, auto.
+
+396
+01:06:02,000 --> 01:06:06,000
+Yeah, I want to say
+
+397
+01:06:06,000 --> 01:06:13,000
+order equals this
+
+398
+01:06:13,000 --> 01:06:25,000
+Order
+
+399
+01:06:25,000 --> 01:06:29,000
+Okay.
+
+400
+01:06:29,000 --> 01:06:34,000
+So now we have our order. We've
+
+401
+01:06:34,000 --> 01:06:40,000
+Printed this out and I'm just going to go over this
+
+402
+01:06:40,000 --> 01:06:55,000
+Just kind of follow our tree and see if it matches our in order. Sorry, our pre-order DFS, our pre-order that we visit the node, and then we visit the left child, and then the right child. So we start at 8
+
+403
+01:06:55,000 --> 01:07:04,000
+We visit the node. That means we put it in the output array. Sorry, list output list. Then we visit the left child.
+
+404
+01:07:04,000 --> 01:07:08,000
+Now 3 is our root. We are
+
+405
+01:07:08,000 --> 01:07:12,000
+Pre-order. So we put the
+
+406
+01:07:12,000 --> 01:07:18,000
+we put that node 3 into our output list
+
+407
+01:07:18,000 --> 01:07:21,000
+And then we visit our left
+
+408
+01:07:21,000 --> 01:07:24,000
+That left child is one.
+
+409
+01:07:24,000 --> 01:07:34,000
+We put that in to our out list and we have no left or no right. We go back up to the parent.
+
+410
+01:07:34,000 --> 01:07:47,000
+And we do the right child. Right child gives us 6 gives us 4, gives us 7. We go back up to 8, and then we're doing the right child here. We visit 10. There's no left
+
+411
+01:07:47,000 --> 01:07:55,000
+We visit this one, we visit 14, we visit 13.
+
+412
+01:07:55,000 --> 01:08:00,000
+Set track.
+
+413
+01:08:00,000 --> 01:08:01,000
+Yes, it does
+
+414
+01:08:01,000 --> 01:08:04,000
+Submit your notes. Great.
+
+415
+01:08:04,000 --> 01:08:05,000
+Okay.
+
+416
+01:08:05,000 --> 01:08:09,000
+Let's do, how are we on time? Okay, let's do
+
+417
+01:08:09,000 --> 01:08:16,000
+Let's do our… we did our pre-order. Let's do our in order
+
+418
+01:08:16,000 --> 01:08:21,000
+Excellent. I could copy paste. I'm going to do in order.
+
+419
+01:08:21,000 --> 01:08:24,000
+DFS
+
+420
+01:08:24,000 --> 01:08:33,000
+Node out equals empty. And we're going to start with our base case, which is if node is none.
+
+421
+01:08:33,000 --> 01:08:36,000
+Return.
+
+422
+01:08:36,000 --> 01:08:41,000
+And then for in order, we visit the left child
+
+423
+01:08:41,000 --> 01:08:46,000
+Then we visit the node, and then we visit the right child
+
+424
+01:08:46,000 --> 01:08:49,000
+So that means we're going to visit the left child, which means
+
+425
+01:08:49,000 --> 01:08:57,000
+our recursive call
+
+426
+01:08:57,000 --> 01:09:00,000
+Visit the left child.
+
+427
+01:09:00,000 --> 01:09:03,000
+Then we visit our node
+
+428
+01:09:03,000 --> 01:09:10,000
+which means that's when we append
+
+429
+01:09:10,000 --> 01:09:25,000
+And then we visit the right child.
+
+430
+01:09:25,000 --> 01:09:30,000
+Okay, I'm just double checking. I think that looks okay.
+
+431
+01:09:30,000 --> 01:09:33,000
+What do y'all think?
+
+432
+01:09:33,000 --> 01:09:53,000
+Look okay, should we
+
+433
+01:09:53,000 --> 01:09:56,000
+No one sees anything that I should
+
+434
+01:09:56,000 --> 01:10:03,000
+Do, let me know, but I think this is okay. I'm gonna run it. Let's see what happens.
+
+435
+01:10:03,000 --> 01:10:09,000
+Okay, so now are in order
+
+436
+01:10:09,000 --> 01:10:17,000
+Is that we visit the left child first, and then this node and then that right child. So if we start at 8
+
+437
+01:10:17,000 --> 01:10:20,000
+We visit the left child first
+
+438
+01:10:20,000 --> 01:10:24,000
+Which is the tree rooted at 3
+
+439
+01:10:24,000 --> 01:10:29,000
+We then visit the left child first, which is the tree rooted at one
+
+440
+01:10:29,000 --> 01:10:40,000
+And there's no left child, so nothing happens. And then we're in order, so we visit node 1, which is that first one that we got, emitted there
+
+441
+01:10:40,000 --> 01:10:46,000
+And then we visit the node, which is node 3. And then we visit the right child.
+
+442
+01:10:46,000 --> 01:10:51,000
+Here, the right child is the tree rooted at six
+
+443
+01:10:51,000 --> 01:10:56,000
+And once again, we visit the left child. Which is four
+
+444
+01:10:56,000 --> 01:11:02,000
+And then we visit the node 6, and then the right child 7.
+
+445
+01:11:02,000 --> 01:11:08,000
+So now we have visited the left child of node 8
+
+446
+01:11:08,000 --> 01:11:17,000
+So then we visit node 8. And then on the right hand side we 10 has no left child, so we visit 10.
+
+447
+01:11:17,000 --> 01:11:19,000
+And then we visit the tree
+
+448
+01:11:19,000 --> 01:11:21,000
+rooted at 14
+
+449
+01:11:21,000 --> 01:11:26,000
+We are left child 13 first, and then 14.
+
+450
+01:11:26,000 --> 01:11:29,000
+Look okay.
+
+451
+01:11:29,000 --> 01:11:41,000
+And doing this a little quicker right now to kind of get through the code and hopefully this repeats what we saw with walking through it in the pictures.
+
+452
+01:11:41,000 --> 01:11:48,000
+And then
+
+453
+01:11:48,000 --> 01:11:50,000
+We will see
+
+454
+01:11:50,000 --> 01:11:58,000
+patterns at the end, and I'm going to try to hit my 520 break time.
+
+455
+01:11:58,000 --> 01:12:09,000
+So base case, the same post order is visit left child, visit right child. And then visit the
+
+456
+01:12:09,000 --> 01:12:13,000
+the note
+
+457
+01:12:13,000 --> 01:12:15,000
+Base case
+
+458
+01:12:15,000 --> 01:12:17,000
+Once again
+
+459
+01:12:17,000 --> 01:12:19,000
+Empty node
+
+460
+01:12:19,000 --> 01:12:30,000
+And first we visit the left child, then we visit the right child.
+
+461
+01:12:30,000 --> 01:12:35,000
+First order VFS
+
+462
+01:12:35,000 --> 01:12:37,000
+node right
+
+463
+01:12:37,000 --> 01:12:49,000
+And then we visit our node
+
+464
+01:12:49,000 --> 01:12:52,000
+I think that looks okay.
+
+465
+01:12:52,000 --> 01:13:02,000
+I'm gonna copy this again. If anyone sees anything that doesn't look right, feel free to
+
+466
+01:13:02,000 --> 01:13:12,000
+Call me out
+
+467
+01:13:12,000 --> 01:13:19,000
+Okay, I'm gonna hit go on this.
+
+468
+01:13:19,000 --> 01:13:23,000
+I got something wrong with my post order.
+
+469
+01:13:23,000 --> 01:13:29,000
+Notice none
+
+470
+01:13:29,000 --> 01:13:38,000
+Oh, I see what I did. I didn't pass in the note.
+
+471
+01:13:38,000 --> 01:13:48,000
+Okay, cool. I want to take a quick glance at this compared to my notes. I think this is exactly what we had before. So this is our post order
+
+472
+01:13:48,000 --> 01:14:00,000
+And I'm going to ask you to believe me and maybe double check my post order here at during the break. But I want to just take a moment
+
+473
+01:14:00,000 --> 01:14:06,000
+And look at our pre-order are in order and our post order
+
+474
+01:14:06,000 --> 01:14:19,000
+Our implementation here, it's a recursive implementation, and it has a very similar structure. Each of these three implementations have a very similar structure.
+
+475
+01:14:19,000 --> 01:14:22,000
+They have the structure of base case
+
+476
+01:14:22,000 --> 01:14:23,000
+And then
+
+477
+01:14:23,000 --> 01:14:30,000
+They have the components of this is the visit the node step
+
+478
+01:14:30,000 --> 01:14:34,000
+And we have two recursive calls.
+
+479
+01:14:34,000 --> 01:14:44,000
+And the only thing that changes is the order of the recursive calls in relation to the visit the node calls.
+
+480
+01:14:44,000 --> 01:14:53,000
+So our pre-order, we visit the node first and then do the same thing to the left and then do the same thing to the right.
+
+481
+01:14:53,000 --> 01:14:56,000
+are in order says
+
+482
+01:14:56,000 --> 01:14:58,000
+Traverse the left
+
+483
+01:14:58,000 --> 01:15:01,000
+Visit the node
+
+484
+01:15:01,000 --> 01:15:03,000
+Traverse the right.
+
+485
+01:15:03,000 --> 01:15:05,000
+Our post order says
+
+486
+01:15:05,000 --> 01:15:07,000
+Traverse the left
+
+487
+01:15:07,000 --> 01:15:12,000
+traverse the right, and then visit the node.
+
+488
+01:15:12,000 --> 01:15:28,000
+Okay, so that structure, that's a very common structure. We're going to repeat it. We're going to see it more, and we're going to get super comfortable with it.
+
+489
+01:15:28,000 --> 01:15:52,000
+We are at 520 exactly right now. Ethan asked a question about why we need these three traversal methods and what their use cases are. Do we have any other questions on this before we take a break? And then I'm going to answer Ethan's question when we come back from the break
+
+490
+01:15:52,000 --> 01:15:55,000
+Okay, let's take our break.
+
+491
+01:15:55,000 --> 01:16:01,000
+Come back at 5:30.
+
+492
+01:16:01,000 --> 01:16:07,000
+And we will talk about why we have these different traversals and what their use cases will be.
+
+493
+01:16:07,000 --> 01:16:09,000
+Okay.
+
+494
+01:16:09,000 --> 01:16:20,000
+See y'all in a few minutes.
+
+495
+01:16:39,000 --> 01:16:44,000
+Okay, I'm just checking all the things. I think we're back.
+
+496
+01:16:44,000 --> 01:16:47,000
+You got video, you got audio
+
+497
+01:16:47,000 --> 01:16:54,000
+We are sharing the screen
+
+498
+01:16:54,000 --> 01:17:00,000
+Okay. Any questions come up while we were on break?
+
+499
+01:17:00,000 --> 01:17:08,000
+So our traversals over here. We saw that there's a very consistent pattern and that we had
+
+500
+01:17:08,000 --> 01:17:19,000
+This recursive function. And the only thing that changed was where we visited the node
+
+501
+01:17:19,000 --> 01:17:30,000
+Within the context of repeating the recursive call on the left child and the right child.
+
+502
+01:17:30,000 --> 01:17:37,000
+Okay. I'm going to quickly
+
+503
+01:17:37,000 --> 01:17:41,000
+We'll come back to the code in a little bit, but we'll go back to
+
+504
+01:17:41,000 --> 01:17:44,000
+The whiteboard
+
+505
+01:17:44,000 --> 01:17:47,000
+First
+
+506
+01:17:47,000 --> 01:17:49,000
+Okay
+
+507
+01:17:49,000 --> 01:17:50,000
+So
+
+508
+01:17:50,000 --> 01:18:02,000
+We are sharing. We got this. Okay. I want to do this. So the question was, why do we need these 3 traversal methods? And what are the use cases?
+
+509
+01:18:02,000 --> 01:18:14,000
+So let's ask that question. Our pre-order. Can anyone think of anything where we think about the trees
+
+510
+01:18:14,000 --> 01:18:25,000
+that we have, and why we would want to pre-order it. So I'm going to take us back to… let me see if I wrote this down. On Monday
+
+511
+01:18:25,000 --> 01:18:35,000
+I think we talked, yeah, we talked a little bit about these trees that we see in the real world. And I'm going to add one here, too, because I'm going to give the
+
+512
+01:18:35,000 --> 01:18:39,000
+I'm going to use and add an expression tree.
+
+513
+01:18:39,000 --> 01:18:55,000
+And I will explain what that is. But first we'll do this. We had our file system. We had our browser or our document object model. We talked about autofill and auto suggest or predictive text. But that
+
+514
+01:18:55,000 --> 01:19:01,000
+Sometimes done with a tree, and I think we'll see an example of it this quarter.
+
+515
+01:19:01,000 --> 01:19:05,000
+So
+
+516
+01:19:05,000 --> 01:19:11,000
+With when thinking about the things that a tree might represent.
+
+517
+01:19:11,000 --> 01:19:26,000
+What when might we want to traverse a tree using pre-order
+
+518
+01:19:26,000 --> 01:19:31,000
+So one thing I would think about, so for example, with our file system
+
+519
+01:19:31,000 --> 01:19:39,000
+We might… if we are listing out, all of the files in a file system, we might
+
+520
+01:19:39,000 --> 01:19:42,000
+Do
+
+521
+01:19:42,000 --> 01:19:50,000
+are pre-order. Let's say, looking for some root folder. Yes. So let's see.
+
+522
+01:19:50,000 --> 01:19:58,000
+Tell me a little bit more about the looking for the root folder.
+
+523
+01:19:58,000 --> 01:20:04,000
+So if we have a file system that looks something like this. Oh
+
+524
+01:20:04,000 --> 01:20:15,000
+And then maybe we have a one and a 2, and under here file one dot X and
+
+525
+01:20:15,000 --> 01:20:25,000
+Okay, okay, like, yeah, okay, navigating to a particular path.
+
+526
+01:20:25,000 --> 01:20:30,000
+We're going to go pre-order because we're going to visit
+
+527
+01:20:30,000 --> 01:20:38,000
+We're going to visit wherever we are starting and then
+
+528
+01:20:38,000 --> 01:20:45,000
+So we're going to want to visit this node first and then
+
+529
+01:20:45,000 --> 01:20:47,000
+any children.
+
+530
+01:20:47,000 --> 01:21:00,000
+And we said… we've been working with binary trees, we said left child, right child, but in the case of our file system, that root node could have a whole bunch of children
+
+531
+01:21:00,000 --> 01:21:07,000
+So we're going to want to visit this node first, and then visit all the children
+
+532
+01:21:07,000 --> 01:21:09,000
+And
+
+533
+01:21:09,000 --> 01:21:14,000
+Looking for that, like navigating to it.
+
+534
+01:21:14,000 --> 01:21:27,000
+could fall under their… also, if we were just… if we were just printing out the names of all of the files in our under a particular directory, we're going to want to start at the
+
+535
+01:21:27,000 --> 01:21:31,000
+the root, or at that node, we're going to want to print it out, and then
+
+536
+01:21:31,000 --> 01:21:37,000
+Print one of the children, and then all of the children's children
+
+537
+01:21:37,000 --> 01:21:43,000
+and go down, and then come back, and go back to our children and all of their children
+
+538
+01:21:43,000 --> 01:22:01,000
+And so on. We're going to want to do that pre-order, such that we visit the node first, and then visit all the children.
+
+539
+01:22:01,000 --> 01:22:24,000
+are in order. We're looking at our in order. What might be a case. What is something we notice about the output of our in-order traversal?
+
+540
+01:22:24,000 --> 01:22:31,000
+There's something special about our in-order traversal that doesn't apply to any of our other traversals.
+
+541
+01:22:31,000 --> 01:22:33,000
+Smallest to largest numbers
+
+542
+01:22:33,000 --> 01:22:38,000
+Yeah, it's an order. It's increasing.
+
+543
+01:22:38,000 --> 01:22:42,000
+So we're going to keep that in mind, and we'll come back to this in just a little bit.
+
+544
+01:22:42,000 --> 01:22:45,000
+Our post order
+
+545
+01:22:45,000 --> 01:22:55,000
+This is a case where we're going to do something to the children. Whoops, the children before we do something to the root.
+
+546
+01:22:55,000 --> 01:23:06,000
+So in the case, Brian, I like your use of the file system. Maybe in the case that we are deleting
+
+547
+01:23:06,000 --> 01:23:09,000
+a folder
+
+548
+01:23:09,000 --> 01:23:16,000
+First, we're going to want to delete all the children before we actually delete the parent
+
+549
+01:23:16,000 --> 01:23:26,000
+So this might be a case that we delete the children first, and visit… visit the children by deleting all the children first, and then once everything
+
+550
+01:23:26,000 --> 01:23:33,000
+all the children have been deleted. We can then delete the parent
+
+551
+01:23:33,000 --> 01:23:49,000
+Adding up the size of a folder, how much size on disk. We're going to want to do that with the children first. We're going to visit all the children, get how big they are, and then visit the parent where we add all this up.
+
+552
+01:23:49,000 --> 01:23:52,000
+And then I'm going to
+
+553
+01:23:52,000 --> 01:23:56,000
+Give the example work with my
+
+554
+01:23:56,000 --> 01:24:04,000
+Okay, we'll put it here. I'm going to give the example of an expression tree.
+
+555
+01:24:04,000 --> 01:24:09,000
+And I'm going to do this kind of quickly
+
+556
+01:24:09,000 --> 01:24:21,000
+I put this. Someone seen an expression tree before, or can anyone tell me anything about an expression tree? I'm going to draw one, but
+
+557
+01:24:21,000 --> 01:24:33,000
+In the meantime
+
+558
+01:24:33,000 --> 01:24:48,000
+Okay, so here's an expression tree. And all this is doing is that we have some nodes that reflect arithmetic operations
+
+559
+01:24:48,000 --> 01:25:00,000
+And then we have leaves that represent a number. So these are operations that are going to apply to the numbers
+
+560
+01:25:00,000 --> 01:25:16,000
+So we can represent this with a tree quite nicely. But what this means and how we navigate this tree might look a little bit different. So let's look at our pre-order first. If we were going to pre-order
+
+561
+01:25:16,000 --> 01:25:21,000
+Traverse this tree. We would start at the root.
+
+562
+01:25:21,000 --> 01:25:32,000
+And then visit the left and then visit the right. Do that recursively. So pre-order is going to give us I'll do this one in orange. It's going to give us star
+
+563
+01:25:32,000 --> 01:25:34,000
+And then we visit the left
+
+564
+01:25:34,000 --> 01:25:39,000
+We visit the left, we're going to visit the minus
+
+565
+01:25:39,000 --> 01:25:44,000
+And then we're going to visit the left and then the right
+
+566
+01:25:44,000 --> 01:25:46,000
+8, 3
+
+567
+01:25:46,000 --> 01:25:53,000
+So now we've visited the left. We come back here, we visit the right. We're going to get plus
+
+568
+01:25:53,000 --> 01:25:57,000
+2 and 4.
+
+569
+01:25:57,000 --> 01:25:59,000
+Okay. Anyone
+
+570
+01:25:59,000 --> 01:26:13,000
+I don't know, I only say one thing when I look at this, but does anyone, can anyone look at something like this? And what's it mean to you?
+
+571
+01:26:13,000 --> 01:26:20,000
+And if not, all I think about is All I think about is Lisp
+
+572
+01:26:20,000 --> 01:26:23,000
+I can't think about anything else, but
+
+573
+01:26:23,000 --> 01:26:37,000
+Y'all already know how old I am, or have some sense. So Lisp, we're going to see something like that. Yeah. And our order of operations. Thank you. This also gives us our order of operations.
+
+574
+01:26:37,000 --> 01:26:45,000
+So it's it's what's called prefix notation.
+
+575
+01:26:45,000 --> 01:26:52,000
+We have any math people here or old people who know this.
+
+576
+01:26:52,000 --> 01:27:07,000
+And the way we can think about it, Emax, yes, that's right, that's right. Yes, if you're an Emacs user, love it. Basically, what this looks like is that the plus is going to apply to these numbers, so this is 2 plus 4
+
+577
+01:27:07,000 --> 01:27:13,000
+This is 8 minus three, and then this is whatever this is times this
+
+578
+01:27:13,000 --> 01:27:24,000
+I'm not going to go into it. It's a little… it's a little obscure, but this… but navigating this expression tree with pre-order gives us this
+
+579
+01:27:24,000 --> 01:27:27,000
+We're going to go in order now
+
+580
+01:27:27,000 --> 01:27:33,000
+In order means we go to the left, we visit the node, we go to the right
+
+581
+01:27:33,000 --> 01:27:36,000
+So if we were to do that, we would come here
+
+582
+01:27:36,000 --> 01:27:39,000
+And then we would come here
+
+583
+01:27:39,000 --> 01:27:42,000
+So we would get eight
+
+584
+01:27:42,000 --> 01:27:47,000
+We're going in order, so we get 8 minus three.
+
+585
+01:27:47,000 --> 01:27:54,000
+And then we come up here and we get our star.
+
+586
+01:27:54,000 --> 01:27:56,000
+And then we visit the right
+
+587
+01:27:56,000 --> 01:28:00,000
+If we're visiting the right, we go to the left first
+
+588
+01:28:00,000 --> 01:28:05,000
+Two. And then our
+
+589
+01:28:05,000 --> 01:28:13,000
+And here, and this, what does this look like? So
+
+590
+01:28:13,000 --> 01:28:23,000
+If we had had this looks a lot more like what we would write, but by pulling it out of the tree, we've lost our parentheses.
+
+591
+01:28:23,000 --> 01:28:31,000
+So if our original was
+
+592
+01:28:31,000 --> 01:28:33,000
+Minus 3
+
+593
+01:28:33,000 --> 01:28:35,000
+times
+
+594
+01:28:35,000 --> 01:28:38,000
+Sorry.
+
+595
+01:28:38,000 --> 01:28:43,000
+2 plus 4
+
+596
+01:28:43,000 --> 01:28:48,000
+We're gonna lose the groupings, which means we're going to get a different answer.
+
+597
+01:28:48,000 --> 01:28:54,000
+I'm not going to think too much about this right now.
+
+598
+01:28:54,000 --> 01:29:04,000
+Or we'll come back to this in just a second. And then lastly, we're going to use this. We're going to navigate this using our post order.
+
+599
+01:29:04,000 --> 01:29:12,000
+So post order means we visit the left, we visit the right, we visit the node.
+
+600
+01:29:12,000 --> 01:29:15,000
+We visit the left
+
+601
+01:29:15,000 --> 01:29:24,000
+By visiting the left, first we're going to go left and then right. So we're going to get 8 and 3. And then
+
+602
+01:29:24,000 --> 01:29:27,000
+R minus
+
+603
+01:29:27,000 --> 01:29:33,000
+And now we're back up here. That's the left child. We're going to go to the right child.
+
+604
+01:29:33,000 --> 01:29:40,000
+From the right child, we're gonna go to left child first. We get 2, 4,
+
+605
+01:29:40,000 --> 01:29:41,000
+Plus
+
+606
+01:29:41,000 --> 01:29:46,000
+And then we're going to go to our star
+
+607
+01:29:46,000 --> 01:29:50,000
+So this was our post order
+
+608
+01:29:50,000 --> 01:29:53,000
+And this
+
+609
+01:29:53,000 --> 01:30:01,000
+It will give us what we call post fix
+
+610
+01:30:01,000 --> 01:30:04,000
+And
+
+611
+01:30:04,000 --> 01:30:10,000
+They want a fun little aside?
+
+612
+01:30:10,000 --> 01:30:21,000
+Of how we can use this post fixed notation or or this post fix, this post order evaluation
+
+613
+01:30:21,000 --> 01:30:24,000
+traversal of our tree to to do our math
+
+614
+01:30:24,000 --> 01:30:28,000
+Or should we move on? It's in the notes.
+
+615
+01:30:28,000 --> 01:30:35,000
+What do you want fun trick, fun little aside, or move on.
+
+616
+01:30:35,000 --> 01:30:36,000
+One trick
+
+617
+01:30:36,000 --> 01:30:53,000
+Fun trick. We love a fun trick. Okay. So what we're going to do, we have a we're going to evaluate this. We're going to evaluate our tree either using our post order traversal or our post fixed notation, if this is what we
+
+618
+01:30:53,000 --> 01:31:02,000
+Admitted out, that's fine. So, we're gonna put a rule into place
+
+619
+01:31:02,000 --> 01:31:17,000
+That we're gonna keep a stack. Our rule is that if we're going to push numbers
+
+620
+01:31:17,000 --> 01:31:19,000
+And
+
+621
+01:31:19,000 --> 01:31:25,000
+We're going to pop… oh, wait.
+
+622
+01:31:25,000 --> 01:31:32,000
+I guess I didn't write this out real if operator.
+
+623
+01:31:32,000 --> 01:31:34,000
+Up to
+
+624
+01:31:34,000 --> 01:31:39,000
+Prom stack
+
+625
+01:31:39,000 --> 01:31:41,000
+Apply
+
+626
+01:31:41,000 --> 01:31:46,000
+Push results
+
+627
+01:31:46,000 --> 01:31:51,000
+Okay, so we are going to keep a stack
+
+628
+01:31:51,000 --> 01:31:55,000
+This is our stack
+
+629
+01:31:55,000 --> 01:32:03,000
+This is our stack. And we're going to traverse our tree. We're going to do our post-order traversal.
+
+630
+01:32:03,000 --> 01:32:11,000
+And when we visit our node, whatever node we're at, if it's a number, we're going to push it into the stack
+
+631
+01:32:11,000 --> 01:32:17,000
+And if it's an operator, we're going to pop two numbers off the stack.
+
+632
+01:32:17,000 --> 01:32:23,000
+Combine them as the operator says, and then push it back into the stack.
+
+633
+01:32:23,000 --> 01:32:30,000
+So if we're going through our traversal here, operator, oh wait, we're not visiting. Yes, we're doing post order, which means
+
+634
+01:32:30,000 --> 01:32:33,000
+We visit the left child
+
+635
+01:32:33,000 --> 01:32:42,000
+Over here, again, we're at this one. We visit the left child. It's a number. We push it on the stack.
+
+636
+01:32:42,000 --> 01:32:47,000
+We visit the right child. It's a number, we push it on the stack.
+
+637
+01:32:47,000 --> 01:32:50,000
+And then we come back to the parent
+
+638
+01:32:50,000 --> 01:32:56,000
+And it's an operator. So our rule says pop the two things from the stack
+
+639
+01:32:56,000 --> 01:33:02,000
+Apply the operator and push the result. So that gives us 8 minus 3.
+
+640
+01:33:02,000 --> 01:33:06,000
+Which is 5, we push the 5 onto the stack.
+
+641
+01:33:06,000 --> 01:33:08,000
+That's our left child.
+
+642
+01:33:08,000 --> 01:33:20,000
+We know, go to the right child. We're doing post order, so we don't visit this yet. We visit the left child. Left child is a number we push down the stack
+
+643
+01:33:20,000 --> 01:33:24,000
+Right child is a number, we push it on the stack.
+
+644
+01:33:24,000 --> 01:33:38,000
+And then we visit the parent. The parent is a plus. That's an operator. So we take two things off our stack, 2 and 4. We add them together because that's what the operator said. And we push that result into the stack.
+
+645
+01:33:38,000 --> 01:33:53,000
+So now we've visited the left. We visited the right. And now we are at the root, the parent. And we visit this node. It's an operator. So we pop two things off the stack
+
+646
+01:33:53,000 --> 01:33:55,000
+5 and 6.
+
+647
+01:33:55,000 --> 01:34:13,000
+And we apply them according to the operator, and we've got our results. We can put our result back into the stack. If we want to follow our rules directly, which we should. And now, that last value left in the stack is how we've… we've just now evaluated this tree
+
+648
+01:34:13,000 --> 01:34:16,000
+That represents our expression.
+
+649
+01:34:16,000 --> 01:34:21,000
+So that's our fun little aside of we have a tree, our expression tree
+
+650
+01:34:21,000 --> 01:34:28,000
+And how we can use a stack and a couple of rules to efficiently evaluate
+
+651
+01:34:28,000 --> 01:34:32,000
+are arithmetic.
+
+652
+01:34:32,000 --> 01:34:36,000
+Was that fine?
+
+653
+01:34:36,000 --> 01:34:38,000
+So fun.
+
+654
+01:34:38,000 --> 01:34:45,000
+Okay, properly calibrated on the amount of fun that we have in this class.
+
+655
+01:34:45,000 --> 01:34:53,000
+Okay, that's our little aside, but this gives us some kind of sense of
+
+656
+01:34:53,000 --> 01:34:57,000
+What those different traversals
+
+657
+01:34:57,000 --> 01:35:06,000
+I can… can do for us, and depending on what our tree represents, how it is that we're we're
+
+658
+01:35:06,000 --> 01:35:09,000
+Is going to be a useful traversal.
+
+659
+01:35:09,000 --> 01:35:22,000
+Ethan did that answer your question a little bit? And anyone have any follow-ons?
+
+660
+01:35:22,000 --> 01:35:27,000
+Great question.
+
+661
+01:35:27,000 --> 01:35:29,000
+Okay.
+
+662
+01:35:29,000 --> 01:35:33,000
+So I'm going to move on
+
+663
+01:35:33,000 --> 01:35:40,000
+And we have been talking about depth first
+
+664
+01:35:40,000 --> 01:35:56,000
+Specifically, our depth first. And I hinted at breadth first. And I did that primarily to let you know that there is just kind of another way to think about our traversals
+
+665
+01:35:56,000 --> 01:35:59,000
+So now let's talk about breadth first.
+
+666
+01:35:59,000 --> 01:36:09,000
+So I set myself up earlier with this. So now we're going to come in here and we're going to say our breadth first tradition.
+
+667
+01:36:09,000 --> 01:36:11,000
+Breath
+
+668
+01:36:11,000 --> 01:36:13,000
+First
+
+669
+01:36:13,000 --> 01:36:17,000
+Traversal
+
+670
+01:36:17,000 --> 01:36:19,000
+And
+
+671
+01:36:19,000 --> 01:36:28,000
+In general, what are breadth first traversal is we're going level by level
+
+672
+01:36:28,000 --> 01:36:36,000
+We're gonna go kind of across and hit all the siblings before we go down to the next
+
+673
+01:36:36,000 --> 01:36:40,000
+the next generation, I'll say
+
+674
+01:36:40,000 --> 01:36:53,000
+So our breadth first traversal for this example is going to be we're going to 1st visit the root
+
+675
+01:36:53,000 --> 01:36:54,000
+We've got 8
+
+676
+01:36:54,000 --> 01:36:57,000
+And then we're going to visit the children.
+
+677
+01:36:57,000 --> 01:37:01,000
+I've got three and ten
+
+678
+01:37:01,000 --> 01:37:04,000
+And then we're going to visit the next children.
+
+679
+01:37:04,000 --> 01:37:07,000
+at one
+
+680
+01:37:07,000 --> 01:37:18,000
+614. And then our next level.
+
+681
+01:37:18,000 --> 01:37:21,000
+Okay. So
+
+682
+01:37:21,000 --> 01:37:34,000
+With a breadth first traversal, we don't have quite the same we don't have the same options we do with our breadth first.
+
+683
+01:37:34,000 --> 01:37:46,000
+With our breadth first, we have this… this order do we visit the node in context with when we visit the children
+
+684
+01:37:46,000 --> 01:37:52,000
+We don't have that option for breadth first, because it's level by level by level.
+
+685
+01:37:52,000 --> 01:38:08,000
+What we might have an option for, depending on the context of our traversal and what we're doing with it. We might have a decision to make about the order of the children we look at. Do we look at the left child versus the right child?
+
+686
+01:38:08,000 --> 01:38:16,000
+And that depends on context, but we don't have that same kind of
+
+687
+01:38:16,000 --> 01:38:20,000
+Framework that we do for depth first traversals.
+
+688
+01:38:20,000 --> 01:38:24,000
+I am going to
+
+689
+01:38:24,000 --> 01:38:31,000
+I'm going to switch, and we're gonna write some… actually, I'll pause before we switch. Any questions
+
+690
+01:38:31,000 --> 01:38:37,000
+Then I might need this diagram or scribbling for
+
+691
+01:38:37,000 --> 01:38:39,000
+And then we'll look at
+
+692
+01:38:39,000 --> 01:38:49,000
+An implementation of our breadth first search.
+
+693
+01:38:49,000 --> 01:38:56,000
+I'm going to swap over to our code.
+
+694
+01:38:56,000 --> 01:39:04,000
+Where are we?
+
+695
+01:39:04,000 --> 01:39:07,000
+Okay.
+
+696
+01:39:07,000 --> 01:39:11,000
+Okay, sharing our code again.
+
+697
+01:39:11,000 --> 01:39:14,000
+Let me know if not.
+
+698
+01:39:14,000 --> 01:39:30,000
+Okay, so we're going to start with our breadth first search. And you know what? I'm going to I'm just gonna do it in here
+
+699
+01:39:30,000 --> 01:39:40,000
+Do it way down here after all this stuff. We'll do all the… keep all the DFS stuff up there. And then we're going to do our
+
+700
+01:39:40,000 --> 01:39:52,000
+Our breadth first search.
+
+701
+01:39:52,000 --> 01:39:55,000
+AFS
+
+702
+01:39:55,000 --> 01:39:57,000
+Root
+
+703
+01:39:57,000 --> 01:40:03,000
+And here we're going to have a slightly different pattern here.
+
+704
+01:40:03,000 --> 01:40:18,000
+We're going to have a slightly different pattern, but we'll come back to this. The depth first search has a very nice recursive nature to it. And so we right because with our depth first search
+
+705
+01:40:18,000 --> 01:40:24,000
+We've got our root, and then we've got the left child, which is a tree, and then the right child, which is a tree
+
+706
+01:40:24,000 --> 01:40:35,000
+With our breadth first, that same kind of thing, it's not quite as it doesn't quite fit into the
+
+707
+01:40:35,000 --> 01:40:37,000
+Recursive
+
+708
+01:40:37,000 --> 01:40:40,000
+Framework. Quite the same way.
+
+709
+01:40:40,000 --> 01:40:51,000
+So as well, I promised you that I would show you an iterative version and how we go from recursion, a recursive
+
+710
+01:40:51,000 --> 01:40:58,000
+implementation to an iterative or non-recursive implementation.
+
+711
+01:40:58,000 --> 01:41:03,000
+So I'm going to start with our breadth first search and then transition to that.
+
+712
+01:41:03,000 --> 01:41:06,000
+So our breadth first search
+
+713
+01:41:06,000 --> 01:41:09,000
+I'm going to start and I'm going to
+
+714
+01:41:09,000 --> 01:41:19,000
+Keep track of the nodes in the order that I visit that. This is going to be our output, basically.
+
+715
+01:41:19,000 --> 01:41:29,000
+And then something I need if I'm not calling recursively, I need to keep track of the nodes I yet have yet to visit.
+
+716
+01:41:29,000 --> 01:41:31,000
+So
+
+717
+01:41:31,000 --> 01:41:35,000
+I'm going to say nodes to visit.
+
+718
+01:41:35,000 --> 01:41:37,000
+And
+
+719
+01:41:37,000 --> 01:41:39,000
+I want a queue.
+
+720
+01:41:39,000 --> 01:41:41,000
+So
+
+721
+01:41:41,000 --> 01:41:43,000
+What should I use?
+
+722
+01:41:43,000 --> 01:41:47,000
+A little bit of a trick question.
+
+723
+01:41:47,000 --> 01:41:50,000
+I want to cue
+
+724
+01:41:50,000 --> 01:41:51,000
+Anyway
+
+725
+01:41:51,000 --> 01:41:56,000
+Use a cue
+
+726
+01:41:56,000 --> 01:41:59,000
+Yeah, we're gonna duck.
+
+727
+01:41:59,000 --> 01:42:08,000
+And is it going to tell it to import for me?
+
+728
+01:42:08,000 --> 01:42:14,000
+From collections.dev
+
+729
+01:42:14,000 --> 01:42:17,000
+Import tech
+
+730
+01:42:17,000 --> 01:42:22,000
+Is that right?
+
+731
+01:42:22,000 --> 01:42:26,000
+I don't know how to write my imports anymore.
+
+732
+01:42:26,000 --> 01:42:36,000
+This is what happens when you use AI too much to write your code. From collections. Import. Thank you.
+
+733
+01:42:36,000 --> 01:42:37,000
+Okay.
+
+734
+01:42:37,000 --> 01:42:43,000
+From collections import deck, just collections. Got it. Thank you, Fruit.
+
+735
+01:42:43,000 --> 01:42:59,000
+Helping with that. Okay, so now we've got our deck. Great. That's what we're using for our queue because our double-ended queue or yeah, a double ended queue is more efficient. If we're trying to
+
+736
+01:42:59,000 --> 01:43:04,000
+when we want to add from one side and take out from the other side, it's more efficient than our list
+
+737
+01:43:04,000 --> 01:43:11,000
+that is efficient when we add on one side or pop off the other side.
+
+738
+01:43:11,000 --> 01:43:13,000
+Okay, so
+
+739
+01:43:13,000 --> 01:43:19,000
+Still, our base case, if root
+
+740
+01:43:19,000 --> 01:43:26,000
+is not none. We're going to check to make sure that it's something. Okay.
+
+741
+01:43:26,000 --> 01:43:27,000
+If
+
+742
+01:43:27,000 --> 01:43:33,000
+We're looking at our node
+
+743
+01:43:33,000 --> 01:43:36,000
+We are at our Route 8
+
+744
+01:43:36,000 --> 01:43:46,000
+Art 8 is a node. That's the first node we want to visit. So we're going to say nodes to visit.
+
+745
+01:43:46,000 --> 01:43:50,000
+dot append
+
+746
+01:43:50,000 --> 01:43:52,000
+Right.
+
+747
+01:43:52,000 --> 01:43:58,000
+This sets us up for a nice loop here
+
+748
+01:43:58,000 --> 01:44:05,000
+We've put it into our queue. So while
+
+749
+01:44:05,000 --> 01:44:08,000
+nodes to visit
+
+750
+01:44:08,000 --> 01:44:10,000
+I'm gonna say this
+
+751
+01:44:10,000 --> 01:44:22,000
+And this is just a shortcut where I can say, while nodes to visit, and this is a shortcut that means while nodes to visit has anything left in it.
+
+752
+01:44:22,000 --> 01:44:29,000
+If it has anything left in it, then we're gonna hop into this loop.
+
+753
+01:44:29,000 --> 01:44:43,000
+And since I'm visiting a node, what that means is that I'm going to I'm going to get my node
+
+754
+01:44:43,000 --> 01:44:47,000
+And I'm going to pop left
+
+755
+01:44:47,000 --> 01:44:52,000
+Because I want to pop it off in the beginning, the front of the line, not the back of the line.
+
+756
+01:44:52,000 --> 01:44:56,000
+And then I'm going to visit that node
+
+757
+01:44:56,000 --> 01:45:03,000
+By putting it in my
+
+758
+01:45:03,000 --> 01:45:07,000
+By putting it in my
+
+759
+01:45:07,000 --> 01:45:11,000
+Output.
+
+760
+01:45:11,000 --> 01:45:31,000
+And then if I've got any children and we're a binary tree. So if I have a left child, put it in the queue. If I've got a right child, put it in the queue.
+
+761
+01:45:31,000 --> 01:45:33,000
+Left
+
+762
+01:45:33,000 --> 01:45:40,000
+It's nice
+
+763
+01:45:40,000 --> 01:45:46,000
+knows to visit.append
+
+764
+01:45:46,000 --> 01:45:49,000
+No.
+
+765
+01:45:49,000 --> 01:45:55,000
+Left
+
+766
+01:45:55,000 --> 01:46:06,000
+I can make sure I wrote the right thing. Sometimes if I am talking and writing at the same time, I don't type the right thing. If node right
+
+767
+01:46:06,000 --> 01:46:12,000
+Is not none nodes to visit dot append.
+
+768
+01:46:12,000 --> 01:46:16,000
+node of right
+
+769
+01:46:16,000 --> 01:46:21,000
+And
+
+770
+01:46:21,000 --> 01:46:24,000
+I think that's it.
+
+771
+01:46:24,000 --> 01:46:26,000
+Okay.
+
+772
+01:46:26,000 --> 01:46:33,000
+So out we are
+
+773
+01:46:33,000 --> 01:46:39,000
+This is our output, which is really just the order of the nodes that we visited.
+
+774
+01:46:39,000 --> 01:46:46,000
+This is our queue that's keeping track of the nodes to visit.
+
+775
+01:46:46,000 --> 01:46:57,000
+If, as long as our root node is actually a node, we're going to put that in because that's going to be that we're going to put that in our queue because that's going to be the very first thing we visit.
+
+776
+01:46:57,000 --> 01:47:07,000
+So we put that on our queue. And then it sets us up quite nicely that while we have anything left in that queue that is our nodes to visit
+
+777
+01:47:07,000 --> 01:47:09,000
+We're going to pop off the end
+
+778
+01:47:09,000 --> 01:47:16,000
+And we're gonna visit that node by putting its payload in our output list
+
+779
+01:47:16,000 --> 01:47:24,000
+And then, if we've got a left child, we're gonna put it in the queue, and then if we've got a right child, we're gonna put it in the queue.
+
+780
+01:47:24,000 --> 01:47:34,000
+So I'm gonna just, before I run this, we've got our tree over here. Let's just kind of walk through this.
+
+781
+01:47:34,000 --> 01:47:40,000
+And think about what we expect the output to be.
+
+782
+01:47:40,000 --> 01:47:45,000
+So first thing we do is we put eight in our queue
+
+783
+01:47:45,000 --> 01:47:49,000
+And we put 8 in our queue here
+
+784
+01:47:49,000 --> 01:47:53,000
+We've got something in our queue, we pop it out
+
+785
+01:47:53,000 --> 01:47:56,000
+We print out
+
+786
+01:47:56,000 --> 01:47:58,000
+8
+
+787
+01:47:58,000 --> 01:48:00,000
+And then
+
+788
+01:48:00,000 --> 01:48:04,000
+We put the left note in
+
+789
+01:48:04,000 --> 01:48:10,000
+And then we put the right note in. So now we put three in our queue and we put 10 in our queue.
+
+790
+01:48:10,000 --> 01:48:20,000
+And then which one do we visit next? Let me go back around this loop, we've got something in our queue. What do we do next?
+
+791
+01:48:20,000 --> 01:48:30,000
+Which now gets popped out next.
+
+792
+01:48:30,000 --> 01:48:31,000
+Three
+
+793
+01:48:31,000 --> 01:48:32,000
+It should be 3
+
+794
+01:48:32,000 --> 01:48:34,000
+Okay, so now
+
+795
+01:48:34,000 --> 01:48:40,000
+We pop out three. We put it in our output
+
+796
+01:48:40,000 --> 01:48:50,000
+And then we check if we've got a left. And if we've got a right, we put those in. So we put one in the queue, we put six in the queue.
+
+797
+01:48:50,000 --> 01:48:53,000
+And then we go back into our loop again.
+
+798
+01:48:53,000 --> 01:48:57,000
+What pops out now? What's our next node that we visit?
+
+799
+01:48:57,000 --> 01:48:59,000
+Turn
+
+800
+01:48:59,000 --> 01:49:00,000
+10
+
+801
+01:49:00,000 --> 01:49:10,000
+So, that's our one over here, and I'm not drawing our Q as we go through this, apologies. I know I'm trying to keep it in my head, but
+
+802
+01:49:10,000 --> 01:49:15,000
+I would usually write this down. Pay 10
+
+803
+01:49:15,000 --> 01:49:17,000
+We append the payload
+
+804
+01:49:17,000 --> 01:49:25,000
+We've got a we don't have a left, so we don't put a left in there. We do have a right, so we put 14 in our queue.
+
+805
+01:49:25,000 --> 01:49:36,000
+And then we loop around. We've still got more nodes to visit. So what node pops out next after 10?
+
+806
+01:49:36,000 --> 01:49:37,000
+Anyone remember?
+
+807
+01:49:37,000 --> 01:49:38,000
+Yvon
+
+808
+01:49:38,000 --> 01:49:40,000
+It's going to be one
+
+809
+01:49:40,000 --> 01:49:51,000
+One has no children, so we visit it and move on. And then what comes after one?
+
+810
+01:49:51,000 --> 01:49:56,000
+We're reading it off the picture, it's going to be six.
+
+811
+01:49:56,000 --> 01:50:04,000
+And I think I'm following along with what's in the queue in my brain, but I may have lost track. I think it'll be six.
+
+812
+01:50:04,000 --> 01:50:07,000
+I think it'll be 14
+
+813
+01:50:07,000 --> 01:50:14,000
+And then that final level 4, 7, 13.
+
+814
+01:50:14,000 --> 01:50:23,000
+Should we run this and confirm
+
+815
+01:50:23,000 --> 01:50:26,000
+Confirm. Anyone have any other
+
+816
+01:50:26,000 --> 01:50:33,000
+Suggestions on what it might be
+
+817
+01:50:33,000 --> 01:50:35,000
+Okay.
+
+818
+01:50:35,000 --> 01:50:38,000
+No one going to run it
+
+819
+01:50:38,000 --> 01:50:47,000
+Oh, no module collections.
+
+820
+01:50:47,000 --> 01:50:53,000
+Collections.
+
+821
+01:50:53,000 --> 01:50:57,000
+From collections. Yeah, that's it. Okay.
+
+822
+01:50:57,000 --> 01:51:11,000
+So where we said it was going to be 8, 3, 10, 1, 6, 14, 4, 7, 13. That's what we got
+
+823
+01:51:11,000 --> 01:51:15,000
+Cool.
+
+824
+01:51:15,000 --> 01:51:17,000
+Anyone surprised
+
+825
+01:51:17,000 --> 01:51:29,000
+We noticed
+
+826
+01:51:29,000 --> 01:51:37,000
+I don't know that there's much to notice. What we notice is that
+
+827
+01:51:37,000 --> 01:51:39,000
+We traversed
+
+828
+01:51:39,000 --> 01:51:57,000
+Level by level by using a queue. So we're going to use this is an example of using a data structure to help us keep track of the order that we need to visit data in. And that's not unlike what we just saw with our expression tree
+
+829
+01:51:57,000 --> 01:52:02,000
+We used our stack. We traversed that tree
+
+830
+01:52:02,000 --> 01:52:10,000
+We used a depth first search, but we traversed that tree, but that stack helped us keep track of what we were doing so we could do the math
+
+831
+01:52:10,000 --> 01:52:23,000
+And now we're doing our breath first search, where we're using a cue to help us keep track of the nodes we need to visit, and we just… we have slightly different rules about
+
+832
+01:52:23,000 --> 01:52:29,000
+What we're doing, putting nodes into the queue and when we're popping them off
+
+833
+01:52:29,000 --> 01:52:35,000
+But it's that same idea. There's a similar idea there.
+
+834
+01:52:35,000 --> 01:52:46,000
+I'm going to, I'm going to pause for just a second if anyone has questions. Anyone have questions on this right now.
+
+835
+01:52:46,000 --> 01:52:49,000
+I'm gonna do something
+
+836
+01:52:49,000 --> 01:52:53,000
+I'll put this down here. I'm going to copy
+
+837
+01:52:53,000 --> 01:53:00,000
+this. and I'm going to call this mystery traversal
+
+838
+01:53:00,000 --> 01:53:02,000
+So
+
+839
+01:53:02,000 --> 01:53:07,000
+I'm going to make a change to this code. Notice I copied and pasted it
+
+840
+01:53:07,000 --> 01:53:09,000
+So
+
+841
+01:53:09,000 --> 01:53:12,000
+It's very similar to RBFS
+
+842
+01:53:12,000 --> 01:53:14,000
+And I'm going to make a change to this
+
+843
+01:53:14,000 --> 01:53:21,000
+Instead of using a deck, I'm going to just make this a list
+
+844
+01:53:21,000 --> 01:53:23,000
+And
+
+845
+01:53:23,000 --> 01:53:34,000
+Instead of doing pop left because you cannot pop left off a list, we're just going to pop
+
+846
+01:53:34,000 --> 01:53:37,000
+That's all I'm going to do.
+
+847
+01:53:37,000 --> 01:53:42,000
+What's going to happen
+
+848
+01:53:42,000 --> 01:53:46,000
+Some of you might know the answer
+
+849
+01:53:46,000 --> 01:53:48,000
+And if you know the answer
+
+850
+01:53:48,000 --> 01:53:52,000
+Hold tight for just a second and let
+
+851
+01:53:52,000 --> 01:54:01,000
+Others who maybe don't know the answer yet, think through it a little bit.
+
+852
+01:54:01,000 --> 01:54:08,000
+What is the significance or what's the meaning of this change from a deck
+
+853
+01:54:08,000 --> 01:54:12,000
+To a list
+
+854
+01:54:12,000 --> 01:54:14,000
+And
+
+855
+01:54:14,000 --> 01:54:16,000
+From pop left to pop
+
+856
+01:54:16,000 --> 01:54:22,000
+What am I doing when I do that?
+
+857
+01:54:22,000 --> 01:54:25,000
+Give us each level in reverse.
+
+858
+01:54:25,000 --> 01:54:34,000
+Okay, so we're thinking that you're thinking it would do something like 8, 10, 3, 14, 6, 1.
+
+859
+01:54:34,000 --> 01:54:38,000
+So we're going the same levels down, but different order.
+
+860
+01:54:38,000 --> 01:54:40,000
+Okay, we got one vote
+
+861
+01:54:40,000 --> 01:54:44,000
+What else
+
+862
+01:54:44,000 --> 01:54:47,000
+Any other ideas?
+
+863
+01:54:47,000 --> 01:54:49,000
+Think about
+
+864
+01:54:49,000 --> 01:54:54,000
+If anyone can answer what the significance of
+
+865
+01:54:54,000 --> 01:54:56,000
+The list
+
+866
+01:54:56,000 --> 01:54:57,000
+Using pop
+
+867
+01:54:57,000 --> 01:55:05,000
+Rather than the deck using pop left
+
+868
+01:55:05,000 --> 01:55:11,000
+What's that pattern mean?
+
+869
+01:55:11,000 --> 01:55:17,000
+In Python, this is the difference. This pattern is the difference between a queue and a stack.
+
+870
+01:55:17,000 --> 01:55:23,000
+So by me making this one change, I'm turning the queue into a stack.
+
+871
+01:55:23,000 --> 01:55:38,000
+So what that means is our Q, remember, is first in, first out. We put eight in the stack, and then we put 3 and 10 in the stack. So then 3 and 10 were the first ones or eight was the first one in, first one out
+
+872
+01:55:38,000 --> 01:55:40,000
+3 and 10
+
+873
+01:55:40,000 --> 01:55:46,000
+First one's out when we visited three, we put one in six right behind 10
+
+874
+01:55:46,000 --> 01:55:48,000
+And so on.
+
+875
+01:55:48,000 --> 01:55:51,000
+But with our stack, our stack is
+
+876
+01:55:51,000 --> 01:55:57,000
+last in 1st out. So we start, and we put 8 in the stack
+
+877
+01:55:57,000 --> 01:56:04,000
+We pop it off right away. And we put 3 and 10 in the stack.
+
+878
+01:56:04,000 --> 01:56:11,000
+I might… I might do… I'm gonna make one more change before I run it.
+
+879
+01:56:11,000 --> 01:56:16,000
+Must swap the order that I put them in the stack.
+
+880
+01:56:16,000 --> 01:56:21,000
+Okay, so y'all think for just a second, I'm going to
+
+881
+01:56:21,000 --> 01:56:26,000
+But print mystery.
+
+882
+01:56:26,000 --> 01:56:29,000
+Traversal
+
+883
+01:56:29,000 --> 01:56:32,000
+Great.
+
+884
+01:56:32,000 --> 01:56:39,000
+Hey, y'all think about what we expect to happen.
+
+885
+01:56:39,000 --> 01:56:44,000
+I'm going to hit run
+
+886
+01:56:44,000 --> 01:56:49,000
+Oops
+
+887
+01:56:49,000 --> 01:56:53,000
+There's something wrong here
+
+888
+01:56:53,000 --> 01:56:55,000
+Wow
+
+889
+01:56:55,000 --> 01:57:00,000
+goes to visit
+
+890
+01:57:00,000 --> 01:57:04,000
+Let me take the unsubscriptable.
+
+891
+01:57:04,000 --> 01:57:06,000
+Which one did I
+
+892
+01:57:06,000 --> 01:57:12,000
+I think you should do if, no is right, then you append the right note, instead append the right node
+
+893
+01:57:12,000 --> 01:57:13,000
+You try to look for the value of the left note
+
+894
+01:57:13,000 --> 01:57:18,000
+Thank you.
+
+895
+01:57:18,000 --> 01:57:22,000
+Good call, good call. Thank you.
+
+896
+01:57:22,000 --> 01:57:25,000
+Okay, there we go.
+
+897
+01:57:25,000 --> 01:57:37,000
+So this is this is what we printed out with our mystery traversal. We have eight. We went three, one.
+
+898
+01:57:37,000 --> 01:57:41,000
+6, 4, 7
+
+899
+01:57:41,000 --> 01:57:47,000
+10, 14, 13. What does that look like?
+
+900
+01:57:47,000 --> 01:57:50,000
+That's our pre-order
+
+901
+01:57:50,000 --> 01:58:03,000
+Yeah, that looks like our very first traversal, our pre-order, where we visit the node and then we visit the children, but it's our depth first search. It's not a breadth first search at all.
+
+902
+01:58:03,000 --> 01:58:11,000
+So this is that kind of cool idea. I love this. When
+
+903
+01:58:11,000 --> 01:58:14,000
+This is the same depth first search
+
+904
+01:58:14,000 --> 01:58:17,000
+that we did the 1st time
+
+905
+01:58:17,000 --> 01:58:18,000
+And
+
+906
+01:58:18,000 --> 01:58:29,000
+What we notice about this is that this is no recursive calls. We did not do it this recursively, unlike what we did up here. This was a recursive call.
+
+907
+01:58:29,000 --> 01:58:30,000
+So
+
+908
+01:58:30,000 --> 01:58:34,000
+This is, I will call it
+
+909
+01:58:34,000 --> 01:58:37,000
+EFS now.
+
+910
+01:58:37,000 --> 01:58:41,000
+Change it here, too, so the code doesn't break
+
+911
+01:58:41,000 --> 01:58:49,000
+So this is that same depth first search except for we're doing it iteratively.
+
+912
+01:58:49,000 --> 01:58:53,000
+We are building it up. We're using a stack
+
+913
+01:58:53,000 --> 01:59:08,000
+to help us keep track of what order to visit our nodes in. And then while we have more nodes in the more nodes in the stack, we're going to pop them off, we're going to visit, and then we're going to
+
+914
+01:59:08,000 --> 01:59:12,000
+Use that same
+
+915
+01:59:12,000 --> 01:59:25,000
+that same pattern. What if I didn't swap the left and right traversals? Yeah, great. Let's do that. I'm gonna make this left and left, and I always feel like this is
+
+916
+01:59:25,000 --> 01:59:35,000
+This is the part where… this is the clunkiest part of this kind of demonstration when I do this, is that left and the right
+
+917
+01:59:35,000 --> 01:59:42,000
+I'm going to run this real quick. So let's just remember that this was the same as this first row
+
+918
+01:59:42,000 --> 01:59:44,000
+So when I run this, we can compare
+
+919
+01:59:44,000 --> 01:59:50,000
+And we'll see what we did here was that we went, our visit was eight
+
+920
+01:59:50,000 --> 01:59:55,000
+10 and wait 10, 14, 13.
+
+921
+01:59:55,000 --> 02:00:00,000
+And then three, six, seven, four, one
+
+922
+02:00:00,000 --> 02:00:07,000
+So that swapping that allowed us, we had to visit the or we had to put the
+
+923
+02:00:07,000 --> 02:00:13,000
+We had to put the children to visit in the stack in reverse order
+
+924
+02:00:13,000 --> 02:00:20,000
+So that we still visit the children from left to right
+
+925
+02:00:20,000 --> 02:00:28,000
+And that's the clunkiness of using a stack here instead of using that
+
+926
+02:00:28,000 --> 02:00:40,000
+recursive call
+
+927
+02:00:40,000 --> 02:00:57,000
+Does that answer your question and does anyone have any other questions?
+
+928
+02:00:57,000 --> 02:01:04,000
+Checking my notes, seeing what we can get through and
+
+929
+02:01:04,000 --> 02:01:10,000
+In the next 5 min.
+
+930
+02:01:10,000 --> 02:01:24,000
+I'm going to switch back to the whiteboard. But before I do that, is there anything anyone else wants to see any other questions or anything else we want to see with the code?
+
+931
+02:01:24,000 --> 02:01:54,000
+If we switch back to the whiteboard.
+
+932
+02:02:08,000 --> 02:02:20,000
+Okay.
+
+933
+02:02:20,000 --> 02:02:24,000
+I could duplicate page.
+
+934
+02:02:24,000 --> 02:02:29,000
+Just do this.
+
+935
+02:02:29,000 --> 02:02:42,000
+Let's come down here. And let's just I'm going to take just a couple minutes. We're almost done. But I'm going to take a couple minutes and point out
+
+936
+02:02:42,000 --> 02:02:44,000
+I did a little bit of runtime
+
+937
+02:02:44,000 --> 02:02:50,000
+So our runtime
+
+938
+02:02:50,000 --> 02:02:59,000
+And I'm going to do 2 minutes of this. And then, like I said, we'll come back to it next week. Operation.
+
+939
+02:02:59,000 --> 02:03:08,000
+So when we have a tree like this, if we want to do something like size or height
+
+940
+02:03:08,000 --> 02:03:12,000
+Or count leaves.
+
+941
+02:03:12,000 --> 02:03:27,000
+And I will note that this is in the notes that I put on Canvas the other day. So you have access to these. But what is our time?
+
+942
+02:03:27,000 --> 02:03:29,000
+Which is a runtime
+
+943
+02:03:29,000 --> 02:03:33,000
+I want to know the size of the tree.
+
+944
+02:03:33,000 --> 02:03:45,000
+Or the size of the tree, meaning how many nodes do I have or and I'm sharing my screen, right? Yeah. Or if I want to know the height of the tree.
+
+945
+02:03:45,000 --> 02:03:50,000
+Or if I want to know how many leaves
+
+946
+02:03:50,000 --> 02:03:52,000
+I have the tree.
+
+947
+02:03:52,000 --> 02:03:54,000
+What's my runtime?
+
+948
+02:03:54,000 --> 02:04:03,000
+Don't think too much or say not. Okay, we got OVAV.
+
+949
+02:04:03,000 --> 02:04:06,000
+And the way we can think about this
+
+950
+02:04:06,000 --> 02:04:11,000
+Is that for size
+
+951
+02:04:11,000 --> 02:04:24,000
+For size, this kind of makes sense, because if I want to know how many nodes are in the tree, I have to visit every node in the tree to count how many nodes there are. I have to keep traversing until I've
+
+952
+02:04:24,000 --> 02:04:27,000
+I have no word left to go.
+
+953
+02:04:27,000 --> 02:04:29,000
+So that kind of makes sense.
+
+954
+02:04:29,000 --> 02:04:30,000
+Our height
+
+955
+02:04:30,000 --> 02:04:33,000
+It's also going to be O n
+
+956
+02:04:33,000 --> 02:04:45,000
+Because our height, we also have to traverse every node, because we don't really know that we've found the longest path in the tree
+
+957
+02:04:45,000 --> 02:04:49,000
+Until we've gone through every path in the tree
+
+958
+02:04:49,000 --> 02:04:55,000
+To find the longest one. Which gives us the height.
+
+959
+02:04:55,000 --> 02:04:57,000
+Counting the leaves.
+
+960
+02:04:57,000 --> 02:05:06,000
+Also, we have to visit every node, because until we visit every node in the tree, we don't know that
+
+961
+02:05:06,000 --> 02:05:08,000
+We've hit
+
+962
+02:05:08,000 --> 02:05:13,000
+We don't know that we've hit all the leaves or not.
+
+963
+02:05:13,000 --> 02:05:25,000
+So our runtime is going to be O of N or size or height or counting leaves. What about our traversal?
+
+964
+02:05:25,000 --> 02:05:32,000
+And I'm going to say DFS recursive
+
+965
+02:05:32,000 --> 02:05:35,000
+What was our runtime?
+
+966
+02:05:35,000 --> 02:05:39,000
+So we can think about it as we
+
+967
+02:05:39,000 --> 02:05:50,000
+have a node and they're kind of all the same. So I'm going to start with pre-order. We visit this node and then we visit this one and this one
+
+968
+02:05:50,000 --> 02:05:54,000
+Then we visit this one and we visit this one and this one
+
+969
+02:05:54,000 --> 02:05:58,000
+Then we visit this one and this one, and this one.
+
+970
+02:05:58,000 --> 02:06:03,000
+So what's our runtime?
+
+971
+02:06:03,000 --> 02:06:07,000
+Also going to be of O of N
+
+972
+02:06:07,000 --> 02:06:13,000
+And we are
+
+973
+02:06:13,000 --> 02:06:19,000
+We are we're running out of time. There's 10 seconds left. There's no way I can do it all right now.
+
+974
+02:06:19,000 --> 02:06:27,000
+I'm not going to finish putting this all out right now because
+
+975
+02:06:27,000 --> 02:06:43,000
+We have run out of time. This table is in the notes if anyone wants to look at it. And then next week when we come back to runtime, we will look at the whole table. And we will make some sense of it
+
+976
+02:06:43,000 --> 02:06:47,000
+The piece I'm going to come back to
+
+977
+02:06:47,000 --> 02:06:49,000
+is
+
+978
+02:06:49,000 --> 02:06:53,000
+The column I didn't put here yet
+
+979
+02:06:53,000 --> 02:06:59,000
+And that's the space that we need in order to do all of these operations.
+
+980
+02:06:59,000 --> 02:07:06,000
+And we'll see how that… we'll see how that ties in.
+
+981
+02:07:06,000 --> 02:07:10,000
+Okay. Any questions?
+
+982
+02:07:10,000 --> 02:07:16,000
+Before we take off for today.
+
+983
+02:07:16,000 --> 02:07:21,000
+And I'm going to say a couple people
+
+984
+02:07:21,000 --> 02:07:36,000
+have sent me a private message here on Zoom needing invites. Thank you for letting me know. If you do not get an invite today, send me a private note on Piazza. I think my chat
+
+985
+02:07:36,000 --> 02:07:43,000
+window is my text file is going to save and I can get that out. But if you don't hear from me
+
+986
+02:07:43,000 --> 02:07:47,000
+By like 9 PM-ish.
+
+987
+02:07:47,000 --> 02:07:57,000
+Send me a private message with your GitHub ID on Piazza, but I'll try to… I'll try to get it, but if… if you don't get it, go to Piazza
+
+988
+02:07:57,000 --> 02:08:13,000
+If no one else has any other questions, we're done. Thank you, everyone. Good to see y'all. And we'll see you Monday. We will go into actually, I thought we'd hit binary search trees today. We will do binary search tree
+
+989
+02:08:13,000 --> 02:08:18,000
+Monday, Wednesday next week with runtime. Monday, Wednesday, next week
+
+990
+02:08:18,000 --> 02:08:19,000
+Okay, thank you
+
+991
+02:08:19,000 --> 02:08:21,000
+And if anyone needs anything else, feel free to
+
+992
+02:08:21,000 --> 02:08:25,000
+Let me know.
+
+993
+02:08:25,000 --> 02:08:26,000
+Thank you.
+
+994
+02:08:26,000 --> 02:08:27,000
+Okay, thank you.
+
+995
+02:08:27,000 --> 02:08:35,000
+Thank you
+
+996
+02:08:35,000 --> 02:08:36,000
+Okay, have a great night, everyone.
+
+997
+02:08:36,000 --> 02:08:40,000
+Thank you. Have a good night.
+
