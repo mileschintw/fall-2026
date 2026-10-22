@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-10-22T07:09:49-07:00",
+  "task": "晨報",
+  "status": "new",
+  "summary": "GPU HW2 starter 檔上線；DSA Class 7 錄影；Piazza @52 老師答 HW3 不含 tree",
+  "output": "digests/2026-10-22.md"
+ },
+ {
   "at": "2026-10-21T18:09:42-07:00",
   "task": "截止提醒",
   "status": "ok",
