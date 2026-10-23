@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-10-23T13:42:35-07:00",
+  "task": "晨報",
+  "status": "warn",
+  "summary": "Canvas 需重新登入；Teams 新 OH 貼文、TA 答 pop quiz 政策；A3 10/25 到期",
+  "output": "digests/2026-10-23.md"
+ },
+ {
   "at": "2026-10-23T13:41:14-07:00",
   "task": "截止提醒",
   "status": "ok",
