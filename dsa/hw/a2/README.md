@@ -98,5 +98,6 @@ array list 和 linked list 各寫 1 個 test，要檢查既有 test 沒檢查到
 | 日期 | 變動 |
 |---|---|
 | 2026-10-20 | 第一次整理 |
+| 2026-10-24 | 排程新增存 repo 其他檔案到 [repo/](repo/)，摘要內容沒有改動 |
 
 DSA 課用了 AI 要附 chat session 或註明

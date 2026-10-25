@@ -1,0 +1,203 @@
+name: Autograding Tests
+on:
+  push:
+    branches:
+      - '**'   # run on any branch push in this repo
+  workflow_dispatch:
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: "Array list: create, length, get"
+      id: array-list-create-length-get
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Array list: create, length, get"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest array_list_test.ArrayListContractTests.test_new_list_is_empty array_list_test.ArrayListContractTests.test_get_returns_the_value_at_each_index array_list_test.ArrayListContractTests.test_get_with_a_bad_index_raises_IndexError array_list_test.ArrayListContractTests.test_to_python_list_returns_a_new_python_list array_list_test.ArrayListContractTests.test_any_kind_of_value_can_be_stored array_list_test.ArrayListOnlyTests.test_length_is_the_number_of_values_not_the_capacity array_list_test.ArrayListOnlyTests.test_get_reads_the_right_slot array_list_test.ArrayListOnlyTests.test_get_and_length_do_not_count_moves
+        timeout: 2
+        max-score: 6
+    - name: "Array list: grow"
+      id: array-list-grow
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Array list: grow"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest array_list_test.ArrayListOnlyTests.test_grow_doubles_the_capacity_and_keeps_the_values array_list_test.ArrayListOnlyTests.test_grow_makes_a_new_data_list array_list_test.ArrayListOnlyTests.test_grow_counts_one_move_per_value_copied
+        timeout: 2
+        max-score: 5
+    - name: "Array list: insert"
+      id: array-list-insert
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Array list: insert"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest array_list_test.ArrayListContractTests.test_insert_at_the_front_puts_the_newest_value_first array_list_test.ArrayListContractTests.test_insert_at_the_end_builds_the_list_in_order array_list_test.ArrayListContractTests.test_insert_at_every_position array_list_test.ArrayListContractTests.test_insert_with_a_bad_index_raises_IndexError_and_changes_nothing
+        timeout: 2
+        max-score: 6
+    - name: "Array list: insert grows the array and counts moves"
+      id: array-list-insert-grows-the-array-and-counts-moves
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Array list: insert grows the array and counts moves"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest array_list_test.ArrayListOnlyTests.test_insert_into_a_full_list_grows_it_first array_list_test.ArrayListOnlyTests.test_insert_into_a_list_with_room_does_not_grow array_list_test.ArrayListOnlyTests.test_insert_counts_one_move_per_shifted_value
+        timeout: 2
+        max-score: 5
+    - name: "Array list: remove"
+      id: array-list-remove
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Array list: remove"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest array_list_test.ArrayListContractTests.test_remove_at_every_position array_list_test.ArrayListContractTests.test_remove_everything_from_the_back array_list_test.ArrayListContractTests.test_remove_everything_from_the_front array_list_test.ArrayListContractTests.test_remove_with_a_bad_index_raises_IndexError_and_changes_nothing array_list_test.ArrayListOnlyTests.test_remove_counts_one_move_per_shifted_value array_list_test.ArrayListOnlyTests.test_remove_sets_the_vacated_slot_back_to_none array_list_test.ArrayListOnlyTests.test_remove_does_not_shrink_the_array
+        timeout: 2
+        max-score: 6
+    - name: "Array list: random operations match a Python list, and no shortcuts"
+      id: array-list-random-operations-match-a-python-list-and-no-shortcuts
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Array list: random operations match a Python list, and no shortcuts"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest array_list_test.ArrayListContractTests.test_random_operations_always_match_a_python_list array_list_test.ArrayListOnlyTests.test_the_array_functions_do_not_use_python_list_shortcuts
+        timeout: 2
+        max-score: 2
+    - name: "Linked list: create, length, get"
+      id: linked-list-create-length-get
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Linked list: create, length, get"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest linked_list_test.LinkedListContractTests.test_new_list_is_empty linked_list_test.LinkedListContractTests.test_get_returns_the_value_at_each_index linked_list_test.LinkedListContractTests.test_get_with_a_bad_index_raises_IndexError linked_list_test.LinkedListContractTests.test_to_python_list_returns_a_new_python_list linked_list_test.LinkedListContractTests.test_any_kind_of_value_can_be_stored linked_list_test.LinkedListOnlyTests.test_length_reads_the_size linked_list_test.LinkedListOnlyTests.test_get_follows_the_links
+        timeout: 2
+        max-score: 5
+    - name: "Linked list: insert"
+      id: linked-list-insert
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Linked list: insert"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest linked_list_test.LinkedListContractTests.test_insert_at_the_front_puts_the_newest_value_first linked_list_test.LinkedListContractTests.test_insert_at_the_end_builds_the_list_in_order linked_list_test.LinkedListContractTests.test_insert_at_every_position linked_list_test.LinkedListContractTests.test_insert_with_a_bad_index_raises_IndexError_and_changes_nothing linked_list_test.LinkedListOnlyTests.test_insert_at_the_front_changes_the_head linked_list_test.LinkedListOnlyTests.test_insert_in_the_middle_keeps_the_existing_nodes
+        timeout: 2
+        max-score: 6
+    - name: "Linked list: remove"
+      id: linked-list-remove
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Linked list: remove"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest linked_list_test.LinkedListContractTests.test_remove_at_every_position linked_list_test.LinkedListContractTests.test_remove_with_a_bad_index_raises_IndexError_and_changes_nothing linked_list_test.LinkedListOnlyTests.test_remove_the_first_node_changes_the_head linked_list_test.LinkedListOnlyTests.test_remove_a_middle_node_cuts_it_out linked_list_test.LinkedListOnlyTests.test_remove_the_last_node_leaves_a_proper_end
+        timeout: 2
+        max-score: 5
+    - name: "Linked list: remove everything"
+      id: linked-list-remove-everything
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Linked list: remove everything"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest linked_list_test.LinkedListContractTests.test_remove_everything_from_the_back linked_list_test.LinkedListContractTests.test_remove_everything_from_the_front linked_list_test.LinkedListOnlyTests.test_removing_the_only_node_leaves_an_empty_list
+        timeout: 2
+        max-score: 3
+    - name: "Linked list: reverse"
+      id: linked-list-reverse
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Linked list: reverse"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest linked_list_test.LinkedListOnlyTests.test_reverse linked_list_test.LinkedListOnlyTests.test_reverse_reuses_the_same_nodes linked_list_test.LinkedListOnlyTests.test_reversing_twice_restores_the_order
+        timeout: 2
+        max-score: 6
+    - name: "Linked list: random operations match a Python list, and no shortcuts"
+      id: linked-list-random-operations-match-a-python-list-and-no-shortcuts
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Linked list: random operations match a Python list, and no shortcuts"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest linked_list_test.LinkedListContractTests.test_random_operations_always_match_a_python_list linked_list_test.LinkedListOnlyTests.test_the_linked_list_functions_do_not_use_python_lists
+        timeout: 2
+        max-score: 5
+    - name: "Part E: my array list test"
+      id: part-e-my-array-list-test
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Part E: my array list test"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest part_e_checks.PartEChecks.test_my_array_list_test
+        timeout: 2
+        max-score: 5
+    - name: "Part E: my linked list test"
+      id: part-e-my-linked-list-test
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Part E: my linked list test"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest part_e_checks.PartEChecks.test_my_linked_list_test
+        timeout: 2
+        max-score: 5
+    - name: "Analysis: every question has an answer"
+      id: analysis-every-question-has-an-answer
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Analysis: every question has an answer"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest analysis_test.AnalysisTests.test_every_question_has_an_answer
+        timeout: 2
+        max-score: 4
+    - name: "Analysis: timing results pasted"
+      id: analysis-timing-results-pasted
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Analysis: timing results pasted"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest analysis_test.AnalysisTests.test_the_timing_results_have_been_pasted
+        timeout: 2
+        max-score: 2
+    - name: "my_timing.py: stopwatch function"
+      id: my-timing-py-stopwatch-function
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "my_timing.py: stopwatch function"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest analysis_test.MyTimingTests.test_the_stopwatch_function_times_a_real_insert
+        timeout: 2
+        max-score: 2
+    - name: "my_timing.py: timeit function"
+      id: my-timing-py-timeit-function
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "my_timing.py: timeit function"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest analysis_test.MyTimingTests.test_the_timeit_function_times_a_real_insert
+        timeout: 2
+        max-score: 2
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        ARRAY-LIST-CREATE-LENGTH-GET_RESULTS: "${{steps.array-list-create-length-get.outputs.result}}"
+        ARRAY-LIST-GROW_RESULTS: "${{steps.array-list-grow.outputs.result}}"
+        ARRAY-LIST-INSERT_RESULTS: "${{steps.array-list-insert.outputs.result}}"
+        ARRAY-LIST-INSERT-GROWS-THE-ARRAY-AND-COUNTS-MOVES_RESULTS: "${{steps.array-list-insert-grows-the-array-and-counts-moves.outputs.result}}"
+        ARRAY-LIST-REMOVE_RESULTS: "${{steps.array-list-remove.outputs.result}}"
+        ARRAY-LIST-RANDOM-OPERATIONS-MATCH-A-PYTHON-LIST-AND-NO-SHORTCUTS_RESULTS: "${{steps.array-list-random-operations-match-a-python-list-and-no-shortcuts.outputs.result}}"
+        LINKED-LIST-CREATE-LENGTH-GET_RESULTS: "${{steps.linked-list-create-length-get.outputs.result}}"
+        LINKED-LIST-INSERT_RESULTS: "${{steps.linked-list-insert.outputs.result}}"
+        LINKED-LIST-REMOVE_RESULTS: "${{steps.linked-list-remove.outputs.result}}"
+        LINKED-LIST-REMOVE-EVERYTHING_RESULTS: "${{steps.linked-list-remove-everything.outputs.result}}"
+        LINKED-LIST-REVERSE_RESULTS: "${{steps.linked-list-reverse.outputs.result}}"
+        LINKED-LIST-RANDOM-OPERATIONS-MATCH-A-PYTHON-LIST-AND-NO-SHORTCUTS_RESULTS: "${{steps.linked-list-random-operations-match-a-python-list-and-no-shortcuts.outputs.result}}"
+        PART-E-MY-ARRAY-LIST-TEST_RESULTS: "${{steps.part-e-my-array-list-test.outputs.result}}"
+        PART-E-MY-LINKED-LIST-TEST_RESULTS: "${{steps.part-e-my-linked-list-test.outputs.result}}"
+        ANALYSIS-EVERY-QUESTION-HAS-AN-ANSWER_RESULTS: "${{steps.analysis-every-question-has-an-answer.outputs.result}}"
+        ANALYSIS-TIMING-RESULTS-PASTED_RESULTS: "${{steps.analysis-timing-results-pasted.outputs.result}}"
+        MY-TIMING-PY-STOPWATCH-FUNCTION_RESULTS: "${{steps.my-timing-py-stopwatch-function.outputs.result}}"
+        MY-TIMING-PY-TIMEIT-FUNCTION_RESULTS: "${{steps.my-timing-py-timeit-function.outputs.result}}"
+      with:
+        runners: array-list-create-length-get,array-list-grow,array-list-insert,array-list-insert-grows-the-array-and-counts-moves,array-list-remove,array-list-random-operations-match-a-python-list-and-no-shortcuts,linked-list-create-length-get,linked-list-insert,linked-list-remove,linked-list-remove-everything,linked-list-reverse,linked-list-random-operations-match-a-python-list-and-no-shortcuts,part-e-my-array-list-test,part-e-my-linked-list-test,analysis-every-question-has-an-answer,analysis-timing-results-pasted,my-timing-py-stopwatch-function,my-timing-py-timeit-function

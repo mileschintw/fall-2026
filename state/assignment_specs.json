@@ -75,21 +75,39 @@
    ],
    "files": {},
    "readme": "945a91f7b20ec5b36a1e687dbcc348515e916ca4",
+   "repo_files": {
+    ".gitignore": "68bc17f9ff2104a9d7b6777058bb4c343ca72609",
+    "HelloWorld.ipynb": "d15280b850e23fb2844196472aa37ed78c899e9f",
+    "LICENSE": "8463f92d84047bbca6a11db57ddada3ff23b8ee8"
+   },
    "due_at": "2026-10-05T06:59:59Z"
   },
   "files": [
+   "repo/.gitignore",
+   "repo/HelloWorld.ipynb",
+   "repo/LICENSE",
    "spec.md"
   ],
-  "archived_at": "2026-10-20T02:11:46-07:00",
+  "archived_at": "2026-10-24T21:48:26-07:00",
   "summary_done": true,
   "changes": [
-   "new"
+   "repo 新檔 .gitignore",
+   "repo 新檔 HelloWorld.ipynb",
+   "repo 新檔 LICENSE"
   ],
   "history": [
    {
     "at": "2026-10-20T02:11:46-07:00",
     "changes": [
      "new"
+    ]
+   },
+   {
+    "at": "2026-10-24T21:48:26-07:00",
+    "changes": [
+     "repo 新檔 .gitignore",
+     "repo 新檔 HelloWorld.ipynb",
+     "repo 新檔 LICENSE"
     ]
    }
   ]
@@ -105,21 +123,83 @@
    "links": [],
    "files": {},
    "readme": "602c9863c38f2c621f1234ec09e55d446296065b",
+   "repo_files": {
+    ".github/workflows/classroom.yml": "1aa51e849ac8e51442f8bdd541af65c5a4dc38f0",
+    ".gitignore": "4a74d7e44f98ededb545696f43e1901d463d269e",
+    "analysis.md": "8fee722abf7b9d4fb3e3ea9073d5676f38ef26bc",
+    "analysis_test.py": "bbaea8266af091ee9b367b18919bdfa18f380861",
+    "array_list.py": "16b6f28f8035ead221bd0fa574ec5d5032dc57d0",
+    "array_list_test.py": "47892ec18f73ed501f842bdbb8edb22f13333e6d",
+    "linked_list.py": "5dc9217f20b9570c48fa6d361f4d85949567261e",
+    "linked_list_test.py": "5910522b543a28737f20559b522248cc68709949",
+    "list_checks.py": "eea8c229daed3495821e2f6efdebcd4088b5d0a3",
+    "my_timing.py": "8b4abcc45613b6bcf4b3c4bc2fd3ea3167a771de",
+    "part_e_checks.py": "7e843db5e86c2a6e220ab3d1e1275030390ccc08",
+    "shared_list_tests.py": "a867a8a18d2bccf10b40ac85467b650300606be5",
+    "student_tests.py": "d0ba20eda5c491499dbbacc5d7b060082404f2b0",
+    "timing.py": "8f3447752d5e16e344fdbccf7717a9cc3f5ea639"
+   },
    "due_at": "2026-10-19T06:59:59Z"
   },
   "files": [
+   "repo/.github/workflows/classroom.yml",
+   "repo/.gitignore",
+   "repo/analysis.md",
+   "repo/analysis_test.py",
+   "repo/array_list.py",
+   "repo/array_list_test.py",
+   "repo/linked_list.py",
+   "repo/linked_list_test.py",
+   "repo/list_checks.py",
+   "repo/my_timing.py",
+   "repo/part_e_checks.py",
+   "repo/shared_list_tests.py",
+   "repo/student_tests.py",
+   "repo/timing.py",
    "spec.md"
   ],
-  "archived_at": "2026-10-20T02:11:46-07:00",
+  "archived_at": "2026-10-24T21:48:40-07:00",
   "summary_done": true,
   "changes": [
-   "new"
+   "repo 新檔 .github/workflows/classroom.yml",
+   "repo 新檔 .gitignore",
+   "repo 新檔 analysis.md",
+   "repo 新檔 analysis_test.py",
+   "repo 新檔 array_list.py",
+   "repo 新檔 array_list_test.py",
+   "repo 新檔 linked_list.py",
+   "repo 新檔 linked_list_test.py",
+   "repo 新檔 list_checks.py",
+   "repo 新檔 my_timing.py",
+   "repo 新檔 part_e_checks.py",
+   "repo 新檔 shared_list_tests.py",
+   "repo 新檔 student_tests.py",
+   "repo 新檔 timing.py"
   ],
   "history": [
    {
     "at": "2026-10-20T02:11:46-07:00",
     "changes": [
      "new"
+    ]
+   },
+   {
+    "at": "2026-10-24T21:48:40-07:00",
+    "changes": [
+     "repo 新檔 .github/workflows/classroom.yml",
+     "repo 新檔 .gitignore",
+     "repo 新檔 analysis.md",
+     "repo 新檔 analysis_test.py",
+     "repo 新檔 array_list.py",
+     "repo 新檔 array_list_test.py",
+     "repo 新檔 linked_list.py",
+     "repo 新檔 linked_list_test.py",
+     "repo 新檔 list_checks.py",
+     "repo 新檔 my_timing.py",
+     "repo 新檔 part_e_checks.py",
+     "repo 新檔 shared_list_tests.py",
+     "repo 新檔 student_tests.py",
+     "repo 新檔 timing.py"
     ]
    }
   ]
@@ -135,21 +215,59 @@
    "links": [],
    "files": {},
    "readme": "a169e62042eff693b89d443553f0a592bc57c91c",
+   "repo_files": {
+    ".github/workflows/classroom.yml": "5e85cbf8b89fb574926f8793bb5212c1eae7c16e",
+    ".gitignore": "4a74d7e44f98ededb545696f43e1901d463d269e",
+    "game_play.py": "f0418e4ff0d8bb6e396ca8cb539944645c7dde18",
+    "game_play_test.py": "bc656e0d58a1234f797a23c0653e8d51f11a31ad",
+    "game_structures.py": "dd7818d291b4c063bb91626515010c9ed9e3b26c",
+    "game_structures_test.py": "1a8380b163ac61f95f19817c8aa024644519c3f5",
+    "hand_invariants.py": "a5f54f2ba5e5a85fadf606e76c9a9d3b407420bd",
+    "uw_euchre.py": "59a0d9b7d96021f28f7e494486abcf3e33f66a3f"
+   },
    "due_at": "2026-10-26T06:59:59Z"
   },
   "files": [
+   "repo/.github/workflows/classroom.yml",
+   "repo/.gitignore",
+   "repo/game_play.py",
+   "repo/game_play_test.py",
+   "repo/game_structures.py",
+   "repo/game_structures_test.py",
+   "repo/hand_invariants.py",
+   "repo/uw_euchre.py",
    "spec.md"
   ],
-  "archived_at": "2026-10-20T02:11:47-07:00",
+  "archived_at": "2026-10-24T21:48:48-07:00",
   "summary_done": true,
   "changes": [
-   "new"
+   "repo 新檔 .github/workflows/classroom.yml",
+   "repo 新檔 .gitignore",
+   "repo 新檔 game_play.py",
+   "repo 新檔 game_play_test.py",
+   "repo 新檔 game_structures.py",
+   "repo 新檔 game_structures_test.py",
+   "repo 新檔 hand_invariants.py",
+   "repo 新檔 uw_euchre.py"
   ],
   "history": [
    {
     "at": "2026-10-20T02:11:47-07:00",
     "changes": [
      "new"
+    ]
+   },
+   {
+    "at": "2026-10-24T21:48:48-07:00",
+    "changes": [
+     "repo 新檔 .github/workflows/classroom.yml",
+     "repo 新檔 .gitignore",
+     "repo 新檔 game_play.py",
+     "repo 新檔 game_play_test.py",
+     "repo 新檔 game_structures.py",
+     "repo 新檔 game_structures_test.py",
+     "repo 新檔 hand_invariants.py",
+     "repo 新檔 uw_euchre.py"
     ]
    }
   ]

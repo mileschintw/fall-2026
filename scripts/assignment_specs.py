@@ -1,4 +1,4 @@
-"""Archive assignment specs (Canvas description, linked Canvas files, DSA repo README) into <course>/hw/<slug>/.
+"""Archive assignment specs (Canvas description, linked Canvas files, DSA starter repo README + files) into <course>/hw/<slug>/.
 
 Usage:
   python scripts/assignment_specs.py                  # fetch, archive new/changed specs, print a JSON report
@@ -7,6 +7,7 @@ Usage:
 Per assignment directory:
   spec.md     verbatim sources, regenerated on every change (do not edit)
   spec.pdf    original Canvas file the description links to (spec-1.pdf, spec-2.pdf… when there are several)
+  repo/       DSA starter repo files other than README (stubs, tests, CI workflow), same paths as in the repo
   README.md   structured summary written by the agent (automation/assignment-specs.md)
 State: state/assignment_specs.json (fingerprints per Canvas assignment id; `summary_done` false until --done).
 Old versions live in git history; spec.md is overwritten in place.
@@ -36,6 +37,7 @@ STATE = ROOT / "state" / "assignment_specs.json"
 TMP = ROOT / "state" / "_specs.tmp"
 COURSES = {"1917398": "gpu", "1917417": "dsa"}
 CANVAS = "https://canvas.uw.edu/courses/"
+MAX_REPO_FILE = 1_000_000
 DSA_ORG, DSA_REPO = "uw-python-fall2026", "assignment-{n}-mileschintw"  # courses.yaml dsa.assignment_repo_pattern
 
 
@@ -78,7 +80,30 @@ def readme(name):
             return None
         raise RuntimeError(f"gh {repo}: " + (r.stdout + r.stderr).strip().splitlines()[-1])
     j = json.loads(r.stdout)
-    return {"repo": f"{DSA_ORG}/{repo}", "sha": j["sha"], "text": base64.b64decode(j["content"]).decode("utf-8")}
+    full = f"{DSA_ORG}/{repo}"
+    return {"repo": full, "sha": j["sha"], "text": base64.b64decode(j["content"]).decode("utf-8"), "files": repo_files(full)}
+
+
+def gh_json(path):
+    r = subprocess.run(["gh", "api", path], capture_output=True, text=True, encoding="utf-8")
+    if r.returncode != 0:
+        raise RuntimeError(f"gh {path}: " + (r.stdout + r.stderr).strip().splitlines()[-1])
+    return json.loads(r.stdout)
+
+
+def repo_files(full):
+    """Every file in the starter repo (stubs, tests, CI workflow) -> {path: {sha, bytes}}. README.md is kept in rd['text'];
+    files over MAX_REPO_FILE bytes are listed by the caller but not downloaded."""
+    tree = gh_json(f"repos/{full}/git/trees/HEAD?recursive=1")
+    out = {}
+    for e in tree["tree"]:
+        if e["type"] != "blob" or e["path"].lower() == "readme.md":
+            continue
+        data = None
+        if e.get("size", 0) <= MAX_REPO_FILE:
+            data = base64.b64decode(gh_json(f"repos/{full}/git/blobs/{e['sha']}")["content"])
+        out[e["path"]] = {"sha": e["sha"], "size": e.get("size", 0), "data": data}
+    return out
 
 
 def fingerprint(a, rd):
@@ -86,6 +111,7 @@ def fingerprint(a, rd):
              "links": [x["href"] for x in a["links"]],
              "files": {str(f["id"]): f.get("updated_at") for f in a["files"]},
              "readme": rd["sha"] if rd else None,
+             "repo_files": {k: v["sha"] for k, v in rd["files"].items()} if rd else {},
              "due_at": a["due_at"]}
 
 
@@ -103,6 +129,10 @@ def diff(old, new):
     out += [f"檔案 {fid} 從說明移除" for fid in old["files"] if fid not in new["files"]]
     if old["readme"] != new["readme"]:
         out.append("repo README 改了")
+    of, nf = old.get("repo_files", {}), new["repo_files"]
+    out += [f"repo 新檔 {k}" for k in nf if k not in of]
+    out += [f"repo 檔案 {k} 改了" for k in nf if k in of and of[k] != nf[k]]
+    out += [f"repo 檔案 {k} 刪除" for k in of if k not in nf]
     if old["due_at"] != new["due_at"]:
         out.append(f"due_at {old['due_at']} → {new['due_at']}")
     return out
@@ -118,9 +148,14 @@ def archive(cid, a, rd, d, old_files):
         written = build(cid, a, rd, tmp)
         d.mkdir(exist_ok=True)
         for fn in written:
+            (d / fn).parent.mkdir(parents=True, exist_ok=True)
             (tmp / fn).replace(d / fn)
         for fn in set(old_files) - set(written):  # stale names only, after the new set is in place
             (d / fn).unlink(missing_ok=True)
+        if (d / "repo").is_dir():  # drop emptied dirs left by deleted repo files
+            for sub in sorted((d / "repo").rglob("*"), reverse=True):
+                if sub.is_dir() and not any(sub.iterdir()):
+                    sub.rmdir()
         return written
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
@@ -151,6 +186,17 @@ def build(cid, a, rd, d):
             md.append("（不是 PDF，沒有轉文字，請看原檔）")
     if rd:
         md += ["", f"## Starter repo README（{rd['repo']}，blob {rd['sha'][:7]}）", "", rd["text"].strip()]
+        if rd["files"]:
+            md += ["", "## Starter repo 其他檔案", "",
+                   "原檔存在 `repo/` 底下（stub 的 docstring、測試、CI workflow 才是函式規格和配分的細節）。", ""]
+            for path, f in rd["files"].items():
+                if f["data"] is None:
+                    md.append(f"- `{path}`（{f['size']} bytes，超過 {MAX_REPO_FILE} bytes 沒下載，blob {f['sha'][:7]}）")
+                    continue
+                (d / "repo" / path).parent.mkdir(parents=True, exist_ok=True)
+                (d / "repo" / path).write_bytes(f["data"])
+                written.append(f"repo/{path}")
+                md.append(f"- [`{path}`](repo/{path})（{f['size']} bytes，blob {f['sha'][:7]}）")
     text = re.sub(r"verifier=[^&\s)\]>]+", "verifier=REDACTED", "\n".join(md) + "\n")  # CLAUDE.md 密鑰
     (d / "spec.md").write_text(text, encoding="utf-8")
     return written + ["spec.md"]

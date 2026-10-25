@@ -11,7 +11,8 @@
      - `no_spec`：Canvas 和 repo 都還沒有說明，例如 DSA 還沒發的作業。
      - `errors`：這份作業這次沒抓成，下次會自動重抓。
 2. 照 `pending` 的順序，一份一份照下面的「摘要格式」寫 `<dir>/README.md`。寫完一份就執行 `python scripts/assignment_specs.py --done <spec>`（例如 `--done gpu/hw1`），exit 0 才算這份完成，再做下一份。`--done` exit 1 時照它的訊息補好 README.md 再跑一次。
-   - 內容只取自 `<dir>/spec.md`，加上 repo 裡已有的資料：`<course>/assignments.md`、`<course>/lectures/*/notes.md`、`digests/` 裡老師或 TA 對這份作業的澄清。
+   - DSA 的 starter repo 檔案（stub 的 docstring、測試、`.github/workflows` 的 autograder）存在 `<dir>/repo/`，函式簽名、規格和配分以這些為準，摘要要涵蓋。
+   - 內容取自 `<dir>/spec.md` 和 `<dir>/repo/`，加上 repo 裡已有的資料：`<course>/assignments.md`、`<course>/lectures/*/notes.md`、`digests/` 裡老師或 TA 對這份作業的澄清。
    - `<dir>/README.md` 已經存在（改版）：先讀它，再對照新的 spec.md 改寫，並在「改版紀錄」加一列，寫日期和 `changes` 列的變動。不存在：照格式新寫。
    - 這一步的完成條件：`pending` 裡每一份的 `--done` 都 exit 0。沒做到的那幾份留在 state 裡，下次執行會再出現在 `pending`。
 3. 登記 status，依序判斷，用第一個符合的：

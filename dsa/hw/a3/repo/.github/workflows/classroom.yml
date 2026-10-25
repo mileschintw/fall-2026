@@ -1,0 +1,183 @@
+name: Autograding Tests
+on:
+  push:
+    branches:
+      - '**'   # run on any branch push in this repo
+  workflow_dispatch:
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: "Deck - create, push, peek"
+      id: deck-create-push-peek
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Deck - create, push, peek"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_structures_test.DeckTestCase.test_create_deck game_structures_test.GeneralTest.test_deck game_structures_test.DeckTestCase.test_push_card_to_deck game_structures_test.DeckTestCase.test_push_card_to_deck_adds_card game_structures_test.DeckTestCase.test_push_card_to_deck_increases_size game_structures_test.DeckTestCase.test_push_card_to_deck_empty_deck game_structures_test.DeckTestCase.test_push_card_to_deck_duplicate_card game_structures_test.DeckTestCase.test_peek_deck
+        timeout: 2
+        max-score: 7
+    - name: "Deck - pop, is empty, last in first out"
+      id: deck-pop-is-empty-last-in-first-out
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Deck - pop, is empty, last in first out"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_structures_test.DeckTestCase.test_pop_deck game_structures_test.DeckTestCase.test_deck_is_empty_when_empty game_structures_test.DeckTestCase.test_deck_is_empty_when_not_empty game_structures_test.DeckOrderTestCase.test_deck_is_last_in_first_out
+        timeout: 2
+        max-score: 6
+    - name: "Card node and empty hand"
+      id: card-node-and-empty-hand
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Card node and empty hand"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_structures_test.CardNodeTestCase.test_create_card_node game_structures_test.HandTestCase.test_create_hand game_structures_test.HandInvariantTestCase.test_empty_hand_is_valid
+        timeout: 2
+        max-score: 4
+    - name: "Hand - add a card"
+      id: hand-add-a-card
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Hand - add a card"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_structures_test.HandTestCase.test_add_1card_to_hand game_structures_test.HandTestCase.test_add_2cards_to_hand game_structures_test.HandTestCase.test_add_card_to_hand_empty_hand game_structures_test.HandTestCase.test_add_card_to_hand_non_empty_hand game_structures_test.HandTestCase.test_add_card_to_hand_duplicate_cards game_structures_test.HandInvariantTestCase.test_add_card_puts_it_at_the_front_and_keeps_hand_valid
+        timeout: 2
+        max-score: 8
+    - name: "Hand - peek at a card"
+      id: hand-peek-at-a-card
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Hand - peek at a card"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_structures_test.HandTestCase.test_get_card_from_hand game_structures_test.HandTestCase.test_get_card_from_hand_when_empty game_structures_test.HandTestCase.test_get_card_from_hand_when_index_is_too_big game_structures_test.HandTestCase.test_peek_card_at_index_valid_index game_structures_test.HandTestCase.test_peek_card_at_index_out_of_range_high game_structures_test.HandTestCase.test_peek_card_at_index_out_of_range_negative game_structures_test.HandTestCase.test_peek_card_at_index_empty_hand
+        timeout: 2
+        max-score: 6
+    - name: "Hand - remove a card"
+      id: hand-remove-a-card
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Hand - remove a card"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_structures_test.HandTestCase.test_remove_first_card_from_hand game_structures_test.HandTestCase.test_remove_last_card_from_hand game_structures_test.HandTestCase.test_remove_nonexistent_card_from_hand game_structures_test.GeneralTest.test_remove_hand_front game_structures_test.GeneralTest.test_remove_hand_middle game_structures_test.GeneralTest.test_remove_hand_end game_structures_test.GeneralTest.test_remove_hand_all
+        timeout: 2
+        max-score: 12
+    - name: "Hand - stays a valid linked list when removing"
+      id: hand-stays-a-valid-linked-list-when-removing
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Hand - stays a valid linked list when removing"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_structures_test.HandInvariantTestCase.test_remove_card_from_hand_at_every_position game_structures_test.HandInvariantTestCase.test_remove_card_at_index_at_every_position game_structures_test.HandInvariantTestCase.test_remove_every_card_from_the_front game_structures_test.HandInvariantTestCase.test_remove_every_card_from_the_back game_structures_test.HandInvariantTestCase.test_remove_card_that_is_not_in_the_hand game_structures_test.HandInvariantTestCase.test_remove_card_at_index_out_of_range_changes_nothing game_structures_test.HandInvariantTestCase.test_remove_card_from_hand_removes_only_the_first_match game_structures_test.HandInvariantTestCase.test_remove_card_at_index_removes_that_position_even_with_equal_cards
+        timeout: 2
+        max-score: 8
+    - name: "Hand - random operations match a Python list"
+      id: hand-random-operations-match-a-python-list
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Hand - random operations match a Python list"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_structures_test.HandInvariantTestCase.test_hand_always_matches_a_python_list_under_random_operations
+        timeout: 2
+        max-score: 4
+    - name: "Game - shuffle and deal"
+      id: game-shuffle-and-deal
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Game - shuffle and deal"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_play_test.DeckTestCase.test_shuffle game_play_test.DeckTestCase.test_deal game_play_test.ConservationTestCase.test_deal_alternates_starting_with_player_1_from_the_top_of_the_deck game_play_test.ConservationTestCase.test_deal_never_loses_or_duplicates_a_card
+        timeout: 2
+        max-score: 8
+    - name: "Game - return a hand to the deck"
+      id: game-return-a-hand-to-the-deck
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Game - return a hand to the deck"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_play_test.DeckTestCase.test_return_hand_to_deck game_play_test.ConservationTestCase.test_return_hand_to_deck_gives_back_every_card game_play_test.ConservationTestCase.test_return_empty_hand_to_deck_changes_nothing
+        timeout: 2
+        max-score: 6
+    - name: "Game - legal moves"
+      id: game-legal-moves
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Game - legal moves"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_play_test.GameTestCase.test_is_legal_move
+        timeout: 2
+        max-score: 5
+    - name: "Game - compare cards"
+      id: game-compare-cards
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Game - compare cards"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_play_test.GameTestCase.test_card_with_higher_rank game_play_test.GameTestCase.test_card_with_equal_rank game_play_test.GameTestCase.test_card_with_trump_suit_beating_non_trump game_play_test.GameTestCase.test_card_with_non_trump_suit_losing_to_trump game_play_test.GameTestCase.test_cards_with_different_non_trump_suits game_play_test.GameTestCase.test_card_with_trump_over_equal_rank_of_another_suit
+        timeout: 2
+        max-score: 8
+    - name: "Game - who won the trick"
+      id: game-who-won-the-trick
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Game - who won the trick"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_play_test.GameTestCase.test_who_won
+        timeout: 2
+        max-score: 4
+    - name: "Game - swap a card with the next one"
+      id: game-swap-a-card-with-the-next-one
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Game - swap a card with the next one"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_play_test.GameTestCase.test_swap_card_with_next_middle game_play_test.GameTestCase.test_swap_card_with_next_beginning game_play_test.GameTestCase.test_swap_card_with_next_end game_play_test.ConservationTestCase.test_swap_card_with_next_at_every_index game_play_test.ConservationTestCase.test_swap_card_with_next_raises_for_an_index_past_the_end
+        timeout: 2
+        max-score: 6
+    - name: "Game - sort a hand"
+      id: game-sort-a-hand
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Game - sort a hand"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_play_test.GameTestCase.test_sort_hand_full_hand_with_trump game_play_test.ConservationTestCase.test_sort_hand_orders_the_cards_and_loses_none
+        timeout: 2
+        max-score: 6
+    - name: "Game - play a whole round"
+      id: game-play-a-whole-round
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Game - play a whole round"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest game_play_test.ConservationTestCase.test_playing_a_whole_round_never_loses_or_duplicates_a_card
+        timeout: 2
+        max-score: 2
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        DECK-CREATE-PUSH-PEEK_RESULTS: "${{steps.deck-create-push-peek.outputs.result}}"
+        DECK-POP-IS-EMPTY-LAST-IN-FIRST-OUT_RESULTS: "${{steps.deck-pop-is-empty-last-in-first-out.outputs.result}}"
+        CARD-NODE-AND-EMPTY-HAND_RESULTS: "${{steps.card-node-and-empty-hand.outputs.result}}"
+        HAND-ADD-A-CARD_RESULTS: "${{steps.hand-add-a-card.outputs.result}}"
+        HAND-PEEK-AT-A-CARD_RESULTS: "${{steps.hand-peek-at-a-card.outputs.result}}"
+        HAND-REMOVE-A-CARD_RESULTS: "${{steps.hand-remove-a-card.outputs.result}}"
+        HAND-STAYS-A-VALID-LINKED-LIST-WHEN-REMOVING_RESULTS: "${{steps.hand-stays-a-valid-linked-list-when-removing.outputs.result}}"
+        HAND-RANDOM-OPERATIONS-MATCH-A-PYTHON-LIST_RESULTS: "${{steps.hand-random-operations-match-a-python-list.outputs.result}}"
+        GAME-SHUFFLE-AND-DEAL_RESULTS: "${{steps.game-shuffle-and-deal.outputs.result}}"
+        GAME-RETURN-A-HAND-TO-THE-DECK_RESULTS: "${{steps.game-return-a-hand-to-the-deck.outputs.result}}"
+        GAME-LEGAL-MOVES_RESULTS: "${{steps.game-legal-moves.outputs.result}}"
+        GAME-COMPARE-CARDS_RESULTS: "${{steps.game-compare-cards.outputs.result}}"
+        GAME-WHO-WON-THE-TRICK_RESULTS: "${{steps.game-who-won-the-trick.outputs.result}}"
+        GAME-SWAP-A-CARD-WITH-THE-NEXT-ONE_RESULTS: "${{steps.game-swap-a-card-with-the-next-one.outputs.result}}"
+        GAME-SORT-A-HAND_RESULTS: "${{steps.game-sort-a-hand.outputs.result}}"
+        GAME-PLAY-A-WHOLE-ROUND_RESULTS: "${{steps.game-play-a-whole-round.outputs.result}}"
+      with:
+        runners: deck-create-push-peek,deck-pop-is-empty-last-in-first-out,card-node-and-empty-hand,hand-add-a-card,hand-peek-at-a-card,hand-remove-a-card,hand-stays-a-valid-linked-list-when-removing,hand-random-operations-match-a-python-list,game-shuffle-and-deal,game-return-a-hand-to-the-deck,game-legal-moves,game-compare-cards,game-who-won-the-trick,game-swap-a-card-with-the-next-one,game-sort-a-hand,game-play-a-whole-round

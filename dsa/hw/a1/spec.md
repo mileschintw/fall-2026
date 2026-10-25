@@ -1,6 +1,6 @@
 # A1: My First Python Assignment
 
-> 來源：Canvas assignment 11793714（https://canvas.uw.edu/courses/1917417/assignments/11793714），抓取 2026-10-20 02:11 PDT。
+> 來源：Canvas assignment 11793714（https://canvas.uw.edu/courses/1917417/assignments/11793714），抓取 2026-10-24 21:48 PDT。
 > 這個檔案由 `scripts/assignment_specs.py` 產生，內容是原文，每次來源有變動就整份重寫，不要手改。整理過的版本在 README.md。
 
 - 截止（Canvas `due_at`）：2026-10-04 (Sun) 11:59 PM PDT
@@ -108,3 +108,11 @@ We may periodically deploy updates to the assignment.
 You will need to resolve any conflicts that occur. Please come to office hours if you have any issues. 
 
 If significant changes have been made, we will do our best to send an announcement to the class.
+
+## Starter repo 其他檔案
+
+原檔存在 `repo/` 底下（stub 的 docstring、測試、CI workflow 才是函式規格和配分的細節）。
+
+- [`.gitignore`](repo/.gitignore)（3078 bytes，blob 68bc17f）
+- [`HelloWorld.ipynb`](repo/HelloWorld.ipynb)（2360 bytes，blob d15280b）
+- [`LICENSE`](repo/LICENSE)（1070 bytes，blob 8463f92）
