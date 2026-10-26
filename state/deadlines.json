@@ -163,8 +163,8 @@
   "due": "2026-10-25T23:59:59-07:00",
   "due_label": "10/25（日） 11:59 PM PDT",
   "points": 150,
-  "status": "未交",
-  "done": false,
+  "status": "已交",
+  "done": true,
   "note": "push 後到 Canvas 交 repo URL",
   "canvas_id": 11814801
  },

@@ -7,7 +7,7 @@
 |---|---|---|---|---|---|
 | A1 My First Python Assignment | 10/4（日）11:59 PM | 50 | 11793714 | **graded** | |
 | A2 Lists, lists and more lists | 10/18（日）11:59 PM PDT | 150 | 11814777 | submitted（已交，10/19 晨報確認） | |
-| A3 Stacks, Queues and Testing | **10/25（日）11:59 PM PDT** | 150 | 11814801 | unsubmitted | 10/20 確認 Canvas `due_at` 改成 2026-10-26T06:59:59Z（原 10/23 五） |
+| A3 Stacks, Queues and Testing | **10/25（日）11:59 PM PDT** | 150 | 11814801 | submitted（已交，10/26 晨報確認）| 10/20 確認 Canvas `due_at` 改成 2026-10-26T06:59:59Z（原 10/23 五） |
 | A4 Bug Hunt | **11/1（日）11:59 PM PST** | 100 | 11814804 | unsubmitted | 10/20 確認 `due_at` 2026-11-02T07:59:59Z（原 10/30 五）；DST 結束當天 |
 | A5 BSTs and AVLs | **11/22（日）11:59 PM PST** | 100 | 11814818 | unsubmitted | 10/20 確認 `due_at` 2026-11-23T07:59:59Z（原 11/6 五） |
 | **Midterm** | **11/9（一）4:30–6:30 PM PST，實體紙筆，Moore 220** | 100（15%） | quiz 2448354 / asg 11793712 | — | Canvas Classic Quiz 開放 4:30–6:30 只代表時段 |
