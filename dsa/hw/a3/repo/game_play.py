@@ -3,7 +3,6 @@ import random
 
 def shuffle(deck):
 	random.shuffle(deck)
-	pass
 
 def deal(deck, p1_hand, p2_hand):
 	"""
@@ -19,8 +18,11 @@ def deal(deck, p1_hand, p2_hand):
 	    p2_hand (Hand Linked List): The second player's hand. Cards
 	        dealt to player 2 are added to this list.
 	"""
-
-	pass
+	for _ in range(5):
+		card = pop_card(deck)
+		add_card_to_hand(p1_hand, card)
+		card = pop_card(deck)
+		add_card_to_hand(p2_hand, card)
 
 
 def hand_has_suit(hand, suit):
@@ -36,7 +38,17 @@ def hand_has_suit(hand, suit):
 	Returns:
 	    bool: True if any card in the hand has the given suit, otherwise False.
 	"""
-	pass
+	if is_hand_empty(hand):
+		return False
+
+	curr_node = hand[HAND_FIRST_CARD_KEY]
+	while curr_node:
+		card = curr_node[CARD_NODE_PAYLOAD_KEY]
+		if card[CARD_SUIT_INDEX] == suit:
+			return True
+		curr_node = curr_node[CARD_NODE_NEXT_KEY]
+
+	return False
 
 def is_legal_move(hand, lead_card, played_card):
 	"""
@@ -57,7 +69,14 @@ def is_legal_move(hand, lead_card, played_card):
 	Returns:
 	    bool: True if the played card is a legal move, False otherwise.
 	"""
-	pass
+	lead_card_suit = lead_card[CARD_SUIT_INDEX]
+	played_card_suit = played_card[CARD_SUIT_INDEX]
+	if played_card_suit == lead_card_suit:
+		return True
+	if not hand_has_suit(hand, lead_card_suit):
+		return True
+
+	return False
 
 ## Returns True if the LEAD card wins the trick, and False if the FOLLOWED card wins.
 ##   * Same suit (this includes trump vs. trump): the higher value wins.
@@ -77,8 +96,12 @@ def who_won(lead_card, followed_card, trump):
 	Returns:
 	    bool: True if the lead card wins the trick, False if the followed card wins.
 	"""
+	if followed_card[CARD_SUIT_INDEX] == trump:
+		return False
+	if followed_card[CARD_SUIT_INDEX] == lead_card[CARD_SUIT_INDEX] and followed_card[CARD_VALUE_INDEX] > lead_card[CARD_VALUE_INDEX]:
+		return False
 
-	pass
+	return True
 
 
 # Given the player1 hand, play a card.
@@ -90,8 +113,9 @@ def who_won(lead_card, followed_card, trump):
 # manner: just remove/return the first card in the hand, regardless
 # if it's a "good" card or not.
 def take_player1_turn(hand, trump):
-
-	pass
+	card = remove_card_at_index(hand, 0)
+	print('Player 1 plays {}'.format(card[CARD_NAME_INDEX]))
+	return card
 
 # Given the player2 hand, play a card.
 # Player 2 is always a human.
@@ -102,7 +126,26 @@ def take_player1_turn(hand, trump):
 # saying what card was played, and return the played card.
 # This function does not have to enforce that a valid card is chosen.
 def take_player2_turn(hand, trump):
-	pass
+	print('Your hand:')
+	curr_node = hand[HAND_FIRST_CARD_KEY]
+	index = 0
+	while curr_node is not None:
+		print('{}: {}'.format(index, curr_node[CARD_NODE_PAYLOAD_KEY][CARD_NAME_INDEX]))
+		curr_node = curr_node[CARD_NODE_NEXT_KEY]
+		index += 1
+
+	card = None
+	while card is None:
+		choice = input('Choose a card to play (0-{}): '.format(index - 1))
+		try:
+			card = remove_card_at_index(hand, int(choice))
+		except ValueError:
+			card = None
+		if card is None:
+			print('Invalid choice, try again.')
+
+	print('Player 2 plays {}'.format(card[CARD_NAME_INDEX]))
+	return card
 
 def return_hand_to_deck(hand, deck):
 	"""
@@ -115,7 +158,9 @@ def return_hand_to_deck(hand, deck):
 	    hand (dict): The hand (linked list) to empty.
 	    deck (list): The deck to put the cards on.
 	"""
-	pass
+	while not is_hand_empty(hand):
+		card = remove_card_at_index(hand, 0)
+		push_card_to_deck(deck, card)
 
 
 def swap_card_with_next(hand, index):
@@ -134,7 +179,32 @@ def swap_card_with_next(hand, index):
 	    IndexError: If the index is greater than the last valid index of the hand.
 	"""
 
-	pass
+	curr_node = find_node_at_index(hand, index)
+	if curr_node is None:
+		raise IndexError
+
+	next_node = curr_node[CARD_NODE_NEXT_KEY]
+	prev_node = curr_node[CARD_NODE_PREV_KEY]
+
+	if next_node is None:
+		return
+	next_next_node = next_node[CARD_NODE_NEXT_KEY]
+
+	# move next in front of curr
+	next_node[CARD_NODE_NEXT_KEY] = curr_node
+	next_node[CARD_NODE_PREV_KEY] = prev_node
+
+	# update curr node
+	curr_node[CARD_NODE_NEXT_KEY] = next_next_node
+	curr_node[CARD_NODE_PREV_KEY] = next_node
+
+	if next_next_node is not None:
+		next_next_node[CARD_NODE_PREV_KEY] = curr_node
+
+	if prev_node is None:
+		hand[HAND_FIRST_CARD_KEY] = next_node
+	else:
+		prev_node[CARD_NODE_NEXT_KEY] = next_node
 
 def is_this_card_bigger_than_that_card(this_card, that_card, trump):
 	"""
@@ -156,7 +226,15 @@ def is_this_card_bigger_than_that_card(this_card, that_card, trump):
 	Returns:
 	    bool: True if this_card is bigger than that_card, False otherwise.
 	"""
-	pass
+	this_suit = this_card[CARD_SUIT_INDEX]
+	that_suit = that_card[CARD_SUIT_INDEX]
+	if this_suit == that_suit:
+		return this_card[CARD_VALUE_INDEX] > that_card[CARD_VALUE_INDEX]
+	if this_suit == trump:
+		return True
+	if that_suit == trump:
+		return False
+	return this_suit < that_suit
 
 
 def sort_hand(hand, trump):
@@ -178,6 +256,12 @@ def sort_hand(hand, trump):
 	    Nothing; the provided hand is modified in place.
 	"""
 
-	pass
-
-
+	n = hand[HAND_NUM_CARDS_KEY]
+	for i in range(n):
+		curr_node = hand[HAND_FIRST_CARD_KEY]
+		for j in range(0, n - i - 1):
+			next_node = curr_node[CARD_NODE_NEXT_KEY]
+			if is_this_card_bigger_than_that_card(next_node[CARD_NODE_PAYLOAD_KEY], curr_node[CARD_NODE_PAYLOAD_KEY], trump):
+				swap_card_with_next(hand, j)
+			else:
+				curr_node = curr_node[CARD_NODE_NEXT_KEY]

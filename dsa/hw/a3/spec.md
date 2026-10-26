@@ -1,6 +1,6 @@
 # A3: Stacks, Queues and Testing
 
-> 來源：Canvas assignment 11814801（https://canvas.uw.edu/courses/1917417/assignments/11814801），抓取 2026-10-24 21:48 PDT。
+> 來源：Canvas assignment 11814801（https://canvas.uw.edu/courses/1917417/assignments/11814801），抓取 2026-10-26 07:44 PDT。
 > 這個檔案由 `scripts/assignment_specs.py` 產生，內容是原文，每次來源有變動就整份重寫，不要手改。整理過的版本在 README.md。
 
 - 截止（Canvas `due_at`）：2026-10-25 (Sun) 11:59 PM PDT
@@ -214,9 +214,9 @@ we will do our best to send an announcement to the class.
 
 - [`.github/workflows/classroom.yml`](repo/.github/workflows/classroom.yml)（12166 bytes，blob 5e85cbf）
 - [`.gitignore`](repo/.gitignore)（51 bytes，blob 4a74d7e）
-- [`game_play.py`](repo/game_play.py)（6034 bytes，blob f0418e4）
+- [`game_play.py`](repo/game_play.py)（8906 bytes，blob 780959a）
 - [`game_play_test.py`](repo/game_play_test.py)（16537 bytes，blob bc656e0）
-- [`game_structures.py`](repo/game_structures.py)（11254 bytes，blob dd7818d）
+- [`game_structures.py`](repo/game_structures.py)（12949 bytes，blob 980ca2e）
 - [`game_structures_test.py`](repo/game_structures_test.py)（21716 bytes，blob 1a8380b）
 - [`hand_invariants.py`](repo/hand_invariants.py)（4331 bytes，blob a5f54f2）
 - [`uw_euchre.py`](repo/uw_euchre.py)（5159 bytes，blob 59a0d9b）

@@ -119,7 +119,8 @@ def push_card_to_deck(deck, card):
 	list
 	    The updated deck with the new card added.
 	"""
-	pass
+	deck.append(card)
+	return deck
 
 def peek_card(deck):
 	"""
@@ -139,7 +140,7 @@ def peek_card(deck):
 	Any
 	    The topmost card from the deck.
 	"""
-	pass
+	return deck[-1]
 
 def pop_card(deck):
 	"""
@@ -160,7 +161,7 @@ def pop_card(deck):
 	    The last card from the deck that was removed. The type of the returned card
 	    will match the elements present in the input list.
 	"""
-	pass
+	return deck.pop()
 
 def is_deck_empty(deck):
 	"""
@@ -176,7 +177,7 @@ def is_deck_empty(deck):
 	Returns:
 	    bool: True if the deck is empty, False otherwise.
 	"""
-	pass
+	return not deck
 
 ## Prints the provided deck
 ## Do a little more than just calling "print()"-- make it look nice!
@@ -195,7 +196,11 @@ def print_deck(deck):
 	Returns:
 	    None
 	"""
-	pass
+	print(f"{'#':>3}  {'Name':<20} {'Suit':<10} {'Color':<7} {'Value':>5}")
+	print("-" * 41)
+
+	for i, (name, suit, color, value) in enumerate(deck, start=1):
+			print(f"{i:>3}  {name:<20} {suit:<10} {color:<7} {value:>5}")
 
 #----------------------------------------
 # Hand functions
@@ -261,7 +266,41 @@ def add_card_to_hand(hand, card):
 	Returns:
 	    None: The hand is modified in place.
 	"""
-	return
+	curr_head = hand[HAND_FIRST_CARD_KEY]
+	new_head = create_card_node(card)
+	new_head[CARD_NODE_NEXT_KEY] = curr_head
+	if curr_head:
+		curr_head[CARD_NODE_PREV_KEY] = new_head
+	hand[HAND_NUM_CARDS_KEY] += 1
+	hand[HAND_FIRST_CARD_KEY] = new_head
+
+def find_node_for_card(hand, card):
+	curr_node = hand[HAND_FIRST_CARD_KEY]
+	while curr_node:
+		if curr_node[CARD_NODE_PAYLOAD_KEY] == card:
+			return curr_node
+		curr_node = curr_node[CARD_NODE_NEXT_KEY]
+	return None
+
+def find_node_at_index(hand, index):
+	if index >= hand[HAND_NUM_CARDS_KEY] or index < 0:
+		return None
+
+	curr_node = hand[HAND_FIRST_CARD_KEY]
+	for _ in range(index):
+		curr_node = curr_node[CARD_NODE_NEXT_KEY]
+	return curr_node
+
+def unlink_node(hand, node):
+	prev_node = node[CARD_NODE_PREV_KEY]
+	next_node = node[CARD_NODE_NEXT_KEY]
+	if prev_node:
+		prev_node[CARD_NODE_NEXT_KEY] = next_node
+	else:
+		hand[HAND_FIRST_CARD_KEY] = next_node
+	if next_node:
+		next_node[CARD_NODE_PREV_KEY] = prev_node
+	hand[HAND_NUM_CARDS_KEY] -= 1
 
 def remove_card_from_hand(hand, card):
 	"""
@@ -279,7 +318,11 @@ def remove_card_from_hand(hand, card):
 	    The card that was removed (the payload, not the card node), or None if the
 	    card was not found.
 	"""
-	pass
+	node = find_node_for_card(hand, card)
+	if node is None:
+		return None
+	unlink_node(hand, node)
+	return node[CARD_NODE_PAYLOAD_KEY]
 
 def remove_card_at_index(hand, index):
 	"""
@@ -296,7 +339,11 @@ def remove_card_at_index(hand, index):
 	    The card that was removed (the payload, not the card node), or None if the
 	    index is out of range.
 	"""
-	pass
+	node = find_node_at_index(hand, index)
+	if node is None:
+		return None
+	unlink_node(hand, node)
+	return node[CARD_NODE_PAYLOAD_KEY]
 
 def peek_card_at_index(hand, index):
 	"""
@@ -312,8 +359,10 @@ def peek_card_at_index(hand, index):
 	    The card at that position (the payload, not the card node), or None if the
 	    index is out of range (too big, or negative).
 	"""
-
-	pass
+	node = find_node_at_index(hand, index)
+	if node is None:
+		return None
+	return node[CARD_NODE_PAYLOAD_KEY]
 
 def is_card_in_hand(hand, card):
 	"""
@@ -328,7 +377,7 @@ def is_card_in_hand(hand, card):
 	Returns:
 	    bool: True if the card is in the hand, False otherwise.
 	"""
-	pass
+	return find_node_for_card(hand, card) is not None
 
 
 def is_hand_empty(hand):
@@ -347,7 +396,7 @@ def is_hand_empty(hand):
 	    bool: True if the hand is empty, i.e., 'first_card' is None; otherwise,
 	    returns False.
 	"""
-	pass
+	return hand[HAND_FIRST_CARD_KEY] is None
 
 def print_card(card):
 	"""

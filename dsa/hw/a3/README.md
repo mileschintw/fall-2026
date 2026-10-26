@@ -74,6 +74,8 @@
 | **Part 2 小計** | **45** |
 
 ### 函式規格（來自 [repo/game_structures.py](repo/game_structures.py)、[repo/game_play.py](repo/game_play.py) 的 docstring）
+> 2026-10-26 起，[repo/](repo/) 裡的 `game_structures.py`、`game_play.py` 是使用者自己的實作（commit 643e685–870bc51），不再是 stub；原始 stub 版看這個 repo 的 commit 3adc8bf，或 GitHub 上 starter 的 initial commit 9abfe38。docstring 沒有改，下面的規格照舊。
+
 已寫好、不用動的：`create_card`、`create_deck`、`create_card_node`、`create_hand`、`print_card`、`print_hand`、常數。資料格式：card = `(name, suit, color, value)` tuple；deck = 當 stack 用的 list，top 是 list 尾端；card node = `{payload, next, prev}` dict；hand = `{first_card, num_cards_in_hand}` dict。
 
 **Part 1（`game_structures.py`，stub 是 `pass`）**
@@ -170,5 +172,6 @@
 |---|---|
 | 2026-10-20 | 第一次整理 |
 | 2026-10-24 | 排程原本只存 repo README；改成連 stub、測試、`hand_invariants.py`、`uw_euchre.py`、`classroom.yml` 一起存到 [repo/](repo/)，補上「函式規格」和「autograder 細節」 |
+| 2026-10-26 | repo 檔案 `game_play.py`、`game_structures.py` 改了：是使用者自己 push 的實作（把 stub 的 `pass`／`return` 換成程式碼，另加幾個 helper，原有行沒有刪改），題目、docstring、測試、`classroom.yml` 都沒變，摘要內容不用改；在「函式規格」註明 repo/ 現在是實作版 |
 
 DSA 課用了 AI 要附 chat session 或註明
