@@ -1,9 +1,9 @@
 {
- "fetched_at": "2026-10-20T01:08:23.579941-07:00",
+ "fetched_at": "2026-10-25T21:04:45.168927-07:00",
  "stats": {
   "GPU": {
-   "raw": 8,
-   "kept": 2
+   "raw": 9,
+   "kept": 4
   },
   "DSA": {
    "raw": 126,
@@ -129,6 +129,15 @@
    "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917398&month=10&year=2026#assignment_11810625"
   },
   {
+   "course": "GPU",
+   "summary": "Pop Quiz - Lecture 3 - 10/20/26 [EE P 524 A]",
+   "start": "2026-10-20T20:30:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917398&month=10&year=2026#assignment_11860726"
+  },
+  {
    "course": "DSA",
    "summary": "EEP 590A: Class Meeting [EE P 590 A]",
    "start": "2026-10-21T16:30:00-07:00",
@@ -163,6 +172,15 @@
    "location": null,
    "kind": "event",
    "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=10&year=2026#calendar_event_5120538"
+  },
+  {
+   "course": "GPU",
+   "summary": "Homework #2 - Parallel performance theory, Gaussian blur kernels and more! [EE P 524 A]",
+   "start": "2026-10-27T17:59:00-07:00",
+   "all_day": false,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917398&month=10&year=2026#assignment_11810626"
   },
   {
    "course": "DSA",
