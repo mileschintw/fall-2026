@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-10-27T14:28:36-07:00",
+  "task": "晨報",
+  "status": "warn",
+  "summary": "Canvas 需重新登入；GPU HW2 今天 5:59PM 到期；Panopto 新錄影 Class 8",
+  "output": "digests/2026-10-27.md"
+ },
+ {
   "at": "2026-10-27T14:28:07-07:00",
   "task": "上課筆記",
   "status": "warn",
