@@ -8,13 +8,14 @@
 - 晨報：10/27 二 14:28 ⚠️ Canvas 需重新登入；GPU HW2 今天 5:59PM 到期；Panopto 新錄影 Class 8 → [2026-10-27.md](2026-10-27.md)
 - 週規劃：10/25 日 21:05 🆕 A3 今晚到期未交；GPU HW2 週二 5:59PM 到期未交；A4 11/1 → [2026-10-25-weekly.md](2026-10-25-weekly.md)
 - 截止提醒：10/27 二 14:27 ✅ 沒有新提醒；GPU HW2 今天 5:59PM 剩約 3.5h（48h/24h 已提醒） → —
-- 上課筆記：10/27 二 14:28 ⚠️ 需要重新登入：Canvas（DSA Class 8 10/26 字幕已存，講義/筆記未做） → [transcript.srt](../dsa/lectures/2026-10-26/transcript.srt)
+- 上課筆記：10/27 二 15:32 🆕 DSA Class 8 10/26 筆記：fault tree/post-order、BST search/insert/delete、O(h)；A5 Part1 建議考前做 → [notes.md](../dsa/lectures/2026-10-26/notes.md)
 - 作業說明：10/27 二 14:28 ⚠️ 需要重新登入：Canvas → —
 
 ## 紀錄
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 10/27 二 15:32 | 上課筆記 | 🆕 | DSA Class 8 10/26 筆記：fault tree/post-order、BST search/insert/delete、O(h)；A5 Part1 建議考前做 | [notes.md](../dsa/lectures/2026-10-26/notes.md) |
 | 10/27 二 14:28 | 作業說明 | ⚠️ | 需要重新登入：Canvas | — |
 | 10/27 二 14:28 | 晨報 | ⚠️ | Canvas 需重新登入；GPU HW2 今天 5:59PM 到期；Panopto 新錄影 Class 8 | [2026-10-27.md](2026-10-27.md) |
 | 10/27 二 14:28 | 上課筆記 | ⚠️ | 需要重新登入：Canvas（DSA Class 8 10/26 字幕已存，講義/筆記未做） | [transcript.srt](../dsa/lectures/2026-10-26/transcript.srt) |

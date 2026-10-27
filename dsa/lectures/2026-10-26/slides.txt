@@ -1,0 +1,384 @@
+=== p1 ===
+
+
+
+
+
+ 
+EE   590 a :   C l a ss   outl i n e ,   fa ult   tr ee s   a n d   bi n a ry   s ea r ch 
+tr ee s 
+C la ss   8   ·   M o d   3   ( c ont )   ·   M on da y   · 
+P l a n   a t   a   g l a n ce 
+L a st   c l a ss   r eached   post - or de r   a n d   i ntro d u ced   t he   idea   o f   a   bi n a ry   s ea r ch   tr ee . 
+T o da y   op e ns   w i t h   a   r ea l   us e   o f   post - or de r ,   c omput i n g   t he   pro babi l i ty   t ha t   a   v ehic l e   syst e m   fai ls   f rom   a   fa ult   tr ee ,   t he n 
+b u i l d s   t he   s ea r ch   tr ee   f rom   t he   or de r i n g   rul e   up   w i t h   loops 
+( A ss ig nm e nt   5   P a rt   1   b u i l d s   t he   s a m e   tr ee ,   w i t h   loops   or   r ec urs i on ),   a n d   c los e s   b y   a s ki n g   w ha t   " c ost "   m ea ns   a n d 
+w h y   a   s ea r ch   c osts   O ( h )   r a t he r   t ha n   O ( n ). 
+W ed n e s da y   p ick s   up   t he   s ha p e   pro b l e m   w i t h   A V L   tr ee s   a n d   m ake s   t he   not a t i on   pr eci s e . 
+A ge n da 
+O p e n i n g :   a nnoun ce m e nts ,   a n d   a   qu e st i on 
+F a ult   tr ee s :   post - or de r   c omput e s   t he   cha n ce   o f   fai lur e 
+T he   bi n a ry   s ea r ch   tr ee   rul e ,   a n d   s ea r ch 
+I ns e rt ,   a n d   w h y   or de r   m a tt e rs 
+B r eak 
+S m a ll e st ,   l a r ge st ,   a n d   t he   t h r ee   ca s e s   o f   de l e t e 
+T he   c ost   o f   a   s ea r ch :   c ount i n g   st e ps 
+W r a p - up :   chea t   s hee t   a n d   check   qu e st i ons 
+O bjec t i v e s 
+B y   t he   e n d ,   stu de nts   ca n : 
+1.   E v a lu a t e   a   tr ee   b ottom - up   w i t h   a   post - or de r   tr a v e rs a l ,   us i n g   a   fa ult   tr ee   to   c omput e   t he   pro babi l i ty   t ha t   a   syst e m   fai ls , 
+a n d   s a y   w h y   post - or de r   i s   t he   or de r   t ha t   wor k s . 
+2.   S t a t e   t he   bi n a ry   s ea r ch   tr ee   rul e ,   s ea r ch   a n d   i ns e rt   w i t h   loops   b y   ha n d   a n d   i n   c o de ,   a n d   de s c r ibe   t he   t h r ee   ca s e s   o f
+de l e t e . 
+3.   S a y   w ha t   a   " st e p "   i s ,   e xpl ai n   w h y   s ea r ch   a n d   i ns e rt   c ost   O ( h )   r a t he r   t ha n   O ( n ),   a n d   di st i n g u i s h   be st ,   worst   a n d   a v e r age
+ca s e   us i n g   a   tr ee   b u i lt   f rom   r a n d om   or de r   agai nst   on e   b u i lt   f rom   sort ed   or de r . 
+O p e n i n g 
+T he   qu e st i on   " A n   ai r c r af t   ha s   two   h y d r a ul ic   pumps   a n d   on e   l i n e   t ha t   ca rr ie s   t he   f lu id .   H ow   woul d   you   wor k   out   t he   cha n ce 
+t ha t   t he   ai r c r af t   los e s   h y d r a ul ic   pr e ssur e ?" 
+F a ult   tr ee s :   post - or de r   c omput e s   t he   cha n ce   o f   fai lur e 
+T he   p ic tur e   A   fa ult   tr ee   i s   a   tr ee   t ha t   wor k s   back w a r d   f rom   a   fai lur e . 
+T he   root   i s   t he   fai lur e   w e   ca r e   ab out   ( t he   " top   e v e nt "). 
+T he   lea v e s   a r e   ba s ic   e v e nts ,   each   w i t h   a   pro babi l i ty   t ha t   som e on e   m ea sur ed   or   e st i m a t ed . 
+10/25/26, 7:33 PM   EE590a_Class_Mon_fault_trees_and_BSTs_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/255.html   1/10
+
+=== p2 ===
+T he   i nt e rn al   no de s   a r e   ga t e s   t ha t   s a y   h ow   t he   fai lur e s   c om bi n e . 
+R ead   t he   fig ur e   f rom   t he   b ottom :   pump   A   fai ls   if   i ts   motor   fai ls   or   i ts   c ontroll e r   fai ls .   T he   pumps   a r e   r ed un da nt ,   so   t he
+h y d r a ul ic   syst e m   los e s   b ot h   only   if   pump   A   a n d   pump   B   fai l .   A n d   t he   syst e m   los e s   pr e ssur e   if   b ot h   pumps   fai l   or   t he   l i n e 
+ruptur e s .   ( T he   pro babi l i t ie s   a r e   m ade   up   f or   t he   c l a ss ,   p e r   f l igh t ,   a n d   a r e   not   r ea l   da t a .) 
+A   fa u l t   tr ee   f or   l oss   o f   h y d r a u lic   pr e ssur e .   T he   nu mbe r   i n   each   no de   i s   t he   or de r   i n   w hich   a   post - or de r   w alk   fi n i s he s   i t . 
+T wo   rul e s . 
+A n   AND   ga t e   fai ls   only   if   e v e ry   i nput   fai ls ,   so   i ts   pro babi l i ty   i s   t he   pro d u c t   o f   t he   i nputs . 
+A n   OR   ga t e   fai ls   if   a t   l ea st   on e   i nput   fai ls ,   so   i ts   pro babi l i ty   i s   on e   m i nus   t he   cha n ce   t ha t   non e   fai l :   1   −   (1   −   p 1 )(1   −   p 2 )... 
+C heck   pump   A :   1   −   (0.9996)(0.9994)   =   0.00099976,   w hich   i s   a lmost   t he   sum   o f   t he   two ,   beca us e   sm a ll   pro babi l i t ie s
+n ea rly   add . 
+B ot h   pumps :   ab out   0.001   ×   0.001   =   0.000001. 
+W h ol e   syst e m :   1.0995   ×   10 −6 ,   ab out   on e   cha n ce   i n   900,000   p e r   f l igh t . 
+B ot h   rul e s   a ssum e   t he   ba s ic   e v e nts   a r e   i n de p e n de nt   o f   each   ot he r ,   w hich   i s   a   mo de l i n g   a ssumpt i on   ( mor e   be low ). 
+W h y   post - or de r   L oo k   a t   t he   num be rs   i n   t he   fig ur e . 
+N o de   7   ( b ot h   pumps   fai l )   ca nnot   be   c omput ed   unt i l   no de s   3   a n d   6   a r e   k nown ,   a n d   no de   3   n eed s   no de s   1   a n d   2. 
+T ha t   i s   e x ac tly   t he   or de r   a   post - or de r   w a l k   fi n i s he s   no de s :   a   no de   i s   ha n d l ed   af t e r   a ll   o f   i ts   chi l d r e n . 
+T hi s   i s   t he   s a m e   s ha p e   a s   eval_postfix   f rom   l a st   c l a ss :   e v a lu a t e   t he   chi l d r e n ,   t he n   c om bi n e . 
+A   pr e - or de r   w a l k   woul d   r each   t he   top   ga t e   fi rst ,   w he n   non e   o f   i ts   i nputs   e x i sts   y e t . 
+O n e   diffe r e n ce :   a   ga t e   ca n   ha v e   a ny   num be r   o f   i nputs ,   so   each   no de   h ol d s   a   l i st   o f   chi l d r e n   i nst ead   o f   a   l ef t   a n d   a 
+r igh t ,   a n d   t he   w a l k   loops   ov e r   t he   l i st . 
+T he   c o de   out   c oll ec ts   each   no de ' s   n a m e   a n d   pro babi l i ty   a s   i t   fi n i s he s ,   t he   s a m e   tr ick   w e   us ed   f or   t he   tr a v e rs a ls ,   so   t he 
+or de r   ca n   be   pr i nt ed . 
+def   failure_probability ( node ,   out ): 
+if   node [ 'kind' ]   ==   'event' : 
+p   =   node [ 'p' ]   #   a   leaf:   its   probability   is   given 
+else : 
+probs   =   [ failure_probability ( child ,   out )   for   child   in   node [ 'children' ]] 
+if   node [ 'kind' ]   ==   'AND' :   #   fails   only   if   every   input   fails 
+10/25/26, 7:33 PM   EE590a_Class_Mon_fault_trees_and_BSTs_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/255.html   2/10
+
+=== p3 ===
+ 
+p   =   1.0 
+for   q   in   probs : 
+p   =   p   *   q 
+else :   #   OR:   fails   if   any   input   fails 
+none_fail   =   1.0 
+for   q   in   probs : 
+none_fail   =   none_fail   *   ( 1   -   q ) 
+p   =   1   -   none_fail 
+out . append (( node [ 'name' ],   p ))   #   visit   last:   post-order 
+return   p 
+R un   i t   on   t he   tr ee   i n   a n d   r ead   t he   n i n e   l i n e s   i t   pr i nts .   T he y   c om e   out   i n   t he   or de r   1   to   9   i n   t he   fig ur e ,   a n d   t he   l a st   l i n e   i s   t he
+a nsw e r ,   1.0995 e -06. 
+W ha t   t he   tr ee   t e lls   you   T h r ee   s h ort   po i nts . 
+(1)   " W ha t   if   t he r e   w e r e   only   on e   pump ?" 
+T he   tr ee   a nsw e rs   i n   on e   run :   ab out   1.0   ×   10 −3 ,   rou gh ly   900   t i m e s   wors e ,   w hich   i s   w h y   r ed un da n c y   e x i sts . 
+(2)   T he   w a l k   v i s i ts   each   no de   on ce ,   so   n i n e   no de s   too k   n i n e   st e ps ,   a n d   a   tr ee   w i t h   n   no de s   t ake s   ab out   n   st e ps :   t he
+c ost   g rows   w i t h   t he   s i z e   o f   t he   tr ee . 
+H ol d   t ha t   t h ou gh t   unt i l   t he   c ost   s eg m e nt . 
+(3)   T wo   ca v ea ts .   R ea l   ba s ic   e v e nts   a r e   not   a lw a ys   i n de p e n de nt   ( a   s ha r ed   pow e r   sour ce ,   s a y ),   a n d   w he n   on e
+c ompon e nt   a pp ea rs   i n   two   pl ace s   t he   stru c tur e   i s   no   lon ge r   a   tr ee ,   beca us e   a   no de   woul d   ha v e   two   p a r e nts . 
+I n   a   sm a ll   e x a mpl e ,   w i t h   A   s ha r ed   be tw ee n   two   AND   ga t e s   un de r   a n   OR ,   mult i ply i n g   t h rou gh   n ai v e ly   gi v e s   0.0494, 
+a n d   t he   c orr ec t   a nsw e r   i s   0.044. 
+R ea l   a n a lys i s   tools   ha n d l e   t hi s   w i t h   ot he r   m e t h o d s ,   a n d   NASA ' s   F a ult   T r ee   H a n db oo k   w i t h   A e rosp ace   A ppl ica t i ons 
+i s   t he   st a n da r d   pu b l ic   r efe r e n ce 
+T he   bi n a ry   s ea r ch   tr ee   rul e ,   a n d   s ea r ch 
+T he   rul e .   T he   fa ult   tr ee   ha s   no   or de r   a mon g   i ts   chi l d r e n :   sw a pp i n g   pump   A   a n d   pump   B   cha n ge s   not hi n g . 
+A   s ea r ch   tr ee   d o e s   t he   oppos i t e ,   a n d   t he   or de r   i s   t he   po i nt . 
+T he   R ul e :   f or   e v e ry   no de ,   e v e ry   v a lu e   i n   i ts   l ef t   su b tr ee   i s   sm a ll e r ,   a n d   e v e ry   v a lu e   i n   i ts   r igh t   su b tr ee   i s   l a r ge r . 
+C heck   i t   on   no de   8   ( e v e ryt hi n g   to   i ts   l ef t   i s   be low   8,   e v e ryt hi n g   to   i ts   r igh t   ab ov e )   a n d   t he n   on   6. 
+S tr e ss   " e v e ry   v a lu e   i n   t he   su b tr ee ,"   not   " t he   chi l d ." 
+T he n   s h ow   t he   runn i n g   e x a mpl e ' s   i nor de r   output ,   1   3   4   6   7   8   10   13   14,   a n d   a s k   w ha t   t he y   not ice . 
+I t   i s   sort ed ,   beca us e   l ef t ,   t he n   no de ,   t he n   r igh t ,   w i t h   t he   rul e   a t   e v e ry   no de ,   ca n   only   c om e   out   i n   or de r . 
+S ea r ch   b y   ha n d ,   t he n   i n   c o de .   " F i n d   13." 
+A t   8,   13   i s   bigge r ,   so   t he   w h ol e   l ef t   su b tr ee   i s   out . 
+A t   10,   bigge r   agai n ,   g o   r igh t . 
+A t   14,   sm a ll e r ,   g o   l ef t . 
+T he r e   i s   13,   af t e r   f our   no de s   out   o f   n i n e ,   a n d   each   st e p   t h r e w   a w a y   a   w h ol e   su b tr ee   w i t h out   loo ki n g   a t   i t . 
+S a m e   idea   a s   bi n a ry   s ea r ch   on   a   sort ed   l i st ,   i n   a   diffe r e nt   c ont ai n e r . 
+T he   c o de   i s   a   loop ,   beca us e   f ollow i n g   on e   p a t h   d own   t he   tr ee   i s   a   loop : 
+def   bst_search_iterative ( root ,   value ): 
+node   =   root 
+while   node   is   not   None : 
+if   value   ==   node [ 'payload' ]: 
+return   node 
+10/25/26, 7:33 PM   EE590a_Class_Mon_fault_trees_and_BSTs_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/255.html   3/10
+
+=== p4 ===
+ 
+node   =   node [ 'left' ]   if   value   <   node [ 'payload' ]   else   node [ 'right' ] 
+return   None   #   fell   off   the   tree:   not   here 
+A   r ec urs i v e   v e rs i on   i s   s h ort e r .   R ec urs i on   i s   a llow ed   i n   A ss ig nm e nt   5   P a rt   1,   a n d   t hi n ki n g   r ec urs i v e ly   i s   wort h   pr ac t i s i n g ,   b ut
+stu de nts   s h oul d   be   ab l e   to   wr i t e   t he   loop   too :   P yt h on   a llows   only   ab out   1,000   n e st ed   ca lls ,   a n d   a   tr ee   w i t h   a   lon g   p a t h 
+woul d   e x ceed   t ha t .   C omp a r e   w i t h   tree_size   ,   w hich   m ake s   two   r ec urs i v e   ca lls   a n d   add s   t he   a nsw e rs :   s ea r ch   n e v e r   m ake s
+t he   s ec on d   ca ll ,   a n d   t ha t   m i ss i n g   ca ll   i s   w he r e   t he   sp eed   c om e s   f rom . 
+E x a mpl e / P r ac t ice .   O n   t he   runn i n g   e x a mpl e ,   l i st   t he   no de s   v i s i t ed   w he n   s ea r chi n g   f or   13,   f or   5   a n d   f or   1,   a n d   w ha t   c om e s 
+back . 
+T he   a nsw e rs :   13   v i s i ts   8,   10,   14,   13   a n d   i s   f oun d ;   5   v i s i ts   8,   3,   6,   4,   t he n   fa lls   o ff   t he   tr ee   a n d   r e turns   None   ;   1   v i s i ts   8,   3,
+1. 
+N ot e :   t he   fai l ed   s ea r ch   f or   5   e n d s   e x ac tly   w he r e   5   woul d   be   i ns e rt ed ,   w hich   i s   t he   n e xt   s eg m e nt . 
+O n e   pol ic y   deci s i on .   W ha t   if   t he   v a lu e   i s   a lr ead y   i n   t he   tr ee ? 
+O urs   ig nor e s   d upl ica t e s ,   l ike   a   s e t . 
+O t he r   pol icie s   e x i st   ( a   c ount   i n   t he   no de ,   or   a lw a ys   s e n di n g   e qu a l   v a lu e s   r igh t ),   so   on   a   t e st ,   check   w hich   on e   t he 
+qu e st i on   a ssum e s . 
+I ns e rt ,   a n d   w h y   or de r   m a tt e rs 
+B y   ha n d .   T o   i ns e rt ,   s ea r ch   f or   t he   v a lu e ,   a n d   w he n   t he   s ea r ch   fa lls   o ff   t he   tr ee ,   a tt ach   a   n e w   no de   r igh t   t he r e . 
+N e w   v a lu e s   a lw a ys   bec om e   l ea v e s . 
+I ns e rt   5   i nto   t he   runn i n g   e x a mpl e :   f ollow   8,   3,   6,   4   a n d   a tt ach   5   a s   t he   r igh t   chi l d   o f   4,   t he   e mpty   spot   t he   fai l ed   s ea r ch
+e n ded   a t . 
+T he   c o de .   S a m e   loop   a s   s ea r ch ,   r e m e m be r i n g   w he r e   w e   a r e   so   t ha t   w e   ca n   a tt ach   a t   t he   e n d . 
+T h r ee   po i nts : 
+a n   e mpty   tr ee   ge ts   a   b r a n d - n e w   no de ,   w hich   bec om e s   t he   root ; 
+f or   a   non - e mpty   tr ee   t he   f un c t i on   cha n ge s   t he   tr ee   i n   pl ace   a n d   r e turns   t he   s a m e   root   i t   w a s   gi v e n ; 
+a n d   a   d upl ica t e   cha n ge s   not hi n g . 
+def   bst_insert_iterative ( root ,   value ): 
+if   root   is   None : 
+return   create_tree_node ( value )   #   empty   tree:   the   new   node   is   the   root 
+node   =   root 
+while   True : 
+if   value   ==   node [ 'payload' ]: 
+return   root   #   duplicate:   nothing   to   do 
+side   =   'left'   if   value   <   node [ 'payload' ]   else   'right' 
+if   node [ side ]   is   None : 
+node [ side ]   =   create_tree_node ( value )   #   attach   a   new   leaf   here 
+return   root 
+node   =   node [ side ] 
+B u i l d   t he   runn i n g   e x a mpl e .   R un   t he   loop   be low   a n d   pr i nt   preorder   o f   t he   r e sult ;   i t   s h oul d   r ead   8   3   1   6   4   7   10   14   13,   t he 
+tr ee   w e   ha v e   bee n   d r a w i n g . 
+root   =   None 
+for   v   in   [ 8 ,   3 ,   10 ,   1 ,   6 ,   14 ,   4 ,   7 ,   13 ]: 
+root   =   bst_insert_iterative ( root ,   v ) 
+10/25/26, 7:33 PM   EE590a_Class_Mon_fault_trees_and_BSTs_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/255.html   4/10
+
+=== p5 ===
+
+ 
+S a m e   v a lu e s ,   diffe r e nt   or de r .   A s k :   " W ha t   tr ee   d o   w e   ge t   if   w e   i ns e rt   t he   s a m e   n i n e   v a lu e s   i n   sort ed   or de r ,   1,   3,   4,   6,   7,   8,
+10,   13,   14?" 
+[ T ake   g u e ss e s ,   t he n   s h ow   t he   p ic tur e .] 
+B ot h   tr ee s   h ol d   t he   s a m e   v a lu e s   a n d   o be y   t he   rul e ,   b ut   on e   ha s   heigh t   3   a n d   t he   ot he r   ha s   heigh t   8,   a n d   t he   s ec on d   i s 
+a   l i n ked   l i st   w i t h   a   left   fie l d   t ha t   i s   a lw a ys   e mpty . 
+T he   s ha p e   de p e n d s   on   t he   or de r   t he   v a lu e s   a rr i v e   i n .   R e m e m be r   t hi s !   W e ' ll   c om e   back   to   i t . 
+T he   s ame   n i n e   v al u e s   i ns e rt ed   i n   two   diffe r e nt   or de rs . 
+B r eak   (5 : 20   to   5 : 30) 
+A   t hi n g   to   t hi n k   ab out   ov e r   t he   b r eak :   " I f   a   tr ee   ha s   a   m i ll i on   v a lu e s ,   w ha t   i s   t he   fe w e st   num be r   o f   no de s   a   s ea r ch   c oul d 
+v i s i t ,   a n d   w ha t   i s   t he   most ?"   T he   c ost   s eg m e nt   a nsw e rs   i t . 
+S m a ll e st ,   l a r ge st ,   a n d   t he   t h r ee   ca s e s   o f   de l e t e 
+S m a ll e st   a n d   l a r ge st .   T he   rul e   gi v e s   t he s e   a lmost   f or   f r ee . 
+T he   sm a ll e st   v a lu e   i s   f oun d   b y   g o i n g   l ef t   unt i l   t he r e   i s   no   l ef t   chi l d   (1   i n   t he   runn i n g   e x a mpl e ),   t he   l a r ge st   b y   g o i n g   r igh t 
+(14). 
+E ach   i s   a   s h ort   loop   t ha t   f ollows   on e   p a t h . 
+A lso :   t he   n e xt   l a r ge r   v a lu e   af t e r   a   no de ,   i ts   su cce ssor ,   i s   " on e   st e p   r igh t ,   t he n   a ll   t he   w a y   l ef t "   w he n   t he   no de   ha s   a 
+r igh t   su b tr ee . 
+F or   3   t ha t   i s   4.   W e   n eed   t ha t   i n   a   mom e nt . 
+def   bst_min ( node ): 
+while   node [ 'left' ]   is   not   None : 
+node   =   node [ 'left' ] 
+return   node 
+D e l e t e   a t   t he   b o a r d .   I ns e rt   only   e v e r   add s   a   l eaf ,   w hi l e   de l e t e   ca n   r e mov e   a   no de   w i t h   chi l d r e n   ha n gi n g   o ff   i t ,   so   t he r e   a r e 
+t h r ee   ca s e s . 
+[ D o   each   on   t he   e x a mpl e   a n d   r ed r a w   t he   tr ee   af t e rw a r d --   no   c o de   to da y ,   b ut   stu de nts   i mpl e m e nt   de l e t e   t he ms e lv e s   i n 
+A ss ig nm e nt   5   P a rt   1] 
+W r i t e   t he   s ha p e   o f   t he   f un c t i on   on   t he   b o a r d   w i t h out   fi ll i n g   i t   i n : 
+10/25/26, 7:33 PM   EE590a_Class_Mon_fault_trees_and_BSTs_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/255.html   5/10
+
+=== p6 ===
+ 
+c omp a r e   t he   v a lu e   w i t h   t he   no de ,   g o   l ef t   or   r igh t   unt i l   t he   no de   i s   f oun d ,   a n d   a t   t he   m a t ch   ha n d l e   t he   t h r ee   ca s e s . 
+T wo   hi nts : 
+i n   t he   two - chi l d   ca s e ,   c opy   t he   su cce ssor ' s   v a lu e   i nto   t he   no de   a n d   t he n   de l e t e   t ha t   v a lu e   f rom   t he   r igh t   su b tr ee 
+( a   r ec urs i v e   ca ll   to   t he   s a m e   f un c t i on   i s   t he   s h ort e st   w a y ), 
+t he   f un c t i on   r e turns   t he   root   o f   w ha t   i s   l ef t ,   beca us e   de l e t i n g   a   l eaf   root   or   a   root   w i t h   on e   chi l d   cha n ge s   w hich 
+no de   i s   t he   root . 
+C a s e   E x a mpl e   W ha t   to   d o 
+N o   chi l d r e n 
+( a   l eaf )   de l e t e   1   R e mov e   i t :   t he   p a r e nt ' s   l i n k   bec om e s   None   . 
+O n e   chi l d 
+de l e t e   14,   w hich
+ha s   only   t he   l ef t 
+chi l d   13 
+S pl ice   i t   out :   t he   p a r e nt   l i n k s   str aigh t   to   t he   chi l d ,   a n d   t he   chi l d ' s   w h ol e   su b tr ee
+c om e s   a lon g .   T he   rul e   st i ll   h ol d s ,   beca us e   e v e ryt hi n g   i n   t ha t   su b tr ee   w a s   a lr ead y
+on   t he   c orr ec t   s ide   o f   t he   p a r e nt . 
+T wo 
+chi l d r e n 
+de l e t e   3,   w hich
+ha s   chi l d r e n   1   a n d 
+6 
+C a nnot   j ust   r e mov e   i t ,   beca us e   two   su b tr ee s   woul d   be   l ef t   w i t h   no   p a r e nt .   F i n d 
+t he   su cce ssor   ( t he   sm a ll e st   v a lu e   i n   t he   r igh t   su b tr ee ,   he r e   4),   c opy   i ts   v a lu e   i nto
+t hi s   no de ,   t he n   de l e t e   t he   su cce ssor ' s   own   no de   f rom   t he   r igh t   su b tr ee . 
+W h y   t he   two - chi l d   ca s e   wor k s : 
+t he   su cce ssor   i s   t he   n e xt   v a lu e   i n   sort ed   or de r   af t e r   t he   on e   w e   r e mov e ,   so   putt i n g   i t   i n   t ha t   spot   kee ps   e v e ryt hi n g   on
+t he   l ef t   sm a ll e r   a n d   e v e ryt hi n g   on   t he   r igh t   l a r ge r . 
+T he   su cce ssor   i s   a lso   t he   l ef tmost   no de   o f   t he   r igh t   su b tr ee ,   so   i t   ha s   no   l ef t   chi l d ,   w hich   m ea ns   r e mov i n g   i t   i s   a lw a ys
+t he   l eaf   ca s e   or   t he   on e - chi l d   ca s e . 
+T he   ha r d   ca s e   r ed u ce s   to   t he   ea sy   on e s .   T he   fig ur e   s h ows   de l e t i n g   3. 
+D ele t i n g   3   f ro m   t he   e x am p le :   c opy   i n   t he   su cce ssor ,   t he n   r em ov e   t he   or igi n al   4 . 
+P r edic t ,   t he n   check .   " D e l e t e   8,   t he   root .   W ha t   i s   t he   n e w   root ,   a n d   w ha t   d o e s   pr e or de r   pr i nt ?" 
+T he   su cce ssor   o f   8   i s   10,   so   10   bec om e s   t he   root ,   a n d   i ts   ol d   no de   i s   spl iced   out   a n d   r e pl aced   b y   14. 
+P r e or de r   gi v e s   10   3   1   6   4   7   14   13,   a n d   i nor de r   st i ll   r ead s   1   3   4   6   7   10   13   14. 
+T he   c ost   o f   a   s ea r ch :   c ount i n g   st e ps 
+W ha t   d o   w e   c ount ?.   A s k   h ow   lon g   a   s ea r ch   t ake s . 
+10/25/26, 7:33 PM   EE590a_Class_Mon_fault_trees_and_BSTs_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/255.html   6/10
+
+=== p7 ===
+S ec on d s   de p e n d   on   t he   m achi n e ,   t he   l a n g u age   a n d   w ha t   e ls e   i s   runn i n g ,   so   w e   c ount   st e ps   i nst ead ,   a n d   f or   a   s ea r ch 
+t he   n a tur a l   st e p   i s   on e   no de   v i s i t ed   ( on e   c omp a r i son   a n d   on e   mov e ). 
+E ach   st e p   t ake s   a   fi x ed   ha n df ul   o f   op e r a t i ons ,   w hich   i s   w h y   w e   ca n   ig nor e   t he   e x ac t   a mount   a n d   j ust   c ount   t he m . 
+A   s ea r ch   v i s i ts   a t   most   on e   no de   p e r   l e v e l ,   so   t he   num be r   o f   st e ps   i s   a t   most   t he   heigh t   plus   on e . 
+S ea r ch   a n d   i ns e rt   c ost   O ( h ),   w he r e   h   i s   t he   heigh t   o f   t he   tr ee . 
+N ot ice   t ha t   i t   i s   st a t ed   i n   t e rms   o f   t he   tr ee ' s   heigh t   a n d   not   i n   t e rms   o f   n ,   t he   num be r   o f   v a lu e s . 
+T he   qu e st i on   i s   h ow   h   r e l a t e s   to   n . 
+Q u ick   c ount   w i t h   t he   c l a ss ,   on   t he   e x a mpl e . 
+E v e ry   no de   ha s   a   de pt h   ( t he   root ' s   i s   0),   a n d   fi n di n g   a   no de   t ake s   de pt h   plus   on e   st e ps . 
+T he   root   t ake s   1   st e p , 
+3   a n d   10   t ake   2, 
+1,   6   a n d   14   t ake   3,   a n d 
+4,   7   a n d   13   t ake   4. 
+S o   t he   be st   ca s e   i s   1   st e p ,   t he   worst   ca s e   i s   4   st e ps   ( a t   4,   7   a n d   13),   a n d   t he   a v e r age   ov e r   a ll   n i n e   v a lu e s   i s   26   ÷   9, 
+ab out   2.9   st e ps . 
+B e st ,   worst   a n d   a v e r age   ca s e . 
+T h r ee   diffe r e nt   qu e st i ons   ab out   t he   s a m e   a l g or i t h m . 
+T he   be st   ca s e   i s   t he   chea p e st   i nput   o f   a   gi v e n   s i z e , 
+t he   worst   ca s e   i s   t he   most   e xp e ns i v e ,   a n d 
+t he   a v e r age   ca s e   i s   t he   c ost   a v e r aged   ov e r   i nputs   un de r   som e   a ssumpt i on   ab out   h ow   t he y   a rr i v e . 
+F or   s ea r ch   i n   a   bi n a ry   s ea r ch   tr ee , 
+t he   be st   ca s e   i s   1   st e p   ( t he   v a lu e   i s   a t   t he   root )   w ha t e v e r   n   i s . 
+T he   worst   ca s e   de p e n d s   on   t he   s ha p e :   a   chai n   o f   n   v a lu e s   t ake s   n   st e ps   f or   t he   dee p e st   on e ,   w hi l e   a   p e r fec tly 
+ba l a n ced   tr ee   t ake s   ab out   lo g 2   n . 
+S o   t he   worst   ca s e   f or   a   pl ai n   bi n a ry   s ea r ch   tr ee   i s   n ,   a n d   t he   s ha p e   decide s   e v e ryt hi n g . 
+W ha t   s ha p e s   a pp ea r ?   T ha t   de p e n d s   on   i ns e rt i on   or de r ,   so   w e   m ea sur e   b ot h   e xtr e m e s . 
+L i v e   de mo . 
+B u i l d   on e   tr ee   f rom   5,000   r a n d om   v a lu e s , 
+a n d   a not he r   f rom   t he   s a m e   v a lu e s   i ns e rt ed   i n   sort ed   or de r , 
+t he n   t i m e   5,000   s ea r che s   i n   each . 
+T he   c o de   i s   be low . 
+O n   my   m achi n e   t he   s h u ff l ed   tr ee   too k   ab out   0.005   s ec on d s   a n d   t he   sort ed   on e   ab out   0.6   s ec on d s ,   rou gh ly   120   to   150 
+t i m e s   slow e r ,   f rom   t he   s a m e   v a lu e s   a n d   t he   s a m e   f un c t i on . 
+( B u i l di n g   t he   sort ed   tr ee   t ake s   most   o f   a   s ec on d   b y   i ts e l f ,   w hich   i s   t he   s a m e   effec t   on   i ns e rt .) 
+W h y ?   ( i n   t e rms   o f   st e ps ) 
+import   random ,   time 
+from   bst   import   bst_insert_iterative ,   bst_search_iterative 
+rng   =   random . Random ( 3 ) 
+values   =   rng . sample ( range ( 50000 ),   5000 ) 
+shuffled   =   None 
+for   v   in   values : 
+shuffled   =   bst_insert_iterative ( shuffled ,   v )   #   random   order 
+chain   =   None 
+10/25/26, 7:33 PM   EE590a_Class_Mon_fault_trees_and_BSTs_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/255.html   7/10
+
+=== p8 ===
+ 
+for   v   in   sorted ( values ): 
+chain   =   bst_insert_iterative ( chain ,   v )   #   sorted   order 
+for   name ,   tree   in   (( 'random   order' ,   shuffled ),   ( 'sorted   order' ,   chain )): 
+start   =   time . perf_counter () 
+for   v   in   values : 
+bst_search_iterative ( tree ,   v ) 
+print ( name ,   round ( time . perf_counter ()   -   start ,   4 ),   'seconds   for   5000   searches' ) 
+T he   t ab l e : 
+( T he s e   c om e   f rom   my   run   on   P yt h on   3.11:   n   v a lu e s   i ns e rt ed   i n   r a n d om   or de r ,   a v e r aged   ov e r   5   tr ee s ,   w i t h   t he   a v e r age 
+num be r   o f   st e ps   to   fi n d   each   v a lu e   i n   t he   tr ee ,   agai nst   a   chai n ,   w he r e   t he   a v e r age   i s   ( n   +   1)   ÷   2   st e ps .) 
+V a lu e s   ( n )   H eigh t ,   r a n d om   or de r   A v e r age   st e ps ,   r a n d om   or de r   lo g 2   n   A v e r age   st e ps ,   sort ed   or de r 
+1,000   ab out   20   11.7   10.0   500.5 
+10,000   ab out   30   16.5   13.3   5,000.5 
+100,000   ab out   40   21.4   16.6   50,000.5 
+A   r a n d om   tr ee   i s   not   p e r fec t ,   b ut   i t   i s   c los e   e nou gh :   t he   heigh t   i s   rou gh ly   tw ice   t he   idea l ,   a n d   a   typ ica l   s ea r ch   t ake s 
+ab out   1.2   to   1.3   t i m e s   lo g 2   n   st e ps . 
+A   s ea r ch   a mon g   100,000   v a lu e s   i n   ab out   21   st e ps   i s   t he   " t h row   a w a y   ha l f   a t   each   st e p "   prom i s e ,   ke pt   on   a v e r age . 
+T he   s a m e   da t a   i n   sort ed   or de r   t ake s   50,000   st e ps   on   a v e r age . 
+A lso :   t he   r ec urs i v e   i ns e rt   hi ts   P yt h on ' s   r ec urs i on   l i m i t   a t   ab out   1,000   sort ed   v a lu e s   (990   wor ked   a n d   1,000   r ai s ed 
+RecursionError   on   3.11),   a   chai n   t ha t   dee p   bei n g   1,000   n e st ed   ca lls ,   w hi l e   t he   loop   v e rs i ons   ha v e   no   su ch   l i m i t . 
+W h y   t hi s   i s   not   a   c orn e r   ca s e ,   a n d   w ha t   s h r i n k s   t he   pro b l e m . 
+S ort ed   or   n ea rly   sort ed   da t a   i s   c ommon :   t i m e st a mps ,   id s ,   a   wor d   l i st   i n   a lp habe t ica l   or de r . 
+S h u ff l i n g   he lps   only   if   a ll   t he   da t a   e x i sts   i n   ad v a n ce . 
+S o   a   pl ai n   tr ee   ha s   a   g oo d   a v e r age   ca s e   a n d   a   bad   worst   ca s e   t ha t   r ea l   i nputs   r each   ea s i ly . 
+W ed n e s da y ' s   A V L   tr ee s   m ake   t he   worst   ca s e   g oo d   a s   w e ll . 
+H ow   fa st   d o   t hi n g s   g row ?. 
+T o   c omp a r e   a l g or i t h ms   w e   a s k   h ow   t he   st e p   c ount   g rows   w i t h   n . 
+T he   t ab l e   f or   r efe r e n ce : 
+n   lo g 2   n   n   n   lo g 2   n   n 2   n 2   st e ps   a t   1   ns   each 
+10   3.3   10   33   100   0.1   m ic ros ec on d s 
+1,000   10.0   1,000   9,966   1,000,000   1   m i ll i s ec on d 
+1,000,000   19.9   1,000,000   19,931,569   1,000,000,000,000   1,000   s ec on d s ,   ab out   17   m i nut e s 
+A t   a   m i ll i on   v a lu e s ,   a   s ea r ch   t ha t   c osts   lo g 2   n   i s   20   st e ps ,   a n d   on e   t ha t   c osts   n   t ake s   a   m i ll i on .   D o i n g   n   s ea r che s   a t   n   st e ps 
+each   i s   10 12   st e ps ,   ab out   17   m i nut e s   a t   t ha t   sp eed ,   w hi l e   n   s ea r che s   a t   lo g 2   n   st e ps   each   i s   ab out   0.02   s ec on d s . 
+W ed n e s da y   gi v e s   t he   not a t i on   ( O ,   Ω   a n d   Θ )   a   pr eci s e   defi n i t i on ,   so   to da y   s a y   " g rows   l ike "   a n d   l ea v e   i t   t he r e . 
+W r a p - up 
+T he   t akea w a ys : 
+10/25/26, 7:33 PM   EE590a_Class_Mon_fault_trees_and_BSTs_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/255.html   8/10
+
+=== p9 ===
+ 
+a   tr ee   l e ts   us   c omput e   b ottom - up   ( post - or de r ), 
+on e   or de r i n g   rul e   turns   a   tr ee   i nto   a   s ea r ch   stru c tur e ,   a n d 
+s ea r ch   a n d   i ns e rt   c ost   O ( h )   w he r e   h   i s   t he   heigh t ,   w hich   t he   or de r   o f   i ns e rt i on   decide s . 
+I f   you   n eed :   R each   f or   C ost   to   r e m e m be r 
+C om bi n e   r e sults   f rom 
+chi l d r e n   post - or de r :   chi l d r e n   fi rst ,   t he n   t he   no de   O ( n ),   each   no de   on ce 
+S ea r ch ,   i ns e rt   c omp a r e   a n d   g o   l ef t   or   r igh t ;   i ns e rt   a tt ache s   a   n e w   l eaf   O ( h ) 
+D e l e t e   l eaf :   r e mov e ;   on e   chi l d :   spl ice ;   two   chi l d r e n :   c opy   t he 
+su cce ssor ,   de l e t e   i t   O ( h ) 
+H eigh t ,   r a n d om 
+i ns e rt i on   or de r   ab out   tw ice   lo g 2   n   so   s ea r ch   i s   ab out   O ( lo g   n )   on 
+a v e r age 
+H eigh t ,   sort ed   i ns e rt i on
+or de r   n   −   1,   a   chai n   so   e v e ryt hi n g   i s   O ( n ) 
+A n d   r e m e m be r   T he   R u le   f or   B i n a ry   S ea r ch   T r ee s :   F or   e v e ry   no de   i n   a   bi n a ry   tr ee ,   e v e ryt hi n g   i n   t he   l ef t   su b tr ee   i s   sm a ll e r , 
+a n d   e v e ryt hi n g   i n   t he   r igh t   su b tr ee   i s   l a r ge r . 
+C heck   qu e st i ons . 
+1.   W h y   must   a   fa ult   tr ee   be   e v a lu a t ed   i n   post - or de r ? 
+2.   T wo   i n de p e n de nt   e v e nts   ha v e   pro babi l i t ie s   0.1   a n d   0.2.   W ha t   i s   t he   pro babi l i ty   t ha t   b ot h   ha pp e n   ( AND ),   a n d   t ha t   a t
+l ea st   on e   ha pp e ns   ( OR )? 
+3.   S t a t e   t he   bi n a ry   s ea r ch   tr ee   rul e   i n   on e   s e nt e n ce . 
+4.   W hich   no de s   d o e s   a   s ea r ch   f or   5   v i s i t   i n   t he   runn i n g   e x a mpl e ,   a n d   w ha t   c om e s   back ? 
+5.   W h y   d o   w e   s a y   a   s ea r ch   c osts   O ( h )   a n d   not   O ( n )? 
+6.   A   tr ee   h ol d s   a   m i ll i on   v a lu e s .   W ha t   i s   t he   fe w e st   a n d   t he   most   st e ps   a   s ea r ch   c oul d   t ake ,   de p e n di n g   on   i ts   s ha p e ? 
+A nsw e r   ke y 
+C heck   qu e st i ons . 
+1.   A   ga t e ' s   pro babi l i ty   de p e n d s   on   i ts   i nputs ,   so   each   i nput   must   be   fi n i s hed   bef or e   t he   ga t e   i s .   P ost - or de r   ha n d l e s   a 
+no de   af t e r   a ll   o f   i ts   chi l d r e n ,   a n d   a   pr e - or de r   w a l k   woul d   r each   t he   ga t e   bef or e   i ts   i nputs   e x i st . 
+2.   AND :   0.1   ×   0.2   =   0.02.   OR :   1   −   (0.9)(0.8)   =   0.28.   ( N ot   0.3:   t ha t   woul d   c ount   t he   ca s e   w he r e   b ot h   ha pp e n   tw ice .) 
+3.   F or   e v e ry   no de ,   e v e ry   v a lu e   i n   i ts   l ef t   su b tr ee   i s   sm a ll e r ,   a n d   e v e ry   v a lu e   i n   i ts   r igh t   su b tr ee   i s   l a r ge r . 
+4.   I t   v i s i ts   8,   3,   6   a n d   4,   t he n   fa lls   o ff   t he   tr ee ,   so   i t   r e turns   None   .   F our   no de s   w e r e   v i s i t ed ,   a n d   5   i s   not   i n   t he   tr ee   ( a n 
+i ns e rt   o f   5   woul d   a tt ach   i t   a s   t he   r igh t   chi l d   o f   4). 
+5.   A   s ea r ch   t ake s   a t   most   on e   st e p   p e r   l e v e l ,   so   i ts   c ost   i s   b oun ded   b y   t he   heigh t   h   o f   t he   tr ee ,   not   t he   num be r   o f   v a lu e s . 
+H ow   h   r e l a t e s   to   n   de p e n d s   on   t he   s ha p e ,   w hich   i s   decided   b y   t he   or de r   t he   v a lu e s   w e r e   i ns e rt ed . 
+6.   F e w e st :   1   st e p   ( t he   v a lu e   i s   a t   t he   root ).   M ost :   1,000,000   st e ps   i n   a   chai n ,   or   ab out   20   i n   a   p e r fec tly   ba l a n ced   tr ee   ( lo g 2 
+o f   a   m i ll i on   i s   19.9,   so   a   p e r fec t   tr ee   o f   t ha t   s i z e   ha s   heigh t   19   a n d   t he   dee p e st   v a lu e   t ake s   20   st e ps ). 
+P ai r   t a s k   i n   t he   s ea r ch   s eg m e nt .   13   v i s i ts   8,   10,   14,   13   ( f oun d ).   5   v i s i ts   8,   3,   6,   4   a n d   r e turns   None   .   1   v i s i ts   8,   3,   1   ( f oun d ). 
+S t e p   c ounts   f or   t he   runn i n g   e x a mpl e .   D e pt h   plus   on e :   8   t ake s   1   st e p ;   3   a n d   10   t ake   2;   1,   6   a n d   14   t ake   3;   4,   7   a n d   13   t ake 
+4.   T he   tot a l   i s   26,   so   t he   a v e r age   i s   26   ÷   9   =   2.89. 
+10/25/26, 7:33 PM   EE590a_Class_Mon_fault_trees_and_BSTs_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/255.html   9/10
+
+=== p10 ===
+D e l e t e   pr edic t i ons .   D e l e t i n g   3   gi v e s   pr e or de r   8   4   1   6   7   10   14   13.   D e l e t i n g   8   gi v e s   pr e or de r   10   3   1   6   4   7   14   13   a n d   i nor de r   1
+3   4   6   7   10   13   14. 
+10/25/26, 7:33 PM   EE590a_Class_Mon_fault_trees_and_BSTs_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/255.html   10/10

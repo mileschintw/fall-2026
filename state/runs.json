@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-10-27T15:32:01-07:00",
+  "task": "上課筆記",
+  "status": "new",
+  "summary": "DSA Class 8 10/26 筆記：fault tree/post-order、BST search/insert/delete、O(h)；A5 Part1 建議考前做",
+  "output": "dsa/lectures/2026-10-26/notes.md"
+ },
+ {
   "at": "2026-10-27T14:28:55-07:00",
   "task": "作業說明",
   "status": "warn",
