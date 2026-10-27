@@ -1,0 +1,4605 @@
+1
+00:04:01,000 --> 00:04:21,000
+[該逐字稿自動產生。為清晰起見，可能已進行編輯。]
+Okay, can you all hear me online?
+
+2
+00:04:21,000 --> 00:04:25,000
+People, we got chat.
+
+3
+00:04:25,000 --> 00:04:29,000
+And I'm going to start off
+
+4
+00:04:29,000 --> 00:04:36,000
+Sharing
+
+5
+00:04:36,000 --> 00:05:05,000
+What's the sharing
+
+6
+00:05:05,000 --> 00:05:12,000
+Sometimes it shares easily, and sometimes it doesn't.
+
+7
+00:05:12,000 --> 00:05:14,000
+As you can see, there we go.
+
+8
+00:05:14,000 --> 00:05:18,000
+Should we come in on now?
+
+9
+00:05:18,000 --> 00:05:21,000
+Hmm…
+
+10
+00:05:21,000 --> 00:05:25,000
+Showing plugged in on my side
+
+11
+00:05:25,000 --> 00:05:37,000
+Something else
+
+12
+00:05:37,000 --> 00:05:39,000
+It's almost there. Almost
+
+13
+00:05:39,000 --> 00:05:44,000
+There we go.
+
+14
+00:05:44,000 --> 00:05:50,000
+To arrange everything so we can see the classroom and online. Okay
+
+15
+00:05:50,000 --> 00:05:52,000
+I got
+
+16
+00:05:52,000 --> 00:06:02,000
+Showing on the screens here, so you guys in the classroom can see and can hear I'm sharing online. You guys can see and hear the scribble.
+
+17
+00:06:02,000 --> 00:06:04,000
+Let me know if you can't
+
+18
+00:06:04,000 --> 00:06:16,000
+I'm going to go ahead. Nope, no hotspot. I'm going to go ahead. I'm going to start with some announcements and just kind of warming us up as people kind of stumble in
+
+19
+00:06:16,000 --> 00:06:21,000
+Number one, announcement. Two weeks
+
+20
+00:06:21,000 --> 00:06:25,000
+Midterm.
+
+21
+00:06:25,000 --> 00:06:27,000
+It's in two weeks, two weeks from today.
+
+22
+00:06:27,000 --> 00:06:29,000
+It's
+
+23
+00:06:29,000 --> 00:06:32,000
+In person, in the classroom, on paper, here.
+
+24
+00:06:32,000 --> 00:06:35,000
+So
+
+25
+00:06:35,000 --> 00:06:41,000
+See everyone in the classroom in two weeks. Plan ahead.
+
+26
+00:06:41,000 --> 00:06:45,000
+November 9th is in two weeks.
+
+27
+00:06:45,000 --> 00:06:46,000
+That's fast.
+
+28
+00:06:46,000 --> 00:06:50,000
+orders go so fast. Okay.
+
+29
+00:06:50,000 --> 00:07:00,000
+You will have questions about what's on the midterm, and how is it a fair midterm? What kinds of questions will we have right?
+
+30
+00:07:00,000 --> 00:07:15,000
+You can add, yeah. So it will be on paper. It will be the kinds… there will be some easy to grade problems, just because we have to grade them all by hand and get them back
+
+31
+00:07:15,000 --> 00:07:20,000
+In a timely manner, so there will be some, like, multiple-choice type questions
+
+32
+00:07:20,000 --> 00:07:28,000
+There will not be any you have to write code that I expect to be syntactically correct.
+
+33
+00:07:28,000 --> 00:07:33,000
+You might have to write some pseudocode. You might have to fill in some blanks
+
+34
+00:07:33,000 --> 00:07:38,000
+You should feel comfortable. Anything that we would write
+
+35
+00:07:38,000 --> 00:07:50,000
+In Python during class kind of along that lines, you should feel comfortable writing that kind of code. I will not grade you on
+
+36
+00:07:50,000 --> 00:07:55,000
+Perfect syntax.
+
+37
+00:07:55,000 --> 00:08:06,000
+I will note I've been putting up the outlines and notes that I am basing classes on not
+
+38
+00:08:06,000 --> 00:08:10,000
+not slides, but those notes that I have put on Canvas.
+
+39
+00:08:10,000 --> 00:08:25,000
+At the end of them, I think all of them, if not all of them, most of them, there are check your knowledge type questions, questions for you to read and the answers are in there for you to kind of check and make sure that you understand
+
+40
+00:08:25,000 --> 00:08:37,000
+The content, but those are a good place to go to get some some study material. And next week we will go through some more
+
+41
+00:08:37,000 --> 00:08:39,000
+I
+
+42
+00:08:39,000 --> 00:08:44,000
+I can't remember if I have a sample midterm I can give you
+
+43
+00:08:44,000 --> 00:08:47,000
+Luna? Yeah.
+
+44
+00:08:47,000 --> 00:08:52,000
+Yeah, I don't think I do, but I will check.
+
+45
+00:08:52,000 --> 00:08:55,000
+I will check. I think
+
+46
+00:08:55,000 --> 00:08:59,000
+I think I have like
+
+47
+00:08:59,000 --> 00:09:10,000
+basically old final exam questions on Canvas that I might use as a you can have this as a as some example questions. But
+
+48
+00:09:10,000 --> 00:09:18,000
+It will cover the full quarter, not just the first half. So there might be some questions that
+
+49
+00:09:18,000 --> 00:09:19,000
+Don
+
+50
+00:09:19,000 --> 00:09:25,000
+aren't yet relevant. But I'll double check.
+
+51
+00:09:25,000 --> 00:09:26,000
+Any other
+
+52
+00:09:26,000 --> 00:09:30,000
+I will say short questions
+
+53
+00:09:30,000 --> 00:09:41,000
+On the midterm. Well, we can talk… I'll answer deeper questions next week. Next week, we will go through all of what is considered fair game for the midterm versus, out of scope
+
+54
+00:09:41,000 --> 00:09:45,000
+So I don't want to get into that right now, but if anyone has
+
+55
+00:09:45,000 --> 00:09:47,000
+questions on the midterm
+
+56
+00:09:47,000 --> 00:09:50,000
+Right now, if you have anything else, I'll
+
+57
+00:09:50,000 --> 00:10:00,000
+Okay. The other thing I just want to point out too, and hopefully this doesn't go away, is that November 11th
+
+58
+00:10:00,000 --> 00:10:13,000
+That's the Wednesday after the midterm. That is Veterans Day. There's no school. There's no UW school. So there's no class. And I purposely put the midterm
+
+59
+00:10:13,000 --> 00:10:17,000
+Right before Veterans Day, since we didn't have class, so
+
+60
+00:10:17,000 --> 00:10:19,000
+You have a day off.
+
+61
+00:10:19,000 --> 00:10:27,000
+and I'm not going to make it up because you have a midterm right before that. And I think that was about
+
+62
+00:10:27,000 --> 00:10:28,000
+Please go.
+
+63
+00:10:28,000 --> 00:10:39,000
+Some people really want a class made up if we get a holiday during the quarter. You guys look surprised. But I have to answer that question more frequently than
+
+64
+00:10:39,000 --> 00:10:45,000
+I ever expect
+
+65
+00:10:45,000 --> 00:10:48,000
+Let's see. A4.
+
+66
+00:10:48,000 --> 00:10:51,000
+A4 is out
+
+67
+00:10:51,000 --> 00:10:56,000
+Oh, oh, sorry, hands up. Jean, go ahead.
+
+68
+00:10:56,000 --> 00:11:00,000
+Yeah, sorry to miss a little bit of the announcement. I just wondered when was the meter again?
+
+69
+00:11:00,000 --> 00:11:04,000
+Two weeks, two weeks. November 9th.
+
+70
+00:11:04,000 --> 00:11:06,000
+Okay, thank you, sorry
+
+71
+00:11:06,000 --> 00:11:15,000
+That's okay. Now is the time to ask that question, and I will repeat to plan ahead and be in the classroom that day.
+
+72
+00:11:15,000 --> 00:11:19,000
+Because it is in person on paper
+
+73
+00:11:19,000 --> 00:11:22,000
+A4
+
+74
+00:11:22,000 --> 00:11:32,000
+is out now. This is our first. It's a one week timeline. It's our so it's quick. It's our first you get to use AI
+
+75
+00:11:32,000 --> 00:11:42,000
+I'm going to make a note. I think this says this in the write up, but I'm going to repeat it here. Keep your transcripts
+
+76
+00:11:42,000 --> 00:11:51,000
+So as if you are using, if you choose to use AI if your AI transcripts. I am not asking you to submit them
+
+77
+00:11:51,000 --> 00:12:03,000
+Specifically for this assignment. I probably don't care, but I'm asking you to keep them, and if there is, I'm asking you to do this for all of the
+
+78
+00:12:03,000 --> 00:12:11,000
+assignments going forward. In case there is something that comes up by the end of the quarter that
+
+79
+00:12:11,000 --> 00:12:12,000
+Because
+
+80
+00:12:12,000 --> 00:12:18,000
+academic integrity into question
+
+81
+00:12:18,000 --> 00:12:32,000
+You're having your transcript is something that will help us answer any of those questions. I do not expect there to be a need to look at your transcripts, but I'm just telling y'all ahead of time.
+
+82
+00:12:32,000 --> 00:12:39,000
+Like I said, at the start of this quarter, this AI stuff is moving fast
+
+83
+00:12:39,000 --> 00:12:46,000
+We're trying new things. You never know what kinds of questions come up. Please keep your chats
+
+84
+00:12:46,000 --> 00:12:50,000
+and then that would be something that helps
+
+85
+00:12:50,000 --> 00:12:54,000
+Protect you, not the end of the quarter, feel free to
+
+86
+00:12:54,000 --> 00:13:00,000
+Drop them or let them live on forever and never look at them again or whatever.
+
+87
+00:13:00,000 --> 00:13:02,000
+But just
+
+88
+00:13:02,000 --> 00:13:06,000
+I'm gonna ask that I feel like I'm being a little too conservative in that ask, but
+
+89
+00:13:06,000 --> 00:13:09,000
+That's where we're at right now.
+
+90
+00:13:09,000 --> 00:13:15,000
+And then one last thing, a five. A five is almost going out.
+
+91
+00:13:15,000 --> 00:13:18,000
+Because I'm going to send it out early
+
+92
+00:13:18,000 --> 00:13:22,000
+A5 has two parts
+
+93
+00:13:22,000 --> 00:13:26,000
+And it's not due until after the midterm.
+
+94
+00:13:26,000 --> 00:13:34,000
+But the first part, I think doing the first part would be helpful for you to prepare for the midterm.
+
+95
+00:13:34,000 --> 00:13:44,000
+So it's going out early and I'm just going to let you know that doing that first part could be helpful as preparation for the midterm.
+
+96
+00:13:44,000 --> 00:13:48,000
+It is not due until after the midterm, though.
+
+97
+00:13:48,000 --> 00:13:50,000
+So
+
+98
+00:13:50,000 --> 00:14:01,000
+That's all, I think. That's all announcements I have. Anyone have questions, comments?
+
+99
+00:14:01,000 --> 00:14:02,000
+Okay.
+
+100
+00:14:02,000 --> 00:14:08,000
+Let's dive in then. And
+
+101
+00:14:08,000 --> 00:14:10,000
+Let's go ahead and dive in.
+
+102
+00:14:10,000 --> 00:14:29,000
+So last week we last week we went through our trees and our tree traversals. We introduced the idea, I think it was just last week we introduced the idea of a tree and all of our traversals, it was just last week that we started it. Okay
+
+103
+00:14:29,000 --> 00:14:34,000
+And when we left, after we left off
+
+104
+00:14:34,000 --> 00:14:38,000
+After we left off
+
+105
+00:14:38,000 --> 00:14:42,000
+I thought, oh
+
+106
+00:14:42,000 --> 00:14:48,000
+Joan I knew that. I was like, that's not quite right. Okay, Joan Marie.
+
+107
+00:14:48,000 --> 00:14:59,000
+Had brought up this idea or contributed that in the aeronautics industry, this use of a fault tree
+
+108
+00:14:59,000 --> 00:15:05,000
+to capture basically how likely
+
+109
+00:15:05,000 --> 00:15:07,000
+a plane is to fail.
+
+110
+00:15:07,000 --> 00:15:12,000
+And I thought we have a great opportunity. I'm going to spend just a few minutes
+
+111
+00:15:12,000 --> 00:15:25,000
+Going down a made-up fault tree. I have no idea how close to real it is. You can feel free to correct me. A made-up fault tree for us to think about how we can apply some of this in the real world.
+
+112
+00:15:25,000 --> 00:15:26,000
+So
+
+113
+00:15:26,000 --> 00:15:31,000
+What we're working with today, the picture I'm going with
+
+114
+00:15:31,000 --> 00:15:32,000
+is
+
+115
+00:15:32,000 --> 00:15:45,000
+I'm not starting at the vehicle level because that's a little too complex for me. But we're going to start with something like
+
+116
+00:15:45,000 --> 00:15:48,000
+I'm going to call this loss
+
+117
+00:15:48,000 --> 00:15:52,000
+of hydraulic
+
+118
+00:15:52,000 --> 00:15:55,000
+Pressure.
+
+119
+00:15:55,000 --> 00:16:01,000
+So this is one of the things that can go wrong in my system.
+
+120
+00:16:01,000 --> 00:16:07,000
+And my tree might look something like okay
+
+121
+00:16:07,000 --> 00:16:17,000
+I want to come up with… I want to have some sort of way to capture what is the loss of hydraulic pressure.
+
+122
+00:16:17,000 --> 00:16:23,000
+And I might say, hey, it really depends on a couple of things down here.
+
+123
+00:16:23,000 --> 00:16:33,000
+So one thing, it might depend on our line ruptures
+
+124
+00:16:33,000 --> 00:16:45,000
+So this would be a line rupture, hydraulic pressure means you have some pipes running with water somewhere. And if the line
+
+125
+00:16:45,000 --> 00:16:50,000
+Ruptures, then you're going to lose pressure.
+
+126
+00:16:50,000 --> 00:16:59,000
+So I have a probability here that I can associate with this. And we'll say it's the probability is
+
+127
+00:16:59,000 --> 00:17:04,000
+10 to the negative 7. So it's pretty small. I'm going to capture this here
+
+128
+00:17:04,000 --> 00:17:07,000
+And I have
+
+129
+00:17:07,000 --> 00:17:16,000
+Another thing over here, I'm going to ignore this for just a second. But over here, I'm going to say
+
+130
+00:17:16,000 --> 00:17:21,000
+That I've got pump A
+
+131
+00:17:21,000 --> 00:17:24,000
+And I've got pump B.
+
+132
+00:17:24,000 --> 00:17:28,000
+So if we are again
+
+133
+00:17:28,000 --> 00:17:32,000
+dealing with hydraulic pressure. That means we have
+
+134
+00:17:32,000 --> 00:17:38,000
+tubes with water liquid in them, and we have pumps doing something there.
+
+135
+00:17:38,000 --> 00:17:50,000
+Until I'm a mechanical engineer. Okay, we have our pump pump A and our pump B, and something that could go wrong is that
+
+136
+00:17:50,000 --> 00:17:52,000
+Pump A fails
+
+137
+00:17:52,000 --> 00:17:56,000
+And pump B fails.
+
+138
+00:17:56,000 --> 00:18:00,000
+And what does it mean for pump A to fail?
+
+139
+00:18:00,000 --> 00:18:06,000
+might be either that the motor fails
+
+140
+00:18:06,000 --> 00:18:14,000
+Or that the controller fails.
+
+141
+00:18:14,000 --> 00:18:29,000
+And that's the same for pump B, too.
+
+142
+00:18:29,000 --> 00:18:38,000
+Okay. I have probabilities for all of these. I'm probably not going to fill them all in, but let's say this one is 0.00
+
+143
+00:18:38,000 --> 00:18:54,000
+06, and this is probability of 0.004. And I think I do have this diagram in the notes. So if it's more detailed in the notes makes more sense. So here
+
+144
+00:18:54,000 --> 00:18:56,000
+I am
+
+145
+00:18:56,000 --> 00:19:03,000
+I've got now a tree that's kind of capturing all the information I have
+
+146
+00:19:03,000 --> 00:19:08,000
+And how it all comes together. So now
+
+147
+00:19:08,000 --> 00:19:11,000
+My calculation
+
+148
+00:19:11,000 --> 00:19:15,000
+That pump B fails
+
+149
+00:19:15,000 --> 00:19:19,000
+Depends on the motor failing or the controller failing.
+
+150
+00:19:19,000 --> 00:19:26,000
+So got that magic word here. We're going to call this an or
+
+151
+00:19:26,000 --> 00:19:37,000
+So pump B fails if either the motor fails or the controller fails or they both fail.
+
+152
+00:19:37,000 --> 00:19:40,000
+And that's the same
+
+153
+00:19:40,000 --> 00:19:47,000
+For pump A. Same thing, not same, or either the motor can fail, or the controller can fail, or they can both fail.
+
+154
+00:19:47,000 --> 00:19:50,000
+So from that
+
+155
+00:19:50,000 --> 00:19:58,000
+I can, knowing that pump B depends on the motor or the controller
+
+156
+00:19:58,000 --> 00:20:07,000
+Or I guess it should be since pump B depends on the motor and the controller. If either one of them fail
+
+157
+00:20:07,000 --> 00:20:10,000
+The or then
+
+158
+00:20:10,000 --> 00:20:22,000
+Pump B fails. So this gives me a probability
+
+159
+00:20:22,000 --> 00:20:28,000
+Now I have a probability that Pompe A fails. I have a probability that pump B fails
+
+160
+00:20:28,000 --> 00:20:31,000
+And
+
+161
+00:20:31,000 --> 00:20:37,000
+We only lose hydraulic pressure if both of them fail.
+
+162
+00:20:37,000 --> 00:20:39,000
+So this is an AND
+
+163
+00:20:39,000 --> 00:20:42,000
+And this is both motors.
+
+164
+00:20:42,000 --> 00:20:53,000
+Both pumps fail
+
+165
+00:20:53,000 --> 00:20:56,000
+We get it or and
+
+166
+00:20:56,000 --> 00:20:58,000
+Overall
+
+167
+00:20:58,000 --> 00:21:00,000
+Our loss of hydraulic pressure
+
+168
+00:21:00,000 --> 00:21:04,000
+Our hydraulic pressure requires
+
+169
+00:21:04,000 --> 00:21:06,000
+At least one pump
+
+170
+00:21:06,000 --> 00:21:09,000
+And some good lines
+
+171
+00:21:09,000 --> 00:21:13,000
+So they will fail if one of them
+
+172
+00:21:13,000 --> 00:21:16,000
+If one of them fails
+
+173
+00:21:16,000 --> 00:21:19,000
+So we've got our OR here.
+
+174
+00:21:19,000 --> 00:21:26,000
+So, yeah.
+
+175
+00:21:26,000 --> 00:21:34,000
+Yes, so this is saying with the or here it's if the motor fails or the controller fails.
+
+176
+00:21:34,000 --> 00:21:36,000
+or both of them fail.
+
+177
+00:21:36,000 --> 00:21:40,000
+It's our or
+
+178
+00:21:40,000 --> 00:21:42,000
+a logic table.
+
+179
+00:21:42,000 --> 00:21:43,000
+0111.
+
+180
+00:21:43,000 --> 00:21:48,000
+So if they're both successful
+
+181
+00:21:48,000 --> 00:21:52,000
+The and
+
+182
+00:21:52,000 --> 00:21:55,000
+Means
+
+183
+00:21:55,000 --> 00:21:58,000
+Both pumps fail only if
+
+184
+00:21:58,000 --> 00:22:01,000
+A fails and B fails.
+
+185
+00:22:01,000 --> 00:22:04,000
+So if one of them is still good
+
+186
+00:22:04,000 --> 00:22:10,000
+This is still good. And we can still maintain hydraulic pressure.
+
+187
+00:22:10,000 --> 00:22:12,000
+I think I said the right way.
+
+188
+00:22:12,000 --> 00:22:23,000
+We're waving our hands a little bit on this because this is not about the actual faults, but us understanding kind of what's going on here and what we can do with it.
+
+189
+00:22:23,000 --> 00:22:25,000
+Okay, so
+
+190
+00:22:25,000 --> 00:22:34,000
+So this gives us kind of a sense of what the data might be and how we structure it. So what do we do with this? Why do we care about this?
+
+191
+00:22:34,000 --> 00:22:38,000
+I, in particular, let's see.
+
+192
+00:22:38,000 --> 00:22:41,000
+I wanted to pull this out.
+
+193
+00:22:41,000 --> 00:22:44,000
+If I want to
+
+194
+00:22:44,000 --> 00:22:50,000
+Calculate the loss, the probability of the loss of hydraulic pressure.
+
+195
+00:22:50,000 --> 00:22:59,000
+How do I use this tree and what we've learned so far? How do I use this tree to calculate it?
+
+196
+00:22:59,000 --> 00:23:00,000
+Well
+
+197
+00:23:00,000 --> 00:23:03,000
+I want to know this probability
+
+198
+00:23:03,000 --> 00:23:08,000
+Which means I need to know this probability or
+
+199
+00:23:08,000 --> 00:23:15,000
+or I need to know this probability and this probability, and then I need to OR them together.
+
+200
+00:23:15,000 --> 00:23:21,000
+That's great. I know this probability. But this probability I don't know yet.
+
+201
+00:23:21,000 --> 00:23:30,000
+This probability makes my laser go away. This probability means I only know this one
+
+202
+00:23:30,000 --> 00:23:35,000
+When I've calculated this one. And this one
+
+203
+00:23:35,000 --> 00:23:38,000
+And this one
+
+204
+00:23:38,000 --> 00:23:42,000
+I only know the probability of this one once I
+
+205
+00:23:42,000 --> 00:23:48,000
+Get down here. And yes, I've got my values here. And then I can compute this.
+
+206
+00:23:48,000 --> 00:23:57,000
+And then I can compute this. And then I can combine it together and I have this. So what is this feeling like to us?
+
+207
+00:23:57,000 --> 00:24:00,000
+What's this?
+
+208
+00:24:00,000 --> 00:24:05,000
+What concept can we tie back to that we talked about last Wednesday?
+
+209
+00:24:05,000 --> 00:24:12,000
+Because I'm I want this. But in order to get this, I need this and this first.
+
+210
+00:24:12,000 --> 00:24:17,000
+In order to get this. I need this and this first.
+
+211
+00:24:17,000 --> 00:24:21,000
+In order to get this, I need this and this first.
+
+212
+00:24:21,000 --> 00:24:23,000
+It's one of our traversals.
+
+213
+00:24:23,000 --> 00:24:27,000
+Their post-order traversal
+
+214
+00:24:27,000 --> 00:24:30,000
+This is our post-order traversal.
+
+215
+00:24:30,000 --> 00:24:34,000
+So this is one of those cases where
+
+216
+00:24:34,000 --> 00:24:37,000
+When we're thinking about
+
+217
+00:24:37,000 --> 00:24:45,000
+This is a very lovely way for us to put our data in order, because it makes sense. And
+
+218
+00:24:45,000 --> 00:24:50,000
+Those smart physics, Mikey Euro Astro people can
+
+219
+00:24:50,000 --> 00:24:56,000
+Put real numbers to this and real real relationships in place.
+
+220
+00:24:56,000 --> 00:25:13,000
+But us from the data side, we know that if we can structure it this way, we know that we can traverse this in a post-order traversal and make those calculations and come up with the probability that we're looking for
+
+221
+00:25:13,000 --> 00:25:16,000
+Kind of cool, huh?
+
+222
+00:25:16,000 --> 00:25:25,000
+I thought this is a very lovely real-world example of that post-order traversal and where it comes up, and we're talking about
+
+223
+00:25:25,000 --> 00:25:34,000
+Post-order versus pre-order versus in-order traverses.
+
+224
+00:25:34,000 --> 00:25:37,000
+I can't remember. I think I put a little
+
+225
+00:25:37,000 --> 00:25:44,000
+Little thing of code in the notes that you can implement yourself if you want to play around with that.
+
+226
+00:25:44,000 --> 00:25:49,000
+I'm not going to do it right now because I think it's the concept that's most important.
+
+227
+00:25:49,000 --> 00:25:51,000
+Anyone have questions?
+
+228
+00:25:51,000 --> 00:25:56,000
+comments. Is this close enough to realistic? Yeah.
+
+229
+00:25:56,000 --> 00:26:00,000
+What's that? Oh, in the box
+
+230
+00:26:00,000 --> 00:26:10,000
+Oh, okay. Yeah, yeah.
+
+231
+00:26:10,000 --> 00:26:22,000
+An avionics box. Okay. Over my head, I will nod and say, okay, cool, I get you. Okay.
+
+232
+00:26:22,000 --> 00:26:29,000
+Questions, comments?
+
+233
+00:26:29,000 --> 00:26:33,000
+Okay. Let's move on.
+
+234
+00:26:33,000 --> 00:26:44,000
+And let's go back to, I'm going to copy our tree from the previous couple days
+
+235
+00:26:44,000 --> 00:26:46,000
+Where's my copy
+
+236
+00:26:46,000 --> 00:26:50,000
+And we're gonna paste this again.
+
+237
+00:26:50,000 --> 00:26:58,000
+So we can start with this. Whoopsie.
+
+238
+00:26:58,000 --> 00:27:08,000
+And we talked about our pre-order. We talked about our post order. We're going back to in order. So while we do this real quick
+
+239
+00:27:08,000 --> 00:27:11,000
+Let me walk through here
+
+240
+00:27:11,000 --> 00:27:16,000
+And you all tell me we're going to start at the root
+
+241
+00:27:16,000 --> 00:27:29,000
+You all tell me the in-order traversal.
+
+242
+00:27:29,000 --> 00:27:32,000
+We start at 8
+
+243
+00:27:32,000 --> 00:27:42,000
+What do I do? I can either go to the left, go to the right, or visit the node, i.e. write out the node name.
+
+244
+00:27:42,000 --> 00:27:43,000
+So
+
+245
+00:27:43,000 --> 00:27:48,000
+We're doing an in-order traversal, we're right here. Do I go to the left, to the right?
+
+246
+00:27:48,000 --> 00:27:51,000
+or EMIT.
+
+247
+00:27:51,000 --> 00:27:52,000
+What?
+
+248
+00:27:52,000 --> 00:27:55,000
+Okay, so we go to the left
+
+249
+00:27:55,000 --> 00:28:00,000
+Do we go to the left, the right, or emit?
+
+250
+00:28:00,000 --> 00:28:04,000
+Left.
+
+251
+00:28:04,000 --> 00:28:08,000
+Okay, left, right, or emit.
+
+252
+00:28:08,000 --> 00:28:10,000
+Okay.
+
+253
+00:28:10,000 --> 00:28:12,000
+We're going to emit
+
+254
+00:28:12,000 --> 00:28:14,000
+One is our first unit.
+
+255
+00:28:14,000 --> 00:28:18,000
+After we emit, we go back up
+
+256
+00:28:18,000 --> 00:28:22,000
+And now we're here. Do I go to the left, the right, or emit?
+
+257
+00:28:22,000 --> 00:28:25,000
+I've heard you knit
+
+258
+00:28:25,000 --> 00:28:29,000
+And now what do we do?
+
+259
+00:28:29,000 --> 00:28:33,000
+We go, wait, what?
+
+260
+00:28:33,000 --> 00:28:35,000
+Okay, did you say right or left?
+
+261
+00:28:35,000 --> 00:28:38,000
+Okay, I heard last week.
+
+262
+00:28:38,000 --> 00:28:40,000
+I thought it was right. Okay
+
+263
+00:28:40,000 --> 00:28:43,000
+left, right, or emit
+
+264
+00:28:43,000 --> 00:28:46,000
+left. We got our four
+
+265
+00:28:46,000 --> 00:28:50,000
+There's no children, so you go back up
+
+266
+00:28:50,000 --> 00:28:51,000
+Here
+
+267
+00:28:51,000 --> 00:28:53,000
+What do we need now?
+
+268
+00:28:53,000 --> 00:28:55,000
+You met R6
+
+269
+00:28:55,000 --> 00:28:59,000
+And then
+
+270
+00:28:59,000 --> 00:29:11,000
+Go down to the right and emit R7. And let's see, we've already done three. So now we go back up to eight.
+
+271
+00:29:11,000 --> 00:29:13,000
+Should I just write it down?
+
+272
+00:29:13,000 --> 00:29:17,000
+I'll just write it up. I think you guys are along with me.
+
+273
+00:29:17,000 --> 00:29:26,000
+If I make a step that you disagree with, let me know. I come down here. There is no left. So I'm going to emit 10.
+
+274
+00:29:26,000 --> 00:29:35,000
+I come I've emitted 10, so I go down to the right. I'm here. I go to the left first.
+
+275
+00:29:35,000 --> 00:29:42,000
+And there's no children. There's no left, so I admit there's no right. So I go back up.
+
+276
+00:29:42,000 --> 00:29:45,000
+And then I am at 14
+
+277
+00:29:45,000 --> 00:29:51,000
+And there's no right. So I go back up and I go back up and I'm done.
+
+278
+00:29:51,000 --> 00:29:54,000
+is our in-order traversal
+
+279
+00:29:54,000 --> 00:30:01,000
+What do we see about this in-order traversal?
+
+280
+00:30:01,000 --> 00:30:03,000
+It's what?
+
+281
+00:30:03,000 --> 00:30:10,000
+It's sorted.
+
+282
+00:30:10,000 --> 00:30:11,000
+Okay.
+
+283
+00:30:11,000 --> 00:30:18,000
+It's sorted. Our in-order traversal gave us a sorted output.
+
+284
+00:30:18,000 --> 00:30:23,000
+Of our of the nodes in our tree, the values in our tree.
+
+285
+00:30:23,000 --> 00:30:26,000
+There's a reason that it did this.
+
+286
+00:30:26,000 --> 00:30:37,000
+There's a rule that this tree is following that allows us to get a sorted output when we traverse it in order
+
+287
+00:30:37,000 --> 00:30:43,000
+Anyone know what the rule is?
+
+288
+00:30:43,000 --> 00:30:45,000
+In green
+
+289
+00:30:45,000 --> 00:30:47,000
+I'm going to call it the rule
+
+290
+00:30:47,000 --> 00:30:51,000
+For today
+
+291
+00:30:51,000 --> 00:30:56,000
+If it's smaller than the node, it goes to the left. If it's larger, it goes to the right.
+
+292
+00:30:56,000 --> 00:31:02,000
+Okay, that's an algorithm rule. I'm looking for a rule that describes our tree.
+
+293
+00:31:02,000 --> 00:31:10,000
+Our tree has to satisfy a particular rule. Once it satisfies that rule, then the algorithm that you just
+
+294
+00:31:10,000 --> 00:31:19,000
+You just said will work.
+
+295
+00:31:19,000 --> 00:31:33,000
+Okay, so a node shot, if a node's left node is smaller than itself. A child's right node is bigger than itself.
+
+296
+00:31:33,000 --> 00:31:35,000
+Yeah.
+
+297
+00:31:35,000 --> 00:31:39,000
+Child's left node… I'm gonna write that down.
+
+298
+00:31:39,000 --> 00:31:49,000
+Thank you.
+
+299
+00:31:49,000 --> 00:31:52,000
+Yes
+
+300
+00:31:52,000 --> 00:32:02,000
+I'm trying to make it grammatically correct. I'm going to write down what I put on my paper. Is that okay?
+
+301
+00:32:02,000 --> 00:32:05,000
+It's the same thing, just
+
+302
+00:32:05,000 --> 00:32:10,000
+Okay, on my paper. Okay, for every node
+
+303
+00:32:10,000 --> 00:32:13,000
+For all nodes
+
+304
+00:32:13,000 --> 00:32:16,000
+Okay, every
+
+305
+00:32:16,000 --> 00:32:18,000
+value
+
+306
+00:32:18,000 --> 00:32:21,000
+In the left
+
+307
+00:32:21,000 --> 00:32:25,000
+Subtree
+
+308
+00:32:25,000 --> 00:32:29,000
+Is smaller
+
+309
+00:32:29,000 --> 00:32:31,000
+And
+
+310
+00:32:31,000 --> 00:32:32,000
+Every
+
+311
+00:32:32,000 --> 00:32:34,000
+Value
+
+312
+00:32:34,000 --> 00:32:38,000
+In the right
+
+313
+00:32:38,000 --> 00:32:41,000
+Century
+
+314
+00:32:41,000 --> 00:32:43,000
+is bigger.
+
+315
+00:32:43,000 --> 00:32:48,000
+And so what you said was
+
+316
+00:32:48,000 --> 00:32:50,000
+We're a node
+
+317
+00:32:50,000 --> 00:32:57,000
+The left child is smaller, and the right child is bigger. This is expanding it to the whole tree.
+
+318
+00:32:57,000 --> 00:33:00,000
+And if you had taken that and like it
+
+319
+00:33:00,000 --> 00:33:06,000
+Span it out for everything beneath it, you get the same thing. So our rule that this tree follows
+
+320
+00:33:06,000 --> 00:33:08,000
+Is that
+
+321
+00:33:08,000 --> 00:33:13,000
+Every value in the left subtree is smaller. That means if I'm looking at 8
+
+322
+00:33:13,000 --> 00:33:16,000
+Everything over here is smaller than 8.
+
+323
+00:33:16,000 --> 00:33:20,000
+And everything here is bigger than 8.
+
+324
+00:33:20,000 --> 00:33:25,000
+And that maintained that property is maintained throughout the whole tree. So for six
+
+325
+00:33:25,000 --> 00:33:34,000
+Everything in the left subtree is smaller. The right subtree is bigger.
+
+326
+00:33:34,000 --> 00:33:38,000
+No. Oh, no question. You're just like
+
+327
+00:33:38,000 --> 00:33:41,000
+Okay, this is a property that we care about.
+
+328
+00:33:41,000 --> 00:33:43,000
+This gives us
+
+329
+00:33:43,000 --> 00:33:45,000
+what we call
+
+330
+00:33:45,000 --> 00:34:01,000
+A binary search tree.
+
+331
+00:34:01,000 --> 00:34:17,000
+Just checking my notes, make sure I cover everything. So this is what we call a binary search tree. So our binary search tree, it's a binary tree. And it follows this rule that everything for every node in the tree. Anything in the left subtree
+
+332
+00:34:17,000 --> 00:34:24,000
+The smaller, everything in the right subtree is larger.
+
+333
+00:34:24,000 --> 00:34:27,000
+Let's see.
+
+334
+00:34:27,000 --> 00:34:29,000
+Do we want
+
+335
+00:34:29,000 --> 00:34:38,000
+Well, let's go through this. Let's do it by hand first and then, yeah.
+
+336
+00:34:38,000 --> 00:34:42,000
+Wi-Fi research.
+
+337
+00:34:42,000 --> 00:34:54,000
+Okay, so the question is, the fact that we've got this sorted output from our in-order traversal. We only get that with a binary search tree.
+
+338
+00:34:54,000 --> 00:34:58,000
+This question.
+
+339
+00:34:58,000 --> 00:35:00,000
+Thanks, Seth.
+
+340
+00:35:00,000 --> 00:35:01,000
+Yes
+
+341
+00:35:01,000 --> 00:35:04,000
+Trying to think if there's any edge cases or something.
+
+342
+00:35:04,000 --> 00:35:09,000
+But what I can say is, if you have a binary search tree
+
+343
+00:35:09,000 --> 00:35:15,000
+In-order traversal will give you a sorted output.
+
+344
+00:35:15,000 --> 00:35:20,000
+Sometimes the reverse. You get funny edge cases, so
+
+345
+00:35:20,000 --> 00:35:22,000
+Not at me.
+
+346
+00:35:22,000 --> 00:35:31,000
+If you've played around with your logic tables, you know that sometimes the reverse
+
+347
+00:35:31,000 --> 00:35:40,000
+But what we can say is if we have a binary search tree. Then in order traversal is going to give us sorted output of the values of that tree.
+
+348
+00:35:40,000 --> 00:35:44,000
+So that's any other questions
+
+349
+00:35:44,000 --> 00:35:54,000
+Let's do a quick little thing here. I want to find the node with value 13. I am starting at the root
+
+350
+00:35:54,000 --> 00:36:03,000
+So what do I do?
+
+351
+00:36:03,000 --> 00:36:06,000
+Oh, I did.
+
+352
+00:36:06,000 --> 00:36:20,000
+Okay, so Alec, I say I'm looking for 13. 8 is smaller than 13 or 13 is bigger than 8. I'm looking for something that's bigger, so I'm going to go look in the right subtree.
+
+353
+00:36:20,000 --> 00:36:23,000
+Okay, so now I'm at 10
+
+354
+00:36:23,000 --> 00:36:25,000
+And
+
+355
+00:36:25,000 --> 00:36:29,000
+I'm looking for 13. What do I say?
+
+356
+00:36:29,000 --> 00:36:41,000
+Some minute, thank you. Yes, check node value. That's right, Brent. Check the node value. It's 10. I'm looking for 13.
+
+357
+00:36:41,000 --> 00:36:48,000
+13 is bigger than 10, so I'm going to do the same thing again with the right subtree.
+
+358
+00:36:48,000 --> 00:36:49,000
+You can add
+
+359
+00:36:49,000 --> 00:36:56,000
+Okay, so now I'm here and I check that node value. I see it's 14
+
+360
+00:36:56,000 --> 00:37:01,000
+It's 14 is bigger than 13. So I look in the left subtree.
+
+361
+00:37:01,000 --> 00:37:04,000
+And here I find 13. Yay
+
+362
+00:37:04,000 --> 00:37:06,000
+Okay.
+
+363
+00:37:06,000 --> 00:37:21,000
+Anyone notice anything about that that process?
+
+364
+00:37:21,000 --> 00:37:25,000
+Yeah, so at every step
+
+365
+00:37:25,000 --> 00:37:28,000
+I think this is what you're saying at every step
+
+366
+00:37:28,000 --> 00:37:33,000
+We are cutting out half of the search space
+
+367
+00:37:33,000 --> 00:37:36,000
+So when I start here
+
+368
+00:37:36,000 --> 00:37:39,000
+I make a decision left or right.
+
+369
+00:37:39,000 --> 00:37:46,000
+And whichever one it is, depending where I'm going, I cut off the one of the sub trees
+
+370
+00:37:46,000 --> 00:37:51,000
+That's the whole space I know. I don't even need to go looking at because that's
+
+371
+00:37:51,000 --> 00:37:52,000
+You know, it
+
+372
+00:37:52,000 --> 00:37:55,000
+We're looking for something small.
+
+373
+00:37:55,000 --> 00:38:02,000
+What else?
+
+374
+00:38:02,000 --> 00:38:05,000
+No one noticing the recursive nature of the
+
+375
+00:38:05,000 --> 00:38:10,000
+the, the algorithm
+
+376
+00:38:10,000 --> 00:38:28,000
+Got a nice recursive nature there of once we know where we are, we're going to run that same algorithm either on the left half or the right half over and over again.
+
+377
+00:38:28,000 --> 00:38:34,000
+Sorry, just double checking my notes here. So do we want to see this in some code?
+
+378
+00:38:34,000 --> 00:38:36,000
+Yeah, time.
+
+379
+00:38:36,000 --> 00:38:39,000
+I want to see that in code
+
+380
+00:38:39,000 --> 00:38:58,000
+Anyone online? Thumbs up, yes, no? Moving on. Yeah.
+
+381
+00:38:58,000 --> 00:39:00,000
+Let's see if I knew
+
+382
+00:39:00,000 --> 00:39:04,000
+VST
+
+383
+00:39:04,000 --> 00:39:10,000
+Monday…
+
+384
+00:39:10,000 --> 00:39:21,000
+Let me put this over here so we can still look at our tree picture. Oh, let me make sure I'm sharing my screen.
+
+385
+00:39:21,000 --> 00:39:30,000
+Michelle.
+
+386
+00:39:30,000 --> 00:39:36,000
+Okay, so now
+
+387
+00:39:36,000 --> 00:39:39,000
+Okay, share my screen.
+
+388
+00:39:39,000 --> 00:39:40,000
+Still recording
+
+389
+00:39:40,000 --> 00:39:47,000
+All can still hear. Okay. What does this look like? So I am
+
+390
+00:39:47,000 --> 00:39:53,000
+I'm going to skip over the recursive implementation. So we saw some recursive implementations last week.
+
+391
+00:39:53,000 --> 00:40:02,000
+And I kept telling you, if you could do it recursively, you can do it iteratively. So I'm going to show today, I'm going to start with an iterative implementation
+
+392
+00:40:02,000 --> 00:40:06,000
+And then
+
+393
+00:40:06,000 --> 00:40:11,000
+Wednesday, we will talk about how to go from one to the other.
+
+394
+00:40:11,000 --> 00:40:14,000
+But first, I need my tree
+
+395
+00:40:14,000 --> 00:40:19,000
+From last week
+
+396
+00:40:19,000 --> 00:40:23,000
+It's our roots and create our tree
+
+397
+00:40:23,000 --> 00:40:25,000
+We'll keep that
+
+398
+00:40:25,000 --> 00:40:27,000
+And
+
+399
+00:40:27,000 --> 00:40:29,000
+They will come in here
+
+400
+00:40:29,000 --> 00:40:35,000
+This gives us our tree that we did over here, and we're going to
+
+401
+00:40:35,000 --> 00:40:39,000
+Search
+
+402
+00:40:39,000 --> 00:40:42,000
+And you're gonna do this iterative. We need a root.
+
+403
+00:40:42,000 --> 00:40:45,000
+And we need a value
+
+404
+00:40:45,000 --> 00:40:46,000
+Okay.
+
+405
+00:40:46,000 --> 00:40:51,000
+So now
+
+406
+00:40:51,000 --> 00:40:56,000
+What does it mean to be iterative? That means we're not doing this recursively
+
+407
+00:40:56,000 --> 00:41:07,000
+Usually means we have a loop in there somewhere. We usually define where we start with, and then while we have more steps, we're going to keep going
+
+408
+00:41:07,000 --> 00:41:11,000
+So we're going to start with a node
+
+409
+00:41:11,000 --> 00:41:20,000
+I like to call it per node. A lot of times that helps me keep track of like, oh, this is the nodes that the current node that we're
+
+410
+00:41:20,000 --> 00:41:31,000
+It always starts at the root because we always start with the root
+
+411
+00:41:31,000 --> 00:41:33,000
+While
+
+412
+00:41:33,000 --> 00:41:35,000
+Her node
+
+413
+00:41:35,000 --> 00:41:39,000
+is not none
+
+414
+00:41:39,000 --> 00:41:42,000
+This is where we do our check.
+
+415
+00:41:42,000 --> 00:41:44,000
+Yes
+
+416
+00:41:44,000 --> 00:41:52,000
+Roots of what is the payload
+
+417
+00:41:52,000 --> 00:41:56,000
+Root of payload.
+
+418
+00:41:56,000 --> 00:42:03,000
+Route of payload if this equals our value
+
+419
+00:42:03,000 --> 00:42:09,000
+Return the node
+
+420
+00:42:09,000 --> 00:42:11,000
+Yep.
+
+421
+00:42:11,000 --> 00:42:17,000
+It's not right. This is Kernode.
+
+422
+00:42:17,000 --> 00:42:25,000
+Hey, Pranode, if the node we are looking at, if the value is the value we're looking for, then we return that node.
+
+423
+00:42:25,000 --> 00:42:29,000
+Otherwise, we say
+
+424
+00:42:29,000 --> 00:42:40,000
+Here we can, I'm going to do it the clunky way.
+
+425
+00:42:40,000 --> 00:42:43,000
+Is less than
+
+426
+00:42:43,000 --> 00:42:48,000
+Let's see
+
+427
+00:42:48,000 --> 00:42:59,000
+The value that we're looking for is less than the payload at the node that we're at. Then we are going to say node
+
+428
+00:42:59,000 --> 00:43:02,000
+Equals…
+
+429
+00:43:02,000 --> 00:43:05,000
+Or a node of left
+
+430
+00:43:05,000 --> 00:43:08,000
+Elves
+
+431
+00:43:08,000 --> 00:43:12,000
+Node equals per node of rights
+
+432
+00:43:12,000 --> 00:43:14,000
+Hi.
+
+433
+00:43:14,000 --> 00:43:20,000
+And if we get down here, return none
+
+434
+00:43:20,000 --> 00:43:25,000
+I'm doing it two different ways.
+
+435
+00:43:25,000 --> 00:43:30,000
+Okay.
+
+436
+00:43:30,000 --> 00:43:35,000
+Let's look at this. Did I type the right thing? Does this make sense?
+
+437
+00:43:35,000 --> 00:43:38,000
+So we're saying we start with our
+
+438
+00:43:38,000 --> 00:43:40,000
+Our roots
+
+439
+00:43:40,000 --> 00:43:44,000
+And we are saying, while we have a node
+
+440
+00:43:44,000 --> 00:43:46,000
+If
+
+441
+00:43:46,000 --> 00:43:52,000
+The payload of the node that we're looking at is the same as the value that we're looking for
+
+442
+00:43:52,000 --> 00:43:56,000
+Then we return that note. That's success. We found it.
+
+443
+00:43:56,000 --> 00:43:59,000
+If
+
+444
+00:43:59,000 --> 00:44:01,000
+The value
+
+445
+00:44:01,000 --> 00:44:05,000
+is less than the value we're looking for is less than
+
+446
+00:44:05,000 --> 00:44:08,000
+The value of the node we're currently at
+
+447
+00:44:08,000 --> 00:44:10,000
+Lesson
+
+448
+00:44:10,000 --> 00:44:12,000
+So we go to the left
+
+449
+00:44:12,000 --> 00:44:14,000
+Is that right?
+
+450
+00:44:14,000 --> 00:44:18,000
+Otherwise, we go to the right. This must be big.
+
+451
+00:44:18,000 --> 00:44:28,000
+Like, okay.
+
+452
+00:44:28,000 --> 00:44:31,000
+Yeah, so down here, when we return none
+
+453
+00:44:31,000 --> 00:44:34,000
+That's… we didn't find anything.
+
+454
+00:44:34,000 --> 00:44:39,000
+So we just return nothing because it's not in their tree.
+
+455
+00:44:39,000 --> 00:44:42,000
+Let's, let's run
+
+456
+00:44:42,000 --> 00:44:47,000
+Anyone want me to put some print statements in here so we can
+
+457
+00:44:47,000 --> 00:44:53,000
+Trace it through while it's running.
+
+458
+00:44:53,000 --> 00:44:57,000
+Let's put some print statements in. Where would be a good print statement?
+
+459
+00:44:57,000 --> 00:45:07,000
+Maybe here, going to the left.
+
+460
+00:45:07,000 --> 00:45:19,000
+And we'll say going to the right
+
+461
+00:45:19,000 --> 00:45:22,000
+Okay.
+
+462
+00:45:22,000 --> 00:45:28,000
+Like right here
+
+463
+00:45:28,000 --> 00:45:34,000
+Her node is
+
+464
+00:45:34,000 --> 00:45:39,000
+Node of payload
+
+465
+00:45:39,000 --> 00:45:44,000
+That look okay?
+
+466
+00:45:44,000 --> 00:45:50,000
+I'm gonna run it. Let's see what happens. Oh, got to call it first.
+
+467
+00:45:50,000 --> 00:45:52,000
+Friends
+
+468
+00:45:52,000 --> 00:45:56,000
+PST search, iterative
+
+469
+00:45:56,000 --> 00:45:58,000
+Which
+
+470
+00:45:58,000 --> 00:46:00,000
+and
+
+471
+00:46:00,000 --> 00:46:17,000
+Let's see, what were we just looking at? We said 13. Let's start with 13.
+
+472
+00:46:17,000 --> 00:46:20,000
+File
+
+473
+00:46:20,000 --> 00:46:22,000
+Let's run it.
+
+474
+00:46:22,000 --> 00:46:25,000
+And
+
+475
+00:46:25,000 --> 00:46:30,000
+Okay, so dear
+
+476
+00:46:30,000 --> 00:46:32,000
+Let's focus on our tree
+
+477
+00:46:32,000 --> 00:46:51,000
+Okay, so we're looking, maybe we should have printed out what we're looking for. Curd note is 8. We're going to the right. Current node is 10. We're going to the right. Current node is 14. We're going to the left. Current node is 13, and that's what we
+
+478
+00:46:51,000 --> 00:47:00,000
+Cool. Okay. Let's do
+
+479
+00:47:00,000 --> 00:47:02,000
+Yeah.
+
+480
+00:47:02,000 --> 00:47:14,000
+Yeah, plenty of time. We'll run again with oh yes
+
+481
+00:47:14,000 --> 00:47:24,000
+I'm going to make a call, which I'm going to call, I'm going to run it one more time. What value do we want to search for?
+
+482
+00:47:24,000 --> 00:47:26,000
+Okay.
+
+483
+00:47:26,000 --> 00:47:27,000
+Search for one
+
+484
+00:47:27,000 --> 00:47:30,000
+I'm going to run it again.
+
+485
+00:47:30,000 --> 00:47:33,000
+End of here
+
+486
+00:47:33,000 --> 00:47:37,000
+Thank you.
+
+487
+00:47:37,000 --> 00:47:45,000
+We're at 8. We go to the left. We're at 3. We go to the left. We found one, so we're done.
+
+488
+00:47:45,000 --> 00:47:55,000
+What happens if I do something like
+
+489
+00:47:55,000 --> 00:47:58,000
+9
+
+490
+00:47:58,000 --> 00:48:02,000
+Think about what you think is going to happen
+
+491
+00:48:02,000 --> 00:48:16,000
+Okay, we're at 8. So we're looking for nine. We go to the right. We're at 10. So we're going to go to the left. And here, this is where we hit none because it's not in the tree.
+
+492
+00:48:16,000 --> 00:48:19,000
+And we found that it was not in the tree.
+
+493
+00:48:19,000 --> 00:48:26,000
+Okay, so now we've got down
+
+494
+00:48:26,000 --> 00:48:39,000
+Okay, now we've got down. I'm trying to think. Yeah, I'm going to swap again because this will be easier to do on the we'll do it by hand first before the bell rings.
+
+495
+00:48:39,000 --> 00:48:51,000
+But the big question is, okay, cool, great. When we have a binary search tree, isn't it excellent? We have what seems to be a very efficient way to search for a value we're looking for.
+
+496
+00:48:51,000 --> 00:48:57,000
+But how do we make this tree? How do we make the search tree?
+
+497
+00:48:57,000 --> 00:49:08,000
+We here, we did it by hand, and that's all well and great because I put the orders in there, the numbers in there
+
+498
+00:49:08,000 --> 00:49:14,000
+Purpose by hand so that it fit this
+
+499
+00:49:14,000 --> 00:49:16,000
+fitness.
+
+500
+00:49:16,000 --> 00:49:18,000
+Followed our rule
+
+501
+00:49:18,000 --> 00:49:19,000
+But
+
+502
+00:49:19,000 --> 00:49:28,000
+We cannot do that by hand all the time. No. So we need to think about what does it mean to build our binary search tree
+
+503
+00:49:28,000 --> 00:49:32,000
+Let's think about
+
+504
+00:49:32,000 --> 00:49:38,000
+We're going to go to scribbling once again
+
+505
+00:49:38,000 --> 00:49:45,000
+Back here
+
+506
+00:49:45,000 --> 00:49:47,000
+Okay
+
+507
+00:49:47,000 --> 00:49:50,000
+So right just a little bit
+
+508
+00:49:50,000 --> 00:49:54,000
+Okay, so we want to insert. What does it look like?
+
+509
+00:49:54,000 --> 00:50:04,000
+I want to insert 9 into our tree. What do we do?
+
+510
+00:50:04,000 --> 00:50:12,000
+Any thoughts?
+
+511
+00:50:12,000 --> 00:50:14,000
+What's that?
+
+512
+00:50:14,000 --> 00:50:16,000
+Go to the root first. Okay.
+
+513
+00:50:16,000 --> 00:50:24,000
+Is it right that we're inserting nine. Okay, so we start with root
+
+514
+00:50:24,000 --> 00:50:27,000
+Yeah.
+
+515
+00:50:27,000 --> 00:50:31,000
+Okay, we're going to go to the right. We're going to go to the right because 9 is bigger than 8.
+
+516
+00:50:31,000 --> 00:50:35,000
+Okay? And then what
+
+517
+00:50:35,000 --> 00:50:40,000
+And then we know that we're going to check to the left
+
+518
+00:50:40,000 --> 00:50:46,000
+Because 9 is smaller than 10, but we're right here, and we have nothing there.
+
+519
+00:50:46,000 --> 00:50:49,000
+So what can we do at that point?
+
+520
+00:50:49,000 --> 00:50:57,000
+William, put the note in there.
+
+521
+00:50:57,000 --> 00:50:58,000
+Okay.
+
+522
+00:50:58,000 --> 00:51:07,000
+So couple things here basically are our insert is always going to be
+
+523
+00:51:07,000 --> 00:51:19,000
+Search. I'm going to start off with the search. The search gets us to the point in the tree where the node should live, where the new node should live.
+
+524
+00:51:19,000 --> 00:51:24,000
+And if it were there, we would find it. If it's not, we put it there because
+
+525
+00:51:24,000 --> 00:51:31,000
+We know that that's where it's supposed to be.
+
+526
+00:51:31,000 --> 00:51:37,000
+Let's put 5 in the tree.
+
+527
+00:51:37,000 --> 00:51:39,000
+I'll wait in time
+
+528
+00:51:39,000 --> 00:51:44,000
+So now we've got eight.
+
+529
+00:51:44,000 --> 00:51:50,000
+Eight, we're looking for five. So we look in the left subtree
+
+530
+00:51:50,000 --> 00:52:02,000
+We're looking for 5, but we're at 3. So we're going to look at the right subtree. We're looking at 6, but we want to find 5. So we go to the left subtree
+
+531
+00:52:02,000 --> 00:52:08,000
+Here we're looking at four, but we want to find five. So we go to the right subtree
+
+532
+00:52:08,000 --> 00:52:09,000
+It's not there
+
+533
+00:52:09,000 --> 00:52:12,000
+So we put it in
+
+534
+00:52:12,000 --> 00:52:15,000
+Okay.
+
+535
+00:52:15,000 --> 00:52:19,000
+Are we on time? Okay, we're gonna do
+
+536
+00:52:19,000 --> 00:52:21,000
+One more thing
+
+537
+00:52:21,000 --> 00:52:30,000
+Before the bell rings. We are going to
+
+538
+00:52:30,000 --> 00:52:33,000
+We're going to
+
+539
+00:52:33,000 --> 00:52:34,000
+do this
+
+540
+00:52:34,000 --> 00:52:37,000
+We are going to insert 8
+
+541
+00:52:37,000 --> 00:52:41,000
+310, 1, 6.
+
+542
+00:52:41,000 --> 00:52:58,000
+14, 4, 7, 13. I think we can do this before the bell rings? Let's find out. Okay, first, we're going to put this in, or we're going to put 8 in the tree. There is no root, so that's easy. We get 8
+
+543
+00:52:58,000 --> 00:53:02,000
+We're going to put three in the tree.
+
+544
+00:53:02,000 --> 00:53:09,000
+We go here. We go off to the left. It's not there. So we're going to put three as the left child.
+
+545
+00:53:09,000 --> 00:53:12,000
+I'm going to just kind of
+
+546
+00:53:12,000 --> 00:53:17,000
+go through here, y'all stop me if I do something wrong, or if you have a question.
+
+547
+00:53:17,000 --> 00:53:22,000
+Okay, so we got 3 in our tree, we're now putting 10 in. We come here
+
+548
+00:53:22,000 --> 00:53:24,000
+We got 10
+
+549
+00:53:24,000 --> 00:53:26,000
+Oops.
+
+550
+00:53:26,000 --> 00:53:34,000
+Putting one in. We start here. Come here. And we can put one in down here.
+
+551
+00:53:34,000 --> 00:53:44,000
+We've got 6, so we come here, come down here. We want to put it here.
+
+552
+00:53:44,000 --> 00:53:53,000
+We have 14. So we start here, here, we want 14. Put it here
+
+553
+00:53:53,000 --> 00:53:56,000
+8, 3,
+
+554
+00:53:56,000 --> 00:54:01,000
+Six
+
+555
+00:54:01,000 --> 00:54:11,000
+7. So we start here. Come to the left. Three, come to the right here, come to the right.
+
+556
+00:54:11,000 --> 00:54:13,000
+And
+
+557
+00:54:13,000 --> 00:54:15,000
+13, 8
+
+558
+00:54:15,000 --> 00:54:24,000
+The bigger here, go bigger. 14 go smaller. This is where our 13 goes.
+
+559
+00:54:24,000 --> 00:54:26,000
+Okay.
+
+560
+00:54:26,000 --> 00:54:28,000
+So that's how we built this.
+
+561
+00:54:28,000 --> 00:54:35,000
+Do I have no bell's going to ring any second, so I'm not gonna push my chances at this time, at this point.
+
+562
+00:54:35,000 --> 00:54:37,000
+When we come back
+
+563
+00:54:37,000 --> 00:54:38,000
+We're going to build another tree
+
+564
+00:54:38,000 --> 00:54:40,000
+And
+
+565
+00:54:40,000 --> 00:54:44,000
+Let's see what we got.
+
+566
+00:54:44,000 --> 00:54:47,000
+Any questions before we take a break?
+
+567
+00:54:47,000 --> 00:54:55,000
+Okay, let's do a break. And it's back in about 10 minutes.
+
+568
+00:54:55,000 --> 00:55:16,000
+Yes, we're doing Big O this week. I'll talk a little bit about it today and then more on Wednesday.
+
+569
+00:56:04,000 --> 00:56:15,000
+Let's see. Just going to go through. The bell has not rung yet. I'm going to give a few seconds for the bell to ring.
+
+570
+00:56:15,000 --> 00:56:19,000
+I'm going to make sure that I have everything turned on.
+
+571
+00:56:19,000 --> 00:56:33,000
+Make sure that I'm recording.
+
+572
+00:56:33,000 --> 00:56:35,000
+There we go.
+
+573
+00:56:35,000 --> 00:56:39,000
+Okay, that's the bell.
+
+574
+00:56:39,000 --> 00:56:43,000
+Any questions over the break? Any questions come up?
+
+575
+00:56:43,000 --> 00:56:47,000
+Great questions from before the break
+
+576
+00:56:47,000 --> 00:56:49,000
+Should we go back to
+
+577
+00:56:49,000 --> 00:56:57,000
+Okay, we got this. We built this tree. Before we before we went on break.
+
+578
+00:56:57,000 --> 00:57:13,000
+And we saw that our insert, that same process that we looked at where you start at the root and basically you do your search until you find where a node is supposed to be
+
+579
+00:57:13,000 --> 00:57:18,000
+And if it's not there, then our insert function puts it in there.
+
+580
+00:57:18,000 --> 00:57:20,000
+And we
+
+581
+00:57:20,000 --> 00:57:34,000
+Created our tree by doing this order of inserting this, these numbers in this order into our tree. And that gave us the tree that we have been using for the past few days.
+
+582
+00:57:34,000 --> 00:57:37,000
+We're going to build another version of this tree.
+
+583
+00:57:37,000 --> 00:57:40,000
+And this version
+
+584
+00:57:40,000 --> 00:57:46,000
+Same values. We're going to insert them in a different order.
+
+585
+00:57:46,000 --> 00:57:50,000
+Anyone have a guess as to what's going to happen.
+
+586
+00:57:50,000 --> 00:57:57,000
+Are our trees going to look exactly the same?
+
+587
+00:57:57,000 --> 00:58:00,000
+No, they're gonna look different.
+
+588
+00:58:00,000 --> 00:58:04,000
+You know it's coming. Okay, cool. Good.
+
+589
+00:58:04,000 --> 00:58:10,000
+You want to break the news to the class?
+
+590
+00:58:10,000 --> 00:58:17,000
+It's going to be a list. Okay, cool. So everyone's bubbles have been burst. It's going to be a list.
+
+591
+00:58:17,000 --> 00:58:24,000
+Let's walk through, let's watch it. I'm gonna do the same thing we did last time. I'm gonna build our tree, inserting in this order
+
+592
+00:58:24,000 --> 00:58:37,000
+and if I do something wrong or unexpected, or you have a question, stop me. Okay, first thing we're inserting one into our tree. We have nothing there. It's our 1st node. We just put it in.
+
+593
+00:58:37,000 --> 00:58:41,000
+And then we insert 3
+
+594
+00:58:41,000 --> 00:58:50,000
+We come to one. Three is bigger than one. We go to the right child. There's nothing there. So we insert 3.
+
+595
+00:58:50,000 --> 00:58:55,000
+We go to four or we're inserting 4. We start at one.
+
+596
+00:58:55,000 --> 00:59:02,000
+Y'all can hear me online and everything's going online, right? Okay. If anyone online sees something not right, let me know.
+
+597
+00:59:02,000 --> 00:59:11,000
+We're inserting 4. We go to one. It's bigger. We go. We're at 3. It's bigger. We insert 4 here.
+
+598
+00:59:11,000 --> 00:59:15,000
+We have 6. We have one
+
+599
+00:59:15,000 --> 00:59:20,000
+It's bigger 3, it's bigger, 4, it's bigger. The insert 6.
+
+600
+00:59:20,000 --> 00:59:26,000
+And then you see I'm starting to make things just a little bit smaller.
+
+601
+00:59:26,000 --> 00:59:34,000
+We're doing 7. 1, 3, 4, 6, 7.
+
+602
+00:59:34,000 --> 00:59:36,000
+8
+
+603
+00:59:36,000 --> 00:59:43,000
+1, 3, 4, 6, 7, 8.
+
+604
+00:59:43,000 --> 00:59:50,000
+And… 10, 1, 3, 4, 6, 7, 8, 10.
+
+605
+00:59:50,000 --> 00:59:53,000
+You see the pattern, I think
+
+606
+00:59:53,000 --> 00:59:57,000
+Let me put 13 down here, we put 14 down here.
+
+607
+00:59:57,000 --> 00:59:59,000
+Okay
+
+608
+00:59:59,000 --> 01:00:08,000
+So this is the list, or this is the tree that we get that looks very much like a list, so much like a list. I can't help but call it a list.
+
+609
+01:00:08,000 --> 01:00:11,000
+This looks like a linked list
+
+610
+01:00:11,000 --> 01:00:19,000
+And we talked about this, I think we mentioned it briefly last week, that a linked list is really a special case of a tree.
+
+611
+01:00:19,000 --> 01:00:27,000
+Where every node has every node has one and only one shot.
+
+612
+01:00:27,000 --> 01:00:37,000
+And here it's still a binary search tree. This still satisfies our rule for a binary search tree. What's our rule for a binary search tree?
+
+613
+01:00:37,000 --> 01:00:40,000
+For every node
+
+614
+01:00:40,000 --> 01:00:49,000
+The left subtree has values that are all smaller than that node, and the right subtree has all values that are larger than that.
+
+615
+01:00:49,000 --> 01:00:53,000
+So for any of I start here
+
+616
+01:00:53,000 --> 01:00:58,000
+I expect that all of these nodes have a value larger than
+
+617
+01:00:58,000 --> 01:01:00,000
+Which it does.
+
+618
+01:01:00,000 --> 01:01:03,000
+So still a binary search tree.
+
+619
+01:01:03,000 --> 01:01:18,000
+But it looks a lot different.
+
+620
+01:01:18,000 --> 01:01:20,000
+Let's
+
+621
+01:01:20,000 --> 01:01:28,000
+Well, we'll come back to this. We'll come back to this in just a minute. I'm going to go back to this one.
+
+622
+01:01:28,000 --> 01:01:33,000
+our our default for the our default tree.
+
+623
+01:01:33,000 --> 01:01:37,000
+Another question I want to ask about trees.
+
+624
+01:01:37,000 --> 01:01:42,000
+Our binary search tree is I might like something like
+
+625
+01:01:42,000 --> 01:01:49,000
+What's the smallest value?
+
+626
+01:01:49,000 --> 01:01:55,000
+As well as what's the biggest value.
+
+627
+01:01:55,000 --> 01:01:59,000
+Using this tree.
+
+628
+01:01:59,000 --> 01:02:12,000
+What does my function find min look like? How do I find the smallest value in my binary search tree?
+
+629
+01:02:12,000 --> 01:02:15,000
+Okay, so the most left one
+
+630
+01:02:15,000 --> 01:02:20,000
+Which means our function looks something like if we start here
+
+631
+01:02:20,000 --> 01:02:26,000
+Then go left. And keep going left until there's no more left.
+
+632
+01:02:26,000 --> 01:02:31,000
+And if we keep doing that, we're going to find the smallest value in the binary search tree.
+
+633
+01:02:31,000 --> 01:02:33,000
+Absolutely.
+
+634
+01:02:33,000 --> 01:02:37,000
+What about finding the max?
+
+635
+01:02:37,000 --> 01:02:39,000
+Same thing, flipped.
+
+636
+01:02:39,000 --> 01:02:52,000
+So we start here. I want to find the max in our tree, and I go to the right and to the right until I can't go to the right anymore. And that's the max in our tree
+
+637
+01:02:52,000 --> 01:02:53,000
+Okay.
+
+638
+01:02:53,000 --> 01:03:01,000
+Any any questions on that Max and Min. Those are the easy ones.
+
+639
+01:03:01,000 --> 01:03:05,000
+Let's move on. Let's move on to something a little more
+
+640
+01:03:05,000 --> 01:03:08,000
+a little more interesting.
+
+641
+01:03:08,000 --> 01:03:21,000
+Now, I want to take something out of my tree. We talked about putting things into our binary search tree. We talked about searching with our binary search tree. We've talked about finding them in. We talked about finding the max.
+
+642
+01:03:21,000 --> 01:03:32,000
+How do we take things out of our binary search tree?
+
+643
+01:03:32,000 --> 01:03:34,000
+If we want
+
+644
+01:03:34,000 --> 01:03:42,000
+Let's see if we want to delete one
+
+645
+01:03:42,000 --> 01:03:43,000
+Okay
+
+646
+01:03:43,000 --> 01:03:46,000
+If we want to delete one
+
+647
+01:03:46,000 --> 01:03:55,000
+What do we do? And I'm not asking algorithmically right now, but like just looking at the tree. What does it kind of look like?
+
+648
+01:03:55,000 --> 01:04:00,000
+Big picture.
+
+649
+01:04:00,000 --> 01:04:01,000
+This seems kind of easy
+
+650
+01:04:01,000 --> 01:04:06,000
+Nope
+
+651
+01:04:06,000 --> 01:04:09,000
+What's that?
+
+652
+01:04:09,000 --> 01:04:12,000
+Yeah, do this.
+
+653
+01:04:12,000 --> 01:04:16,000
+And depending on what language we're doing, maybe we do this.
+
+654
+01:04:16,000 --> 01:04:19,000
+But removing this link
+
+655
+01:04:19,000 --> 01:04:22,000
+Takes it out of the tree.
+
+656
+01:04:22,000 --> 01:04:25,000
+Okay.
+
+657
+01:04:25,000 --> 01:04:29,000
+And we still have a binary search tree
+
+658
+01:04:29,000 --> 01:04:31,000
+Okay.
+
+659
+01:04:31,000 --> 01:04:36,000
+What if we want to delete
+
+660
+01:04:36,000 --> 01:04:46,000
+14.
+
+661
+01:04:46,000 --> 01:04:50,000
+We'll be wrestling with, yeah.
+
+662
+01:04:50,000 --> 01:04:55,000
+With that?
+
+663
+01:04:55,000 --> 01:05:05,000
+Okay, so we're going to do something like remove 14 and then something like this
+
+664
+01:05:05,000 --> 01:05:12,000
+Is that what you say? Yeah. Okay, so something like this. So
+
+665
+01:05:12,000 --> 01:05:15,000
+14. Has one child
+
+666
+01:05:15,000 --> 01:05:19,000
+So we can't just fully delete 14.
+
+667
+01:05:19,000 --> 01:05:25,000
+We have to we have to
+
+668
+01:05:25,000 --> 01:05:28,000
+Make sure that its child
+
+669
+01:05:28,000 --> 01:05:33,000
+Becomes the child of the parent 14.
+
+670
+01:05:33,000 --> 01:05:44,000
+We'll go through the code for this a little bit, but we're gonna wrap our heads around what we're expecting first.
+
+671
+01:05:44,000 --> 01:05:45,000
+Okay.
+
+672
+01:05:45,000 --> 01:05:47,000
+And if we do this
+
+673
+01:05:47,000 --> 01:05:50,000
+Cross this one out and add this one.
+
+674
+01:05:50,000 --> 01:05:55,000
+We're going to ask ourselves, do we still have a binary search tree? Yes.
+
+675
+01:05:55,000 --> 01:05:57,000
+Because
+
+676
+01:05:57,000 --> 01:06:05,000
+We know everything to the right subtree of 10. So everything here is going to be bigger than 10.
+
+677
+01:06:05,000 --> 01:06:13,000
+And we know that everything to the left of 14 is going to be smaller than 14. So if we add this link here
+
+678
+01:06:13,000 --> 01:06:20,000
+We know that this subtree has to be greater than 10 and less than 14.
+
+679
+01:06:20,000 --> 01:06:23,000
+So we still have a binary search tree.
+
+680
+01:06:23,000 --> 01:06:27,000
+And of course, we're humans, so we can look at the picture and it makes sense.
+
+681
+01:06:27,000 --> 01:06:31,000
+But we're looking for that proof as well.
+
+682
+01:06:31,000 --> 01:06:36,000
+Okay. And then
+
+683
+01:06:36,000 --> 01:06:38,000
+I'm going to
+
+684
+01:06:38,000 --> 01:06:40,000
+I'm going to
+
+685
+01:06:40,000 --> 01:06:43,000
+keep put one back in the mix here.
+
+686
+01:06:43,000 --> 01:06:47,000
+So that we can delete three
+
+687
+01:06:47,000 --> 01:06:50,000
+So now we have the case
+
+688
+01:06:50,000 --> 01:06:54,000
+Where we have a smaller child
+
+689
+01:06:54,000 --> 01:07:01,000
+And we have a larger child, so it gets a little bit more messier.
+
+690
+01:07:01,000 --> 01:07:10,000
+So what do we do here?
+
+691
+01:07:10,000 --> 01:07:14,000
+If I want to delete this node.
+
+692
+01:07:14,000 --> 01:07:26,000
+How do we delete it in such a way that we still have a valid binary search tree?
+
+693
+01:07:26,000 --> 01:07:32,000
+So now this is where it gets we got to be a little smarter.
+
+694
+01:07:32,000 --> 01:07:45,000
+We are going to. There's there's you will see different ways to do this. It's all the same idea, but different books might explain it in slightly different ways, or do it slightly differently.
+
+695
+01:07:45,000 --> 01:07:50,000
+I'll just I'll give you that caveat, but we'll do an example. We'll do it here
+
+696
+01:07:50,000 --> 01:08:01,000
+In one way. Okay, so we're deleting three
+
+697
+01:08:01,000 --> 01:08:08,000
+We are going to find the successor
+
+698
+01:08:08,000 --> 01:08:12,000
+Our successor
+
+699
+01:08:12,000 --> 01:08:20,000
+I'm going to ask y'all to think about this for a second. I'm going to find the successor of three. What does that mean?
+
+700
+01:08:20,000 --> 01:08:25,000
+Yeah.
+
+701
+01:08:25,000 --> 01:08:32,000
+It should be the next closest value to 3 that's larger than 3.
+
+702
+01:08:32,000 --> 01:08:34,000
+Of the 8
+
+703
+01:08:34,000 --> 01:08:36,000
+The 8 we already got
+
+704
+01:08:36,000 --> 01:08:40,000
+Because we know that everything in this tree is smaller than 8
+
+705
+01:08:40,000 --> 01:08:42,000
+But yes, yes.
+
+706
+01:08:42,000 --> 01:08:45,000
+So our successor
+
+707
+01:08:45,000 --> 01:08:50,000
+It's just the next the node in the tree
+
+708
+01:08:50,000 --> 01:08:55,000
+That is the next value higher than 3, the node that we're doing
+
+709
+01:08:55,000 --> 01:09:04,000
+And so what this looks like is that if we go back and we think about the operations we have available to us
+
+710
+01:09:04,000 --> 01:09:09,000
+If we're at 3 and we're looking for a successor
+
+711
+01:09:09,000 --> 01:09:14,000
+What do we do?
+
+712
+01:09:14,000 --> 01:09:22,000
+We want to go right and then what do we want to what do we want to do with the tree that's the right
+
+713
+01:09:22,000 --> 01:09:27,000
+We have an operation for that. We have a name for it
+
+714
+01:09:27,000 --> 01:09:30,000
+Yes. We use the operations we already have.
+
+715
+01:09:30,000 --> 01:09:45,000
+I'm only calling that out because I see in lots of homeworks, not necessarily this class this quarter, but a lot of times I will see someone will re-implement this. They'll say, oh, I know how to find them in. You go to the left, left, left, left, left
+
+716
+01:09:45,000 --> 01:09:48,000
+And so they will re-implement it. But
+
+717
+01:09:48,000 --> 01:09:56,000
+If we've already defined this, we use it. So, we get this successor, which is the min
+
+718
+01:09:56,000 --> 01:09:58,000
+of the tree that is
+
+719
+01:09:58,000 --> 01:10:01,000
+Larger.
+
+720
+01:10:01,000 --> 01:10:04,000
+Men of
+
+721
+01:10:04,000 --> 01:10:11,000
+Right, child.
+
+722
+01:10:11,000 --> 01:10:17,000
+So then, first thing we do, we find the successor. Which is 4
+
+723
+01:10:17,000 --> 01:10:21,000
+And this is another thing that
+
+724
+01:10:21,000 --> 01:10:33,000
+Different books will do differently and different implementations will do a little bit differently. We say
+
+725
+01:10:33,000 --> 01:10:39,000
+We take the value of that smallest one and we put it here.
+
+726
+01:10:39,000 --> 01:10:44,000
+We don't rearrange our tree. We just put a new value there.
+
+727
+01:10:44,000 --> 01:10:47,000
+And then once we've done this
+
+728
+01:10:47,000 --> 01:10:55,000
+We can delete four from the tree because four has no children
+
+729
+01:10:55,000 --> 01:11:00,000
+So
+
+730
+01:11:00,000 --> 01:11:04,000
+Let's just take second.
+
+731
+01:11:04,000 --> 01:11:06,000
+Look at this
+
+732
+01:11:06,000 --> 01:11:11,000
+And I'm not going to implement this today.
+
+733
+01:11:11,000 --> 01:11:22,000
+What I want that is, I think part of assignment five that first part that I suggest doing before
+
+734
+01:11:22,000 --> 01:11:26,000
+The midterm. But what delete looks like
+
+735
+01:11:26,000 --> 01:11:29,000
+Is that if we want
+
+736
+01:11:29,000 --> 01:11:31,000
+If we have
+
+737
+01:11:31,000 --> 01:11:37,000
+Let's see, delete. I'm gonna write it here. Three cases.
+
+738
+01:11:37,000 --> 01:11:43,000
+We have the case where we have no children
+
+739
+01:11:43,000 --> 01:11:45,000
+And this is all in the notes
+
+740
+01:11:45,000 --> 01:11:52,000
+I'm not going to put it all right here. But if we have no children, it's really easy. We just delete that note, and we're fine.
+
+741
+01:11:52,000 --> 01:11:54,000
+nothing to worry about.
+
+742
+01:11:54,000 --> 01:12:01,000
+If we have one child
+
+743
+01:12:01,000 --> 01:12:04,000
+We
+
+744
+01:12:04,000 --> 01:12:10,000
+If we have one child like this 14, we
+
+745
+01:12:10,000 --> 01:12:15,000
+Find the parent and replace this link.
+
+746
+01:12:15,000 --> 01:12:18,000
+With the left child
+
+747
+01:12:18,000 --> 01:12:25,000
+And if 14 were smaller than 10, we'd flip that around.
+
+748
+01:12:25,000 --> 01:12:31,000
+And then we have the case of two children.
+
+749
+01:12:31,000 --> 01:12:33,000
+And when we have two children
+
+750
+01:12:33,000 --> 01:12:36,000
+We are going to find the successor
+
+751
+01:12:36,000 --> 01:12:40,000
+By finding the min of the right child
+
+752
+01:12:40,000 --> 01:12:43,000
+And then swap the values
+
+753
+01:12:43,000 --> 01:12:46,000
+And delete the smallest check.
+
+754
+01:12:46,000 --> 01:12:58,000
+That gets put here.
+
+755
+01:12:58,000 --> 01:13:00,000
+Any questions?
+
+756
+01:13:00,000 --> 01:13:03,000
+This makes sense.
+
+757
+01:13:03,000 --> 01:13:15,000
+We feel confident that it works and it still gives us a binary search tree. So one of the things we're always double checking after we do any of these operations is do we still have a binary search tree?
+
+758
+01:13:15,000 --> 01:13:19,000
+And we're looking to see, okay, if I put four here
+
+759
+01:13:19,000 --> 01:13:21,000
+Is this
+
+760
+01:13:21,000 --> 01:13:28,000
+is this tree still a left child? Everything in this tree is still smaller than 8
+
+761
+01:13:28,000 --> 01:13:44,000
+is everything in the left child smaller than 4? Is everything in the right child larger than 4? And it is.
+
+762
+01:13:44,000 --> 01:13:46,000
+Orient.
+
+763
+01:13:46,000 --> 01:13:49,000
+I'm going to go to next piece.
+
+764
+01:13:49,000 --> 01:14:00,000
+Okay, let's talk about how much each of these operations cost.
+
+765
+01:14:00,000 --> 01:14:05,000
+So we've talked and actually, I think I left a dangling thread
+
+766
+01:14:05,000 --> 01:14:11,000
+from last Wednesday about talking about number of steps. So this will time. Oh, wait.
+
+767
+01:14:11,000 --> 01:14:16,000
+So successor
+
+768
+01:14:16,000 --> 01:14:23,000
+Okay, Ethan asked about the successor. Max
+
+769
+01:14:23,000 --> 01:14:29,000
+Okay, I'm going to interpret. I'm interpreting your question. So
+
+770
+01:14:29,000 --> 01:14:38,000
+We, when we did this, when we deleted three, we found the successor, which was the min of the right child.
+
+771
+01:14:38,000 --> 01:14:41,000
+So
+
+772
+01:14:41,000 --> 01:14:46,000
+We know that everything in the right child is larger than 3
+
+773
+01:14:46,000 --> 01:14:59,000
+And if we get the min from that, that is going to be the successor. That's the next largest number. And Ethan, I think you're asking, why don't we take the max of the left child instead?
+
+774
+01:14:59,000 --> 01:15:03,000
+Great question. So that is called
+
+775
+01:15:03,000 --> 01:15:11,000
+The predecessor.
+
+776
+01:15:11,000 --> 01:15:13,000
+I feel like
+
+777
+01:15:13,000 --> 01:15:17,000
+Sit with predators or
+
+778
+01:15:17,000 --> 01:15:21,000
+We're not doing the predecessor because I can't spell it.
+
+779
+01:15:21,000 --> 01:15:26,000
+That's only half joke. But when I said that some some books
+
+780
+01:15:26,000 --> 01:15:42,000
+Some books do it differently, so you'll see slightly different implementations. That's one of the different implementations. So I said, let's take the successor. Let's take the next largest value that we can find, and then swap that and remove that one
+
+781
+01:15:42,000 --> 01:15:45,000
+I could have just as easily said.
+
+782
+01:15:45,000 --> 01:15:49,000
+Apparently not just as easily because I still didn't spell it right.
+
+783
+01:15:49,000 --> 01:15:54,000
+Find the predecessor of the node we want to delete.
+
+784
+01:15:54,000 --> 01:15:58,000
+And swap the values and delete the predecessor.
+
+785
+01:15:58,000 --> 01:16:02,000
+Which means if we were here
+
+786
+01:16:02,000 --> 01:16:08,000
+If we were here, let's find the max of the left child.
+
+787
+01:16:08,000 --> 01:16:10,000
+Swap the values.
+
+788
+01:16:10,000 --> 01:16:14,000
+and delete that child.
+
+789
+01:16:14,000 --> 01:16:17,000
+I left that out just for simplicity.
+
+790
+01:16:17,000 --> 01:16:24,000
+So if I confuse anyone, don't worry about it. Just do the successor.
+
+791
+01:16:24,000 --> 01:16:36,000
+But anyone who is wondering, and Ethan does that answer your question?
+
+792
+01:16:36,000 --> 01:16:46,000
+But yes, those are just implementation details. Whichever one you do, you got to be consistent with.
+
+793
+01:16:46,000 --> 01:16:55,000
+Yes.
+
+794
+01:16:55,000 --> 01:17:13,000
+Sorry, repeat that the node to delete the. So the way to delete something from the tree
+
+795
+01:17:13,000 --> 01:17:16,000
+So there's coming
+
+796
+01:17:16,000 --> 01:17:27,000
+Yes. Yeah, I'm going to repeat that for here. Can you correct me where I got got wrong. There's two different ways. So if we it's it's hard to delete a node with two children
+
+797
+01:17:27,000 --> 01:17:31,000
+But it's easy to delete a node with no children.
+
+798
+01:17:31,000 --> 01:17:37,000
+Right? We have two ways if we are deleting a node with two children
+
+799
+01:17:37,000 --> 01:17:40,000
+We have two options.
+
+800
+01:17:40,000 --> 01:17:48,000
+I gave you one to start with was that you find the men of the right child, which is the successor
+
+801
+01:17:48,000 --> 01:17:50,000
+And then you swap it around
+
+802
+01:17:50,000 --> 01:18:00,000
+And then that means you leave a child down here with no children. A node down here with no children, that's really easy to remove from the tree.
+
+803
+01:18:00,000 --> 01:18:04,000
+Or we could have found the max
+
+804
+01:18:04,000 --> 01:18:06,000
+of the left child
+
+805
+01:18:06,000 --> 01:18:08,000
+And did our swap
+
+806
+01:18:08,000 --> 01:18:11,000
+And then deleted that node.
+
+807
+01:18:11,000 --> 01:18:17,000
+Which, again, we can do because deleting a node with no children is very easy.
+
+808
+01:18:17,000 --> 01:18:29,000
+And one thing we know about our binary search tree is that the min value and the max value
+
+809
+01:18:29,000 --> 01:18:38,000
+Well, it's not true. I'm going to leave it at that. Oh, yeah, no, yes, the min
+
+810
+01:18:38,000 --> 01:18:44,000
+Never mind, I'm gonna stop there.
+
+811
+01:18:44,000 --> 01:18:47,000
+Because there could be a case
+
+812
+01:18:47,000 --> 01:18:50,000
+Where, so for example
+
+813
+01:18:50,000 --> 01:18:58,000
+Trying to think of another example. I think that that's enough.
+
+814
+01:18:58,000 --> 01:19:00,000
+Okay.
+
+815
+01:19:00,000 --> 01:19:02,000
+Any other questions?
+
+816
+01:19:02,000 --> 01:19:05,000
+comments
+
+817
+01:19:05,000 --> 01:19:07,000
+So
+
+818
+01:19:07,000 --> 01:19:37,000
+Let's talk about runtime.
+
+819
+01:19:39,000 --> 01:19:47,000
+Okay. I think we started on this last week.
+
+820
+01:19:47,000 --> 01:19:52,000
+We want to answer the question of how long does a search take?
+
+821
+01:19:52,000 --> 01:19:57,000
+So we have two two trees here. We've got this tree
+
+822
+01:19:57,000 --> 01:20:02,000
+And we've got this tree. And we want to know
+
+823
+01:20:02,000 --> 01:20:11,000
+How long does it take to do a search on either of those
+
+824
+01:20:11,000 --> 01:20:15,000
+How do we answer that question?
+
+825
+01:20:15,000 --> 01:20:20,000
+The O of N.
+
+826
+01:20:20,000 --> 01:20:24,000
+Let's take a step back for just a second before we go straight to Element.
+
+827
+01:20:24,000 --> 01:20:32,000
+What does it mean to take the cost, identify the cost of a search of one of these trees?
+
+828
+01:20:32,000 --> 01:20:40,000
+Okay, calculating the complexity. It's not even worry about that quite yet. All right answers. All right answers.
+
+829
+01:20:40,000 --> 01:20:43,000
+But
+
+830
+01:20:43,000 --> 01:20:46,000
+What… what we're jumping to
+
+831
+01:20:46,000 --> 01:21:00,000
+our complexity is we are counting something what O N gets us is comparable search time
+
+832
+01:21:00,000 --> 01:21:05,000
+Yeah, comparable search
+
+833
+01:21:05,000 --> 01:21:09,000
+Comparable time
+
+834
+01:21:09,000 --> 01:21:12,000
+Metric.
+
+835
+01:21:12,000 --> 01:21:22,000
+Okay, that's what complexity gets us. That's what O of N gets us. These are values that allow us to compare
+
+836
+01:21:22,000 --> 01:21:32,000
+how long it takes to do a search, independent of things like the machine, the hardware
+
+837
+01:21:32,000 --> 01:21:40,000
+Or the language
+
+838
+01:21:40,000 --> 01:21:51,000
+Anything else running on the machine
+
+839
+01:21:51,000 --> 01:21:53,000
+These are the kinds of things
+
+840
+01:21:53,000 --> 01:21:57,000
+That if I just write some code and
+
+841
+01:21:57,000 --> 01:22:02,000
+run a search for a long time. These are the things that are going to impact
+
+842
+01:22:02,000 --> 01:22:12,000
+the clock time. That's going to run. So these are not comparable across across implementations or across algorithms.
+
+843
+01:22:12,000 --> 01:22:27,000
+So instead, we're going to count steps.
+
+844
+01:22:27,000 --> 01:22:32,000
+Each step, this is we're going to say that a
+
+845
+01:22:32,000 --> 01:22:37,000
+step is
+
+846
+01:22:37,000 --> 01:22:46,000
+Step is a node visited.
+
+847
+01:22:46,000 --> 01:22:50,000
+Okay, that's what we'll say. We're going to count steps
+
+848
+01:22:50,000 --> 01:23:00,000
+How many steps we're taking in our algorithm and our function, in our implementation, and our step is just we're going to simplify that down to the node that we're going to visit.
+
+849
+01:23:00,000 --> 01:23:07,000
+So we're going to think about how to characterize this.
+
+850
+01:23:07,000 --> 01:23:15,000
+So
+
+851
+01:23:15,000 --> 01:23:21,000
+How can we think about this?
+
+852
+01:23:21,000 --> 01:23:24,000
+And this tree
+
+853
+01:23:24,000 --> 01:23:26,000
+How many steps do we do?
+
+854
+01:23:26,000 --> 01:23:31,000
+We're gonna start here. If we're searching for we're going to search for 13. Why not?
+
+855
+01:23:31,000 --> 01:23:36,000
+Search for 13 and make one
+
+856
+01:23:36,000 --> 01:23:37,000
+One step here
+
+857
+01:23:37,000 --> 01:23:40,000
+Let me come down here, you do one step here
+
+858
+01:23:40,000 --> 01:23:47,000
+Come down here, one step here, come down here, one step here.
+
+859
+01:23:47,000 --> 01:23:50,000
+We'll call it four steps
+
+860
+01:23:50,000 --> 01:23:56,000
+I will compare it to, we're going to look for 13 steps or we're going to look for 13 here.
+
+861
+01:23:56,000 --> 01:24:00,000
+Rearrange the windows here
+
+862
+01:24:00,000 --> 01:24:04,000
+So we can all see everything. We're going to start here.
+
+863
+01:24:04,000 --> 01:24:11,000
+13, 1, 2, 3, 4, 5, 6, 7, 8.
+
+864
+01:24:11,000 --> 01:24:14,000
+Eight steps
+
+865
+01:24:14,000 --> 01:24:20,000
+What does this look like? I mean, we can say 8 is twice as many as 4.
+
+866
+01:24:20,000 --> 01:24:22,000
+True statement.
+
+867
+01:24:22,000 --> 01:24:27,000
+But what are we noticing?
+
+868
+01:24:27,000 --> 01:24:29,000
+Versa is
+
+869
+01:24:29,000 --> 01:24:33,000
+This one, this one, this one, this one.
+
+870
+01:24:33,000 --> 01:24:37,000
+We can tell
+
+871
+01:24:37,000 --> 01:24:46,000
+We can see it in this example a little bit better. We're doing one step at every level of the tree.
+
+872
+01:24:46,000 --> 01:24:54,000
+So this is one. One, one, one. It's bounded by the height of the tree.
+
+873
+01:24:54,000 --> 01:24:58,000
+We're never going to go higher than the longer than the hiding tree.
+
+874
+01:24:58,000 --> 01:25:02,000
+Maybe shorter because maybe we're looking for eight.
+
+875
+01:25:02,000 --> 01:25:06,000
+We're never going to go longer than the height of the tree.
+
+876
+01:25:06,000 --> 01:25:08,000
+And here
+
+877
+01:25:08,000 --> 01:25:16,000
+The number of steps, if we're looking for 13, happens to be twice as long. But again, it's bounded by
+
+878
+01:25:16,000 --> 01:25:19,000
+We only ever do one step
+
+879
+01:25:19,000 --> 01:25:27,000
+At each level of the tree. You only ever visit one node at every level in the tree, which means we're bounded by
+
+880
+01:25:27,000 --> 01:25:36,000
+the height of the tree
+
+881
+01:25:36,000 --> 01:25:40,000
+So we can say that our cost of the search
+
+882
+01:25:40,000 --> 01:25:43,000
+is…
+
+883
+01:25:43,000 --> 01:25:46,000
+We're gonna call it
+
+884
+01:25:46,000 --> 01:25:50,000
+of age
+
+885
+01:25:50,000 --> 01:25:54,000
+Okay, and what's H
+
+886
+01:25:54,000 --> 01:25:56,000
+Right.
+
+887
+01:25:56,000 --> 01:26:06,000
+How do we calculate height?
+
+888
+01:26:06,000 --> 01:26:12,000
+It's a full binary tree
+
+889
+01:26:12,000 --> 01:26:17,000
+It's binary tree. Let's see.
+
+890
+01:26:17,000 --> 01:26:18,000
+Okay.
+
+891
+01:26:18,000 --> 01:26:28,000
+This is height
+
+892
+01:26:28,000 --> 01:26:36,000
+What's the height of this tree?
+
+893
+01:26:36,000 --> 01:26:38,000
+9
+
+894
+01:26:38,000 --> 01:26:45,000
+We'll call it N. I'm going to put nine and n here. I think it's 9. I'm trusting that it's not it.
+
+895
+01:26:45,000 --> 01:26:49,000
+Sounds about right. Okay, we're going to call it N.
+
+896
+01:26:49,000 --> 01:26:59,000
+Because this is the number of items that we have. We've said in this in this crazy VST that's we're not crazy about
+
+897
+01:26:59,000 --> 01:27:03,000
+is basically a linked list.
+
+898
+01:27:03,000 --> 01:27:05,000
+I'll call it 9
+
+899
+01:27:05,000 --> 01:27:08,000
+Or sorry, Anne
+
+900
+01:27:08,000 --> 01:27:10,000
+Oh.
+
+901
+01:27:10,000 --> 01:27:20,000
+One, two, three. I did not count it 4, 5, 6, 7, 8, 9. Height is the
+
+902
+01:27:20,000 --> 01:27:22,000
+Yes.
+
+903
+01:27:22,000 --> 01:27:34,000
+Yes, it should be height should be the path. Well, it's levels or depth. Depth is 0. 1, 2, 3, 4, 5, 6, 7.
+
+904
+01:27:34,000 --> 01:27:37,000
+We can call this
+
+905
+01:27:37,000 --> 01:27:39,000
+Height is the path
+
+906
+01:27:39,000 --> 01:27:41,000
+Length of the path
+
+907
+01:27:41,000 --> 01:27:43,000
+Root to the
+
+908
+01:27:43,000 --> 01:27:49,000
+Finally.
+
+909
+01:27:49,000 --> 01:28:01,000
+But our heights in this case is N. We're going to talk about it in terms of n because it's n items and it's
+
+910
+01:28:01,000 --> 01:28:06,000
+Oh, one list.
+
+911
+01:28:06,000 --> 01:28:11,000
+What's the height of this tree?
+
+912
+01:28:11,000 --> 01:28:15,000
+In terms of N.
+
+913
+01:28:15,000 --> 01:28:17,000
+This one gets a little trickier, too.
+
+914
+01:28:17,000 --> 01:28:23,000
+Yeah.
+
+915
+01:28:23,000 --> 01:28:31,000
+Here, the color height three
+
+916
+01:28:31,000 --> 01:28:34,000
+This one's somewhere
+
+917
+01:28:34,000 --> 01:28:40,000
+This one's not quite as, let me give another example. Let's do another one here.
+
+918
+01:28:40,000 --> 01:28:47,000
+If we have one
+
+919
+01:28:47,000 --> 01:28:50,000
+1, 2, 3, 4, 5
+
+920
+01:28:50,000 --> 01:28:53,000
+6, 7…
+
+921
+01:28:53,000 --> 01:28:55,000
+8, 9…
+
+922
+01:28:55,000 --> 01:29:03,000
+That still gives us. I was trying to get something a little bit better that distinguishes a little bit more
+
+923
+01:29:03,000 --> 01:29:07,000
+But I think this is as good as we can get.
+
+924
+01:29:07,000 --> 01:29:16,000
+With nine notes, that's as good as we can get
+
+925
+01:29:16,000 --> 01:29:25,000
+Yet. So our height. So we have our height. Our height is related to the number of items that we have in our tree.
+
+926
+01:29:25,000 --> 01:29:31,000
+What is the minimum number of what's the lowest height?
+
+927
+01:29:31,000 --> 01:29:33,000
+We can have in
+
+928
+01:29:33,000 --> 01:29:38,000
+binary search tree.
+
+929
+01:29:38,000 --> 01:29:43,000
+In terms of N.
+
+930
+01:29:43,000 --> 01:29:47,000
+This is going to be
+
+931
+01:29:47,000 --> 01:29:50,000
+Thank you.
+
+932
+01:29:50,000 --> 01:29:56,000
+Log N or log base to event
+
+933
+01:29:56,000 --> 01:30:05,000
+And this is the best case.
+
+934
+01:30:05,000 --> 01:30:10,000
+This is the case where
+
+935
+01:30:10,000 --> 01:30:17,000
+Our binary search tree. I'm gonna say is relatively well balanced, kind of full on every level.
+
+936
+01:30:17,000 --> 01:30:20,000
+It's well behaved. We'll call it well-behaved
+
+937
+01:30:20,000 --> 01:30:26,000
+And that's in contrast to this one
+
+938
+01:30:26,000 --> 01:30:28,000
+Where it's still the height
+
+939
+01:30:28,000 --> 01:30:31,000
+But here our height
+
+940
+01:30:31,000 --> 01:30:39,000
+is N.
+
+941
+01:30:39,000 --> 01:30:43,000
+So we can feel fairly confident
+
+942
+01:30:43,000 --> 01:30:50,000
+feel pretty good about. Okay, our our search time for
+
+943
+01:30:50,000 --> 01:30:59,000
+If we count our search time in terms of number of steps or the number of nodes we visit to do our search, that's one per level
+
+944
+01:30:59,000 --> 01:31:04,000
+binary search. We only ever visit one node on every level
+
+945
+01:31:04,000 --> 01:31:10,000
+So our cost, or the number of steps we visit is
+
+946
+01:31:10,000 --> 01:31:12,000
+No more than
+
+947
+01:31:12,000 --> 01:31:14,000
+the height of the tree
+
+948
+01:31:14,000 --> 01:31:16,000
+But the height of the tree
+
+949
+01:31:16,000 --> 01:31:19,000
+could be login
+
+950
+01:31:19,000 --> 01:31:26,000
+Or it could be N. It's going to be somewhere in the middle.
+
+951
+01:31:26,000 --> 01:31:31,000
+Or there's best case, it could be worst case, it could be somewhere in the
+
+952
+01:31:31,000 --> 01:31:35,000
+So we are going to
+
+953
+01:31:35,000 --> 01:31:37,000
+Let's see.
+
+954
+01:31:37,000 --> 01:31:41,000
+We're going to, when we talk about our runtime
+
+955
+01:31:41,000 --> 01:31:47,000
+We will be able to characterize it one way or another.
+
+956
+01:31:47,000 --> 01:31:51,000
+Here we're counting those steps
+
+957
+01:31:51,000 --> 01:31:55,000
+But what those steps are and how they relate to N.
+
+958
+01:31:55,000 --> 01:31:57,000
+Might change.
+
+959
+01:31:57,000 --> 01:32:08,000
+And we need to think about both the best case and the worst case, and sometimes average case.
+
+960
+01:32:08,000 --> 01:32:15,000
+Which I'm not filling in here. Average case is going to be longer.
+
+961
+01:32:15,000 --> 01:32:24,000
+Okay, so we have our best case, our worst case, and our average case.
+
+962
+01:32:24,000 --> 01:32:26,000
+Yes, yes.
+
+963
+01:32:26,000 --> 01:32:31,000
+Yeah. So this is
+
+964
+01:32:31,000 --> 01:32:36,000
+This is the case where our binary tree is
+
+965
+01:32:36,000 --> 01:32:38,000
+well-behaved
+
+966
+01:32:38,000 --> 01:32:40,000
+So
+
+967
+01:32:40,000 --> 01:32:43,000
+We're going to think of it as
+
+968
+01:32:43,000 --> 01:32:49,000
+At every level
+
+969
+01:32:49,000 --> 01:33:03,000
+If I have, I'm going to go to powers of two to keep it easy. So if I have N equals 2, 4, 8
+
+970
+01:33:03,000 --> 01:33:15,000
+1632 dot dot dot log base 2. This is going to be one 2 3
+
+971
+01:33:15,000 --> 01:33:17,000
+Five
+
+972
+01:33:17,000 --> 01:33:20,000
+I take 30, well, that's too many.
+
+973
+01:33:20,000 --> 01:33:25,000
+I have 1, 2, 3.
+
+974
+01:33:25,000 --> 01:33:30,000
+This is
+
+975
+01:33:30,000 --> 01:33:50,000
+I'm trying to think of how to put it. I'm not going to count off in terms of numbers. I'm not going to make this a binary search tree. This is one node, two, three, four, five, six, seven, eight, nine, 10, 11, 12, 13, 14, 15.
+
+976
+01:33:50,000 --> 01:33:57,000
+Is that right, 1, 2, 3, 4, 5, 6, 7, 8, plus four. 12, 13, 14, 15.
+
+977
+01:33:57,000 --> 01:34:00,000
+So if we take 15
+
+978
+01:34:00,000 --> 01:34:07,000
+And of course, 16 as
+
+979
+01:34:07,000 --> 01:34:11,000
+Ceiling. You divide it by 2 over and over again.
+
+980
+01:34:11,000 --> 01:34:20,000
+So that's what a nicely behaved binary search tree gives us is that we are splitting it into two at every step.
+
+981
+01:34:20,000 --> 01:34:25,000
+So that's where our log base 2 comes from
+
+982
+01:34:25,000 --> 01:34:32,000
+It's probably the best patient
+
+983
+01:34:32,000 --> 01:34:37,000
+Will you repeat that?
+
+984
+01:34:37,000 --> 01:34:43,000
+Okay, the only the runtime of the search
+
+985
+01:34:43,000 --> 01:34:48,000
+Only the worst case is the height of the tree.
+
+986
+01:34:48,000 --> 01:34:49,000
+No.
+
+987
+01:34:49,000 --> 01:34:55,000
+The runtime is always going to be the height of the tree, or
+
+988
+01:34:55,000 --> 01:34:57,000
+It's a max of the height
+
+989
+01:34:57,000 --> 01:34:59,000
+Well
+
+990
+01:34:59,000 --> 01:35:02,000
+Did you say hi to the tree or n?
+
+991
+01:35:02,000 --> 01:35:09,000
+Worst case is height of the tree. Yes, yes, that is correct. Your worst case is going to be height of the tree
+
+992
+01:35:09,000 --> 01:35:17,000
+But if we are thinking of the height of the tree, we will define the height of the tree in terms of N.
+
+993
+01:35:17,000 --> 01:35:28,000
+Which means the height of the tree is going to be somewhere between log n and
+
+994
+01:35:28,000 --> 01:35:31,000
+Sorry, I heard that you said N.
+
+995
+01:35:31,000 --> 01:35:34,000
+But that is not what you said.
+
+996
+01:35:34,000 --> 01:35:40,000
+But yes, our worst case is going to be the height of the truth
+
+997
+01:35:40,000 --> 01:35:45,000
+But given the height of the tree. That could be either
+
+998
+01:35:45,000 --> 01:35:50,000
+Again, a best case and a worst case for the height of the tree
+
+999
+01:35:50,000 --> 01:35:55,000
+Let's look at an example of this
+
+1000
+01:35:55,000 --> 01:36:11,000
+Are we on time? Let me take just a moment here.
+
+1001
+01:36:11,000 --> 01:36:14,000
+Hi, John. And
+
+1002
+01:36:14,000 --> 01:36:17,000
+We are going to
+
+1003
+01:36:17,000 --> 01:36:22,000
+Let's see.
+
+1004
+01:36:22,000 --> 01:36:34,000
+If we've got time for this. We're gonna do this. We're going to try to run and
+
+1005
+01:36:34,000 --> 01:36:42,000
+See if we get this in before the end of class. I'm going to
+
+1006
+01:36:42,000 --> 01:36:46,000
+Let's do not
+
+1007
+01:36:46,000 --> 01:36:56,000
+I import random. I'm just going to type this out real quick.
+
+1008
+01:36:56,000 --> 01:37:00,000
+trees… what is this?
+
+1009
+01:37:00,000 --> 01:37:04,000
+Did we do this
+
+1010
+01:37:04,000 --> 01:37:11,000
+This Wednesday. BSC Monday and BSC Monday
+
+1011
+01:37:11,000 --> 01:37:19,000
+Oh.
+
+1012
+01:37:19,000 --> 01:37:29,000
+We might have another
+
+1013
+01:37:29,000 --> 01:37:38,000
+I will talk through this
+
+1014
+01:37:38,000 --> 01:37:44,000
+5, 1, 2, we're doing 50,000.
+
+1015
+01:37:44,000 --> 01:37:52,000
+I think it's 50,000, 5,000.
+
+1016
+01:37:52,000 --> 01:37:54,000
+I'm going to
+
+1017
+01:37:54,000 --> 01:38:04,000
+Take this in and then answer any questions.
+
+1018
+01:38:04,000 --> 01:38:09,000
+VST insert iterative
+
+1019
+01:38:09,000 --> 01:38:14,000
+Shuffle B…
+
+1020
+01:38:14,000 --> 01:38:21,000
+Change… 48 new values
+
+1021
+01:38:21,000 --> 01:38:27,000
+Chain equals BST insert iterative
+
+1022
+01:38:27,000 --> 01:38:30,000
+Change
+
+1023
+01:38:30,000 --> 01:38:39,000
+Morning tree
+
+1024
+01:38:39,000 --> 01:38:43,000
+Sheffield…
+
+1025
+01:38:43,000 --> 01:38:47,000
+Sorted. Anyone have a
+
+1026
+01:38:47,000 --> 01:38:53,000
+sense of what we're doing here
+
+1027
+01:38:53,000 --> 01:38:56,000
+Stand equals time.berf
+
+1028
+01:38:56,000 --> 01:38:58,000
+Ontario
+
+1029
+01:38:58,000 --> 01:39:02,000
+For the values
+
+1030
+01:39:02,000 --> 01:39:07,000
+VST search.
+
+1031
+01:39:07,000 --> 01:39:10,000
+Nice.
+
+1032
+01:39:10,000 --> 01:39:24,000
+Anyone want to explain what I'm doing here?
+
+1033
+01:39:24,000 --> 01:39:27,000
+Yep.
+
+1034
+01:39:27,000 --> 01:39:30,000
+Where
+
+1035
+01:39:30,000 --> 01:39:34,000
+Building
+
+1036
+01:39:34,000 --> 01:39:38,000
+We are building our tree.
+
+1037
+01:39:38,000 --> 01:39:50,000
+We're building one in order and one randomized, and then we are going to run them all and compare them. And then I think
+
+1038
+01:39:50,000 --> 01:39:56,000
+Let me
+
+1039
+01:39:56,000 --> 01:40:01,000
+Which one do we have? We have BST search iterative.
+
+1040
+01:40:01,000 --> 01:40:07,000
+We do have that
+
+1041
+01:40:07,000 --> 01:40:11,000
+From oh, I spelled the wrong
+
+1042
+01:40:11,000 --> 01:40:18,000
+And then I think we need to insert iterative.
+
+1043
+01:40:18,000 --> 01:40:21,000
+I don't think we implemented that yet.
+
+1044
+01:40:21,000 --> 01:40:27,000
+Okay, let's implement that real quick.
+
+1045
+01:40:27,000 --> 01:40:33,000
+Yeah
+
+1046
+01:40:33,000 --> 01:40:36,000
+Insert, iterative. Y'all remember
+
+1047
+01:40:36,000 --> 01:40:45,000
+How we do our
+
+1048
+01:40:45,000 --> 01:40:48,000
+How we do our insert
+
+1049
+01:40:48,000 --> 01:40:57,000
+Our insert is we search for the value we're inserting. When we get nothing back, we then insert it into the tree.
+
+1050
+01:40:57,000 --> 01:41:01,000
+Okay, so it should look something like
+
+1051
+01:41:01,000 --> 01:41:04,000
+Sake of time, I'm double check my notes.
+
+1052
+01:41:04,000 --> 01:41:14,000
+Well, you know.
+
+1053
+01:41:14,000 --> 01:41:21,000
+Copy. Copy paste this and
+
+1054
+01:41:21,000 --> 01:41:22,000
+No, I'm not.
+
+1055
+01:41:22,000 --> 01:41:31,000
+Too much change if root is none. we turn create tree
+
+1056
+01:41:31,000 --> 01:41:33,000
+Node
+
+1057
+01:41:33,000 --> 01:41:38,000
+This is in the notes. I thought I'd get away with not
+
+1058
+01:41:38,000 --> 01:41:57,000
+Hopefully we'll be able to run this real quick.
+
+1059
+01:41:57,000 --> 01:42:00,000
+Slide equals left
+
+1060
+01:42:00,000 --> 01:42:06,000
+F value less than node of payload
+
+1061
+01:42:06,000 --> 01:42:13,000
+That's right. We're deciding which side we're going to. If node of
+
+1062
+01:42:13,000 --> 01:42:14,000
+side
+
+1063
+01:42:14,000 --> 01:42:16,000
+Is none
+
+1064
+01:42:16,000 --> 01:42:20,000
+Here we say node of side
+
+1065
+01:42:20,000 --> 01:42:25,000
+Equals create
+
+1066
+01:42:25,000 --> 01:42:27,000
+Tree
+
+1067
+01:42:27,000 --> 01:42:30,000
+node value
+
+1068
+01:42:30,000 --> 01:42:36,000
+Return. Root
+
+1069
+01:42:36,000 --> 01:42:40,000
+Node equals node outside.
+
+1070
+01:42:40,000 --> 01:42:53,000
+Okay, so we're basically doing the same thing as the search. If we have nothing in our tree already, create a node and put it in. Otherwise, go through
+
+1071
+01:42:53,000 --> 01:42:55,000
+And
+
+1072
+01:42:55,000 --> 01:43:09,000
+If we find the value we're looking for, return and do nothing. Otherwise, we figure out if we go to the left or the right. It's got a typo here.
+
+1073
+01:43:09,000 --> 01:43:16,000
+Check the node, create it if we need to. I'm gonna just leave it at that. And then, let's run this
+
+1074
+01:43:16,000 --> 01:43:23,000
+Let's see if it tells us anything interesting. And if I have a typo
+
+1075
+01:43:23,000 --> 01:43:31,000
+Forgot we put all those print statements in
+
+1076
+01:43:31,000 --> 01:43:40,000
+Okay, let me get some of those print statements out of there because it's obfuscating our output.
+
+1077
+01:43:40,000 --> 01:43:44,000
+We can't see what it says.
+
+1078
+01:43:44,000 --> 01:43:46,000
+It's more
+
+1079
+01:43:46,000 --> 01:43:50,000
+Okay
+
+1080
+01:43:50,000 --> 01:43:53,000
+Okay.
+
+1081
+01:43:53,000 --> 01:44:09,000
+Back to notes. How are we on time? We're going to run out of time. So here, what do we see? We have zero in our random order. We have 0.4 seconds for 5,000 searches, and our sorted order is 0.8
+
+1082
+01:44:09,000 --> 01:44:16,000
+4 seconds for five same number of searches
+
+1083
+01:44:16,000 --> 01:44:20,000
+Run out of time.
+
+1084
+01:44:20,000 --> 01:44:22,000
+Let's
+
+1085
+01:44:22,000 --> 01:44:28,000
+I would I'm going to do. So we're going to remember this
+
+1086
+01:44:28,000 --> 01:44:31,000
+0.04 and 0.
+
+1087
+01:44:31,000 --> 01:44:33,000
+08. Let's
+
+1088
+01:44:33,000 --> 01:44:37,000
+make this
+
+1089
+01:44:37,000 --> 01:44:38,000
+Let's make this
+
+1090
+01:44:38,000 --> 01:44:43,000
+Let's make this 100,000.
+
+1091
+01:44:43,000 --> 01:44:47,000
+1, 2, 3, you know, I'll put one there.
+
+1092
+01:44:47,000 --> 01:44:52,000
+I'm going to do a whole bunch. It's going to run for a while because it's going to be a little slow.
+
+1093
+01:44:52,000 --> 01:44:57,000
+And here.
+
+1094
+01:44:57,000 --> 01:44:59,000
+Is that right?
+
+1095
+01:44:59,000 --> 01:45:06,000
+I like that and seeing first first thing I'm suspicious.
+
+1096
+01:45:06,000 --> 01:45:24,000
+The bell is going to ring very soon.
+
+1097
+01:45:24,000 --> 01:45:27,000
+It's
+
+1098
+01:45:27,000 --> 01:45:30,000
+Yeah, why does this look suspicious?
+
+1099
+01:45:30,000 --> 01:45:35,000
+Why don't we look at this? So you started to say it, and maybe you said the whole thing, and I didn't catch it all. But
+
+1100
+01:45:35,000 --> 01:45:38,000
+The first time we ran this
+
+1101
+01:45:38,000 --> 01:45:46,000
+The random order was about half the runtime of our sorted order.
+
+1102
+01:45:46,000 --> 01:45:53,000
+Which kind of made sense. That made sense to us, right? Because random order keeps our tree short
+
+1103
+01:45:53,000 --> 01:45:56,000
+And sorted order makes our tree long.
+
+1104
+01:45:56,000 --> 01:46:02,000
+And now we're looking at a… I put a whole bunch more things in there, and it's about the same runtime.
+
+1105
+01:46:02,000 --> 01:46:06,000
+So I call
+
+1106
+01:46:06,000 --> 01:46:21,000
+I call that that that is absolutely fishy. I suspect I did something wrong, my code somewhere.
+
+1107
+01:46:21,000 --> 01:46:24,000
+I wonder
+
+1108
+01:46:24,000 --> 01:46:29,000
+I'm not
+
+1109
+01:46:29,000 --> 01:46:35,000
+This always happens at the end. No, that's wrong. I think it's wrong. There is
+
+1110
+01:46:35,000 --> 01:46:41,000
+You can do it for yourself at home. And there is a table that's a little bit more
+
+1111
+01:46:41,000 --> 01:46:43,000
+It seems a little less fishy
+
+1112
+01:46:43,000 --> 01:46:51,000
+That will tell us. I'm just going to take a moment. I'm going to let you all go
+
+1113
+01:46:51,000 --> 01:46:56,000
+We are very close to the end. Take a look at this table
+
+1114
+01:46:56,000 --> 01:47:15,000
+And I'll double check this and try to fix it when we come back on Wednesday online, we will start at looking at this table and how we extrapolate it to N log N and squared, all that jazz. And on to the you see something?
+
+1115
+01:47:15,000 --> 01:47:21,000
+You'll see
+
+1116
+01:47:21,000 --> 01:47:28,000
+Good car, okay.
+
+1117
+01:47:28,000 --> 01:47:37,000
+You're right. That does look like it's the same.
+
+1118
+01:47:37,000 --> 01:47:42,000
+Wait, a change
+
+1119
+01:47:42,000 --> 01:47:44,000
+Range.sample
+
+1120
+01:47:44,000 --> 01:47:54,000
+50,000 take 10,000 of them. Our values shuffled
+
+1121
+01:47:54,000 --> 01:47:56,000
+Yeah
+
+1122
+01:47:56,000 --> 01:48:04,000
+Oh, oh, oh, oh, because I do. Thank you. Yes, that is the problem. This is supposed to be sorted.
+
+1123
+01:48:04,000 --> 01:48:07,000
+Yes.
+
+1124
+01:48:07,000 --> 01:48:12,000
+Y'all can all go. I'm not going to make you there, but I am going to
+
+1125
+01:48:12,000 --> 01:48:15,000
+Yeah, I think it's running.
+
+1126
+01:48:15,000 --> 01:48:31,000
+It's going to take a while because the sorting I think
+
+1127
+01:48:31,000 --> 01:48:34,000
+It's gonna take a lot longer.
+
+1128
+01:48:34,000 --> 01:48:39,000
+Oh my goodness.
+
+1129
+01:48:39,000 --> 01:48:43,000
+I did make it really big.
+
+1130
+01:48:43,000 --> 01:48:46,000
+100,000… I put 100,000 in there
+
+1131
+01:48:46,000 --> 01:48:52,000
+Can't give up now because then I have to restart it.
+
+1132
+01:48:52,000 --> 01:48:54,000
+Maybe I should
+
+1133
+01:48:54,000 --> 01:48:59,000
+How many tickets, let's see
+
+1134
+01:48:59,000 --> 01:49:04,000
+Yeah, 50,000 steps
+
+1135
+01:49:04,000 --> 01:49:06,000
+Should I restart it?
+
+1136
+01:49:06,000 --> 01:49:09,000
+With a slightly smaller number
+
+1137
+01:49:09,000 --> 01:49:10,000
+Sorry.
+
+1138
+01:49:10,000 --> 01:49:13,000
+Let's do this
+
+1139
+01:49:13,000 --> 01:49:17,000
+Was that 50,000? I'll do.
+
+1140
+01:49:17,000 --> 01:49:21,000
+We'll do 10,000. See if it gets a little
+
+1141
+01:49:21,000 --> 01:49:24,000
+Master.
+
+1142
+01:49:24,000 --> 01:49:27,000
+Come on.
+
+1143
+01:49:27,000 --> 01:49:30,000
+It's 10,000, right?
+
+1144
+01:49:30,000 --> 01:49:34,000
+10,000… 10,000 shouldn't be quite that slow.
+
+1145
+01:49:34,000 --> 01:49:42,000
+There we go.
+
+1146
+01:49:42,000 --> 01:49:46,000
+I didn't update the 5,000.
+
+1147
+01:49:46,000 --> 01:49:55,000
+12 seconds. There we go. That's why we're sitting here waiting 12 seconds. That's what we're looking for. Thank you for catching that.
+
+1148
+01:49:55,000 --> 01:49:57,000
+Okay.
+
+1149
+01:49:57,000 --> 01:49:58,000
+Now we're
+
+1150
+01:49:58,000 --> 01:50:05,000
+Now we're satisfied we can all go home now. Have a good night.
+
+1151
+01:50:05,000 --> 01:50:08,746
+Okay. Night, everyone.
+

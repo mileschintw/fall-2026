@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-10-27T14:28:07-07:00",
+  "task": "上課筆記",
+  "status": "warn",
+  "summary": "需要重新登入：Canvas（DSA Class 8 10/26 字幕已存，講義/筆記未做）",
+  "output": "dsa/lectures/2026-10-26/transcript.srt"
+ },
+ {
   "at": "2026-10-27T14:27:02-07:00",
   "task": "截止提醒",
   "status": "ok",
