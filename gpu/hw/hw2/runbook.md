@@ -11,13 +11,16 @@
 - 兩種標記：
   - **✍️**：要寫進答案的東西。這份只給答案方向和本機數據，交出去的要用你自己的截圖和文字。
   - **⚠️**：原文和實際情況不一樣，以這裡的實測為準。
-- 學習單：[`D:\Repos\Au26_GPU\Au26_GPUCompute\HW2\HW2_Answers.docx`](../../../../Au26_GPU/Au26_GPUCompute/HW2/HW2_Answers.docx)，格式照 HW1_Answers.docx（Calibri、灰底表頭、1×1 作答框），內容是空的，照原文順序排好：
-  - Part 1：Q1–Q3
-  - Part 2：P1 a–c 各一張表、P2 兩張 roofline 圖
-  - Part 3：3 個 kernel、計時表、debugger 兩張截圖和 Warp QUESTION、NCU 8 列表、兩題 HW Q
-  - Extra credit：CPU vs GPU、理論 AI
+- 學習單：[`D:\Repos\Au26_GPU\Au26_GPUCompute\HW2\HW2_Answers.docx`](../../../../Au26_GPU/Au26_GPUCompute/HW2/HW2_Answers.docx)，格式照 HW1_Answers.docx（Calibri、灰底表頭、1×1 作答框），**2026-10-27 起是完整填好的版本**，只剩匯出 PDF 和上傳。
+  - 只放原文要求的項目：
+    - Part 1：Q1–Q3
+    - Part 2：P1 a–c 各一張 `algorithm | FLOPs | Mem bytes | AI` 表，加上 order of complexity；P2 的規格表、代入值、兩張 roofline 圖
+    - Part 3：模糊影像 #1–#3、理論 AI（extra credit）、計時表、DEBUG vs RELEASE、Warp QUESTION 和兩張截圖、NCU 8 列和 CLI 原始輸出、兩題 HW Q
+    - Extra credit：CPU vs GPU
+  - 開頭的 Build environment 寫明是本機 RTX 3050、不是 AWS T4，也寫了量測用的 build 和 debugger 用的 build 不同。
   - 填完用 Word「另存 PDF」交。
-  - 產生器是 [src/make_answers_docx.py](src/make_answers_docx.py)，重跑會**覆蓋**已經填的內容，填之前跑過一次就好。
+  - 產生流程是 [src/make_sheet.ps1](src/make_sheet.ps1)：空白版只產生在 `%TEMP%` 當中間檔，接著填入數據和簡答，直接寫成 `HW2_Answers.docx`。**重跑會覆蓋你在 Word 裡手改的內容。**
+  - 2026-10-27 用四個獨立 agent 檢查過兩輪：刪掉原文沒要求的項目、逐格驗算數字、確認每題都有回答。
 
 ### 進度：哪些做完了，哪些要你動手
 
@@ -29,9 +32,9 @@
 | P2 roofline 圖 | ✅ [fig/roofline_quadro.png](fig/roofline_quadro.png)、[fig/roofline_h100.png](fig/roofline_h100.png)，數值在 [fig/p1_p2_values.md](fig/p1_p2_values.md) |
 | 模糊後的影像 #1–#3 | ✅ [results/images/](results/images/) |
 | 把程式放進 VS 的 HW2 專案 | ✅ 2026-10-27 15:50 PDT 經你同意後完成，msbuild Debug（有 `-G`）和 Release 都成功，不帶參數執行是影像 1、0 mismatch（§2）。**沒有 commit** |
-| 預填數字版學習單 | ✅ `HW2_Answers_data.docx`（同一個資料夾）：只填了計時、NCU、CPU vs GPU 三張表，其他和空白版相同。用 [src/fill_data_docx.py](src/fill_data_docx.py) 產生 |
-| **Nsight VSE debugger 兩張截圖（步驟 9–13）** | ⏳ **一定要你操作 GUI**（§5），約 10 分鐘 |
-| 填學習單、匯出 PDF、上傳 Canvas | ⏳ 你 |
+| 學習單 | ✅ `HW2_Answers.docx` 已完整填好（見上面）。預填版 `HW2_Answers_data.docx` 已刪除 |
+| Nsight VSE debugger 兩張截圖（步驟 9–13） | ✅ 你在 GUI 截好：`HW2\screenshot_1.png`（640/640 warps）、`screenshot_2.png`（`<<<1,1>>>`，Launch Details 展開） |
+| 匯出 PDF、上傳 Canvas | ⏳ 你 |
 
 ---
 
@@ -42,7 +45,7 @@
 | [src/hw2.cu](src/hw2.cu) | 從你的 `hw2_starter.cu` 改出來：3 個 Gaussian kernel、L2 的 box blur（原文提示要先做）、CPU 循序版本、Windows high-performance timer、和 CPU 結果逐 pixel 比對 |
 | [src/cuda_check.h](src/cuda_check.h) | HW1 的 `checkCuda()`，原樣複製 |
 | [src/roofline.py](src/roofline.py) | P1 的 AI 數值和 P2 的兩張 roofline 圖 |
-| [src/make_answers_docx.py](src/make_answers_docx.py) | 產生空白學習單 |
+| [src/make_sheet.ps1](src/make_sheet.ps1) | 產生學習單：[make_answers_docx.py](src/make_answers_docx.py)（版面）→ [fill_data_docx.py](src/fill_data_docx.py)（數據、圖、P1/P2）→ [fill_answers_docx.py](src/fill_answers_docx.py)（簡答） |
 | [src/build.bat](src/build.bat)、[src/run_all.ps1](src/run_all.ps1)、[src/ncu_admin.ps1](src/ncu_admin.ps1) | 背景流程，build 資料夾是 `%TEMP%\claude\hw2build`（repo 外面） |
 
 對照原文的要求：
@@ -197,6 +200,7 @@ DEBUG vs RELEASE 的答案方向：
 ## 6. Nsight Compute CLI（原文步驟 14–26）✍️
 
 - 指令照原文步驟 19，14 個 metric 全部收。每個 exe 都跑了兩次：一次一般輸出（`ncu_*.txt`，可以截圖），一次 `--csv --print-units base`（`ncu_*.csv`，下表從這裡算）。
+- **⚠️ 學習單（2026-10-27 改版）的 NCU 表改用 `.txt` 那次執行**，和學習單裡貼的 CLI 原始輸出是同一次，HW Q 的數字也照這次寫：影像 4 的 DRAM 是 80.3 MB（global）vs 45.8 MB（shared），inst intensity 6.43 vs 10.77，頻寬 19.5 vs 11.8 GB/s。下表是 `.csv` 那次，兩次的 DRAM 數字不一樣，原因見下面的 ⚠️。
 - ⚠️ 原文步驟 25b 的 `dram_bytes.sum` 少一個底線，正確是 `dram__bytes.sum`。用 `--print-units base` 時單位已經是 byte，不用再從 Kbyte 換算。
 - 第 1 列範例（global、影像 1）：kernel time = 3,464,440 / 1.428e11 = 2.426e-5 s，和 ncu 的 `gpu__time_duration.sum` 24,256 ns 一致。
 
@@ -314,7 +318,7 @@ DEBUG vs RELEASE 的答案方向：
 1. 答案文件（學習單匯出 PDF）：Q1–Q3、P1、P2（含兩張圖）、Warp QUESTION、兩題 HW Q，都要附理由。
 2. 原始碼：只交 `.cu`、`.h`，也就是 `hw2.cu`（或你改名後的 `hw2_starter.cu`）和 `cuda_check.h`。不要交 `.slnx`、`.vcxproj`、`x64\`。
 3. 3 個 kernel 在同一個 `.cu` 裡。可以在學習單另外貼出這 3 個函式。
-4. 模糊後的影像 #1、#2、#3：[results/images/](results/images/) 的 `hw2_outimage{1,2,3}_global.png`。三個版本的輸出逐 pixel 相同，交一種就好，或三種都交。
+4. 模糊後的影像 #1、#2、#3：`Au26_GPUCompute\HW2\output\hw2_outimage{1,2,3}_global.png`（2026-10-27 從 [results/images/](results/images/) 複製過去）。三個 kernel 的輸出逐 pixel 相同，所以只放 global 版。
 5. 計時結果：§4 的表。
 6. debugger 截圖兩張：§5。
 7. NCU 8 次的輸出（[results/ncu/*.txt](results/ncu/) 可以直接截圖或附檔），加上 kernel time 和 inst intensity 兩欄（§6 的表）。
