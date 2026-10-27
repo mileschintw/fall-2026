@@ -1,0 +1,23 @@
+﻿==PROF== Connected to process 29568 (C:\Users\user3\AppData\Local\Temp\claude\hw2build\bin\hw2_rel_shared_img4.exe)
+==PROF== Disconnected from process 29568
+HW2 Gaussian blur  build=Release  DEBUG_SINGLE_THREAD=0
+
+=== image 4: D:/Repos/Au26_GPU/Au26_GPUCompute/HW2/dat/hw2_testimage4.png  4032 x 3024  channels in file=1 (loaded as 1) ===
+  launch static  grid(252,189) block(16,16)
+  static  rep 1  timer1=   337.128 ms  timer2=   332.703 ms  mismatches vs CPU=-1 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=static rep=1 t1_ms=337.1276 t2_ms=332.7034 mismatches=-1
+"ID","Process ID","Process Name","Host Name","Kernel Name","Context","Stream","Block Size","Grid Size","Device","CC","Section Name","Metric Name","Metric Unit","Metric Value"
+"0","29568","hw2_rel_shared_img4.exe","127.0.0.1","gaussBlurKernel_sharedmem_static(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(252, 189, 1)","0","8.6","Command line profiler metrics","dram__bytes.sum","byte","30,713,344"
+"0","29568","hw2_rel_shared_img4.exe","127.0.0.1","gaussBlurKernel_sharedmem_static(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(252, 189, 1)","0","8.6","Command line profiler metrics","dram__bytes_read.sum","byte","19,036,160"
+"0","29568","hw2_rel_shared_img4.exe","127.0.0.1","gaussBlurKernel_sharedmem_static(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(252, 189, 1)","0","8.6","Command line profiler metrics","dram__bytes_write.sum","byte","11,677,184"
+"0","29568","hw2_rel_shared_img4.exe","127.0.0.1","gaussBlurKernel_sharedmem_static(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(252, 189, 1)","0","8.6","Command line profiler metrics","dram__sectors_read.sum","sector","594,880"
+"0","29568","hw2_rel_shared_img4.exe","127.0.0.1","gaussBlurKernel_sharedmem_static(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(252, 189, 1)","0","8.6","Command line profiler metrics","dram__sectors_write.sum","sector","364,912"
+"0","29568","hw2_rel_shared_img4.exe","127.0.0.1","gaussBlurKernel_sharedmem_static(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(252, 189, 1)","0","8.6","Command line profiler metrics","gpu__cycles_elapsed.sum","cycle","5,913,559"
+"0","29568","hw2_rel_shared_img4.exe","127.0.0.1","gaussBlurKernel_sharedmem_static(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(252, 189, 1)","0","8.6","Command line profiler metrics","gpu__time_duration.avg","ns","3,865,504"
+"0","29568","hw2_rel_shared_img4.exe","127.0.0.1","gaussBlurKernel_sharedmem_static(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(252, 189, 1)","0","8.6","Command line profiler metrics","gpu__time_duration.sum","ns","3,865,504"
+"0","29568","hw2_rel_shared_img4.exe","127.0.0.1","gaussBlurKernel_sharedmem_static(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(252, 189, 1)","0","8.6","Command line profiler metrics","sm__cycles_elapsed.avg","cycle","7,042,351"
+"0","29568","hw2_rel_shared_img4.exe","127.0.0.1","gaussBlurKernel_sharedmem_static(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(252, 189, 1)","0","8.6","Command line profiler metrics","sm__cycles_elapsed.avg.per_second","hz","1,821,845,482.50"
+"0","29568","hw2_rel_shared_img4.exe","127.0.0.1","gaussBlurKernel_sharedmem_static(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(252, 189, 1)","0","8.6","Command line profiler metrics","sm__inst_executed.sum","inst","493,092,684"
+"0","29568","hw2_rel_shared_img4.exe","127.0.0.1","gaussBlurKernel_sharedmem_static(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(252, 189, 1)","0","8.6","Command line profiler metrics","smsp__cycles_elapsed.sum","cycle","563,388,080"
+"0","29568","hw2_rel_shared_img4.exe","127.0.0.1","gaussBlurKernel_sharedmem_static(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(252, 189, 1)","0","8.6","Command line profiler metrics","smsp__cycles_elapsed.sum.per_second","hz","145,747,638,600.30"
+"0","29568","hw2_rel_shared_img4.exe","127.0.0.1","gaussBlurKernel_sharedmem_static(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(252, 189, 1)","0","8.6","Command line profiler metrics","smsp__inst_executed.sum","inst","493,092,684"

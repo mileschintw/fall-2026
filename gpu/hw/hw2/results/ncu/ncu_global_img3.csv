@@ -1,0 +1,23 @@
+﻿==PROF== Connected to process 30908 (C:\Users\user3\AppData\Local\Temp\claude\hw2build\bin\hw2_rel_global_img3.exe)
+==PROF== Disconnected from process 30908
+HW2 Gaussian blur  build=Release  DEBUG_SINGLE_THREAD=0
+
+=== image 3: D:/Repos/Au26_GPU/Au26_GPUCompute/HW2/dat/hw2_testimage3.png  850 x 850  channels in file=1 (loaded as 1) ===
+  launch global  grid(54,54) block(16,16)
+  global  rep 1  timer1=   331.117 ms  timer2=   330.274 ms  mismatches vs CPU=-1 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=global rep=1 t1_ms=331.1171 t2_ms=330.2744 mismatches=-1
+"ID","Process ID","Process Name","Host Name","Kernel Name","Context","Stream","Block Size","Grid Size","Device","CC","Section Name","Metric Name","Metric Unit","Metric Value"
+"0","30908","hw2_rel_global_img3.exe","127.0.0.1","gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(54, 54, 1)","0","8.6","Command line profiler metrics","dram__bytes.sum","byte","961,408"
+"0","30908","hw2_rel_global_img3.exe","127.0.0.1","gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(54, 54, 1)","0","8.6","Command line profiler metrics","dram__bytes_read.sum","byte","796,032"
+"0","30908","hw2_rel_global_img3.exe","127.0.0.1","gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(54, 54, 1)","0","8.6","Command line profiler metrics","dram__bytes_write.sum","byte","165,376"
+"0","30908","hw2_rel_global_img3.exe","127.0.0.1","gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(54, 54, 1)","0","8.6","Command line profiler metrics","dram__sectors_read.sum","sector","24,876"
+"0","30908","hw2_rel_global_img3.exe","127.0.0.1","gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(54, 54, 1)","0","8.6","Command line profiler metrics","dram__sectors_write.sum","sector","5,168"
+"0","30908","hw2_rel_global_img3.exe","127.0.0.1","gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(54, 54, 1)","0","8.6","Command line profiler metrics","gpu__cycles_elapsed.sum","cycle","385,881"
+"0","30908","hw2_rel_global_img3.exe","127.0.0.1","gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(54, 54, 1)","0","8.6","Command line profiler metrics","gpu__time_duration.avg","ns","252,640"
+"0","30908","hw2_rel_global_img3.exe","127.0.0.1","gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(54, 54, 1)","0","8.6","Command line profiler metrics","gpu__time_duration.sum","ns","252,640"
+"0","30908","hw2_rel_global_img3.exe","127.0.0.1","gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(54, 54, 1)","0","8.6","Command line profiler metrics","sm__cycles_elapsed.avg","cycle","459,093.50"
+"0","30908","hw2_rel_global_img3.exe","127.0.0.1","gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(54, 54, 1)","0","8.6","Command line profiler metrics","sm__cycles_elapsed.avg.per_second","hz","1,817,184,531.35"
+"0","30908","hw2_rel_global_img3.exe","127.0.0.1","gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(54, 54, 1)","0","8.6","Command line profiler metrics","sm__inst_executed.sum","inst","31,101,030"
+"0","30908","hw2_rel_global_img3.exe","127.0.0.1","gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(54, 54, 1)","0","8.6","Command line profiler metrics","smsp__cycles_elapsed.sum","cycle","36,727,480"
+"0","30908","hw2_rel_global_img3.exe","127.0.0.1","gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(54, 54, 1)","0","8.6","Command line profiler metrics","smsp__cycles_elapsed.sum.per_second","hz","145,374,762,507.92"
+"0","30908","hw2_rel_global_img3.exe","127.0.0.1","gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int)","1","7","(16, 16, 1)","(54, 54, 1)","0","8.6","Command line profiler metrics","smsp__inst_executed.sum","inst","31,101,030"

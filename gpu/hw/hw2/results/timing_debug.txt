@@ -1,0 +1,197 @@
+﻿HW2 Gaussian blur  build=Debug  DEBUG_SINGLE_THREAD=0
+
+=== image 1: D:/Repos/Au26_GPU/Au26_GPUCompute/HW2/dat/hw2_testimage1.png  240 x 240  channels in file=1 (loaded as 1) ===
+  cpu     timer3=    16.525 ms
+RESULT build=Debug img=1 w=240 h=240 kernel=cpu t3_ms=16.5252
+  launch global  grid(15,15) block(16,16)
+  global  rep 1  timer1=    40.227 ms  timer2=    39.402 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=1 w=240 h=240 kernel=global rep=1 t1_ms=40.2269 t2_ms=39.4017 mismatches=0
+  launch global  grid(15,15) block(16,16)
+  global  rep 2  timer1=     1.378 ms  timer2=     0.757 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=1 w=240 h=240 kernel=global rep=2 t1_ms=1.3784 t2_ms=0.7567 mismatches=0
+  launch global  grid(15,15) block(16,16)
+  global  rep 3  timer1=     1.522 ms  timer2=     0.794 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=1 w=240 h=240 kernel=global rep=3 t1_ms=1.5215 t2_ms=0.7943 mismatches=0
+  launch global  grid(15,15) block(16,16)
+  global  rep 4  timer1=     1.280 ms  timer2=     0.753 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=1 w=240 h=240 kernel=global rep=4 t1_ms=1.2800 t2_ms=0.7535 mismatches=0
+  launch global  grid(15,15) block(16,16)
+  global  rep 5  timer1=     1.169 ms  timer2=     0.745 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=1 w=240 h=240 kernel=global rep=5 t1_ms=1.1685 t2_ms=0.7450 mismatches=0
+  launch static  grid(15,15) block(16,16)
+  static  rep 1  timer1=     1.404 ms  timer2=     0.816 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=1 w=240 h=240 kernel=static rep=1 t1_ms=1.4040 t2_ms=0.8159 mismatches=0
+  launch static  grid(15,15) block(16,16)
+  static  rep 2  timer1=     1.199 ms  timer2=     0.760 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=1 w=240 h=240 kernel=static rep=2 t1_ms=1.1989 t2_ms=0.7600 mismatches=0
+  launch static  grid(15,15) block(16,16)
+  static  rep 3  timer1=     1.238 ms  timer2=     0.772 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=1 w=240 h=240 kernel=static rep=3 t1_ms=1.2384 t2_ms=0.7725 mismatches=0
+  launch static  grid(15,15) block(16,16)
+  static  rep 4  timer1=     1.173 ms  timer2=     0.767 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=1 w=240 h=240 kernel=static rep=4 t1_ms=1.1732 t2_ms=0.7670 mismatches=0
+  launch static  grid(15,15) block(16,16)
+  static  rep 5  timer1=     1.098 ms  timer2=     0.757 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=1 w=240 h=240 kernel=static rep=5 t1_ms=1.0984 t2_ms=0.7569 mismatches=0
+  launch dynamic grid(15,15) block(16,16)
+  dynamic rep 1  timer1=     1.231 ms  timer2=     0.781 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=1 w=240 h=240 kernel=dynamic rep=1 t1_ms=1.2307 t2_ms=0.7812 mismatches=0
+  launch dynamic grid(15,15) block(16,16)
+  dynamic rep 2  timer1=     1.147 ms  timer2=     0.759 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=1 w=240 h=240 kernel=dynamic rep=2 t1_ms=1.1469 t2_ms=0.7593 mismatches=0
+  launch dynamic grid(15,15) block(16,16)
+  dynamic rep 3  timer1=     1.153 ms  timer2=     0.757 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=1 w=240 h=240 kernel=dynamic rep=3 t1_ms=1.1531 t2_ms=0.7568 mismatches=0
+  launch dynamic grid(15,15) block(16,16)
+  dynamic rep 4  timer1=     1.161 ms  timer2=     0.770 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=1 w=240 h=240 kernel=dynamic rep=4 t1_ms=1.1615 t2_ms=0.7699 mismatches=0
+  launch dynamic grid(15,15) block(16,16)
+  dynamic rep 5  timer1=     1.173 ms  timer2=     0.754 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=1 w=240 h=240 kernel=dynamic rep=5 t1_ms=1.1733 t2_ms=0.7539 mismatches=0
+
+=== image 2: D:/Repos/Au26_GPU/Au26_GPUCompute/HW2/dat/hw2_testimage2.png  512 x 512  channels in file=1 (loaded as 1) ===
+  cpu     timer3=    68.940 ms
+RESULT build=Debug img=2 w=512 h=512 kernel=cpu t3_ms=68.9400
+  launch global  grid(32,32) block(16,16)
+  global  rep 1  timer1=     3.918 ms  timer2=     3.241 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=2 w=512 h=512 kernel=global rep=1 t1_ms=3.9184 t2_ms=3.2412 mismatches=0
+  launch global  grid(32,32) block(16,16)
+  global  rep 2  timer1=     3.736 ms  timer2=     3.191 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=2 w=512 h=512 kernel=global rep=2 t1_ms=3.7363 t2_ms=3.1906 mismatches=0
+  launch global  grid(32,32) block(16,16)
+  global  rep 3  timer1=     3.756 ms  timer2=     3.222 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=2 w=512 h=512 kernel=global rep=3 t1_ms=3.7563 t2_ms=3.2217 mismatches=0
+  launch global  grid(32,32) block(16,16)
+  global  rep 4  timer1=     3.736 ms  timer2=     3.193 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=2 w=512 h=512 kernel=global rep=4 t1_ms=3.7363 t2_ms=3.1931 mismatches=0
+  launch global  grid(32,32) block(16,16)
+  global  rep 5  timer1=     3.685 ms  timer2=     3.175 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=2 w=512 h=512 kernel=global rep=5 t1_ms=3.6849 t2_ms=3.1746 mismatches=0
+  launch static  grid(32,32) block(16,16)
+  static  rep 1  timer1=     4.122 ms  timer2=     3.250 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=2 w=512 h=512 kernel=static rep=1 t1_ms=4.1224 t2_ms=3.2499 mismatches=0
+  launch static  grid(32,32) block(16,16)
+  static  rep 2  timer1=     3.788 ms  timer2=     3.210 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=2 w=512 h=512 kernel=static rep=2 t1_ms=3.7880 t2_ms=3.2100 mismatches=0
+  launch static  grid(32,32) block(16,16)
+  static  rep 3  timer1=     3.703 ms  timer2=     3.203 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=2 w=512 h=512 kernel=static rep=3 t1_ms=3.7033 t2_ms=3.2030 mismatches=0
+  launch static  grid(32,32) block(16,16)
+  static  rep 4  timer1=     3.690 ms  timer2=     3.193 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=2 w=512 h=512 kernel=static rep=4 t1_ms=3.6897 t2_ms=3.1933 mismatches=0
+  launch static  grid(32,32) block(16,16)
+  static  rep 5  timer1=     3.696 ms  timer2=     3.215 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=2 w=512 h=512 kernel=static rep=5 t1_ms=3.6962 t2_ms=3.2149 mismatches=0
+  launch dynamic grid(32,32) block(16,16)
+  dynamic rep 1  timer1=     3.898 ms  timer2=     3.213 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=2 w=512 h=512 kernel=dynamic rep=1 t1_ms=3.8976 t2_ms=3.2131 mismatches=0
+  launch dynamic grid(32,32) block(16,16)
+  dynamic rep 2  timer1=     3.813 ms  timer2=     3.194 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=2 w=512 h=512 kernel=dynamic rep=2 t1_ms=3.8128 t2_ms=3.1940 mismatches=0
+  launch dynamic grid(32,32) block(16,16)
+  dynamic rep 3  timer1=     3.756 ms  timer2=     3.196 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=2 w=512 h=512 kernel=dynamic rep=3 t1_ms=3.7565 t2_ms=3.1956 mismatches=0
+  launch dynamic grid(32,32) block(16,16)
+  dynamic rep 4  timer1=     3.739 ms  timer2=     3.211 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=2 w=512 h=512 kernel=dynamic rep=4 t1_ms=3.7387 t2_ms=3.2114 mismatches=0
+  launch dynamic grid(32,32) block(16,16)
+  dynamic rep 5  timer1=     3.663 ms  timer2=     3.209 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=2 w=512 h=512 kernel=dynamic rep=5 t1_ms=3.6627 t2_ms=3.2095 mismatches=0
+
+=== image 3: D:/Repos/Au26_GPU/Au26_GPUCompute/HW2/dat/hw2_testimage3.png  850 x 850  channels in file=1 (loaded as 1) ===
+  cpu     timer3=   189.731 ms
+RESULT build=Debug img=3 w=850 h=850 kernel=cpu t3_ms=189.7312
+  launch global  grid(54,54) block(16,16)
+  global  rep 1  timer1=     9.781 ms  timer2=     8.954 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=3 w=850 h=850 kernel=global rep=1 t1_ms=9.7812 t2_ms=8.9544 mismatches=0
+  launch global  grid(54,54) block(16,16)
+  global  rep 2  timer1=    10.428 ms  timer2=     9.727 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=3 w=850 h=850 kernel=global rep=2 t1_ms=10.4276 t2_ms=9.7272 mismatches=0
+  launch global  grid(54,54) block(16,16)
+  global  rep 3  timer1=    10.740 ms  timer2=    10.001 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=3 w=850 h=850 kernel=global rep=3 t1_ms=10.7401 t2_ms=10.0009 mismatches=0
+  launch global  grid(54,54) block(16,16)
+  global  rep 4  timer1=     9.643 ms  timer2=     8.899 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=3 w=850 h=850 kernel=global rep=4 t1_ms=9.6426 t2_ms=8.8995 mismatches=0
+  launch global  grid(54,54) block(16,16)
+  global  rep 5  timer1=    10.484 ms  timer2=     9.756 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=3 w=850 h=850 kernel=global rep=5 t1_ms=10.4843 t2_ms=9.7559 mismatches=0
+  launch static  grid(54,54) block(16,16)
+  static  rep 1  timer1=    10.653 ms  timer2=     9.872 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=3 w=850 h=850 kernel=static rep=1 t1_ms=10.6530 t2_ms=9.8720 mismatches=0
+  launch static  grid(54,54) block(16,16)
+  static  rep 2  timer1=    10.523 ms  timer2=     9.814 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=3 w=850 h=850 kernel=static rep=2 t1_ms=10.5229 t2_ms=9.8142 mismatches=0
+  launch static  grid(54,54) block(16,16)
+  static  rep 3  timer1=    10.644 ms  timer2=     9.813 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=3 w=850 h=850 kernel=static rep=3 t1_ms=10.6436 t2_ms=9.8127 mismatches=0
+  launch static  grid(54,54) block(16,16)
+  static  rep 4  timer1=    10.604 ms  timer2=     9.822 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=3 w=850 h=850 kernel=static rep=4 t1_ms=10.6037 t2_ms=9.8220 mismatches=0
+  launch static  grid(54,54) block(16,16)
+  static  rep 5  timer1=    10.779 ms  timer2=     9.849 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=3 w=850 h=850 kernel=static rep=5 t1_ms=10.7787 t2_ms=9.8492 mismatches=0
+  launch dynamic grid(54,54) block(16,16)
+  dynamic rep 1  timer1=     9.885 ms  timer2=     9.034 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=3 w=850 h=850 kernel=dynamic rep=1 t1_ms=9.8852 t2_ms=9.0341 mismatches=0
+  launch dynamic grid(54,54) block(16,16)
+  dynamic rep 2  timer1=     9.610 ms  timer2=     8.946 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=3 w=850 h=850 kernel=dynamic rep=2 t1_ms=9.6097 t2_ms=8.9459 mismatches=0
+  launch dynamic grid(54,54) block(16,16)
+  dynamic rep 3  timer1=     9.712 ms  timer2=     8.972 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=3 w=850 h=850 kernel=dynamic rep=3 t1_ms=9.7123 t2_ms=8.9719 mismatches=0
+  launch dynamic grid(54,54) block(16,16)
+  dynamic rep 4  timer1=     9.829 ms  timer2=     8.978 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=3 w=850 h=850 kernel=dynamic rep=4 t1_ms=9.8289 t2_ms=8.9777 mismatches=0
+  launch dynamic grid(54,54) block(16,16)
+  dynamic rep 5  timer1=     9.732 ms  timer2=     8.959 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=3 w=850 h=850 kernel=dynamic rep=5 t1_ms=9.7318 t2_ms=8.9590 mismatches=0
+
+=== image 4: D:/Repos/Au26_GPU/Au26_GPUCompute/HW2/dat/hw2_testimage4.png  4032 x 3024  channels in file=1 (loaded as 1) ===
+  cpu     timer3=  3700.191 ms
+RESULT build=Debug img=4 w=4032 h=3024 kernel=cpu t3_ms=3700.1908
+  launch global  grid(252,189) block(16,16)
+  global  rep 1  timer1=   342.376 ms  timer2=   337.293 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=4 w=4032 h=3024 kernel=global rep=1 t1_ms=342.3756 t2_ms=337.2930 mismatches=0
+  launch global  grid(252,189) block(16,16)
+  global  rep 2  timer1=   154.407 ms  timer2=   150.488 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=4 w=4032 h=3024 kernel=global rep=2 t1_ms=154.4073 t2_ms=150.4879 mismatches=0
+  launch global  grid(252,189) block(16,16)
+  global  rep 3  timer1=   152.206 ms  timer2=   147.379 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=4 w=4032 h=3024 kernel=global rep=3 t1_ms=152.2060 t2_ms=147.3794 mismatches=0
+  launch global  grid(252,189) block(16,16)
+  global  rep 4  timer1=   146.108 ms  timer2=   141.645 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=4 w=4032 h=3024 kernel=global rep=4 t1_ms=146.1080 t2_ms=141.6447 mismatches=0
+  launch global  grid(252,189) block(16,16)
+  global  rep 5  timer1=   146.235 ms  timer2=   141.231 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=4 w=4032 h=3024 kernel=global rep=5 t1_ms=146.2354 t2_ms=141.2309 mismatches=0
+  launch static  grid(252,189) block(16,16)
+  static  rep 1  timer1=   140.047 ms  timer2=   136.162 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=4 w=4032 h=3024 kernel=static rep=1 t1_ms=140.0468 t2_ms=136.1616 mismatches=0
+  launch static  grid(252,189) block(16,16)
+  static  rep 2  timer1=   140.882 ms  timer2=   137.057 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=4 w=4032 h=3024 kernel=static rep=2 t1_ms=140.8821 t2_ms=137.0570 mismatches=0
+  launch static  grid(252,189) block(16,16)
+  static  rep 3  timer1=   161.352 ms  timer2=   141.192 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=4 w=4032 h=3024 kernel=static rep=3 t1_ms=161.3519 t2_ms=141.1917 mismatches=0
+  launch static  grid(252,189) block(16,16)
+  static  rep 4  timer1=   140.038 ms  timer2=   136.123 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=4 w=4032 h=3024 kernel=static rep=4 t1_ms=140.0385 t2_ms=136.1229 mismatches=0
+  launch static  grid(252,189) block(16,16)
+  static  rep 5  timer1=   139.821 ms  timer2=   136.110 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=4 w=4032 h=3024 kernel=static rep=5 t1_ms=139.8206 t2_ms=136.1101 mismatches=0
+  launch dynamic grid(252,189) block(16,16)
+  dynamic rep 1  timer1=   140.258 ms  timer2=   136.176 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=4 w=4032 h=3024 kernel=dynamic rep=1 t1_ms=140.2576 t2_ms=136.1758 mismatches=0
+  launch dynamic grid(252,189) block(16,16)
+  dynamic rep 2  timer1=   140.325 ms  timer2=   136.108 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=4 w=4032 h=3024 kernel=dynamic rep=2 t1_ms=140.3247 t2_ms=136.1084 mismatches=0
+  launch dynamic grid(252,189) block(16,16)
+  dynamic rep 3  timer1=   141.368 ms  timer2=   137.145 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=4 w=4032 h=3024 kernel=dynamic rep=3 t1_ms=141.3678 t2_ms=137.1450 mismatches=0
+  launch dynamic grid(252,189) block(16,16)
+  dynamic rep 4  timer1=   153.164 ms  timer2=   149.405 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=4 w=4032 h=3024 kernel=dynamic rep=4 t1_ms=153.1643 t2_ms=149.4052 mismatches=0
+  launch dynamic grid(252,189) block(16,16)
+  dynamic rep 5  timer1=   150.041 ms  timer2=   146.204 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Debug img=4 w=4032 h=3024 kernel=dynamic rep=5 t1_ms=150.0411 t2_ms=146.2045 mismatches=0

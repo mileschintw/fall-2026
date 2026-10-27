@@ -1,0 +1,6 @@
+﻿HW2 Gaussian blur  build=Release  DEBUG_SINGLE_THREAD=0
+
+=== image 1: D:/Repos/Au26_GPU/Au26_GPUCompute/HW2/dat/hw2_testimage1.png  240 x 240  channels in file=1 (loaded as 1) ===
+  launch box     grid(15,15) block(16,16)
+  box     rep 1  timer1=     1.550 ms  timer2=     0.747 ms  mismatches vs CPU=-1 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=box rep=1 t1_ms=1.5505 t2_ms=0.7465 mismatches=-1

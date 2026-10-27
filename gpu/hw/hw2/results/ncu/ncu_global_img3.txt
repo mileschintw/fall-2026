@@ -1,0 +1,31 @@
+﻿==PROF== Connected to process 36952 (C:\Users\user3\AppData\Local\Temp\claude\hw2build\bin\hw2_rel_global_img3.exe)
+==PROF== Profiling "gaussBlurKernel_globalmem": 0%....50%....100% - 1 pass
+==PROF== Disconnected from process 36952
+HW2 Gaussian blur  build=Release  DEBUG_SINGLE_THREAD=0
+
+=== image 3: D:/Repos/Au26_GPU/Au26_GPUCompute/HW2/dat/hw2_testimage3.png  850 x 850  channels in file=1 (loaded as 1) ===
+  launch global  grid(54,54) block(16,16)
+  global  rep 1  timer1=   304.564 ms  timer2=   303.631 ms  mismatches vs CPU=-1 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=global rep=1 t1_ms=304.5640 t2_ms=303.6307 mismatches=-1
+[36952] hw2_rel_global_img3.exe@127.0.0.1
+  gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int) (54, 54, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ----------------------------------- ----------- ------------
+    Metric Name                         Metric Unit Metric Value
+    ----------------------------------- ----------- ------------
+    dram__bytes.sum                           Mbyte         1.08
+    dram__bytes_read.sum                      Kbyte       912.77
+    dram__bytes_write.sum                     Kbyte       169.47
+    dram__sectors_read.sum                   sector       28,524
+    dram__sectors_write.sum                  sector        5,296
+    gpu__cycles_elapsed.sum                   cycle      385,677
+    gpu__time_duration.avg                       us       252.51
+    gpu__time_duration.sum                       us       252.51
+    sm__cycles_elapsed.avg                    cycle      458,935
+    sm__cycles_elapsed.avg.per_second           Ghz         1.82
+    sm__inst_executed.sum                      inst   31,101,030
+    smsp__cycles_elapsed.sum                  cycle   36,714,800
+    smsp__cycles_elapsed.sum.per_second         Ghz       145.40
+    smsp__inst_executed.sum                    inst   31,101,030
+    ----------------------------------- ----------- ------------
+

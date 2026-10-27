@@ -1,0 +1,197 @@
+﻿HW2 Gaussian blur  build=Release  DEBUG_SINGLE_THREAD=0
+
+=== image 1: D:/Repos/Au26_GPU/Au26_GPUCompute/HW2/dat/hw2_testimage1.png  240 x 240  channels in file=1 (loaded as 1) ===
+  cpu     timer3=     9.682 ms
+RESULT build=Release img=1 w=240 h=240 kernel=cpu t3_ms=9.6821
+  launch global  grid(15,15) block(16,16)
+  global  rep 1  timer1=     1.278 ms  timer2=     0.602 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=global rep=1 t1_ms=1.2782 t2_ms=0.6019 mismatches=0
+  launch global  grid(15,15) block(16,16)
+  global  rep 2  timer1=     0.584 ms  timer2=     0.064 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=global rep=2 t1_ms=0.5838 t2_ms=0.0640 mismatches=0
+  launch global  grid(15,15) block(16,16)
+  global  rep 3  timer1=     0.492 ms  timer2=     0.058 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=global rep=3 t1_ms=0.4916 t2_ms=0.0583 mismatches=0
+  launch global  grid(15,15) block(16,16)
+  global  rep 4  timer1=     0.537 ms  timer2=     0.060 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=global rep=4 t1_ms=0.5366 t2_ms=0.0599 mismatches=0
+  launch global  grid(15,15) block(16,16)
+  global  rep 5  timer1=     0.440 ms  timer2=     0.038 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=global rep=5 t1_ms=0.4395 t2_ms=0.0380 mismatches=0
+  launch static  grid(15,15) block(16,16)
+  static  rep 1  timer1=     0.538 ms  timer2=     0.073 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=static rep=1 t1_ms=0.5379 t2_ms=0.0727 mismatches=0
+  launch static  grid(15,15) block(16,16)
+  static  rep 2  timer1=     0.508 ms  timer2=     0.055 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=static rep=2 t1_ms=0.5082 t2_ms=0.0549 mismatches=0
+  launch static  grid(15,15) block(16,16)
+  static  rep 3  timer1=     0.488 ms  timer2=     0.044 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=static rep=3 t1_ms=0.4884 t2_ms=0.0441 mismatches=0
+  launch static  grid(15,15) block(16,16)
+  static  rep 4  timer1=     0.451 ms  timer2=     0.057 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=static rep=4 t1_ms=0.4510 t2_ms=0.0570 mismatches=0
+  launch static  grid(15,15) block(16,16)
+  static  rep 5  timer1=     0.460 ms  timer2=     0.056 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=static rep=5 t1_ms=0.4595 t2_ms=0.0561 mismatches=0
+  launch dynamic grid(15,15) block(16,16)
+  dynamic rep 1  timer1=     0.508 ms  timer2=     0.073 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=dynamic rep=1 t1_ms=0.5076 t2_ms=0.0727 mismatches=0
+  launch dynamic grid(15,15) block(16,16)
+  dynamic rep 2  timer1=     0.508 ms  timer2=     0.059 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=dynamic rep=2 t1_ms=0.5083 t2_ms=0.0591 mismatches=0
+  launch dynamic grid(15,15) block(16,16)
+  dynamic rep 3  timer1=     0.441 ms  timer2=     0.039 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=dynamic rep=3 t1_ms=0.4407 t2_ms=0.0387 mismatches=0
+  launch dynamic grid(15,15) block(16,16)
+  dynamic rep 4  timer1=     0.585 ms  timer2=     0.044 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=dynamic rep=4 t1_ms=0.5848 t2_ms=0.0440 mismatches=0
+  launch dynamic grid(15,15) block(16,16)
+  dynamic rep 5  timer1=     0.406 ms  timer2=     0.046 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=dynamic rep=5 t1_ms=0.4065 t2_ms=0.0463 mismatches=0
+
+=== image 2: D:/Repos/Au26_GPU/Au26_GPUCompute/HW2/dat/hw2_testimage2.png  512 x 512  channels in file=1 (loaded as 1) ===
+  cpu     timer3=    41.533 ms
+RESULT build=Release img=2 w=512 h=512 kernel=cpu t3_ms=41.5328
+  launch global  grid(32,32) block(16,16)
+  global  rep 1  timer1=     0.913 ms  timer2=     0.178 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=global rep=1 t1_ms=0.9135 t2_ms=0.1776 mismatches=0
+  launch global  grid(32,32) block(16,16)
+  global  rep 2  timer1=     0.699 ms  timer2=     0.126 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=global rep=2 t1_ms=0.6989 t2_ms=0.1259 mismatches=0
+  launch global  grid(32,32) block(16,16)
+  global  rep 3  timer1=     0.745 ms  timer2=     0.143 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=global rep=3 t1_ms=0.7447 t2_ms=0.1431 mismatches=0
+  launch global  grid(32,32) block(16,16)
+  global  rep 4  timer1=     0.713 ms  timer2=     0.178 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=global rep=4 t1_ms=0.7128 t2_ms=0.1779 mismatches=0
+  launch global  grid(32,32) block(16,16)
+  global  rep 5  timer1=     0.594 ms  timer2=     0.125 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=global rep=5 t1_ms=0.5938 t2_ms=0.1246 mismatches=0
+  launch static  grid(32,32) block(16,16)
+  static  rep 1  timer1=     0.644 ms  timer2=     0.121 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=static rep=1 t1_ms=0.6444 t2_ms=0.1207 mismatches=0
+  launch static  grid(32,32) block(16,16)
+  static  rep 2  timer1=     0.582 ms  timer2=     0.103 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=static rep=2 t1_ms=0.5818 t2_ms=0.1028 mismatches=0
+  launch static  grid(32,32) block(16,16)
+  static  rep 3  timer1=     0.495 ms  timer2=     0.103 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=static rep=3 t1_ms=0.4953 t2_ms=0.1034 mismatches=0
+  launch static  grid(32,32) block(16,16)
+  static  rep 4  timer1=     0.705 ms  timer2=     0.124 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=static rep=4 t1_ms=0.7054 t2_ms=0.1242 mismatches=0
+  launch static  grid(32,32) block(16,16)
+  static  rep 5  timer1=     0.718 ms  timer2=     0.120 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=static rep=5 t1_ms=0.7183 t2_ms=0.1202 mismatches=0
+  launch dynamic grid(32,32) block(16,16)
+  dynamic rep 1  timer1=     0.780 ms  timer2=     0.173 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=dynamic rep=1 t1_ms=0.7802 t2_ms=0.1730 mismatches=0
+  launch dynamic grid(32,32) block(16,16)
+  dynamic rep 2  timer1=     0.541 ms  timer2=     0.103 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=dynamic rep=2 t1_ms=0.5414 t2_ms=0.1030 mismatches=0
+  launch dynamic grid(32,32) block(16,16)
+  dynamic rep 3  timer1=     0.487 ms  timer2=     0.103 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=dynamic rep=3 t1_ms=0.4868 t2_ms=0.1027 mismatches=0
+  launch dynamic grid(32,32) block(16,16)
+  dynamic rep 4  timer1=     0.503 ms  timer2=     0.103 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=dynamic rep=4 t1_ms=0.5028 t2_ms=0.1031 mismatches=0
+  launch dynamic grid(32,32) block(16,16)
+  dynamic rep 5  timer1=     0.474 ms  timer2=     0.097 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=dynamic rep=5 t1_ms=0.4738 t2_ms=0.0966 mismatches=0
+
+=== image 3: D:/Repos/Au26_GPU/Au26_GPUCompute/HW2/dat/hw2_testimage3.png  850 x 850  channels in file=1 (loaded as 1) ===
+  cpu     timer3=   109.971 ms
+RESULT build=Release img=3 w=850 h=850 kernel=cpu t3_ms=109.9712
+  launch global  grid(54,54) block(16,16)
+  global  rep 1  timer1=     1.220 ms  timer2=     0.343 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=global rep=1 t1_ms=1.2196 t2_ms=0.3429 mismatches=0
+  launch global  grid(54,54) block(16,16)
+  global  rep 2  timer1=     0.809 ms  timer2=     0.269 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=global rep=2 t1_ms=0.8092 t2_ms=0.2689 mismatches=0
+  launch global  grid(54,54) block(16,16)
+  global  rep 3  timer1=     0.829 ms  timer2=     0.268 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=global rep=3 t1_ms=0.8286 t2_ms=0.2678 mismatches=0
+  launch global  grid(54,54) block(16,16)
+  global  rep 4  timer1=     0.817 ms  timer2=     0.269 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=global rep=4 t1_ms=0.8171 t2_ms=0.2686 mismatches=0
+  launch global  grid(54,54) block(16,16)
+  global  rep 5  timer1=     0.886 ms  timer2=     0.269 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=global rep=5 t1_ms=0.8861 t2_ms=0.2689 mismatches=0
+  launch static  grid(54,54) block(16,16)
+  static  rep 1  timer1=     1.125 ms  timer2=     0.320 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=static rep=1 t1_ms=1.1250 t2_ms=0.3202 mismatches=0
+  launch static  grid(54,54) block(16,16)
+  static  rep 2  timer1=     0.908 ms  timer2=     0.270 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=static rep=2 t1_ms=0.9081 t2_ms=0.2704 mismatches=0
+  launch static  grid(54,54) block(16,16)
+  static  rep 3  timer1=     0.936 ms  timer2=     0.299 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=static rep=3 t1_ms=0.9358 t2_ms=0.2991 mismatches=0
+  launch static  grid(54,54) block(16,16)
+  static  rep 4  timer1=     0.798 ms  timer2=     0.256 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=static rep=4 t1_ms=0.7982 t2_ms=0.2559 mismatches=0
+  launch static  grid(54,54) block(16,16)
+  static  rep 5  timer1=     0.775 ms  timer2=     0.256 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=static rep=5 t1_ms=0.7747 t2_ms=0.2560 mismatches=0
+  launch dynamic grid(54,54) block(16,16)
+  dynamic rep 1  timer1=     1.085 ms  timer2=     0.321 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=dynamic rep=1 t1_ms=1.0849 t2_ms=0.3211 mismatches=0
+  launch dynamic grid(54,54) block(16,16)
+  dynamic rep 2  timer1=     1.061 ms  timer2=     0.273 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=dynamic rep=2 t1_ms=1.0609 t2_ms=0.2731 mismatches=0
+  launch dynamic grid(54,54) block(16,16)
+  dynamic rep 3  timer1=     0.874 ms  timer2=     0.268 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=dynamic rep=3 t1_ms=0.8735 t2_ms=0.2684 mismatches=0
+  launch dynamic grid(54,54) block(16,16)
+  dynamic rep 4  timer1=     1.117 ms  timer2=     0.299 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=dynamic rep=4 t1_ms=1.1166 t2_ms=0.2995 mismatches=0
+  launch dynamic grid(54,54) block(16,16)
+  dynamic rep 5  timer1=     1.680 ms  timer2=     0.251 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=3 w=850 h=850 kernel=dynamic rep=5 t1_ms=1.6796 t2_ms=0.2512 mismatches=0
+
+=== image 4: D:/Repos/Au26_GPU/Au26_GPUCompute/HW2/dat/hw2_testimage4.png  4032 x 3024  channels in file=1 (loaded as 1) ===
+  cpu     timer3=  2210.161 ms
+RESULT build=Release img=4 w=4032 h=3024 kernel=cpu t3_ms=2210.1613
+  launch global  grid(252,189) block(16,16)
+  global  rep 1  timer1=     8.132 ms  timer2=     4.209 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=global rep=1 t1_ms=8.1317 t2_ms=4.2093 mismatches=0
+  launch global  grid(252,189) block(16,16)
+  global  rep 2  timer1=     7.819 ms  timer2=     4.136 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=global rep=2 t1_ms=7.8191 t2_ms=4.1365 mismatches=0
+  launch global  grid(252,189) block(16,16)
+  global  rep 3  timer1=     8.240 ms  timer2=     4.158 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=global rep=3 t1_ms=8.2400 t2_ms=4.1576 mismatches=0
+  launch global  grid(252,189) block(16,16)
+  global  rep 4  timer1=     8.719 ms  timer2=     4.203 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=global rep=4 t1_ms=8.7193 t2_ms=4.2029 mismatches=0
+  launch global  grid(252,189) block(16,16)
+  global  rep 5  timer1=     8.591 ms  timer2=     4.187 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=global rep=5 t1_ms=8.5910 t2_ms=4.1868 mismatches=0
+  launch static  grid(252,189) block(16,16)
+  static  rep 1  timer1=     8.033 ms  timer2=     3.960 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=static rep=1 t1_ms=8.0332 t2_ms=3.9604 mismatches=0
+  launch static  grid(252,189) block(16,16)
+  static  rep 2  timer1=     7.366 ms  timer2=     3.885 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=static rep=2 t1_ms=7.3660 t2_ms=3.8845 mismatches=0
+  launch static  grid(252,189) block(16,16)
+  static  rep 3  timer1=     7.448 ms  timer2=     3.885 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=static rep=3 t1_ms=7.4480 t2_ms=3.8855 mismatches=0
+  launch static  grid(252,189) block(16,16)
+  static  rep 4  timer1=     7.413 ms  timer2=     3.886 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=static rep=4 t1_ms=7.4135 t2_ms=3.8862 mismatches=0
+  launch static  grid(252,189) block(16,16)
+  static  rep 5  timer1=     8.281 ms  timer2=     3.894 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=static rep=5 t1_ms=8.2807 t2_ms=3.8941 mismatches=0
+  launch dynamic grid(252,189) block(16,16)
+  dynamic rep 1  timer1=     7.800 ms  timer2=     3.959 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=dynamic rep=1 t1_ms=7.7998 t2_ms=3.9589 mismatches=0
+  launch dynamic grid(252,189) block(16,16)
+  dynamic rep 2  timer1=     7.677 ms  timer2=     3.892 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=dynamic rep=2 t1_ms=7.6769 t2_ms=3.8918 mismatches=0
+  launch dynamic grid(252,189) block(16,16)
+  dynamic rep 3  timer1=     7.667 ms  timer2=     4.198 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=dynamic rep=3 t1_ms=7.6670 t2_ms=4.1984 mismatches=0
+  launch dynamic grid(252,189) block(16,16)
+  dynamic rep 4  timer1=     7.447 ms  timer2=     3.891 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=dynamic rep=4 t1_ms=7.4475 t2_ms=3.8906 mismatches=0
+  launch dynamic grid(252,189) block(16,16)
+  dynamic rep 5  timer1=     7.688 ms  timer2=     3.914 ms  mismatches vs CPU=0 (max diff 0)
+RESULT build=Release img=4 w=4032 h=3024 kernel=dynamic rep=5 t1_ms=7.6875 t2_ms=3.9137 mismatches=0

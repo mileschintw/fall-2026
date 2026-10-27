@@ -1,0 +1,31 @@
+﻿==PROF== Connected to process 1980 (C:\Users\user3\AppData\Local\Temp\claude\hw2build\bin\hw2_rel_global_img1.exe)
+==PROF== Profiling "gaussBlurKernel_globalmem": 0%....50%....100% - 1 pass
+==PROF== Disconnected from process 1980
+HW2 Gaussian blur  build=Release  DEBUG_SINGLE_THREAD=0
+
+=== image 1: D:/Repos/Au26_GPU/Au26_GPUCompute/HW2/dat/hw2_testimage1.png  240 x 240  channels in file=1 (loaded as 1) ===
+  launch global  grid(15,15) block(16,16)
+  global  rep 1  timer1=   412.009 ms  timer2=   411.373 ms  mismatches vs CPU=-1 (max diff 0)
+RESULT build=Release img=1 w=240 h=240 kernel=global rep=1 t1_ms=412.0089 t2_ms=411.3726 mismatches=-1
+[1980] hw2_rel_global_img1.exe@127.0.0.1
+  gaussBlurKernel_globalmem(const unsigned char *, unsigned char *, const float *, int, int, int) (15, 15, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ----------------------------------- ----------- ------------
+    Metric Name                         Metric Unit Metric Value
+    ----------------------------------- ----------- ------------
+    dram__bytes.sum                           Kbyte        77.82
+    dram__bytes_read.sum                      Kbyte        77.82
+    dram__bytes_write.sum                      byte            0
+    dram__sectors_read.sum                   sector        2,432
+    dram__sectors_write.sum                  sector            0
+    gpu__cycles_elapsed.sum                   cycle       36,315
+    gpu__time_duration.avg                       us        24.10
+    gpu__time_duration.sum                       us        24.10
+    sm__cycles_elapsed.avg                    cycle    43,025.50
+    sm__cycles_elapsed.avg.per_second           Ghz         1.79
+    sm__inst_executed.sum                      inst    2,439,000
+    smsp__cycles_elapsed.sum                  cycle    3,442,040
+    smsp__cycles_elapsed.sum.per_second         Ghz       142.85
+    smsp__inst_executed.sum                    inst    2,439,000
+    ----------------------------------- ----------- ------------
+

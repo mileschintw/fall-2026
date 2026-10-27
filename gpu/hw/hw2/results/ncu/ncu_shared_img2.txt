@@ -1,0 +1,31 @@
+﻿==PROF== Connected to process 41420 (C:\Users\user3\AppData\Local\Temp\claude\hw2build\bin\hw2_rel_shared_img2.exe)
+==PROF== Profiling "gaussBlurKernel_sharedmem_static": 0%....50%....100% - 1 pass
+==PROF== Disconnected from process 41420
+HW2 Gaussian blur  build=Release  DEBUG_SINGLE_THREAD=0
+
+=== image 2: D:/Repos/Au26_GPU/Au26_GPUCompute/HW2/dat/hw2_testimage2.png  512 x 512  channels in file=1 (loaded as 1) ===
+  launch static  grid(32,32) block(16,16)
+  static  rep 1  timer1=   360.769 ms  timer2=   360.037 ms  mismatches vs CPU=-1 (max diff 0)
+RESULT build=Release img=2 w=512 h=512 kernel=static rep=1 t1_ms=360.7695 t2_ms=360.0367 mismatches=-1
+[41420] hw2_rel_shared_img2.exe@127.0.0.1
+  gaussBlurKernel_sharedmem_static(const unsigned char *, unsigned char *, const float *, int, int, int) (32, 32, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ----------------------------------- ----------- ------------
+    Metric Name                         Metric Unit Metric Value
+    ----------------------------------- ----------- ------------
+    dram__bytes.sum                           Mbyte         1.22
+    dram__bytes_read.sum                      Mbyte         1.22
+    dram__bytes_write.sum                      byte            0
+    dram__sectors_read.sum                   sector       37,984
+    dram__sectors_write.sum                  sector            0
+    gpu__cycles_elapsed.sum                   cycle      133,376
+    gpu__time_duration.avg                       us        87.58
+    gpu__time_duration.sum                       us        87.58
+    sm__cycles_elapsed.avg                    cycle   158,460.50
+    sm__cycles_elapsed.avg.per_second           Ghz         1.81
+    sm__inst_executed.sum                      inst   10,601,472
+    smsp__cycles_elapsed.sum                  cycle   12,676,840
+    smsp__cycles_elapsed.sum.per_second         Ghz       144.74
+    smsp__inst_executed.sum                    inst   10,601,472
+    ----------------------------------- ----------- ------------
+
