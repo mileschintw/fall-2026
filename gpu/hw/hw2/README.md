@@ -193,7 +193,7 @@ HW2 分兩大部分：(i) 書面問題，(ii) 程式練習（2D CUDA grid、shar
 
 ## 本機檔案核對（2026-10-26）
 來源資料夾 `D:\Repos\Au26_GPU\Au26_GPUCompute\HW2\`（使用者從 Canvas 下載）。starter 已複製進 repo：[hw2_starter.cu](hw2_starter.cu)（原樣，未修改）。測試影像（共約 9 MB）和 stb header 沒複製進 repo，Canvas Files/Homeworks/Hw2_materials 可再下載。
-- **PDF**：`Homework #2 (HW2) - Au26 - GPUCompute.pdf` 是 259794 bytes，與 spec.md 記的 Canvas file 154697826 大小相同，內容視為同一份，沒有新增資訊（PDF 有密碼保護，工具讀不了，以 spec.md 為準）。
+- **PDF**：`Homework #2 (HW2) - Au26 - GPUCompute.pdf` 是 259794 bytes，與 spec.md 記的 Canvas file 154697826 大小相同，與 repo 的 `spec.pdf` 逐 byte 比對相同（`cmp`），沒有新增資訊。PDF 沒有密碼（Google Docs 匯出，檔頭無加密欄位）；Read 工具曾誤報 password-protected，改用 `spec.md` 的抽出文字。
 - **測試影像實測（PNG 檔頭）**：全部 8-bit grayscale（color type 0）、非 interlaced。
 
   | 檔案 | 寬×高 |
