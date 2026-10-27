@@ -37,6 +37,10 @@ class Sheet:
         for el in list(body):
             if not el.tag.endswith("sectPr"):
                 body.remove(el)
+        xml = self.d.element.xml
+        for rid, rel in list(self.d.part.rels.items()):
+            if "image" in rel.reltype and f'"{rid}"' not in xml:
+                self.d.part.drop_rel(rid)
         # header/footer come from HW1 ("HW1 – page N")
         for sec in self.d.sections:
             for part in (sec.header, sec.footer, sec.first_page_header, sec.first_page_footer):
@@ -112,7 +116,7 @@ def build(base, out):
     s.p("Homework #2 (HW2)", bold=True, size=18)
     s.p("Parallel Performance Theory, Gaussian Blur Kernels and More", size=13)
     s.p("Autumn 2026 – GPU Computing", size=11)
-    s.table(["Field", ""], [["Name"], ["UW NetID"], ["Date"], ["Build environment"]], widths=[2400, 6960])
+    s.table(["Field", ""], [["Name"], ["UW NetID"], ["Build environment"]], widths=[2400, 6960])
 
     # ---------------- Part 1 ----------------
     s.h("Part 1 – Questions", 1)
@@ -141,40 +145,33 @@ def build(base, out):
     s.h("P1. Arithmetic Intensity of ML Operations", 2)
     s.p("AI := FLOPs / BYTE. FP32 unless stated; only global memory (DRAM) reads and writes count as Mem bytes; "
         "registers and cache are free. Transcendentals (exp, tanh, erf, sqrt) = 4 FLOP; FMA = 2 FLOP.")
-    ops = [
-        ("a. Matrix transpose (N×N matrix)", "B[j][i] = A[i][j]"),
-        ("b. SoftMax, 3-pass, unfused", "pass 1: max   pass 2: exp + sum   pass 3: normalize"),
-        ("c. Convolution (image W×H, kernel size K, channels C, batch size N)", "Out[n,c,h,w] = Σ In[...]·Wt[...]"),
+    ops = [  # (title, hint, number of term rows)
+        ("a. Matrix transpose (N×N matrix)", "B[j][i] = A[i][j]", 2),
+        ("b. SoftMax, 3-pass, unfused", "pass 1: max   pass 2: exp + sum   pass 3: normalize", 3),
+        ("c. Convolution (image W×H, kernel size K, channels C, batch size N)", "Out[n,c,h,w] = Σ In[...]·Wt[...]", 3),
     ]
-    for title, hint in ops:
+    for title, hint, nterms in ops:
         s.h(title, 3)
         s.p("Algorithm equation and term definitions:", bold=True)
         s.box(1.2, hint)
-        s.table(["algorithm (term)", "FLOPs", "Mem bytes", "AI"], [[""], [""], [""], ["Total"]],
+        s.table(["algorithm", "FLOPs", "Mem bytes", "AI"], [[""]] * nterms + [["Total"]],
                 widths=[3000, 2200, 2200, 1960])
+        s.label_value("Order of complexity:", "________________")
+        s.p()
 
     s.h("P2. Roofline Performance Charts", 2)
-    s.table(["GPU", "Peak FP32 (TFLOP/s)", "Peak GMEM BW (GB/s)", "Ridge point (FLOP/B)", "Source"],
-            [["Quadro RTX 6000 (TU102)"], ["H100 SXM5"]], widths=[2200, 1600, 1600, 1600, 2360])
+    s.table(["GPU", "Peak FP32 (TFLOP/s)", "Peak GMEM BW (GB/s)", "Ridge point (FLOP/B)"],
+            [["Quadro RTX 6000 (TU102)"], ["H100 SXM5"]], widths=[3060, 2100, 2100, 2100])
     s.p("Chosen values for the variable terms in each AI expression:", bold=True)
     s.box(1.0)
     for g in ["a. Turing Quadro RTX 6000 (TU102)", "b. Hopper H100 SXM5"]:
         s.h(g, 3)
         s.p("Roofline plot:", bold=True)
         s.box(3.2)
-        s.table(["Kernel", "Chosen values", "AI (FLOP/B)", "Regime (memory-bound / transitional / compute-bound)"],
-                [["Matrix transpose"], ["SoftMax (3-pass)"], ["Convolution"], [""]], widths=[2000, 2600, 1400, 3360])
 
     # ---------------- Part 3 ----------------
     s.h("Part 3 – Programming Exercises", 1)
     s.h("3.1 CUDA Gaussian Blur Kernels", 2)
-    s.table(["Item", "Value"], [["Filter", "9×9 Gaussian (BLUR_FILT), normalized by sum of applied weights"],
-                                ["Execution configuration (threads/block, blocks/grid)"],
-                                ["Boundary handling"], ["Verification method"]], widths=[3400, 5960])
-    for k in ["Kernel #1 – global memory only (GMEM)", "Kernel #2 – static shared memory (SMEM)",
-              "Kernel #3 – dynamic shared memory (SMEM)"]:
-        s.p(k + " – kernel code:", bold=True)
-        s.box(2.4)
     s.p("Blurred output images (test images #1, #2, #3):", bold=True)
     s.box(3.0)
     s.h("Extra Credit: Theoretical AI – global memory kernel vs shared memory kernel", 3)
@@ -184,7 +181,7 @@ def build(base, out):
     s.box(1.4)
 
     s.h("3.2 Host-Side Code Execution Timing", 2)
-    s.p("Timer #1 = device alloc + HtoD copy + kernel + DtoH copy; Timer #2 = kernel launch → cudaDeviceSynchronize(). "
+    s.p("Timer #1 = device alloc + HtoD copy + kernel + DtoH copy + cudaFree; Timer #2 = kernel launch → cudaDeviceSynchronize(). "
         "Not run in the debugger.")
     rows = []
     for img, size in [(1, "240×240"), (2, "512×512"), (3, "850×850"), (4, "4032×3024")]:
@@ -196,13 +193,6 @@ def build(base, out):
     s.box(1.2)
 
     s.h("3.3 Nsight VSE CUDA Debugger", 2)
-    s.p("Breakpoints set on adjacent lines (file : line numbers):", bold=True)
-    s.box(0.5)
-    s.table(["Step", "blockIdx (x,y)", "threadIdx (x,y)", "col, row", "Line"],
-            [["Break hit"], ["F10 #1"], ["F10 #2"], ["Thread picked in Lanes"], ["Warp picked in Warp Info"]],
-            widths=[2360, 1750, 1750, 1750, 1750])
-    s.p("Why does F10 often stay on the same line while col / row change?", bold=True)
-    s.box(1.0)
     s.p("QUESTION: How many warps are running? Based on the Tesla T4 hardware, can you explain this number in terms of "
         "hardware resources?", bold=True)
     s.box(1.6)
@@ -227,12 +217,10 @@ def build(base, out):
     s.box(1.8)
 
     s.h("Extra Credit: Host CPU Sequential Blur vs GPU Kernels", 2)
-    s.table(["Image", "CPU T3 (ms)", "GPU global T2 (ms)", "GPU static T2 (ms)", "GPU dynamic T2 (ms)", "Speedup (CPU / best GPU)"],
+    s.table(["Image", "CPU T3 Debug (ms)", "CPU T3 Release (ms)", "GPU global T2 Release (ms)",
+             "GPU static T2 Release (ms)", "GPU dynamic T2 Release (ms)"],
             [["#1 240×240"], ["#2 512×512"], ["#3 850×850"], ["#4 4032×3024"]],
-            widths=[1660, 1500, 1550, 1550, 1550, 1550], size=18)
-
-    s.h("Submitted Source Files", 1)
-    s.table(["File", "Description"], [[""], [""], [""]], widths=[3000, 6360])
+            widths=[1560, 1560, 1560, 1560, 1560, 1560], size=18)
     s.save(out)
 
 
