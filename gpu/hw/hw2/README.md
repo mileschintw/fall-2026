@@ -69,7 +69,7 @@ HW2 分兩大部分：(i) 書面問題，(ii) 程式練習（2D CUDA grid、shar
    | `hw2_testimage1.png` | 240×240 |
    | `hw2_testimage2.png` | 512×512 |
    | `hw2_testimage3.png` | 850×850 |
-   | `hw2_testimage4.png` | 4023×3024 |
+   | `hw2_testimage4.png` | 4032×3024（原文寫 4023，是筆誤；實際檔頭 4032×3024，見「本機檔案核對」） |
    | `stb_image.h`、`stb_image_write.h` | 影像讀寫 |
 4. 對 project 按右鍵 → Add → Existing Item，加入 `hw2_starter.cu`（檔案總管可能要手動打 `C:\` 才到得了 C 槽根目錄）。
 
@@ -188,12 +188,43 @@ HW2 分兩大部分：(i) 書面問題，(ii) 程式練習（2D CUDA grid、shar
 - **步驟 13c 是空的**：原文 p7 只有「c.」沒有內容。
 - **步驟 25b 的 `dram_bytes.sum`**：metric 實際名稱是 `dram__bytes.sum`（兩個底線），原文少一個底線。
 - **Dynamic SMEM 版本要不要 profile**：步驟 24 只說重做 static shared-memory 版本，所以 8 次 profiling 不含 dynamic；計時（SUBMIT 5「GPU CUDA blur kernel variants」）看起來 3 個版本都要。
-- **計時要量哪些 timer**：步驟 6 說加在 starter「註解標的位置」，要看 `hw2_starter.cu` 才知道（repo 裡還沒有這個檔）。
+- **計時要量哪些 timer**：已解決，看 starter 註解：timer #1 = 配置 device 記憶體 → H2D → kernel → D2H（整段）；timer #2 = 只含 kernel launch → `cudaDeviceSynchronize()`；timer #3（Extra credit）= host 循序 blur。
 - **繳交方式和配分**：原文沒寫 Canvas submission type，也沒寫各部分佔幾分。
+
+## 本機檔案核對（2026-10-26）
+來源資料夾 `D:\Repos\Au26_GPU\Au26_GPUCompute\HW2\`（使用者從 Canvas 下載）。starter 已複製進 repo：[hw2_starter.cu](hw2_starter.cu)（原樣，未修改）。測試影像（共約 9 MB）和 stb header 沒複製進 repo，Canvas Files/Homeworks/Hw2_materials 可再下載。
+- **PDF**：`Homework #2 (HW2) - Au26 - GPUCompute.pdf` 是 259794 bytes，與 spec.md 記的 Canvas file 154697826 大小相同，內容視為同一份，沒有新增資訊（PDF 有密碼保護，工具讀不了，以 spec.md 為準）。
+- **測試影像實測（PNG 檔頭）**：全部 8-bit grayscale（color type 0）、非 interlaced。
+
+  | 檔案 | 寬×高 |
+  |---|---|
+  | `hw2_testimage1.png` | 240×240 |
+  | `hw2_testimage2.png` | 512×512 |
+  | `hw2_testimage3.png` | 850×850 |
+  | `hw2_testimage4.png` | **4032×3024**（原文寫 4023×3024，筆誤） |
+- **STB 版本**：`stb_image.h` v2.16。
+- **Starter 裡的 timer 位置**：timer #1 在配置 device 記憶體之前開始、D2H 之後停；timer #2 夾住 kernel launch 到 `cudaDeviceSynchronize()`；timer #3（Extra credit）夾住 host 循序 blur。
+- **Starter 直接編不過／要改的地方**（沒有實際編譯，是讀程式碼的判斷）：
+  1. `#include "../util/stb_image.h"`：路徑指向上一層的 `util/`，但檔案在同一個資料夾，要改成 `"stb_image.h"`。
+  2. `int imgSize = x_cols * y_rows * sizeof(uchar);`：`uchar` 不是標準型別，改 `unsigned char`（或自己 `typedef`）。
+  3. `cudaStatus` 沒宣告就使用，要自己加 `cudaError_t cudaStatus;`。
+  4. `h_imgOut` 沒宣告，要自己 malloc host 輸出 buffer。
+  5. 檔名路徑是 `c:/Temp/AUT22_GPUCompute/dat/...`（去年的），要改成本機路徑；輸出檔名 `hw2_outimage1.png` 要依影像／kernel 版本分開命名。
+  6. `goto Error` 會跳過後面 `const char imgFileOut[] = ...` 這類有初始化的宣告，C++ 會報 jump bypasses initialization。宣告集中放在 `main()` 最前面。
+  7. 開頭 `// #include your error-check macro header file here`：要自己寫 error-check macro（含 `goto Error`），HW1 應該有現成的。
+  8. 錯誤訊息字串寫 `addKernel launch failed`，是複製自 VS 預設範本，可改成自己 kernel 名稱。
+  9. `stbi_load(..., 1)` 強制 1 channel；最後 `stbi_write_png(..., x_cols * n_pixdepth)` 的 stride 用的是檔案原本的 channel 數，這 4 張都是 1 channel 所以剛好對，換彩色圖會錯。
+- **Starter 的 kernel 註解**：
+  - `// blur kernel #1 - global memory only`
+  - `// blur kernel #2 - device shared memory (static alloc)`
+  - `// blur kernel #2 - device shared memory (dynamic alloc)`（第二個也寫 #2，應該是 #3 的筆誤）
+  - `BLUR_FILT[81]` 是 host 端 `const float` 陣列，kernel 不能直接讀，所以要多一個 kernel 參數把它複製到 device（步驟 5c.iv）。
+  - 正規化除數是「實際用到的係數權重總和」（步驟 5b.vii）；邊緣 pixel 只用到落在影像內的係數，除數要跟著只加這些係數。
 
 ## 改版紀錄
 | 日期 | 變動 |
 |---|---|
 | 2026-10-21 | 第一次整理 |
+| 2026-10-26 | 補「本機檔案核對」：starter、影像尺寸（image4 實為 4032×3024）、starter 要修的地方；timer 位置已確認 |
 
 GPU 課禁止用 AI 產生作業解答
