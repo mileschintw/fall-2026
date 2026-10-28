@@ -3,7 +3,7 @@
 > 每次上課結束更新。時間用 Pacific。掌握程度：⬜ 未學、🟨 看過但不穩、🟩 能自己解釋並做對題目。
 
 ## 目前位置
-- 下一步：M2–M4 快速掃描（學生 10/28 要求：診斷每模組只考 1–2 題，想補沒考到的部分）。一則一題，答對就過，答錯才停下來教。題目：S1 host 端寫 `d_x[0]` 會怎樣（M2 兩塊記憶體）→ S2 kernel launch 是非同步、`cudaDeviceSynchronize` 的用途（M2）→ S3 .cu→PTX→SASS、只編 sm_75 的執行檔拿到 RTX 3050 能不能跑（M2）→ S4 62×76 影像、16×16 block 的 `dim3 grid` 與 2D index（M3）→ S5 2D block 16×16 的 warp 怎麼切、grid-stride loop（M3/M4）→ S6 zero-overhead warp 切換如何藏 latency（M4）。S1 重問答對（10/28）。目前在 S2（已問：為什麼 launch 後 `cudaGetLastError` 說 no error，到 `cudaDeviceSynchronize` 才報 700，等回答）。掃完接模組 5／步驟 1 熱身／待複習第 1 題（SI 字首換算）；步驟 2 預測可以從「01-roundtrip WORK=100 時 kernel 時間怎麼變」切入（實測 WORK 1→100 都約 0.6–0.7 ms，WORK=1000 才變 2.4 ms）（格式：模組 #／流程步驟／題號）
+- 下一步：M2–M4 快速掃描（學生 10/28 要求：診斷每模組只考 1–2 題，想補沒考到的部分）。一則一題，答對就過，答錯才停下來教。題目：S1 host 端寫 `d_x[0]` 會怎樣（M2 兩塊記憶體）→ S2 kernel launch 是非同步、`cudaDeviceSynchronize` 的用途（M2）→ S3 .cu→PTX→SASS、只編 sm_75 的執行檔拿到 RTX 3050 能不能跑（M2）→ S4 62×76 影像、16×16 block 的 `dim3 grid` 與 2D index（M3）→ S5 2D block 16×16 的 warp 怎麼切、grid-stride loop（M3/M4）→ S6 zero-overhead warp 切換如何藏 latency（M4）。S1 重問答對（10/28）。S2 答對（10/28）。目前在 S3（已問：HW2 的 `-gencode arch=compute_75,code=[sm_75,compute_75]` 若改成只有 `code=sm_75`，在 RTX 3050 上跑會怎樣；揭曉前先實測，預期 error 209 no kernel image）。掃完接模組 5／步驟 1 熱身／待複習第 1 題（SI 字首換算）；步驟 2 預測可以從「01-roundtrip WORK=100 時 kernel 時間怎麼變」切入（實測 WORK 1→100 都約 0.6–0.7 ms，WORK=1000 才變 2.4 ms）（格式：模組 #／流程步驟／題號）
 - 上次上課：2026-10-27 22:10 – 10/28 02:05 PT（模組 0 診斷、模組 1 完成）
 - 累計上課分鐘：65
 
@@ -25,6 +25,7 @@
 |---|---|---|
 | GPU 適合什麼工作（throughput、簡單重複運算） | 🟩 | M1 練習 2（10/28）四個情境全對，理由能講出傳輸成本與運算量的權衡；b 理由寫「比較規則複雜不利平行」，主因其實是 n 太小（latency）。先前證據：診斷 Q1（10/27）：說出「簡單算術、要規劃情境」；漏了 host↔device 搬資料成本、序列/分支多/單一 latency 敏感的工作 CPU 較快。M1 熱身（10/27）：說出 alloc→H2D→算→D2H、傳輸可能抵銷加速 ✔；但以為「資料量大時」傳輸才吃掉優勢（vector add 這種 AI 低的工作在任何大小都被傳輸主導，小 n 時還有固定 overhead） |
 | Host/device 流程順序（malloc→H2D→kernel→D2H→free） | 🟩 | 診斷 Q2（10/27）c d a b e 全對 |
+| kernel launch 非同步、錯誤在 sync 才回報 | 🟩 | 掃描 S2（10/28）答「錯誤在 GPU 上，sync 前 CPU 不知道」✔；補充：launch 立刻返回、設定錯誤 launch 時就報、`cudaMemcpy` 會隱含同步、CPU 計時要先 sync |
 | block 數 = ceil(n/blockDim)、邊界 `if` | 🟩 | 診斷 Q3（10/27）4 個、知道最後一個 block 超出範圍 |
 | 2D→1D row-major index | 🟩 | 診斷 Q4（10/27）寫成 `row*W + H`，被問到時自己說是筆誤，更正為 `row*W + col` |
 | kernel launch 固定 overhead（小 n 輸的原因） | 🟨 | M1 追問（10/27）答「compile 或啟動 kernel」：launch 對；compile 錯（nvcc 事先編好 SASS，只有第一次啟動多約 0.16 ms 的 lazy module loading） |
