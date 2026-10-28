@@ -18,6 +18,10 @@
 | 5 | 效能理論 | ⬜（Q7 對、Q8 不會） | — | — |
 | 6 | 記憶體階層、tiling | ⬜（Q9 不會） | — | — |
 | 7 | 拆解 HW2 | ⬜ | — | — |
+| 8 | Occupancy 與 launch configuration | ⬜ | — | — |
+| 9 | Warp scheduling、latency hiding | ⬜（S6 已碰到 zero-overhead 切換） | — | — |
+| 10 | 任意尺寸 tiled MMULT 邊界檢查 | ⬜（S5 的右排／下排 divergence 就是 p42–47 的同一種分析） | — | — |
+| 11 | Nsight Compute 實作 | ⬜ | — | — |
 
 ## 觀念掌握（細項）
 <!-- 每列：觀念 | 狀態 | 證據（哪一題答對/答錯、日期） -->

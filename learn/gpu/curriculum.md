@@ -1,7 +1,7 @@
 # GPU 課程地圖
 
 > 教材正本：`gpu/lectures/<date>/`（notes.md、slides.txt、transcript.vtt）、`gpu/hw/<hwN>/`。
-> 已涵蓋到：2026-10-20（L3）。新講次＝`gpu/lectures/` 下日期比這個新、而且有 `notes.md` 的資料夾。
+> 已涵蓋到：2026-10-27（L4）。新講次＝`gpu/lectures/` 下日期比這個新、而且有 `notes.md` 的資料夾。
 
 | # | 模組 | 互動頁點子 | 課程來源 | 作業 |
 |---|---|---|---|---|
@@ -9,10 +9,14 @@
 | 1 | CPU vs GPU、為什麼要平行 | 1 個大核心 vs 幾千個小核心處理同一張圖的動畫；latency vs throughput | L1、L3 p11–13 | HW0 |
 | 2 | 一個 CUDA 程式的完整流程 | 拖曳排序 host/device 步驟；`nvcc` 編譯流程（.cu → PTX → SASS）；host 和 device 記憶體是兩塊 | L1、L2 | HW0、HW1 |
 | 3 | Grid / block / thread 對應到資料 | 調 gridDim、blockDim，看每個 thread 負責哪一格、哪些越界被 `if` 擋掉；2D/3D 攤平 | L2 | HW1 |
-| 4 | SIMT、warp、divergence | block 切成 warp 的動畫；32 lane 遇到 `if` 時一半閒置；zero-overhead 切換 | L3 p4–10 | HW3 預習 |
-| 5 | 效能理論 | Amdahl 滑桿（f、P）；AI 計算器；可拖點的 roofline（T4、H100、RTX 3050） | L3 p11–31 | HW2 P1–P2 |
+| 4 | SIMT、warp、divergence | block 切成 warp 的動畫；32 lane 遇到 `if` 時一半閒置；zero-overhead 切換 | L3 p4–10、L4 p34–41 | HW3 |
+| 5 | 效能理論 | Amdahl 滑桿（f、P）；AI 計算器；可拖點的 roofline（T4、H100、RTX 3050） | L3 p11–31、L4 p50（NCU roofline） | HW2 P1–P2 |
 | 6 | 記憶體階層、tiling、shared memory | 記憶體金字塔（延遲／容量）；tiled MMULT 的 phase 動畫，即時數 GMEM load；`__syncthreads()` 拿掉會怎樣 | L3 p37–74 | HW2、HW3 |
 | 7 | 拆解 HW2 | Gaussian blur 三種寫法逐行對照；用 `gpu/hw/hw2/results/` 的實測和 ncu 數據讀 roofline | L3 p75–76、HW2 spec | HW2 |
+| 8 | Occupancy 與 launch configuration | Occupancy 計算器：調 threads/block、registers/thread、shared/block，看四個限制哪個先卡住（T4 vs RTX 3050 vs H100）；p8–p9 例題 A–D 逐題拖拉；register spilling | L4 p5–11、[00:59:05]–[01:13:01] | HW3 |
+| 9 | Warp scheduling、stall、latency hiding、waves | 4 個 SMSP 的 warp pool 動畫：每 cycle 挑一個 eligible warp，調 warp 數和指令延遲看 issue slot 使用率（Little's law）；stall 原因對照表；wave／tail wave 計算 | L4 p27–33 | HW3 |
+| 10 | 任意尺寸 tiled MMULT 的邊界檢查與 divergence 分析 | 3×3／2×2 tile 逐 phase 動畫，標出「錯但合法」和越界的讀取；J×K×L 長方形矩陣；100×100、16×16 tile 的 warp-phase divergence 計數器（M tile 示範，N tile 是 HW3 自己做） | L4 p12–25、p42–48 | HW3 |
+| 11 | Nsight Compute 實作 | 在 RTX 3050 上用 `ncu` 跑 loop-divergence 和 transpose 範例，讀 Summary、Speed of Light、Roofline、Warp State、Source view（SASS），用 Baseline 比較 | L4 p49–51、[02:55:01]–[03:31:01] | HW3 |
 
 ## 模組 0 診斷題
 目的是找出卡在哪。出題時一次貼出 9 題，告訴學生：每題寫答案、「不會」或「猜：…」，憑現在的理解作答就好。
@@ -30,7 +34,7 @@
 9. shared memory 和 global memory 差在哪？tiled MMULT 為什麼要 `__syncthreads()`？（M6）
 
 ## 之後的課（syllabus，未上）
-- HW3（11/3）：去年是 control divergence、tiled MMULT、NCU profiling。
+- HW3 已在 L4 發布：Control Divergence & Tiled MMULT improvements & NCU profiling，截止 11/6（五）11:59 PM PST（Canvas 11810628），對應模組 8–11。
 - HW4（11/10）：去年是 memory access patterns、corner turning（coalescing）。
 
 ## 診斷題答案（批改時才讀，只給學生看批改結果）
