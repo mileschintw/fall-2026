@@ -1,6 +1,6 @@
 # GPU Lecture 3 — 2026-10-20（SIMD／SIMT 與 warp、平行效能理論（speedup、Amdahl、arithmetic intensity、roofline）、naive 與 tiled MMULT、CUDA 記憶體階層、HW2）
 
-> 來源：transcript（Teams 自動逐字稿 `transcript.vtt`，2446 cues，00:01:05–03:35:51，約 3 小時 35 分）、slides（Au26_GPU-Compute_Lecture3.pdf，Canvas file 154698067，76 頁）、閱讀章節：Reading Set #2 = PMPP 4th ed. Ch3 §1–4、Ch4 §1–4（對應 L2、L3）；Reading Set #3 = PMPP Ch5 全章（10/19 起，對應 L3–L5、HW2–3）。逐字稿是自動產生，專有名詞可能聽錯。
+> 來源：transcript（Teams 自動逐字稿 `transcript.vtt`，2446 cues，00:01:05–03:35:51，約 3 小時 35 分）、slides（Au26_GPU-Compute_Lecture3.pdf，Canvas file 154698067，76 頁；另有 10/22 上傳的手寫註解版 `Au26_GPU-Compute_Lecture3_w_notes.pdf`，file 154778212，76 頁。註解是壓平的筆跡，不在文字層裡，是逐頁轉成圖片再和原版比對讀出來的，見「講義手寫註解」一節，標成（註解 pN））、閱讀章節：Reading Set #2 = PMPP 4th ed. Ch3 §1–4、Ch4 §1–4（對應 L2、L3）；Reading Set #3 = PMPP Ch5 全章（10/19 起，對應 L3–L5、HW2–3）。逐字稿是自動產生，專有名詞可能聽錯。
 >
 > 常見誤聽對照：sam's → SMs；Cindy → SIMD；SYSD → SISD；Matt Mall / MMALT → MMult（matrix multiplication）；Cublast / Kublas / KuBlast → cuBLAS；blast → BLAS；gem V / Gem V → GEMV；SIAS → SASS；Kuobj dump → cuobjdump；Omdal / Mom dolls law → Amdahl's law；Gustafson Barsi → Gustafson-Barsis；Week scaling → weak scaling；big O micron → big-Omicron；rich point / bridge point → ridge point；ECE sheet → spec sheet；Coop Pilot → Copilot；Colonel → kernel；Team in → GMEM；Shared, man → shared mem；Tse → C（GEMM 的輸出）；"Court concurrent workers" → P concurrent workers；"100 gigabit per second" → 投影片 p24 寫 100 GB/s；Devika、Diya 是兩位 TA。
 >
@@ -125,10 +125,10 @@
 - [00:03:03] [00:04:01] 連不上 AWS 就說一聲，重寄邀請通常就好了。看到「no streaming resources available」可以 10 分鐘後再試；開新 instance 最差要等約 20 分鐘，AWS 說這是正常的啟動時間。
 - [00:07:06] [00:08:02] WorkSpaces session 有 4 小時上限，到期前一定要把資料備份到 instance 外面，不然就沒了。
 - [00:08:02] 正在和 UW IT 處理把 UW Google Drive／OneDrive 掛到 Windows Explorer，希望下週能好。
-- [00:08:02] [00:09:01] TA office hours 已經開始：Devika 週四（逐字稿時間聽不清楚，見「還要釐清的問題」），Diya 週一 6:30–8:30 PM。週四先問、週末寫、週一還卡住再去問；週末卡住就貼 Teams channel。
+- [00:08:02] [00:09:01] TA office hours 已經開始：Devika 週四 11:30 AM–1 PM（逐字稿聽不清楚，註解版 p3 補上了時間），Diya 週一 6:30–8:30 PM。週四先問、週末寫、週一還卡住再去問；週末卡住就貼 Teams channel。
 - [00:09:01] [00:10:02] 有同學要求某個工具預裝（逐字稿是「Get get pre-installed」，可能是 Git），老師說可以。其他工具要大家都需要才會加，因為重建 image 很麻煩。
 - [00:10:02] 選擇題要拿滿分，除了答案還要附解釋；答錯但解釋合理也能拿分。
-- [00:10:02] [00:11:00] Final project 要到 lecture 6 才會講，屆時還剩約五、六週做專題（投影片 p3 寫 L5，見「還要釐清的問題」）。Reading set 每週更新，記得去 Canvas Pages 看。
+- [00:10:02] [00:11:00] Final project 要到 lecture 6 才會講，屆時還剩約五、六週做專題（原版 p3 寫 L5，註解版 p3 已改成 L6）。Reading set 每週更新，記得去 Canvas Pages 看。
 
 **SIMD／SIMT 與 warp**
 - [00:17:00] 老師說目前多數裝置每個 sub-partition 有 32 個 FP32 core，可以一次跑完一整個 warp（和 L2 講的 T4 不同，見「還要釐清的問題」）。
@@ -190,7 +190,7 @@
 - [02:35:02] [02:36:04] 可配置的 grid 遠大於 device DRAM 放得下的資料；更大的資料要靠 host → device 的串流、非同步傳輸與計算重疊，這學期末開始講，下學期深入。
 
 **記憶體階層**
-- [02:38:03] 老師說記憶體空間示意圖（p44）有錯：右邊那個 block 應該標成另一個 block（例如 block (1,0)），每個 block 看不到別的 block 的 shared memory。
+- [02:38:03] 老師說記憶體空間示意圖（p44）有錯：右邊那個 block 應該標成另一個 block（例如 block (1,0)），每個 block 看不到別的 block 的 shared memory。註解版 p44 已把右邊那個手寫改成 Block (1, 0)。
 - [02:39:03] [02:40:03] Host 只能存取 global 和 constant；99% 的情況資料是放 global，因為 constant 小而且唯讀。之後要自己把資料搬到 shared，因為離 thread 比較近、快很多。
 - [02:40:03] Global 和 shared／register 之間的搬移都要 programmer 明確寫，不會自動發生。
 - [02:41:02] [02:42:02] Local memory 這個名字很容易誤會：它其實在 global memory 裡。Register 用完時 compiler 會自動把東西放到 local memory，程式看不出來，但會變慢；之後會教怎麼查。
@@ -231,8 +231,74 @@
 - p27 提到 MIPS（整數效能）和 TOPS（現在多指低精度 tensor 運算）（講義 p27）。
 - p32 總結還列了降低功耗、locality、span（critical path）是設計平行演算法的考量（講義 p32）。
 - p34 的數字：Llama 3.1 405B 用了 3.8×10²⁵ FLOPs；H100 Tensor Core BF16 GEMM 989 TFLOPS 對 FP32 CUDA core 67 TFLOPS（約 15×）；剩下 1% 的 softmax、LayerNorm 等若不 fuse 可能主導執行時間，所以 FlashAttention 把它們 fuse 進 GEMM（講義 p34）。
-- p69–p73 的 kernel 有筆誤（自行發現，課堂沒提）：載入 N 的 index 寫成 `t*TILE_WIDTH`，應為 `p*TILE_WIDTH`；迴圈上限寫 `n/TILE_WIDTH`，參數名其實是 `Width`；第二個同步寫成 `__synchthreads()`，應為 `__syncthreads()`（講義 p69）。
-- p5 的 MIMD 括號誤寫成「Single Instruction, Multiple Data」（講義 p5）。
+- p69–p73 的 kernel 有筆誤（自行發現，課堂沒提）：載入 N 的 index 寫成 `t*TILE_WIDTH`，應為 `p*TILE_WIDTH`；迴圈上限寫 `n/TILE_WIDTH`，參數名其實是 `Width`；第二個同步寫成 `__synchthreads()`，應為 `__syncthreads()`（講義 p69）。註解版 p69–p72 的這幾處都沒有改。
+- p5 的 MIMD 括號誤寫成「Single Instruction, Multiple Data」（講義 p5）。註解版也沒改。
+
+## 講義手寫註解（`Au26_GPU-Compute_Lecture3_w_notes.pdf`）
+
+老師上課時在投影片上寫的紅、藍、綠、黑字和螢光筆，10/22 上傳。文字層和原版相比只有 p3 有實質修改：Devika 的 office hours 補上「Thursdays 1130-1 PM」、「HW2 procedures will be published after lecture」後面加「today」、final project 介紹從「will be in L5」改成「will be covered in L6」、「READING SET updated」改成「READING SET #3 updated」；其他頁只差在空白。其他差異都是筆跡。沒有筆跡的頁（p1–2、p4、p33–34、p43、p48–50、p56–68、p73）不列；p18（圖例 log(n)、nⁿ 旁兩個小記號）和 p40（幾條藍色底線）也不列。p69–p72 的程式筆誤（`t*TILE_WIDTH`、`n/TILE_WIDTH`、`__synchthreads()`）和 p5 的 MIMD 括號都沒有改。
+
+**課務**
+- （註解 p3）「AppStream sessions expire in 4 hrs」的「AppStream」劃掉，改寫「WorkSpaces」，對應 [00:07:06] 口頭說的 WorkSpaces 4 小時上限。
+- （註解 p75）HW2 learning objective 第 6 項（host timing）畫箭頭。（註解 p76）`profileapi.h` 和兩個 learn.microsoft.com 連結畫箭頭，`QueryPerformanceCounter`、`QueryPerformanceFrequency` 前加點，也就是 HW2「Host-side Code Execution Timing」要用的東西。
+
+**SIMD／SIMT 與 warp**
+- （註解 p5）右上角畫一個 SM 切成 4 格，標「SP」，其中一格畫成小格子並寫「32 FP32」，意思是每個 SP 有 32 個 FP32 core（一般情況；T4 是 16 個，見「還要釐清的問題」第 2 點）。SIMD 那格框起來，箭頭標「GPU」。左下畫 op1、op2、op3 錯開的 pipeline 圖，下面寫「Time」，用來解釋 MISD「Computers May be Pipelined」：pipeline 填滿時，同一時間有多道指令在處理資料。
+- （註解 p6）Processing Unit 旁寫「core」，整個大框左下寫「chip」，「Processing Block in SM」的 SM 框起來。
+- （註解 p7）「Both models run one instruction over many ALU lanes at once」打星號，句尾補「does.」（what the hardware automatically does）。CPU SIMD 旁寫「Intel MMX →」、「4 element, 8 element」，也就是固定寬度的 vector 指令。「scalar thread is the unit of programming」和「programmer declares independence」畫箭頭，independence、masking 畫底線。
+- （註解 p8）「Each Block is executed as 32-thread Warps」的 Block 上方補「Thread」（thread block）。1D 和「row-major order」畫底線。
+- （註解 p9）「There are 8 * 3 = 24 Warps」後面寫「→ possible resource limitation due to the available device warp slots.」，對應 [00:33:16] 說的 warp slot 不夠時要分批。左下畫 2×8×4 block 的示意：z=0 那片 8 列 × 4 行是「W0」，後面那片 z=1 是「Warp-1」；「ZxYxX」的 Z 標「slowest」、X 標「fastest」（[00:35:04]–[00:38:06]）。
+- （註解 p10）「Warp-level primitives」打星號、寫「→ CUDA prog lang.」，左邊畫一個框表示 warp 是 block 和 thread 之間多一層。
+
+**效能理論**
+- （註解 p11）latency 和 throughput 的 Units 打星號；bytes/sec 後面寫「GB/s」，memory 畫底線。
+- （註解 p12）表格最上面寫「Fastest」、最下面寫「Slowest」並畫箭頭。圈出 register file（~356 TB/s、5.7×10⁻¹ ns）和 HBM3（3.35 TB/s、4.5×10² ns）兩列，對照 register 和 global memory 差了約三個數量級（[00:46:01]）。Register file、L1/shared、L2 用大括號標「on chip」；HBM3、HBM3e、DDR5 標「global」；PCIe 4.0／5.0 打星號寫「Host ↔ device」。
+- （註解 p13）Analysis-Driven Optimization Process 打大星號；「Establish baseline reference」旁寫「CPU, naive kernel…」；從第 5 步畫箭頭繞回第 1 步，表示是迴圈；working、validate 畫底線。
+- （註解 p14）S_P 旁寫「S₈ → cores」；Efficiency = T₁/(P·T_P) 後面寫「= 1 if T_P = T₁/P」，箭頭指向 linear speedup；「Both algorithms must solve the identical computational problem」畫箭頭。
+- （註解 p15）左邊畫一個方格切成多塊（strong scaling：同一個問題切給更多 processor）和兩個空方格（weak scaling：每個 processor 一份）；weak scaling 那行打星號。例題答案：Strong scaling「M_ss = M/P」，Weak scaling「M_ws = P·M/P = M」。
+- （註解 p16）O(g(n)) 旁寫「O(n²)」；Big-Θ 的 c₁g(n) 標「lower」、c₂g(n) 標「upper」。
+- （註解 p17）「3x² + 8x² = 11x²」，標出 O 那段是「upper」、Ω 那段是「lower」。
+- （註解 p19）「Partition vectors」前補「evenly」；右邊畫兩條向量 a、b 切成 P 段，下面畫 tree reduction。Asymptotic speedup 後面寫「~ Θ(P)」；asymptotic efficiency 劃掉 log₂P，寫「~ (N/2N) ~ Θ(1)」（N ≈ P log₂P 時）。
+- （註解 p20）serial fraction 畫底線，圖上 serial work 標「W_ser」。
+- （註解 p21）P → ∞ 時 (1−f)/P → 0；「f = .5、.1」→「1/(1/2) = 2、1/(1/10) = 10」（[01:10:01]–[01:11:03]）。
+- （註解 p22）「program size as fixed」畫底線；serial fraction 0.1% 那條畫線拉到 2048 workers 的 672（[01:12:00]）。
+- （註解 p23）Gustafson 圖的 serial work 標「fixed」；problem sizes grow、serial portion is constant 畫底線。
+- （註解 p24）AI 範圍上方寫「0.1 ←→ 400」（[01:18:04]）；BLAS1,2 畫箭頭，Dense Linear Algebra 旁寫「MM」。例題「memory bandwidth」上補「Peak」，兩行規格旁寫「from spec sheet」。最下面手寫算式「AI = W/Q = 625 GFLOP/s / 100 GB/s ⇒ 6.25 FLOPs/byte」。
+- （註解 p25）左邊寫「(cuBLAS)」；1979、n²、n³、matrix-vector 畫底線。GEMM 那行的「y = aAB + bC」把 y 改成 C，旁邊寫「A, B, C: N×N」（最後一個字母寫得像 D），也就是方陣 C = αAB + βC。
+- （註解 p26）步驟 1 上方寫「PROJECT」，表示 final project 也要照這個步驟算 W、Q；perfect cache 後面補「initially」。
+- （註解 p27）FLOP 後面寫「(FP32)」；SFU 那行打星號。手寫 FP32 方陣 GEMM：「C = AB, A, B, C: N×N FP32」、「W: (2N)N² = 2N³」、「Q_R = 2N²·4 bytes/float」、「Q_W = N²·4」、「Q = Q_R + Q_W = 12N²」、「AI = W/Q = 2N³/12N² = N/6 ~ O(N)」。
+- （註解 p28）手寫 SGEMV：「y = αAx + βy, A: N×N, x, y: N×1, α, β: scalar fp32」；「W = (2N−1)N = Ax」、「αAx = 2N² − N + N」、「+βy = 2N」、「= 2N² + 2N」；「Q_R = (N² + 2N + 2)·4」（旁註「float bytes!」）、「Q_W = N·4」、「Q = 4N² + 12N + 8」；「AI_SGEMV = W/Q = (2N²+2N)/(4N²+12N+8) ≃ 1/2 ~ O(1)」；「DGEMV ~ 1/4」。
+- （註解 p29）交點標「ridge pt = machine balance pt」，左上寫「unattainable」；斜線標「Peak memory BW」，下方「memory bound」、右方「compute bound」；橫軸標 0.1、10、100。
+- （註解 p30）整頁手寫：「P(AI) = min(P_peak, β·AI)，β: memory peak BW」；「P = β·AI → AI = P_peak/β = 6.25」；「log P = log(AI) + log(β)」對應「y = mx + b」（斜率 1，log β 只是截距，[01:47:03]）；右邊「Ex: hypothetical system，P_peak = 625 GFLOPS/s，β = 100 GB/s」，下面寫「get this from spec sheet」；底下畫 log-log 軸（AI 0.1、1、10、100）和 100 GB/s 斜線、625 GFLOP/s 水平線。
+- （註解 p31）measured 畫底線，箭頭指向 Theoretical GB/s 那條線。
+- （註解 p32）computational work 和 communication 用大括號寫「AI?」；span／serial fraction 旁寫「Amdahl's law eat your lunch?!」（[01:52:01]–[01:53:02]）。
+
+**MMULT v0**
+- （註解 p35）c_row,col 下面寫「y, x」；c_ij 展開式下寫「P + P−1」（每個輸出元素 P 個乘法、P−1 個加法）；三個矩陣標 C、A、B。
+- （註解 p36）「D: data size in bytes, 4=SP, 8=DP」上面補「2=HP」；最後一行「AI = N/3D ~ O(N)」後面寫「→ N/6」。
+- （註解 p37）標題旁寫「need validation baseline!!」，往下寫「1. math correct」、「2. baseline timing」（[02:17:06]）。迴圈上限 P、`h_C[i * N + j]` 的 index 畫底線。
+- （註解 p38）標題和「get the kernel working and computing correct results on GPU」打星號；「each kernel calculates」中間補「thread」；DRAM 上寫「global mem」；slowest、K.I.S.S. 畫底線；程式內迴圈用大括號指到「and computes the inner loop」。
+- （註解 p39）row/col 公式用大括號連到 kernel 裡的對應行；`+= M[...] * N[...]` 和 `P[...] = pval` 標「DRAM reads」、「writes」；圖上標 x、y 軸，M 的寬標「k」，P 上畫出 block 切成的 tile 和「Block_width」。
+- （註解 p41）「Effective AI for mmult_sqr_gmem kernel」旁寫「→ specific implementation」（同一演算法不同實作 AI 不同，[02:29:05]）；peak compute 和 max memory bandwidth 兩行打星號；GDDR6 的 Double Data Rate 畫箭頭指到「× 2」；「25.4 FLOPs/Byte」後面寫「→ to saturate T4 GPU FP32.」
+- （註解 p42）「32*65535 = 2^21」旁寫「→ y-dim」；17 TB、F32s 畫底線。
+
+**記憶體階層**
+- （註解 p44）右邊的「Block (0, 0)」手寫改成「Block (1, 0)」，就是 [02:38:03] 口頭說的圖錯。圖上標「SMEM」、「REG」、「GMEM」，thread 下面寫「thread local」（local memory 其實在 global memory）。Grid、Block、Thread 用黃色螢光筆，Shared Memory、Registers、Global Memory、Constant Memory 用藍色螢光筆；Host 框成綠色。
+- （註解 p45）「__device__ __constant__」的 `__device__` 圈起來，箭頭指到「__device__ is optional」；shared 那列畫箭頭；Lifetime 欄畫箭頭，global／constant 的 application 用大括號標。
+- （註解 p46）explicit memory load/store、scratchpad 畫底線。
+- （註解 p47）`__shared__ float ds_in[TILE_WIDTH][TILE_WIDTH];` 旁寫「→ TILE_WIDTH must be avail to compiler」（[02:47:02]）；launch 的 `shared_mem_size`、`0` 下面標「3」、「4」（第三、四個參數，[02:48:01]）；`s_filter[i] = d_filter[i];` 旁寫「→ explicit move GMEM → SMEM」。
+
+**Tiled MMULT v1**
+- （註解 p51）左邊寫「m₀n₀ + m₁n₁ + m₂n₂ + m₃n₃ + …」，前兩項標 p0、後兩項標 p1，表示 dot product 拆成 phase 的部分和（[03:04:04]）；右邊畫 M、N 的 tile 搬進「SM」、「SN」（shared memory 裡的 tile）。
+- （註解 p52）Phase 0、Phase 1 的欄位上方寫「Load0、Use0、Load1、Use1」。
+- （註解 p53）左邊的 M、N 標「GMEM」。
+- （註解 p54）「SYNCHRONIZE! Why?」下面寫「potential RAW hazard」。
+- （註解 p55）右上 timeline 標「barrier」；`__syncthreads()` 和「All threads must execute」畫箭頭；SM、deadlock 畫底線；if/else 各有一個 `__syncthreads()` 的範例旁寫「not same barrier = deadlock」（[03:11:03]）。
+- （註解 p69）兩行 `__shared__` 宣告標「static SMEM」，旁寫「same as threadblock dims!」；setup 部分用大括號標「setup」；Row、Col 旁寫「location in output matrix being computed」。
+- （註解 p70）for 迴圈標「enter phases」。
+- （註解 p71）LOAD 的兩行標「GMEM → SMEM」，旁寫「→ using 1D indices for GMEM」（[03:21:03]）；第一個 `__syncthreads()` 畫箭頭。
+- （註解 p72）第一個 `__syncthreads()` 標「RAW」、第二個標「WAR」，兩個都打星號；`Pvalue +=` 那行寫「use register acc」，內層迴圈標「USE iterations」；外層迴圈結尾標「// P Phases」；`P[Row*Width+Col] = Pvalue;` 旁寫「← write result 1 time to gmem」。
+- （註解 p74）TILE_WIDTH、TILE_WIDTH / 4、0.25、AI = 32、20 FLOP/B 畫底線；TILE_WIDTH = 32（AI = 8）和 128（AI = 32）打星號，32 那行畫箭頭。
 
 ## 和作業 / 考試的關聯
 
@@ -244,16 +310,16 @@
   - 提醒：課程 AI policy 由使用者自行判斷；這份筆記整理的是課堂內容，HW2 的答案和程式請自己完成。
 - **Pop Quiz - Lecture 3**（10/20 8:30 PM 截止，3 分）：Canvas 顯示 graded，算 participation。
 - **HW3**（預定 11/3，未發布）：去年題目是 control divergence、tiled MMULT 和 NCU profiling，L4 會繼續講 tiled 演算法 [03:32:04]。
-- **Final project**：老師說 L6 才會介紹（投影片 p3 寫 L5）；Project Proposal 預定 11/17。
+- **Final project**：L6 才會介紹（口頭和註解版 p3 都是 L6）；Project Proposal 預定 11/17。
 - **Reading**：Reading Set #3（PMPP Ch5 全章，記憶體架構與 data locality）對應 L3–L5 和 HW2–3；HW2 說明也寫「L3 + reading set #3」就夠。
 - 本課沒有考試（HW 50%、Final Project 50%）。
 
 ## 還要釐清的問題
 
-1. **GEMM 的 AI 是 N/6 還是 N/12？** 老師在 [01:31:05] 用 W = 2N³ 算出 N/6；投影片 p36 把 W 近似成 N³，寫成 N/3D（FP32 時 D=4，等於 N/12）。差的是 W 有沒有乘 2。依逐字稿優先，以 N/6 為準；HW2 P1 寫 FLOPs 時建議明確寫出是否計入乘和加兩個 FLOP。
-2. **T4 每個 sub-partition 有幾個 FP32 core？** L3 [00:17:00] 說「多數現行裝置」每個 sub-partition 32 個，一次跑完一個 warp；L2 [03:14:01] 說 T4 每個 processing block 只有 16 個，一個 warp 要兩個 cycle。兩者不矛盾（L3 講的是一般情況），但寫 T4 相關作業時以 L2 的 16 個為準。
-3. **Final project 介紹在 L5 還是 L6？** 投影片 p3 寫 L5，逐字稿 [00:10:02] 說 lecture 6。依逐字稿優先，暫定 L6。
-4. **Devika 的週四 office hours 幾點？** 投影片 p3 只寫「Thursdays」，逐字稿 [00:08:02] 是「Thursdays, 1.30 to 1 P.m.」，顯然聽錯了。要到 Teams 或 Canvas 確認。
-5. **例題裝置的 bandwidth 單位**：老師口頭說 100 gigabit/s [01:20:02]，投影片 p24 寫 100 GB/s；算出 6.25 FLOP/B 用的是 GB/s，以投影片為準。
+1. **GEMM 的 AI 是 N/6 還是 N/12？** 老師在 [01:31:05] 用 W = 2N³ 算出 N/6；投影片 p36 把 W 近似成 N³，寫成 N/3D（FP32 時 D=4，等於 N/12）。差的是 W 有沒有乘 2。依逐字稿優先，以 N/6 為準；HW2 P1 寫 FLOPs 時建議明確寫出是否計入乘和加兩個 FLOP。**已解決**：註解版 p27 手寫 W = 2N³、Q = 12N²、AI = N/6，p36 在「N/3D ~ O(N)」後面也寫「→ N/6」，所以是 N/6。
+2. **T4 每個 sub-partition 有幾個 FP32 core？** L3 [00:17:00] 說「多數現行裝置」每個 sub-partition 32 個，一次跑完一個 warp；L2 [03:14:01] 說 T4 每個 processing block 只有 16 個，一個 warp 要兩個 cycle。兩者不矛盾（L3 講的是一般情況），但寫 T4 相關作業時以 L2 的 16 個為準。註解版 p5 畫的 SM 示意圖每個 SP 寫「32 FP32」，也是一般情況；L4 p7 的表格是 T4 每個 SM 64 個 FP32 core，等於每個 SP 16 個。
+3. **Final project 介紹在 L5 還是 L6？** 投影片 p3 寫 L5，逐字稿 [00:10:02] 說 lecture 6。依逐字稿優先，暫定 L6。**已解決**：註解版 p3 的文字層改成「will be covered in L6」。
+4. **Devika 的週四 office hours 幾點？** 投影片 p3 只寫「Thursdays」，逐字稿 [00:08:02] 是「Thursdays, 1.30 to 1 P.m.」，顯然聽錯了。**已解決**：註解版 p3 的文字層寫「Devika – Thursdays 1130-1 PM」，也就是週四 11:30 AM–1 PM（「1130」沒標 AM／PM，依「1 PM」結束推斷是上午 11:30 開始）。
+5. **例題裝置的 bandwidth 單位**：老師口頭說 100 gigabit/s [01:20:02]，投影片 p24 寫 100 GB/s；算出 6.25 FLOP/B 用的是 GB/s，以投影片為準。**已解決**：註解版 p24 手寫「625 GFLOP/s / 100 GB/s」，p30 也寫「β = 100 GB/s」，是 GB/s。
 6. **[00:09:01] 預裝的工具是什麼？** 逐字稿「Get get pre-installed」，可能是 Git，待確認。
 7. **Pop quiz 有沒有人沒記錄到？** 老師說會檢查，並開 channel 收意見 [02:09:04]；可留意 Teams。
