@@ -3,7 +3,7 @@
 > 每次上課結束更新。時間用 Pacific。掌握程度：⬜ 未學、🟨 看過但不穩、🟩 能自己解釋並做對題目。
 
 ## 目前位置
-- 下一步：M2–M4 快速掃描（學生 10/28 要求：診斷每模組只考 1–2 題，想補沒考到的部分）。一則一題，答對就過，答錯才停下來教。題目：S1 host 端寫 `d_x[0]` 會怎樣（M2 兩塊記憶體）→ S2 kernel launch 是非同步、`cudaDeviceSynchronize` 的用途（M2）→ S3 .cu→PTX→SASS、只編 sm_75 的執行檔拿到 RTX 3050 能不能跑（M2）→ S4 62×76 影像、16×16 block 的 `dim3 grid` 與 2D index（M3）→ S5 2D block 16×16 的 warp 怎麼切、grid-stride loop（M3/M4）→ S6 zero-overhead warp 切換如何藏 latency（M4）。S1 重問答對（10/28）。S2 答對（10/28）。S3 答對（10/28）。S4 全對（10/28）。目前在 S5（學生 10/28 不知道 2D block 怎麼切 warp，猜「16×2」✔ 但說不出原因；已講 row-major 攤平 tid = ty*blockDim.x + tx、warp = tid/32，附互動圖（show_widget，可切 block 形狀與位置），請他重答原題：同一張 76×62 影像，右邊那排 block（blockIdx.x=4，只有 col 64–75 有效）8 個 warp 幾個 divergence？下排 block（blockIdx.y=3，row 62–63 無效）呢？答案：右排 8 個全部（每個 warp 是 2 列 × 16，每列都有 4 個越界）；下排 0 個（warp 7 = row 62–63 整個越界，整個 warp 一起跳過，不算 divergence），角落那塊 7 個）。grid-stride loop 併入 S6 或略過。掃完接模組 5／步驟 1 熱身／待複習第 1 題（SI 字首換算）；步驟 2 預測可以從「01-roundtrip WORK=100 時 kernel 時間怎麼變」切入（實測 WORK 1→100 都約 0.6–0.7 ms，WORK=1000 才變 2.4 ms）（格式：模組 #／流程步驟／題號）
+- 下一步：M2–M4 快速掃描（學生 10/28 要求：診斷每模組只考 1–2 題，想補沒考到的部分）。一則一題，答對就過，答錯才停下來教。題目：S1 host 端寫 `d_x[0]` 會怎樣（M2 兩塊記憶體）→ S2 kernel launch 是非同步、`cudaDeviceSynchronize` 的用途（M2）→ S3 .cu→PTX→SASS、只編 sm_75 的執行檔拿到 RTX 3050 能不能跑（M2）→ S4 62×76 影像、16×16 block 的 `dim3 grid` 與 2D index（M3）→ S5 2D block 16×16 的 warp 怎麼切、grid-stride loop（M3/M4）→ S6 zero-overhead warp 切換如何藏 latency（M4）。S1 重問答對（10/28）。S2 答對（10/28）。S3 答對（10/28）。S4 全對（10/28）。S5 數字對（10/28：右排 8、下排 0），理由「整區灰色就不會排入執行」✘ 已更正（warp 照樣被排程、算 if、32 lane 一起跳過，所以沒有 divergence 但仍占資源）；角落 block 7 個已補充。grid-stride loop 略過（之後有作業用到再教）。目前在 S6（已問：warp 發出 global load 要等幾百 cycle，這段時間 SM 在做什麼、為什麼 GPU 換 warp 幾乎不用成本而 CPU 換 thread 很貴；答案：排程器改發其他 eligible warp，每個 warp 的 register／context 一直留在 SM 上，不用存回記憶體，L3 p10、[00:40:01]）。掃完接模組 5／步驟 1 熱身／待複習第 1 題（SI 字首換算）；步驟 2 預測可以從「01-roundtrip WORK=100 時 kernel 時間怎麼變」切入（實測 WORK 1→100 都約 0.6–0.7 ms，WORK=1000 才變 2.4 ms）（格式：模組 #／流程步驟／題號）
 - 上次上課：2026-10-27 22:10 – 10/28 02:05 PT（模組 0 診斷、模組 1 完成）
 - 累計上課分鐘：65
 
@@ -34,6 +34,7 @@
 | latency vs throughput（T = 固定延遲 + 工作量/throughput） | 🟨 | M1 練習 1（10/27）列式對、單位錯；練習 3（10/28）短答：latency 定義成「資料傳輸的時間」太窄（應是完成一件事的時間：一次存取、一個指令、一次 launch、一趟 round trip）；throughput 對；「GPU 為 throughput 設計、單次較慢、靠大量工作掩蓋 latency」✔ |
 | warp = 32 threads、block 大小取 32 倍數 | 🟩 | 診斷 Q5（10/27）4 個 warp、不整除會有 lane 空轉 |
 | Control divergence | 🟩 | 診斷 Q6（10/27）兩條路徑分開跑、用 mask 遮住另一半 |
+| 2D block 攤平切 warp（tid = ty*bx + tx、warp = tid/32） | 🟩 | 掃描 S5（10/28）一開始不知道怎麼切（猜 16×2 ✔），講解 + 互動圖後答對右排 8、下排 0 個 divergence；理由說成「整個越界的 warp 不會排入執行」✘（其實照樣執行、一起跳過 if） |
 | Amdahl's law | 🟨 | 診斷 Q7（10/27）答 10×，沒寫推導（1/f），還沒確認會用在 f、P 有限的情況 |
 | FLOP / bytes / arithmetic intensity | ⬜ | 診斷 Q8（10/27）不會 |
 | memory-bound vs compute-bound（roofline） | ⬜ | 診斷 Q8（10/27）不會 |
@@ -49,6 +50,7 @@
 | 10/27 | M1 練習 1 交叉點計算 | 列式 `10us + 8n/100G = 8n/20G` ✔；下一步寫 `1000 s = 40n - 8n`，得 n = 31.25 | SI 字首相乘：把 10u × 100G 算成 1000（μ×G 當成互相抵消），實際 = 10⁻⁵ × 10¹¹ = 10⁶（= 1 MB）；也沒做合理性檢查（31 個元素 GPU 怎麼可能贏）。10/27 已講解，待再測 | 部分 |
 | 10/27 | M1 互動頁：資料已在 GPU，n 多大 GPU 才贏 | 約 9000（✔，模型交叉點 ≈ 8800）；理由「GPU 本身運算能力比較差，優勢是平行化」 | 把小 n 輸的原因歸給「算得慢」；實際上小 n 時 kernel 時間幾乎固定（launch overhead／latency ≈ 6 μs），跟算力無關。「單一 thread 比 CPU 核心弱」這半句是對的 | 否 |
 | 10/28 | 掃描 S1 host 寫 `d_x[0]` | 「還沒開始執行也還沒 sync，應該不會有差別」 | 把 `cudaMalloc` 拿到的指標當成一般 host 指標，以為問題只在時間順序（sync），沒有「兩塊記憶體、各自的位址」的模型 | 部分（反方向重問答對） |
+| 10/28 | 掃描 S5 下排 block 為什麼沒有 divergence | 「整區灰色代表一開始就不會排入執行」 | 以為越界的 warp 不存在／不被排程；實際上 block 的 256 個 thread 全部都會啟動，整個 warp 都走 `if` 為 false 那條路，一起跳過，所以沒有 divergence，但還是占 warp slot 和 register | 否 |
 | 10/27 | 診斷 Q1 為什麼不全丟 GPU | 「擅長平行但只做簡單算術，要規劃情境」 | 沒有 host↔device 傳輸成本的概念；沒提到 latency vs throughput、序列部分 | 否 |
 
 ## 待複習
