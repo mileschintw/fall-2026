@@ -3,18 +3,18 @@
 > 每次上課結束更新。時間用 Pacific。掌握程度：⬜ 未學、🟨 看過但不穩、🟩 能自己解釋並做對題目。
 
 ## 目前位置
-- 下一步：M2–M4 快速掃描（學生 10/28 要求：診斷每模組只考 1–2 題，想補沒考到的部分）。一則一題，答對就過，答錯才停下來教。題目：S1 host 端寫 `d_x[0]` 會怎樣（M2 兩塊記憶體）→ S2 kernel launch 是非同步、`cudaDeviceSynchronize` 的用途（M2）→ S3 .cu→PTX→SASS、只編 sm_75 的執行檔拿到 RTX 3050 能不能跑（M2）→ S4 62×76 影像、16×16 block 的 `dim3 grid` 與 2D index（M3）→ S5 2D block 16×16 的 warp 怎麼切、grid-stride loop（M3/M4）→ S6 zero-overhead warp 切換如何藏 latency（M4）。S1 重問答對（10/28）。S2 答對（10/28）。S3 答對（10/28）。S4 全對（10/28）。S5 數字對（10/28：右排 8、下排 0），理由「整區灰色就不會排入執行」✘ 已更正（warp 照樣被排程、算 if、32 lane 一起跳過，所以沒有 divergence 但仍占資源）；角落 block 7 個已補充。grid-stride loop 略過（之後有作業用到再教）。目前在 S6（已問：warp 發出 global load 要等幾百 cycle，這段時間 SM 在做什麼、為什麼 GPU 換 warp 幾乎不用成本而 CPU 換 thread 很貴；答案：排程器改發其他 eligible warp，每個 warp 的 register／context 一直留在 SM 上，不用存回記憶體，L3 p10、[00:40:01]）。掃完接模組 5／步驟 1 熱身／待複習第 1 題（SI 字首換算）；步驟 2 預測可以從「01-roundtrip WORK=100 時 kernel 時間怎麼變」切入（實測 WORK 1→100 都約 0.6–0.7 ms，WORK=1000 才變 2.4 ms）（格式：模組 #／流程步驟／題號）
-- 上次上課：2026-10-27 22:10 – 10/28 02:05 PT（模組 0 診斷、模組 1 完成）
-- 累計上課分鐘：65
+- 下一步：模組 5（效能理論）／步驟 1 熱身／待複習第 1 題（SI 字首換算，10/28 已問，等回答）；接著待複習第 3 題（Amdahl P 有限）當第二題熱身，再進步驟 2 預測，可以從「01-roundtrip WORK=100 時 kernel 時間怎麼變」切入（實測 WORK 1→100 都約 0.6–0.7 ms，WORK=1000 才變 2.4 ms）。M2–M4 快速掃描 10/28 完成（S1–S6，grid-stride loop 略過）（格式：模組 #／流程步驟／題號）
+- 上次上課：2026-10-28 13:44 – 14:40 PT（M2–M4 快速掃描完成，進模組 5）
+- 累計上課分鐘：120
 
 ## 模組
 | # | 模組 | 狀態 | Artifact | 最後上課 |
 |---|---|---|---|---|
 | 0 | 診斷 | 🟩（已批改） | — | 10/27 |
 | 1 | CPU vs GPU | 🟩（練習 2 全對、交叉點對；latency 定義和 SI 換算放待複習） | [GPU Round-Trip 帳單](https://claude.ai/artifact/UgjmP4Rsx5Lyrg8ko5wCjP)（`modules/01-cpu-vs-gpu.html`） | 10/28 |
-| 2 | CUDA 程式流程 | 🟩（診斷 Q2 對） | — | — |
-| 3 | Grid / block / thread | 🟩（Q3 對；Q4 經學生確認是筆誤，自行更正為 +col） | — | — |
-| 4 | SIMT、warp | 🟩（診斷 Q5、Q6 對） | — | — |
+| 2 | CUDA 程式流程 | 🟩（診斷 Q2 對；10/28 掃描 S1 錯後重問對、S2、S3 對） | — | — |
+| 3 | Grid / block / thread | 🟩（Q3 對；Q4 經學生確認是筆誤，自行更正為 +col；10/28 掃描 S4 對） | — | — |
+| 4 | SIMT、warp | 🟩（診斷 Q5、Q6 對；10/28 掃描 S5 對、S6 部分對） | — | — |
 | 5 | 效能理論 | ⬜（Q7 對、Q8 不會） | — | — |
 | 6 | 記憶體階層、tiling | ⬜（Q9 不會） | — | — |
 | 7 | 拆解 HW2 | ⬜ | — | — |
@@ -33,6 +33,7 @@
 | kernel launch 固定 overhead（小 n 輸的原因） | 🟨 | M1 追問（10/27）答「compile 或啟動 kernel」：launch 對；compile 錯（nvcc 事先編好 SASS，只有第一次啟動多約 0.16 ms 的 lazy module loading） |
 | latency vs throughput（T = 固定延遲 + 工作量/throughput） | 🟨 | M1 練習 1（10/27）列式對、單位錯；練習 3（10/28）短答：latency 定義成「資料傳輸的時間」太窄（應是完成一件事的時間：一次存取、一個指令、一次 launch、一趟 round trip）；throughput 對；「GPU 為 throughput 設計、單次較慢、靠大量工作掩蓋 latency」✔ |
 | warp = 32 threads、block 大小取 32 倍數 | 🟩 | 診斷 Q5（10/27）4 個 warp、不整除會有 lane 空轉 |
+| zero-overhead warp 切換、latency hiding | 🟨 | 掃描 S6（10/28）答「換 warp 不用像 CPU 那樣 offload 再 load」✔；但原因說成「GPU 核心數多」✘（真正原因是 register file 大到每個常駐 warp 的 context 一直留在 SM 上：Turing／GA10x 每 SM 64K 個 32-bit register = 256 KB）；還沒問「所有 warp 都在等時會怎樣」（L3 [00:40:01]，模組 6 occupancy 再接） |
 | Control divergence | 🟩 | 診斷 Q6（10/27）兩條路徑分開跑、用 mask 遮住另一半 |
 | 2D block 攤平切 warp（tid = ty*bx + tx、warp = tid/32） | 🟩 | 掃描 S5（10/28）一開始不知道怎麼切（猜 16×2 ✔），講解 + 互動圖後答對右排 8、下排 0 個 divergence；理由說成「整個越界的 warp 不會排入執行」✘（其實照樣執行、一起跳過 if） |
 | Amdahl's law | 🟨 | 診斷 Q7（10/27）答 10×，沒寫推導（1/f），還沒確認會用在 f、P 有限的情況 |
@@ -51,6 +52,7 @@
 | 10/27 | M1 互動頁：資料已在 GPU，n 多大 GPU 才贏 | 約 9000（✔，模型交叉點 ≈ 8800）；理由「GPU 本身運算能力比較差，優勢是平行化」 | 把小 n 輸的原因歸給「算得慢」；實際上小 n 時 kernel 時間幾乎固定（launch overhead／latency ≈ 6 μs），跟算力無關。「單一 thread 比 CPU 核心弱」這半句是對的 | 否 |
 | 10/28 | 掃描 S1 host 寫 `d_x[0]` | 「還沒開始執行也還沒 sync，應該不會有差別」 | 把 `cudaMalloc` 拿到的指標當成一般 host 指標，以為問題只在時間順序（sync），沒有「兩塊記憶體、各自的位址」的模型 | 部分（反方向重問答對） |
 | 10/28 | 掃描 S5 下排 block 為什麼沒有 divergence | 「整區灰色代表一開始就不會排入執行」 | 以為越界的 warp 不存在／不被排程；實際上 block 的 256 個 thread 全部都會啟動，整個 warp 都走 `if` 為 false 那條路，一起跳過，所以沒有 divergence，但還是占 warp slot 和 register | 否 |
+| 10/28 | 掃描 S6 為什麼 GPU 換 warp 幾乎免費 | 「因為 GPU 核心數多，換 warp 不用 offload 再 load」 | 後半對；前半把原因歸給核心數。切換免費靠的是每個常駐 warp 都有自己的一份 register（SM 上的大 register file），跟 core 數量無關 | 部分 |
 | 10/27 | 診斷 Q1 為什麼不全丟 GPU | 「擅長平行但只做簡單算術，要規劃情境」 | 沒有 host↔device 傳輸成本的概念；沒提到 latency vs throughput、序列部分 | 否 |
 
 ## 待複習
@@ -63,3 +65,4 @@
 <!-- 日期 時間 PT｜分鐘數｜做了什麼 -->
 - 2026-10-27 22:10 PT｜65｜模組 0 診斷：9 題，Q2、Q3、Q5、Q6、Q7 對；Q1 部分對；Q4 筆誤（自行更正）；Q8、Q9 不會；Q4 確認筆誤；M1 熱身（round-trip 組成）答對大方向；M1 預測「n=10⁷ kernel 占幾 %」猜 50%（自述亂猜），實測 3.5–4%；做了 exercises/01-roundtrip.cu 和互動頁
 - 2026-10-28 02:05 PT｜（含在上列 65 分鐘）｜模組 1 動手：WORK=10 猜 GPU 贏（憑互動頁印象）✔，實測 GPU 18.1 ms vs CPU 23.0 ms；kernel 0.73 ms 跟 WORK=1 幾乎一樣（memory-bound 的伏筆）。M1 完成 🟩
+- 2026-10-28 14:40 PT｜約 55｜M2–M4 快速掃描（學生要求）：S1 host 寫 `d_x[0]` 錯（以為是 sync 問題，實測 access violation），反方向重問對；S2 非同步 launch 對；S3 只編 sm_75 對（實測 no kernel image）；S4 2D grid 全對；S5 不知道 2D block 怎麼切 warp → 講解 + show_widget 互動圖後答對，理由小錯；S6 latency hiding 部分對。進模組 5 熱身
