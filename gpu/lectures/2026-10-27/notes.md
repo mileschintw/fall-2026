@@ -1,6 +1,6 @@
 # GPU Lecture 4 — 2026-10-27（occupancy 與資源分配、launch configuration、通用尺寸的 tiled MMULT 邊界檢查、warp scheduling 與 control divergence、Nsight Compute GUI、HW3）
 
-> 來源：transcript（Teams 自動逐字稿 `transcript.vtt`，2346 cues，00:02:07–03:32:43，約 3 小時 30 分）、slides（Au26_GPU-Compute_Lecture4.pdf，Canvas file 155101601，52 頁；另有 10/28 上傳的 `Au26_GPUCompute_L4_w_notes.pdf`，file 155143699，本筆記沒有讀）、閱讀章節：Reading Set #3 = PMPP 4th ed. Ch5 全章（10/19 起，對應 L3–L5、HW2–3）。本講 occupancy、warp scheduling、control divergence 的內容對應 PMPP Ch4 §4.4–4.8（自行對照；Reading Set #2 只指定到 Ch4 §1–4）；邊界檢查對應 Ch5 §5.5，記憶體用量對 occupancy 的影響對應 §5.6（自行對照）。逐字稿是自動產生，專有名詞可能聽錯。
+> 來源：transcript（Teams 自動逐字稿 `transcript.vtt`，2346 cues，00:02:07–03:32:43，約 3 小時 30 分）、slides（Au26_GPU-Compute_Lecture4.pdf，Canvas file 155101601，52 頁；另有 10/28 上傳的手寫註解版 `Au26_GPUCompute_L4_w_notes.pdf`，file 155143699，52 頁。註解是壓平的筆跡，不在文字層裡，是逐頁轉成圖片再和原版比對讀出來的，見「講義手寫註解」一節，標成（註解 pN））、閱讀章節：Reading Set #3 = PMPP 4th ed. Ch5 全章（10/19 起，對應 L3–L5、HW2–3）。本講 occupancy、warp scheduling、control divergence 的內容對應 PMPP Ch4 §4.4–4.8（自行對照；Reading Set #2 只指定到 Ch4 §1–4）；邊界檢查對應 Ch5 §5.5，記憶體用量對 occupancy 的影響對應 §5.6（自行對照）。逐字稿是自動產生，專有名詞可能聽錯。
 >
 > 常見誤聽對照：Insight Compute / N site compute / NSight → Nsight Compute；NCU → `ncu`（Nsight Compute CLI）；sam's → SMs；Touring → Turing；coobs dump / Kuobjdump / coo obj dump → cuobjdump；SIAS → SASS；PTXA / PTXAS verbose → `ptxas` verbose（`-Xptxas -v`）；Lu kernel / Lu divergent / loop div → loop divergence demo kernel；Gustavson-Barcis / Gustafson-Barsi's → Gustafson-Barsis；Colonels → kernels；Orp → warp；M-Mult / MMult → MMULT；warp faces → warp-phases；"14 out of 1392" → 14 out of 392（投影片 p47）；Ballad → valid；1G grid → 1D grid；"10, 20, 48" → 2048；"over 15,000 threads" → 1,536 threads；"2000 or 200 and 61" → 1024×255 = 261,120；museums（[01:10:00]）→ 應是指 occupancy 隨 block size 呈鋸齒狀的低谷（推測）；GPU Telecom cluster → 推測是 UW 的 Tillicum GPU cluster（Hopper）；Devika、Diya 是兩位 TA；Gautam 是下課道謝的同學。
 >
@@ -9,7 +9,7 @@
 ## 重點摘要
 
 1. **課務更新**（p2–p3）
-   - HW2 今天（10/27）5:59 PM 截止。HW3 今晚下課後發布，截止延到 **11/6（五）11:59 PM PST**（原本 11/3 二）。Canvas `due_at` 2026-11-07T07:59:59Z 也是 11/6 11:59 PM PST。p52 仍寫舊的「11/03/26 5:59 PM」，老師口頭說那頁沒改（[03:31:01]）。
+   - HW2 今天（10/27）5:59 PM 截止。HW3 今晚下課後發布，截止延到 **11/6（五）11:59 PM PST**（原本 11/3 二）。Canvas `due_at` 2026-11-07T07:59:59Z 也是 11/6 11:59 PM PST。原版 p52 仍寫舊的「11/03/26 5:59 PM」，老師口頭說那頁沒改（[03:31:01]）；10/28 的註解版已手寫改成 11/6 11:59 PM。
    - **Late days**：每人 7 天，今天起生效；可用在 HW 和 final project 的各階段，但**不能用在 final project 發表和 final report**。週末（六＋日）只算 1 天。之後作業盡量都排在週五截止，所以拖到週一只花 1 天。沒用完的每天換 0.5 分 extra credit。
    - **Pop quiz**：隨機出現，每次 3 題，不算進基本分；最多 2 分 extra credit（參加 0.5 ＋ 每答對一題 0.5）。基本分滿分 100 只由 4 份 HW 和 final project 組成。參與度（pop quiz、Teams 討論、上課發問）在成績邊界時列入考量。老師說隔天會把這些補進 Canvas。
    - TA office hours 時間已公布但很少人去；Devika 可以在週二上課前 5:20–6:20 PM 多開一小時，有興趣或想換時段就貼到 Teams。
@@ -200,7 +200,7 @@
 - [01:21:02] 越界存取可能直接 access violation 當掉，也可能只是讀到垃圾值。
 - [01:25:01] [01:26:03] 用 2D（寬、高）思考邊界比用 1D index 直觀；超出範圍就寫 0，因為 0 不影響 inner product 的結果。
 - [01:27:02] 載入（LOAD）和使用（USE）的檢查條件不同，不能擋掉只負責載入、不負責計算的 thread。
-- [01:32:02] [01:34:06] p20 的 1D index 和比較條件有誤，應該用 M 的寬度；老師說會修正後重新上傳投影片（見「還要釐清的問題」）。
+- [01:32:02] [01:34:06] p20 的 1D index 和比較條件有誤，應該用 M 的寬度；老師說會修正後重新上傳投影片。註解版 p20 已經改成 M_WIDTH（見「講義手寫註解」）。
 - [01:37:01] 投影片上的程式碼故意沒有改完，因為通用化的實作是 HW3 的作業內容。
 - [01:41:00] `__syncthreads()` 一定要放在 if 區塊外面；放在只有部分 thread 會進去的 if 裡面會 deadlock。沒通過檢查的 thread 也要走到 barrier 等其他 thread。
 - [01:42:02] 邊界檢查的 if/else 依 thread index 決定，就是 control divergence。
@@ -247,6 +247,48 @@
 - [03:31:01] SASS 是實際執行內容的 ground truth；PTX 是抽象的中介表示。
 - [03:31:01] [03:32:00] HW3 會用 NCU，內容包括 control divergence、通用化的 MMULT 和 profiling；有問題就找 TA。
 
+## 講義手寫註解（`Au26_GPUCompute_L4_w_notes.pdf`）
+
+老師上課時在投影片上寫的紅字和螢光筆，10/28 上傳。文字層和原版相比只改了一處：p20 的 1D index 從 `M[Row*M_HEIGHT + …]` 改成 `M[Row*M_WIDTH + …]`。其他差異都是筆跡。沒有筆跡的頁（p1–2、p11–12、p14、p16–17、p24、p26–36、p40、p42–45、p47–48、p51）不列。
+
+**課務**
+- （註解 p3）螢光筆標出「Late Days Policy」和「1 late day」（週末算 1 天）。
+- （註解 p52）HW3 截止日原本是「11/03/26 5:59 PM」，已劃掉，改寫成「11/6 11:59 PM」。Learning objectives 中，control divergence、divergent kernel、通用化 MMULT、Nsight Compute GUI 這四項畫了箭頭，MMULT 有底線；launch configuration 調校那一項沒畫。
+
+**L3 複習與 occupancy**
+- （註解 p4）「Analysis-driven optimization process → use in Final Project!」；Arithmetic Intensity 那行加了外框；redundant GMEM accesses 畫底線；`__syncthreads()` 旁寫「RAW, WAR」，也就是 barrier 要防的 read-after-write 和 write-after-read hazard。
+- （註解 p5）在 registers、shared memory、block slots、warp slots、barriers 旁加大括號，寫「potential limiting factors」。SM 圖上標出「SMSP」和「cuda cores = FP32/INT32 ALU」，旁邊另畫「SFU」和「TC」（Tensor Core）方框。
+- （註解 p6）「Provide a lot of threads」上面寫「(warps)」；「Minimize warp divergence → wasting threads」；memory hierarchy 的 deep dive 從「Lecture 5」補成「5, 6, 7…」。
+- （註解 p7）左邊畫一個 SM 的 4 個 SP（SP0–3），各分到 warp（W0/W4、W1/W5…），表示 warp 輪流分給各 SP。「FP32/INT32, Tensor Core…」旁寫「pipes」；「32 lock-step threads」旁寫「SP level」。表格中 thread blocks/SM、threads/block、registers/thread、shared memory/SM 畫了箭頭，threads/SM 和 Turing T4 打了星號。
+- （註解 p8）例題的手寫答案（Turing，1024 threads/SM、16 blocks/SM）：
+  - A：block size 1024／512／256／128／64／32 依序放得下 1、2、4、8、16、16 個 block；32 threads/block 時卡在「16 blocks/SM = 50% occ」。
+  - B：100 threads = 32×3 + 4，所以要 4 個 warp；寫「10」、「4×10 = 40」和「1000/1024」。這和口頭答案一樣，但和 Turing 的 32 warps/SM 衝突，見「還要釐清的問題」第 5 點。
+  - C：768 threads 時是 1 個 block、24 個 warp，768/1024 = 0.75。
+  - D：要 full occupancy（1024 threads）時每個 thread 最多 64 個 register；每個 thread 用 128 個時只剩 512 threads；300 個超過「max 255」，多的會「put in local memory」。
+- （註解 p9）Occupancy Calculator 旁寫「(no longer the old Excel..)」。
+- （註解 p10）「minimum」畫底線；四項因素後面補「/SM」；「Compute it, don't guess it」底下寫「use NCU」。
+
+**Tiled MMULT 的邊界檢查**
+- （註解 p13）標出「GMEM」、「N: 3×3」、「M: 3×3」，強調 Phase 1 的「Loads」和「2×2 tiles」。M、N 超出範圍的那一排 tile 塗成黃色。
+- （註解 p18）畫一張 2D 示意圖（x 寬、y 高），說明要用 2D 範圍檢查。「0 value…」那行旁寫「ab + cd + ef + gh…」，其中一項改成 0，表示補 0 不影響 inner product。LOAD 和 USE 畫了底線。「input matrix data ranges」上寫「M, N」；「phase #」上寫「(p)」，並和 TILE_WIDTH 一起畫底線。
+- （註解 p19）用綠筆標出維度：M 是 N（高）× K（寬），N 是 K（高）× N（寬），也就是 K 是 inner-product 維度。這是另一套命名，和 p25 的 J×K、K×L 不同，要對照著看。
+- （註解 p20）2D 那行畫箭頭；條件 `p*TILE_WIDTH+tx < Width` 的「Width」劃掉，改寫「M-WIDTH」。圖上標「p=0」、「p=p」。這證實了口頭更正（[01:32:02]、[01:34:06]）。
+- （註解 p21）「Each thread loads」後面補「Row」。
+- （註解 p22）大括號標成「updated LOAD phase」；M、N index 裡的 `Width` 都打了星號（要通用化的地方）；`ds_N[ty][tx] = 0.0` 旁寫「outside valid input data ranges」；`__syncthreads()` 畫箭頭。
+- （註解 p23）`if(Row < Width && Col < Width)` 的兩個 Width 上寫「generalize! TODO」，這就是 HW3 要做的。Pvalue 那行旁寫「will use zeros if outside data range」。`__syncthreads()` 旁寫「CAREFUL this is outside the if-block!」，對應 [01:41:00] 的 deadlock 警告。最後的寫回條件旁寫「don't write to invalid output location!」。
+- （註解 p25）在「(j × k)」和「(k × l)」的 k 下面畫底線，強調 inner-product 維度要一致。
+
+**Warp divergence**
+- （註解 p37）畫一個分岔成 1、2、3 條路徑的分支圖。旁邊寫「thread active predicate bit」，用 T0–T3 的位元（case 1：0 0 1 1；case 2：1 1 0 0）說明不同路徑由 predicate mask 決定哪些 thread active。
+- （註解 p38）時間軸「t ↓」。
+- （註解 p39）「traversed one at a time」後面補「(by all threads)」，意思是整個 warp 依序走過每條路徑。
+- （註解 p41）branch-induced 圖上方寫「real execution of warp」，並在旁邊畫時間軸。
+- （註解 p46）Type 2 block 旁標 row 96、100、112：96–99 這 4 列在範圍內，100 以後在範圍外，並畫箭頭指出全程在範圍外的 6 個 warp。
+
+**Nsight Compute**
+- （註解 p49）Profiled execution 圖下寫「Profile 1..N passes」；右邊寫「Sets → Sections → specific metrics」。
+- （註解 p50）「GPU Speed of Light Roofline Chart → gives real world measured results including all overhead etc.」；在 ceiling 上標一點，寫「theory gives upper bounds」，對應 [02:53:07]。
+
 ## 和作業 / 考試的關聯
 
 - **HW2**（10/27 二 5:59 PM PDT，今天截止）：老師說晚幾分鐘沒關係，而且 late days 從今天起生效（[00:08:00]、[00:09:02]）。`gpu/assignments.md` 最後記錄的繳交狀態是 unsubmitted，請自己確認是否已交。
@@ -263,15 +305,15 @@
 
 ## 還要釐清的問題
 
-1. **HW3 截止時間**：p2、口頭（[00:09:02]、[03:31:01]）、Canvas `due_at` 都是 11/6（五）11:59 PM；p52 還寫 11/03 5:59 PM。依 BOOTSTRAP §3 以口頭和 Canvas 為準，p52 是舊資料。
+1. **HW3 截止時間**：p2、口頭（[00:09:02]、[03:31:01]）、Canvas `due_at` 都是 11/6（五）11:59 PM；原版 p52 還寫 11/03 5:59 PM。**已解決**：註解版 p52 把舊日期劃掉，手寫改成 11/6 11:59 PM。
 2. **HW4 和 project proposal 會不會也改到週五？** 老師說「之後的作業盡量都排週五」（[00:10:02]），但 HW4（目前 11/10 二）、Project Proposal（11/17 二）還沒公布新日期。
 3. **Late days 和原本的遲交扣分規則怎麼併用？** Syllabus 原本是遲 1 天 −1 分、之後每 24h 再 −1 分。Late days 用完之後是否回到原本的扣分方式，老師沒說；等 Canvas 更新。
 4. **Pop quiz 配分**：L3 的 pop quiz 在 Canvas 上是 3 分（`gpu/assignments.md`），但 p3 和口頭說每次最多 2 分 extra credit（0.5 參加 + 每題 0.5）。3 題全對應該是 0.5 + 1.5 = 2 分，和 Canvas 的 3 分不一致，看 Canvas 怎麼算。
-5. **例題 B（100 threads/block）的答案**：老師口頭答 Turing 可以放 10 個 block、40 個 warp（[00:49:02]–[00:50:00]）。但 Turing 每個 SM 最多 32 個 warp（p7），每個 block 4 個 warp，所以應該只能放 8 個 block（32 warps，warp occupancy 100%，但只有 800 個 thread 在做事，約 78%）。這是我自己的推算，和 calculator 示範中 300 threads/block 依 warp 數算出 3 個 block 的做法一致（[01:04:09]、[01:05:01]）；可以用 Occupancy Calculator 驗證。
+5. **例題 B（100 threads/block）的答案**：老師口頭答 Turing 可以放 10 個 block、40 個 warp（[00:49:02]–[00:50:00]）。但 Turing 每個 SM 最多 32 個 warp（p7），每個 block 4 個 warp，所以應該只能放 8 個 block（32 warps，warp occupancy 100%，但只有 800 個 thread 在做事，約 78%）。這是我自己的推算，和 calculator 示範中 300 threads/block 依 warp 數算出 3 個 block 的做法一致（[01:04:09]、[01:05:01]）；可以用 Occupancy Calculator 驗證。註解版 p8 的手寫答案也是「4×10 = 40」和「1000/1024」，和口頭答案一樣，所以老師的版本沒有考慮 warp slot 的限制。可以在 Teams 上問。
 6. **p7 的 Turing 數字**：老師一度懷疑 Hopper 的 64 warps/SM，後來自己驗算說是對的（[00:37:01]–[00:39:06]）。[00:38:02] 他把「每個 SP 16 個 core」說成「16 thread blocks per SM」，是口誤。
 7. **Warp pool slot 數**：老師口頭說 Turing 每個 SMSP 8 個 slot、Hopper／Ada 16 個（[02:03:03]），和 p7 的「32 (8/SP)」一致；但 [00:29:04] 又說一般是 8、12 或 16。p29 的 16 slots 是示意圖。
 8. **NCU 顯示 16 個 register、ptxas 報 10 個**（[03:07:01]）：老師沒解釋。我推測是 register 以 warp 為單位、有分配粒度（per-thread 數量會向上取整），NCU 顯示的是實際分配量；待確認。
 9. **放大到 1000×1000 時 divergence 比例會降多少？** 老師說「大概兩個數量級」（[02:44:04]）。用同樣方法自行估算：TILE_WIDTH = 16 時有 63 個 phase，Type 1 只有最後一個 phase diverge，比例約 1/63 ≈ 1.6%，比 12.76% 小約 8 倍，比較接近一個數量級。值得在 HW3 用 NCU 實測驗證。
-10. **p20 的 1D index 和條件**：p20 寫 `M[Row * M_HEIGHT + p*TILE_WIDTH+tx]` 和 `p*TILE_WIDTH+tx < Width`，老師說應該是 M 的寬度（[01:32:02]、[01:34:06]）。10/28 上傳的 `Au26_GPUCompute_L4_w_notes.pdf`（file 155143699）可能是老師標註、修正後的版本，本筆記沒有讀，之後可以比對。
+10. **p20 的 1D index 和條件**：p20 寫 `M[Row * M_HEIGHT + p*TILE_WIDTH+tx]` 和 `p*TILE_WIDTH+tx < Width`，老師說應該是 M 的寬度（[01:32:02]、[01:34:06]）。**已解決**：註解版 p20 的文字層已經改成 `M[Row*M_WIDTH + p*TILE_WIDTH+tx]`，條件裡的 `Width` 也劃掉、手寫改成 M_WIDTH。所以正確的條件是 `(Row < M_HEIGHT) && (p*TILE_WIDTH+tx < M_WIDTH)`。
 11. **新的課務規定何時上 Canvas**：老師說 10/28 會把 late days、pop quiz 規則放上 Canvas（[00:13:03]），晨報可以留意。
 12. **Devika 週二課前 office hour（5:20–6:20 PM）** 要看有沒有人表示興趣才會開，目前未定。
