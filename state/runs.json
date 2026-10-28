@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-10-28T13:44:45-07:00",
+  "task": "上課筆記",
+  "status": "new",
+  "summary": "GPU L4 10/27 筆記：occupancy、MMULT 邊界檢查、divergence、NCU；HW3 延到 11/6",
+  "output": "gpu/lectures/2026-10-27/notes.md"
+ },
+ {
   "at": "2026-10-28T13:44:26-07:00",
   "task": "晨報",
   "status": "new",

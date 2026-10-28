@@ -8,3 +8,4 @@
 | 2026-10-06 Lecture 1 | Weekly Live Lecture-20261006_184808-會議錄製.mp4 | 0.80 GB | 1897 | 錄影 18:48 才開始，前 ~18 分鐘沒有逐字稿 |
 | 2026-10-13 Lecture 2 | Weekly Live Lecture-20261013_183029-Meeting Recording.mp4 | 0.90 GB | 2554 | 開頭「welcome everybody to lecture #2」 |
 | 2026-10-20 Lecture 3 | Weekly Live Lecture-20261020_182717-Meeting Recording.mp4 | — | 2446 | 錄影 18:27 開始，[00:02:54] 正式上課；[01:57]–[02:07] pop quiz＋休息空白；大小未記錄 |
+| 2026-10-27 Lecture 4 | Weekly Live Lecture-20261027_182817-Meeting Recording.mp4 | — | 2346 | 錄影 18:28 開始，[00:02:07] 就開始上課；[01:44]–[01:59] pop quiz＋休息空白；老師生病；大小未記錄 |

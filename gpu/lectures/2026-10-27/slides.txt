@@ -1,0 +1,871 @@
+=== p1 ===
+EEP 524 
+Applied High - Performance 
+GPU Computing 
+LECTURE 4 :   Tuesday, October 27, 2026 
+Instructor: Dr. Colin Reinhardt 
+University of Washington   -   Professional Masters Program 
+Autumn 2026
+
+=== p2 ===
+Lecture 4 : Outline 
+   GPU HW Architecture Topics 
+   Device   resource partitioning and   SM   occupancy 
+   Launch configuration   grid   and thread - block sizing 
+   General shared - memory phased tiled MMULT algorithm 
+   Warp Scheduling and Divergence 
+   MMULT   control   divergence   analysi s 
+   Nsight   Compute Profiler 
+   I ntroduction   to the   NCU   graphical   interface (GUI) 
+HW2 due today 
+HW3   now   due   Fri ,   6   NOV by   11 :59   PM
+
+=== p3 ===
+Logistics: Class Policy Updates 
+   Late Days Policy 
+   Each student will be given 7 late day credits 
+   These   can   be   used   for   submitting   Homeworks   and/or   Final   Project   items   late 
+   Does NOT apply to Final Project Presentations and Final Project Final Reports 
+   Weekend   ( Sat+Sun )   counts   as   1   late   day. 
+   Can   redeem   for   extra   credit if not used (.5 pts for each unused late day) 
+   Lecture Pop Quizzes 
+   We   will   have   random   short   pop   quizzes during some lectures 
+   These   will   NOT   be   factored   into   base   grade   scoring 
+   Will count as extra credit (up to 2 pts each: 0.5 + 0.5 for each correct) 
+   class participation   will be   considered   for borderline grade decisions 
+   TA Office   Hours 
+   Let us   know   if   hours   are   not   working 
+   TA Devika can do 1   hr   prior to lectures on TUES 520 - 620 if interest…
+
+=== p4 ===
+Last Week (L3) Topics : Quick Review 
+   Parallel Performance Theory & Metrics 
+   Key performance concepts: latency and throughput 
+   Analysis - driven optimization process 
+   Speedup, Efficiency 
+   Strong/Weak Scaling 
+   Computational complexity and asymptotic notation 
+   Amdahl’s Law, achievable speedup limited by code   serial fraction 
+   Gustafson - Barsis ’ Law 
+   Arithmetic Intensity AI = FLOPS/byte 
+   GPU HW Architecture 102   –   Device/CUDA memory hierarchy 
+   Threads : registers 
+   Blocks : Shared memory, L1 
+   Grid : Global memory, constant memory, L2 
+   Parallelizing MMULT 
+   Serial reference 
+   Naïve all - global memory (GMEM) kernel v0 
+   Tiled - phased shared - memory (SMEM) kernel v1 
+   Reducing redundant GMEM accesses 
+   Synchronization __ syncthreads () 
+GoBoT   :   G rid of   B lock s   of 
+T hreads!
+
+=== p5 ===
+Device Occupancy and Resource Partitioning 
+•   Maximizing the occupancy can help to cover latency during global memory loads. 
+•   programmers need to choose the size of thread blocks with care to maximize occupancy 
+O ccupancy =   active   warps   assigned   to   SM 
+max   warps   per   SM 
+   SM   execution resources: 
+   registers 
+   shared memory 
+   thread block slots 
+   T hread /warp   slots 
+   Barriers 
+   NOTE :   typically   128   cores/SM 
+   which is 4 x 32 - wide warp SIMT sub - partitions
+
+=== p6 ===
+Two key concepts for GPU Performance 
+1.   Provide a lot of threads to allow latency hiding 
+A.   Maximize warp occupancy on device 
+B.   Minimize warp divergence 
+2.   Efficient use of the device memory hierarchy 
+A.   Deep dive coming in Lecture 5
+
+=== p7 ===
+GPU   Resource   Partitioning 
+   Device   execution resources 
+   Each SM is   divided into 4 processing blocks (SP: sub - partition) 
+   Each has FP32/INT32, Tensor Core, FP64, SFU, RT Cores 
+   Full   threadblocks   always assigned to a single SM 
+   T hreads   in same warp are assigned to same SP and are guaranteed to stay there 
+   warps are executed by SIMD   hardware model : 32 lock - step threads 
+Device   Hopper GH100   Turing T4 
+compute capability   9.0   7.5 
+FP32 cores/SM   128   64 
+SP/SM   4   4 
+thread blocks/SM   32   16 
+warps/SM   64   32 (8/SP) 
+threads/SM   2048   1024 
+threads/block   1024   1024 
+registers/SM (32 - bit)   65,536   65,536 
+registers/thread   255   255 
+shared memory/SM   228   KB   64 KB
+
+=== p8 ===
+Kernel Launch Configurations 
+   Determine device HW resources 
+   Consider Rules of Thumb 
+   match grid and thread topology to parallel algorithm structure 
+   at least 128 threads per block 
+   to allow 4x32 threads decomposition into a warp for each SMSP 
+   Use powers - of - 2, divisible by 32 
+   EXAMPLES 
+A.   grid launched with block size = 1024 / 512 / 256 /128 / 64 / 32 threads) 
+   how many blocks can Turing SM accommodate? 
+B.   Suppose we chose block size = 10 x 10 = 100 threads 
+   how many blocks, warps on Turing SM? Occupancy? 
+C.   Consider blocks of 768 threads. 
+A.   how many blocks accommodated on Turing? warps? threads? occupancy? 
+D.   How many registers per thread can Turing support at full occupancy? 
+   what if each thread (kernel) uses 128 registers? occupancy? 
+   what about 300 registers / thread? (Register spilling)
+
+=== p9 ===
+Nsight Compute 
+Occupancy 
+Calculator
+
+=== p10 ===
+Occupancy Summary 
+   Occupancy is the minimum of four   device - specific factors: 
+   warps ,   thread blocks , registers, shared   memory 
+   C ompute   it, don’t guess it. 
+   Useful Tools
+
+=== p11 ===
+CUDA Occupancy   Calculator 
+(Nsight   Compute GUI ) 
+DEMO
+
+=== p12 ===
+MMULT: Handling Matrices of Arbitrary Size 
+•   The tiled matrix multiplication kernel we presented so far can handle 
+only square matrices whose dimensions (Width) are multiples of the 
+tile width (TILE_WIDTH) 
+•   However , real applications need to handle arbitrary sized rectangular (but 
+still conforming) matrices. 
+•   i.e.   such that P=MN where P: j x l, M: j x k, N: k x l 
+•   Matrix   sizes may not be evenly divisible by   TILE_WIDTH , in general. 
+•   One could pad (add elements to) the rows and columns into multiples of the tile size, 
+•   but   this   would   introduce undesirable   space   and data transfer time overhead. 
+•   There is a preferable approach we will now discuss.
+
+=== p13 ===
+MMULT Example: Phase 1   Loads   for   Block (0,0) 
+P 0,1 P 0,0 
+P 1,0 
+P 0,2 
+P 1,1 
+P 2,0   P 2,2 P 2,1 
+P 1,2 
+M 0,1 M 0,0 
+M 1,0 
+M 0,2 
+M 1,1 
+M 2,0   M 2,2 M 2,1 
+M 1,2 
+N 0,1 N 0,0 
+N 1,0 
+N 0,2 
+N 1,1 
+N 2,0   N 2,2 N 2,1 
+N 1,2 
+M 0,2 
+M 1,2 
+N 2,1 N 2,0   Shared Memory 
+Shared Memory 
+Threads (1,0) and (1,1) need special treatment 
+in loading N tile 
+•   accesses will result in true out - of - bounds accesses 
+to   invalid memory region 
+Threads (0,1) and (1,1) need special treatment in loading M tile 
+•   accesses will result in using incorrect values due to   row - major   wrapping 
+of M in GMEM 
+For 3x3 Input/Output matrices, with 2x2 tiles
+
+=== p14 ===
+Phase 1   Use   for Block (0,0) (iteration 0) 
+P 0,1 P 0,0 
+P 1,0 
+P 0,2 
+P 1,1 
+P 2,0   P 2,2 P 2,1 
+P 1,2 
+M 0,1 M 0,0 
+M 1,0 
+M 0,2 
+M 1,1 
+M 2,0   M 2,2 M 2,1 
+M 1,2 
+N 0,1 N 0,0 
+N 1,0 
+N 0,2 
+N 1,1 
+N 2,0   N 2,2 N 2,1 
+N 1,2 
+M 0,2 
+M 1,2 
+N 2,1 N 2,0   Shared Memory 
+Shared Memory
+
+=== p15 ===
+Phase 1   Use   for Block (0,0) (iteration 1) 
+P 0,1 P 0,0 
+P 1,0 
+P 0,2 
+P 1,1 
+P 2,0   P 2,2 P 2,1 
+P 1,2 
+M 0,1 M 0,0 
+M 1,0 
+M 0,2 
+M 1,1 
+M 2,0   M 2,2 M 2,1 
+M 1,2 
+N 0,1 N 0,0 
+N 1,0 
+N 0,2 
+N 1,1 
+N 2,0   N 2,2 N 2,1 
+N 1,2 
+M 0,2 
+M 1,2 
+N 2,1 N 2,0   Shared Memory 
+Shared Memory 
+All Threads need special treatment . 
+None   of them should introduce invalid 
+contributions to their P elements.
+
+=== p16 ===
+Phase 0   Loads for   Block (1,1)   for a 3x3 Example 
+P 0,1 P 0,0 
+P 1,0 
+P 0,2 
+P 1,1 
+P 2,0   P 2,2 P 2,1 
+P 1,2 
+M 0,1 M 0,0 
+M 1,0 
+M 0,2 
+M 1,1 
+M 2,0   M 2,2 M 2,1 
+M 1,2 
+N 0,1 N 0,0 
+N 1,0 
+N 0,2 
+N 1,1 
+N 2,0   N 2,2 N 2,1 
+N 1,2 
+M 2,1 M 2,0 
+N 0,2 
+N 1,2 
+Shared Memory 
+Shared Memory 
+Threads (0,1) and (1,1) need special 
+treatment in loading N tile 
+Threads (1,0) and (1,1) need 
+special treatment in loading M tile
+
+=== p17 ===
+Key   Problem Cases in Toy Example 
+1.   Threads that do not calculate valid P elements but still need to 
+participate in loading the input tiles 
+–   Phase 0 of Block(1,1), Thread(1,0), assigned to calculate non - existent P[3,2] but need to 
+participate in loading tile element N[1,2] 
+2.   Threads that calculate valid P elements may attempt to load non - existing 
+input elements when loading input tiles 
+–   Phase 1 of Block(0,0), Thread(1,0), assigned to calculate valid P[1,0] but attempts to load 
+non - existing N[3,0 ]   in interation - 1
+
+=== p18 ===
+A “Simple” Solution 
+When a thread is to load any input element, test if it is in the valid 2D   data   range 
+–   If valid, proceed to load 
+–   Else, do not load, just write a 0 in SMEM 
+Rationale: a 0 value will ensure that that the multiply - add step does not affect 
+the final value of the output element 
+–   The condition tested for loading input elements (Load stage) is different from 
+the test for calculating output P element (Use stage) 
+–   A thread that does not calculate valid P element can still participate in loading 
+input tile   elements 
+–   LOAD stage: test that input data element is within 2D input matrix data ranges 
+–   USE   stage: test that not exceeding inner - product dimension   K 
+–   Tests need to account for algorithm phase # and TILE_WIDTH
+
+=== p19 ===
+Phase 1   Use   for Block (0,0) (iteration 1) 
+P 0,1 P 0,0 
+P 1,0 
+P 0,2 
+P 1,1 
+P 2,0   P 2,2 P 2,1 
+P 1,2 
+M 0,1 M 0,0 
+M 1,0 
+M 0,2 
+M 1,1 
+M 2,0   M 2,2 M 2,1 
+M 1,2 
+N 0,1 N 0,0 
+N 1,0 
+N 0,2 
+N 1,1 
+N 2,0   N 2,2 N 2,1 
+N 1,2 
+0 M 0,2 
+M 1,2   0 
+N 2,1 N 2,0 
+0   0 
+Shared Memory 
+Shared Memory
+
+=== p20 ===
+Boundary Condition for Input   M   Tile : LOAD 
+•   Each thread loads 
+•   2D:   M[Row][p* TILE_WIDTH+tx ] 
+•   1D:   M[Row * M_HEIGHT   + p* TILE_WIDTH+tx ] 
+•   Each thread needs to test 
+•   (Row <   M_HEIGHT )   && (p* TILE_WIDTH+tx   < Width) 
+•   If true, load M element 
+•   Else , load 0   M 
+TILE_WIDTH TILE_WIDTH 
+M_HEIGHT 
+M _ WIDTH
+
+=== p21 ===
+Boundary Condition for Input   N   Tile: LOAD 
+•   Each thread loads 
+•   2D:   N[p* TILE_WIDTH+ty ][Col] 
+•   1D:   N[(p* TILE_WIDTH+ty )* N_WIDTH +   Col] 
+•   Each thread needs to test 
+•   (p* TILE_WIDTH+ty   <   N _HEIGHT )   && (Col<   N_WIDTH ) 
+•   If true, load N element 
+•   Else , load 0 
+N 
+TILE_WIDTH TILE_WIDTH 
+N _ HEIGHT 
+N _ WIDTH
+
+=== p22 ===
+Loading Elements   –   with boundary checks 
+8   for (int p = 0; p <   (Width - 1) / TILE_WIDTH + 1 ; ++p) { 
+++   if( Row < Width && p* TILE_WIDTH+tx   < Width ) { 
+9   ds_M [ty][ tx ] = M[Row * Width + p * TILE_WIDTH +   tx ]; 
+++   } else { 
+++   ds_M [ty][ tx ] = 0.0; 
+++   } 
+++   if ( p* TILE_WIDTH+ty   < Width && Col < Width ) { 
+10   ds_N [ty][ tx ] = N[(p*TILE_WIDTH + ty) * Width + Col]; 
+++   } else { 
+++   ds_N [ty][ tx ] = 0.0; 
+++   } 
+11   __ syncthreads ();
+
+=== p23 ===
+USE: Inner Product   –   Check Before and After 
+++   if(Row < Width && Col < Width) { 
+12   for (int i = 0; i < TILE_WIDTH; ++i) { 
+13   Pvalue   +=   ds_M [ty][i] *   ds_N [i][ tx ]; 
+} 
+14   __ syncthreads (); 
+15   } /* end of outer for loop */ 
+++   if ( Row < Width && Col < Width ) 
+16   P[Row*Width + Col] =   Pvalue ; 
+} /* end of kernel */
+
+=== p24 ===
+Some Important Points 
+•   For each   thread   the boundary conditions are 
+different for 
+•   Loading M element 
+•   Loading N element 
+•   Using to calculate and store output P elements 
+•   The effect of   control divergence   should be small for large matrices 
+•   Why?
+
+=== p25 ===
+Handling General Rectangular Matrices 
+•   In general, the matrix multiplication is defined in terms of rectangular matrices 
+•   A (j x k) M matrix multiplied with a (k x l) N matrix results in a (j x l) P matrix 
+•   P = MN 
+•   Previously we   considered   square matrix multiplication, a   special   limited   case 
+•   The kernel function can be generalized to handle general rectangular 
+matrices as follows : 
+•   The kernel Width argument is replaced by three   input data   dimensions :   J,   K, L 
+•   Where   M : J x K,   N :   K x L,   P : J x L 
+•   When   Width is used to refer to the height (#rows) of M or height of P, replace it with   J 
+•   When Width is used to refer to the width (#cols) of M or height of N, replace it with   K 
+•   K is the “inner product” dimension of the matrix multiplication 
+•   When Width is used to refer to the width of N or width of P, replace it with   L
+
+=== p26 ===
+Warp Scheduling and Divergence 
+Introduction and Overview
+
+=== p27 ===
+Warp Scheduling on NVIDIA GPUs 
+How each SM picks one instruction per 
+cycle, and why warps stall 
+SUB - TOPICS 
+•   From a kernel launch to warps 
+•   Inside an SM sub - partition 
+•   Warp states and stall reasons 
+•   Latency hiding 
+•   Reading Nsight Compute 
+•   Waves of Warps 
+Grid 
+thread blocks 
+One block 
+8 warps (256 threads) 
+One warp = 32 threads 
+All 32 threads execute the same instruction together (SIMT)
+
+=== p28 ===
+From a kernel launch to warps on the SMs 
+Host launches a kernel 
+my_kernel<<<256,256>>>(a,b); 
+256 blocks   ×   256 threads 
+= 65,536 threads 
+Grid of 256 thread blocks 
+blockIdx.x = 0 … 255 
+GPU   work 
+distributor 
+Blocks placed on SMs 
+… 
+SM 0 … SM 5 … (A100 has 108 SMs) 
+Inside one SM: a block becomes 8 warps, spread over 4 SMSPs 
+W0 
+t0 – 31 
+W1 
+t32 – 63 
+W2 
+t64 – 95 
+W3 
+t96 – 127 
+W4 
+t128 – 159 
+W5 
+t160 – 191 
+W6 
+t192 – 223 
+W7 
+t224 – 255 
+SMSP 0 
+W0   W4 
+SMSP 1 
+W1   W5 
+SMSP 2 
+W2   W6 
+SMSP 3 
+W3   W7 
+1   Blocks are independent 
+They may run in any order. A block stays on one 
+SM until all its threads finish. 
+2   Resources set how many fit 
+Registers, shared memory and warp slots limit 
+blocks per SM (occupancy). 
+3   Warps are fixed to an SMSP 
+32 consecutive threads form a warp; it lives on 
+one sub - partition for its whole life.
+
+=== p29 ===
+Inside an SM sub - partition (SMSP): the warp scheduler 
+One SM sub - partition (SMSP), 4 per SM 
+Warp pool (16 slots) 
+W0   W1   W2   W3 
+W4   W5   W6   W7 
+W8   W9 
+Register file (64 KB) 
+Each warp's registers stay here for its 
+whole life 
+Warp scheduler 
+picks 1 eligible warp per 
+cycle 
+dispatch 
+FP32 / FMA 
+floating - point math 
+INT 
+integer, address math 
+Load / Store 
+to L1 and shared memory 
+SFU 
+exp, sin, 1/x 
+Tensor core 
+matrix multiply 
+Execution pipes 
+Issued this cycle 
+Eligible (ready) 
+Stalled (waiting) 
+Empty slot 
+10   Active warps 
+resident in the pool 
+3   Eligible warps 
+ready to issue this cycle 
+1   Issued 
+at most one per cycle 
+A warp is eligible when 
+•   its next instruction is fetched and 
+decoded 
+•   its input operands are ready 
+•   the target pipe can accept it
+
+=== p30 ===
+Warp states: what a warp is doing each cycle 
+Warp launched   Exited → drain → slot freed 
+Active: resident in the warp pool 
+Eligible 
+ready to issue 
+Selected 
+issues one instruction 
+Stalled 
+waiting on something 
+Not selected 
+ready, but lost the pick 
+EXIT 
+scheduler picks it 
+next instruction 
+must wait 
+dependency 
+resolves 
+retry 
+next cycle 
+Every active warp is in exactly one state each cycle. Nsight Compute counts the cycles 
+spent in each state. 
+Common stall reasons 
+Reason   Waiting for   Typical fix 
+Long scoreboard   global / local memory data   coalesce, reuse via 
+shared memory 
+Wait   fixed - latency result ( e.g. 
+FMA→FMA) 
+independent 
+instructions (ILP) 
+Short scoreboard   shared memory or SFU 
+result   avoid bank conflicts 
+Barrier   other warps at 
+__syncthreads() 
+balance work between 
+warps 
+Math pipe throttle   a busy execution unit   usually fine: compute - 
+bound 
+MIO / LG throttle   a full memory - instruction 
+queue   fewer, wider accesses 
+No instruction   instruction fetch   rarely large; avoid code 
+bloat
+
+=== p31 ===
+Latency   hiding:   why a scheduler needs many warps 
+issues   stalled   issue slot used   issue slot empty 
+Case A: 1 warp, each instruction waits 4 cycles for the previous one 
+0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15 
+Warp 0 
+Issue slot 
+Issue slot used 25% of the time: the scheduler sits idle 
+Case B: 4 warps, same code 
+0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15 
+Warp 0 
+Warp 1 
+Warp 2 
+Warp 3 
+Issue slot 
+Issue slot used 100% of the time: latency fully hidden 
+T H E K E Y R E L A T I O N S H I P 
+Average Active warps 
+= Issue rate 
+×   Cycles per issued instruction 
+(Little's law for one scheduler) 
+Case A:   1 = 0.25   ×   4 
+Case   B:   4 =   1.0   ×   4 
+To issue every cycle, you need roughly as many 
+ready warps as the cycles each warp waits. 
+Memory latency is hundreds of cycles, so combine 
+many warps with independent instructions per 
+warp (ILP). 
+Real kernel: 
+avg 40 cycles/instruction, 16 warp slots 
+→ best issue rate = 16 / 40 = 0.4
+
+=== p32 ===
+Reading Nsight Compute: Scheduler and Warp State Statistics 
+Scheduler Statistics: is the issue slot busy? 
+Active warps / scheduler   6.0   resident warps in the pool 
+Eligible warps / scheduler   0.38   ready warps, per cycle 
+Issued warp / scheduler   0.25   fraction of cycles that issue (max 1) 
+No eligible   75%   cycles with nothing to issue 
+Warp State Statistics: why is it idle? 
+Warp cycles / issued instr.   24   cycles between a warp's instructions 
+Stall breakdown   →   cycles per state (chart); sums to 24 
+ncu   -- section SchedulerStats   -- section WarpStateStats   ./app 
+1.0 
+0.5 
+1.5 
+1.5 
+2.5 
+3.0 
+14.0 
+0   2   4   6   8   10   12   14   16 
+Selected 
+Not selected 
+Other 
+Short scoreboard 
+Barrier 
+Wait 
+Long scoreboard 
+warp cycles per issued instruction 
+Example kernel: 24 cycles between instructions 
+1   Is the issue rate high (≈0.8+)? 
+The scheduler is busy. Look at pipe and memory 
+throughput, not stalls. 
+2   Low issue rate? 
+Compare active vs. theoretical warps to spot an 
+occupancy limit. 
+3   Find the top stall reason 
+Use the Source view to locate it, then apply the 
+matching fix.
+
+=== p33 ===
+Waves: running a grid larger than the GPU (A100) 
+A 1 0 0 C A P A C I T Y 
+108 SMs   221,184 threads 
+resident GPU - wide 
+Each SM holds at most: 
+64   warp slots (2,048 threads) 
+32   block slots 
+65,536   registers 
+164 KB   shared memory 
+Blocks per SM = min( 64   ÷   warps/block, 32, 65,536   ÷   regs/block, 164 KB   ÷   smem/block ) 
+Blocks per wave = 108   ×   blocks per SM   Waves = grid blocks   ÷   blocks per wave 
+Kernel   Grid   Regs / thread   Smem / block   Blocks / SM (limiter)   Blocks / wave   Waves 
+A   4096   32   0   8 (warp slots)   864   4.74 → 5 
+B   4096   64   0   4 (registers)   432   9.48 → 10 
+C   4096   32   48 KB   3 (shared mem)   324   12.6 → 13 
+D   256   128   0   2 (registers)   216   1.19 → 2 
+All blocks have   256 threads (8 warps).   Shared memory per block includes a 1 KB system reserve. 
+Waves over time (bar height = share of block slots in use) 
+Kernel A 
+5 waves · 95% efficient   74% 
+Kernel B 
+10 waves · 95% efficient   48% 
+Kernel C 
+13 waves · 97% efficient   64% 
+Kernel D 
+2 waves · 59% efficient   19% 
+What this means 
+•   The grid can be far larger than the GPU; only one 
+wave is resident at a time. 
+•   Freed slots are refilled at once, so a wave is a 
+counting tool, not a barrier. 
+•   The partial last wave (tail) hurts most when there 
+are few waves (Kernel D). 
+•   More registers or shared memory per block 
+means fewer resident warps to hide latency.
+
+=== p34 ===
+Warps in Multi - dimensional Thread Blocks 
+–   The thread blocks are first linearized into 1D in row major order 
+–   In x - dimension first, y - dimension next, and z - dimension last 
+35 
+Figure 6.1: Placing 2D threads into linear order 
+T row,col   =   T y,x 
+Warp 0   Warp 1 
+(for hypothetical device with 8 thread warps!)
+
+=== p35 ===
+Blocks are partitioned after linearization 
+–   Linearized thread blocks are partitioned 
+–   Thread indices within a warp are consecutive and increasing 
+–   Warp 0 starts with Thread 0 { (0,0), (0,0,0) } 
+–   Partitioning scheme is consistent across devices 
+–   Thus   you can use this knowledge in control flow 
+–   However, the exact size of warps may change from HW generation to 
+generation 
+–   DO NOT rely on any ordering within or between warps 
+–   If there are any dependencies between threads, you must __ syncthreads () 
+to get correct results (more later). (or __ syncwarp ())
+
+=== p36 ===
+SMs are SIMD/SIMT Processors 
+–   Control unit for instruction fetch, decode, and control is shared among 
+multiple processing units (cores) in each SP 
+–   Control overhead is minimized
+
+=== p37 ===
+SIMD Execution Among Threads in a Warp 
+–   All threads in a warp must execute the same 
+instruction at any point in time 
+–   This works efficiently   if   all threads follow the same 
+control flow path 
+–   All if - then - else statements make the same decision(s) 
+–   All loops iterate the same number of   times   for each thread
+
+=== p38 ===
+Control Flow Problem in GPUs/SIMT 
+Slide credit:   Reetuparna   Das,   U Michigan,   EECS 471: Applied Parallel Programming with GPUs
+
+=== p39 ===
+Control Divergence 
+–   Control divergence occurs when threads in a warp take different 
+control flow paths   by making different control decisions 
+•   Some take the then - path   and others take the else - path of an if - statement 
+•   Some threads take different number of loop iterations than others 
+–   The execution of threads taking different paths are serialized in 
+current GPUs 
+–   The control paths taken by the threads in a warp are traversed one at a time 
+until there   are   no more. 
+–   During the execution of each path, all threads taking that path will be executed 
+in parallel 
+–   The number of different paths can   grow for   nested   control flow statements
+
+=== p40 ===
+Control Divergence Examples 
+–   Divergence can arise when branch or loop condition is a 
+function of thread indices 
+–   Example kernel statement with divergence: 
+–   if ( threadIdx.x   > 10) { } 
+–   This creates two different control paths for threads in a block 
+–   Decision granularity < warp size 
+–   threads 0…9 follow different path than the rest of the threads in the first 
+warp 
+–   Control flow based on   threadIdx 
+–   Example without divergence: 
+–   If ( blockIdx.x   > 2) { } 
+–   Decision granularity is a multiple of blocks size; 
+–   all threads in any given warp follow the same path
+
+=== p41 ===
+Warp divergence 
+(a) branch induced   (b) loop induced
+
+=== p42 ===
+MMULT: Performance Impact of Control Divergence 
+–   Boundary condition checks are vital for   co rrect   functionality and robustness of parallel 
+code 
+–   The tiled matrix multiplication kernel has many boundary condition checks 
+–   The concern is that these checks may cause significant performance degradation 
+–   For example, see the tile loading code below: 
+if(Row < Width && p *   TILE_WIDTH+ tx   < Width) { 
+ds_M [ty][ tx ] = M[Row * Width + p * TILE_WIDTH +   tx ]; 
+} else { 
+ds_M [ty][ tx ] = 0.0; 
+} 
+if (p* TILE_WIDTH+ ty   < Width && Col < Width) { 
+ds_N [ty][ tx ] = N[(p*TILE_WIDTH + ty) * Width + Col]; 
+} else { 
+ds_N [ty][ tx ] = 0.0; 
+}
+
+=== p43 ===
+Two types of blocks in loading M Tiles 
+1.   Blocks whose tiles are all within valid range until the last phase. 
+2.   Blocks whose tiles are partially outside the valid range   for all phases. 
+M 
+TILE_WIDTH 
+Type 1 
+Type 2 
+Phases
+
+=== p44 ===
+MMULT _v1   Kernel 
+Analysis of Control Divergence Impact 
+•   Assume 16x16 tiles   and thread - blocks   (TILE_WIDTH = 16) 
+•   Each thread - block has 8 warps (256/32) 
+•   Assume square input matrices   of   size   100x100 
+•   Each thread will go through 7 phases (ceiling of 100/16) 
+•   There are 49 thread blocks /   tiles   total   (7 in each   dimension   x,y ) 
+•   To cover the whole input   matrices   data range
+
+=== p45 ===
+Control Divergence in Loading M   Tiles   (Type 1) 
+–   16x16   tiles and thread blocks 
+–   Each thread block has 8 warps (256/32) of 32 threads 
+–   S quare   input   matrices of 100x100 
+–   Each   output tile calculation will go through 7 phases (ceiling of 100/16) 
+–   There are 42 (6*7) Type 1 blocks, with a total of 336 (8*42) warps 
+–   They all have 7 phases, so there are   2,352   (336*7) Type - 1 warp - phases 
+–   The warps have control divergence only in their last phase 
+–   336   warp - phases have control divergence
+
+=== p46 ===
+Control Divergence in Loading M Tiles (Type 2) 
+•   Type 2: All 7 blocks assigned to load the bottom tiles, 
+•   with a total of 56 (8*7) warps 
+•   so   there are   392   Type - 2 warp - phases 
+•   The first 2 warps in each Type 2 block will stay within the valid range until 
+the last phase (2 divergent warps) 
+•   The 6 remaining warps stay entirely outside the valid range for all phases 
+•   So ,   only 7*2=14   warps have control divergence (occurring in phase 7)
+
+=== p47 ===
+Overall Impact of Control Divergence 
+–   Type 1 Blocks: 336 out of 2,352 warp - phases have control divergence 
+–   Type 2 Blocks: 14 out of 392 warp - phases have control divergence 
+–   The performance impact is expected to be less than 12.8% 
+–   350/2,744 = (336+14)/(2352+392) = 12.76 
+M 
+TILE_WIDTH 
+Type 1 
+Type 2
+
+=== p48 ===
+Additional Comments 
+–   The calculation of impact of control divergence in loading N tiles is 
+evaluated similarly   and is left as a HW3 exercise 
+–   The estimated performance impact is dataset size dependent. 
+–   For larger matrices, the impact will be significantly smaller 
+–   In general, the impact of control divergence for boundary condition checking 
+for large input data sets should be insignificant 
+–   One should not hesitate to use boundary checks to ensure full   functionality   and correctness 
+–   The fact that a kernel is full of control flow constructs does not mean that 
+there will be heavy occurrence of control divergence 
+–   We will cover some algorithm patterns that naturally incur control 
+divergence (such as parallel reduction) in the Parallel Algorithm Patterns 
+modules (lecture 6 - 10)
+
+=== p49 ===
+Nsight   Compute   (NCU)   : GPU Profiler 
+   Performance Metrics Collection 
+   Sets (metrics )   ( ncu   – list - sets ) 
+   Basic   ( 229 ),   Detailed   ( 115 0 ), Full   ( 9059 ),   Roofline   ( 6783 ) 
+   Each set includes one or more Sections 
+   Sections : groups of logically associated   metrics   ( ncu   – list - sections ) 
+   Speed of Light Throughput,   several   Roofline , Occupancy 
+   WORKLOADS: Compute, Memory, GPU and Memory 
+   STATISTICS: Scheduler, Warp State, Instruction, Launch 
+   Source Counters 
+Regular Execution   Profiled Execution 
+NCU   o ffers both   command - line (CLI) and   graphical   interfaces 
+https://docs.nvidia.com/nsight - compute/index. html
+
+=== p50 ===
+Nsight Compute: Roofline Charts 
+   Section: GPU Speed of Light Roofline Chart 
+different kernel variants profiled and plotted (“baselines”) 
+•   memory - bound 
+•   compute - bound
+
+=== p51 ===
+DEMO: Visual CUDA Profiling on   AppStream 
+with Nsight Compute 
+ Introduction to using the Nsight Compute GUI 
+ Preparing code for profiling 
+ Configuring Nsight Compute 
+ Nsight Compute reports 
+ Key report Detail sections 
+ Using baselines 
+ Roofline charts 
+ Warp   divergence analysis
+
+=== p52 ===
+HW3 Overview 
+   DUE   11/0 3 /26   5:59 PM 
+Learning Objectives 
+o   Get experience understanding control divergence in warps 
+o   Implement and profile simple kernels with warp divergence behavior 
+o   Implement   MMULT   tiled - phased algorithm   kernel   with generalizations 
+o   Get a better understanding of kernel launch configuration tuning. 
+o   Get basic experience using Nsight Compute GUI 
+o   profiling kernel   execution   and occupancy 
+o   analyze kernel performance issues 
+o   Kernel   optimization.
