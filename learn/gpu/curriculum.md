@@ -2,6 +2,7 @@
 
 > 教材正本：`gpu/lectures/<date>/`（notes.md、slides.txt、transcript.vtt）、`gpu/hw/<hwN>/`。
 > 已涵蓋到：2026-10-27（L4）。新講次＝`gpu/lectures/` 下日期比這個新、而且有 `notes.md` 的資料夾。
+> 建議順序（10/28 起，HW3 11/6 截止）：5 → 6 → 10 → 8 → 9 → 11，模組 7 延後（HW2 已截止，3.2 的 naive MMULT／roofline 部分在 5、11 順帶）。M4 的 L4 新內容（loop-induced、巢狀 branch 三條路徑、predicate bit、`blockIdx` 判斷不 diverge）在進 10 之前用 1–2 題補測。
 
 | # | 模組 | 互動頁點子 | 課程來源 | 作業 |
 |---|---|---|---|---|
@@ -14,9 +15,9 @@
 | 6 | 記憶體階層、tiling、shared memory | 記憶體金字塔（延遲／容量）；tiled MMULT 的 phase 動畫，即時數 GMEM load；`__syncthreads()` 拿掉會怎樣 | L3 p37–74 | HW2、HW3 |
 | 7 | 拆解 HW2 | Gaussian blur 三種寫法逐行對照；用 `gpu/hw/hw2/results/` 的實測和 ncu 數據讀 roofline | L3 p75–76、HW2 spec | HW2 |
 | 8 | Occupancy 與 launch configuration | Occupancy 計算器：調 threads/block、registers/thread、shared/block，看四個限制哪個先卡住（T4 vs RTX 3050 vs H100）；p8–p9 例題 A–D 逐題拖拉；register spilling | L4 p5–11、[00:59:05]–[01:13:01] | HW3 |
-| 9 | Warp scheduling、stall、latency hiding、waves | 4 個 SMSP 的 warp pool 動畫：每 cycle 挑一個 eligible warp，調 warp 數和指令延遲看 issue slot 使用率（Little's law）；stall 原因對照表；wave／tail wave 計算 | L4 p27–33 | HW3 |
-| 10 | 任意尺寸 tiled MMULT 的邊界檢查與 divergence 分析 | 3×3／2×2 tile 逐 phase 動畫，標出「錯但合法」和越界的讀取；J×K×L 長方形矩陣；100×100、16×16 tile 的 warp-phase divergence 計數器（M tile 示範，N tile 是 HW3 自己做） | L4 p12–25、p42–48 | HW3 |
-| 11 | Nsight Compute 實作 | 在 RTX 3050 上用 `ncu` 跑 loop-divergence 和 transpose 範例，讀 Summary、Speed of Light、Roofline、Warp State、Source view（SASS），用 Baseline 比較 | L4 p49–51、[02:55:01]–[03:31:01] | HW3 |
+| 9 | Warp scheduling、stall、latency hiding、waves | 4 個 SMSP 的 warp pool 動畫：每 cycle 挑一個 eligible warp，調 warp 數和指令延遲看 issue slot 使用率（Little's law）；stall 原因對照表；wave／tail wave 計算 | L4 p27–33、[02:00:04]–[02:17:05]（老師快速帶過，要自己讀） | HW3 |
+| 10 | 任意尺寸 tiled MMULT 的邊界檢查與 divergence 分析 | 3×3／2×2 tile 逐 phase 動畫，標出「錯但合法」和越界的讀取；J×K×L 長方形矩陣；100×100、16×16 tile 的 warp-phase divergence 計數器（M tile 示範，N tile 是 HW3 自己做） | L4 p12–25、p42–48、[01:14:02]–[01:43:02]、[02:35:01]–[02:45:00]；注意 p19 手寫用 N×K、K×N 命名，p25 用 J×K、K×L | HW3 |
+| 11 | Nsight Compute 實作 | 在 RTX 3050 上用 `ncu` 跑 loop-divergence 和 transpose 範例，讀 Summary、Speed of Light、Roofline、Warp State、Source view（SASS），用 Baseline 比較；HW3 3.1 要看的四個 divergence metric（Theoretical/Achieved Occupancy、Active Warps、Avg. Active Threads Per Warp、Avg. Not Predicated Off Threads）；FMAD 開關（`--fmad`）對結果和 instruction 數的影響（HW3 3.2 要求，L4 沒講）。本機 `ncu.bat`／`ncu-ui.bat`（Nsight Compute 2026.3.1）在 PATH 上，讀 counter 要系統管理員權限 | L4 p49–51、[02:47:01]–[03:31:01] | HW3 |
 
 ## 模組 0 診斷題
 目的是找出卡在哪。出題時一次貼出 9 題，告訴學生：每題寫答案、「不會」或「猜：…」，憑現在的理解作答就好。

@@ -14,7 +14,7 @@
 | 1 | CPU vs GPU | 🟩（練習 2 全對、交叉點對；latency 定義和 SI 換算放待複習） | [GPU Round-Trip 帳單](https://claude.ai/artifact/UgjmP4Rsx5Lyrg8ko5wCjP)（`modules/01-cpu-vs-gpu.html`） | 10/28 |
 | 2 | CUDA 程式流程 | 🟩（診斷 Q2 對；10/28 掃描 S1 錯後重問對、S2、S3 對） | — | — |
 | 3 | Grid / block / thread | 🟩（Q3 對；Q4 經學生確認是筆誤，自行更正為 +col；10/28 掃描 S4 對） | — | — |
-| 4 | SIMT、warp | 🟩（診斷 Q5、Q6 對；10/28 掃描 S5 對、S6 部分對） | — | — |
+| 4 | SIMT、warp | 🟩（診斷 Q5、Q6 對；10/28 掃描 S5 對、S6 部分對；L4 p34–41 新內容未測，見 curriculum 建議順序） | — | — |
 | 5 | 效能理論 | ⬜（Q7 對、Q8 不會） | — | — |
 | 6 | 記憶體階層、tiling | ⬜（Q9 不會） | — | — |
 | 7 | 拆解 HW2 | ⬜ | — | — |
@@ -37,7 +37,7 @@
 | kernel launch 固定 overhead（小 n 輸的原因） | 🟨 | M1 追問（10/27）答「compile 或啟動 kernel」：launch 對；compile 錯（nvcc 事先編好 SASS，只有第一次啟動多約 0.16 ms 的 lazy module loading） |
 | latency vs throughput（T = 固定延遲 + 工作量/throughput） | 🟨 | M1 練習 1（10/27）列式對、單位錯；練習 3（10/28）短答：latency 定義成「資料傳輸的時間」太窄（應是完成一件事的時間：一次存取、一個指令、一次 launch、一趟 round trip）；throughput 對；「GPU 為 throughput 設計、單次較慢、靠大量工作掩蓋 latency」✔ |
 | warp = 32 threads、block 大小取 32 倍數 | 🟩 | 診斷 Q5（10/27）4 個 warp、不整除會有 lane 空轉 |
-| zero-overhead warp 切換、latency hiding | 🟨 | 掃描 S6（10/28）答「換 warp 不用像 CPU 那樣 offload 再 load」✔；但原因說成「GPU 核心數多」✘（真正原因是 register file 大到每個常駐 warp 的 context 一直留在 SM 上：Turing／GA10x 每 SM 64K 個 32-bit register = 256 KB）；還沒問「所有 warp 都在等時會怎樣」（L3 [00:40:01]，模組 6 occupancy 再接） |
+| zero-overhead warp 切換、latency hiding | 🟨 | 掃描 S6（10/28）答「換 warp 不用像 CPU 那樣 offload 再 load」✔；但原因說成「GPU 核心數多」✘（真正原因是 register file 大到每個常駐 warp 的 context 一直留在 SM 上：Turing／GA10x 每 SM 64K 個 32-bit register = 256 KB）；還沒問「所有 warp 都在等時會怎樣」（L3 [00:40:01]，模組 8／9 再接） |
 | Control divergence | 🟩 | 診斷 Q6（10/27）兩條路徑分開跑、用 mask 遮住另一半 |
 | 2D block 攤平切 warp（tid = ty*bx + tx、warp = tid/32） | 🟩 | 掃描 S5（10/28）一開始不知道怎麼切（猜 16×2 ✔），講解 + 互動圖後答對右排 8、下排 0 個 divergence；理由說成「整個越界的 warp 不會排入執行」✘（其實照樣執行、一起跳過 if） |
 | Amdahl's law | 🟨 | 診斷 Q7（10/27）答 10×，沒寫推導（1/f），還沒確認會用在 f、P 有限的情況 |
@@ -45,6 +45,14 @@
 | memory-bound vs compute-bound（roofline） | ⬜ | 診斷 Q8（10/27）不會 |
 | shared vs global memory | ⬜ | 診斷 Q9（10/27）不會 |
 | `__syncthreads()` 在 tiling 的兩個用途（RAW、WAR） | ⬜ | 診斷 Q9（10/27）不會 |
+| occupancy（四項限制取最小、block slot vs warp slot） | ⬜ | L4 p5–11，HW3 Part 1 I、IV、V |
+| register spilling、`cuobjdump`／ptxas verbose | ⬜ | L4 p8 例 D、[00:54:03] |
+| warp scheduler、eligible／stalled、stall 原因、Little's law | ⬜ | L4 p27–32 |
+| waves／tail wave | ⬜ | L4 p33 |
+| loop-induced 與巢狀 branch divergence、predicate bit | ⬜ | L4 p37–41，HW3 3.1 |
+| 任意尺寸 tiled MMULT 邊界檢查（LOAD／USE／寫回、`__syncthreads()` 在 if 外） | ⬜ | L4 p12–25、[01:41:00]，HW3 3.2 |
+| warp-phase divergence 計數 | ⬜ | L4 p42–48，HW3 Part 2 |
+| NCU 讀報告（Summary、SOL、Roofline、Warp State、Baseline、Source view） | ⬜ | L4 p49–51，HW3 3.1、3.2 |
 | host 和 device 是兩個位址空間（`d_` 指標不能在 host 解參考） | 🟨 | 掃描 S1 重問（10/28）答「GPU 碰不到 CPU 的 RAM」✔（實測 error 700 illegal memory access，sync 才報、之後的呼叫都失敗、exit code 仍是 0）；補充過 pinned/mapped、unified memory 是例外。掃描 S1（10/28）答「還沒 sync，不會有差別」✘；RTX 3050 實測 host 寫 `d_x[0]` 直接 access violation（0xC0000005） |
 
 ## 錯題與錯誤觀念
