@@ -145,7 +145,7 @@
 - **TILE_WIDTH 12**：(12,12,1) = 144 threads，不是 32 的倍數，和 L4 的經驗法則（block 大小是 32 的倍數，`gpu/lectures/2026-10-27/notes.md`「重點摘要」3）不同；原文仍列為要試的設定。
 - **用哪個 GPU**：原文說「your specific GPU device」，沒指定。課程環境是 AWS WorkSpaces 的 T4（`sm_75`，HW2 原文）。
 - **`--fmad=false` 的設定路徑**是 Visual Studio 的；不用 VS 的話對應 `nvcc --fmad=false`（自行推論）。
-- **L4 投影片 p20 的筆誤**：M tile 的 1D index 和條件應該用 M 的寬度（[01:32:02]、[01:34:06]）。10/28 上傳的 `Au26_GPUCompute_L4_w_notes.pdf`（file 155143699）可能是修正版，repo 裡還沒讀過。
+- **L4 投影片 p20 的筆誤**：M tile 的 1D index 和條件應該用 M 的寬度（[01:32:02]、[01:34:06]）。**已確認**：10/28 上傳的 `Au26_GPUCompute_L4_w_notes.pdf`（file 155143699）把 p20 改成 `M[Row*M_WIDTH + p*TILE_WIDTH+tx]`，條件也手寫改成 `(Row < M_HEIGHT) && (p*TILE_WIDTH+tx < M_WIDTH)`。註解版的其他重點見 `gpu/lectures/2026-10-27/notes.md`「講義手寫註解」，例如 p23 的「generalize! TODO」，以及 `__syncthreads()` 要放在 if 外面。
 - **Late days 和原本扣分規則怎麼併用**：老師沒說；late day 用完後是否回到每 24h -1，等 Canvas 公告（`gpu/lectures/2026-10-27/notes.md`「還要釐清的問題」3）。
 - **原文 p5 ADDITIONAL QUESTIONS 最後一個 bullet 是空的**（只有「○」）。
 - **繳交方式和配分**：原文沒寫 Canvas submission type，也沒寫各部分佔幾分。
