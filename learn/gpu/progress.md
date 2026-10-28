@@ -3,9 +3,9 @@
 > 每次上課結束更新。時間用 Pacific。掌握程度：⬜ 未學、🟨 看過但不穩、🟩 能自己解釋並做對題目。
 
 ## 目前位置
-- 下一步：模組 1／步驟 4 講解／已問「n=1000 和 n=10000 的 kernel 時間幾乎一樣（約 6 μs），這 6 μs 花在哪」（10/27 23:00），等回答，用來修正「GPU 運算能力差」的模型，再講 latency vs throughput（L3 p11–12、[00:43:03] 買牛奶比喻）（格式：模組 #／流程步驟／題號）
+- 下一步：模組 1／步驟 5 練習／第 1 題（交叉點計算：overhead 10 μs、GPU 100 GB/s、CPU 20 GB/s、每元素 8 B，答案 n = 31,250）已問（10/27 23:05），等回答；之後還要第 2–3 題（看情境判斷該不該丟 GPU、短答 latency vs throughput）（格式：模組 #／流程步驟／題號）
 - 上次上課：2026-10-27 22:10 PT（模組 0 診斷）
-- 累計上課分鐘：30
+- 累計上課分鐘：35
 
 ## 模組
 | # | 模組 | 狀態 | Artifact | 最後上課 |
@@ -27,6 +27,8 @@
 | Host/device 流程順序（malloc→H2D→kernel→D2H→free） | 🟩 | 診斷 Q2（10/27）c d a b e 全對 |
 | block 數 = ceil(n/blockDim)、邊界 `if` | 🟩 | 診斷 Q3（10/27）4 個、知道最後一個 block 超出範圍 |
 | 2D→1D row-major index | 🟩 | 診斷 Q4（10/27）寫成 `row*W + H`，被問到時自己說是筆誤，更正為 `row*W + col` |
+| kernel launch 固定 overhead（小 n 輸的原因） | 🟨 | M1 追問（10/27）答「compile 或啟動 kernel」：launch 對；compile 錯（nvcc 事先編好 SASS，只有第一次啟動多約 0.16 ms 的 lazy module loading） |
+| latency vs throughput（T = 固定延遲 + 工作量/throughput） | 🟨 | M1 步驟 4 講解（10/27），還沒做題驗證 |
 | warp = 32 threads、block 大小取 32 倍數 | 🟩 | 診斷 Q5（10/27）4 個 warp、不整除會有 lane 空轉 |
 | Control divergence | 🟩 | 診斷 Q6（10/27）兩條路徑分開跑、用 mask 遮住另一半 |
 | Amdahl's law | 🟨 | 診斷 Q7（10/27）答 10×，沒寫推導（1/f），還沒確認會用在 f、P 有限的情況 |
@@ -50,4 +52,4 @@
 
 ## 上課紀錄
 <!-- 日期 時間 PT｜分鐘數｜做了什麼 -->
-- 2026-10-27 22:10 PT｜30｜模組 0 診斷：9 題，Q2、Q3、Q5、Q6、Q7 對；Q1 部分對；Q4 筆誤（自行更正）；Q8、Q9 不會；Q4 確認筆誤；M1 熱身（round-trip 組成）答對大方向；M1 預測「n=10⁷ kernel 占幾 %」猜 50%（自述亂猜），實測 3.5–4%；做了 exercises/01-roundtrip.cu 和互動頁
+- 2026-10-27 22:10 PT｜35｜模組 0 診斷：9 題，Q2、Q3、Q5、Q6、Q7 對；Q1 部分對；Q4 筆誤（自行更正）；Q8、Q9 不會；Q4 確認筆誤；M1 熱身（round-trip 組成）答對大方向；M1 預測「n=10⁷ kernel 占幾 %」猜 50%（自述亂猜），實測 3.5–4%；做了 exercises/01-roundtrip.cu 和互動頁
