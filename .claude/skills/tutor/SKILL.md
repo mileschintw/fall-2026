@@ -1,45 +1,43 @@
 ---
 name: tutor
-description: Interactive tutor for a Fall 2026 course, resuming from saved progress. Use when the user runs /tutor <gpu|dsa>, says they want to learn or review course material ("教我 GPU", "繼續上次的進度"), or asks to add a new lecture to their study plan.
+description: Tutor for a Fall 2026 course (gpu|dsa), resuming from learn/<course>/progress.md. Use when the user runs /tutor, asks to be taught or quizzed on GPU/DSA material ("教我 GPU", "繼續上次"), or asks to add a lecture to their study plan (not to write lecture notes — that is /lecture-notes).
 argument-hint: <gpu|dsa> [module number | "new"]
 ---
 
 # /tutor <course> [module | new]
 
-Teaches the user from `learn/<course>/`. Done = one teaching step finished with the user, `learn/<course>/progress.md` updated, and the change committed.
+Teaches the user from `learn/<course>/`. How to teach lives in `learn/<course>/CLAUDE.md`; this skill only loads it, picks the starting point, and saves progress.
 
-## 1. Load the frame (every time, before saying anything)
+Done = the user has answered every question asked this session, `learn/<course>/progress.md`'s 目前位置 names the next concrete step (module # / flow step / question #), and the change is committed.
 
-1. Read `learn/<course>/CLAUDE.md` (student profile, reply style, module flow) and follow it for the whole session.
-2. Read `learn/<course>/progress.md` and `learn/<course>/curriculum.md`.
-3. If `learn/<course>/` does not exist (e.g. first `/tutor dsa`): copy the structure of `learn/gpu/` (CLAUDE.md, curriculum.md, progress.md, modules/, exercises/), rewrite the student profile and module map for that course from `<course>/lectures/*/notes.md`, ask the user what they already know, then stop for their answer.
+## 1. Load the frame (before saying anything)
+
+Read `learn/<course>/CLAUDE.md`, `progress.md` and `curriculum.md`, and follow CLAUDE.md for the whole session.
+
+If `learn/<course>/` does not exist: create the same file skeleton as `learn/gpu/` (CLAUDE.md, curriculum.md, progress.md, modules/, exercises/) with course-specific content only — module map drawn from `<course>/lectures/*/notes.md`; leave the student goal and starting level empty. Ask the user for their goal and what they already know, then stop and wait.
 
 ## 2. Check for new course material
 
-List `<course>/lectures/` and `<course>/hw/`. Any lecture date or HW not covered in `curriculum.md`'s 「已涵蓋到」 line is new:
-- Has `notes.md`: draft the new module rows (same columns), add them to `curriculum.md` and `progress.md`, and tell the user in one line.
-- Folder exists but no `notes.md`: say the notes aren't written yet and offer `/lecture-notes <course> <date>`.
+Use the rule on curriculum.md's 「已涵蓋到」 line to find new lectures:
+- New lecture with `notes.md`: add module rows (same columns) to `curriculum.md` and `progress.md`, move the 「已涵蓋到」 date forward, and tell the user in one line.
+- Lecture folder without `notes.md`: say the notes aren't written yet and offer `/lecture-notes <course> <date>`.
 
 ## 3. Pick where to start
 
-- Argument is a module number: start there.
-- Argument is `new`: start at the first module added in step 2.
-- No argument: resume at 「目前位置 → 下一步」. If the last session ended mid-module, say where it stopped and continue from that step.
-- Open with a warm-up from 「待複習」 when it has entries (CLAUDE.md step 1).
+- Module number given: start there.
+- `new`: start at the first module added in step 2.
+- Otherwise: resume at progress.md 「目前位置」, at the exact flow step and question it names.
 
 ## 4. Teach
 
-Follow the module flow in `learn/<course>/CLAUDE.md`. Ground every concept in the course files: cite `notes.md` timestamps `[hh:mm:ss]` and slide pages. Read the relevant `notes.md` sections (and `slides.txt` / the transcript around a timestamp when notes are thin) before teaching a module, not from memory.
-
-- Inline visuals: `show_widget` (call `mcp__visualize__read_me` first, once per session).
-- Module main page: write `learn/<course>/modules/NN-slug.html` and publish with the Artifact tool (load the `artifact-design` skill first; first publish needs `icon`). Republish from the same path. Record the URL in `progress.md`.
-- Exercises: write `learn/<course>/exercises/NN-slug.cu` (GPU) or `.py` (DSA). For GPU, compile and run it yourself once before giving it to the user (vcvars64 + nvcc as in `gpu/hw/hw2/src/build.bat`), so it is known to build.
-- Stop and wait after every question you ask the user. Never answer your own prediction question in the same message.
-- Homework that is still open: teach the concept with a different example; don't hand over the graded answer.
+Follow `learn/<course>/CLAUDE.md`. Tool notes:
+- Inline visuals: `show_widget` (call `mcp__visualize__read_me` once per session first).
+- Module page: load the `artifact-design` skill, write `learn/<course>/modules/NN-slug.html`, publish with the Artifact tool (`icon` on first publish), republish from the same path.
+- Exercises: build per `learn/<course>/exercises/README.md`.
 
 ## 5. Save progress (end of every session, or when the user leaves)
 
-Update `progress.md`: 目前位置, module status, 觀念掌握 rows with evidence (which question, right/wrong, date), 錯題與錯誤觀念, 待複習 (2–3 questions for next time), and a one-line 上課紀錄 entry with Pacific time (`python scripts/tz.py` if unsure). Then commit only `learn/` (and `.claude/skills/tutor/` if changed):
+Update `progress.md` as CLAUDE.md's 「進度怎麼記」 says (Pacific time: `python -c "import sys; sys.path.insert(0,'scripts'); import tz; print(tz.now_pacific())"`). Commit only `learn/<course>`:
 
 ```
 git add learn/<course> && git commit -m "<COURSE> 學習 <MM/DD HH:MM> PT: <模組與一句話進度>"

@@ -1,11 +1,11 @@
 # GPU 課程地圖
 
 > 教材正本：`gpu/lectures/<date>/`（notes.md、slides.txt、transcript.vtt）、`gpu/hw/<hwN>/`。
-> 已涵蓋到：L3（2026-10-20）。L4（2026-10-27）錄影還沒抓，抓到後在下面加模組。
+> 已涵蓋到：2026-10-20（L3）。新講次＝`gpu/lectures/` 下日期比這個新、而且有 `notes.md` 的資料夾。
 
 | # | 模組 | 互動頁點子 | 課程來源 | 作業 |
 |---|---|---|---|---|
-| 0 | 診斷 | 對話裡 8 題小測 | L1–L3 | — |
+| 0 | 診斷 | 對話裡 9 題小測 | L1–L3 | — |
 | 1 | CPU vs GPU、為什麼要平行 | 1 個大核心 vs 幾千個小核心處理同一張圖的動畫；latency vs throughput | L1、L3 p11–13 | HW0 |
 | 2 | 一個 CUDA 程式的完整流程 | 拖曳排序 host/device 步驟；`nvcc` 編譯流程（.cu → PTX → SASS）；host 和 device 記憶體是兩塊 | L1、L2 | HW0、HW1 |
 | 3 | Grid / block / thread 對應到資料 | 調 gridDim、blockDim，看每個 thread 負責哪一格、哪些越界被 `if` 擋掉；2D/3D 攤平 | L2 | HW1 |
@@ -15,18 +15,31 @@
 | 7 | 拆解 HW2 | Gaussian blur 三種寫法逐行對照；用 `gpu/hw/hw2/results/` 的實測和 ncu 數據讀 roofline | L3 p75–76、HW2 spec | HW2 |
 
 ## 模組 0 診斷題
-目的是找出卡在哪，不是考試。告訴學生：每題寫答案、「不會」或「猜：…」，不要查資料。批改後依結果決定從哪個模組開始、哪些可以跳過，並寫進 progress.md。
+目的是找出卡在哪。出題時一次貼出 9 題，告訴學生：每題寫答案、「不會」或「猜：…」，憑現在的理解作答就好。
+
+完成條件：9 題都有學生的回答並已批改；依下表把每題對應的模組在 progress.md 標 🟩（答對且說得出原因）／🟨（部分對）／⬜（錯或不會），同一模組有多題時取最低的；「下一步」設為第一個不是 🟩 的模組。
 
 1. GPU 有幾千個核心，CPU 只有十幾個。那為什麼不把所有程式都丟給 GPU 跑？（M1）
-2. 排順序：a 啟動 kernel、b `cudaMemcpy` device→host、c `cudaMalloc`、d `cudaMemcpy` host→device、e `cudaFree`。（M2；答案 c d a b e）
-3. 1000 個元素、`blockDim.x = 256`，要開幾個 block？為什麼 kernel 裡要寫 `if (i < n)`？（M3；4 個，最後一個 block 有 24 個 thread 越界）
-4. 影像寬 W、高 H，存成 1D 陣列，thread 算出 row、col 後，元素 index 是多少？（M3；`row*W + col`）
-5. 100 個 thread 的 block 切成幾個 warp？為什麼 block 大小建議用 32 的倍數？（M4；4 個，最後一個只有 4 個 active thread）
-6. 同一個 warp 裡偶數 thread 走 `if`、奇數走 `else`，會發生什麼事？（M4；兩條路徑依序執行，各有一半 lane 閒置）
-7. 一個程式有 10% 必須依序執行，給無限多核心，最多快幾倍？（M5；Amdahl，10×）
-8. SAXPY `y[i] = a*x[i] + y[i]`（float）：每個元素幾 FLOP、讀寫幾 bytes、AI 多少、memory-bound 還是 compute-bound？（M5；2 FLOP、12 B、1/6、memory-bound）
-9. shared memory 和 global memory 差在哪？tiled MMULT 為什麼要 `__syncthreads()`？（M6；兩次：LOAD 後防 RAW、USE 後防 WAR）
+2. 排順序：a 啟動 kernel、b `cudaMemcpy` device→host、c `cudaMalloc`、d `cudaMemcpy` host→device、e `cudaFree`。（M2）
+3. 1000 個元素、`blockDim.x = 256`，要開幾個 block？為什麼 kernel 裡要寫 `if (i < n)`？（M3）
+4. 影像寬 W、高 H，存成 1D 陣列，thread 算出 row、col 後，元素 index 是多少？（M3）
+5. 100 個 thread 的 block 切成幾個 warp？為什麼 block 大小建議用 32 的倍數？（M4）
+6. 同一個 warp 裡偶數 thread 走 `if`、奇數走 `else`，會發生什麼事？（M4）
+7. 一個程式有 10% 必須依序執行，給無限多核心，最多快幾倍？（M5）
+8. SAXPY `y[i] = a*x[i] + y[i]`（float）：每個元素幾 FLOP、讀寫幾 bytes、AI 多少、memory-bound 還是 compute-bound？（M5）
+9. shared memory 和 global memory 差在哪？tiled MMULT 為什麼要 `__syncthreads()`？（M6）
 
 ## 之後的課（syllabus，未上）
 - HW3（11/3）：去年是 control divergence、tiled MMULT、NCU profiling。
 - HW4（11/10）：去年是 memory access patterns、corner turning（coalescing）。
+
+## 診斷題答案（批改時才讀，只給學生看批改結果）
+1. GPU 擅長大量相同、互相獨立的工作（throughput）；單一工作的 latency、分支多的邏輯、序列部分 CPU 比較快。資料還要在 host 和 device 之間搬，小工作不划算。
+2. c d a b e。
+3. 4 個（ceil(1000/256)）；共 1024 個 thread，最後 24 個超出範圍，`if` 防止越界讀寫。
+4. `row*W + col`（row-major）。
+5. 4 個 warp，最後一個只有 4 個 active thread，其他 28 個 lane 浪費。
+6. Divergence：兩條路徑依序執行，每條路徑執行時另一半 lane 被 mask 閒置，效率約減半。
+7. 10×（Amdahl：1/f，f = 0.1）。
+8. 2 FLOP（一乘一加）；讀 x、y 各 4 B、寫 y 4 B，共 12 B；AI = 1/6；遠低於 T4 的 ~25 FLOP/B，memory-bound。
+9. Shared 是 SM 上的 on-chip SRAM、block 內共用、由程式管理、快很多；global 是 DRAM、大但慢、host 也能存取。每個 phase 要兩次：LOAD 後防 RAW（tile 搬完才能用），USE 後防 WAR（大家用完才能覆寫下一個 tile）。
