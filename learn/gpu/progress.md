@@ -3,7 +3,7 @@
 > 每次上課結束更新。時間用 Pacific。掌握程度：⬜ 未學、🟨 看過但不穩、🟩 能自己解釋並做對題目。
 
 ## 目前位置
-- 下一步：M2–M4 快速掃描（學生 10/28 要求：診斷每模組只考 1–2 題，想補沒考到的部分）。一則一題，答對就過，答錯才停下來教。題目：S1 host 端寫 `d_x[0]` 會怎樣（M2 兩塊記憶體）→ S2 kernel launch 是非同步、`cudaDeviceSynchronize` 的用途（M2）→ S3 .cu→PTX→SASS、只編 sm_75 的執行檔拿到 RTX 3050 能不能跑（M2）→ S4 62×76 影像、16×16 block 的 `dim3 grid` 與 2D index（M3）→ S5 2D block 16×16 的 warp 怎麼切、grid-stride loop（M3/M4）→ S6 zero-overhead warp 切換如何藏 latency（M4）。S1 重問答對（10/28）。S2 答對（10/28）。S3 答對（10/28）。目前在 S4（已問：寬 76、高 62 的影像、`dim3 block(16,16)`，`dim3 grid(?,?)`、總共幾個 thread、幾個被 `if` 擋掉；答案 grid(5,4)、5120、408）。掃完接模組 5／步驟 1 熱身／待複習第 1 題（SI 字首換算）；步驟 2 預測可以從「01-roundtrip WORK=100 時 kernel 時間怎麼變」切入（實測 WORK 1→100 都約 0.6–0.7 ms，WORK=1000 才變 2.4 ms）（格式：模組 #／流程步驟／題號）
+- 下一步：M2–M4 快速掃描（學生 10/28 要求：診斷每模組只考 1–2 題，想補沒考到的部分）。一則一題，答對就過，答錯才停下來教。題目：S1 host 端寫 `d_x[0]` 會怎樣（M2 兩塊記憶體）→ S2 kernel launch 是非同步、`cudaDeviceSynchronize` 的用途（M2）→ S3 .cu→PTX→SASS、只編 sm_75 的執行檔拿到 RTX 3050 能不能跑（M2）→ S4 62×76 影像、16×16 block 的 `dim3 grid` 與 2D index（M3）→ S5 2D block 16×16 的 warp 怎麼切、grid-stride loop（M3/M4）→ S6 zero-overhead warp 切換如何藏 latency（M4）。S1 重問答對（10/28）。S2 答對（10/28）。S3 答對（10/28）。S4 全對（10/28）。目前在 S5（已問：同一張 76×62 影像，右邊那排 block（blockIdx.x=4，只有 col 64–75 有效）8 個 warp 幾個 divergence？下排 block（blockIdx.y=3，row 62–63 無效）呢？答案：右排 8 個全部（每個 warp 是 2 列 × 16，每列都有 4 個越界）；下排 0 個（warp 7 = row 62–63 整個越界，整個 warp 一起跳過，不算 divergence），角落那塊 7 個）。grid-stride loop 併入 S6 或略過。掃完接模組 5／步驟 1 熱身／待複習第 1 題（SI 字首換算）；步驟 2 預測可以從「01-roundtrip WORK=100 時 kernel 時間怎麼變」切入（實測 WORK 1→100 都約 0.6–0.7 ms，WORK=1000 才變 2.4 ms）（格式：模組 #／流程步驟／題號）
 - 上次上課：2026-10-27 22:10 – 10/28 02:05 PT（模組 0 診斷、模組 1 完成）
 - 累計上課分鐘：65
 
@@ -29,6 +29,7 @@
 | kernel launch 非同步、錯誤在 sync 才回報 | 🟩 | 掃描 S2（10/28）答「錯誤在 GPU 上，sync 前 CPU 不知道」✔；補充：launch 立刻返回、設定錯誤 launch 時就報、`cudaMemcpy` 會隱含同步、CPU 計時要先 sync |
 | block 數 = ceil(n/blockDim)、邊界 `if` | 🟩 | 診斷 Q3（10/27）4 個、知道最後一個 block 超出範圍 |
 | 2D→1D row-major index | 🟩 | 診斷 Q4（10/27）寫成 `row*W + H`，被問到時自己說是筆誤，更正為 `row*W + col` |
+| 2D grid 配置（`dim3 grid` x 對寬、ceil-div、越界 thread 數） | 🟩 | 掃描 S4（10/28）76×62、16×16 → grid(5,4)、5120 threads、408 個被擋，全對，x/y 順序也對 |
 | kernel launch 固定 overhead（小 n 輸的原因） | 🟨 | M1 追問（10/27）答「compile 或啟動 kernel」：launch 對；compile 錯（nvcc 事先編好 SASS，只有第一次啟動多約 0.16 ms 的 lazy module loading） |
 | latency vs throughput（T = 固定延遲 + 工作量/throughput） | 🟨 | M1 練習 1（10/27）列式對、單位錯；練習 3（10/28）短答：latency 定義成「資料傳輸的時間」太窄（應是完成一件事的時間：一次存取、一個指令、一次 launch、一趟 round trip）；throughput 對；「GPU 為 throughput 設計、單次較慢、靠大量工作掩蓋 latency」✔ |
 | warp = 32 threads、block 大小取 32 倍數 | 🟩 | 診斷 Q5（10/27）4 個 warp、不整除會有 lane 空轉 |
