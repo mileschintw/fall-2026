@@ -264,8 +264,8 @@
 - （註解 p22）「program size as fixed」畫底線；serial fraction 0.1% 那條畫線拉到 2048 workers 的 672（[01:12:00]）。
 - （註解 p23）Gustafson 圖的 serial work 標「fixed」；problem sizes grow、serial portion is constant 畫底線。
 - （註解 p24）AI 範圍上方寫「0.1 ←→ 400」（[01:18:04]）；BLAS1,2 畫箭頭，Dense Linear Algebra 旁寫「MM」。例題「memory bandwidth」上補「Peak」，兩行規格旁寫「from spec sheet」。最下面手寫算式「AI = W/Q = 625 GFLOP/s / 100 GB/s ⇒ 6.25 FLOPs/byte」。
-- （註解 p25）左邊寫「(cuBLAS)」；1979、n²、n³、matrix-vector 畫底線。GEMM 那行的「y = aAB + bC」把 y 改成 C，旁邊寫「A, B, C: N×N」（最後一個字母寫得像 D），也就是方陣 C = αAB + βC。
-- （註解 p26）步驟 1 上方寫「PROJECT」，表示 final project 也要照這個步驟算 W、Q；perfect cache 後面補「initially」。
+- （註解 p25）左邊寫「(cuBLAS)」；1979、n²、n³、matrix-vector 畫底線。GEMM 那行的「y = aAB + bC」，y 上面蓋寫「C」、最後的 C 上面蓋寫「D」，旁邊寫「A, B, D: N×N」，也就是「C = αAB + βD」。p26、p28 的表格和 p27 的手寫都是 C = αAB + βC／「A, B, C: N×N」，所以 D 大概是筆誤，重點是把左邊的 y 改成 C。
+- （註解 p26）步驟 1 上方寫「PROCESS」（字跡像 PROCEST），表示下面 1、2 是算 AI 的固定步驟：先 W 再 Q；W、Q 打點，Q_r、Q_w 畫底線；perfect cache 後面補「initially」。
 - （註解 p27）FLOP 後面寫「(FP32)」；SFU 那行打星號。手寫 FP32 方陣 GEMM：「C = AB, A, B, C: N×N FP32」、「W: (2N)N² = 2N³」、「Q_R = 2N²·4 bytes/float」、「Q_W = N²·4」、「Q = Q_R + Q_W = 12N²」、「AI = W/Q = 2N³/12N² = N/6 ~ O(N)」。
 - （註解 p28）手寫 SGEMV：「y = αAx + βy, A: N×N, x, y: N×1, α, β: scalar fp32」；「W = (2N−1)N = Ax」、「αAx = 2N² − N + N」、「+βy = 2N」、「= 2N² + 2N」；「Q_R = (N² + 2N + 2)·4」（旁註「float bytes!」）、「Q_W = N·4」、「Q = 4N² + 12N + 8」；「AI_SGEMV = W/Q = (2N²+2N)/(4N²+12N+8) ≃ 1/2 ~ O(1)」；「DGEMV ~ 1/4」。
 - （註解 p29）交點標「ridge pt = machine balance pt」，左上寫「unattainable」；斜線標「Peak memory BW」，下方「memory bound」、右方「compute bound」；橫軸標 0.1、10、100。
