@@ -1,0 +1,238 @@
+<title>GPU Round-Trip 帳單</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: 單欄實驗台 — 控制列在上，帳單長條，下面是 log-log 圖和實測表 */
+:root {
+  --bg: #f5f6f8; --panel: #ffffff; --fg: #1b2230; --muted: #5d6677; --line: #d9dde5;
+  --malloc: #8a93a6; --h2d: #2f6fdf; --kernel: #1f9d6b; --d2h: #8b4fd1; --cpu: #d9762b;
+  --accent: #2f6fdf;
+  --f-body: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #12161d; --panel: #1a2029; --fg: #e4e8ef; --muted: #98a1b2; --line: #2c3442;
+  --malloc: #7d879b; --h2d: #5b93f0; --kernel: #3cc58e; --d2h: #a979e6; --cpu: #f0954d; --accent: #5b93f0; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #12161d; --panel: #1a2029; --fg: #e4e8ef; --muted: #98a1b2; --line: #2c3442;
+  --malloc: #7d879b; --h2d: #5b93f0; --kernel: #3cc58e; --d2h: #a979e6; --cpu: #f0954d; --accent: #5b93f0; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 920px; margin: 0 auto; padding-block: 24px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 20px; }
+h1 { font-size: 1.6rem; margin: 0; text-wrap: balance; }
+h2 { font-size: 1.1rem; margin: 0 0 8px; text-wrap: balance; }
+p { margin: 0; max-width: 65ch; }
+.sub { color: var(--muted); }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; min-width: 0; }
+.controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+label { display: block; font-size: .85rem; color: var(--muted); letter-spacing: .02em; }
+.val { font-family: var(--f-mono); color: var(--fg); font-weight: 600; }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin-top: 4px; }
+.seg button { font: inherit; font-size: .85rem; padding: 6px 12px; border: 0; background: transparent; color: var(--fg); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.seg button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.bill { display: grid; gap: 10px; }
+.row { display: grid; grid-template-columns: 92px 1fr 96px; gap: 10px; align-items: center; }
+.row .name { font-size: .85rem; color: var(--muted); }
+.row .t { font-family: var(--f-mono); font-size: .85rem; text-align: right; font-variant-numeric: tabular-nums; }
+.track { height: 26px; background: var(--bg); border-radius: 5px; display: flex; overflow: hidden; }
+.track span { height: 100%; transition: width .25s; }
+@media (prefers-reduced-motion: reduce) { .track span { transition: none; } }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .82rem; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+.verdict { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: .95rem; }
+.verdict b { font-family: var(--f-mono); }
+.pill { font-size: .8rem; padding: 2px 10px; border-radius: 999px; border: 1px solid currentColor; }
+.chart-box { overflow-x: auto; }
+svg text { fill: var(--muted); font-family: var(--f-mono); font-size: 11px; }
+table { border-collapse: collapse; font-family: var(--f-mono); font-size: .8rem; font-variant-numeric: tabular-nums; width: 100%; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+th { color: var(--muted); font-weight: 400; }
+.table-box { overflow-x: auto; }
+.note { font-size: .82rem; color: var(--muted); }
+code { font-family: var(--f-mono); font-size: .88em; }
+</style>
+
+<div class="wrap">
+  <header style="display:grid;gap:6px">
+    <h1>vector add 的 GPU round-trip 帳單</h1>
+    <p class="sub">模組 1：CPU vs GPU。<code>c[i] = a[i] + b[i]</code>，資料一開始在 CPU。把整趟拆成 cudaMalloc → H2D → kernel → D2H，跟 CPU 自己算比。點是 2026-10-27 在你的 RTX 3050 上實測的，線是用實測擬合出的簡單模型。</p>
+  </header>
+
+  <section class="panel controls" aria-label="參數">
+    <div>
+      <label for="n">元素數 n：<span class="val" id="nv"></span></label>
+      <input id="n" type="range" min="3" max="8" step="0.05" value="7">
+    </div>
+    <div>
+      <label for="k">每個元素做幾個 FLOP：<span class="val" id="kv"></span></label>
+      <input id="k" type="range" min="0" max="3" step="0.05" value="0">
+    </div>
+    <div>
+      <label>host 記憶體</label>
+      <div class="seg" role="group" aria-label="host 記憶體">
+        <button id="pg" aria-pressed="true">malloc（作業寫法）</button>
+        <button id="pn" aria-pressed="false">pinned</button>
+      </div>
+    </div>
+    <div>
+      <label>資料一開始在哪</label>
+      <div class="seg" role="group" aria-label="資料位置">
+        <button id="onh" aria-pressed="true">CPU</button>
+        <button id="ond" aria-pressed="false">已經在 GPU</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel bill" aria-label="時間帳單">
+    <h2>這次的帳單</h2>
+    <div class="row"><span class="name">GPU 整趟</span><div class="track" id="gpuTrack"></div><span class="t" id="gpuT"></span></div>
+    <div class="row"><span class="name">CPU 迴圈</span><div class="track"><span id="cpuBar" style="background:var(--cpu)"></span></div><span class="t" id="cpuT"></span></div>
+    <div class="legend">
+      <span><i style="background:var(--malloc)"></i>cudaMalloc</span>
+      <span><i style="background:var(--h2d)"></i>H2D（a、b 傳過去）</span>
+      <span><i style="background:var(--kernel)"></i>kernel（真正在算）</span>
+      <span><i style="background:var(--d2h)"></i>D2H（c 傳回來）</span>
+    </div>
+    <div class="verdict">
+      <span>kernel 占整趟 <b id="kp"></b></span>
+      <span>GPU 整趟 ÷ CPU = <b id="ratio"></b></span>
+      <span class="pill" id="win"></span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>n 從 1,000 到 1 億：時間怎麼長</h2>
+    <p class="note">兩軸都是 log。豎線是目前選的 n。</p>
+    <div class="chart-box"><svg id="chart" viewBox="0 0 860 330" style="width:100%;min-width:560px" role="img" aria-label="時間對 n 的 log-log 圖"></svg></div>
+    <div class="legend">
+      <span><i style="background:var(--h2d)"></i>GPU 整趟（模型）</span>
+      <span><i style="background:var(--kernel)"></i>只算 kernel（模型）</span>
+      <span><i style="background:var(--cpu)"></i>CPU（模型）</span>
+      <span>● 實測（RTX 3050，malloc 版）</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>實測原始數據（ms）</h2>
+    <p class="note">跑 <code>learn/gpu/exercises/01-roundtrip.cu</code> 得到的。n=1000 那列的 kernel 0.16 ms 大多是第一次啟動 kernel 的載入成本（CUDA 預設 lazy loading），真正的 launch overhead 大約幾 μs。</p>
+    <div class="table-box"><table id="tbl"></table></div>
+  </section>
+
+  <section class="panel" style="display:grid;gap:8px">
+    <h2>可以試試看</h2>
+    <p>1. n 拉到最左邊，再拉到最右邊。kernel 占比有隨著 n 變大而變高嗎？</p>
+    <p>2. 把「資料一開始在哪」切成「已經在 GPU」。GPU 什麼時候開始贏？</p>
+    <p>3. 切回 CPU，把每元素 FLOP 調到 100 以上。這時候傳輸還是主角嗎？</p>
+    <p class="note">對照課程：L1 [01:43:01] 老師說 heterogeneous 系統的瓶頸在跨 PCIe 的傳輸；L3 [03:34:00] HW2 的計時要量 HtoD + kernel + DtoH 整趟；L3 p11–12 latency / throughput / bandwidth 的定義。模型參數是從這台機器的實測擬合的，不是規格表數字。</p>
+  </section>
+</div>
+
+<script>
+// 實測（2026-10-27，RTX 3050，第二次執行）
+const measured = {
+  pageable: [
+    {n:1e3, malloc:.4730, h2d:.0314, kernel:.1635, d2h:.0215, cpu:.0002},
+    {n:1e5, malloc:.3389, h2d:.1449, kernel:.0233, d2h:.1315, cpu:.0740},
+    {n:1e7, malloc:3.6234, h2d:7.8489, kernel:.7362, d2h:6.3835, cpu:7.5519},
+  ],
+  pinned: [
+    {n:1e3, malloc:.1509, h2d:.0333, kernel:.1527, d2h:.0143, cpu:.0002},
+    {n:1e5, malloc:.1892, h2d:.1206, kernel:.0308, d2h:.0598, cpu:.0691},
+    {n:1e7, malloc:3.9253, h2d:6.1014, kernel:.5986, d2h:3.0876, cpu:8.1005},
+  ],
+};
+// 模型（單位 ms；bytes/(GB/s) = 1e-6 ms/byte）
+const P = {
+  pageable: { h2dBW: 10.2, d2hBW: 6.3 },
+  pinned:   { h2dBW: 13.1, d2hBW: 13.0 },
+  copyLat: .012, mallocFix: .15, mallocPerMB: .031,
+  launch: .006, gpuBW: 170, gpuFlops: 9000, // GFLOP/s，RTX 3050 FP32 峰值約 9 TFLOPS
+  cpuBW: 16, cpuFlops: 8,                   // 單執行緒迴圈的有效值
+};
+const st = { pinned:false, onDevice:false };
+function model(n, k) {
+  const m = st.pinned ? P.pinned : P.pageable;
+  const B = n * 4, mb = 3 * B / 1e6;
+  const flops = n * Math.max(k, 1);
+  const r = {
+    malloc: st.onDevice ? 0 : P.mallocFix + P.mallocPerMB * mb,
+    h2d: st.onDevice ? 0 : 2 * (P.copyLat + B / (m.h2dBW * 1e6)),
+    kernel: P.launch + Math.max(3 * B / (P.gpuBW * 1e6), flops / (P.gpuFlops * 1e6)),
+    d2h: st.onDevice ? 0 : P.copyLat + B / (m.d2hBW * 1e6),
+    cpu: Math.max(3 * B / (P.cpuBW * 1e6), flops / (P.cpuFlops * 1e6)),
+  };
+  r.gpu = r.malloc + r.h2d + r.kernel + r.d2h;
+  return r;
+}
+const $ = id => document.getElementById(id);
+const fmtT = ms => ms >= 1 ? ms.toFixed(2) + " ms" : ms >= .001 ? (ms * 1000).toFixed(1) + " μs" : (ms * 1e6).toFixed(0) + " ns";
+const fmtN = n => n >= 1e6 ? (n / 1e6).toFixed(n >= 1e7 ? 0 : 1) + " 百萬" : Math.round(n).toLocaleString();
+function render() {
+  const n = Math.round(10 ** +$("n").value), k = 10 ** +$("k").value;
+  $("nv").textContent = fmtN(n) + `（${(n * 12 / 1e6).toFixed(n < 1e5 ? 3 : 1)} MB 要搬）`;
+  $("kv").textContent = k < 1.05 ? "1（就是一次加法）" : Math.round(k);
+  const r = model(n, k), max = Math.max(r.gpu, r.cpu);
+  $("gpuTrack").innerHTML = ["malloc", "h2d", "kernel", "d2h"].map(s =>
+    `<span style="width:${100 * r[s] / max}%;background:var(--${s})" title="${s} ${fmtT(r[s])}"></span>`).join("");
+  $("cpuBar").style.width = 100 * r.cpu / max + "%";
+  $("gpuT").textContent = fmtT(r.gpu); $("cpuT").textContent = fmtT(r.cpu);
+  $("kp").textContent = (100 * r.kernel / r.gpu).toFixed(1) + "%";
+  const q = r.gpu / r.cpu;
+  $("ratio").textContent = q >= 1 ? q.toFixed(1) + "×（GPU 慢）" : (1 / q).toFixed(1) + "× 快";
+  const w = $("win"); w.textContent = q < 1 ? "GPU 贏" : "CPU 贏"; w.style.color = q < 1 ? "var(--kernel)" : "var(--cpu)";
+  drawChart(Math.log10(n), k);
+}
+function drawChart(lnCur, k) {
+  const W = 860, H = 330, L = 64, R = 16, T = 12, Bm = 40;
+  const x0 = 3, x1 = 8, y0 = -4, y1 = 3; // 0.1 μs ~ 1000 ms
+  const X = v => L + (v - x0) / (x1 - x0) * (W - L - R);
+  const Y = ms => T + (y1 - Math.log10(Math.max(ms, 1e-4))) / (y1 - y0) * (H - T - Bm);
+  let s = "";
+  for (let e = y0; e <= y1; e++) {
+    s += `<line x1="${L}" x2="${W - R}" y1="${Y(10 ** e)}" y2="${Y(10 ** e)}" stroke="var(--line)"/>`;
+    s += `<text x="${L - 8}" y="${Y(10 ** e) + 4}" text-anchor="end">${fmtT(10 ** e)}</text>`;
+  }
+  for (let e = x0; e <= x1; e++) {
+    s += `<line y1="${T}" y2="${H - Bm}" x1="${X(e)}" x2="${X(e)}" stroke="var(--line)"/>`;
+    s += `<text x="${X(e)}" y="${H - Bm + 18}" text-anchor="middle">1e${e}</text>`;
+  }
+  s += `<text x="${(L + W - R) / 2}" y="${H - 4}" text-anchor="middle">n（元素數）</text>`;
+  const line = (key, color) => {
+    let d = "";
+    for (let v = x0; v <= x1 + 1e-9; v += .05) { const r = model(10 ** v, k); d += (d ? "L" : "M") + X(v).toFixed(1) + "," + Y(r[key]).toFixed(1); }
+    return `<path d="${d}" fill="none" stroke="${color}" stroke-width="2.5"/>`;
+  };
+  s += line("cpu", "var(--cpu)") + line("kernel", "var(--kernel)") + line("gpu", "var(--h2d)");
+  if (k < 1.05) {
+    const ms = st.pinned ? measured.pinned : measured.pageable;
+    for (const m of ms) {
+      const lx = X(Math.log10(m.n));
+      const gpu = st.onDevice ? m.kernel : m.malloc + m.h2d + m.kernel + m.d2h;
+      s += `<circle cx="${lx}" cy="${Y(gpu)}" r="5" fill="var(--h2d)" stroke="var(--panel)" stroke-width="1.5"/>`;
+      s += `<circle cx="${lx}" cy="${Y(m.kernel)}" r="5" fill="var(--kernel)" stroke="var(--panel)" stroke-width="1.5"/>`;
+      s += `<circle cx="${lx}" cy="${Y(m.cpu)}" r="5" fill="var(--cpu)" stroke="var(--panel)" stroke-width="1.5"/>`;
+    }
+  }
+  s += `<line x1="${X(lnCur)}" x2="${X(lnCur)}" y1="${T}" y2="${H - Bm}" stroke="var(--fg)" stroke-dasharray="4 4"/>`;
+  $("chart").innerHTML = s;
+}
+function table() {
+  const rows = [["pageable", "malloc"], ["pinned", "pinned"]];
+  let h = "<tr><th>host</th><th>n</th><th>malloc</th><th>H2D</th><th>kernel</th><th>D2H</th><th>GPU 整趟</th><th>CPU</th><th>kernel %</th></tr>";
+  for (const [key, label] of rows) for (const m of measured[key]) {
+    const g = m.malloc + m.h2d + m.kernel + m.d2h;
+    h += `<tr><td>${label}</td><td>${m.n.toLocaleString()}</td><td>${m.malloc.toFixed(3)}</td><td>${m.h2d.toFixed(3)}</td><td>${m.kernel.toFixed(3)}</td><td>${m.d2h.toFixed(3)}</td><td>${g.toFixed(3)}</td><td>${m.cpu.toFixed(4)}</td><td>${(100 * m.kernel / g).toFixed(1)}%</td></tr>`;
+  }
+  $("tbl").innerHTML = h;
+}
+const toggle = (a, b, key, val) => { st[key] = val; $(a).setAttribute("aria-pressed", "true"); $(b).setAttribute("aria-pressed", "false"); render(); };
+$("pg").onclick = () => toggle("pg", "pn", "pinned", false);
+$("pn").onclick = () => toggle("pn", "pg", "pinned", true);
+$("onh").onclick = () => toggle("onh", "ond", "onDevice", false);
+$("ond").onclick = () => toggle("ond", "onh", "onDevice", true);
+$("n").oninput = render; $("k").oninput = render;
+table(); render();
+</script>
