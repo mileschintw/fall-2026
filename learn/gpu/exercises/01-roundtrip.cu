@@ -40,7 +40,7 @@ int main() {
     CK(cudaFree(0));  // 先建立 CUDA context，不然第一次呼叫會多出幾百 ms
     cudaEvent_t t0, t1;
     CK(cudaEventCreate(&t0)); CK(cudaEventCreate(&t1));
-    printf("pinned=%d WORK=%d (每元素約 %d FLOP)\n", USE_PINNED, WORK, 2 * WORK - 1);
+    printf("pinned=%d WORK=%d (~%d FLOP per element)\n", USE_PINNED, WORK, 2 * WORK - 1);
     printf("%10s %10s %10s %10s %10s %10s %10s %8s\n",
            "n", "malloc_ms", "H2D_ms", "kernel_ms", "D2H_ms", "GPU_total", "CPU_ms", "kernel%");
 

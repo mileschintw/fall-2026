@@ -3,15 +3,15 @@
 > 每次上課結束更新。時間用 Pacific。掌握程度：⬜ 未學、🟨 看過但不穩、🟩 能自己解釋並做對題目。
 
 ## 目前位置
-- 下一步：模組 1／步驟 6 動手／已請學生把 `exercises/01-roundtrip.cu` 第 21 行 WORK 改成 10，先猜 n=1000 萬時誰贏再跑、貼結果（10/28 01:05）。實測答案：WORK=10 → GPU 18.6 ms vs CPU 22 ms（接近交叉、GPU 小贏）；WORK=100 → GPU 19 ms vs CPU 750 ms；WORK=1000 → kernel 從 0.6 ms 跳到 2.4 ms（變 compute-bound，約 8.5 TFLOPS），CPU 14 s。WORK 1→100 kernel 時間幾乎不變＝memory-bound，可當模組 5 AI/roofline 的伏筆。之後步驟 7 收尾（M1 可升 🟩）
-- 上次上課：2026-10-27 22:10 PT（模組 0 診斷）
-- 累計上課分鐘：60
+- 下一步：模組 5（效能理論）／步驟 1 熱身／待複習第 1 題（SI 字首換算）。M2–M4 診斷已 🟩，跳過。步驟 2 預測可以從「01-roundtrip WORK=100 時 kernel 時間怎麼變」切入（實測 WORK 1→100 都約 0.6–0.7 ms，WORK=1000 才變 2.4 ms）（格式：模組 #／流程步驟／題號）
+- 上次上課：2026-10-27 22:10 – 10/28 02:05 PT（模組 0 診斷、模組 1 完成）
+- 累計上課分鐘：65
 
 ## 模組
 | # | 模組 | 狀態 | Artifact | 最後上課 |
 |---|---|---|---|---|
 | 0 | 診斷 | 🟩（已批改） | — | 10/27 |
-| 1 | CPU vs GPU | 🟨（診斷 Q1 部分對；學習中） | [GPU Round-Trip 帳單](https://claude.ai/artifact/UgjmP4Rsx5Lyrg8ko5wCjP)（`modules/01-cpu-vs-gpu.html`） | 10/27 |
+| 1 | CPU vs GPU | 🟩（練習 2 全對、交叉點對；latency 定義和 SI 換算放待複習） | [GPU Round-Trip 帳單](https://claude.ai/artifact/UgjmP4Rsx5Lyrg8ko5wCjP)（`modules/01-cpu-vs-gpu.html`） | 10/28 |
 | 2 | CUDA 程式流程 | 🟩（診斷 Q2 對） | — | — |
 | 3 | Grid / block / thread | 🟩（Q3 對；Q4 經學生確認是筆誤，自行更正為 +col） | — | — |
 | 4 | SIMT、warp | 🟩（診斷 Q5、Q6 對） | — | — |
@@ -48,10 +48,11 @@
 
 ## 待複習
 <!-- 下次熱身要問的題目 -->
-1. 只有 1000 個元素的 vector add，GPU round-trip 裡哪一段最花時間？為什麼「資料小」反而更不划算？
-2. SI 字首換算：5 μs × 200 GB/s 等於多少 bytes？（再測 μ×G）
-3. 程式 10% 序列、有 4 個核心，最多快幾倍？（Amdahl 用在 P 有限的情況）
+1. SI 字首換算：5 μs × 200 GB/s 等於多少 bytes？（再測 μ×G，10/27 練習 1 錯過）
+2. 用一句話定義 latency，舉兩個不是「資料傳輸」的例子。（10/28 練習 3 定義太窄）
+3. 程式 10% 序列、有 4 個核心，最多快幾倍？（Amdahl 用在 P 有限的情況，模組 5 開頭）
 
 ## 上課紀錄
 <!-- 日期 時間 PT｜分鐘數｜做了什麼 -->
-- 2026-10-27 22:10 PT｜60｜模組 0 診斷：9 題，Q2、Q3、Q5、Q6、Q7 對；Q1 部分對；Q4 筆誤（自行更正）；Q8、Q9 不會；Q4 確認筆誤；M1 熱身（round-trip 組成）答對大方向；M1 預測「n=10⁷ kernel 占幾 %」猜 50%（自述亂猜），實測 3.5–4%；做了 exercises/01-roundtrip.cu 和互動頁
+- 2026-10-27 22:10 PT｜65｜模組 0 診斷：9 題，Q2、Q3、Q5、Q6、Q7 對；Q1 部分對；Q4 筆誤（自行更正）；Q8、Q9 不會；Q4 確認筆誤；M1 熱身（round-trip 組成）答對大方向；M1 預測「n=10⁷ kernel 占幾 %」猜 50%（自述亂猜），實測 3.5–4%；做了 exercises/01-roundtrip.cu 和互動頁
+- 2026-10-28 02:05 PT｜（含在上列 65 分鐘）｜模組 1 動手：WORK=10 猜 GPU 贏（憑互動頁印象）✔，實測 GPU 18.1 ms vs CPU 23.0 ms；kernel 0.73 ms 跟 WORK=1 幾乎一樣（memory-bound 的伏筆）。M1 完成 🟩
