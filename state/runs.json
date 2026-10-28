@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-10-28T13:45:59-07:00",
+  "task": "作業說明",
+  "status": "new",
+  "summary": "新：gpu/hw3",
+  "output": "gpu/hw/README.md"
+ },
+ {
   "at": "2026-10-28T13:44:45-07:00",
   "task": "上課筆記",
   "status": "new",

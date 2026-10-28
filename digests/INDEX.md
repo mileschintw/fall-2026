@@ -9,12 +9,13 @@
 - 週規劃：10/25 日 21:05 🆕 A3 今晚到期未交；GPU HW2 週二 5:59PM 到期未交；A4 11/1 → [2026-10-25-weekly.md](2026-10-25-weekly.md)
 - 截止提醒：10/28 三 13:39 ✅ 48 小時內沒有作業或考試到期 → —
 - 上課筆記：10/28 三 13:44 🆕 GPU L4 10/27 筆記：occupancy、MMULT 邊界檢查、divergence、NCU；HW3 延到 11/6 → [notes.md](../gpu/lectures/2026-10-27/notes.md)
-- 作業說明：10/27 二 14:28 ⚠️ 需要重新登入：Canvas → —
+- 作業說明：10/28 三 13:45 🆕 新：gpu/hw3 → [README.md](../gpu/hw/README.md)
 
 ## 紀錄
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 10/28 三 13:45 | 作業說明 | 🆕 | 新：gpu/hw3 | [README.md](../gpu/hw/README.md) |
 | 10/28 三 13:44 | 上課筆記 | 🆕 | GPU L4 10/27 筆記：occupancy、MMULT 邊界檢查、divergence、NCU；HW3 延到 11/6 | [notes.md](../gpu/lectures/2026-10-27/notes.md) |
 | 10/28 三 13:44 | 晨報 | 🆕 | GPU HW3 發布(11/6)、HW2 已交；L4 錄影/講義；DSA Mod3 教材 | [2026-10-28.md](2026-10-28.md) |
 | 10/28 三 13:39 | 截止提醒 | ✅ | 48 小時內沒有作業或考試到期 | — |

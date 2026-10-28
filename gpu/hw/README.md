@@ -7,4 +7,5 @@
 | Task 0 - self introductions | 2026-10-09 (Fri) 11:59 PM PDT | [README](task0/README.md) | [spec.md](task0/spec.md) |
 | Homework #1 - SAXPY, 2D & 3D Matrix addition | 2026-10-20 (Tue) 05:59 PM PDT | [README](hw1/README.md) | [spec.md](hw1/spec.md) |
 | Homework #2 - Parallel performance theory, Gaussian blur kernels and more! | 2026-10-27 (Tue) 05:59 PM PDT | [README](hw2/README.md) | [spec.md](hw2/spec.md) |
+| Homework #3 - Control Divergence & Tiled MMULT improvements & NCU profiling | 2026-11-06 (Fri) 11:59 PM PST | [README](hw3/README.md) | [spec.md](hw3/spec.md) |
 | Homework 0 - Preliminaries and Refreshers（不計分） | — | [README](hw0/README.md) | [spec.md](hw0/spec.md) |

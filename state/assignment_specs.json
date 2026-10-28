@@ -333,5 +333,39 @@
     ]
    }
   ]
+ },
+ "11810628": {
+  "course": "gpu",
+  "slug": "hw3",
+  "dir": "gpu/hw/hw3",
+  "name": "Homework #3 - Control Divergence & Tiled MMULT improvements & NCU profiling",
+  "due_at": "2026-11-07T07:59:59Z",
+  "fp": {
+   "text": "9b2761f268178c96",
+   "links": [],
+   "files": {
+    "155100870": "2026-10-28T00:59:26Z"
+   },
+   "readme": null,
+   "repo_files": {},
+   "due_at": "2026-11-07T07:59:59Z"
+  },
+  "files": [
+   "spec.pdf",
+   "spec.md"
+  ],
+  "archived_at": "2026-10-28T13:44:13-07:00",
+  "summary_done": true,
+  "changes": [
+   "new"
+  ],
+  "history": [
+   {
+    "at": "2026-10-28T13:44:13-07:00",
+    "changes": [
+     "new"
+    ]
+   }
+  ]
  }
 }
