@@ -3,7 +3,7 @@
 > 每次上課結束更新。時間用 Pacific。掌握程度：⬜ 未學、🟨 看過但不穩、🟩 能自己解釋並做對題目。
 
 ## 目前位置
-- 下一步：M2–M4 快速掃描（學生 10/28 要求：診斷每模組只考 1–2 題，想補沒考到的部分）。一則一題，答對就過，答錯才停下來教。題目：S1 host 端寫 `d_x[0]` 會怎樣（M2 兩塊記憶體）→ S2 kernel launch 是非同步、`cudaDeviceSynchronize` 的用途（M2）→ S3 .cu→PTX→SASS、只編 sm_75 的執行檔拿到 RTX 3050 能不能跑（M2）→ S4 62×76 影像、16×16 block 的 `dim3 grid` 與 2D index（M3）→ S5 2D block 16×16 的 warp 怎麼切、grid-stride loop（M3/M4）→ S6 zero-overhead warp 切換如何藏 latency（M4）。目前在 S1（已問，等回答）。掃完接模組 5／步驟 1 熱身／待複習第 1 題（SI 字首換算）；步驟 2 預測可以從「01-roundtrip WORK=100 時 kernel 時間怎麼變」切入（實測 WORK 1→100 都約 0.6–0.7 ms，WORK=1000 才變 2.4 ms）（格式：模組 #／流程步驟／題號）
+- 下一步：M2–M4 快速掃描（學生 10/28 要求：診斷每模組只考 1–2 題，想補沒考到的部分）。一則一題，答對就過，答錯才停下來教。題目：S1 host 端寫 `d_x[0]` 會怎樣（M2 兩塊記憶體）→ S2 kernel launch 是非同步、`cudaDeviceSynchronize` 的用途（M2）→ S3 .cu→PTX→SASS、只編 sm_75 的執行檔拿到 RTX 3050 能不能跑（M2）→ S4 62×76 影像、16×16 block 的 `dim3 grid` 與 2D index（M3）→ S5 2D block 16×16 的 warp 怎麼切、grid-stride loop（M3/M4）→ S6 zero-overhead warp 切換如何藏 latency（M4）。目前在 S1 重問（反方向：kernel 拿到 host 的 `malloc` 指標會怎樣，已問，等回答）；答對再問 S2。掃完接模組 5／步驟 1 熱身／待複習第 1 題（SI 字首換算）；步驟 2 預測可以從「01-roundtrip WORK=100 時 kernel 時間怎麼變」切入（實測 WORK 1→100 都約 0.6–0.7 ms，WORK=1000 才變 2.4 ms）（格式：模組 #／流程步驟／題號）
 - 上次上課：2026-10-27 22:10 – 10/28 02:05 PT（模組 0 診斷、模組 1 完成）
 - 累計上課分鐘：65
 
@@ -36,6 +36,7 @@
 | memory-bound vs compute-bound（roofline） | ⬜ | 診斷 Q8（10/27）不會 |
 | shared vs global memory | ⬜ | 診斷 Q9（10/27）不會 |
 | `__syncthreads()` 在 tiling 的兩個用途（RAW、WAR） | ⬜ | 診斷 Q9（10/27）不會 |
+| host 和 device 是兩個位址空間（`d_` 指標不能在 host 解參考） | ⬜ | 掃描 S1（10/28）答「還沒 sync，不會有差別」✘；RTX 3050 實測 host 寫 `d_x[0]` 直接 access violation（0xC0000005） |
 
 ## 錯題與錯誤觀念
 <!-- 日期 | 題目 | 學生的答案 | 背後的錯誤模型 | 是否已修正 -->
@@ -44,6 +45,7 @@
 | 10/27 | 診斷 Q4 2D→1D index | `row*W + H` | 筆誤（學生 10/27 自行更正為 +col），不是觀念錯 | 是 |
 | 10/27 | M1 練習 1 交叉點計算 | 列式 `10us + 8n/100G = 8n/20G` ✔；下一步寫 `1000 s = 40n - 8n`，得 n = 31.25 | SI 字首相乘：把 10u × 100G 算成 1000（μ×G 當成互相抵消），實際 = 10⁻⁵ × 10¹¹ = 10⁶（= 1 MB）；也沒做合理性檢查（31 個元素 GPU 怎麼可能贏）。10/27 已講解，待再測 | 部分 |
 | 10/27 | M1 互動頁：資料已在 GPU，n 多大 GPU 才贏 | 約 9000（✔，模型交叉點 ≈ 8800）；理由「GPU 本身運算能力比較差，優勢是平行化」 | 把小 n 輸的原因歸給「算得慢」；實際上小 n 時 kernel 時間幾乎固定（launch overhead／latency ≈ 6 μs），跟算力無關。「單一 thread 比 CPU 核心弱」這半句是對的 | 否 |
+| 10/28 | 掃描 S1 host 寫 `d_x[0]` | 「還沒開始執行也還沒 sync，應該不會有差別」 | 把 `cudaMalloc` 拿到的指標當成一般 host 指標，以為問題只在時間順序（sync），沒有「兩塊記憶體、各自的位址」的模型 | 否 |
 | 10/27 | 診斷 Q1 為什麼不全丟 GPU | 「擅長平行但只做簡單算術，要規劃情境」 | 沒有 host↔device 傳輸成本的概念；沒提到 latency vs throughput、序列部分 | 否 |
 
 ## 待複習
