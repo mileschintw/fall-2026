@@ -176,7 +176,7 @@ def build(base, out):
     s.box(3.0)
     s.h("Extra Credit: Theoretical AI – global memory kernel vs shared memory kernel", 3)
     s.table(["Kernel", "FLOPs per output pixel", "GMEM bytes per output pixel", "AI (FLOP/B)"],
-            [["Global memory"], ["Static shared memory"]], widths=[2400, 2300, 2400, 2260])
+            [["Global memory"], ["Static / dynamic shared memory"]], widths=[2400, 2300, 2400, 2260])
     s.p("Work / Reasoning:", bold=True)
     s.box(1.4)
 
@@ -203,7 +203,7 @@ def build(base, out):
 
     s.h("3.4 Nsight Compute CLI Profiling", 2)
     s.p("Kernel execution time = smsp__cycles_elapsed.sum / smsp__cycles_elapsed.sum.per_second (ns → s). "
-        "Kernel instruction intensity = smsp__inst_executed.sum / dram__bytes.sum (Kbyte → byte).")
+        "Kernel instruction intensity = smsp__inst_executed.sum / dram__bytes.sum; dram__bytes.sum shown in bytes (Kbyte/Mbyte × 10³/10⁶).")
     rows = [[k, f"#{i}"] for k in ["global", "static SMEM"] for i in range(1, 5)]
     s.table(["Kernel", "Image", "smsp__cycles_ elapsed.sum", "…sum.per_ second", "smsp__inst_ executed.sum",
              "dram__bytes .sum", "Kernel time (s)", "Inst intensity (inst/B)"], rows,

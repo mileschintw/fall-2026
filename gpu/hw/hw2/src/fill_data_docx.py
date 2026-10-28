@@ -112,6 +112,9 @@ def box_after(d, label_prefix):
 
 
 def put_pictures(cell, paths, width_in):
+    # let the box shrink to the picture instead of keeping the blank minimum height
+    for h in cell._tc.getparent().iter("{http://schemas.openxmlformats.org/wordprocessingml/2006/main}trHeight"):
+        h.getparent().remove(h)
     p = cell.paragraphs[0]
     for r in list(p.runs):
         r._element.getparent().remove(r._element)
@@ -243,7 +246,7 @@ def fill_static(d, hw2_dir, fig_dir):
     # extra credit AI table
     t = find(d, "Kernel", "FLOPs per output pixel")
     fill_row(t, "Global memory", ["≈ 163 (81 FMUL + 81 FADD + 1 FDIV)", "406 (81 pixels + 81×4 coeffs + 1 write), no cache", "≈ 0.40"])
-    fill_row(t, "Static shared memory", ["≈ 163", "≈ 83.3 (81 + 324/256 + 1), no cache", "≈ 1.96"])
+    fill_row(t, "Static / dynamic shared memory", ["≈ 163", "≈ 83.3 (81 + 324/256 + 1), no cache", "≈ 1.96"])
 
     # NCU text
     ncu_dir = Path(__file__).resolve().parent.parent / "results" / "ncu"
@@ -257,6 +260,8 @@ def fill_static(d, hw2_dir, fig_dir):
     for cs in cell._tc.getparent().iter("{http://schemas.openxmlformats.org/wordprocessingml/2006/main}cantSplit"):
         cs.getparent().remove(cs)
 
+    keep_together(d)
+
     # the spacer paragraph after the last table can spill onto a blank final page
     body = d.element.body
     while body[-2].tag.endswith("}p") and not "".join(body[-2].itertext()).strip():
@@ -266,6 +271,25 @@ def fill_static(d, hw2_dir, fig_dir):
     body.insert(len(body) - 1, docx.oxml.parse_xml(
         f'<w:p xmlns:w="{W}"><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/>'
         f'<w:rPr><w:sz w:val="2"/></w:rPr></w:pPr></w:p>'))
+
+
+def keep_together(d):
+    """no heading or label left alone at a page bottom; short tables stay on one page"""
+    body = list(d.element.body)
+    for i, el in enumerate(body[:-1]):
+        if not el.tag.endswith("}p"):
+            continue
+        para = docx.text.paragraph.Paragraph(el, d._body)
+        nxt = body[i + 1]
+        heading = para.style is not None and para.style.name.startswith("Heading")
+        if heading or (nxt.tag.endswith("}tbl") and para.text.strip()):
+            para.paragraph_format.keep_with_next = True
+    for t in d.tables:
+        if 1 < len(t.rows) <= 6:
+            for row in t.rows[:-1]:
+                for cell in row.cells:
+                    for p in cell.paragraphs:
+                        p.paragraph_format.keep_with_next = True
 
 
 def _boxes_after(d, label_prefix):
