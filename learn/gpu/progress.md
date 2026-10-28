@@ -3,9 +3,9 @@
 > 每次上課結束更新。時間用 Pacific。掌握程度：⬜ 未學、🟨 看過但不穩、🟩 能自己解釋並做對題目。
 
 ## 目前位置
-- 下一步：模組 1／步驟 5 練習／第 1 題（交叉點計算：overhead 10 μs、GPU 100 GB/s、CPU 20 GB/s、每元素 8 B，答案 n = 31,250）學生列式對、單位換算錯得 31.25，已講解修正（10/27 23:15）。第 2 題四個情境全對（b 的理由偏了，已補充）。第 3 題短答（用自己的話講 latency vs throughput、GPU 為哪個設計、代價）已問（10/28 00:50），等回答；答完做步驟 6 動手（01-roundtrip.cu 改 USE_PINNED／sizes）（格式：模組 #／流程步驟／題號）
+- 下一步：模組 1／步驟 6 動手／已請學生把 `exercises/01-roundtrip.cu` 第 21 行 WORK 改成 10，先猜 n=1000 萬時誰贏再跑、貼結果（10/28 01:05）。實測答案：WORK=10 → GPU 18.6 ms vs CPU 22 ms（接近交叉、GPU 小贏）；WORK=100 → GPU 19 ms vs CPU 750 ms；WORK=1000 → kernel 從 0.6 ms 跳到 2.4 ms（變 compute-bound，約 8.5 TFLOPS），CPU 14 s。WORK 1→100 kernel 時間幾乎不變＝memory-bound，可當模組 5 AI/roofline 的伏筆。之後步驟 7 收尾（M1 可升 🟩）
 - 上次上課：2026-10-27 22:10 PT（模組 0 診斷）
-- 累計上課分鐘：50
+- 累計上課分鐘：60
 
 ## 模組
 | # | 模組 | 狀態 | Artifact | 最後上課 |
@@ -28,7 +28,7 @@
 | block 數 = ceil(n/blockDim)、邊界 `if` | 🟩 | 診斷 Q3（10/27）4 個、知道最後一個 block 超出範圍 |
 | 2D→1D row-major index | 🟩 | 診斷 Q4（10/27）寫成 `row*W + H`，被問到時自己說是筆誤，更正為 `row*W + col` |
 | kernel launch 固定 overhead（小 n 輸的原因） | 🟨 | M1 追問（10/27）答「compile 或啟動 kernel」：launch 對；compile 錯（nvcc 事先編好 SASS，只有第一次啟動多約 0.16 ms 的 lazy module loading） |
-| latency vs throughput（T = 固定延遲 + 工作量/throughput） | 🟨 | M1 步驟 4 講解（10/27），還沒做題驗證 |
+| latency vs throughput（T = 固定延遲 + 工作量/throughput） | 🟨 | M1 練習 1（10/27）列式對、單位錯；練習 3（10/28）短答：latency 定義成「資料傳輸的時間」太窄（應是完成一件事的時間：一次存取、一個指令、一次 launch、一趟 round trip）；throughput 對；「GPU 為 throughput 設計、單次較慢、靠大量工作掩蓋 latency」✔ |
 | warp = 32 threads、block 大小取 32 倍數 | 🟩 | 診斷 Q5（10/27）4 個 warp、不整除會有 lane 空轉 |
 | Control divergence | 🟩 | 診斷 Q6（10/27）兩條路徑分開跑、用 mask 遮住另一半 |
 | Amdahl's law | 🟨 | 診斷 Q7（10/27）答 10×，沒寫推導（1/f），還沒確認會用在 f、P 有限的情況 |
@@ -54,4 +54,4 @@
 
 ## 上課紀錄
 <!-- 日期 時間 PT｜分鐘數｜做了什麼 -->
-- 2026-10-27 22:10 PT｜50｜模組 0 診斷：9 題，Q2、Q3、Q5、Q6、Q7 對；Q1 部分對；Q4 筆誤（自行更正）；Q8、Q9 不會；Q4 確認筆誤；M1 熱身（round-trip 組成）答對大方向；M1 預測「n=10⁷ kernel 占幾 %」猜 50%（自述亂猜），實測 3.5–4%；做了 exercises/01-roundtrip.cu 和互動頁
+- 2026-10-27 22:10 PT｜60｜模組 0 診斷：9 題，Q2、Q3、Q5、Q6、Q7 對；Q1 部分對；Q4 筆誤（自行更正）；Q8、Q9 不會；Q4 確認筆誤；M1 熱身（round-trip 組成）答對大方向；M1 預測「n=10⁷ kernel 占幾 %」猜 50%（自述亂猜），實測 3.5–4%；做了 exercises/01-roundtrip.cu 和互動頁

@@ -8,4 +8,6 @@
 cmd /c '"C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvars64.bat" >nul && nvcc -O3 -arch=sm_86 -Xcompiler /utf-8 -o NN-slug.exe NN-slug.cu && .\NN-slug.exe'
 ```
 
+字串裡不要讓中文或全形標點緊接在 `\` 前面（例如 `"）\n"`）。nvcc 的前端在這台繁中 Windows 上會用 Big5 讀，UTF-8 的尾位元組和 `\` 會被併成一個字，結果印出字面上的 `\n`（2026-10-28 實際遇到）。
+
 練習用 `-arch=sm_86`（這台的 RTX 3050）；作業照老師設定用 `compute_75,sm_75`（`gpu/hw/hw2/src/build.bat`）。`*.exe`、`*.exp`、`*.lib`、`*.pdb` 已 gitignore。
