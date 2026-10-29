@@ -13,6 +13,7 @@ Panopto folder：`Autumn 2026 - EE P 590 A Au 26`（`9b12e253-ce65-412c-837a-b4d
 | 2026-10-19（一） | Mod 3 Trees/Traversals [Mon, Class 6] | 6e8bef14-3722-4b1d-94b4-b4e9001f6e1d | 111 min | 1091 |
 | 2026-10-21（三） | Mod 3 Trees/Traversals [Wed, Class 7] | 887324e8-5bc6-4517-895d-b4eb00222511 | 129 min | 997 |
 | 2026-10-26（一） | Mod 3 Trees/BST [Mon, Class 8] | a75e4b14-f311-4938-9c21-b4f00023a332 | 110 min | 1151 |
+| 2026-10-28（三） | Mod 4 Trees/AVL, Big-O [Wed, Class 9] | 2a320fb9-8082-4e68-bced-b4f200240c3c | 114 min | 1059 |
 
 - Class 1 在 Panopto 的 StartTime 是 10/02，應是上傳時間；上課日以 Canvas Module 0 與 BOOTSTRAP 為準（9/30）。
 - 資料夾內另有一支 9 秒的「EEP 590A: Class Meeting」（`0c21a835-…`），是空錄影，忽略。

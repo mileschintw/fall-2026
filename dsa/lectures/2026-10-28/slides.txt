@@ -1,0 +1,406 @@
+##### FILE EE590a_Class_Wed_AVL_and_asymptotics_outline_students.pdf (file 155413878, 9 pages) #####
+=== p1 ===
+
+
+
+ 
+EE   590 a :   C l a ss   outl i n e ,   A V L   tr ee s   a n d   a symptot ic 
+not a t i on 
+·   W ed n e s da y   · 
+A ge n da 
+M on da y   e n ded   on   a   pro b l e m :   a   pl ai n   bi n a ry   s ea r ch   tr ee   i s   only   a s   g oo d   a s   t he   or de r   i ts   v a lu e s   a rr i v e   i n ,   a n d   sort ed
+i nput   turns   i t   i nto   a   chai n . 
+T o da y   i s   t he   fi x ,   ke pt   b r ief :   a   rul e   f or   " ba l a n ced "   ( t he   A V L   rul e ),   on e   r e p ai r   mov e   ( t he   rot a t i on ),   a n d   t he   f our   w a ys   a n 
+i ns e rt   ca n   b r eak   t he   rul e . 
+T he r e   i s   no   A V L   i ns e rt   c o de   to   wr i t e   to da y 
+D efi n g   a n d   E xpl ai n   A sy m ptot ic   A n al ys i s :   O ,   Ω   a n d   Θ . 
+O bjec t i v e s 
+B y   t he   e n d ,   stu de nts   ca n : 
+1.   S a y   w ha t   a n   A V L   tr ee   g u a r a nt ee s   ( e v e ry   no de ' s   two   su b tr ee s   diffe r   i n   heigh t   b y   a t   most   1),   a n d   e xpl ai n   h ow   a   rot a t i on
+r e p ai rs   a n   i m ba l a n ce   w i t h out   b r eaki n g   t he   s ea r ch - tr ee   or de r . 
+2.   S h ow   t ha t   a n   A V L   tr ee   w i t h   n   no de s   ha s   heigh t   O ( lo g   n ),   f rom   t he   r ec urr e n ce   f or   t he   fe w e st   no de s   a   tr ee   o f   a   gi v e n 
+heigh t   ca n   ha v e . 
+3.   S t a t e   t he   defi n i t i ons   o f   O ,   Ω   a n d   Θ ,   fi n d   c onst a nts   t ha t   prov e   a   b oun d ,   a n d   c l a ss if y   t he   runn i n g   t i m e   o f   s i mpl e   loops . 
+R eca p :   t he   s ha p e   pro b l e m ,   a n d   w ha t   w e   w a nt 
+R eca p 
+S ea r ch   a n d   i ns e rt   c ost   O ( h ),   w he r e   h   i s   t he   heigh t . 
+R a n d om   i ns e rt i on   or de r   gi v e s   a   heigh t   o f   rou gh ly   tw ice   t he   idea l ,   a n d   sort ed   or de r   gi v e s   a   chai n . 
+R e m i n d   t he m   o f   M on da y ' s   de mo :   5,000   s ea r che s   too k   ab out   0.005   s ec on d s   i n   t he   s h u ff l ed   tr ee   a n d   ab out   0.6 
+s ec on d s   i n   t he   sort ed   on e ,   f rom   t he   s a m e   v a lu e s   a n d   t he   s a m e   f un c t i on . 
+I s   t hi s   tr ee   ba l a n ced ? 
+( t he   runn i n g   e x a mpl e )   L e t   stu de nts   su gge st / a r g u e / deba t e 
+Z oom   i n   on   10:   i t   ha s   no   l ef t   chi l d   a t   a ll ,   w hi l e   i ts   r igh t   chi l d   14   ha s   a   chi l d   o f   i ts   own   (13). 
+T he   l ef t   s ide   o f   10   i s   e mpty ,   a n d   t he   r igh t   s ide   i s   two   l e v e ls   dee p . 
+T ha t   lops ided   spot   i s   w ha t   w e   w i ll   t each   t he   tr ee   to   de t ec t   a n d   r e p ai r . 
+W ha t   w e   w a nt 
+A f t e r   e v e ry   i ns e rt ,   t he   heigh t   s h oul d   st a y   n ea r   lo g 2   n ,   w ha t e v e r   or de r   v a lu e s   a rr i v e   i n . 
+T h r ee   idea s : 
+S h u ff l e   t he   i nput   fi rst :   t hi s   wor k s   only   if   a ll   t he   da t a   e x i sts   i n   ad v a n ce ,   a n d   v a lu e s   t ha t   a rr i v e   on e   a t   a   t i m e   ca nnot 
+be   s h u ff l ed . 
+R eb u i l d   t he   w h ol e   tr ee   w he n   i t   loo k s   bad :   r eb u i l di n g   c osts   O ( n ),   a n d   d o i n g   i t   o f t e n   e nou gh   to   m a tt e r   c osts   mor e 
+t ha n   i t   s a v e s . 
+10/28/26, 9:01 PM   EE590a_Class_Wed_AVL_and_asymptotics_draft_students 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/107.html   1/9
+
+=== p2 ===
+
+ 
+O r   r e p ai r   lo ca lly   a s   w e   g o :   af t e r   each   i ns e rt ,   check   t he   no de s   on   t he   w a y   back   up ,   a n d   fi x   a ny   t ha t   i s   too   lops ided 
+w i t h   a   mov e   t ha t   ca nnot   di stur b   t he   or de r i n g . 
+T he   A V L   idea :   ba l a n ce   fac tor 
+T he   defi n i t i on 
+R e m e m be r   t he   heigh t   c onv e nt i on   f rom   t he   tr ee   c l a ss e s : 
+a   s i n g l e   no de   ha s   heigh t   0 
+t he   e mpty   tr ee   ha s   heigh t   −1 
+T he   ba l a n ce   fac tor   o f   a   no de   i s   t he   heigh t   o f   i ts   l ef t   su b tr ee   m i nus   t he   heigh t   o f   i ts   r igh t   su b tr ee . 
+A n   A V L   tr ee   i s   a   bi n a ry   s ea r ch   tr ee   i n   w hich   e v e ry   no de   ha s   a   ba l a n ce   fac tor   o f   −1,   0   or   1. 
+I n   wor d s :   a t   e v e ry   no de ,   t he   two   s ide s   diffe r   i n   heigh t   b y   a t   most   on e . 
+C heck   t he   runn i n g   e x a mpl e 
+C omput e   t he   ba l a n ce   fac tor   o f   each   no de   o f   t he   lops ided   tr ee : 
+8   ha s   0,   3   ha s   −1,   6   ha s   0,   14   ha s   +1,   t he   l ea v e s   ha v e   0,   a n d   10   ha s   −1   −   1   =   −2. 
+O nly   no de   10   b r eak s   t he   A V L   rul e 
+A f t e r   a n   i ns e rt ,   only   t he   no de s   on   t he   p a t h   f rom   t he   n e w   l eaf   up   to   t he   root   ca n   ha v e   cha n ged   heigh t ,   so   t h os e   a r e   t he 
+only   no de s   to   check ,   f rom   t he   b ottom   up . 
+C Y K   ( C heck   Y our   K nowl edge ) 
+W hich   o f   t he s e   a r e   A V L   tr ee s ? 
+( a )   A   chai n :   1,   t he n   2   a s   i ts   r igh t   chi l d ,   t he n   3   a s   2' s   r igh t   chi l d . 
+( b )   2   w i t h   chi l d r e n   1   a n d   3. 
+( c )   5   w i t h   a   l ef t   chi l d   3,   w hich   ha s   a   l ef t   chi l d   1,   a n d   a   r igh t   chi l d   8   w i t h   no   chi l d r e n . 
+A nsw e rs : 
+( a )   no ,   t he   root   ha s   ba l a n ce   fac tor   −2; 
+( b )   y e s ; 
+( c )   y e s :   5   ha s   ba l a n ce   fac tor   +1,   3   ha s   +1,   a n d   t he   l ea v e s   a r e   0. 
+T hi s   rul e   he lps   t he   w h ol e   tr ee   st a y   s h ort . 
+R ot a t i ons :   t he   r e p ai r   mov e 
+T he   mov e 
+S uppos e   a   no de   y   ha s   bec om e   too   hea vy   on   t he   l ef t . 
+L if t   i ts   l ef t   chi l d   x   ab ov e   i t :   x   bec om e s   t he   top   o f   t hi s   su b tr ee ,   a n d   y   bec om e s   x ' s   r igh t   chi l d . 
+O n e   p iece   d o e s   not   fi t   y e t ,   x ' s   ol d   r igh t   su b tr ee ,   B . 
+I t   ca nnot   st a y ,   beca us e   x   now   ha s   a   r igh t   chi l d . 
+B ut   B   h ol d s   v a lu e s   t ha t   a r e   bigge r   t ha n   x   a n d   sm a ll e r   t ha n   y ,   a n d   y ' s   n e w   l ef t   spot   i s   e x ac tly   t ha t   r a n ge . 
+S o   B   mov e s   ac ross   a n d   bec om e s   y ' s   n e w   l ef t   su b tr ee . 
+T ha t   i s   on e   r igh t   rot a t i on . 
+10/28/26, 9:01 PM   EE590a_Class_Wed_AVL_and_asymptotics_draft_students 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/107.html   2/9
+
+=== p3 ===
+A   r igh t   rot a t i on   a t   y .   A ,   B   a n d   C   st a n d   f or   w h o le   su b tr ee s ,   w hich   c o me   al on g   untou ched . 
+W h y   t he   or de r   i s   s afe 
+R ead   t he   p ic tur e   l ef t   to   r igh t   bef or e   t he   rot a t i on :   A ,   x ,   B ,   y ,   C . 
+A f t e r   t he   rot a t i on   i t   r ead s   A ,   x ,   B ,   y ,   C   agai n . 
+N ot hi n g   w a s   c omp a r ed   or   c op ied ,   only   t h r ee   l i n k s   cha n ged ,   so   t he   i nor de r   s e qu e n ce   i s   e x ac tly   t he   s a m e ,   a n d   a 
+tr ee   w h os e   i nor de r   i s   sort ed   i s   st i ll   a   s ea r ch   tr ee . 
+T ha t   m ake s   t he   r e p ai r   b ot h   s afe   a n d   chea p   ( a   c onst a nt   num be r   o f   st e ps ). 
+T he   c o de 
+U s e s   t he   s a m e   " r e turn   t he   n e w   root   o f   t hi s   su b tr ee "   p a tt e rn   a s   i ns e rt   a n d   de l e t e 
+each   no de   now   stor e s   i ts   own   heigh t   so   t ha t   t he   ba l a n ce   fac tor   t ake s   c onst a nt   t i m e : 
+def   rotate_right ( y ): 
+x   =   y [ 'left' ] 
+y [ 'left' ]   =   x [ 'right' ]   #   B   moves   across 
+x [ 'right' ]   =   y   #   y   drops   below   x 
+update_height ( y )   #   y   is   lower   now,   so   fix   it   first 
+update_height ( x ) 
+return   x   #   x   is   the   new   root   of   this   subtree 
+def   rotate_left ( x ):   #   the   mirror   image 
+y   =   x [ 'right' ] 
+x [ 'right' ]   =   y [ 'left' ] 
+y [ 'left' ]   =   x 
+update_height ( x ) 
+update_height ( y ) 
+return   y 
+** C Y K   ** 
+S t a rt   f rom   t he   chai n   1,   t he n   2   a s   i ts   r igh t   chi l d ,   t he n   3   a s   2' s   r igh t   chi l d . 
+W hich   w a y   s h oul d   w e   rot a t e ,   a n d   a t   w hich   no de ? 
+R ot a t e   l ef t   a t   1. 
+T he   r e sult   i s   2   w i t h   chi l d r e n   1   a n d   3. 
+10/28/26, 9:01 PM   EE590a_Class_Wed_AVL_and_asymptotics_draft_students 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/107.html   3/9
+
+=== p4 ===
+ 
+T he   f our   ca s e s 
+A f t e r   a n   i ns e rt ,   a   no de   on   t he   p a t h   back   up   m a y   ha v e   a   ba l a n ce   fac tor   o f   +2   or   −2,   a n d   n e v e r   mor e ,   beca us e   each
+i ns e rt   cha n ge s   a   heigh t   b y   a t   most   on e   a n d   w e   r e p ai r   a s   w e   g o . 
+T he   pro b l e m   c om e s   i n   f our   s ha p e s ,   de p e n di n g   on   w he r e   t he   e xtr a   heigh t   i s . 
+C a s e   W he r e   t he   e xtr a   heigh t 
+i s   B a l a n ce   fac tors   T he   fi x 
+L ef t - l ef t   l ef t   chi l d ' s   l ef t   su b tr ee   no de   +2,   l ef t   chi l d   +1   ( or 
+0)   rot a t e   r igh t   a t   t he   no de 
+R igh t - 
+r igh t 
+r igh t   chi l d ' s   r igh t
+su b tr ee 
+no de   −2,   r igh t   chi l d   −1   ( or 
+0)   rot a t e   l ef t   a t   t he   no de 
+L ef t - r igh t   l ef t   chi l d ' s   r igh t   su b tr ee   no de   +2,   l ef t   chi l d   −1   rot a t e   l ef t   a t   t he   l ef t   chi l d ,   t he n   r igh t   a t   t he 
+no de 
+R igh t - l ef t   r igh t   chi l d ' s   l ef t   su b tr ee   no de   −2,   r igh t   chi l d   +1   rot a t e   r igh t   a t   t he   r igh t   chi l d ,   t he n   l ef t   a t   t he 
+no de 
+T he   lef t - lef t   ca s e   n eed s   on e   rot a t i on ,   a n d   t he   lef t - r igh t   ca s e   n eed s   two .   T he   or a n ge   no de   i s   t he   on e   w h os e   bala n ce   fac tor 
+i s   + 2 . 
+L ef t - l ef t 
+I ns e rt   3,   t he n   2,   t he n   1. 
+E ach   i s   t he   l ef t   chi l d   o f   t he   on e   bef or e ,   so   t he   chai n   l ea ns   l ef t   a n d   t he   no de   3   ha s   ba l a n ce   fac tor   +2. 
+O n e   r igh t   rot a t i on   a t   3   l if ts   2,   a n d   3   bec om e s   i ts   r igh t   chi l d . 
+T he   r e sult   i s   2   w i t h   chi l d r e n   1   a n d   3. 
+10/28/26, 9:01 PM   EE590a_Class_Wed_AVL_and_asymptotics_draft_students 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/107.html   4/9
+
+=== p5 ===
+
+ 
+L ef t - r igh t 
+T hi s   on e   n eed s   ca r e . 
+I ns e rt   3,   t he n   1,   t he n   2. 
+N ow   3   ha s   a   l ef t   chi l d   1,   a n d   1   ha s   a   r igh t   chi l d   2,   so   t he   e xtr a   heigh t   i s   on   t he   i ns ide . 
+T ry   a   r igh t   rot a t i on   a t   3:   1   i s   l if t ed ,   3   d rops   to   i ts   r igh t ,   a n d   2   mov e s   ac ross   to   be   3' s   l ef t   chi l d . 
+T he   r e sult   i s   1   w i t h   a   r igh t   chi l d   3,   w h os e   l ef t   chi l d   i s   2,   w hich   i s   st i ll   lops ided   ( ba l a n ce   fac tor   −2   a t   t he   top ),   now
+l ea n i n g   t he   ot he r   w a y . 
+A   s i n g l e   rot a t i on   mov e s   heigh t   f rom   on e   s ide   to   t he   ot he r   w i t h out   r ed u ci n g   i t . 
+I nst ead ,   str aigh t e n   t he   i ns ide   fi rst :   rot a t e   l ef t   a t   t he   chi l d   (1),   so   t ha t   2   c om e s   up   a n d   t he   s ha p e   bec om e s   t he   l ef t - l ef t 
+chai n   3,   2,   1,   a n d   t he n   rot a t e   r igh t   a t   3. 
+M i rror   ca s e s 
+R igh t - r igh t   a n d   r igh t - l ef t   a r e   t he   s a m e   w i t h   l ef t   a n d   r igh t   sw a pp ed . 
+L ea rn   i s   t he   p a tt e rn ,   not   f our   r eci p e s :   if   t he   e xtr a   heigh t   i s   on   t he   outs ide ,   rot a t e   on ce ;   if   i t   i s   on   t he   i ns ide ,   rot a t e 
+t he   child   fi rst   so   t ha t   i t   i s   on   t he   outs ide . 
+C Y K :   f our   or de rs ,   on e   tr ee 
+C ons ide r   each   o f   t he   or de rs   3,   2,   1   a n d   1,   2,   3   a n d   3,   1,   2   a n d   1,   3,   2.   I ns e rt   t he   t h r ee   v a lu e s   i nto   a n   A V L   tr ee   a n d   d r a w 
+i t . 
+A ll   f our   e n d   i n   t he   s a m e   tr ee ,   2   w i t h   chi l d r e n   1   a n d   3. 
+W hich   i s   w hich   ca s e   ( l ef t - l ef t ,   e t c )? 
+B ack   to   t he   runn i n g   e x a mpl e 
+I ns e rt   8,   3,   10,   1,   6,   14,   4,   7,   13   i nto   a n   A V L   tr ee . 
+E v e ryt hi n g   g o e s   i n   a s   bef or e   unt i l   13. 
+I ns e rt i n g   13   gi v e s   no de   10   a   ba l a n ce   fac tor   o f   −2,   a n d   i ts   r igh t   chi l d   14   ha s   +1,   so   t hi s   i s   t he   r igh t - l ef t   ca s e : 
+rot a t e   r igh t   a t   14,   w hich   l if ts   13,   t he n   rot a t e   l ef t   a t   10,   w hich   l if ts   13   agai n . 
+T he   r e sult   ha s   13   a s   t he   p a r e nt   o f   10   a n d   14,   a n d   pr e or de r   r ead s   8   3   1   6   4   7   13   10   14. 
+T he   heigh t   i s   st i ll   3,   b ut   e v e ry   no de   i s   ba l a n ced . 
+A   c oupl e   o f   not e s : 
+A f t e r   a n   i ns e rt ,   a t   most   on e   r e p ai r   ( a   s i n g l e   or   a   d ou b l e   rot a t i on )   i s   e v e r   n eeded 
+D e l e t e   i s   l e ss   lu ck y ,   s i n ce   i t   ca n   n eed   a   r e p ai r   a t   s e v e r a l   l e v e ls . 
+B r eak 
+A   t hi n g   to   t hi n k   ab out :   " T he   rul e   s a ys   t he   two   s ide s   diffe r   b y   a t   most   on e .   H ow   t a ll   ca n   a   tr ee   w i t h   a   m i ll i on   v a lu e s   ge t
+un de r   t ha t   rul e ?" 
+W h y   t he   heigh t   i s   O ( lo g   n ) 
+T he   qu e st i on 
+T he   rul e   l i m i ts   h ow   lops ided   each   no de   ca n   be ,   b ut   d o e s   t ha t   kee p   t he   w h ol e   tr ee   s h ort ? 
+F l i p   t he   qu e st i on :   w ha t   i s   t he   fe w e st   no de s   a n   A V L   tr ee   o f   heigh t   h   ca n   ha v e ?   C a ll   i t   N ( h ). 
+A   tr ee   o f   heigh t   0   n eed s   1   no de ,   a n d   a   tr ee   o f   heigh t   1   n eed s   2. 
+A   tr ee   o f   heigh t   h   n eed s   a   root ,   on e   su b tr ee   o f   heigh t   h   −   1,   a n d   a   s ec on d   su b tr ee   t ha t   i s   a llow ed   to   be   on e 
+s h ort e r ,   so   o f   heigh t   h   −   2. 
+T ha t   gi v e s   N ( h )   =   1   +   N ( h   −   1)   +   N ( h   −   2).   B u i l d   t he   t ab l e   w i t h   t he   c l a ss : 
+10/28/26, 9:01 PM   EE590a_Class_Wed_AVL_and_asymptotics_draft_students 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/107.html   5/9
+
+=== p6 ===
+ 
+H eigh t   h   0   1   2   3   4   5   6   7   8 
+F e w e st   no de s   N ( h )   1   2   4   7   12   20   33   54   88 
+A   s h ort   proo f 
+T he   t ab l e   g rows   fa st : 
+S i n ce   N ( h   −   1)   i s   a t   l ea st   N ( h   −   2)   ( a   t a ll e r   tr ee   n eed s   a t   l ea st   a s   m a ny   no de s ),   N ( h )   =   1   +   N ( h   −   1)   +   N ( h   −   2)   i s   g r ea t e r
+t ha n   2   ·   N ( h   −   2). 
+S o   e v e ry   two   l e v e ls   a t   l ea st   d ou b l e   t he   no de   c ount :   N ( h )   i s   a t   l ea st   2 h /2 . 
+A   tr ee   w i t h   n   no de s   t he r ef or e   ha s   n   ≥   2 h /2 ,   a n d   t aki n g   lo g 2   o f   b ot h   s ide s   gi v e s   h   ≤   2   lo g 2   n . 
+T he   heigh t   i s   a t   most   tw ice   lo g   n ,   w hich   i s   O ( lo g   n ). 
+T he   big   idea :   w e   turn ed   a   rul e   ab out   ba l a n ce   i nto   a   b oun d   on   heigh t . 
+T he   b oun d   ha s   t he   f orm   " a t   most   a   c onst a nt   t i m e s   lo g   n " 
+H ow   t igh t   i s   i t ? 
+T he   r ea l   g rowt h   i s   F ib on acci - l ike ,   ab out   1.6   t i m e s   p e r   l e v e l ,   w hich   gi v e s   a   t igh t e r   b oun d   o f   ab out   1.44   lo g 2   n . 
+C omput ed   f rom   t he   r ec urr e n ce ,   t he   t a ll e st   a n   A V L   tr ee   ca n   be : 
+13   l e v e ls   f or   1,000   v a lu e s ,   17   f or   10,000,   22   f or   100,000   a n d   27   f or   a   m i ll i on ,   agai nst   9,   13,   16   a n d   19   f or   a   p e r fec t
+tr ee ,   a n d   999,999   f or   a   chai n . 
+S o   e v e ry   s ea r ch   t ake s   a t   most   28   st e ps   i n   a   tr ee   o f   a   m i ll i on   v a lu e s ,   i n   t he   worst   ca s e ,   w i t h   no   a ssumpt i on   ab out
+t he   i nput   or de r . 
+B eca us e   each   i ns e rt   i s   on e   s ea r ch   p a t h   plus   a t   most   on e   r e p ai r ,   s ea r ch ,   i ns e rt   a n d   de l e t e   a r e   a ll   O ( lo g   n )   i n   t he 
+worst   ca s e . 
+C Y K 
+(1)   W ha t   i s   t he   fe w e st   no de s   i n   a n   A V L   tr ee   o f   heigh t   6? 
+(2)   C oul d   a n   A V L   tr ee   w i t h   10,000   no de s   ha v e   heigh t   20? 
+A nsw e rs : 
+(1)   33,   f rom   t he   t ab l e . 
+(2)   N o :   N (17)   =   6,764   a n d   N (18)   =   10,945,   so   a   tr ee   w i t h   10,000   no de s   ca n   be   a t   most   17   t a ll ,   a n d   a   heigh t   o f   20   woul d 
+n eed   a t   l ea st   28,656   no de s . 
+A symptot ic   not a t i on :   O ,   Ω ,   Θ 
+W h y   be   pr eci s e 
+W e   ha v e   bee n   s a y i n g   " O ( h ),"   " g rows   l ike ,"   a n d   " a t   most   a   c onst a nt   t i m e s ." 
+W e   now   n eed   t he   pr eci s e   m ea n i n g ,   f or   two   r ea sons : 
+i t   l e ts   us   prov e   st a t e m e nts   l ike   t he   on e   w e   j ust   did , 
+i t   stops   us   f rom   s a y i n g   t hi n g s   t ha t   soun d   r igh t   b ut   a r e   not . 
+T he   idea   i s   to   c omp a r e   h ow   f un c t i ons   g row   w hi l e   ig nor i n g   two   t hi n g s   t ha t   de p e n d   on   t he   m achi n e :   c onst a nt   fac tors , 
+a n d   w ha t   ha pp e ns   f or   sm a ll   i nputs . 
+B ig - O   D efi n i t i on :   f ( n )   i s   O ( g ( n ))   if   t he r e   a r e   c onst a nts   c   >   0   a n d   n 0   su ch   t ha t   f ( n )   ≤   c   ·   g ( n )   f or   e v e ry   n   ≥   n 0 .   I n   wor d s :   p a st
+som e   po i nt ,   f   st a ys   be low   a   c onst a nt   mult i pl e   o f   g . 
+E x a mpl e   to   wor k : 
+f ( n )   =   3 n ²   +   5 n   +   2. 
+C l ai m :   f   i s   O ( n ² ). 
+10/28/26, 9:01 PM   EE590a_Class_Wed_AVL_and_asymptotics_draft_students 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/107.html   6/9
+
+=== p7 ===
+P roo f :   f or   n   ≥   6,   w e   ha v e   5 n   +   2   ≤   6 n   ≤   n ² ,   so   f ( n )   ≤   3 n ²   +   n ²   =   4 n ² .   S o   c   =   4   a n d   n 0   =   6   wor k . 
+S h ow   t he   p ic tur e : 
+t he   b oun d   d o e s   not   h ol d   a t   n   =   5   ( f (5)   =   102   a n d   4 n ²   =   100),   w hich   i s   w h y   n 0   e x i sts . 
+f ( n )   =   3 n ²   +   5 n   +   2   st a ys   be tw ee n   3 n ²   a n d   4 n ²   f ro m   n   =   6   onw a r d . 
+Ω   a n d   Θ   T he   m i rror   i m age   i s   a   low e r   b oun d :   f ( n )   i s   Ω ( g ( n ))   if   f ( n )   ≥   c   ·   g ( n )   f or   e v e ry   n   ≥   n 0 . 
+H e r e   f ( n )   ≥   3 n ²   f or   e v e ry   n ,   so   f   i s   Ω ( n ² )   w i t h   c   =   3. 
+W he n   b ot h   h ol d ,   f   i s   Θ ( g ( n )) :   i t   i s   squ ee z ed   be tw ee n   two   c onst a nt   mult i pl e s   o f   g ,   so   i t   g rows   e x ac tly   l ike   g ,   up   to 
+c onst a nts . 
+S o   3 n ²   +   5 n   +   2   i s   Θ ( n ² ),   w i t h   c 1   =   3,   c 2   =   4   a n d   n 0   =   6. 
+N ot a t i on   R ead s   a s   M ea ns 
+f   i s   O ( g )   a t   most   p a st   som e   po i nt ,   f   ≤   c   ·   g 
+f   i s   Ω ( g )   a t   l ea st   p a st   som e   po i nt ,   f   ≥   c   ·   g 
+f   i s   Θ ( g )   e x ac tly ,   up   to   c onst a nts   b ot h :   c 1   ·   g   ≤   f   ≤   c 2   ·   g 
+R ul e s   o f   t h um b   a n d   two   tr a ps 
+D rop   c onst a nt   fac tors   a n d   low e r - or de r   t e rms :   3 n ²   +   5 n   +   2   i s   Θ ( n ² ),   a n d   t he   lo g   ba s e   d o e s   not   m a tt e r ,   s i n ce   lo g 2   n   a n d 
+ln   n   diffe r   b y   a   c onst a nt   fac tor . 
+T he   usu a l   or de r ,   slow e st - g row i n g   fi rst :   1,   lo g   n ,   n ,   n   lo g   n ,   n ² ,   n ³ ,   2 n . 
+T wo   g ot cha s : 
+F i rst ,   O   i s   not   " worst   ca s e ."   O   de s c r ibe s   h ow   a   f un c t i on   g rows ;   t he   f un c t i on   ca n   be   t he   be st - ca s e ,   worst - ca s e   or 
+a v e r age - ca s e   runn i n g   t i m e . 
+F or   e x a mpl e ,   t he   worst - ca s e   t i m e   o f   s ea r ch   i n   a   pl ai n   bi n a ry   s ea r ch   tr ee   i s   Θ ( n ),   t he   a v e r age - ca s e   t i m e   ov e r
+r a n d om   i ns e rt i on   or de rs   i s   Θ ( lo g   n ),   a n d   t he   worst - ca s e   t i m e   i n   a n   A V L   tr ee   i s   Θ ( lo g   n ). 
+S ec on d ,   O   i s   only   a n   upp e r   b oun d ,   so   " n ²   i s   O ( n ³ )"   i s   tru e   b ut   not   i n f orm a t i v e .   W he n   you   ca n ,   s a y   Θ . 
+C Y K   C l a ss if y   each   i n   Θ   t e rms ,   t he n   check   a nsw e rs .   T he   loops   c ount   h ow   m a ny   t i m e s   t he   b o d y   runs . 
+10/28/26, 9:01 PM   EE590a_Class_Wed_AVL_and_asymptotics_draft_students 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/107.html   7/9
+
+=== p8 ===
+
+ 
+#   1   #   2   #   3 
+for   i   in   range ( n ):   i   =   n   for   i   in   range ( n ): 
+for   j   in   range ( n ):   while   i   >   1 :   j   =   1 
+count   +=   1   i   //=   2   while   j   <   n : 
+count   +=   1   j   *=   2 
+count   +=   1 
+#   4 
+for   i   in   range ( n ): 
+for   j   in   range ( i ): 
+count   +=   1 
+(5)   T ru e   or   fa ls e :   2 n +1   i s   O (2 n ). 
+(6)   T ru e   or   fa ls e :   2 2 n   i s   O (2 n ). 
+(7)   I s   3 n ²   +   5 n   +   2   O ( n )? 
+( A nsw e rs   a r e   i n   t he   a nsw e r   ke y .) 
+W r a p - up 
+A n   A V L   tr ee   r e p ai rs   i ts e l f   w i t h   rot a t i ons   t ha t   ca nnot   di stur b   t he   or de r ,   t he   r ec urr e n ce   f or   t he   fe w e st   no de s   prov e s   i ts 
+heigh t   i s   O ( lo g   n ),   a n d   O ,   Ω   a n d   Θ   a r e   t he   l a n g u age   t ha t   s a ys   so   pr eci s e ly . 
+C Y K 
+1.   W ha t   d o e s   i t   m ea n   f or   a   tr ee   to   be   a n   A V L   tr ee ? 
+2.   W h y   ca n   a   rot a t i on   n e v e r   b r eak   t he   s ea r ch - tr ee   or de r ? 
+3.   W hich   ca s e   i s   i t ,   a n d   w ha t   i s   t he   fi x ,   if   a   no de   ha s   ba l a n ce   fac tor   +2   a n d   i ts   l ef t   chi l d   ha s   ba l a n ce   fac tor   −1? 
+4.   W h y   d o e s   N ( h )   >   2   ·   N ( h   −   2)   gi v e   a   heigh t   o f   O ( lo g   n )? 
+5.   F i n d   c   a n d   n 0   s h ow i n g   t ha t   2 n   +   10   i s   O ( n ). 
+6.   A   f r ie n d   s a ys   " t he   worst   ca s e   o f   s ea r ch   i n   a   bi n a ry   s ea r ch   tr ee   i s   O ( n ),   so   O   m ea ns   worst   ca s e ."   W ha t   i s   wron g   w i t h   t he 
+s ec on d   ha l f ? 
+A nsw e r   ke y 
+C heck   qu e st i ons . 
+1.   I t   i s   a   bi n a ry   s ea r ch   tr ee   i n   w hich ,   a t   e v e ry   no de ,   t he   heigh ts   o f   t he   l ef t   a n d   r igh t   su b tr ee s   diffe r   b y   a t   most   1   ( e v e ry 
+ba l a n ce   fac tor   i s   −1,   0   or   1). 
+2.   A   rot a t i on   cha n ge s   only   t h r ee   l i n k s ,   a n d   i t   l ea v e s   t he   l ef t - to - r igh t   ( i nor de r )   or de r   o f   t he   no de s   a n d   t he   t h r ee   su b tr ee s 
+e x ac tly   a s   i t   w a s :   A ,   x ,   B ,   y ,   C   bef or e   a n d   af t e r .   A   tr ee   w h os e   i nor de r   i s   sort ed   i s   a   s ea r ch   tr ee . 
+3.   L ef t - r igh t :   t he   e xtr a   heigh t   i s   i ns ide .   R ot a t e   l ef t   a t   t he   l ef t   chi l d ,   so   t ha t   i t   bec om e s   a   l ef t - l ef t   ca s e ,   t he n   rot a t e   r igh t   a t
+t he   no de . 
+4.   E ach   two   l e v e ls   a t   l ea st   d ou b l e   t he   num be r   o f   no de s ,   so   n   ≥   2 h /2 .   T aki n g   lo g 2   gi v e s   h   ≤   2   lo g 2   n ,   w hich   i s   a t   most   a
+c onst a nt   t i m e s   lo g   n ,   so   h   i s   O ( lo g   n ). 
+5.   2 n   +   10   ≤   3 n   w he n e v e r   n   ≥   10,   so   c   =   3   a n d   n 0   =   10   wor k .   ( O t he r   ch o ice s   wor k   too ,   f or   e x a mpl e   c   =   12   a n d   n 0   =   1.) 
+6.   O   i s   a   st a t e m e nt   ab out   h ow   a   f un c t i on   g rows .   I t   i s   not   t ied   to   t he   worst   ca s e :   w e   ca n   st a t e   a n   O   b oun d   on   t he   be st , 
+worst   or   a v e r age   ca s e .   " T he   worst   ca s e   i s   O ( n )"   c om bi n e s   two   s e p a r a t e   ch o ice s ,   t he   ca s e   ( worst )   a n d   t he   b oun d 
+( upp e r ). 
+C Y K   ( A V L   or   not ) 
+( a )   no   ( root   ha s   ba l a n ce   fac tor   −2); 
+10/28/26, 9:01 PM   EE590a_Class_Wed_AVL_and_asymptotics_draft_students 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/107.html   8/9
+
+=== p9 ===
+( b )   y e s ; 
+( c )   y e s . 
+C Y K   ( heigh t ) 
+(1)   N (6)   =   33. 
+(2)   N o :   N (17)   =   6,764   a n d   N (18)   =   10,945,   so   10,000   no de s   a llow   a   heigh t   o f   a t   most   17.   A   heigh t   o f   20   woul d   n eed   a t
+l ea st   N (20)   =   28,656   no de s . 
+P r ac t ice   pro b l e ms . 
+(1)   Θ ( n ² ):   t he   b o d y   runs   n   ·   n   t i m e s . 
+(2)   Θ ( lo g   n ):   n   i s   ha lv ed   unt i l   i t   r eache s   1,   ab out   lo g 2   n   t i m e s . 
+(3)   Θ ( n   lo g   n ):   n   t i m e s   roun d   t he   out e r   loop ,   a n d   t he   i nn e r   loop   d ou b l e s   j   unt i l   i t   r eache s   n ,   ab out   lo g 2   n   t i m e s   each 
+( e x ac tly   n   ·   ⌈ lo g 2   n ⌉ ). 
+(4)   Θ ( n ² ):   t he   b o d y   runs   0   +   1   +   ...   +   ( n   −   1)   =   n ( n   −   1)   ÷   2   t i m e s . 
+(5)   T ru e :   2 n +1   =   2   ·   2 n ,   so   c   =   2   wor k s . 
+(6)   F a ls e :   2 2 n   =   4 n ,   a n d   t he   r a t i o   4 n   ÷   2 n   =   2 n   g rows   w i t h out   b oun d ,   so   no   c onst a nt   c   wor k s . 
+(7)   N o :   3 n ²   +   5 n   +   2   g rows   l ike   n ² ,   a n d   no   c onst a nt   mult i pl e   o f   n   st a ys   ab ov e   i t   f or   a ll   l a r ge   n . 
+10/28/26, 9:01 PM   EE590a_Class_Wed_AVL_and_asymptotics_draft_students 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/107.html   9/9
+
+##### FILE EE590a_Class_Wed_AVL_and_asymptotics_students.pdf (file 155378415, 4 pages) #####
+=== p1 ===
+EE 590a: AVL trees and asymptotic notation   page 1 
+EE 590a: AVL trees and asymptotic notation 
+Wednesday class notes. Follow along in class; the blanks are for you to fill in. 
+Today 
+1. The shape problem, and what we want 
+2. The AVL rule: the balance factor 
+3. Rotations: the repair move 
+4. The four cases 
+5. Why an AVL tree is short: height O(log n) 
+6. Asymptotic notation: O, Ω and Θ 
+1. The shape problem 
+The running example, inserted in the order 8, 3, 10, 1, 6, 14, 4, 7, 13. Is it balanced? 
+Search and insert cost O(h), where h is the height. Sorted input turns a plain binary search
+tree into a chain. 
+2. The AVL rule 
+Balance factor   of a node = height of its left subtree − height of its right subtree. (A single
+node has height 0; the empty tree has height −1.) 
+An   AVL tree   is a binary search tree in which every node has a balance factor of _____, _____
+or _____. 
+Which of these are AVL trees? (a) 1, with right child 2, with right child 3. (b) 2 with children 1
+and 3. (c) 5 with left child 3 (which has left child 1) and right child 8.
+
+=== p2 ===
+EE 590a: AVL trees and asymptotic notation   page 2 
+3. Rotations 
+A right rotation at y. A, B and C stand for whole subtrees, which come along untouched. 
+Why does a rotation never break the search-tree order? ______________________________ 
+4. The four cases 
+The left-left and left-right cases. The orange node has balance factor +2. 
+Case   Where the extra height is   The fix 
+Left-left   left child's left subtree 
+Right-right   right child's right subtree 
+Left-right   left child's right subtree 
+Right-left   right child's left subtree
+
+=== p3 ===
+EE 590a: AVL trees and asymptotic notation   page 3 
+Try it: insert 1, 2, 3 into an AVL tree. Then 3, 1, 2. Then 1, 3, 2. Draw each result. 
+5. Why the height is O(log n) 
+N(h) = the   fewest   nodes an AVL tree of height h can have. N(h) = 1 + N(h − 1) + N(h − 2). 
+Height h   0   1   2   3   4   5   6   7   8 
+Fewest nodes N(h)   1   2 
+So an AVL tree with n nodes has height at most __________, which is O(log n). 
+6. Asymptotic notation 
+f(n) is   O(g(n))   if there are constants c > 0 and n 0   such that f(n) ≤ c · g(n) for every n ≥ n 0 . 
+f(n) is   Ω(g(n))   if f(n) ≥ c · g(n) for every n ≥ n 0 . f(n) is   Θ(g(n))   if both hold. 
+Notation   Reads as   Means 
+f is O(g)   at most   past some point, f ≤ c · g 
+f is Ω(g)   at least   past some point, f ≥ c · g 
+f is Θ(g)   exactly, up to constants   c 1   · g ≤ f ≤ c 2   · g 
+Example.   Show that f(n) = 3n 2   + 5n + 2 is O(n 2 ) by finding a c and an n 0   that work. 
+f(n) = 3n² + 5n + 2 compared with 3n² and 4n². 
+Rules of thumb.   Drop constant factors and lower-order terms. The base of a log does not
+matter. Slowest-growing first: 1, log n, n, n log n, n 2 , n 3 , 2 n . 
+Careful:   O is not the same thing as "worst case."
+
+=== p4 ===
+EE 590a: AVL trees and asymptotic notation   page 4 
+Practice 
+Give each in Θ terms: how many times does the body run? 
+#   1   #   2   #   3
+for   i   in   range(n):   i   =   n   for   i   in   range(n):
+for   j   in   range(n):   while   i   >   1:   j   =   1
+count   +=   1   i   //=   2   while   j   <   n:
+count   +=   1   j   *=   2
+count   +=   1
+#   4
+for   i   in   range(n):
+for   j   in   range(i):
+count   +=   1 
+(5) True or false: 2 n+1   is O(2 n ). (6) True or false: 2 2n   is O(2 n ). (7) Is 3n 2   + 5n + 2 O(n)?

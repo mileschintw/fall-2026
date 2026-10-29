@@ -8,13 +8,14 @@
 - 晨報：10/29 四 07:08 🆕 DSA 新錄影 Class 9 + AVL 講義 2 份；其餘無新東西 → [2026-10-29.md](2026-10-29.md)
 - 週規劃：10/25 日 21:05 🆕 A3 今晚到期未交；GPU HW2 週二 5:59PM 到期未交；A4 11/1 → [2026-10-25-weekly.md](2026-10-25-weekly.md)
 - 截止提醒：10/29 四 08:09 ✅ 48h 內無到期項目（最近 DSA A4 11/1） → —
-- 上課筆記：10/28 三 13:44 🆕 GPU L4 10/27 筆記：occupancy、MMULT 邊界檢查、divergence、NCU；HW3 延到 11/6 → [notes.md](../gpu/lectures/2026-10-27/notes.md)
+- 上課筆記：10/29 四 10:13 🆕 DSA 10/28 Class 9 筆記：AVL（balance factor、rotation）+ Big-O/Θ/Ω 定義 → [notes.md](../dsa/lectures/2026-10-28/notes.md)
 - 作業說明：10/29 四 07:44 ✅ 沒有新東西 → —
 
 ## 紀錄
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 10/29 四 10:13 | 上課筆記 | 🆕 | DSA 10/28 Class 9 筆記：AVL（balance factor、rotation）+ Big-O/Θ/Ω 定義 | [notes.md](../dsa/lectures/2026-10-28/notes.md) |
 | 10/29 四 08:09 | 截止提醒 | ✅ | 48h 內無到期項目（最近 DSA A4 11/1） | — |
 | 10/29 四 07:44 | 作業說明 | ✅ | 沒有新東西 | — |
 | 10/29 四 07:08 | 晨報 | 🆕 | DSA 新錄影 Class 9 + AVL 講義 2 份；其餘無新東西 | [2026-10-29.md](2026-10-29.md) |
