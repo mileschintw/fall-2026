@@ -1,0 +1,215 @@
+<title>Roofline 兩條水管</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: 單欄實驗台（跟模組 1 同一套）— 控制列 → 兩條水管的時間 → log-log roofline → 實測表 */
+:root {
+  --bg: #f5f6f8; --panel: #ffffff; --fg: #1b2230; --muted: #5d6677; --line: #d9dde5;
+  --mem: #2f6fdf; --comp: #d9762b; --meas: #1f9d6b; --roof: #1b2230;
+  --accent: #2f6fdf;
+  --f-body: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #12161d; --panel: #1a2029; --fg: #e4e8ef; --muted: #98a1b2; --line: #2c3442;
+  --mem: #5b93f0; --comp: #f0954d; --meas: #3cc58e; --roof: #e4e8ef; --accent: #5b93f0; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #12161d; --panel: #1a2029; --fg: #e4e8ef; --muted: #98a1b2; --line: #2c3442;
+  --mem: #5b93f0; --comp: #f0954d; --meas: #3cc58e; --roof: #e4e8ef; --accent: #5b93f0; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 920px; margin: 0 auto; padding-block: 24px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 20px; }
+h1 { font-size: 1.6rem; margin: 0; text-wrap: balance; }
+h2 { font-size: 1.1rem; margin: 0 0 8px; text-wrap: balance; }
+p { margin: 0; max-width: 65ch; }
+.sub { color: var(--muted); }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; min-width: 0; display: grid; gap: 12px; }
+.controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+label, .lab { display: block; font-size: .85rem; color: var(--muted); letter-spacing: .02em; }
+.val { font-family: var(--f-mono); color: var(--fg); font-weight: 600; }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin-top: 4px; }
+.seg button { font: inherit; font-size: .85rem; padding: 6px 12px; border: 0; background: transparent; color: var(--fg); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.seg button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pipes { display: grid; gap: 10px; }
+.row { display: grid; grid-template-columns: 110px 1fr 90px; gap: 10px; align-items: center; }
+.row .name { font-size: .85rem; color: var(--muted); }
+.row .t { font-family: var(--f-mono); font-size: .85rem; text-align: right; font-variant-numeric: tabular-nums; }
+.track { height: 26px; background: var(--bg); border-radius: 5px; position: relative; overflow: hidden; }
+.fill { position: absolute; inset: 0 auto 0 0; border-radius: 5px; transition: width .25s; }
+.fill.mem { background: var(--mem); } .fill.comp { background: var(--comp); } .fill.meas { background: var(--meas); }
+.verdict { font-size: .95rem; }
+.chip { display: inline-block; font-size: .8rem; padding: 1px 8px; border-radius: 99px; color: #fff; font-weight: 500; }
+.chip.mem { background: var(--mem); } .chip.comp { background: var(--comp); }
+.formula { font-family: var(--f-mono); font-size: .85rem; background: var(--bg); border-radius: 6px; padding: 8px 10px; overflow-x: auto; white-space: pre; }
+.chart { overflow-x: auto; }
+svg text { font-family: var(--f-mono); font-size: 11px; fill: var(--muted); }
+table { border-collapse: collapse; width: 100%; font-size: .85rem; }
+.tbl { overflow-x: auto; }
+th, td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--muted); font-weight: 500; }
+td { font-family: var(--f-mono); }
+.note { font-size: .82rem; color: var(--muted); }
+@media (max-width: 520px) { .row { grid-template-columns: 76px 1fr 72px; } }
+@media (prefers-reduced-motion: reduce) { .fill { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header style="display:grid;gap:6px">
+    <h1>Roofline：kernel 時間由哪條水管決定</h1>
+    <p class="sub">模組 5 · 用 <code>01-roundtrip.cu</code> 的 vector add（n = 10⁷）調 WORK，看「搬資料」和「做運算」哪一個比較久。GPU 兩件事同時在做，所以 kernel 時間大約是比較長的那一個。</p>
+  </header>
+
+  <section class="panel">
+    <div class="controls">
+      <div>
+        <span class="lab">GPU</span>
+        <div class="seg" id="dev" role="group" aria-label="GPU"></div>
+      </div>
+      <div>
+        <label for="work">WORK（每個元素的運算圈數）：<span class="val" id="workV"></span></label>
+        <input type="range" id="work" min="0" max="3.5" step="0.01" value="2">
+        <div class="note">FLOP/元素 = 2·WORK − 1；bytes/元素固定 12（讀 a、b，寫 c）</div>
+      </div>
+    </div>
+
+    <div class="pipes" aria-live="polite">
+      <div class="row"><span class="name">搬資料 (bytes÷BW)</span><div class="track"><div class="fill mem" id="bMem"></div></div><span class="t" id="tMem"></span></div>
+      <div class="row"><span class="name">做運算 (FLOP÷peak)</span><div class="track"><div class="fill comp" id="bComp"></div></div><span class="t" id="tComp"></span></div>
+      <div class="row" id="measRow"><span class="name">你的 3050 實測</span><div class="track"><div class="fill meas" id="bMeas"></div></div><span class="t" id="tMeas"></span></div>
+    </div>
+    <p class="verdict" id="verdict"></p>
+    <div class="formula" id="formula"></div>
+  </section>
+
+  <section class="panel">
+    <h2>同一件事畫成 roofline（log-log）</h2>
+    <p class="sub">橫軸 AI = FLOP ÷ bytes，縱軸可達到的 GFLOP/s = min(peak, BW × AI)。圓點是現在的 WORK；灰點是課堂上提過的 kernel。拖上面的 WORK，看圓點沿著屋頂往右爬。</p>
+    <div class="chart"><svg id="roof" viewBox="0 0 640 380" width="100%" style="min-width:480px" role="img" aria-label="Roofline 圖"></svg></div>
+    <p class="note">斜線那段：每多 1 FLOP/B，效能跟著變大（memory-bound，斜率 1，L3 [01:47:03]）。平的那段：算力用滿了（compute-bound）。轉折點就是 ridge point = peak ÷ BW（L3 p29–31、[01:41:03]）。</p>
+  </section>
+
+  <section class="panel">
+    <h2>實測：RTX 3050，n = 10⁷，2026-10-28</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>WORK</th><th>FLOP/元素</th><th>AI (FLOP/B)</th><th>模型預測 kernel</th><th>實測 kernel</th></tr></thead>
+      <tbody id="measT"></tbody>
+    </table></div>
+    <p class="note">實測取三次裡最快的一次。WORK = 1000 另外兩次跑出 16–17 ms，可能是 GPU 剛從閒置狀態還沒升頻（未查證）；10/28 稍早也量過 2.4 ms。WORK = 1、100 三次都在 0.68–0.73 ms。</p>
+  </section>
+
+  <section class="panel">
+    <h2>數字從哪來</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>GPU</th><th>peak FP32</th><th>memory BW</th><th>ridge point</th><th>出處</th></tr></thead>
+      <tbody id="devT"></tbody>
+    </table></div>
+  </section>
+</div>
+
+<script>
+const N = 1e7, BYTES = 12;
+const DEVICES = [
+  { id: "3050", name: "RTX 3050", peak: 9.10e12, bw: 224e9,
+    src: "2560 cores × 1.777 GHz × 2；BW = 7001 MHz × 2 (DDR) × 128 bit ÷ 8（nvidia-smi）" },
+  { id: "t4", name: "Tesla T4", peak: 8.14e12, bw: 320e9, src: "L3 p41、[02:31:03]" },
+  { id: "h100", name: "H100 SXM", peak: 67e12, bw: 3.35e12, src: "NVIDIA H100 datasheet（FP32 非 tensor core）" },
+];
+const MEASURED = [ { w: 1, ms: 0.683 }, { w: 100, ms: 0.689 }, { w: 1000, ms: 3.04 } ];
+const REF = [
+  { name: "SAXPY", ai: 2/12 },
+  { name: "naive MMULT", ai: 0.25 },
+  { name: "tiled 16", ai: 4 },
+  { name: "tiled 32", ai: 8 },
+];
+let dev = DEVICES[0];
+
+const $ = id => document.getElementById(id);
+const fmtMs = s => { const ms = s * 1e3; return ms >= 10 ? ms.toFixed(1) + " ms" : ms >= 1 ? ms.toFixed(2) + " ms" : ms.toFixed(3) + " ms"; };
+const flopPer = w => 2 * w - 1;
+const predict = (w, d) => Math.max(N * BYTES / d.bw, N * flopPer(w) / d.peak);
+
+const seg = $("dev");
+DEVICES.forEach(d => {
+  const b = document.createElement("button");
+  b.textContent = d.name; b.id = "dev-" + d.id;
+  b.setAttribute("aria-pressed", d === dev);
+  b.onclick = () => { dev = d; [...seg.children].forEach(c => c.setAttribute("aria-pressed", c === b)); render(); };
+  seg.appendChild(b);
+});
+$("work").oninput = render;
+
+function curW() { return Math.max(1, Math.round(10 ** +$("work").value)); }
+
+function render() {
+  const w = curW();
+  $("workV").textContent = w;
+  const f = flopPer(w);
+  const tMem = N * BYTES / dev.bw, tComp = N * f / dev.peak;
+  const meas = dev.id === "3050" ? MEASURED.find(m => m.w === w) : null;
+  const scale = Math.max(tMem, tComp, meas ? meas.ms / 1e3 : 0);
+  $("bMem").style.width = (tMem / scale * 100) + "%";
+  $("bComp").style.width = (tComp / scale * 100) + "%";
+  $("tMem").textContent = fmtMs(tMem);
+  $("tComp").textContent = fmtMs(tComp);
+  $("measRow").hidden = !meas;
+  if (meas) { $("bMeas").style.width = (meas.ms / 1e3 / scale * 100) + "%"; $("tMeas").textContent = meas.ms.toFixed(2) + " ms"; }
+  const ai = f / BYTES, ridge = dev.peak / dev.bw;
+  const memBound = tMem >= tComp;
+  $("verdict").innerHTML = (memBound
+    ? `<span class="chip mem">memory-bound</span> 搬資料比較久。運算躲在搬資料的時間裡，再多算一點 kernel 也不會變慢。`
+    : `<span class="chip comp">compute-bound</span> 運算比較久。現在每多一圈運算，kernel 就跟著變慢。`)
+    + ` AI = ${ai.toFixed(ai < 1 ? 3 : 1)} FLOP/B，ridge point = ${ridge.toFixed(1)} FLOP/B。`
+    + (dev.id === "3050" && !meas ? ` <span class="note">（把 WORK 拉到 1、100 或 1000 可以看到實測）</span>` : "");
+  $("formula").textContent =
+    `搬資料 = 10⁷ × 12 B ÷ ${(dev.bw / 1e9).toFixed(0)} GB/s = ${fmtMs(tMem)}\n` +
+    `做運算 = 10⁷ × ${f} FLOP ÷ ${(dev.peak / 1e12).toFixed(2)} TFLOP/s = ${fmtMs(tComp)}\n` +
+    `kernel ≈ max(兩者) = ${fmtMs(Math.max(tMem, tComp))}`;
+  drawRoof(ai);
+}
+
+function drawRoof(ai) {
+  const svg = $("roof");
+  const W = 640, H = 380, L = 64, R = 20, T = 20, B = 48;
+  const x0 = -2, x1 = 3, y0 = 0, y1 = 5;   // log10: AI 0.01–1000，GFLOP/s 1–100000
+  const X = a => L + (Math.log10(a) - x0) / (x1 - x0) * (W - L - R);
+  const Y = g => T + (y1 - Math.log10(g)) / (y1 - y0) * (H - T - B);
+  const peakG = dev.peak / 1e9, bwG = dev.bw / 1e9, ridge = peakG / bwG;
+  const att = a => Math.min(peakG, bwG * a);
+  let s = "";
+  for (let e = x0; e <= x1; e++) s += `<line x1="${X(10**e)}" x2="${X(10**e)}" y1="${T}" y2="${H-B}" stroke="var(--line)"/><text x="${X(10**e)}" y="${H-B+16}" text-anchor="middle">${10**e >= 1 ? 10**e : 10**e}</text>`;
+  for (let e = y0; e <= y1; e++) s += `<line x1="${L}" x2="${W-R}" y1="${Y(10**e)}" y2="${Y(10**e)}" stroke="var(--line)"/><text x="${L-6}" y="${Y(10**e)+4}" text-anchor="end">${(10**e).toLocaleString()}</text>`;
+  s += `<text x="${(L+W-R)/2}" y="${H-8}" text-anchor="middle">AI (FLOP/byte)</text>`;
+  s += `<text transform="translate(14 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle">GFLOP/s</text>`;
+  const aStart = 10**x0;
+  s += `<polyline fill="none" stroke="var(--mem)" stroke-width="3" points="${X(aStart)},${Y(att(aStart))} ${X(ridge)},${Y(peakG)}"/>`;
+  s += `<polyline fill="none" stroke="var(--comp)" stroke-width="3" points="${X(ridge)},${Y(peakG)} ${X(10**x1)},${Y(peakG)}"/>`;
+  s += `<line x1="${X(ridge)}" x2="${X(ridge)}" y1="${Y(peakG)}" y2="${H-B}" stroke="var(--muted)" stroke-dasharray="4 4"/>`;
+  s += `<text x="${X(ridge)+6}" y="${H-B-8}" fill="var(--fg)">ridge ${ridge.toFixed(1)}</text>`;
+  s += `<text x="${X(10**x1)-4}" y="${Y(peakG)-8}" text-anchor="end" fill="var(--comp)">peak ${(peakG/1000).toFixed(2)} TFLOP/s</text>`;
+  s += `<text x="${X(0.03)}" y="${Y(att(0.03))-10}" fill="var(--mem)">${bwG.toFixed(0)} GB/s × AI</text>`;
+  REF.forEach((r, i) => {
+    const cx = X(r.ai), cy = Y(att(r.ai));
+    s += `<circle cx="${cx}" cy="${cy}" r="4" fill="var(--muted)"/><text x="${cx+6}" y="${cy+16 + (i%2)*12}" font-size="10">${r.name}</text>`;
+  });
+  if (dev.id === "3050") MEASURED.forEach(m => {
+    const a = flopPer(m.w) / BYTES, g = N * flopPer(m.w) / (m.ms / 1e3) / 1e9;
+    s += `<rect x="${X(a)-4}" y="${Y(g)-4}" width="8" height="8" fill="var(--meas)" transform="rotate(45 ${X(a)} ${Y(g)})"/>`;
+  });
+  const cx = X(ai), cy = Y(att(ai));
+  s += `<circle cx="${cx}" cy="${cy}" r="8" fill="var(--accent)" stroke="var(--panel)" stroke-width="2"/>`;
+  s += `<text x="${L+8}" y="${T+14}" fill="var(--fg)">● 現在的 WORK　◆ 3050 實測　● 課堂例子</text>`;
+  svg.innerHTML = s;
+}
+
+$("measT").innerHTML = MEASURED.map(m => {
+  const f = flopPer(m.w), p = predict(m.w, DEVICES[0]);
+  return `<tr><td>${m.w}</td><td>${f}</td><td>${(f/BYTES).toFixed(f/BYTES < 1 ? 3 : 1)}</td><td>${fmtMs(p)}</td><td>${m.ms.toFixed(2)} ms</td></tr>`;
+}).join("");
+$("devT").innerHTML = DEVICES.map(d =>
+  `<tr><td>${d.name}</td><td>${(d.peak/1e12).toFixed(2)} TFLOP/s</td><td>${d.bw >= 1e12 ? (d.bw/1e12).toFixed(2) + " TB/s" : (d.bw/1e9).toFixed(0) + " GB/s"}</td><td>${(d.peak/d.bw).toFixed(1)} FLOP/B</td><td style="font-family:var(--f-body);white-space:normal;text-align:left">${d.src}</td></tr>`).join("");
+render();
+</script>

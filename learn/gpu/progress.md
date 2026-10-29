@@ -3,9 +3,9 @@
 > 每次上課結束更新。時間用 Pacific。掌握程度：⬜ 未學、🟨 看過但不穩、🟩 能自己解釋並做對題目。
 
 ## 目前位置
-- 下一步：模組 5（效能理論）／步驟 1 熱身／待複習第 1 題（SI 字首換算：5 μs × 200 GB/s，要學生先寫 μ、G 各是 10 的幾次方；10/28 14:40、16:05 兩次問了但學生都收工沒答，下次開頭重問）；接著待複習第 3 題（Amdahl P 有限）當第二題熱身，再進步驟 2 預測，可以從「01-roundtrip WORK=100 時 kernel 時間怎麼變」切入（實測 WORK 1→100 都約 0.6–0.7 ms，WORK=1000 才變 2.4 ms）。M2–M4 快速掃描 10/28 完成（S1–S6，grid-stride loop 略過）。模組 5 之後照 curriculum.md 的建議順序：6 → 10 → 8 → 9 → 11，M7 延後；進 10 前補測 M4 的 L4 新內容（格式：模組 #／流程步驟／題號）
-- 上次上課：2026-10-28 16:00 – 17:00 PT（檢查 L4 模組 8–11，沒有教學）
-- 累計上課分鐘：120
+- 下一步：模組 5（效能理論）／步驟 3 互動頁／問題 3a 待答：「用互動頁找出 RTX 3050 上 WORK 大約多少時 kernel 開始變慢，用 AI 和 ridge point 說明」（答案：2W−1 = 12 × 40.6 → W ≈ 244）。之後步驟 4 講解（L3 p24–31、[01:16:00]–[01:53:02]，T4 推算 [02:31:03]）→ 步驟 5 練習（含診斷 Q8 SAXPY 重測）→ 步驟 6 動手。模組 5 之後照 curriculum.md 的建議順序：6 → 10 → 8 → 9 → 11，M7 延後；進 10 前補測 M4 的 L4 新內容
+- 上次上課：2026-10-28 17:50 – 18:15 PT
+- 累計上課分鐘：145
 
 ## 模組
 | # | 模組 | 狀態 | Artifact | 最後上課 |
@@ -15,7 +15,7 @@
 | 2 | CUDA 程式流程 | 🟩（診斷 Q2 對；10/28 掃描 S1 錯後重問對、S2、S3 對） | — | — |
 | 3 | Grid / block / thread | 🟩（Q3 對；Q4 經學生確認是筆誤，自行更正為 +col；10/28 掃描 S4 對） | — | — |
 | 4 | SIMT、warp | 🟩（診斷 Q5、Q6 對；10/28 掃描 S5 對、S6 部分對；L4 p34–41 新內容未測，見 curriculum 建議順序） | — | — |
-| 5 | 效能理論 | ⬜（Q7 對、Q8 不會） | — | — |
+| 5 | 效能理論 | 🟨（進行中：熱身 2 題對；預測 WORK=100 錯，見錯題表） | [Roofline 兩條水管](https://claude.ai/artifact/Fs1fQTcsxcM2HMXz2vUUnX)（`modules/05-roofline.html`） | 10/28 |
 | 6 | 記憶體階層、tiling | ⬜（Q9 不會） | — | — |
 | 7 | 拆解 HW2 | ⬜ | — | — |
 | 8 | Occupancy 與 launch configuration | ⬜ | — | — |
@@ -40,8 +40,8 @@
 | zero-overhead warp 切換、latency hiding | 🟨 | 掃描 S6（10/28）答「換 warp 不用像 CPU 那樣 offload 再 load」✔；但原因說成「GPU 核心數多」✘（真正原因是 register file 大到每個常駐 warp 的 context 一直留在 SM 上：Turing／GA10x 每 SM 64K 個 32-bit register = 256 KB）；還沒問「所有 warp 都在等時會怎樣」（L3 [00:40:01]，模組 8／9 再接） |
 | Control divergence | 🟩 | 診斷 Q6（10/27）兩條路徑分開跑、用 mask 遮住另一半 |
 | 2D block 攤平切 warp（tid = ty*bx + tx、warp = tid/32） | 🟩 | 掃描 S5（10/28）一開始不知道怎麼切（猜 16×2 ✔），講解 + 互動圖後答對右排 8、下排 0 個 divergence；理由說成「整個越界的 warp 不會排入執行」✘（其實照樣執行、一起跳過 if） |
-| Amdahl's law | 🟨 | 診斷 Q7（10/27）答 10×，沒寫推導（1/f），還沒確認會用在 f、P 有限的情況 |
-| FLOP / bytes / arithmetic intensity | ⬜ | 診斷 Q8（10/27）不會 |
+| Amdahl's law | 🟩 | M5 熱身 2（10/28）：f=0.1、P=4 一開始不知道 P 的影響；看「序列段不變、平行段 ÷P」的時間圖後算出 100 s → 32.5 s、約 3 倍 ✔。先前證據：診斷 Q7（10/27）答 10×（P→∞） |
+| FLOP / bytes / arithmetic intensity | ⬜ | 診斷 Q8（10/27）不會；M5 預測（10/28）以為 kernel 時間跟運算量成正比 |
 | memory-bound vs compute-bound（roofline） | ⬜ | 診斷 Q8（10/27）不會 |
 | shared vs global memory | ⬜ | 診斷 Q9（10/27）不會 |
 | `__syncthreads()` 在 tiling 的兩個用途（RAW、WAR） | ⬜ | 診斷 Q9（10/27）不會 |
@@ -65,13 +65,14 @@
 | 10/28 | 掃描 S1 host 寫 `d_x[0]` | 「還沒開始執行也還沒 sync，應該不會有差別」 | 把 `cudaMalloc` 拿到的指標當成一般 host 指標，以為問題只在時間順序（sync），沒有「兩塊記憶體、各自的位址」的模型 | 部分（反方向重問答對） |
 | 10/28 | 掃描 S5 下排 block 為什麼沒有 divergence | 「整區灰色代表一開始就不會排入執行」 | 以為越界的 warp 不存在／不被排程；實際上 block 的 256 個 thread 全部都會啟動，整個 warp 都走 `if` 為 false 那條路，一起跳過，所以沒有 divergence，但還是占 warp slot 和 register | 否 |
 | 10/28 | 掃描 S6 為什麼 GPU 換 warp 幾乎免費 | 「因為 GPU 核心數多，換 warp 不用 offload 再 load」 | 後半對；前半把原因歸給核心數。切換免費靠的是每個常駐 warp 都有自己的一份 register（SM 上的大 register file），跟 core 數量無關 | 部分 |
+| 10/28 | M5 預測：WORK 1→100（運算 ×200，資料量不變），kernel 時間？ | 「100 倍，運算量提升多少就要多少 cycle」 | 把 kernel 時間當成只由運算量決定；沒有「搬資料和運算同時進行、時間取較長者」的模型。實測 RTX 3050 WORK=1 0.68 ms、WORK=100 0.69 ms（搬 120 MB 要 0.54 ms，運算 2×10⁹ FLOP 只要 0.22 ms）；WORK=1000 才變 3.0 ms | 否（步驟 3 互動頁進行中） |
 | 10/27 | 診斷 Q1 為什麼不全丟 GPU | 「擅長平行但只做簡單算術，要規劃情境」 | 沒有 host↔device 傳輸成本的概念；沒提到 latency vs throughput、序列部分 | 否 |
 
 ## 待複習
 <!-- 下次熱身要問的題目 -->
-1. SI 字首換算：5 μs × 200 GB/s 等於多少 bytes？（再測 μ×G，10/27 練習 1 錯過）
-2. 用一句話定義 latency，舉兩個不是「資料傳輸」的例子。（10/28 練習 3 定義太窄）
-3. 程式 10% 序列、有 4 個核心，最多快幾倍？（Amdahl 用在 P 有限的情況，模組 5 開頭）
+1. 用一句話定義 latency，舉兩個不是「資料傳輸」的例子。（10/28 練習 3 定義太窄）
+2. 程式 20% 序列、8 個核心，最多快幾倍？（Amdahl P 有限，10/28 經引導後才算對，再測一次不給圖）
+3. 一個 kernel 運算量變 10 倍、資料量不變，時間一定變 10 倍嗎？什麼情況下幾乎不變？（M5 預測錯過）
 
 ## 上課紀錄
 <!-- 日期 時間 PT｜分鐘數｜做了什麼 -->
@@ -79,3 +80,4 @@
 - 2026-10-28 02:05 PT｜（含在上列 65 分鐘）｜模組 1 動手：WORK=10 猜 GPU 贏（憑互動頁印象）✔，實測 GPU 18.1 ms vs CPU 23.0 ms；kernel 0.73 ms 跟 WORK=1 幾乎一樣（memory-bound 的伏筆）。M1 完成 🟩
 - 2026-10-28 14:40 PT｜約 55｜M2–M4 快速掃描（學生要求）：S1 host 寫 `d_x[0]` 錯（以為是 sync 問題，實測 access violation），反方向重問對；S2 非同步 launch 對；S3 只編 sm_75 對（實測 no kernel image）；S4 2D grid 全對；S5 不知道 2D block 怎麼切 warp → 講解 + show_widget 互動圖後答對，理由小錯；S6 latency hiding 部分對。進模組 5 熱身
 - 2026-10-28 17:00 PT｜0（不計）｜檢查 L4 新增的模組 8–11：頁碼正確；補時間戳、HW3 對照（FMAD、四個 divergence metric）、8 列 L4 觀念、建議順序 5→6→10→8→9→11。M5 熱身第 1 題重問，學生改到下個 session 再開始
+- 2026-10-28 17:50 PT｜約 25｜M5 熱身 1 SI 換算 5 μs × 200 GB/s = 1 MB ✔（μ×G 已修正）；熱身 2 Amdahl P=4 先不會，時間圖引導後算出 32.5 s、約 3× ✔；預測 WORK=100 猜 100 倍 ✘，實測 RTX 3050 WORK 1／100／1000 = 0.68／0.69／3.0 ms（1000 另兩次 16–17 ms，疑似未升頻）；做 roofline 互動頁
