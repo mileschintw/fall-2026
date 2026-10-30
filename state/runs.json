@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-10-30T12:58:00-07:00",
+  "task": "晨報",
+  "status": "warn",
+  "summary": "Canvas 需重新登入；Piazza @61、Teams 新 2 貼文+1 回覆；A4 11/1 到期",
+  "output": "digests/2026-10-30.md"
+ },
+ {
   "at": "2026-10-30T12:57:01-07:00",
   "task": "截止提醒",
   "status": "ok",
