@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-10-30T13:13:40-07:00",
+  "task": "晨報",
+  "status": "new",
+  "summary": "Canvas 補抓：GPU syllabus 有改（5027→5728）；Piazza @61、Teams 新 2 貼文；A4 11/1 到期",
+  "output": "digests/2026-10-30.md"
+ },
+ {
   "at": "2026-10-30T12:58:00-07:00",
   "task": "晨報",
   "status": "warn",
