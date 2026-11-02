@@ -1,9 +1,9 @@
 {
- "fetched_at": "2026-10-25T21:04:45.168927-07:00",
+ "fetched_at": "2026-11-01T21:04:36.129775-08:00",
  "stats": {
   "GPU": {
    "raw": 9,
-   "kept": 4
+   "kept": 5
   },
   "DSA": {
    "raw": 126,
@@ -226,6 +226,15 @@
    "location": null,
    "kind": "event",
    "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5120541"
+  },
+  {
+   "course": "GPU",
+   "summary": "Homework #3 - Control Divergence & Tiled MMULT improvements & NCU profiling [EE P 524 A]",
+   "start": "2026-11-06T00:00:00-08:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917398&month=11&year=2026#assignment_11810628"
   },
   {
    "course": "DSA",
