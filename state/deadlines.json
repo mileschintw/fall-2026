@@ -176,7 +176,7 @@
   "due": "2026-10-25T23:59:59-07:00",
   "due_label": "10/25（日） 11:59 PM PDT",
   "points": 150,
-  "status": "已交",
+  "status": "已評分",
   "done": true,
   "note": "push 後到 Canvas 交 repo URL",
   "canvas_id": 11814801
@@ -189,9 +189,9 @@
   "due": "2026-11-01T23:59:59-08:00",
   "due_label": "11/1（日） 11:59 PM PST",
   "points": 100,
-  "status": "未交",
-  "done": false,
-  "note": "repo 還沒建立",
+  "status": "已交",
+  "done": true,
+  "note": "Canvas 顯示 submitted（11/3 晨報確認）；原 note：repo 還沒建立",
   "canvas_id": 11814804
  },
  {

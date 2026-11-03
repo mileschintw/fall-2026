@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-03T07:08:19-08:00",
+  "task": "晨報",
+  "status": "new",
+  "summary": "Panopto 新錄影 Class 10；Piazza 新 2（期中 11/9 in-class）；A4 已交、A3 已評分",
+  "output": "digests/2026-11-03.md"
+ },
+ {
   "at": "2026-11-02T18:08:54-08:00",
   "task": "截止提醒",
   "status": "ok",
