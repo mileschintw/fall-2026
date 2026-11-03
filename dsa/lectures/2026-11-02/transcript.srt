@@ -1,0 +1,4605 @@
+1
+00:06:44,000 --> 00:07:14,000
+[該逐字稿自動產生。為清晰起見，可能已進行編輯。]
+Why is it today? I don't know where everyone is
+
+2
+00:08:26,000 --> 00:08:33,000
+Okay, it's 4 30 already. Got a couple people in the classroom. Got a few people online.
+
+3
+00:08:33,000 --> 00:08:35,000
+And the bell just rang.
+
+4
+00:08:35,000 --> 00:08:43,000
+Can y'all hear me online okay?
+
+5
+00:08:43,000 --> 00:08:44,000
+Let's see
+
+6
+00:08:44,000 --> 00:08:47,000
+As people are
+
+7
+00:08:47,000 --> 00:09:01,000
+Coming in. Great. Thanks, Gus. Hi, everyone. I'm going to, I'll just kind of start talking to get us all warmed up and all on the same page.
+
+8
+00:09:01,000 --> 00:09:11,000
+So last week we talked about AVLs and asymptotic analysis. That's what we ended on Wednesday with
+
+9
+00:09:11,000 --> 00:09:29,000
+So today we are going to do a little bit more asymptotic analysis, hopefully tie all the pieces together, because I feel like I got the definition out, kind of walked through what it meant, and I did not tie it to the bigger picture and how it all comes together. So I want to make sure to spend a little time doing that
+
+10
+00:09:29,000 --> 00:09:36,000
+And then we've got just a little bit more AVL to get through as well. Again, we
+
+11
+00:09:36,000 --> 00:09:41,000
+talked about the concept, some of the ideas behind it. But
+
+12
+00:09:41,000 --> 00:09:45,000
+have a few pieces I think we can tie together.
+
+13
+00:09:45,000 --> 00:09:52,000
+So plan for today is start with some of that asymptotic analysis and then go back to AVL.
+
+14
+00:09:52,000 --> 00:09:54,000
+Just to give a little context
+
+15
+00:09:54,000 --> 00:09:58,000
+So next Monday
+
+16
+00:09:58,000 --> 00:10:03,000
+Midterm here in this room. In person on paper.
+
+17
+00:10:03,000 --> 00:10:07,000
+So everyone, be sure to plan ahead.
+
+18
+00:10:07,000 --> 00:10:11,000
+And be sure to get here on time.
+
+19
+00:10:11,000 --> 00:10:19,000
+In preparation for that on Wednesday, this Wednesday in class, we will spend some time
+
+20
+00:10:19,000 --> 00:10:37,000
+doing some review. We'll do a list of topics that should be considered fair game for the midterm, answer questions, go through some problems. And I'm going to see how today goes, and how I'm feeling about Wednesday
+
+21
+00:10:37,000 --> 00:10:44,000
+We might start introducing heaps on Wednesday for us to be able to pick it up after the midterm.
+
+22
+00:10:44,000 --> 00:10:47,000
+Or we might just do review. We'll see.
+
+23
+00:10:47,000 --> 00:10:51,000
+But yeah, for today.
+
+24
+00:10:51,000 --> 00:10:55,000
+Oh, oh, and then the other thing to keep in mind, next Wednesday, no class.
+
+25
+00:10:55,000 --> 00:10:59,000
+It's a holiday. University is closed, so
+
+26
+00:10:59,000 --> 00:11:01,000
+No classes at all on Wednesday
+
+27
+00:11:01,000 --> 00:11:03,000
+That's it.
+
+28
+00:11:03,000 --> 00:11:06,000
+Because we'll be cleaning up midterms.
+
+29
+00:11:06,000 --> 00:11:09,000
+Okay, asymptotic analysis.
+
+30
+00:11:09,000 --> 00:11:11,000
+Let's go back to that
+
+31
+00:11:11,000 --> 00:11:18,000
+What does anyone remember about what we talked about last week with this whole asymptotic analysis thing?
+
+32
+00:11:18,000 --> 00:11:24,000
+Because I know I threw out some definitions that are probably not
+
+33
+00:11:24,000 --> 00:11:36,000
+For at least some of you, not what you've heard before.
+
+34
+00:11:36,000 --> 00:11:38,000
+Throw anything at
+
+35
+00:11:38,000 --> 00:11:42,000
+In the chat
+
+36
+00:11:42,000 --> 00:11:44,000
+Shout something out out loud
+
+37
+00:11:44,000 --> 00:11:46,000
+Anything?
+
+38
+00:11:46,000 --> 00:11:48,000
+Big O
+
+39
+00:11:48,000 --> 00:11:49,000
+Okay
+
+40
+00:11:49,000 --> 00:11:52,000
+Talked about big O.
+
+41
+00:11:52,000 --> 00:11:58,000
+What else? What we remember about it
+
+42
+00:11:58,000 --> 00:12:01,000
+I gave an equation
+
+43
+00:12:01,000 --> 00:12:11,000
+That was a definition. Anyone remember anything of plaus, that equation?
+
+44
+00:12:11,000 --> 00:12:17,000
+What did the equations do? Very broad, broads
+
+45
+00:12:17,000 --> 00:12:22,000
+Broad strokes.
+
+46
+00:12:22,000 --> 00:12:32,000
+What does asymptotic analysis do in broad strokes? What were the mathematicians when they started with this concept? What were they doing?
+
+47
+00:12:32,000 --> 00:12:34,000
+What's the goal?
+
+48
+00:12:34,000 --> 00:12:48,000
+I'm going to remember
+
+49
+00:12:48,000 --> 00:13:00,000
+Yeah, so that's how we use it now, is that it's a performance analysis. So it's a way for us to characterize the performance of an algorithm based on the size of the input
+
+50
+00:13:00,000 --> 00:13:04,000
+Did I capture what you said? That's what we use it for now.
+
+51
+00:13:04,000 --> 00:13:11,000
+And that's what we're, that's how we will use it. But this asymptotic analysis
+
+52
+00:13:11,000 --> 00:13:15,000
+Where it came from and where that original equation came from.
+
+53
+00:13:15,000 --> 00:13:18,000
+Does anyone remember what the equation was?
+
+54
+00:13:18,000 --> 00:13:23,000
+I'm gonna write it down. We said something like f of n
+
+55
+00:13:23,000 --> 00:13:29,000
+equals big O of g of n
+
+56
+00:13:29,000 --> 00:13:32,000
+If
+
+57
+00:13:32,000 --> 00:13:35,000
+Does this look familiar?
+
+58
+00:13:35,000 --> 00:13:40,000
+And we said, if
+
+59
+00:13:40,000 --> 00:13:58,000
+If there exists a C and an N not such that f of n is less than or sorry, it's not
+
+60
+00:13:58,000 --> 00:13:59,000
+That bits
+
+61
+00:13:59,000 --> 00:14:02,000
+less than
+
+62
+00:14:02,000 --> 00:14:06,000
+C times G of
+
+63
+00:14:06,000 --> 00:14:11,000
+As n goes to
+
+64
+00:14:11,000 --> 00:14:25,000
+Let me say it properly and is greater than and not an n goes to infinity. So as it grows.
+
+65
+00:14:25,000 --> 00:14:33,000
+So what we're calling out here specifically is that f of n and g of n
+
+66
+00:14:33,000 --> 00:14:34,000
+Our functions
+
+67
+00:14:34,000 --> 00:14:36,000
+We have functions
+
+68
+00:14:36,000 --> 00:14:39,000
+In terms of N.
+
+69
+00:14:39,000 --> 00:14:44,000
+And when we're doing our performance analysis
+
+70
+00:14:44,000 --> 00:14:48,000
+What we're doing is we're saying that f of n is
+
+71
+00:14:48,000 --> 00:14:57,000
+A function that describes the number of operations
+
+72
+00:14:57,000 --> 00:15:05,000
+For an algorithm
+
+73
+00:15:05,000 --> 00:15:17,000
+So our f of n is we're going to come up with some characterization of how many operations an algorithm is going to do is going to execute.
+
+74
+00:15:17,000 --> 00:15:20,000
+or a chunk of code
+
+75
+00:15:20,000 --> 00:15:39,000
+And then for our analysis part, our performance analysis part, this is we're really going to compare it to a G of N. Now, for performance analysis, there are a handful of functions, G of N functions that we care about
+
+76
+00:15:39,000 --> 00:15:45,000
+I don't want to take a guess at what some of those are. We've talked about them. We've said something like
+
+77
+00:15:45,000 --> 00:15:49,000
+Oh, this algorithm is O of N.
+
+78
+00:15:49,000 --> 00:15:53,000
+So if an algorithm is O of N
+
+79
+00:15:53,000 --> 00:16:00,000
+What's the g of n in that case
+
+80
+00:16:00,000 --> 00:16:03,000
+You might say that G of n equals n
+
+81
+00:16:03,000 --> 00:16:10,000
+might equal one, our constant time might equal log n might equal
+
+82
+00:16:10,000 --> 00:16:12,000
+And log in
+
+83
+00:16:12,000 --> 00:16:15,000
+And squared
+
+84
+00:16:15,000 --> 00:16:18,000
+And so on. And these here
+
+85
+00:16:18,000 --> 00:16:22,000
+are the functions, the groups of functions, this is what we care about.
+
+86
+00:16:22,000 --> 00:16:26,000
+So when we say we have an algorithm
+
+87
+00:16:26,000 --> 00:16:29,000
+That runs Big O
+
+88
+00:16:29,000 --> 00:16:32,000
+of one of these algorithms
+
+89
+00:16:32,000 --> 00:16:40,000
+What we're saying is we're describing the relationship between this function and this function.
+
+90
+00:16:40,000 --> 00:16:44,000
+Does that make sense?
+
+91
+00:16:44,000 --> 00:16:46,000
+Can I get
+
+92
+00:16:46,000 --> 00:16:53,000
+Some some input
+
+93
+00:16:53,000 --> 00:16:55,000
+But I hope to do an example.
+
+94
+00:16:55,000 --> 00:17:00,000
+Let's do an example.
+
+95
+00:17:00,000 --> 00:17:05,000
+For my example, what I'm going to do, we're going to start with a little chunk of code
+
+96
+00:17:05,000 --> 00:17:08,000
+I'm going to show a chunk of code
+
+97
+00:17:08,000 --> 00:17:10,000
+From that chunk of code
+
+98
+00:17:10,000 --> 00:17:16,000
+We are going to identify our f of n to represent that chunk of code.
+
+99
+00:17:16,000 --> 00:17:34,000
+And then we're going to decide which G event makes sense.
+
+100
+00:17:34,000 --> 00:18:02,000
+Okay. If I have some code
+
+101
+00:18:02,000 --> 00:18:05,000
+Okay, this is my code.
+
+102
+00:18:05,000 --> 00:18:23,000
+What is this code doing?
+
+103
+00:18:23,000 --> 00:18:34,000
+Okay, so you would one way we could think about it is something like if we have something like a square matrix, it's going through each
+
+104
+00:18:34,000 --> 00:18:45,000
+row or each row and each column and counting the number of cells. That could be that that could accurately describe what we're doing here.
+
+105
+00:18:45,000 --> 00:18:48,000
+So now we're going to come up
+
+106
+00:18:48,000 --> 00:18:53,000
+This is the point where a lot of times you'll hear, what's the runtime of this?
+
+107
+00:18:53,000 --> 00:18:55,000
+I'm not asking that question quite yet
+
+108
+00:18:55,000 --> 00:19:00,000
+We're gonna go slow. We're gonna step through this a little bit slower, and then we'll see how we jump to the runtime.
+
+109
+00:19:00,000 --> 00:19:04,000
+I'm going to ask you, what is
+
+110
+00:19:04,000 --> 00:19:08,000
+What is f of n
+
+111
+00:19:08,000 --> 00:19:12,000
+Where
+
+112
+00:19:12,000 --> 00:19:16,000
+F of N describes
+
+113
+00:19:16,000 --> 00:19:21,000
+The number
+
+114
+00:19:21,000 --> 00:19:22,000
+Of
+
+115
+00:19:22,000 --> 00:19:27,000
+Number of times
+
+116
+00:19:27,000 --> 00:19:30,000
+We call
+
+117
+00:19:30,000 --> 00:19:32,000
+Count
+
+118
+00:19:32,000 --> 00:19:34,000
+Less equals one.
+
+119
+00:19:34,000 --> 00:19:36,000
+I'm being very specific.
+
+120
+00:19:36,000 --> 00:19:46,000
+Count plus equals one. But it's really just the number of times that this line of code runs this number of operations, the number of instructions
+
+121
+00:19:46,000 --> 00:19:53,000
+So we look at this and first we're going to say
+
+122
+00:19:53,000 --> 00:20:01,000
+We have this first line of code. It's a loop for I and range N. So
+
+123
+00:20:01,000 --> 00:20:11,000
+How many… how many times does this loop run?
+
+124
+00:20:11,000 --> 00:20:19,000
+We're going to start with i equals zero and then one and then two dot dot dot up to n
+
+125
+00:20:19,000 --> 00:20:26,000
+So I'm going to start with this runs n times.
+
+126
+00:20:26,000 --> 00:20:30,000
+And then inside here, we've got another four
+
+127
+00:20:30,000 --> 00:20:36,000
+So for J in range n, how many times is is this going to run
+
+128
+00:20:36,000 --> 00:20:38,000
+Yep, this is also end times.
+
+129
+00:20:38,000 --> 00:20:41,000
+Benth time
+
+130
+00:20:41,000 --> 00:20:43,000
+And then
+
+131
+00:20:43,000 --> 00:20:45,000
+Here, this
+
+132
+00:20:45,000 --> 00:20:48,000
+This operation
+
+133
+00:20:48,000 --> 00:20:52,000
+It's content. This is just one operation. This is one.
+
+134
+00:20:52,000 --> 00:20:58,000
+So in order to define our f of n, we're going to say
+
+135
+00:20:58,000 --> 00:21:04,000
+This one operation runs n times
+
+136
+00:21:04,000 --> 00:21:05,000
+In that loop
+
+137
+00:21:05,000 --> 00:21:07,000
+And then another end times
+
+138
+00:21:07,000 --> 00:21:10,000
+So we come up with
+
+139
+00:21:10,000 --> 00:21:19,000
+f of n equals n times n times one equals n squared
+
+140
+00:21:19,000 --> 00:21:25,000
+Let me rearrange the window here so we can see it on the board.
+
+141
+00:21:25,000 --> 00:21:26,000
+Okay
+
+142
+00:21:26,000 --> 00:21:31,000
+So we have f of n
+
+143
+00:21:31,000 --> 00:21:33,000
+Well, Zen squared
+
+144
+00:21:33,000 --> 00:21:36,000
+We agree with this. Does this make sense?
+
+145
+00:21:36,000 --> 00:21:39,000
+So if f of n is the function
+
+146
+00:21:39,000 --> 00:21:46,000
+That describes the number of times we call this line of code.
+
+147
+00:21:46,000 --> 00:21:48,000
+Do we agree?
+
+148
+00:21:48,000 --> 00:22:05,000
+Okay, cool. So now it's kind of meaningless for us to say, oh, I have an algorithm and the operations are N squared
+
+149
+00:22:05,000 --> 00:22:14,000
+This one is kind of straightforward, but sometimes you might end up with it's not just N squared. Well, we'll see. We'll see another example.
+
+150
+00:22:14,000 --> 00:22:17,000
+But what I want to do now
+
+151
+00:22:17,000 --> 00:22:18,000
+Is
+
+152
+00:22:18,000 --> 00:22:22,000
+We're going to use this characterization.
+
+153
+00:22:22,000 --> 00:22:24,000
+So we know what f of n is
+
+154
+00:22:24,000 --> 00:22:28,000
+Now we can compare it to
+
+155
+00:22:28,000 --> 00:22:29,000
+These
+
+156
+00:22:29,000 --> 00:22:36,000
+these different functions here to see which statements make sense, which ones are true.
+
+157
+00:22:36,000 --> 00:22:39,000
+So
+
+158
+00:22:39,000 --> 00:22:42,000
+If
+
+159
+00:22:42,000 --> 00:22:47,000
+G of n equals one
+
+160
+00:22:47,000 --> 00:23:03,000
+That's our constant. Then is this a true statement f of n equals big O of G of n. I'm going to plug in my
+
+161
+00:23:03,000 --> 00:23:05,000
+My functions
+
+162
+00:23:05,000 --> 00:23:14,000
+So this would be n squared equals I want to know. It's a question mark because we don't know if this is true yet or not.
+
+163
+00:23:14,000 --> 00:23:18,000
+Big O of one
+
+164
+00:23:18,000 --> 00:23:21,000
+If this is true
+
+165
+00:23:21,000 --> 00:23:24,000
+Then we know
+
+166
+00:23:24,000 --> 00:23:30,000
+This is true, then we know that
+
+167
+00:23:30,000 --> 00:23:35,000
+I'm going to repeat the definition here
+
+168
+00:23:35,000 --> 00:23:45,000
+Just so I have it all in one place
+
+169
+00:23:45,000 --> 00:23:52,000
+Equal to C times G of n
+
+170
+00:23:52,000 --> 00:23:56,000
+For all n greater than not
+
+171
+00:23:56,000 --> 00:24:04,000
+And we'll go back here. So n squared equals question mark
+
+172
+00:24:04,000 --> 00:24:08,000
+C times one
+
+173
+00:24:08,000 --> 00:24:18,000
+For all n greater than n numbers greater than or equal to n not. Is there any C
+
+174
+00:24:18,000 --> 00:24:24,000
+I can define that will make this a true statement.
+
+175
+00:24:24,000 --> 00:24:32,000
+Is there any way that
+
+176
+00:24:32,000 --> 00:24:38,000
+I read the wrong thing here.
+
+177
+00:24:38,000 --> 00:24:44,000
+We want to know is this less than or equal to? Is there any
+
+178
+00:24:44,000 --> 00:24:46,000
+value of C.
+
+179
+00:24:46,000 --> 00:24:48,000
+We can put in here
+
+180
+00:24:48,000 --> 00:24:58,000
+or some N0 as n goes to infinity to make this a true statement.
+
+181
+00:24:58,000 --> 00:24:59,000
+No.
+
+182
+00:24:59,000 --> 00:25:28,000
+Because even if we make C really big, let's say 1 million, our n as n goes towards infinity is going to be really big. N squared is always going to grow bigger than this. So, no.
+
+183
+00:25:28,000 --> 00:25:30,000
+Does that make sense?
+
+184
+00:25:30,000 --> 00:25:32,000
+Yeah, I'll do it online.
+
+185
+00:25:32,000 --> 00:25:39,000
+Okay, so we compared it to Constantine. This is how we use our definition to prove that it's not.
+
+186
+00:25:39,000 --> 00:25:43,000
+Our intuition would probably have told us that
+
+187
+00:25:43,000 --> 00:25:49,000
+This is the details behind it. This is how we can prove it.
+
+188
+00:25:49,000 --> 00:25:54,000
+So now let's see.
+
+189
+00:25:54,000 --> 00:26:02,000
+Anyone have a favorite algorithm or favorite function here that we should try next?
+
+190
+00:26:02,000 --> 00:26:13,000
+I'm gonna throw one in here just because it's going up
+
+191
+00:26:13,000 --> 00:26:16,000
+Which one should we try next
+
+192
+00:26:16,000 --> 00:26:18,000
+That's true and cute.
+
+193
+00:26:18,000 --> 00:26:24,000
+And Cube. So I want to ask the question is
+
+194
+00:26:24,000 --> 00:26:27,000
+This one in green.
+
+195
+00:26:27,000 --> 00:26:31,000
+G of n equals n cubed
+
+196
+00:26:31,000 --> 00:26:36,000
+I want to answer the question is F of N
+
+197
+00:26:36,000 --> 00:26:41,000
+Does it equal Big O of g of n
+
+198
+00:26:41,000 --> 00:26:45,000
+Where f of n is n squared
+
+199
+00:26:45,000 --> 00:26:52,000
+And I want to know, is it equal Big O of n cubed.
+
+200
+00:26:52,000 --> 00:26:57,000
+I'm going to use my definition that I have right here
+
+201
+00:26:57,000 --> 00:27:02,000
+Just going to write it down that I have n squared on the left-hand side
+
+202
+00:27:02,000 --> 00:27:07,000
+less than or equal to C times N cubed
+
+203
+00:27:07,000 --> 00:27:11,000
+For all n greater than
+
+204
+00:27:11,000 --> 00:27:15,000
+Recultism and not and not
+
+205
+00:27:15,000 --> 00:27:20,000
+Can we find a value of C to make this a true statement?
+
+206
+00:27:20,000 --> 00:27:25,000
+Yeah, with the value of sweet, that makes this a true statement.
+
+207
+00:27:25,000 --> 00:27:28,000
+Has to be constant
+
+208
+00:27:28,000 --> 00:27:37,000
+One. Okay, cool. We'll call it one. What's another value of C that will make this a true statement?
+
+209
+00:27:37,000 --> 00:27:42,000
+Anyone online?
+
+210
+00:27:42,000 --> 00:27:45,000
+Has to be a positive image.
+
+211
+00:27:45,000 --> 00:27:48,000
+It is AIC has to be positive
+
+212
+00:27:48,000 --> 00:27:50,000
+There are a number out there.
+
+213
+00:27:50,000 --> 00:27:56,000
+Energy.
+
+214
+00:27:56,000 --> 00:27:57,000
+Two.
+
+215
+00:27:57,000 --> 00:28:05,000
+I like it too. Okay, so if C were 1, if C were two
+
+216
+00:28:05,000 --> 00:28:11,000
+Is this a true statement for positive N as it goes to infinity?
+
+217
+00:28:11,000 --> 00:28:23,000
+Yes, because n squared is always going to be less than or equal to n cubed or 2n cubed.
+
+218
+00:28:23,000 --> 00:28:27,000
+And it doesn't matter what the C is.
+
+219
+00:28:27,000 --> 00:28:32,000
+We just have to know that there exists a C that would make this a true statement.
+
+220
+00:28:32,000 --> 00:28:36,000
+And it has to be a constant, it has to be an integer
+
+221
+00:28:36,000 --> 00:28:42,000
+has to be positive, can't get tricky and, like, try to make it negative or something.
+
+222
+00:28:42,000 --> 00:28:46,000
+We're just going positive towards infinity.
+
+223
+00:28:46,000 --> 00:28:50,000
+Okay, so it is a true statement to say
+
+224
+00:28:50,000 --> 00:29:00,000
+That yes
+
+225
+00:29:00,000 --> 00:29:06,000
+N squared is big O of n cubed
+
+226
+00:29:06,000 --> 00:29:11,000
+That is a true statement. Now, I'm going to guess we have some people
+
+227
+00:29:11,000 --> 00:29:14,000
+Maybe in the room, maybe online
+
+228
+00:29:14,000 --> 00:29:17,000
+You are going to say
+
+229
+00:29:17,000 --> 00:29:21,000
+Okay, but if this is true
+
+230
+00:29:21,000 --> 00:29:29,000
+I know that from my experience, our performance analysis of this runtime of this code, this algorithm
+
+231
+00:29:29,000 --> 00:29:32,000
+We say n squared. We don't say n cubed.
+
+232
+00:29:32,000 --> 00:29:36,000
+So anyone thinking that?
+
+233
+00:29:36,000 --> 00:29:38,000
+Thank you.
+
+234
+00:29:38,000 --> 00:29:42,000
+Okay
+
+235
+00:29:42,000 --> 00:29:51,000
+Let's, let's do one more. Let's do our n squared real quick or yeah, our n squared.
+
+236
+00:29:51,000 --> 00:30:06,000
+Okay, second here. Fg of n equals n squared, we're going to do this one more time. f of n less than or equal to c times g of n as n
+
+237
+00:30:06,000 --> 00:30:10,000
+For n greater than or equal to and not as it goes to infinity
+
+238
+00:30:10,000 --> 00:30:19,000
+n squared less than or equal to C times N squared for n greater than equal to n naught
+
+239
+00:30:19,000 --> 00:30:24,000
+And I'm, for the most part, ignoring and not here.
+
+240
+00:30:24,000 --> 00:30:29,000
+Can we think of a value of C that this is a true statement?
+
+241
+00:30:29,000 --> 00:30:33,000
+This one's easy because if we put one here
+
+242
+00:30:33,000 --> 00:30:36,000
+It's absolutely equal.
+
+243
+00:30:36,000 --> 00:30:38,000
+So that seems valid.
+
+244
+00:30:38,000 --> 00:30:47,000
+This is true
+
+245
+00:30:47,000 --> 00:30:49,000
+So
+
+246
+00:30:49,000 --> 00:30:53,000
+A couple of things I want to pull out here
+
+247
+00:30:53,000 --> 00:30:59,000
+Our asymptotic analysis, what it's doing is it's comparing the growth of functions.
+
+248
+00:30:59,000 --> 00:31:09,000
+You have two functions. And we're trying to say, hey, does one grow faster or slower than the other one?
+
+249
+00:31:09,000 --> 00:31:17,000
+The way this plays in When it comes to code and how we use this to characterize performance
+
+250
+00:31:17,000 --> 00:31:19,000
+is
+
+251
+00:31:19,000 --> 00:31:21,000
+We
+
+252
+00:31:21,000 --> 00:31:23,000
+Generally
+
+253
+00:31:23,000 --> 00:31:30,000
+Very few GFNs that we care about. We care about these.
+
+254
+00:31:30,000 --> 00:31:31,000
+And so
+
+255
+00:31:31,000 --> 00:31:35,000
+From a programming perspective
+
+256
+00:31:35,000 --> 00:31:39,000
+Our f of n is that number of operations for an algorithm
+
+257
+00:31:39,000 --> 00:31:44,000
+And when we say that it's big O of one of these
+
+258
+00:31:44,000 --> 00:31:46,000
+We're saying that
+
+259
+00:31:46,000 --> 00:31:50,000
+This function that describes how many operations we run
+
+260
+00:31:50,000 --> 00:31:57,000
+is under, it's less than whatever we say is inside here.
+
+261
+00:31:57,000 --> 00:32:00,000
+It's another function
+
+262
+00:32:00,000 --> 00:32:03,000
+Yeah, Beth.
+
+263
+00:32:03,000 --> 00:32:07,000
+A question, a thought.
+
+264
+00:32:07,000 --> 00:32:14,000
+So yeah, so so this is one of those things where I always feel like
+
+265
+00:32:14,000 --> 00:32:16,000
+It's important
+
+266
+00:32:16,000 --> 00:32:22,000
+to explain it, some people really like to see the definition of something and where it comes from
+
+267
+00:32:22,000 --> 00:32:24,000
+But I will say upfront
+
+268
+00:32:24,000 --> 00:32:27,000
+Our definition and where it comes from
+
+269
+00:32:27,000 --> 00:32:32,000
+feel so much more complex than what we actually do.
+
+270
+00:32:32,000 --> 00:32:41,000
+So I'm going to say for those of you who I'm going to do a couple more examples.
+
+271
+00:32:41,000 --> 00:32:51,000
+And what we will keep in mind to take away is y'all should know what this relationship is, what this definition is.
+
+272
+00:32:51,000 --> 00:32:54,000
+But then there's what you actually do in practice every day.
+
+273
+00:32:54,000 --> 00:32:57,000
+And that's more important.
+
+274
+00:32:57,000 --> 00:33:03,000
+But you will start to see kind of if you've seen this a few times, if you've wrestled with it early on
+
+275
+00:33:03,000 --> 00:33:07,000
+It eventually becomes a little bit more clear why we have this.
+
+276
+00:33:07,000 --> 00:33:09,000
+But it's also not
+
+277
+00:33:09,000 --> 00:33:16,000
+This is not what you need for the everyday.
+
+278
+00:33:16,000 --> 00:33:19,000
+Any questions
+
+279
+00:33:19,000 --> 00:33:37,000
+Before I do another example
+
+280
+00:33:37,000 --> 00:33:39,000
+Media
+
+281
+00:33:39,000 --> 00:33:44,000
+I'm going to do another
+
+282
+00:33:44,000 --> 00:33:47,000
+Let's see, which one do I like
+
+283
+00:33:47,000 --> 00:34:17,000
+Another chunk of code
+
+284
+00:34:20,000 --> 00:34:22,000
+Okay.
+
+285
+00:34:22,000 --> 00:34:30,000
+If f of n is the number of operations that this little code snippet
+
+286
+00:34:30,000 --> 00:34:32,000
+Has runs.
+
+287
+00:34:32,000 --> 00:34:52,000
+What is our f of n?
+
+288
+00:34:52,000 --> 00:35:02,000
+Okay, let's say N squared
+
+289
+00:35:02,000 --> 00:35:08,000
+We get N squared.
+
+290
+00:35:08,000 --> 00:35:18,000
+Every moment for us
+
+291
+00:35:18,000 --> 00:35:20,000
+And then this is one.
+
+292
+00:35:20,000 --> 00:35:24,000
+Okay.
+
+293
+00:35:24,000 --> 00:35:32,000
+Everyone on the same page
+
+294
+00:35:32,000 --> 00:35:35,000
+This is
+
+295
+00:35:35,000 --> 00:35:41,000
+This is the one that I usually get a couple people debating
+
+296
+00:35:41,000 --> 00:35:47,000
+We have a need debates here.
+
+297
+00:35:47,000 --> 00:35:53,000
+The second point
+
+298
+00:35:53,000 --> 00:36:00,000
+So
+
+299
+00:36:00,000 --> 00:36:06,000
+Okay, so what we can say is something like
+
+300
+00:36:06,000 --> 00:36:13,000
+This is going to be one, two, three, dot dot, dot N. And
+
+301
+00:36:13,000 --> 00:36:15,000
+Then this is going to be
+
+302
+00:36:15,000 --> 00:36:31,000
+The first time through, it's going to be one, the second time through, it's going to be two, one, two, the third time through 1, 2, 3, 1, 2, 3, 4, 1, dot dot dot dot.
+
+303
+00:36:31,000 --> 00:36:35,000
+Dot dot dot N
+
+304
+00:36:35,000 --> 00:36:39,000
+So
+
+305
+00:36:39,000 --> 00:36:42,000
+So we can look at this and we might say, hey
+
+306
+00:36:42,000 --> 00:36:45,000
+This is definitely an
+
+307
+00:36:45,000 --> 00:36:49,000
+But this one
+
+308
+00:36:49,000 --> 00:36:51,000
+This is N in the worst case
+
+309
+00:36:51,000 --> 00:36:56,000
+Or the worst loop is N
+
+310
+00:36:56,000 --> 00:37:02,000
+The other way we might say it is the upper bound is N.
+
+311
+00:37:02,000 --> 00:37:14,000
+Upper bound
+
+312
+00:37:14,000 --> 00:37:18,000
+So sometimes it runs
+
+313
+00:37:18,000 --> 00:37:26,000
+Sometimes this loop runs less than n, but in the worst case, it runs n times.
+
+314
+00:37:26,000 --> 00:37:28,000
+So
+
+315
+00:37:28,000 --> 00:37:32,000
+We can say here N N
+
+316
+00:37:32,000 --> 00:37:36,000
+Sorry. N times N times
+
+317
+00:37:36,000 --> 00:37:45,000
+is going to give us our n squared
+
+318
+00:37:45,000 --> 00:37:48,000
+Okay
+
+319
+00:37:48,000 --> 00:37:52,000
+And I want to say here
+
+320
+00:37:52,000 --> 00:38:01,000
+The upper bound, this upper bound to say this one's N. Time to do it this way. This upper bound is N
+
+321
+00:38:01,000 --> 00:38:03,000
+This is why
+
+322
+00:38:03,000 --> 00:38:07,000
+We have in our definition of Big O
+
+323
+00:38:07,000 --> 00:38:11,000
+That less than or equal to
+
+324
+00:38:11,000 --> 00:38:24,000
+That upper bound is the same reason why down here, when we compared N squared to n cubed, it was still true.
+
+325
+00:38:24,000 --> 00:38:26,000
+So
+
+326
+00:38:26,000 --> 00:38:37,000
+On the left-hand side, we have the function we're trying to compare to. Inside the big O, are functions that can all… they can all be bigger. There can be a whole bunch of functions that are bigger
+
+327
+00:38:37,000 --> 00:38:41,000
+Then the one that we're comparing to.
+
+328
+00:38:41,000 --> 00:38:47,000
+This can be all kinds of different functions because Big O is an upper bound.
+
+329
+00:38:47,000 --> 00:38:56,000
+Big O says my runtime or the function I'm looking at is never bigger than this amount.
+
+330
+00:38:56,000 --> 00:39:07,000
+But you could also always have bigger. It's like once you say that five is less than 10. Guess what? 5 is also less than 20. 5 is less than 100
+
+331
+00:39:07,000 --> 00:39:09,000
+5 is less than 500
+
+332
+00:39:09,000 --> 00:39:15,000
+So if we know that a function is Big O of n
+
+333
+00:39:15,000 --> 00:39:20,000
+It's also big O of n squared and n cubed and n to the 15th.
+
+334
+00:39:20,000 --> 00:39:26,000
+Because all of those are bigger. And they grow faster.
+
+335
+00:39:26,000 --> 00:39:34,000
+Okay, so we have our f of n equals n squared. I'm going to say G of n equals n squared
+
+336
+00:39:34,000 --> 00:39:41,000
+Or do we want to compare it to N squared? Do we want to compare it to something else?
+
+337
+00:39:41,000 --> 00:39:44,000
+There's something else that would be a more fun
+
+338
+00:39:44,000 --> 00:39:51,000
+comparison
+
+339
+00:39:51,000 --> 00:39:55,000
+I'm going to do N squared
+
+340
+00:39:55,000 --> 00:39:58,000
+Because it's right there.
+
+341
+00:39:58,000 --> 00:40:05,000
+So it would be n squared is less than or equal to C times N squared
+
+342
+00:40:05,000 --> 00:40:11,000
+For all and greater than or equal to N naught
+
+343
+00:40:11,000 --> 00:40:13,000
+And this can be any C.
+
+344
+00:40:13,000 --> 00:40:23,000
+And we'll make it true
+
+345
+00:40:23,000 --> 00:40:25,000
+Oh, yeah.
+
+346
+00:40:25,000 --> 00:40:26,000
+Okay.
+
+347
+00:40:26,000 --> 00:40:29,000
+So dark outside.
+
+348
+00:40:29,000 --> 00:40:31,000
+How are y'all doing online?
+
+349
+00:40:31,000 --> 00:40:33,000
+I get to see some
+
+350
+00:40:33,000 --> 00:40:40,000
+Thumbs up or thumbs down or something. Okay, I've got a thumbs up
+
+351
+00:40:40,000 --> 00:40:41,000
+Okay, cool.
+
+352
+00:40:41,000 --> 00:40:59,000
+I'm going to take it that must y'all are following along. Thank you. Appreciate that. Okay, so so our the big idea. Let's see, let's come up with
+
+353
+00:40:59,000 --> 00:41:01,000
+One more
+
+354
+00:41:01,000 --> 00:41:08,000
+Trying to decide if I… Okay, I'm going to throw something really crazy out there. Really crazy.
+
+355
+00:41:08,000 --> 00:41:16,000
+And I'm not going to write the code. We're not going to count the operations from code because it's going to be too crazy
+
+356
+00:41:16,000 --> 00:41:19,000
+But if I say I have f of n
+
+357
+00:41:19,000 --> 00:41:20,000
+Equals
+
+358
+00:41:20,000 --> 00:41:25,000
+3n squared plus 5n
+
+359
+00:41:25,000 --> 00:41:30,000
+plus 2.
+
+360
+00:41:30,000 --> 00:41:31,000
+Is it
+
+361
+00:41:31,000 --> 00:41:33,000
+Is
+
+362
+00:41:33,000 --> 00:41:35,000
+F of N
+
+363
+00:41:35,000 --> 00:41:42,000
+Big O of N
+
+364
+00:41:42,000 --> 00:41:46,000
+This is my f event
+
+365
+00:41:46,000 --> 00:41:52,000
+And you can imagine I have code that looks like this.
+
+366
+00:41:52,000 --> 00:42:07,000
+I'm gonna write some fake code right now off the top of my head that might represent this particular function for 1, 2, n
+
+367
+00:42:07,000 --> 00:42:16,000
+for J, and one to n, and I'm being super sloppy here. I count
+
+368
+00:42:16,000 --> 00:42:24,000
+plus equals 1, because why not? And then for and then I'm going to
+
+369
+00:42:24,000 --> 00:42:31,000
+I'm going to my
+
+370
+00:42:31,000 --> 00:42:32,000
+Okay.
+
+371
+00:42:32,000 --> 00:42:38,000
+4K and 1 to N
+
+372
+00:42:38,000 --> 00:42:42,000
+No, no, that gives me cute. That doesn't even when I do this
+
+373
+00:42:42,000 --> 00:42:46,000
+For K
+
+374
+00:42:46,000 --> 00:42:47,000
+One
+
+375
+00:42:47,000 --> 00:42:48,000
+To three
+
+376
+00:42:48,000 --> 00:42:52,000
+We're going to just do this loop three times.
+
+377
+00:42:52,000 --> 00:43:00,000
+So we do this loop three times that gives us our 3n squared. And then we say for
+
+378
+00:43:00,000 --> 00:43:04,000
+I and range
+
+379
+00:43:04,000 --> 00:43:07,000
+And
+
+380
+00:43:07,000 --> 00:43:11,000
+Brent, I
+
+381
+00:43:11,000 --> 00:43:19,000
+Let's do that five times just because. And then this is print.
+
+382
+00:43:19,000 --> 00:43:23,000
+Hi N.
+
+383
+00:43:23,000 --> 00:43:30,000
+This is
+
+384
+00:43:30,000 --> 00:43:39,000
+Squish all this down, and the very first thing I do is rent high
+
+385
+00:43:39,000 --> 00:43:41,000
+Okay.
+
+386
+00:43:41,000 --> 00:43:51,000
+Cool. If we just do this five times, then we now have a little chunk of code that runs in 3n squared plus 5n plus 2.
+
+387
+00:43:51,000 --> 00:43:58,000
+It's messy, this is not doing anything interesting. Let's pretend we can make it do something interesting, but you know, whatever.
+
+388
+00:43:58,000 --> 00:44:06,000
+We can easily have a function like this that describes the runtime of a piece of code.
+
+389
+00:44:06,000 --> 00:44:11,000
+Is this function Big O of N?
+
+390
+00:44:11,000 --> 00:44:12,000
+You said no
+
+391
+00:44:12,000 --> 00:44:18,000
+No, no. Okay. Because we say
+
+392
+00:44:18,000 --> 00:44:32,000
+Is 3n squared plus 5n plus 2 less than or equal to N C times N for all n greater than or equal to n not.
+
+393
+00:44:32,000 --> 00:44:36,000
+So we asked ourselves, this looks messy
+
+394
+00:44:36,000 --> 00:44:38,000
+We ask ourselves.
+
+395
+00:44:38,000 --> 00:44:42,000
+Is there a way we can make this statement true?
+
+396
+00:44:42,000 --> 00:44:50,000
+There's no way they can come up with a value for C. That would make this a true statement.
+
+397
+00:44:50,000 --> 00:44:56,000
+So we say, no.
+
+398
+00:44:56,000 --> 00:45:02,000
+But if we were to say f of n equals
+
+399
+00:45:02,000 --> 00:45:05,000
+I want to look at ON square.
+
+400
+00:45:05,000 --> 00:45:09,000
+Try ln squared
+
+401
+00:45:09,000 --> 00:45:19,000
+Let me say 3n squared plus 5n plus 2. Less than or equal to C times N squared
+
+402
+00:45:19,000 --> 00:45:24,000
+For all n greater than or equal to n not
+
+403
+00:45:24,000 --> 00:45:28,000
+Can we make this a true statement?
+
+404
+00:45:28,000 --> 00:45:31,000
+Is there a C, that makes this a true statement.
+
+405
+00:45:31,000 --> 00:45:38,000
+What's a C that makes this a true statement? Saying yes very definitively.
+
+406
+00:45:38,000 --> 00:45:41,000
+Just give me a number.
+
+407
+00:45:41,000 --> 00:45:55,000
+Okay, cool. We're gonna say C equals 100. So if I don't want to do all my messy plotting and pulling out Desmos or whatever, I'm just going to use a C.
+
+408
+00:45:55,000 --> 00:46:05,000
+And if I say 3 N squared plus 5n plus 2 less than or equal to 100 n squared
+
+409
+00:46:05,000 --> 00:46:12,000
+After some point N. We believe this to be true.
+
+410
+00:46:12,000 --> 00:46:14,000
+Yeah, so
+
+411
+00:46:14,000 --> 00:46:25,000
+We could, you know. Plot it out or something if we really care. All we have to know is that there exists AC that makes this a true statement for big enough N
+
+412
+00:46:25,000 --> 00:46:29,000
+So we look at this. Yes, true statement.
+
+413
+00:46:29,000 --> 00:46:30,000
+Okay.
+
+414
+00:46:30,000 --> 00:46:38,000
+Y'all want the easy trip, the takeaway, the thing that you need in your back pocket that is most important.
+
+415
+00:46:38,000 --> 00:46:41,000
+Yes, yes, we do.
+
+416
+00:46:41,000 --> 00:46:43,000
+Okay
+
+417
+00:46:43,000 --> 00:46:47,000
+You come across a chunk of code like this
+
+418
+00:46:47,000 --> 00:46:54,000
+Let's hope you don't. But let's say you do someday. and you come up with
+
+419
+00:46:54,000 --> 00:47:00,000
+The function that describes the number of operations run by that code that looks something like this.
+
+420
+00:47:00,000 --> 00:47:07,000
+You do not have to go through all of this to derive your Big O. Now you're nodding.
+
+421
+00:47:07,000 --> 00:47:09,000
+What's the shortcut
+
+422
+00:47:09,000 --> 00:47:13,000
+I don't know how to say like it's the greatest
+
+423
+00:47:13,000 --> 00:47:29,000
+The largest term. We ignore all this little stuff, because as you go to infinity, the little the little stuff doesn't matter. You drop the lower order terms. I'll put this down here.
+
+424
+00:47:29,000 --> 00:47:31,000
+Drop
+
+425
+00:47:31,000 --> 00:47:35,000
+Lower hold order
+
+426
+00:47:35,000 --> 00:47:37,000
+Terms.
+
+427
+00:47:37,000 --> 00:47:39,000
+And then
+
+428
+00:47:39,000 --> 00:47:42,000
+What else
+
+429
+00:47:42,000 --> 00:47:44,000
+We ignore the constant.
+
+430
+00:47:44,000 --> 00:47:54,000
+Ignore the constant because if we are comparing f of n to G of n that n squared, we know that
+
+431
+00:47:54,000 --> 00:47:58,000
+That constant just represents a C that is valid
+
+432
+00:47:58,000 --> 00:48:04,000
+So now I have my shortcut that f of n
+
+433
+00:48:04,000 --> 00:48:07,000
+Equals big O of N squared
+
+434
+00:48:07,000 --> 00:48:10,000
+Because I dropped this
+
+435
+00:48:10,000 --> 00:48:21,000
+These terms, because I don't care. I drop the coefficient because it doesn't matter. I pick a big enough C. I wait till n goes to infinity, and now I know that
+
+436
+00:48:21,000 --> 00:48:25,000
+F of N is big O of n squared.
+
+437
+00:48:25,000 --> 00:48:27,000
+Okay.
+
+438
+00:48:27,000 --> 00:48:30,000
+This is what most of y'all care about. This takeaway.
+
+439
+00:48:30,000 --> 00:48:36,000
+Most of most of what you care about. So what it looks like is
+
+440
+00:48:36,000 --> 00:48:38,000
+Just putting it all together.
+
+441
+00:48:38,000 --> 00:48:44,000
+You write some code. Or you get some code handed to you.
+
+442
+00:48:44,000 --> 00:48:46,000
+You read through it.
+
+443
+00:48:46,000 --> 00:48:48,000
+You figure out
+
+444
+00:48:48,000 --> 00:48:55,000
+some sort of function that describes how many operations are run
+
+445
+00:48:55,000 --> 00:48:57,000
+And
+
+446
+00:48:57,000 --> 00:49:01,000
+Usually doesn't end up looking like this.
+
+447
+00:49:01,000 --> 00:49:07,000
+But say you come up with something like this. Once you've got this and you feel good about it
+
+448
+00:49:07,000 --> 00:49:11,000
+You drop the lower order terms and the coefficient
+
+449
+00:49:11,000 --> 00:49:21,000
+And as you get more practice, as you get better at it, you start being able to read the chunk of code and figure it out as you go.
+
+450
+00:49:21,000 --> 00:49:25,000
+because you would do something like oh
+
+451
+00:49:25,000 --> 00:49:30,000
+This one's constant time. I probably don't care about it.
+
+452
+00:49:30,000 --> 00:49:33,000
+But in here, this is N,
+
+453
+00:49:33,000 --> 00:49:36,000
+This is an N squared loop
+
+454
+00:49:36,000 --> 00:49:40,000
+And down here, this is N.
+
+455
+00:49:40,000 --> 00:49:50,000
+This is going to contribute to a lower order term, so I don't care about it because it's already less than, it's smaller than this N squared loop
+
+456
+00:49:50,000 --> 00:49:59,000
+So what I'm going to look at, if I'm looking at this code as you start to get really good at it, you will say, Oh, we don't care about this
+
+457
+00:49:59,000 --> 00:50:08,000
+This is N squared, because we already saw N squared, we don't care about N, we don't care about anything else. The N squared dominates
+
+458
+00:50:08,000 --> 00:50:11,000
+is what we'd say
+
+459
+00:50:11,000 --> 00:50:20,000
+So my goal here was to give you the definition of Big O, an asymptotic analysis, and let you know that there is something real behind it.
+
+460
+00:50:20,000 --> 00:50:28,000
+And then tie it back to what it means, how we apply it to the code
+
+461
+00:50:28,000 --> 00:50:34,000
+And how we can, you know, if we can do the math on it, if we ever really need to.
+
+462
+00:50:34,000 --> 00:50:37,000
+There's a definition behind it. There's
+
+463
+00:50:37,000 --> 00:50:40,000
+a real something behind it.
+
+464
+00:50:40,000 --> 00:50:42,000
+Just mathematicians.
+
+465
+00:50:42,000 --> 00:50:45,000
+But they gave us a useful tool.
+
+466
+00:50:45,000 --> 00:51:02,000
+And it's that useful tool that allows us then to go through here and drop those lower order terms. And come up with an algorithm and say, hey, this is it runs big O of something
+
+467
+00:51:02,000 --> 00:51:06,000
+Any questions, comments
+
+468
+00:51:06,000 --> 00:51:10,000
+Alan
+
+469
+00:51:10,000 --> 00:51:14,000
+Got one more thing to clear up and clean up.
+
+470
+00:51:14,000 --> 00:51:21,000
+Because, yeah, it's like something
+
+471
+00:51:21,000 --> 00:51:26,000
+Absolutely.
+
+472
+00:51:26,000 --> 00:51:37,000
+Are people actually manually calculating that? Not quite to this extent? Like they're not going through and defining this usually.
+
+473
+00:51:37,000 --> 00:51:47,000
+Because we shortcut it down to, oh, we don't care about that. It's constant. Oh, this is constant. Oh, this is N, and this is n squared.
+
+474
+00:51:47,000 --> 00:51:52,000
+Okay, I'm gonna… I'm gonna worry about this chunk of my code.
+
+475
+00:51:52,000 --> 00:51:57,000
+I don't care about this, because it's N. This is the part that
+
+476
+00:51:57,000 --> 00:52:01,000
+Yeah. Yep. That's what you're going to be identifying.
+
+477
+00:52:01,000 --> 00:52:04,000
+Great question.
+
+478
+00:52:04,000 --> 00:52:13,000
+The other thing we care about too is not just like here, this is all just kind of
+
+479
+00:52:13,000 --> 00:52:15,000
+counting and loops and stuff.
+
+480
+00:52:15,000 --> 00:52:20,000
+But this is where, when we were talking about a Python list
+
+481
+00:52:20,000 --> 00:52:21,000
+And popping off
+
+482
+00:52:21,000 --> 00:52:26,000
+the end of a list versus the beginning of a list, and what the runtime was.
+
+483
+00:52:26,000 --> 00:52:37,000
+So that's, that has to do with your language. And the details about the implementation of that language. That those are details that hide in the
+
+484
+00:52:37,000 --> 00:52:39,000
+The lines of code
+
+485
+00:52:39,000 --> 00:52:43,000
+Because if you have a
+
+486
+00:52:43,000 --> 00:52:45,000
+My list
+
+487
+00:52:45,000 --> 00:52:48,000
+That pop
+
+488
+00:52:48,000 --> 00:52:51,000
+Versus a my list
+
+489
+00:52:51,000 --> 00:52:53,000
+That pop
+
+490
+00:52:53,000 --> 00:52:57,000
+of 0.
+
+491
+00:52:57,000 --> 00:53:00,000
+How do these lines of code? Oh, sorry.
+
+492
+00:53:00,000 --> 00:53:04,000
+Out of these lines of code contribute to this function?
+
+493
+00:53:04,000 --> 00:53:08,000
+This line of code. It's our runtime
+
+494
+00:53:08,000 --> 00:53:10,000
+O of 1
+
+495
+00:53:10,000 --> 00:53:11,000
+I'm just
+
+496
+00:53:11,000 --> 00:53:14,000
+Prepare and review for next week
+
+497
+00:53:14,000 --> 00:53:18,000
+What's this runtime
+
+498
+00:53:18,000 --> 00:53:20,000
+Not O of 1.
+
+499
+00:53:20,000 --> 00:53:21,000
+Oh, then
+
+500
+00:53:21,000 --> 00:53:29,000
+Yeah, so this is that that, yeah, trickiness of in a Python list. If you're popping off the front of the list
+
+501
+00:53:29,000 --> 00:53:33,000
+It's an array, right? So it shoves everything down.
+
+502
+00:53:33,000 --> 00:53:39,000
+So if you pop off the front of the list, you have to move everything down.
+
+503
+00:53:39,000 --> 00:53:42,000
+But you pop off the end
+
+504
+00:53:42,000 --> 00:53:47,000
+Just pop it off the end and let it go.
+
+505
+00:53:47,000 --> 00:53:49,000
+So that's the tricky part.
+
+506
+00:53:49,000 --> 00:53:51,000
+Professionally.
+
+507
+00:53:51,000 --> 00:54:00,000
+Is knowing, knowing the details of the implementation. These look very similar, but their actual runtimes are different.
+
+508
+00:54:00,000 --> 00:54:08,000
+Okay. Yeah.
+
+509
+00:54:08,000 --> 00:54:14,000
+The question is, this Python list, is it storing first in, first out or last in first out?
+
+510
+00:54:14,000 --> 00:54:26,000
+Sorry? Yes. Yeah. So Prop 0 is removing the element at index 0.
+
+511
+00:54:26,000 --> 00:54:35,000
+And when it removes index zero, it moves everything down.
+
+512
+00:54:35,000 --> 00:54:45,000
+it's taking off the last element. So once it takes that last element off of there, there's nothing to move down.
+
+513
+00:54:45,000 --> 00:54:48,000
+Okay, I said, perfect timing.
+
+514
+00:54:48,000 --> 00:54:54,000
+I said I had one more thing to clarify one more thing to bring up
+
+515
+00:54:54,000 --> 00:54:57,000
+That some of y'all might have noticed
+
+516
+00:54:57,000 --> 00:55:00,000
+And we're going through here
+
+517
+00:55:00,000 --> 00:55:04,000
+We said, going back to this first one
+
+518
+00:55:04,000 --> 00:55:13,000
+We looked at this little chunk of code. We came up with our f of n that described how many operations we're running.
+
+519
+00:55:13,000 --> 00:55:18,000
+We compared it to constant time, Rg of n equals one
+
+520
+00:55:18,000 --> 00:55:26,000
+We compared it to G of n equals n cubed and g of n equals n squared. And it was true for both
+
+521
+00:55:26,000 --> 00:55:29,000
+N cubed and n squared.
+
+522
+00:55:29,000 --> 00:55:32,000
+And some of y'all
+
+523
+00:55:32,000 --> 00:55:33,000
+I hope
+
+524
+00:55:33,000 --> 00:55:39,000
+We've done some of this performance analysis stuff before, which I know many of you have
+
+525
+00:55:39,000 --> 00:55:44,000
+You look at this, and you say, oh, it's N squared. It's big O of N squared.
+
+526
+00:55:44,000 --> 00:55:49,000
+You're right. It is. We proved it.
+
+527
+00:55:49,000 --> 00:55:52,000
+But
+
+528
+00:55:52,000 --> 00:55:53,000
+It's also Big O of n cubed
+
+529
+00:55:53,000 --> 00:56:04,000
+And I mentioned how Big O is an upper bound. So once you have something that is less than or equal to something else.
+
+530
+00:56:04,000 --> 00:56:11,000
+It's also less than or equal to everything that's bigger than this thing, right? 5 is less than or equal to 10
+
+531
+00:56:11,000 --> 00:56:20,000
+It's less than or equal to 20, and so on. Same with that function. So big O is not what we call a tight bound.
+
+532
+00:56:20,000 --> 00:56:33,000
+Big O is an upper bound
+
+533
+00:56:33,000 --> 00:56:36,000
+Some people
+
+534
+00:56:36,000 --> 00:56:38,000
+and industry
+
+535
+00:56:38,000 --> 00:56:43,000
+They will treat Big O as a tight bound
+
+536
+00:56:43,000 --> 00:56:48,000
+And if you say, oh
+
+537
+00:56:48,000 --> 00:56:50,000
+This function here
+
+538
+00:56:50,000 --> 00:56:53,000
+Is Big O of N cubed
+
+539
+00:56:53,000 --> 00:57:00,000
+You would absolutely be saying a true statement, but there are people who would have issue with that.
+
+540
+00:57:00,000 --> 00:57:06,000
+So canonically
+
+541
+00:57:06,000 --> 00:57:15,000
+Big O is treated like a tight bound. But formally, it is an upper bound.
+
+542
+00:57:15,000 --> 00:57:20,000
+And we have definitions in the in the
+
+543
+00:57:20,000 --> 00:57:23,000
+In the notes
+
+544
+00:57:23,000 --> 00:57:25,000
+For big
+
+545
+00:57:25,000 --> 00:57:28,000
+Theta and big
+
+546
+00:57:28,000 --> 00:57:30,000
+Omega
+
+547
+00:57:30,000 --> 00:57:35,000
+Big Theta is our tight bound
+
+548
+00:57:35,000 --> 00:57:41,000
+And Big Omega is a lower bound
+
+549
+00:57:41,000 --> 00:57:51,000
+And I did not take any time to go over tight bound or lower bound in class. Because you don't hear about that for the most part anymore.
+
+550
+00:57:51,000 --> 00:57:54,000
+But when people talk about Big O,
+
+551
+00:57:54,000 --> 00:58:01,000
+They tend to talk about it as a type bound. So my wish for all of you
+
+552
+00:58:01,000 --> 00:58:06,000
+is that you know the distinction. You know that big O is an upper bound.
+
+553
+00:58:06,000 --> 00:58:09,000
+But that some people will treat it as a takedown.
+
+554
+00:58:09,000 --> 00:58:20,000
+So you're in an interview type situation that is not the time to like say pull out being clever that yes, it's really n cubed
+
+555
+00:58:20,000 --> 00:58:23,000
+But you can say, you know.
+
+556
+00:58:23,000 --> 00:58:27,000
+You see, there's a way to say it that you are
+
+557
+00:58:27,000 --> 00:58:31,000
+Showing that you know the difference between the type bound and the upper bound
+
+558
+00:58:31,000 --> 00:58:37,000
+But that in practice, a lot of people are very sloppy about it.
+
+559
+00:58:37,000 --> 00:58:38,000
+So
+
+560
+00:58:38,000 --> 00:58:44,000
+That's my gift to you for what it's worth. Is that you know the difference.
+
+561
+00:58:44,000 --> 00:58:50,000
+Okay, any questions before we take our break?
+
+562
+00:58:50,000 --> 00:59:20,000
+Okay, cool. Let's take our break. Come back in about 10 minutes when the bell rings. And I will answer any last questions about asymptotic analysis, but if there aren't any questions, we'll move on to AVL.
+
+563
+00:59:43,000 --> 00:59:47,000
+There's the bell.
+
+564
+00:59:47,000 --> 00:59:49,000
+Okay.
+
+565
+00:59:49,000 --> 00:59:58,000
+Any questions about asymptotic analysis before we go back to AVL trees?
+
+566
+00:59:58,000 --> 01:00:02,000
+Y'all can ask more questions later too, but
+
+567
+01:00:02,000 --> 01:00:04,000
+Right now. Okay.
+
+568
+01:00:04,000 --> 01:00:07,000
+Let's go back to Aval trees.
+
+569
+01:00:07,000 --> 01:00:10,000
+Let's see.
+
+570
+01:00:10,000 --> 01:00:12,000
+Let's start with
+
+571
+01:00:12,000 --> 01:00:25,000
+Anyone remember why we started talking about AVL trees?
+
+572
+01:00:25,000 --> 01:00:28,000
+How do we start talking about AVL trees?
+
+573
+01:00:28,000 --> 01:00:32,000
+Anyone online?
+
+574
+01:00:32,000 --> 01:00:39,000
+I am sharing everything, right?
+
+575
+01:00:39,000 --> 01:00:45,000
+Need some long extension cord so people can plug in.
+
+576
+01:00:45,000 --> 01:00:50,000
+What did we not like about binary search trees?
+
+577
+01:00:50,000 --> 01:01:06,000
+Well, I said the magic word. What did we talk about before AVLs? Talk about binary search trees. What did we not like about binary search trees?
+
+578
+01:01:06,000 --> 01:01:08,000
+Left a lot small
+
+579
+01:01:08,000 --> 01:01:15,000
+Smaller than red leaf
+
+580
+01:01:15,000 --> 01:01:17,000
+I'll note
+
+581
+01:01:17,000 --> 01:01:24,000
+Yeah, so you're talking about red tree, black tree.
+
+582
+01:01:24,000 --> 01:01:29,000
+But our binary search tree
+
+583
+01:01:29,000 --> 01:01:33,000
+I think you're saying
+
+584
+01:01:33,000 --> 01:01:39,000
+Correct me if I got this wrong. Left node is smaller, everything in the left subtree
+
+585
+01:01:39,000 --> 01:01:44,000
+is smaller than the current node, everything in the right subtree is larger.
+
+586
+01:01:44,000 --> 01:01:45,000
+Yeah, yeah.
+
+587
+01:01:45,000 --> 01:01:57,000
+Yeah, okay, great. Thank you.
+
+588
+01:01:57,000 --> 01:02:00,000
+Okay.
+
+589
+01:02:00,000 --> 01:02:24,000
+So when we have this, we have a tree fitting this, following this rule, fitting this characteristic. What does that give us? Why do we like it?
+
+590
+01:02:24,000 --> 01:02:31,000
+It makes it very easy to search. Because we know that at every step in the tree
+
+591
+01:02:31,000 --> 01:02:40,000
+We know how to make a decision. We either go to the left or the right, depending if the thing we're looking for is larger than or smaller than.
+
+592
+01:02:40,000 --> 01:02:48,000
+And every time we make that decision, we cut off half of the elements in the tree to search through.
+
+593
+01:02:48,000 --> 01:02:54,000
+So we search faster, we can find something faster. Or
+
+594
+01:02:54,000 --> 01:02:58,000
+get to the end and realize we don't have it faster.
+
+595
+01:02:58,000 --> 01:03:06,000
+When are binary search trees bad?
+
+596
+01:03:06,000 --> 01:03:09,000
+Worst case. Yeah.
+
+597
+01:03:09,000 --> 01:03:12,000
+We insert it would be unbalanced
+
+598
+01:03:12,000 --> 01:03:21,000
+Like this tree, the lift is a lot of node, but the right is only one node
+
+599
+01:03:21,000 --> 01:03:40,000
+Yeah, so if it's really unbalanced, so if all of the nodes, let's say the very first element I put into my binary search tree is one, and I think you said it the other way, but I'm starting with one. It means everything, if I'm only putting positive integers in here
+
+600
+01:03:40,000 --> 01:03:43,000
+And I have to start putting numbers. I start inserting
+
+601
+01:03:43,000 --> 01:03:55,000
+I get two here, and then I insert three. Oh, look, it goes here. And then I insert 4. It goes here. And I insert five, it goes here.
+
+602
+01:03:55,000 --> 01:03:59,000
+So I get a very unbalanced tree
+
+603
+01:03:59,000 --> 01:04:11,000
+And in order to search for if I have three in this list, I start here and I have to go this way. I haven't reduced my search space at all.
+
+604
+01:04:11,000 --> 01:04:16,000
+And this is just like a list. I have to go through each
+
+605
+01:04:16,000 --> 01:04:19,000
+Each item in order to find
+
+606
+01:04:19,000 --> 01:04:22,000
+that I have it or I don't have it
+
+607
+01:04:22,000 --> 01:04:34,000
+So this is why we don't like our binary search tree. It's very nice. It's very simple. It's very elegant and gives us And it's when it's well behaved, gives us lots of great
+
+608
+01:04:34,000 --> 01:04:36,000
+Search space
+
+609
+01:04:36,000 --> 01:04:42,000
+But it can become very imbalanced. When it becomes imbalanced
+
+610
+01:04:42,000 --> 01:04:47,000
+We don't get that good runtime.
+
+611
+01:04:47,000 --> 01:04:51,000
+Our runtime
+
+612
+01:04:51,000 --> 01:04:52,000
+Okay.
+
+613
+01:04:52,000 --> 01:05:10,000
+We're going to apply our asymptotic analysis again, but we're not going to do all the math behind it, but we're going to say our runtime for lookup
+
+614
+01:05:10,000 --> 01:05:22,000
+If our algorithm for looking up something in a binary search tree is start at the root and then go to the left or the right
+
+615
+01:05:22,000 --> 01:05:27,000
+Let's say we go to the left and then we go to the left again.
+
+616
+01:05:27,000 --> 01:05:35,000
+What's our runtime?
+
+617
+01:05:35,000 --> 01:05:38,000
+Okay, we've got Ovin
+
+618
+01:05:38,000 --> 01:05:47,000
+My oven
+
+619
+01:05:47,000 --> 01:05:56,000
+So if n is the number… I should ask you. Let me ask the question. What is N?
+
+620
+01:05:56,000 --> 01:05:58,000
+Yes.
+
+621
+01:05:58,000 --> 01:06:05,000
+height of the tree.
+
+622
+01:06:05,000 --> 01:06:08,000
+I know how to spell height.
+
+623
+01:06:08,000 --> 01:06:20,000
+Is that right? I know. See, it's one of the exceptions.
+
+624
+01:06:20,000 --> 01:06:22,000
+It's the height of the tree
+
+625
+01:06:22,000 --> 01:06:27,000
+So here we're asking ourselves, we have to think about what N is.
+
+626
+01:06:27,000 --> 01:06:38,000
+When we're defining an O of something, we always have to think about what N is. And in this case, okay, we're saying
+
+627
+01:06:38,000 --> 01:06:40,000
+O of N.
+
+628
+01:06:40,000 --> 01:06:50,000
+I'm going to say this is a case where you have to be very clear and call out n is the height. Because N by default, when we're looking at a tree, is usually the number of nodes.
+
+629
+01:06:50,000 --> 01:06:57,000
+So we might say something like O of H
+
+630
+01:06:57,000 --> 01:07:06,000
+But I'm going to be clear that O is acceptable if you call out that n is the height of the tree.
+
+631
+01:07:06,000 --> 01:07:08,000
+Just those are just
+
+632
+01:07:08,000 --> 01:07:19,000
+conventions and what people will assume. So here at the height of our tree is 2. Here, the height of the tree is 5, which happens to be N.
+
+633
+01:07:19,000 --> 01:07:39,000
+A well-behaved binary search tree. How high is it?
+
+634
+01:07:39,000 --> 01:07:46,000
+Anyone online? Anyone want to drop it into the chat?
+
+635
+01:07:46,000 --> 01:07:53,000
+Well-behaved, are you?
+
+636
+01:07:53,000 --> 01:07:59,000
+I love how you say log base 2 all the time.
+
+637
+01:07:59,000 --> 01:08:02,000
+Same as
+
+638
+01:08:02,000 --> 01:08:10,000
+When we write log like this, LG, that's assuming a base 2 log
+
+639
+01:08:10,000 --> 01:08:17,000
+Log N assumes base 10 unless we specify our base 2.
+
+640
+01:08:17,000 --> 01:08:24,000
+A well-behaved binary search tree. That means it's
+
+641
+01:08:24,000 --> 01:08:28,000
+As short as it can be.
+
+642
+01:08:28,000 --> 01:08:32,000
+It's not unbalanced.
+
+643
+01:08:32,000 --> 01:08:35,000
+Here, it's not as short as it can be.
+
+644
+01:08:35,000 --> 01:08:39,000
+So a height of a well-behaved
+
+645
+01:08:39,000 --> 01:08:43,000
+Binary search tree is going to be log N
+
+646
+01:08:43,000 --> 01:08:51,000
+But we're seeing here that because of the way that we build a binary search tree, it could be very ill-behaved.
+
+647
+01:08:51,000 --> 01:08:56,000
+And it can be very bad. So this is a case where
+
+648
+01:08:56,000 --> 01:09:04,000
+ideal run time, ideal height could be very good, but it worst case could be really bad.
+
+649
+01:09:04,000 --> 01:09:12,000
+So we started talking about our AVL trees.
+
+650
+01:09:12,000 --> 01:09:24,000
+What does an AVL tree give us?
+
+651
+01:09:24,000 --> 01:09:29,000
+An AVL tree helps us make sure that as we're building
+
+652
+01:09:29,000 --> 01:09:35,000
+This tree, this search tree, we keep it well behaved.
+
+653
+01:09:35,000 --> 01:09:41,000
+We try to keep it from not getting too long. The height too high
+
+654
+01:09:41,000 --> 01:09:44,000
+And
+
+655
+01:09:44,000 --> 01:09:53,000
+We do that without having to rebuild the tree every time we insert something into the tree.
+
+656
+01:09:53,000 --> 01:10:00,000
+Y'all remember what we used with the AVL tree to help make sure that we build
+
+657
+01:10:00,000 --> 01:10:03,000
+It nicely.
+
+658
+01:10:03,000 --> 01:10:08,000
+Anyone remember what the definition of an AVL tree is?
+
+659
+01:10:08,000 --> 01:10:12,000
+I can do
+
+660
+01:10:12,000 --> 01:10:16,000
+Two things.
+
+661
+01:10:16,000 --> 01:10:23,000
+Okay, we had rotations.
+
+662
+01:10:23,000 --> 01:10:28,000
+What else?
+
+663
+01:10:28,000 --> 01:10:31,000
+We had
+
+664
+01:10:31,000 --> 01:10:36,000
+Our balance factor, thank you.
+
+665
+01:10:36,000 --> 01:10:42,000
+We had our balance factor
+
+666
+01:10:42,000 --> 01:10:43,000
+Okay.
+
+667
+01:10:43,000 --> 01:10:53,000
+I'm gonna make a couple notes here so that we remember a couple
+
+668
+01:10:53,000 --> 01:10:56,000
+I'll say height here
+
+669
+01:10:56,000 --> 01:11:02,000
+This is a convention, single node
+
+670
+01:11:02,000 --> 01:11:04,000
+Zero
+
+671
+01:11:04,000 --> 01:11:08,000
+Empty tree
+
+672
+01:11:08,000 --> 01:11:12,000
+Has height minus one. Otherwise
+
+673
+01:11:12,000 --> 01:11:19,000
+Our number of steps to the to the leaf
+
+674
+01:11:19,000 --> 01:11:23,000
+And then our balance factor
+
+675
+01:11:23,000 --> 01:11:31,000
+Is the height
+
+676
+01:11:31,000 --> 01:11:34,000
+Subtree
+
+677
+01:11:34,000 --> 01:11:45,000
+Minus height of right subtree.
+
+678
+01:11:45,000 --> 01:11:47,000
+Okay, so
+
+679
+01:11:47,000 --> 01:11:56,000
+Basically, what we do at every step when we insert something into our tree, we calculate the balance factor.
+
+680
+01:11:56,000 --> 01:12:00,000
+We calculate the height of the left subtree.
+
+681
+01:12:00,000 --> 01:12:07,000
+and subtract, and then subtract the height of the right subtree.
+
+682
+01:12:07,000 --> 01:12:11,000
+And if this balance factor is wrong
+
+683
+01:12:11,000 --> 01:12:21,000
+I'll define wrong in just a minute again. If that balance factor is wrong, that means there's a big difference between the height of the left subtree and the height of the right subtree.
+
+684
+01:12:21,000 --> 01:12:27,000
+And if… so if we've got a big difference in that balance back, those heights
+
+685
+01:12:27,000 --> 01:12:33,000
+Then we're going to… we're going to rotate at that node to make it more balanced.
+
+686
+01:12:33,000 --> 01:12:36,000
+So that's how we're going to try to keep our
+
+687
+01:12:36,000 --> 01:12:44,000
+Search tree balanced as we start building it.
+
+688
+01:12:44,000 --> 01:12:52,000
+Let's see. Positive balance factor
+
+689
+01:12:52,000 --> 01:13:02,000
+if the balance factor is positive, which side is heavier left or right?
+
+690
+01:13:02,000 --> 01:13:13,000
+Yep, so positive, left subtree is heavier
+
+691
+01:13:13,000 --> 01:13:19,000
+I guess I shouldn't say too heavy. I should say heavier, but negative
+
+692
+01:13:19,000 --> 01:13:25,000
+Is the right
+
+693
+01:13:25,000 --> 01:13:29,000
+It's rate heavy.
+
+694
+01:13:29,000 --> 01:13:40,000
+Okay, so it's positive. The left is it's left heavy. Negative, it's right heavy.
+
+695
+01:13:40,000 --> 01:13:47,000
+And an ADL tree.
+
+696
+01:13:47,000 --> 01:13:50,000
+A BST
+
+697
+01:13:50,000 --> 01:13:52,000
+Where
+
+698
+01:13:52,000 --> 01:13:56,000
+Every node
+
+699
+01:13:56,000 --> 01:14:01,000
+Balance factor
+
+700
+01:14:01,000 --> 01:14:06,000
+is minus 1, 0, or one.
+
+701
+01:14:06,000 --> 01:14:09,000
+Okay.
+
+702
+01:14:09,000 --> 01:14:12,000
+Let's look at an example
+
+703
+01:14:12,000 --> 01:14:15,000
+So I did this one first.
+
+704
+01:14:15,000 --> 01:14:17,000
+Okay.
+
+705
+01:14:17,000 --> 01:14:20,000
+Is this a binary search tree?
+
+706
+01:14:20,000 --> 01:14:25,000
+And we're just looking at this part here.
+
+707
+01:14:25,000 --> 01:14:35,000
+Okay, binary search tree, because I'm looking here, it's 20. Everything bigger, everything here is bigger than 20. Everything here is less than 20.
+
+708
+01:14:35,000 --> 01:14:45,000
+10, 5 is smaller, 15 is bigger, but 15 is less than 20. Yeah, okay, binary search true
+
+709
+01:14:45,000 --> 01:14:49,000
+What is the
+
+710
+01:14:49,000 --> 01:14:52,000
+Yeah, let's do this
+
+711
+01:14:52,000 --> 01:14:58,000
+I'm gonna copy this over here
+
+712
+01:14:58,000 --> 01:15:05,000
+So we have this as our reference.
+
+713
+01:15:05,000 --> 01:15:13,000
+Let's calculate the balance factor of all the nodes in this tree.
+
+714
+01:15:13,000 --> 01:15:16,000
+So
+
+715
+01:15:16,000 --> 01:15:19,000
+Everyone pick
+
+716
+01:15:19,000 --> 01:15:26,000
+pick a node in this tree and calculate the balance factor and
+
+717
+01:15:26,000 --> 01:15:31,000
+I will go through each one and ask you all to shout it out.
+
+718
+01:15:31,000 --> 01:15:33,000
+So just take a second
+
+719
+01:15:33,000 --> 01:15:39,000
+I'm not going to assign nodes to people. I feel like if everyone
+
+720
+01:15:39,000 --> 01:15:43,000
+looks at it, then we can cover all of our nodes.
+
+721
+01:15:43,000 --> 01:15:56,000
+Let's see. Start at the bottom where it's easy. 5. What's our balance factor?
+
+722
+01:15:56,000 --> 01:15:58,000
+Zero.
+
+723
+01:15:58,000 --> 01:16:01,000
+That's okay.
+
+724
+01:16:01,000 --> 01:16:04,000
+Yeah, Zero.
+
+725
+01:16:04,000 --> 01:16:10,000
+Okay, what's our balance factor for 15?
+
+726
+01:16:10,000 --> 01:16:13,000
+Said someone said zero.
+
+727
+01:16:13,000 --> 01:16:18,000
+For 10
+
+728
+01:16:18,000 --> 01:16:20,000
+I've heard zero.
+
+729
+01:16:20,000 --> 01:16:25,000
+For 20, or let's start at the bottom. Let's go back down here.
+
+730
+01:16:25,000 --> 01:16:30,000
+I guess I guess it doesn't matter. Did someone already say 0 for 20?
+
+731
+01:16:30,000 --> 01:16:32,000
+Okay
+
+732
+01:16:32,000 --> 01:16:38,000
+30
+
+733
+01:16:38,000 --> 01:16:43,000
+Did I hear something else?
+
+734
+01:16:43,000 --> 01:16:45,000
+I feel like I heard
+
+735
+01:16:45,000 --> 01:16:49,000
+Someone whispered something different
+
+736
+01:16:49,000 --> 01:16:55,000
+So for this one, what's the height of the left
+
+737
+01:16:55,000 --> 01:16:59,000
+Child, the left subtree
+
+738
+01:16:59,000 --> 01:17:04,000
+There's nothing there, so it's minus one.
+
+739
+01:17:04,000 --> 01:17:07,000
+Minus what's the
+
+740
+01:17:07,000 --> 01:17:13,000
+what's the height of the right subtree
+
+741
+01:17:13,000 --> 01:17:20,000
+We have a single node, so it's zero. So we have minus one minus zero
+
+742
+01:17:20,000 --> 01:17:24,000
+Minus one
+
+743
+01:17:24,000 --> 01:17:27,000
+And
+
+744
+01:17:27,000 --> 01:17:28,000
+Yeah.
+
+745
+01:17:28,000 --> 01:17:32,000
+So we're using
+
+746
+01:17:32,000 --> 01:17:36,000
+Our height convention. These are by definition
+
+747
+01:17:36,000 --> 01:17:39,000
+So
+
+748
+01:17:39,000 --> 01:17:44,000
+If I'm looking at this node, the left sub child
+
+749
+01:17:44,000 --> 01:17:46,000
+is an empty tree
+
+750
+01:17:46,000 --> 01:17:48,000
+So it's minus one.
+
+751
+01:17:48,000 --> 01:17:51,000
+And then the right
+
+752
+01:17:51,000 --> 01:17:54,000
+subtree is a single node
+
+753
+01:17:54,000 --> 01:17:55,000
+So it's zero.
+
+754
+01:17:55,000 --> 01:17:58,000
+So it's minus one minus 0.
+
+755
+01:17:58,000 --> 01:18:01,000
+That's my spot
+
+756
+01:18:01,000 --> 01:18:06,000
+Okay, so I got minus one and then our last
+
+757
+01:18:06,000 --> 01:18:09,000
+That's our balance factor. Yes.
+
+758
+01:18:09,000 --> 01:18:13,000
+Correct. Correct. It is a balance factor. It is not the height.
+
+759
+01:18:13,000 --> 01:18:16,000
+Yes
+
+760
+01:18:16,000 --> 01:18:20,000
+Our last node, 35.
+
+761
+01:18:20,000 --> 01:18:27,000
+It's got nothing minus one minus minus one, minus one plus one is 0.
+
+762
+01:18:27,000 --> 01:18:28,000
+Okay.
+
+763
+01:18:28,000 --> 01:18:46,000
+So this is a binary search tree we agreed on. We said that an AVL is a BST where every node's balance factor is minus one zero or one. So is this an example of an AVL?
+
+764
+01:18:46,000 --> 01:18:47,000
+Yes.
+
+765
+01:18:47,000 --> 01:18:53,000
+Because I'm looking at these, it's all zeros, we have 1 minus 1. And does it intuitively
+
+766
+01:18:53,000 --> 01:18:56,000
+Does it feel like an AVL?
+
+767
+01:18:56,000 --> 01:18:58,000
+me
+
+768
+01:18:58,000 --> 01:19:13,000
+Yeah, you could laugh at me when I say, does it feel like an AVL when we look at it, does it feel about right? Does it feel kind of balanced, right? Like, I could believe it's an AVL. It looks kind of balanced. I can believe it.
+
+769
+01:19:13,000 --> 01:19:16,000
+Okay, let's look at this one.
+
+770
+01:19:16,000 --> 01:19:25,000
+I know, we're scientists, we're engineers, we don't trust our feelings, but you can build that intuition and then back it up with the math.
+
+771
+01:19:25,000 --> 01:19:32,000
+So let's do this one real quick. What is our balance factor of 3?
+
+772
+01:19:32,000 --> 01:19:38,000
+It's at the bottom, we saw this a whole lot. Nothing on the left, nothing on the right. So it's zero.
+
+773
+01:19:38,000 --> 01:19:42,000
+We've got five
+
+774
+01:19:42,000 --> 01:19:45,000
+what's on the left
+
+775
+01:19:45,000 --> 01:19:51,000
+So we have 0 minus what's on the right.
+
+776
+01:19:51,000 --> 01:19:57,000
+Minus one. Oh, I mean, on the right is minus one. But when we zero minus minus
+
+777
+01:19:57,000 --> 01:19:59,000
+One is one
+
+778
+01:19:59,000 --> 01:20:06,000
+Yeah. Okay. At 10, the height of the tree that's in the left here.
+
+779
+01:20:06,000 --> 01:20:18,000
+Minus the height of the tree on the right here.
+
+780
+01:20:18,000 --> 01:20:22,000
+Sorry, I heard a whole bunch of things and I'm not quite sure which one I hit.
+
+781
+01:20:22,000 --> 01:20:25,000
+I think I heard something like
+
+782
+01:20:25,000 --> 01:20:31,000
+1 minus zero
+
+783
+01:20:31,000 --> 01:20:46,000
+Did you say minus one? See, I heard all the things.
+
+784
+01:20:46,000 --> 01:20:51,000
+Okay, so the right subtree is a single node, so that's zero.
+
+785
+01:20:51,000 --> 01:21:00,000
+So then what's the height of this subtree, the left subtree?
+
+786
+01:21:00,000 --> 01:21:05,000
+One. So we have one minus 0. Which gives us 1.
+
+787
+01:21:05,000 --> 01:21:07,000
+So this
+
+788
+01:21:07,000 --> 01:21:11,000
+is we're looking at the left subtree
+
+789
+01:21:11,000 --> 01:21:20,000
+So you come here, say this is the left subtree. We're starting. This then becomes the root
+
+790
+01:21:20,000 --> 01:21:25,000
+of that subtree, and we're counting the number of
+
+791
+01:21:25,000 --> 01:21:28,000
+Sorry.
+
+792
+01:21:28,000 --> 01:21:30,000
+Steps.
+
+793
+01:21:30,000 --> 01:21:33,000
+So we get to the leaf.
+
+794
+01:21:33,000 --> 01:21:37,000
+I keep on waiting to say path, that's not the right
+
+795
+01:21:37,000 --> 01:21:40,000
+I'd say the wrong word.
+
+796
+01:21:40,000 --> 01:21:41,000
+Y'all are with me.
+
+797
+01:21:41,000 --> 01:21:44,000
+I think you're with me.
+
+798
+01:21:44,000 --> 01:21:50,000
+We said this. We know if it's a leaf, it has a balance factor of 0.
+
+799
+01:21:50,000 --> 01:21:55,000
+What's the balance factor of 20?
+
+800
+01:21:55,000 --> 01:21:58,000
+We're going to count the height
+
+801
+01:21:58,000 --> 01:22:00,000
+of the left subtree
+
+802
+01:22:00,000 --> 01:22:03,000
+So this is left subtree
+
+803
+01:22:03,000 --> 01:22:06,000
+This is the root of the left subtree
+
+804
+01:22:06,000 --> 01:22:12,000
+And we're taking the number of steps it takes us down to a leaf
+
+805
+01:22:12,000 --> 01:22:18,000
+And we're going to take the max. So I can look at this and I visually see this is the longer path
+
+806
+01:22:18,000 --> 01:22:22,000
+But since there's a path here, I would have to
+
+807
+01:22:22,000 --> 01:22:33,000
+If I were writing code and I couldn't see the whole path, I would have to calculate this path and calculate this path and compare them.
+
+808
+01:22:33,000 --> 01:22:36,000
+So here we've got
+
+809
+01:22:36,000 --> 01:22:39,000
+2 minus
+
+810
+01:22:39,000 --> 01:22:44,000
+We've got one note over here, which is 0. So that gives us 2.
+
+811
+01:22:44,000 --> 01:22:48,000
+For this one.
+
+812
+01:22:48,000 --> 01:22:51,000
+And then what's our balance factor for 30?
+
+813
+01:22:51,000 --> 01:22:54,000
+Oh, wait, did I did that right, actually.
+
+814
+01:22:54,000 --> 01:23:01,000
+1, 2, 2 minus zero. Yes, 2 minus zero. And then 30
+
+815
+01:23:01,000 --> 01:23:05,000
+Balance factor is zero
+
+816
+01:23:05,000 --> 01:23:12,000
+So we look at this binary search tree. Is this an AVL
+
+817
+01:23:12,000 --> 01:23:23,000
+Does it feel like an AVL? No, it doesn't feel like an AVL. When we look at it, it kind of looks a little lopsided.
+
+818
+01:23:23,000 --> 01:23:26,000
+We have at the root
+
+819
+01:23:26,000 --> 01:23:34,000
+This is the only node we have that is not minus one, 0, or one
+
+820
+01:23:34,000 --> 01:23:41,000
+From this balance factor is the tree left heavy or right heavy?
+
+821
+01:23:41,000 --> 01:23:54,000
+It's left heavy. We get that from looking at it. You also get that from a it has a positive balance factor, so it's left heavy if it were a negative balance factor, it'd be right heavy.
+
+822
+01:23:54,000 --> 01:23:57,000
+You want to do one more if you feel like you got it.
+
+823
+01:23:57,000 --> 01:24:00,000
+One more, sweet. I drew it out. Let's do it.
+
+824
+01:24:00,000 --> 01:24:02,000
+Okay.
+
+825
+01:24:02,000 --> 01:24:08,000
+We're starting on the left-hand side here. What's our balance factor of 10?
+
+826
+01:24:08,000 --> 01:24:12,000
+It's zero, we got that one. It's a leaf, we get it.
+
+827
+01:24:12,000 --> 01:24:13,000
+Okay.
+
+828
+01:24:13,000 --> 01:24:16,000
+20
+
+829
+01:24:16,000 --> 01:24:24,000
+We are looking at the left subtree and the height here is 0.
+
+830
+01:24:24,000 --> 01:24:28,000
+So it's going to be 0 minus
+
+831
+01:24:28,000 --> 01:24:32,000
+And then the height of the right subtree
+
+832
+01:24:32,000 --> 01:24:36,000
+This one's a little tricky, because it's big
+
+833
+01:24:36,000 --> 01:24:47,000
+So we have to go down and say we're going to have to try like compare these and compare these, right? If we're thinking algorithmically. But if we're just looking at this
+
+834
+01:24:47,000 --> 01:24:52,000
+We can see that the longest path to a leaf is this one
+
+835
+01:24:52,000 --> 01:24:57,000
+So what's the height of our right subtree?
+
+836
+01:24:57,000 --> 01:24:59,000
+2.
+
+837
+01:24:59,000 --> 01:25:02,000
+It's just the paths.
+
+838
+01:25:02,000 --> 01:25:04,000
+Just a
+
+839
+01:25:04,000 --> 01:25:08,000
+The edges. It's just the edges. It's not the nose.
+
+840
+01:25:08,000 --> 01:25:14,000
+We're only counting the edges.
+
+841
+01:25:14,000 --> 01:25:21,000
+If this is the subtree.
+
+842
+01:25:21,000 --> 01:25:30,000
+Yeah, so this is the roots. Yeah, so this is the root. And if we're looking at this path, we're counting the number of edges we go down.
+
+843
+01:25:30,000 --> 01:25:36,000
+Yeah, and that's how we get, basically, that one node is zero.
+
+844
+01:25:36,000 --> 01:25:44,000
+Because we've got no edges to go down to get to the leaf. It's already the leaf. So we're going to say that it's
+
+845
+01:25:44,000 --> 01:25:46,000
+Zero.
+
+846
+01:25:46,000 --> 01:25:49,000
+Okay, so
+
+847
+01:25:49,000 --> 01:25:52,000
+Yes, Rudy called it.
+
+848
+01:25:52,000 --> 01:25:58,000
+0 minus 2 gives us 2.
+
+849
+01:25:58,000 --> 01:26:11,000
+Is this an AVL? No, we can see that right off the bat. We just hit that this one is two. So we have one node or minus, sorry. Thank you. Rudy said minus two.
+
+850
+01:26:11,000 --> 01:26:19,000
+I wrote 0 minus 2 equals 2, which was wrong. Thank you. But yes, we have minus 2.
+
+851
+01:26:19,000 --> 01:26:24,000
+Which is not minus one or zero or one. So this is not an AVL.
+
+852
+01:26:24,000 --> 01:26:26,000
+I'll leave on time.
+
+853
+01:26:26,000 --> 01:26:35,000
+Okay
+
+854
+01:26:35,000 --> 01:26:40,000
+Okay, so what our ABL tree does for us
+
+855
+01:26:40,000 --> 01:26:49,000
+How we use this is that if we are inserting something into our binary search tree
+
+856
+01:26:49,000 --> 01:26:54,000
+What we're gonna do is we are going to calculate the balance factor
+
+857
+01:26:54,000 --> 01:27:06,000
+Not of all the nodes, but just of the parents of the node we insert. I'll walk through this. We're going to calculate that balance factor. And if we ever identify a node that has
+
+858
+01:27:06,000 --> 01:27:10,000
+A balance factor that is bigger than
+
+859
+01:27:10,000 --> 01:27:13,000
+One or less than minus one
+
+860
+01:27:13,000 --> 01:27:16,000
+We're gonna fix our tree.
+
+861
+01:27:16,000 --> 01:27:22,000
+To get it back into good shape.
+
+862
+01:27:22,000 --> 01:27:26,000
+If we were to insert, say
+
+863
+01:27:26,000 --> 01:27:30,000
+If we were to answer, I'm going to say if we're to insert 5 here
+
+864
+01:27:30,000 --> 01:27:36,000
+When we insert a value into our tree
+
+865
+01:27:36,000 --> 01:27:38,000
+It only impacts the height
+
+866
+01:27:38,000 --> 01:27:42,000
+of the nodes on the path
+
+867
+01:27:42,000 --> 01:27:44,000
+Between
+
+868
+01:27:44,000 --> 01:27:48,000
+That new node and the root
+
+869
+01:27:48,000 --> 01:27:54,000
+So when we insert a new node, we're going to check the balance factor
+
+870
+01:27:54,000 --> 01:28:01,000
+of the the nodes up until we get to the root at at most
+
+871
+01:28:01,000 --> 01:28:12,000
+Only because these are the only nodes impacted by adding a new node, these are the only ones that can possibly be changed. And so therefore might get broken.
+
+872
+01:28:12,000 --> 01:28:17,000
+So if in, for example.
+
+873
+01:28:17,000 --> 01:28:19,000
+Oh, this one.
+
+874
+01:28:19,000 --> 01:28:24,000
+If we inserted three last
+
+875
+01:28:24,000 --> 01:28:30,000
+We would walk up this tree and we would see that its parent
+
+876
+01:28:30,000 --> 01:28:42,000
+has a balance factor of 1. Okay, that's good. I'm not worried about it, so I'm gonna just keep going up. I go to its parent, and I say, okay, this one
+
+877
+01:28:42,000 --> 01:28:57,000
+Still, balance factor of one, that's still good. I haven't negatively impacted this one, so no problem. And I go up to its parent and I look here, I calculate the balance factor. This is where I see, oh, the balance factor is
+
+878
+01:28:57,000 --> 01:28:59,000
+Two, I do not like that
+
+879
+01:28:59,000 --> 01:29:07,000
+So that's the point where we see, okay, we've now by inserting this node into the tree
+
+880
+01:29:07,000 --> 01:29:08,000
+We've broken
+
+881
+01:29:08,000 --> 01:29:10,000
+One of its parents
+
+882
+01:29:10,000 --> 01:29:17,000
+So now we're going to fix it.
+
+883
+01:29:17,000 --> 01:29:19,000
+Hi.
+
+884
+01:29:19,000 --> 01:29:23,000
+So this is where we do our rotation
+
+885
+01:29:23,000 --> 01:29:30,000
+And going to repeat
+
+886
+01:29:30,000 --> 01:29:32,000
+I'm going to repeat
+
+887
+01:29:32,000 --> 01:29:41,000
+Looking at time, I'm trying to just looking at time. I'm going to copy what we saw before
+
+888
+01:29:41,000 --> 01:29:45,000
+If we have
+
+889
+01:29:45,000 --> 01:29:47,000
+I'm going to look at
+
+890
+01:29:47,000 --> 01:29:49,000
+Try to copy this.
+
+891
+01:29:49,000 --> 01:29:52,000
+We had 20
+
+892
+01:29:52,000 --> 01:29:55,000
+And then we had
+
+893
+01:29:55,000 --> 01:30:00,000
+10
+
+894
+01:30:00,000 --> 01:30:07,000
+15 and what was that 5
+
+895
+01:30:07,000 --> 01:30:13,000
+And then under the right, we had 30.
+
+896
+01:30:13,000 --> 01:30:14,000
+Okay.
+
+897
+01:30:14,000 --> 01:30:21,000
+And this was the one that we said, Okay, it got unbalanced.
+
+898
+01:30:21,000 --> 01:30:27,000
+So
+
+899
+01:30:27,000 --> 01:30:29,000
+Well
+
+900
+01:30:29,000 --> 01:30:30,000
+I've
+
+901
+01:30:30,000 --> 01:30:41,000
+taken off the I've taken all the extra pieces off on the bottom here, so we can just focus on this part of it
+
+902
+01:30:41,000 --> 01:30:42,000
+So we
+
+903
+01:30:42,000 --> 01:30:45,000
+Identified that 20
+
+904
+01:30:45,000 --> 01:30:50,000
+This one right here, this is the problematic one. So that's where we want to rotate.
+
+905
+01:30:50,000 --> 01:30:58,000
+So what we're going to do
+
+906
+01:30:58,000 --> 01:31:05,000
+What we're gonna do is we
+
+907
+01:31:05,000 --> 01:31:13,000
+Sorry, I'm looking for Natalie.
+
+908
+01:31:13,000 --> 01:31:15,000
+And then very specific.
+
+909
+01:31:15,000 --> 01:31:18,000
+You're next.
+
+910
+01:31:18,000 --> 01:31:26,000
+We make wait
+
+911
+01:31:26,000 --> 01:31:28,000
+I'm going to make
+
+912
+01:31:28,000 --> 01:31:29,000
+We're going to put
+
+913
+01:31:29,000 --> 01:31:33,000
+10 up to the root, so we have 10
+
+914
+01:31:33,000 --> 01:31:38,000
+And when we make can the parent
+
+915
+01:31:38,000 --> 01:31:42,000
+Once we make 10 to parent.
+
+916
+01:31:42,000 --> 01:31:49,000
+We 10 has two children, right? 5 and 15.
+
+917
+01:31:49,000 --> 01:31:54,000
+But if we're making
+
+918
+01:31:54,000 --> 01:31:58,000
+Tend the parent, we've got to put 20 in there somewhere.
+
+919
+01:31:58,000 --> 01:32:01,000
+10 can only have two kids
+
+920
+01:32:01,000 --> 01:32:03,000
+Left and right.
+
+921
+01:32:03,000 --> 01:32:08,000
+So if we're rotating it and 20
+
+922
+01:32:08,000 --> 01:32:15,000
+Becomes the right child of 10. And 10 still has the left child five
+
+923
+01:32:15,000 --> 01:32:19,000
+The question is, where does this 15 go?
+
+924
+01:32:19,000 --> 01:32:25,000
+15's left hanging out
+
+925
+01:32:25,000 --> 01:32:27,000
+Yeah.
+
+926
+01:32:27,000 --> 01:32:30,000
+So we're going to make it the left
+
+927
+01:32:30,000 --> 01:32:32,000
+Of 20
+
+928
+01:32:32,000 --> 01:32:36,000
+And then 20 still has
+
+929
+01:32:36,000 --> 01:32:39,000
+30 over here
+
+930
+01:32:39,000 --> 01:32:44,000
+So that's what our rotation does. We
+
+931
+01:32:44,000 --> 01:32:47,000
+We lift
+
+932
+01:32:47,000 --> 01:32:52,000
+The we lift the subchild
+
+933
+01:32:52,000 --> 01:32:56,000
+And it's old right subtree
+
+934
+01:32:56,000 --> 01:33:01,000
+gets moved to the left child of
+
+935
+01:33:01,000 --> 01:33:05,000
+So once the node that was moved down.
+
+936
+01:33:05,000 --> 01:33:09,000
+So
+
+937
+01:33:09,000 --> 01:33:18,000
+Let's
+
+938
+01:33:18,000 --> 01:33:23,000
+Let's do I'm going to
+
+939
+01:33:23,000 --> 01:33:26,000
+Let's see if we just did
+
+940
+01:33:26,000 --> 01:33:28,000
+This is B.
+
+941
+01:33:28,000 --> 01:33:31,000
+We just did 10
+
+942
+01:33:31,000 --> 01:33:34,000
+30
+
+943
+01:33:34,000 --> 01:33:36,000
+So we just did this example
+
+944
+01:33:36,000 --> 01:33:39,000
+Where we lifted
+
+945
+01:33:39,000 --> 01:33:41,000
+10
+
+946
+01:33:41,000 --> 01:33:45,000
+And then we gave it
+
+947
+01:33:45,000 --> 01:33:46,000
+Right
+
+948
+01:33:46,000 --> 01:33:48,000
+Child
+
+949
+01:33:48,000 --> 01:33:58,000
+to be the new left child of the, of the node it replaced
+
+950
+01:33:58,000 --> 01:34:09,000
+So I'm going to let y'all think through this one.
+
+951
+01:34:09,000 --> 01:34:15,000
+Actually, first I'll say, when we rotated this one, did we rotate to the left or the right?
+
+952
+01:34:15,000 --> 01:34:19,000
+We rotated to the right. So the left side lost
+
+953
+01:34:19,000 --> 01:34:26,000
+Lost depth. And the right side balanced out
+
+954
+01:34:26,000 --> 01:34:28,000
+This one
+
+955
+01:34:28,000 --> 01:34:33,000
+We're gonna have to rotate it the other way.
+
+956
+01:34:33,000 --> 01:34:41,000
+So I'm going to let y'all think through this for just a second and then talk me through how to
+
+957
+01:34:41,000 --> 01:34:43,000
+how to rearrange
+
+958
+01:34:43,000 --> 01:34:46,000
+what's on here. We're going to rotate
+
+959
+01:34:46,000 --> 01:34:48,000
+left
+
+960
+01:34:48,000 --> 01:34:52,000
+at the root.
+
+961
+01:34:52,000 --> 01:34:55,000
+So you guys think through that
+
+962
+01:34:55,000 --> 01:34:58,000
+For a second. And then
+
+963
+01:34:58,000 --> 01:35:28,000
+Tell me what to write
+
+964
+01:35:38,000 --> 01:35:44,000
+Have a chance to think through it.
+
+965
+01:35:44,000 --> 01:35:50,000
+What we want to do when we are rotating to the left
+
+966
+01:35:50,000 --> 01:35:55,000
+Is that whatever node we're at, we're going to take the right
+
+967
+01:35:55,000 --> 01:35:57,000
+child
+
+968
+01:35:57,000 --> 01:36:00,000
+and lifted up
+
+969
+01:36:00,000 --> 01:36:04,000
+And then we're going to take the left
+
+970
+01:36:04,000 --> 01:36:06,000
+child of that node
+
+971
+01:36:06,000 --> 01:36:11,000
+And assign it to the right child of the node that
+
+972
+01:36:11,000 --> 01:36:17,000
+Not rotated down.
+
+973
+01:36:17,000 --> 01:36:18,000
+Okay.
+
+974
+01:36:18,000 --> 01:36:31,000
+So what is now after after a left rotation at node 20, what is the tree look like? What's at the root of the tree?
+
+975
+01:36:31,000 --> 01:36:32,000
+30.
+
+976
+01:36:32,000 --> 01:36:47,000
+Okay.
+
+977
+01:36:47,000 --> 01:36:49,000
+5
+
+978
+01:36:49,000 --> 01:36:51,000
+Like that?
+
+979
+01:36:51,000 --> 01:37:02,000
+And 40
+
+980
+01:37:02,000 --> 01:37:05,000
+I did that right? So that doesn't feel right
+
+981
+01:37:05,000 --> 01:37:10,000
+Okay.
+
+982
+01:37:10,000 --> 01:37:17,000
+Okay, hold that thought. Let me catch up with it. Okay, I'm gonna delete this. We got 30 move to the top
+
+983
+01:37:17,000 --> 01:37:28,000
+30 move to the top, and we've got 40. It's right child still, and we're looking at this, and we want 30's left child to go somewhere
+
+984
+01:37:28,000 --> 01:37:43,000
+Okay, sorry. Now, go ahead, fill me in.
+
+985
+01:37:43,000 --> 01:37:45,000
+Well, not
+
+986
+01:37:45,000 --> 01:37:47,000
+Let me try Bill.
+
+987
+01:37:47,000 --> 01:37:52,000
+Try to fit that in a little bit better.
+
+988
+01:37:52,000 --> 01:37:54,000
+Like that
+
+989
+01:37:54,000 --> 01:37:58,000
+And then 10 and 5
+
+990
+01:37:58,000 --> 01:37:59,000
+Like that.
+
+991
+01:37:59,000 --> 01:38:05,000
+Okay, so what we did, we took our 30, we moved it up
+
+992
+01:38:05,000 --> 01:38:12,000
+And our 20, we had to move down. So we got 30 at the root now, and we had 20 down.
+
+993
+01:38:12,000 --> 01:38:15,000
+When we moved 30 up
+
+994
+01:38:15,000 --> 01:38:22,000
+We had to move its child, its left child. We had to move it over to be
+
+995
+01:38:22,000 --> 01:38:26,000
+In the, in the
+
+996
+01:38:26,000 --> 01:38:28,000
+The left subtree.
+
+997
+01:38:28,000 --> 01:38:36,000
+And so the thing that got pushed down that 20. We assign it there.
+
+998
+01:38:36,000 --> 01:38:39,000
+So that was the mechanism.
+
+999
+01:38:39,000 --> 01:38:41,000
+That's our rotations.
+
+1000
+01:38:41,000 --> 01:38:48,000
+They take a little bit of practice. So this is
+
+1001
+01:38:48,000 --> 01:38:53,000
+We have an assignment where we get to practice this a whole bunch, but this is the idea behind it.
+
+1002
+01:38:53,000 --> 01:38:58,000
+and what we did not cover last time
+
+1003
+01:38:58,000 --> 01:39:02,000
+is the
+
+1004
+01:39:02,000 --> 01:39:19,000
+When do we do these rotations? So we know, generally speaking, when we have a balance factor that is not minus one, zero or one, we have to do a rotation. But the question is, how many rotations and in what direction
+
+1005
+01:39:19,000 --> 01:39:21,000
+So
+
+1006
+01:39:21,000 --> 01:39:25,000
+Actually, let me see if I've did I copy this
+
+1007
+01:39:25,000 --> 01:39:27,000
+Doesn't matter. I'm gonna write it down now.
+
+1008
+01:39:27,000 --> 01:39:30,000
+We have
+
+1009
+01:39:30,000 --> 01:39:32,000
+We have
+
+1010
+01:39:32,000 --> 01:39:35,000
+Definition
+
+1011
+01:39:35,000 --> 01:39:38,000
+And it's in your notes.
+
+1012
+01:39:38,000 --> 01:39:41,000
+So this is our case.
+
+1013
+01:39:41,000 --> 01:39:44,000
+And
+
+1014
+01:39:44,000 --> 01:39:50,000
+We have left
+
+1015
+01:39:50,000 --> 01:39:51,000
+Right?
+
+1016
+01:39:51,000 --> 01:39:53,000
+Right
+
+1017
+01:39:53,000 --> 01:39:56,000
+Left right
+
+1018
+01:39:56,000 --> 01:40:00,000
+right left and broken
+
+1019
+01:40:00,000 --> 01:40:03,000
+node
+
+1020
+01:40:03,000 --> 01:40:05,000
+Plus two.
+
+1021
+01:40:05,000 --> 01:40:07,000
+minus 2.
+
+1022
+01:40:07,000 --> 01:40:37,000
+plus 2 minus 2.
+
+1023
+01:40:39,000 --> 01:40:42,000
+Child
+
+1024
+01:40:42,000 --> 01:40:56,000
+Write that node
+
+1025
+01:40:56,000 --> 01:41:00,000
+Okay, we've got these four cases.
+
+1026
+01:41:00,000 --> 01:41:03,000
+Leaving this, I'll come back to it in just a sec.
+
+1027
+01:41:03,000 --> 01:41:06,000
+And
+
+1028
+01:41:06,000 --> 01:41:20,000
+This is these are the different cases we have. Left, left, right, right, left, right, right, left. And you'll notice that our left, left and our right, right
+
+1029
+01:41:20,000 --> 01:41:25,000
+scenarios are the flip of each other.
+
+1030
+01:41:25,000 --> 01:41:28,000
+And these two are the flip of each other.
+
+1031
+01:41:28,000 --> 01:41:37,000
+So we have left, left, right, right. It's just do we go to the left or the right? And then same for these ones, the left right conditions.
+
+1032
+01:41:37,000 --> 01:41:40,000
+Okay.
+
+1033
+01:41:40,000 --> 01:41:51,000
+This is the note that's broken. So once we've inserted our new value into the tree and we go up the path above it, we're going to identify a broken node.
+
+1034
+01:41:51,000 --> 01:41:58,000
+And it's always going to be a plus 2 or minus 2, because we are going to fix our tree before it ever gets worse than 2.
+
+1035
+01:41:58,000 --> 01:42:06,000
+So if we come across a node that is plus two or minus two. We're going to fix it. And our fix
+
+1036
+01:42:06,000 --> 01:42:09,000
+Is one of these cases.
+
+1037
+01:42:09,000 --> 01:42:12,000
+So here
+
+1038
+01:42:12,000 --> 01:42:14,000
+Let's see.
+
+1039
+01:42:14,000 --> 01:42:22,000
+Let's
+
+1040
+01:42:22,000 --> 01:42:26,000
+Let's look at this case.
+
+1041
+01:42:26,000 --> 01:42:30,000
+I look at our
+
+1042
+01:42:30,000 --> 01:42:33,000
+We're going to look at our
+
+1043
+01:42:33,000 --> 01:42:35,000
+First example
+
+1044
+01:42:35,000 --> 01:42:41,000
+We are going to insert
+
+1045
+01:42:41,000 --> 01:42:43,000
+Three
+
+1046
+01:42:43,000 --> 01:42:45,000
+Two, one
+
+1047
+01:42:45,000 --> 01:42:49,000
+Okay, these are, this is how I'm building my tree.
+
+1048
+01:42:49,000 --> 01:42:52,000
+First.
+
+1049
+01:42:52,000 --> 01:43:01,000
+I'm going to insert 3 into my tree. I have no tree to start with. So I insert 3 at the root.
+
+1050
+01:43:01,000 --> 01:43:03,000
+Nothing's there, I put it in.
+
+1051
+01:43:03,000 --> 01:43:08,000
+I go to insert 2 into the tree.
+
+1052
+01:43:08,000 --> 01:43:12,000
+Just like binary search, I'm going to start at the root.
+
+1053
+01:43:12,000 --> 01:43:16,000
+Two that we're inserting is smaller than 3, so we go to the left
+
+1054
+01:43:16,000 --> 01:43:21,000
+Nothing's there, I insert to
+
+1055
+01:43:21,000 --> 01:43:32,000
+And once I've inserted two, I'm going to start doing my balance factor, but I can look right now. The tree's so small. I don't really care. I'm going to wave my hands and skip it right now.
+
+1056
+01:43:32,000 --> 01:43:38,000
+And then I'm going to insert one into the tree. Just like binary search tree, I start at the root
+
+1057
+01:43:38,000 --> 01:43:42,000
+One, I'm inserting, it goes to the left
+
+1058
+01:43:42,000 --> 01:43:50,000
+Two. Okay, one is smaller than two. I go to the left again. Nothing's there. I insert one.
+
+1059
+01:43:50,000 --> 01:43:58,000
+And now I check its balance factor. It's a leaf, so the balance factor of this node is
+
+1060
+01:43:58,000 --> 01:44:00,000
+Zero.
+
+1061
+01:44:00,000 --> 01:44:03,000
+And the balance factor. If this node is
+
+1062
+01:44:03,000 --> 01:44:05,000
+left minus right
+
+1063
+01:44:05,000 --> 01:44:07,000
+0 minus minus one
+
+1064
+01:44:07,000 --> 01:44:09,000
+One
+
+1065
+01:44:09,000 --> 01:44:13,000
+It's okay. And my balance factor here
+
+1066
+01:44:13,000 --> 01:44:20,000
+Left height minus right height left. I come over here, the height is one.
+
+1067
+01:44:20,000 --> 01:44:23,000
+Minus what's the
+
+1068
+01:44:23,000 --> 01:44:25,000
+height of the empty subtree
+
+1069
+01:44:25,000 --> 01:44:29,000
+So 1 minus minus one
+
+1070
+01:44:29,000 --> 01:44:38,000
+I got a balance factor of 2. So now we have to do something about this.
+
+1071
+01:44:38,000 --> 01:44:45,000
+So we want to figure out, what it is we need to do.
+
+1072
+01:44:45,000 --> 01:44:54,000
+This is a left. Let's call this. I'm going to put plus two in here.
+
+1073
+01:44:54,000 --> 01:45:03,000
+As the balance factor. So we know that we need to do a rotation, actually, and that we said, oops
+
+1074
+01:45:03,000 --> 01:45:12,000
+0, and this is plus one. Okay, so now that I've shortcut us
+
+1075
+01:45:12,000 --> 01:45:17,000
+We're gonna look at our case here. We have a broken node. It's plus two
+
+1076
+01:45:17,000 --> 01:45:22,000
+So if it's in one of these cases, it's either this case or this case.
+
+1077
+01:45:22,000 --> 01:45:52,000
+How do we distinguish? And we're going to say child on heavy side.
+
+1078
+01:45:52,000 --> 01:46:03,000
+Okay, so our broken node is 2. So it's one of those rows. We look at our left child. It tells us to check our left child
+
+1079
+01:46:03,000 --> 01:46:13,000
+We look at our left child, and we see our left child is plus one. So we know this is what we need to do. We need to rotate right
+
+1080
+01:46:13,000 --> 01:46:18,000
+at the node where we discovered a plus 2.
+
+1081
+01:46:18,000 --> 01:46:32,000
+And I'm going to do this very quickly. We're going to do our rotate to When we rotate at rotate right at this node, 2 is going to come up
+
+1082
+01:46:32,000 --> 01:46:38,000
+3 is going to go down, and I think we don't have any children to worry about.
+
+1083
+01:46:38,000 --> 01:46:45,000
+So we end up with two over here, 3 over here, and one over here.
+
+1084
+01:46:45,000 --> 01:46:57,000
+And we look and we say, is that still a BST? Yes, it's a binary search tree. And if we were to check our balance factors, which I'm not going to do for time, we would see that as bounced, and we're happy with that.
+
+1085
+01:46:57,000 --> 01:47:00,000
+For time
+
+1086
+01:47:00,000 --> 01:47:03,000
+I'm going to do one more real quick
+
+1087
+01:47:03,000 --> 01:47:10,000
+And I'm not going to go build the tree step by step. I'm just going to throw it on here.
+
+1088
+01:47:10,000 --> 01:47:12,000
+And it's
+
+1089
+01:47:12,000 --> 01:47:14,000
+3
+
+1090
+01:47:14,000 --> 01:47:28,000
+and one and two. And if we go through here, if this is the tree we have right now, our balance factor for this one at the root is 0. 1
+
+1091
+01:47:28,000 --> 01:47:33,000
+We have minus one minus
+
+1092
+01:47:33,000 --> 01:47:35,000
+Zero.
+
+1093
+01:47:35,000 --> 01:47:37,000
+Thank you.
+
+1094
+01:47:37,000 --> 01:47:44,000
+And at the root here, we have
+
+1095
+01:47:44,000 --> 01:47:55,000
+The height of the left child is one, the height of the right child is negative one, one minus negative one is
+
+1096
+01:47:55,000 --> 01:47:56,000
+Thank you.
+
+1097
+01:47:56,000 --> 01:48:02,000
+That's what I expected to get.
+
+1098
+01:48:02,000 --> 01:48:07,000
+It's one because the height of this substrate is one.
+
+1099
+01:48:07,000 --> 01:48:10,000
+Okay, so we have two. So we have to do something.
+
+1100
+01:48:10,000 --> 01:48:18,000
+I'm trying to get this in before the bell. We look, we've got a plus two here. It's either this row or this row
+
+1101
+01:48:18,000 --> 01:48:21,000
+And so we look at our left child
+
+1102
+01:48:21,000 --> 01:48:33,000
+And our left child is minus 1, so that tells us first we have to rotate left at the child, and then right at the node. So we have two rotations to do this time
+
+1103
+01:48:33,000 --> 01:48:36,000
+Let's do this. We said
+
+1104
+01:48:36,000 --> 01:48:38,000
+Left at the child
+
+1105
+01:48:38,000 --> 01:48:45,000
+So if this is rotating to the left
+
+1106
+01:48:45,000 --> 01:48:47,000
+It's going to go down
+
+1107
+01:48:47,000 --> 01:48:49,000
+Yes.
+
+1108
+01:48:49,000 --> 01:48:52,000
+Okay, so we get one
+
+1109
+01:48:52,000 --> 01:49:02,000
+Let's do that in orange to be the same. We put one down and then 2 has to come up
+
+1110
+01:49:02,000 --> 01:49:08,000
+And then three is still up here
+
+1111
+01:49:08,000 --> 01:49:12,000
+And then we rotate right at the node, which is the node that
+
+1112
+01:49:12,000 --> 01:49:18,000
+Who's this one? So now we when we rotate right
+
+1113
+01:49:18,000 --> 01:49:20,000
+We're going to drop
+
+1114
+01:49:20,000 --> 01:49:33,000
+This one down, move this one up and move any right children over, but we have no right children here. So we do this one more time. We drop three down, we pull two up
+
+1115
+01:49:33,000 --> 01:49:35,000
+And one stays here.
+
+1116
+01:49:35,000 --> 01:49:39,000
+So again, we get bounced.
+
+1117
+01:49:39,000 --> 01:49:45,000
+Oh, look at that first time. Okay.
+
+1118
+01:49:45,000 --> 01:50:01,000
+Okay, so there's our AVL trees. Boom, we're done. That's it. Good luck with y'all. So there's notes that explain it. We will
+
+1119
+01:50:01,000 --> 01:50:13,000
+Do a couple more examples on Wednesday, if you'd like. Wednesday, we'll do review. Feel free, please do come with questions you have.
+
+1120
+01:50:13,000 --> 01:50:16,000
+I don't have an example exam
+
+1121
+01:50:16,000 --> 01:50:24,000
+But you can pull out questions from the notes that I have published. There's lots of check your knowledge questions and stuff in there
+
+1122
+01:50:24,000 --> 01:50:31,000
+And I will come up with some practice questions and anything anyone wants to see more of.
+
+1123
+01:50:31,000 --> 01:50:38,000
+From the whole quarter, feel free to bring it and ask about it on Wednesday.
+
+1124
+01:50:38,000 --> 01:50:39,000
+Okay. Anyone have questions
+
+1125
+01:50:39,000 --> 01:50:41,000
+When is the midterm again, Professor?
+
+1126
+01:50:41,000 --> 01:50:42,000
+Sorry, what was that?
+
+1127
+01:50:42,000 --> 01:50:44,000
+When is the midterm again?
+
+1128
+01:50:44,000 --> 01:50:46,000
+Next Monday
+
+1129
+01:50:46,000 --> 01:50:50,000
+I'm going to send out an announcement on Piazza tonight to remind everyone
+
+1130
+01:50:50,000 --> 01:50:52,000
+Awesome. Thank you.
+
+1131
+01:50:52,000 --> 01:50:59,000
+My policy, the question in the classroom was, will it take the full two hours? My policy is to give you the full two hours
+
+1132
+01:50:59,000 --> 01:51:04,000
+And I try to make a test that you can be done with in one h.
+
+1133
+01:51:04,000 --> 01:51:07,000
+So that you have plenty of time.
+
+1134
+01:51:07,000 --> 01:51:13,000
+I used to be very terrible at doing that. I've gotten a little better more recently.
+
+1135
+01:51:13,000 --> 01:51:17,000
+But that's my intention. My intention is for it to be
+
+1136
+01:51:17,000 --> 01:51:22,000
+It can be done in an hour, but you get the filter out.
+
+1137
+01:51:22,000 --> 01:51:24,000
+On Canvas.
+
+1138
+01:51:24,000 --> 01:51:27,000
+Under the different modules
+
+1139
+01:51:27,000 --> 01:51:31,000
+There's no new notes for today.
+
+1140
+01:51:31,000 --> 01:51:33,000
+So if you're looking for today
+
+1141
+01:51:33,000 --> 01:51:39,000
+There's no new notes, but it's the same notes from last last week.
+
+1142
+01:51:39,000 --> 01:51:43,000
+Okay. Good night, everyone.
+
+1143
+01:51:43,000 --> 01:51:53,000
+It covers topics up to today's lecture, and that's it. And anything AVL trees are fair game.
+
+1144
+01:51:53,000 --> 01:51:59,000
+So if we talk about AVL trees more on Wednesday, still counts
+
+1145
+01:51:59,000 --> 01:52:07,000
+But anything not outside of today's. Thank you.
+
+1146
+01:52:07,000 --> 01:52:15,000
+I can't say those
+
+1147
+01:52:15,000 --> 01:52:18,000
+I don't know, but I think it's a really good start.
+
+1148
+01:52:18,000 --> 01:52:19,000
+Sorry.
+
+1149
+01:52:19,000 --> 01:52:22,000
+Can't be, I don't know
+
+1150
+01:52:22,000 --> 01:52:28,000
+Anyone else have other questions online?
+
+1151
+01:52:28,000 --> 01:52:40,085
+Okay. Have a great night, everyone.
+

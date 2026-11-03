@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-03T10:12:29-08:00",
+  "task": "上課筆記",
+  "status": "new",
+  "summary": "DSA 2026-11-02 Class 10 筆記：Big-O 套到程式碼、AVL 四種 case；期中 11/9 考到本堂",
+  "output": "dsa/lectures/2026-11-02/notes.md"
+ },
+ {
   "at": "2026-11-03T08:09:08-08:00",
   "task": "截止提醒",
   "status": "ok",
