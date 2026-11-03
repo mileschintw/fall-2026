@@ -367,5 +367,53 @@
     ]
    }
   ]
+ },
+ "11814804": {
+  "course": "dsa",
+  "slug": "a4",
+  "dir": "dsa/hw/a4",
+  "name": "A4: Bug Hunt",
+  "due_at": "2026-11-02T07:59:59Z",
+  "fp": {
+   "text": "e3b0c44298fc1c14",
+   "links": [],
+   "files": {},
+   "readme": "5e06266c7a150a5e5e1187a998a213123557e45a",
+   "repo_files": {
+    ".github/workflows/classroom.yml": "423ed3fa5d960cdb9309345562b7534cab844453",
+    ".gitignore": "538248f34953e769c570cef880094fed816d6831",
+    "FINDINGS.md": "6a1e359c3056b6a5d98935a7706ad5337c60ec90",
+    "check_hunt.py": "aee6603792e86c1dfd8ebd3c5ec566e14a6bc850",
+    "help_desk.py": "44a44ce520ba5035a93142f9a6b26fa98dc028f2",
+    "help_desk_original.py": "44a44ce520ba5035a93142f9a6b26fa98dc028f2",
+    "test_already_correct.py": "e97bb5fea2e3e77b96e2ecbe34fcfeff5c17cb8c",
+    "test_regressions.py": "ef1e774f9d629752b34e3c6933bae38e3e679107"
+   },
+   "due_at": "2026-11-02T07:59:59Z"
+  },
+  "files": [
+   "repo/.github/workflows/classroom.yml",
+   "repo/.gitignore",
+   "repo/FINDINGS.md",
+   "repo/check_hunt.py",
+   "repo/help_desk.py",
+   "repo/help_desk_original.py",
+   "repo/test_already_correct.py",
+   "repo/test_regressions.py",
+   "spec.md"
+  ],
+  "archived_at": "2026-11-02T20:17:25-08:00",
+  "summary_done": true,
+  "changes": [
+   "new"
+  ],
+  "history": [
+   {
+    "at": "2026-11-02T20:17:25-08:00",
+    "changes": [
+     "new"
+    ]
+   }
+  ]
  }
 }

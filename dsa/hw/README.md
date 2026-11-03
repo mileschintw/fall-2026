@@ -7,3 +7,4 @@
 | A1: My First Python Assignment | 2026-10-04 (Sun) 11:59 PM PDT | [README](a1/README.md) | [spec.md](a1/spec.md) |
 | A2: Lists, lists and more lists | 2026-10-18 (Sun) 11:59 PM PDT | [README](a2/README.md) | [spec.md](a2/spec.md) |
 | A3: Stacks, Queues and Testing | 2026-10-25 (Sun) 11:59 PM PDT | [README](a3/README.md) | [spec.md](a3/spec.md) |
+| A4: Bug Hunt | 2026-11-01 (Sun) 11:59 PM PST | [README](a4/README.md) | [spec.md](a4/spec.md) |

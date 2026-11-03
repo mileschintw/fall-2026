@@ -9,5 +9,6 @@
 | [assignment-1-mileschintw](https://github.com/uw-python-fall2026/assignment-1-mileschintw) | 2026-10-07 | main | 2026-10-07 23:59 | 有（Fix greetings 等） | A1，已 graded |
 | [assignment-2-mileschintw](https://github.com/uw-python-fall2026/assignment-2-mileschintw) | 2026-10-07 | **master** | 2026-10-07 02:53 | **沒有（只有 Initial commit）** | A2，**今天 10/18 11:59 PM 到期，Canvas unsubmitted** |
 | [assignment-3-mileschintw](https://github.com/uw-python-fall2026/assignment-3-mileschintw) | 2026-10-14 | main | 2026-10-14 04:34 | 沒有 | A3，10/23 到期 |
+| [assignment-4-mileschintw](https://github.com/uw-python-fall2026/assignment-4-mileschintw) | 2026-10-24 | main | 2026-10-24 18:09 | 沒有（只有 Initial commit 1eca786；2026-11-02 確認有 push 權限，本機 clone 在 `D:\Repos\assignment-4-mileschintw`） | A4 Bug Hunt，11/1 已過期，見 `dsa/hw/a4/` |
 
 註：A2 的工作可能在本機尚未 push（commit 作者曾是 `user39261580`），需使用者確認。

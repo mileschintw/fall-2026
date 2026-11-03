@@ -1,0 +1,67 @@
+name: Autograding Tests
+on:
+  push:
+    branches:
+      - '**'   # run on any branch push in this repo
+  workflow_dispatch:
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: "Your tests pass on your code"
+      id: your-tests-pass-on-your-code
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Your tests pass on your code"
+        setup-command: ''
+        command: timeout 120 python3 check_hunt.py own
+        timeout: 2
+        max-score: 4
+    - name: "Behavior that was already correct"
+      id: behavior-that-was-already-correct
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Behavior that was already correct"
+        setup-command: ''
+        command: timeout 120 python3 check_hunt.py already
+        timeout: 2
+        max-score: 8
+    - name: "Findings table"
+      id: findings-table
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Findings table"
+        setup-command: ''
+        command: timeout 120 python3 check_hunt.py findings
+        timeout: 2
+        max-score: 6
+    - name: "Reflection"
+      id: reflection
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Reflection"
+        setup-command: ''
+        command: timeout 120 python3 check_hunt.py reflection
+        timeout: 2
+        max-score: 6
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        YOUR-TESTS-PASS-ON-YOUR-CODE_RESULTS: "${{steps.your-tests-pass-on-your-code.outputs.result}}"
+        BEHAVIOR-THAT-WAS-ALREADY-CORRECT_RESULTS: "${{steps.behavior-that-was-already-correct.outputs.result}}"
+        FINDINGS-TABLE_RESULTS: "${{steps.findings-table.outputs.result}}"
+        REFLECTION_RESULTS: "${{steps.reflection.outputs.result}}"
+      with:
+        runners: your-tests-pass-on-your-code,behavior-that-was-already-correct,findings-table,reflection
