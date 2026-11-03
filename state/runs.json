@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-03T07:44:31-08:00",
+  "task": "作業說明",
+  "status": "new",
+  "summary": "改版：dsa/a4（repo 換成你 push 的版本，spec 沒變）",
+  "output": "dsa/hw/README.md"
+ },
+ {
   "at": "2026-11-03T07:08:19-08:00",
   "task": "晨報",
   "status": "new",

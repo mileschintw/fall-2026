@@ -13,7 +13,7 @@ somewhere else. Add rows as needed (at least 4).
 
 | # | Function | What I think is wrong | Idea came from (me / AI / other) | Status | Test name |
 | --- | --- | --- | --- | --- | --- |
-| 1 | | | | | |
+| 1 | `da_append` | When full, capacity grows by 1 instead of doubling, so every append copies the whole array and n appends take O(n^2) instead of O(n) | AI | confirmed | test_append_is_linear_time |
 | 2 | | | | | |
 | 3 | | | | | |
 | 4 | | | | | |

@@ -4,12 +4,14 @@
 
 | 項目 | 內容 |
 |---|---|
-| 截止 | **2026-11-01（日）11:59 PM PST**（Canvas `due_at` 2026-11-02T07:59:59Z，和 `assignments.md` 一致；原本是 10/30（五））。**已過期**，Piazza @65 申請一次性免罰延期，待回覆 |
+| 截止 | **2026-11-01（日）11:59 PM PST**（Canvas `due_at` 2026-11-02T07:59:59Z，和 `assignments.md` 一致；原本是 10/30（五））。截止後才交：Canvas 在 2026-11-03 晨報時已變成 `submitted`；Piazza @65 申請一次性免罰延期，待回覆 |
 | 分數 | Canvas 100 分；README 寫 60 分（autograder 24 + 截止後老師評 36，見「還不確定的地方」） |
 | 繳交方式 | push 到 `uw-python-fall2026/assignment-4-mileschintw`，**再到 Canvas 交 repo URL**；每次 push 都會跑 autograder（repo 的 **Actions** 分頁） |
 | 要交的東西 | 只有這 3 個檔案會被評分：<br>1. `help_desk.py`（修好的版本）<br>2. `test_regressions.py`（你的 test，至少 3 個）<br>3. `FINDINGS.md`（嫌疑表格至少 4 列 + 3 題 reflection）<br>其他檔案改了也會被忽略 |
 
-本機工作 clone：`D:\Repos\assignment-4-mileschintw`（branch `main`，2026-11-02 確認只有老師的 Initial commit 1eca786、沒有本機修改；`gh` 確認你有 push 權限）。
+本機工作 clone：`D:\Repos\assignment-4-mileschintw`（branch `main`；`gh` 確認你有 push 權限）。
+
+> **[repo/](repo/) 存的是 repo 目前的內容**。從 2026-11-03 起，`help_desk.py`、`test_regressions.py`、`FINDINGS.md` 是你自己 push 的版本，不是 starter。老師的原版還是 [repo/help_desk_original.py](repo/help_desk_original.py)（blob 44a44ce），下面的函式規格都取自 docstring，兩份的 docstring 一樣。
 
 ## 學習目標
 （README 開頭）
@@ -84,7 +86,7 @@ python3 -m unittest test_already_correct -v  # 本來就對、必須維持的行
 python3 check_hunt.py                        # 全部檢查 + 摘要
 python3 check_hunt.py own|already|findings|reflection   # 單項，和 autograder 一樣
 ```
-`check_hunt.py` 會自己把 `help_desk_original.py` 複製成 `help_desk.py` 放到暫存資料夾去跑，不用手動換檔。2026-11-02 在 starter 上跑的結果：四項都是 `NOT YET`（只有 1 個範例 test；`help_desk.py` 和 original 一樣所以 already 不計；表格 0 列；reflection 空白）。
+`check_hunt.py` 會自己把 `help_desk_original.py` 複製成 `help_desk.py` 放到暫存資料夾去跑，不用手動換檔。2026-11-02 在 starter 上跑的結果：四項都是 `NOT YET`（只有 1 個範例 test；`help_desk.py` 和 original 一樣所以 already 不計；表格 0 列；reflection 空白）。2026-11-03 抓到的提交版本：`test_regressions.py` 有 3 個 test（範例 1 個 + 你寫的 2 個）、`FINDINGS.md` 表格填了 1 列（至少要 4 列）、reflection 還是空白、`help_desk.py` 改了 1 處。這次排程沒有跑 checker，請到 repo 的 Actions 分頁看 autograder 的結果。
 
 ### 配分（README「Points」+ [repo/.github/workflows/classroom.yml](repo/.github/workflows/classroom.yml)）
 
@@ -130,5 +132,6 @@ push 後 GitHub 顯示前 24 分；其餘 36 分老師截止後補上，並列�
 | 日期 | 變動 |
 |---|---|
 | 2026-11-02 | 第一次整理 |
+| 2026-11-03 | repo 檔案 FINDINGS.md、help_desk.py、test_regressions.py 改了（是你自己 push 的作業；Canvas spec 和 README 都沒變）。更新截止列的繳交狀態，註明 repo/ 現在是提交版本，補上提交版本的進度 |
 
 DSA 課用了 AI 要附 chat session 或註明。

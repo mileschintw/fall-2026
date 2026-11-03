@@ -18,7 +18,7 @@ def da_append(arr, value):
     """Add value at the end. When the array is full, its capacity doubles and every element is kept.
     Appending n items takes O(n) time in total."""
     if arr['size'] == len(arr['slots']):
-        bigger = [None] * (len(arr['slots']) + 1)
+        bigger = [None] * (len(arr['slots']) * 2)
         for i in range(arr['size']):
             bigger[i] = arr['slots'][i]
         arr['slots'] = bigger
