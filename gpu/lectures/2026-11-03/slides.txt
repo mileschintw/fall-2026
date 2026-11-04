@@ -1,0 +1,1230 @@
+=== p1 ===
+EEP 524 
+Applied High - Performance 
+GPU Computing 
+LECTURE 5 :   Tuesday, Nov 3, 2026 
+Instructor: Dr. Colin Reinhardt 
+University of Washington   -   Professional Masters Program 
+Autumn 2026
+
+=== p2 ===
+Lecture 5 : Outline 
+   GPU HW Architecture : CUDA Performance Topics 
+   GPU memory subsystems 
+   Global device memory and DRAM 
+   DRAM burst mode 
+   Coalesced memory access 
+   Application to MMULT access patterns 
+HW3 due Fri, 6 NOV by 11:59 PM 
+HW4 due Fri, 13 NOV by 11:59 PM 
+   this is the final homework assignment before final project!
+
+=== p3 ===
+Recall from Lecture 4… 
+Two key concepts for GPU Performance 
+1.   Provide a lot of threads to allow latency hiding 
+2.   Make efficient use of the device memory hierarchy 
+1.   Many   requests in flight 
+In today’s lecture we dig into the device memory hierarchy
+
+=== p4 ===
+Why memory is usually the first bottleneck 
+M O T I V A T I O N 
+38.7   TFLOP/s 
+peak FP32 math (RTX A6000) 
+768   GB/s 
+peak DRAM bandwidth (same GPU) 
+≈ 50   FLOP / byte 
+needed to keep the ALUs busy 
+38.7 × 10¹² FLOP/s   ÷   768 × 10⁹ B/s ≈ 50 FLOP/B 
+0.01   0.1   1   10   100   1000 
+10 G 
+100 G 
+1 T 
+10 T 
+100 T 
+Arithmetic intensity (FLOPs per DRAM byte, log scale) 
+FLOP/s (log) 
+ridge ≈ 50 
+Memory - bound 
+perf = AI   ×   768 GB/s 
+Compute - bound 
+38.7 TFLOP/s roof 
+vector add 
+1 FLOP per 12 B 
+cuBLAS SGEMM 
+≈ 245 FLOP/B 
+4
+
+=== p5 ===
+NVIDIA GPU Memory 
+   Review of CUDA device memory hierarchy and access scopes, lifetimes
+
+=== p6 ===
+GPU Memory Subsystems 
+Global ( Local,Constant ) Memory : GMEM 
+•   DRAM multi - bank/rank memory channels 
+•   1 rank = 8 banks x 8bits = 64bit = 8 Bytes 
+•   leverage burst - mode for optimal perf 
+L1/Shared Memory : SMEM 
+•   SRAM multi - bank memory 
+•   32 banks x 4 Bytes = 128 Byte access width 
+•   full cache line width (128Byte = 4 sectors)
+
+=== p7 ===
+01 
+DRAM Architecture Basics 
+How a bit is stored, 
+how a row is opened, 
+and why data always leaves a DRAM chip in 32 - byte   bursts . 
+Cell (1T1C)   Array / mat   Bank + row 
+buffer   Bank groups   Channel   Chip or HBM 
+stack 
+7
+
+=== p8 ===
+The DRAM cell: one transistor, one capacitor (1T1C) 
+P A R T 1 · D R A M B A S I C S 
+Wordline (row select) 
+Bitline 
+Access 
+transistor 
+gate 
+cell plate (VDD/2) 
+Storage 
+capacitor 
+(femtofarads) 
+Sense amp 
+VDD/2 
+small ΔV 
+amplified 
+bitline voltage vs. time 
+1   Store:   A bit is charge on a tiny capacitor behind one transistor 
+(1T1C). Far denser than the 6 - transistor SRAM used on - chip, so a 
+device holds gigabytes. 
+2   Read:   Raising the wordline shares the cell’s charge with the 
+bitline. The sense amplifier detects a small ΔV and drives it to a 
+full logic level. 
+3   Restore:   Sensing drains the cell (a destructive read), so the sense 
+amplifier writes the value back. 
+4   Refresh:   Charge leaks; every row must be re - read and restored 
+periodically (every few tens of   ms , e.g. 32 – 64   ms ). This costs a 
+little bandwidth , and power. 
+SRAM   (on - chip): registers, L1/shared memory, L2 cache. 
+DRAM   (off - chip): the GPU’s global memory , GDDR or HBM. 
+8
+
+=== p9 ===
+From cells to a bank: rows, columns, row buffer 
+P A R T 1 · D R A M B A S I C S 
+Row decoder 
+row address ↓ 
+activated 
+row 
+cell array (rows   ×   columns) 
+Row buffer 
+(sense amps: one 
+open row) 
+Column decoder / mux 
+← column 
+address 
+I/O pins: burst 
+1   ACT IVATE   (row) 
+The decoder raises one   wordline ; the 
+whole row is sensed into the row buffer 
+(about 1 – 2 KB per bank). 
+2   READ / WRITE (column) 
+Selects a small chunk of the open row and 
+streams it over the pins as a burst (32 B on 
+GPU memories). 
+3   PRE CHARGE 
+Closes the row:   bitlines   return to VDD/2 so 
+a different row of this bank can be 
+opened. 
+Key insight:   opening a row is expensive; reading 
+more data from an already - open row is cheap. 
+9
+
+=== p10 ===
+DRAM commands and timing: row hits vs. conflicts 
+P A R T 1 · D R A M B A S I C S 
+Command 
+Data bus 
+ACT   RD   RD   PRE   ACT 
+32 B   32 B 
+t RCD   row→column   CL (CAS latency)   t RP   precharge 
+2nd RD to the open row: no new ACT needed 
+open next row 
+Each of these delays is roughly 10 – 20 ns on current GDDR/HBM parts (tens of GPU clock cycles). 
+Time until the first byte, by row - buffer state 
+Row hit 
+row already open   CL   data   ≈ 1 × 
+Row empty 
+bank precharged   tRCD   CL   data   ≈ 2 × 
+Row conflict 
+other   row open   tRP   tRCD   CL   data   ≈ 3 × 
+Memory controllers reorder queued 
+requests to favor row hits. 
+Streaming access produces them naturally. 
+10
+
+=== p11 ===
+DRAM parallelism: channels and banks 
+P A R T 1 · D R A M B A S I C S 
+One GDDR6 chip (x32) 
+Channel A (16 - bit) 
+bank group 0 
+bank   bank 
+bank   bank 
+bank group 1 
+bank   bank 
+bank   bank 
+bank group 2 
+bank   bank 
+bank   bank 
+bank group 3 
+bank   bank 
+bank   bank 
+Channel B (16 - bit) 
+bank group 0 
+bank   bank 
+bank   bank 
+bank group 1 
+bank   bank 
+bank   bank 
+bank group 2 
+bank   bank 
+bank   bank 
+bank group 3 
+bank   bank 
+bank   bank 
+2 channels   ×   16 banks (4 bank groups   ×   4 banks) per chip. RTX A6000: 12 chips 
+→ 384 banks. 
+Bank - level parallelism 
+Bank 0   ACT   RD 
+Bank 1   ACT   RD 
+Bank 2   ACT   RD 
+Bank 3   ACT   RD 
+Data   32 B   32 B   32 B   32 B 
+While one bank is still opening a row, others are already delivering 
+data, so the bus stays busy. 
+Scaling up on a GPU:   many chips or stacks   ×   channels   ×   banks 
+means hundreds to thousands of banks working concurrently. 
+The GPU hashes physical addresses across channels and 
+banks so that ordinary access patterns spread out evenly. 
+11
+
+=== p12 ===
+Bursts: why the DRAM access “atom” is   32 Bytes 
+P A R T 1 · D R A M B A S I C S 
+GDDR6 channel 
+16 beats (time) → 
+16 pins 
+16   ×   16 = 256 bit = 32 B 
+HBM3 pseudo - channel 
+8 beats (time) → 
+32 pins 
+32   ×   8 = 256 bit = 32 B 
+Access granularity 
+= channel width   ×   burst length 
+The array fetches all 256 bits internally in 
+one step (“prefetch”), then serializes 
+them over the pins. 
+Every current GPU DRAM type delivers 
+32 B   per access. 
+NVIDIA’s cache sector is 32 B to match. 
+Memory   Channel width   Burst length   Bytes / access   Used on (examples) 
+GDDR6   16 bit   16   32 B   Turing, RTX A6000 (Ampere) 
+GDDR6X   16 bit   8 (PAM4: 2 bit/symbol)   32 B   RTX 3090, RTX 4090 
+HBM2 / HBM2e   64 - bit pseudo - channel   4   32 B   V100, A100 
+HBM3 / HBM3e   32 - bit pseudo - channel   8   32 B   H100, H200, B200 
+12
+
+=== p13 ===
+GDDR vs. HBM: two DRAM families 
+P A R T 1 · D R A M B A S I C S 
+GDDR: chips on the circuit board 
+GPU 
+die 
+x32 
+x32 
+x32 
+x32 
+x32 
+x32 
+x32 
+x32 
+x32   x32 
+x32   x32 
+12 chips   ×   32 bit = 384 - bit bus 
+RTX A6000:   48 GB GDDR6, 384 - bit, 16 Gb/s per pin → 768 
+GB/s 
+•   Narrow bus, very fast pins 
+•   Lower cost; higher energy per bit 
+•   GeForce and RTX workstation GPUs 
+HBM: stacks beside the die 
+silicon interposer (top view) 
+GPU die 
+HBM 
+HBM 
+HBM 
+HBM 
+HBM 
+HBM 
+side view of one stack 
+GPU 
+DRAM dies 
+base die 
+TSVs 
+H100 SXM:   80 GB HBM3, 5 active stacks   ×   1024 bit = 5120 - 
+bit → 3.35 TB/s 
+•   Very wide bus, moderate pin speed 
+•   Best bandwidth and energy per bit 
+•   Data - center GPUs (V100, A100, H100, B200) 
+14
+
+=== p14 ===
+Peak bandwidth = bus width   ×   pin data rate 
+P A R T 1 · D R A M B A S I C S 
+BW peak   = (bus width   ÷   8)   ×   data rate per pin 
+RTX A6000   GDDR6 
+384   ÷   8 = 48 B   ×   16 GT/s   768 GB/s 
+H100 SXM   HBM3 
+5120   ÷   8 = 640 B   ×   ≈ 5.2 GT/s   ≈ 3.35 TB/s 
+B200   HBM3e 
+8192   ÷   8 = 1024 B   ×   ≈ 7.8 GT/s   ≈ 8 TB/s 
+A wider bus means more 32 - B atoms in flight at once, not bigger atoms. 
+Well - written streaming kernels typically reach roughly 80 – 90% of peak. 
+768 
+900 
+1,008 
+1,792 
+2,039 
+3,350 
+8,000 
+0   2,000   4,000   6,000   8,000 
+RTX A6000 (GDDR6) 
+V100 (HBM2) 
+RTX 4090 (GDDR6X) 
+RTX 5090 (GDDR7) 
+A100 80GB (HBM2e) 
+H100 SXM (HBM3) 
+B200 (HBM3e) 
+Peak DRAM bandwidth (GB/s) 
+■   GDDR   ■   HBM   (vendor peak specifications)   15
+
+=== p15 ===
+Global Memory: 
+DRAM 
+Memory Channel 0 
+Each DRAM bank is a set of 2D arrays 
+of 1 bit memory cells. 
+DRAM systems typically employ two 
+more forms of parallel organization: 
+multiple   banks, ranks,   and   channels . 
+•   At the highest level, a processor 
+contains one or more channels. 
+•   Each channel is a memory 
+controller with a separate bus that 
+connects a set of DRAM banks and 
+ranks to the processor
+
+=== p16 ===
+NVIDIA Devices 
+Memory Controllers 
+The correspondence between memory controllers 
+and DRAM memory channels is not necessarily 1 - to - 
+1 (often not) 
+GH100 Hopper GPU 
+TU102 Turing GPU
+
+=== p17 ===
+02 
+Global Memory on NVIDIA GPUs 
+How warps turn loads and stores into 32 - byte sector transactions, and how to make every fetched 
+byte count. 
+Warp: 32 
+addresses   Coalescer   L1: sectors   L2 slices   Memory 
+controller   DRAM burst 
+18
+
+=== p18 ===
+The GPU memory hierarchy (Volta and later) 
+P A R T 2 · G L O B A L M E M O R Y 
+GPU die (on - chip SRAM) 
+SM 0 
+4 sub - partitions + regs 
+L1 / shared 
+SM 1 
+4 sub - partitions + regs 
+L1 / shared 
+SM 2 
+4 sub - partitions + regs 
+L1 / shared 
+… 
+SM n 
+4 sub - partitions + regs 
+L1 / shared 
+On - chip interconnect (crossbar) 
+L2 
+slice 
+L2 
+slice 
+L2 
+slice 
+L2 
+slice 
+L2 
+slice 
+L2 
+slice 
+L2 
+slice 
+L2 
+slice 
+Mem. controller   Mem. controller   Mem. controller   Mem. controller 
+DRAM   DRAM   DRAM   DRAM 
+Off - chip DRAM = global memory (GDDR chips or HBM stacks) 
+Level   Size (typical)   Latency 
+(approx.) 
+Registers   256 KB per SM   ≈ 1 cycle 
+L1 / shared   128 – 256 KB per SM   ≈ 30 cycles 
+L2   6 MB (V100)   –   50 MB 
+(H100)   ≈ 200 cycles 
+DRAM   16 – 192 GB   ≈ 400 – 800 
+cycles 
+Every global load or store   that misses in L1 travels 
+over the crossbar to one L2 slice (chosen by an 
+address hash); L2 misses go to DRAM. 
+Example, RTX A6000:   84 SMs, 6 MB L2, 48 GB 
+GDDR6. 
+Latencies are order - of - magnitude values from 
+microbenchmark studies; they vary by GPU. 
+19
+
+=== p19 ===
+Life of a global - memory load 
+P A R T 2 · G L O B A L M E M O R Y 
+1 
+Warp issues LD 
+one request, 32 
+addresses 
+2 
+Coalescer 
+find unique 32 - B 
+sectors 
+3 
+L1 lookup 
+hit → return data 
+4 
+Crossbar → L2 
+slice chosen by 
+address hash 
+5 
+Memory 
+controller 
+queue, reorder, 
+schedule 
+6 
+DRAM 
+ACT / RD → 32 - B 
+bursts 
+Data returns: DRAM → L2 → L1 → registers of the requesting warp 
+Approximate latency to the warp (GPU core cycles) 
+L1 hit   ≈ 30 
+L2 hit   ≈ 200 
+DRAM   ≈ 550 
+Hundreds of cycles   for DRAM 
+means a single warp would stall for 
+a long time. 
+GPUs hide this with many resident 
+warps and many   requests in flight 
+(see the latency - hiding slide). 
+21
+
+=== p20 ===
+Sectors and cache lines: the units of transfer 
+P A R T 2 · G L O B A L M E M O R Y 
+32 threads of one warp, each loading one 4 - byte float 
+t0   t1   t2   t3   t4   t5   t6   t7   t8   t9   t10   t11   t12   t13   t14   t15   t16   t17   t18   t19   t20   t21   t22   t23   t24   t25   t26   t27   t28   t29   t30   t31 
+sector 0: bytes 0 – 31   sector 1: bytes 32 – 63   sector 2: bytes 64 – 95   sector 3: bytes 96 – 127 
+sector = 32 B (8 floats) 
+cache line = 128 B = 4 sectors (tag granularity) 
+Minimum transfer = 1 sector 
+If a warp touches even one byte of a 
+sector, all 32 bytes move (DRAM   L2 
+L1). 
+Cache   Line = 128 B tag 
+Caches track 128 - B lines, but fill and 
+evict each 32 - B sector independently. 
+Ideal warp access 
+32 consecutive, aligned 4 - B words: 1 
+request → 4 sectors → zero waste. 
+Older documentation (and Boehm’s article) speaks of one 128 - B “transaction”; in current hardware terms that is one request serve d by 4 sectors of one line. 
+22
+
+=== p21 ===
+COALESCING: how access patterns become sectors 
+P A R T 2 · G L O B A L M E M O R Y 
+a   Consecutive and aligned   x = a[tid]; 
+4 sectors · 100% 
+b   Consecutive, offset by one element   x = a[tid + 1]; 
+5 sectors · 80% 
+c   Stride 2   x = a[2 * tid]; 
+8 sectors · 50% 
+d   Stride 32 (e.g. walking down a column)   x = a[32 * tid]; 
+… 30 more sectors 
+32 sectors · 12.5% 
+requested word   fetched, unused   not fetched 
+one 32 - B sector (8 words) 
+Also fully coalesced:   any permutation within the same 
+sectors, and a broadcast (all threads read one word → 1 
+sector). 
+23
+
+=== p22 ===
+Quantifying coalescing: efficiency vs. stride 
+P A R T 2 · G L O B A L M E M O R Y 
+efficiency =   bytes requested   ÷   (sectors   ×   32 B) 
+4 - B elements, stride s: sectors = min(4s, 32) 
+s = 1   4 sectors   128 / 128 B = 100% 
+s = 2   8 sectors   128 / 256 B = 50% 
+s ≥ 8   32 sectors   128 / 1024 B = 12.5% 
+Wider per - thread loads are also 100% efficient 
+Per - thread type   Bytes / warp   Sectors 
+char (1 B)   32   1 
+float (4 B)   128   4 
+float2 / double (8 B)   256   8 
+float4 (16 B)   512   16 
+100.% 
+50.% 
+25.% 
+12.5%   12.5%   12.5% 
+0 
+25 
+50 
+75 
+100 
+1   2   4   8   16   32 
+% of fetched bytes used 
+stride between consecutive threads (elements) 
+Load efficiency vs. stride (4 - B elements) 
+24
+
+=== p23 ===
+Data layout : array of structs ( AoS ) vs. struct of arrays ( SoA ) 
+P A R T 2 · G L O B A L M E M O R Y 
+Array of structs (AoS) 
+struct   P {   float   x, y, z,   w; };   P   pts[N]; 
+float   v   = pts[tid].x;   // stride   16   B between threads 
+x   y   z   w   x   y   z   w   x   y   z   w   x   y   z   w   x   y   z   w   x   y   z   w   x   y   z   w   x   y   z   w   → 16 sectors per warp, 
+25% useful 
+Struct of arrays (SoA) 
+float   xs[N],   ys[N], zs[N], ws[N]; 
+float   v   = xs[tid];   // consecutive threads,   consecutive words 
+x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   → 4 sectors per warp, 
+100% useful 
+Counting the AoS case:   32 threads   ×   16 - B stride span 512 B = 16 sectors, for only 128 useful 
+bytes. 
+Strips show the first 32 words; each outlined group is one 32 - B sector. 
+Practical rules 
+•   Prefer SoA when a kernel 
+reads one field at a time (e.g. 
+point - cloud x, y, z). 
+•   AoS is fine if each thread 
+reads the whole struct with 
+one 16 - B load (float4). 
+•   cudaMalloc returns pointers 
+aligned to at least 256 B. 
+•   Keep 2 - D row pitch a multiple 
+of 32 B, ideally 128 B 
+(cudaMallocPitch). 
+25
+
+=== p24 ===
+2 - D arrays: map threadIdx.x to columns 
+P A R T 2 · G L O B A L M E M O R Y 
+row - major : a[r][c]   at   linear offset   r·8 + c 
+r=0   0   1   2   3   4   5   6   7 
+r=1   8   9   10   11   12   13   14   15 
+r=2   16   17   18   19   20   21   22   23 
+r=3   24   25   26   27   28   29   30   31 
+✓   Coalesced: threads walk along a row 
+a[row *   N +   threadIdx.x]   // contiguous 
+✗   Uncoalesced: threads walk down a column 
+a[threadIdx.x *   N   + col]   // stride   N 
+the same 32 elements in linear memory (row after row) 
+0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+row 0   row 1   row 2   row 3 
+Rule of thumb:   map   threadIdx.x   (the fastest - varying index within a warp) to the last, contiguous index of the array. 
+This is precisely the difference between SGEMM Kernels 1 and 2. 
+26
+
+=== p25 ===
+Hiding DRAM latency:   bytes (requests) in flight 
+P A R T 2 · G L O B A L M E M O R Y 
+Little’s law: bytes in flight = bandwidth   ×   latency 
+latency ≈ 500 ns (illustrative) 
+each box = one 32 - B sector request travelling to and from DRAM 
+RTX A6000, worked example 
+•   768 GB/s   ×   500 ns ≈ 384 KB in flight 
+•   ≈ 12,000 sectors ≈ 3,000 warp - wide 128 - B loads 
+•   ÷   84 SMs ≈ 36 outstanding warp loads per SM 
+Coalescing reduces bytes per request; many warps (and independent 
+loads per thread) raise requests in flight. You need both. 
+One SM scheduler, four resident warps 
+warp 0   waiting on memory 
+warp 1   waiting on memory 
+warp 2   waiting on memory 
+warp 3   waiting on 
+memory 
+issue 
+■   computing / issuing   □   stalled on a load; gaps = idle issue slots 
+The scheduler switches to any warp that is ready. With 
+enough resident warps (up to 48 – 64 per SM), memory 
+latency overlaps with useful work. 
+27
+
+=== p26 ===
+Caches and stores: what happens beyond L1 
+P A R T 2 · G L O B A L M E M O R Y 
+SM 
+L1 data cache 
+L2 cache 
+one per GPU, sliced 
+DRAM 
+global memory 
+SM   L2 
+L1 misses fetch 32 - B sectors; 
+stores pass straight through to L2 
+L2   DRAM 
+misses fill sectors; dirty sectors 
+are written back on eviction 
+load data 
+store data 
+L1 (per SM).   Caches global loads in 128 - B lines with 32 - B sectors. It is not 
+kept coherent across SMs, and it does not hold dirty global data: stores are 
+forwarded to L2. 
+L2 (per GPU).   All DRAM traffic passes through it. Write - back: modified 
+sectors go to DRAM when evicted. Per - byte masks track partially written 
+sectors. 
+Stores coalesce like loads.   32 consecutive 4 - B stores from a warp → 4 full 
+sectors. Scattered partial - sector writes can cost extra DRAM work (e.g. read - 
+modify - write with ECC). 
+Caches are not a substitute for coalescing.   They help when data is reused 
+soon, but they cannot recover the bandwidth wasted by fetching mostly 
+unused sectors. 
+28
+
+=== p27 ===
+Global Memory   -   Access Coalescing 
+–   When all threads of a warp execute a load instruction, if all accessed 
+locations fall into the same burst section, only one DRAM request 
+will be made and the access is fully coalesced. 
+2 1 0   3   5 4   6   7   9 8   10   11   13 12   14   15 
+Burst section   Burst section   Burst section   Burst section 
+T 0   T 1   T 2   T 3 
+Coalesced Loads 
+T 0   T 1   T 2   T 3 
+Coalesced Loads 
+The most favorable global memory access pattern is achieved when all 
+threads in a warp access consecutive global memory locations. 
+In this case, the hardware combines, or   coalesces , all these accesses into a 
+consolidated access to consecutive DRAM locations.
+
+=== p28 ===
+Un - coalesced Accesses 
+–   When the accessed locations spread across burst section boundaries: 
+–   Coalescing fails 
+–   Multiple (additional) DRAM requests are made 
+–   The access is not fully coalesced. 
+–   Some of the bytes accessed and transferred are not used by the threads 
+2 1 0   3   5 4   6   7   9 8   10   11   13 12   14   15 
+Burst section   Burst section   Burst section   Burst section 
+T 0   T 1   T 2   T 3 
+Un - coalesced Loads 
+T 0   T 1   T 2   T 3 
+Un - coalesced Loads
+
+=== p29 ===
+How to judge if an access is coalesced? 
+•   GMEM accesses in a warp are to consecutive DRAM locations 
+IF the index in an array access is in the general form of 
+A[(expression   with   terms   independent   of   threadIdx.x )   +   threadIdx.x ]; 
+•   This   could be realized as a nested expression 
+•   For example (from naïve global MMULT) 
+__global__   void   mmult_sqr_global ( float *   A ,   float *   B ,   float *   C ,   int   width ) 
+{ 
+int   row =   blockIdx.y   *   blockDim.y   +   threadIdx.y ; 
+int   col =   blockIdx.x   *   blockDim.x   +   threadIdx.x ; 
+if   ((row <   width ) && (col <   width )) 
+{ 
+float   pval   = 0; 
+for   ( int   k = 0; k <   width ; ++k) { 
+pval   +=   A [ row *   width   + k] *   B [ k *   width   + col]; 
+} 
+C [ row *   width   + col] =   pval ; 
+} 
+}
+
+=== p30 ===
+Two Memory Access Patterns of Basic Matrix Multiplication 
+A   B 
+WIDTH 
+T1 
+T2 
+… 
+TN   A[Row*K +   i ]   B[ i *N + Col] 
+Row =   blockIdx.y * blockDim.y   +   threadIdx.y 
+Col =   blockIdx.x * blockDim.x   +   threadIdx.x 
+i   is the loop counter in the inner product loop of the kernel code 
+HEIGHT 
+C=AB 
+A is M x K, B is K x N 
+T1   T2   … TN
+
+=== p31 ===
+N 
+T 0   T 1   T 2   T 3 
+Load iteration 0 
+T 0   T 1   T 2   T 3 
+Load iteration 1 
+Access 
+direction in 
+kernel code 
+B 0,2 
+B 1,1 
+B 0,1 B 0,0 
+B 1,0 
+B 0,3 
+B 1,2   B 1,3 
+B 2,1 B 2,0   B 2,2   B 2,3 
+B 3,1 B 3,0   B 3,2   B 3,3 
+B 0,2 B 0,1 B 0,0   B 0,3   B 1,1 B 1,0   B 1,2   B 1,3   B 2,1 B 2,0   B 2,2   B 2,3   B 3,1 B 3,0   B 3,2   B 3,3 
+T 0   T 1   T 2   T 3 
+Load iteration 0 
+T 0   T 1   T 2   T 3 
+Load iteration 1 
+Access 
+direction in 
+kernel code 
+… 
+A 0,2 
+A 1,1 
+A 0,1 A 0,0 
+A 1,0 
+A 0,3 
+A 1,2   A 1,3 
+A 2,1 A 2,0   A 2,2   A 2,3 
+A 3,1 A 3,0   A 3,2   A 3,3 
+A 0,2 A 0,1 A 0,0   A 0,3   A 1,1 A 1,0   A 1,2   A 1,3   A 2,1 A 2,0   A 2,2   A 2,3   A 3,1 A 3,0   A 3,2   A 3,3
+
+=== p32 ===
+B accesses are coalesced 
+N 
+T 0   T 1   T 2   T 3 
+Load iteration 0 
+T 0   T 1   T 2   T 3 
+Load iteration 1 
+Access 
+direction in 
+kernel code 
+B 0,2 
+B 1,1 
+B 0,1 B 0,0 
+B 1,0 
+B 0,3 
+B 1,2   B 1,3 
+B 2,1 B 2,0   B 2,2   B 2,3 
+B 3,1 B 3,0   B 3,2   B 3,3 
+B 0,2 B 0,1 B 0,0   B 0,3   B 1,1 B 1,0   B 1,2   B 1,3   B 2,1 B 2,0   B 2,2   B 2,3   B 3,1 B 3,0   B 3,2   B 3,3
+
+=== p33 ===
+A Accesses are Not Coalesced 
+T 0   T 1   T 2   T 3 
+Load iteration 0 
+T 0   T 1   T 2   T 3 
+Load iteration 1 
+Access direction in kernel 
+code 
+… 
+A 0,2 
+A 1,1 
+A 0,1 A 0,0 
+A 1,0 
+A 0,3 
+A 1,2   A 1,3 
+A 2,1 A 2,0   A 2,2   A 2,3 
+A 3,1 A 3,0   A 3,2   A 3,3 
+A 0,2 A 0,1 A 0,0   A 0,3   A 1,1 A 1,0   A 1,2   A 1,3   A 2,1 A 2,0   A 2,2   A 2,3   A 3,1 A 3,0   A 3,2   A 3,3
+
+=== p34 ===
+Memory Coalescing Analysis 
+C=AB   with [A = B = C =   WxW   square matrices] 
+row   =   blockIdx.y * blockDim.y   +   threadIdx.y ; 
+col   =   blockIdx.x * blockDim.x   +   threadIdx.x ; 
+for(   uint   k =0;   k <   W;   ++k) { 
+Ctmp   +=   A[row*W   + k]   *   B[k*W   + col];   } 
+C[row*W   +   col]   =   Ctmp ; 
+A y,x 
+A row,col 
+C 1,1 
+C 0,1 C 0,0 
+C 1,0 
+C 2,2   C 2,3 
+W 
+W 
+TID ( x,y )   BID ( x,y )   row   col   Loop   idx   A[   i   ]   B[ j ]   Output 
+0,0   0,0   K = 0   C_0,0 
+1,0   0,0   C_0,1 
+0,1   0,0   C_1,0 
+1,1   0,0   C_1,1 
+0,0   1,1   C_2,2 
+1,0   1,1   C_2,3 
+0,0   0,0   K = 1   C_0,0 
+1,0   0,0   C_0,1 
+0,1   0,0   C_1,0 
+1,1   0,0   C_1,1 
+0,0   1,0   C _ 2 ,2 
+1,0   1,1   C_2,3 
+note! 
+A 0,2 
+A 1,1 
+A 0,1 A 0,0 
+A 1,0 
+A 0,3 
+A 1,2   A 1,3 
+A 2,1 A 2,0   A 2,2   A 2,3 
+A 3,1 A 3,0   A 3,2   A 3,3 
+B 0,2 
+B 1,1 
+B 0,1 B 0,0 
+B 1,0 
+B 0,3 
+B 1,2   B 1,3 
+B 2,1 B 2,0   B 2,2   B 2,3 
+B 3,1 B 3,0   B 3,2   B 3,3 
+A 0,2 A 0,1 A 0,0   A 0,3 
+A 1,1 A 1,0   A 1,2   A 1,3 
+A 2,1 A 2,0   A 2,2   A 2,3   A 3,1 A 3,0   A 3,2   A 3,3
+
+=== p35 ===
+Transpose Pattern for Coalesced Access 
+d_M   d_N 
+W I D T H 
+WIDTH 
+Original 
+Access 
+Pattern 
+SETUP : Host transpose and store M matrix to device in col - major layout 
+APPROACH: 
+•   load data from global memory to shared memory in a coalesced manner 
+•   perform the irregular accesses on shared memory   –   no coalesced requirement! 
+d_N 
+Transposed 
+Access 
+Pattern 
+Coalesced tile copies into 
+shared   memory   each phase 
+Use ‘transposed’ indices to access   s_M 
+when performing multiplication phases 
+with shared memory values 
+d_M 
+s_M   s_N
+
+=== p36 ===
+03 
+Case Study: SGEMM Kernel 2 
+Global - memory   coalescing   analysis 
+Problem & 
+napkin math   Kernel 1 mapping   Kernel 1 traffic   Kernel 2 code   Kernel 2 traffic   Results & next 
+steps 
+41
+
+=== p37 ===
+SGEMM: C = α·A·B + β·C 
+P A R T 3 · C A S E S T U D Y 
+B 
+K   ×   N 
+A 
+M   ×   K 
+C 
+M   ×   N 
+row   cRow   of A 
+column cCol 
+of B 
+C[cRow][cCol] 
+■   data one thread reads 
+■   the element it writes 
+Each thread computes one element: a length - K dot product of a row of A with a 
+column of B. 
+Napkin math (M = N = K = 4092, FP32) 
+Quantity   Value 
+FLOPs (2·4092³ + 4092²)   ≈ 137 GFLOP 
+Min. DRAM reads (A, B, C: 3·4092²·4 B)   ≈ 201 MB 
+Min. DRAM writes (C: 4092²·4 B)   ≈ 67 MB 
+Time at peak FP32 (38.7 TFLOP/s)   ≈ 3.5 ms 
+Time at peak bandwidth (768 GB/s)   ≈ 0.35 ms 
+Compute ≈ 10 ×   memory time : a good SGEMM is compute - 
+bound,   as long as   it does not move far more than the ≈ 268 
+MB minimum. 
+Storage is row - major: 
+A [r][c] is A[ r·K   + c], 
+B [r][c] is B[ r·N   + c], 
+C [r][c] is C[ r·N   + c]. 
+42
+
+=== p38 ===
+Kernel 1 (naive): one thread per element of C 
+P A R T 3 · C A S E S T U D Y 
+__global__   void   sgemm_naive ( int   M,   int   N,   int   K,   float   alpha, 
+const   float   *A,   const   float   *B, 
+float   beta,   float   *C) { 
+const   uint   x =   blockIdx.x   *   blockDim.x   +   threadIdx.x ;   // ROW! 
+const   uint   y =   blockIdx.y   *   blockDim.y   +   threadIdx.y ;   // COL! 
+if   (x < M && y < N) { 
+float   tmp   =   0 . 0 ; 
+for   ( int   i   =   0 ;   i   < K; ++ i ) { 
+tmp   += A[x * K +   i ] * B[ i   * N + y]; 
+} 
+C[x * N + y] = alpha *   tmp   + beta * C[x * N + y]; 
+} 
+} 
+// launch:   gridDim (CEIL_DIV(M, 32), CEIL_DIV(N, 32)) 
+//   blockDim (32, 32) 
+Source: 1_naive.cuh in siboehm/SGEMM_CUDA (comments trimmed); launch from runner.cu 
+Warp rule applied:   blockDim.x = 32, so each warp has a fixed threadIdx.y and threadIdx.x = 0…31. 
+warp 0   → rows 0…31 of column 0 of the tile;   warp 1   → the next column. 
+32   ×   32 tile of C (one   thread   block ) 
+x = threadIdx.x → row 
+y = threadIdx.y → column 
+← warp 0 
+← warp 1 
+43
+
+=== p39 ===
+Kernel 1: what one warp touches per loop iteration 
+P A R T 3 · C A S E S T U D Y 
+A (row - major, K = 4092) 
+… 32 rows, one element each 
+column i 
+A[x·K + i] for x = x₀ … x₀+31: addresses 16,368 B apart 
+t0 
+∕∕ 16 KB ∕∕ 
+t1 
+∕∕ 16 KB ∕∕ 
+t2 
+∕∕ 16 KB ∕∕ 
+t3 
+… t31 
+A: 32 different cache lines → 32 sectors per request (4 useful bytes in each) 
+B[i·N + y]: y is the same for every thread in the warp 
+t0   t1   t2   t3   t4   …   t30   t31 
+all 32 threads read the same word: a 
+broadcast 
+B: 1 sector per request (broadcast) 
+Per warp, per iteration:   33 sectors for 64 useful FLOPs. 
+Final store C[x·N + y]:   also stride N → 32 sectors. 
+Measured (A6000, 4092²):   309 GFLOP/s, about 15 GB/s of global - 
+memory throughput. 
+L1 catches the next 7 iterations of each A sector, but every load 
+instruction still generates 32 separate transactions. 
+44
+
+=== p40 ===
+Kernel 2: remap threads to elements of C 
+P A R T 3 · C A S E S T U D Y 
+Kernel 1 (naive) 
+//   blockDim(32,   32):   2 - D   block 
+x   =   blockIdx.x   * blockDim.x   +   threadIdx.x; 
+y   =   blockIdx.y   *   blockDim.y   +   threadIdx.y; 
+...   A[x   *   K   +   i]   *   B[i   *   N   +   y]   ... 
+Kernel 2 (coalesced), BLOCKSIZE = 32 
+//   blockDim(32   *   32):   1 - D   block   of   1024 
+cRow =   blockIdx.x *   BLOCKSIZE   +   threadIdx.x   /   BLOCKSIZE; 
+cCol   =   blockIdx.y   *   BLOCKSIZE   +   threadIdx.x   %   BLOCKSIZE; 
+...   A[cRow   *   K   +   i]   *   B[i   *   N   +   cCol]   ... 
+One warp = a column of C 
+Consecutive lanes → consecutive rows → A 
+reads strided by K 
+One warp = a row of C 
+Consecutive lanes → consecutive columns → 
+B reads contiguous 
+(each stripe is one warp’s 32 outputs; warp 0 highlighted) 
+Same FLOPs, same loop, same instructions.   T he   compiled SASS is unchanged: coalescing is done by the hardware at run time, because 
+alignment cannot be known at compile time. 
+Only the mapping from thread index to output element changes, and with it the set of addresses each warp generates. 
+45
+
+=== p41 ===
+Kernel 2 source, annotated 
+P A R T 3 · C A S E S T U D Y 
+siboehm/SGEMM_CUDA:   src/kernels/2_kernel_global_mem_coalesce.cuh 
+template   < const   uint   BLOCKSIZE> 
+__global__   void   sgemm_global_mem_coalesce( int   M,   int   N,   int   K,   float   alpha, 
+const   float   *A,   const   float   *B, 
+float   beta,   float   *C)   { 
+const   int   cRow   =   blockIdx.x   *   BLOCKSIZE   +   (threadIdx.x   /   BLOCKSIZE); 
+const   int   cCol   =   blockIdx.y   *   BLOCKSIZE   +   (threadIdx.x   %   BLOCKSIZE); 
+//   if   statement   is   necessary   to   make   things   work   under   tile   quantization 
+if   (cRow   <   M   &&   cCol   <   N)   { 
+float   tmp   =   0 . 0 ; 
+for   ( int   i   =   0 ;   i   <   K;   ++i)   { 
+tmp   +=   A[cRow   *   K   +   i]   *   B[i   *   N   +   cCol]; 
+} 
+C[cRow   *   N   +   cCol]   =   alpha   *   tmp   +   beta   *   C[cRow   *   N   +   cCol]; 
+} 
+} 
+1 
+2 
+3 
+4 
+5 
+6 
+Launch:   gridDim(CEIL_DIV(M,   32),   CEIL_DIV(N,   32)),   blockDim(32   *   32), 
+sgemm_global_mem_coalesce<32> 
+Watch the naming:   blockIdx.x selects the tile row (cRow) and blockIdx.y the tile column (cCol), the 
+reverse of the usual “x is horizontal” convention. Within a block, only threadIdx.x is used. 
+1   Template parameter:   BLOCKSIZE = 32 is 
+a compile - time constant, so / and % 
+become shifts and masks. 
+2   Row of C:   Tile row offset + threadIdx.x / 
+32. All 32 lanes of a warp get the same 
+cRow. 
+3   Column of C:   Tile column offset + 
+threadIdx.x % 32. The warp’s lanes cover 
+32 consecutive columns. 
+4   Bounds check:   Handles M, N that are not 
+multiples of 32 (“tile quantization”: edge 
+blocks are partly idle). 
+5   Dot - product loop:   A[cRow·K + i] is one 
+address for the warp (broadcast); B[i·N + 
+cCol] is 32 consecutive floats (coalesced). 
+6   Epilogue:   Read - modify - write of 
+C[cRow·N + cCol]: 32 consecutive floats 
+per warp, coalesced load and store. 
+46
+
+=== p42 ===
+Index mapping: from threadIdx.x to (cRow, cCol) 
+P A R T 3 · C A S E S T U D Y 
+Tile computed by one block 
+warp 0 
+warp 1 
+warp 31 
+32   ×   32 outputs; each stripe = one warp = one row of the tile 
+Zoom: the first two warps 
+cells show threadIdx.x; column = threadIdx.x % 32 
+0 
+32 
+1 
+33 
+2 
+34 
+3 
+35 
+… 
+… 
+31 
+63 
+row 0 
+row 1 
+cRow = blockIdx.x·32 +   ⌊ threadIdx.x / 32 ⌋ 
+cCol = blockIdx.y·32 + threadIdx.x mod 32 
+threadIdx.x   row in tile   col in tile 
+0   0   0 
+1   0   1 
+31   0   31 
+32   1   0 
+1023   31   31 
+Grid of blocks over C 
+blockIdx.x → tile row 
+blockIdx.y → tile column 
+For 4092   ×   4092 
+gridDim   = (128, 128), because 
+⌈ 4092 / 32 ⌉   = 128. 
+The last tile row and column hold 
+only 28 valid rows or columns; the 
+bounds check idles the other 
+threads (tile quantization). 
+47
+
+=== p43 ===
+Kernel 2: what one warp touches per loop iteration 
+P A R T 3 · C A S E S T U D Y 
+A[cRow·K + i]: the same address for all 32 lanes 
+broadcast → 1 sector per request 
+B[ i·N   +   cCol ],   cCol   = c₀ … c₀+31: 32 consecutive floats = 128   B 
+t0   t8   t16   t24   t31 
+4 sectors, all bytes used 
+C[cRow·N + cCol] (epilogue load and store): 32 consecutive floats 
+4 sectors each way 
+5 
+sectors per iteration 
+33 
+in Kernel 1 
+≈ 6.6 ×   fewer transactions 
+A closer look at alignment.   With N = 4092, a row of B is 16,368 B, not a multiple 
+of 32 B. Odd rows start 16 B into a sector, so the warp’s 128 B straddle 5 sectors 
+(80% efficient). 
+Fix:   pad the leading dimension to a multiple of 32 floats ( e.g.   cudaMallocPitch ) 
+so rows start on 128 - B boundaries. 
+odd row of B: 16 - B offset 
+5 sectors fetched for 4 sectors of data 
+even row: aligned 
+48
+
+=== p44 ===
+Result: same math, about 6.4 ×   faster 
+P A R T 3 · C A S E S T U D Y 
+Metric (per warp)   Kernel 1 (naive)   Kernel 2 (coalesced) 
+Output elements   a column of C   a row of C 
+A load / iteration   32 sectors (32 lines)   1 sector (broadcast) 
+B load / iteration   1 sector (broadcast)   4 sectors (coalesced) 
+Sectors / iteration   33   5 
+C store   32 sectors   4 sectors 
+GMEM throughput   ≈ 15 GB/s   ≈ 110 GB/s 
+Performance   309 GFLOP/s   1,986.5 GFLOP/s 
+vs. cuBLAS   1.3%   8.5% 
+Sector counts are the lecture’s model of the L1 request stream; measurements are from S. Boehm 
+(2022), RTX A6000, 4092² FP32. The 6.6 ×   drop in transactions is in line with the 6.4 ×   speedup, but it 
+is a guide, not a precise predictor. 
+309 
+1,987 
+0 
+500 
+1000 
+1500 
+2000 
+Kernel 1 
+(naive) 
+Kernel 2 
+(coalesced) 
+GFLOP/s (RTX A6000) 
+49
+
+=== p45 ===
+Measuring coalescing with Nsight Compute 
+P A R T 2 · G L O B A L M E M O R Y 
+ncu   -- metrics l1tex__t_requests_pipe_lsu_mem_global_op_ld.sum, \ 
+l1tex__t_sectors_pipe_lsu_mem_global_op_ld.sum, \ 
+dram__bytes_read.sum,dram__throughput.avg.pct_of_peak_sustained_elapsed, \ 
+lts__t_sector_hit_rate.pct   ./my_app 
+What to compute   What it tells you   What “good” looks like 
+sectors   ÷   requests (global loads)   Coalescing quality: sectors touched per warp 
+request   4 for 32   ×   4 - B loads; 32 means fully scattered 
+dram__bytes_read / write   Actual DRAM traffic   Close to the data you truly need 
+dram__throughput (% of peak)   How close you are to the bandwidth roof   High for streaming kernels 
+L1 / L2 hit rates   How much reuse the caches captured   Context - dependent 
+Tip:   the Memory Workload Analysis section of the Nsight Compute report flags uncoalesced accesses directly (it reports how many of 
+the 32 bytes per sector each thread   actually uses ) and points to the source line responsible. 
+50
+
+=== p46 ===
+Nsight Compute Demo 
+Analyzing kernel warp coalesced memory access 
+GMEM coalesced   mmult   kernel
+
+=== p47 ===
+Why only 8.5% of cuBLAS? 
+P A R T 3 · C A S E S T U D Y 
+1   Coalescing fixes how bytes are fetched, not how many times. 
+Each thread still streams a whole row of A and column of B (2K 
+values) through the memory system. 
+2   Arithmetic intensity is still tiny. 
+Per warp - iteration: 64 FLOPs for ≈ 132 B requested from L1 → ≈ 0.5 
+FLOP/B, versus the ≈ 50 FLOP/B ridge. 
+3   Reuse is left to the caches. 
+Neighbouring   warps and blocks re - read the same A and B data; L1/L2 
+hits help, but not enough. 
+4   Next steps in the   optimization progression.. . 
+•   Stage tiles in   SMEM   ( Kernel 3 )   with coalesced GMEM< - >SMEM 
+•   compute   many outputs per thread (Kernels 4 – 5 ) 
+•   use   128 - bit vector loads (Kernel 6 ) 
+•   a utotune   and warp - tile. 
+23,250 
+21,779 
+19,721 
+18,237 
+15,972 
+8,475 
+2,980 
+1,987 
+309 
+0   10,000   20,000   30,000 
+cuBLAS 
+10: warptiling 
+9: autotuning 
+6: vectorized 
+5: 2-D blocktiling 
+4: 1-D blocktiling 
+3: SMEM caching 
+2: GMEM coalescing 
+1: naive 
+MMULT   kernel   variants ,   GFLOP/s (A6000) 
+52
+
+=== p48 ===
+Key   T akeaways 
+S U M M A R Y 
+1 
+DRAM moves bursts 
+Channel width   ×   burst length = 32 B 
+on all current GDDR and HBM 
+parts. 
+2 
+Rows are expensive 
+Opening a row costs tens of ns; 
+row hits and many banks in 
+parallel deliver bandwidth. 
+3 
+Sectors are the currency 
+L1, L2 and DRAM exchange 32 - B 
+sectors; 128 - B lines are just the 
+cache   tag   unit. 
+4 
+A warp access = one request 
+Its cost is the number of distinct 
+sectors its 32 addresses touch. 
+5 
+Map   threadIdx.x   to contiguous 
+data 
+Keep rows aligned, prefer   SoA , 
+and use wide loads when possible. 
+6 
+Coalescing is necessary, not 
+sufficient 
+Then add reuse (shared memory, 
+registers) and   keep enough bytes 
+in flight. 
+53
+
+=== p49 ===
+HW4 Overview 
+   due FRI, 13 NOV by 11:59 PM 
+Learning Objectives 
+A.   Reinforce understanding of control divergence, coalesced memory access, and 
+other basic CUDA performance concepts. 
+B.   Get more practice using Nsight Compute (NCU) for profiling and performance 
+analysis 
+C.   Implement the MMULT   transposed   corner   turning   pattern   in a CUDA kernel . 
+A.   Profile to verify improved memory access pattern 
+•   EXTRA CREDIT   ( 4   pts): implement a   parallelized   matrix   transpose kernel to 
+support the corner turning kernel . 
+•   Be sure   to   verify   correctness   and   profile performance!
+
+=== p50 ===
+References and further reading 
+R E S O U R C E S 
+•   S. Boehm,   How to Optimize a CUDA Matmul Kernel for cuBLAS - like Performance: a Worklog , 2022. 
+siboehm.com/articles/22/CUDA - MMM; code: github.com/siboehm/SGEMM_CUDA 
+•   NVIDIA,   CUDA C++ Programming Guide   and   CUDA C++ Best Practices Guide   (device memory access, coalescing). 
+•   NVIDIA,   Nsight Compute Kernel Profiling Guide   (memory tables: requests, sectors, wavefronts). 
+•   NVIDIA architecture whitepapers:   Volta V100, Ampere GA100 and GA102, Hopper H100 . 
+•   Z. Jia, M. Maggioni, B. Staiger, D. P. Scarpazza,   Dissecting the NVIDIA Volta GPU Architecture via Microbenchmarking , 
+arXiv:1804.06826, 2018. 
+•   B. Jacob, S. W. Ng, D. T. Wang,   Memory Systems: Cache, DRAM, Disk , Morgan Kaufmann, 2008. 
+•   JEDEC standards:   JESD250 (GDDR6), JESD235 (HBM / HBM2), JESD238 (HBM3) . 
+•   V. Volkov,   Understanding Latency Hiding on GPUs , PhD thesis, UC Berkeley, 2016. 
+•   O. Mutlu,   Computer Architecture   lectures (ETH Zürich), DRAM sessions. 
+55
