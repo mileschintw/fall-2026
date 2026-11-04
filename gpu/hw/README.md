@@ -8,4 +8,5 @@
 | Homework #1 - SAXPY, 2D & 3D Matrix addition | 2026-10-20 (Tue) 05:59 PM PDT | [README](hw1/README.md) | [spec.md](hw1/spec.md) |
 | Homework #2 - Parallel performance theory, Gaussian blur kernels and more! | 2026-10-27 (Tue) 05:59 PM PDT | [README](hw2/README.md) | [spec.md](hw2/spec.md) |
 | Homework #3 - Control Divergence & Tiled MMULT improvements & NCU profiling | 2026-11-06 (Fri) 11:59 PM PST | [README](hw3/README.md) | [spec.md](hw3/spec.md) |
+| Assignment #4 - Memory access patterns & MMULT coalesced corner turning kernel | 2026-11-13 (Fri) 11:59 PM PST | [README](assignment-4-memory-access-patterns-mmul/README.md) | [spec.md](assignment-4-memory-access-patterns-mmul/spec.md) |
 | Homework 0 - Preliminaries and Refreshers（不計分） | — | [README](hw0/README.md) | [spec.md](hw0/spec.md) |

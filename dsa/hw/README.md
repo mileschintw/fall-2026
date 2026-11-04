@@ -8,3 +8,4 @@
 | A2: Lists, lists and more lists | 2026-10-18 (Sun) 11:59 PM PDT | [README](a2/README.md) | [spec.md](a2/spec.md) |
 | A3: Stacks, Queues and Testing | 2026-10-25 (Sun) 11:59 PM PDT | [README](a3/README.md) | [spec.md](a3/spec.md) |
 | A4: Bug Hunt | 2026-11-01 (Sun) 11:59 PM PST | [README](a4/README.md) | [spec.md](a4/spec.md) |
+| A5: BSTs and AVLs | 2026-11-22 (Sun) 11:59 PM PST | [README](a5/README.md) | [spec.md](a5/spec.md) |

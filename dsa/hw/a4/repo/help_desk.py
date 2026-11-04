@@ -38,7 +38,7 @@ def da_remove_last(arr):
     """Remove and return the last element. Raises IndexError if the array is empty."""
     if arr['size'] == 0:
         raise IndexError('array is empty')
-    value = arr['slots'][arr['size']]
+    value = arr['slots'][arr['size'] - 1]
     arr['size'] -= 1
     arr['slots'][arr['size']] = None
     return value
@@ -63,6 +63,8 @@ def stack_push(s, value):
 
 def stack_pop(s):
     """Remove and return the top item. An empty stack returns None."""
+    if len(s) == 0:
+        return None
     return s.pop()
 
 
@@ -107,7 +109,11 @@ def queue_size(q):
 
 def queue_push_front(q, value):
     """Put value at the FRONT of the queue, so it is the next one dequeued."""
-    q['items'].append(value)
+    if q['head'] > 0:
+        q['head'] -= 1
+        q['items'][q['head']] = value
+    else:
+        q['items'].insert(0, value)
 
 
 # ---------------------------------------------------------------- the help desk
@@ -145,6 +151,7 @@ def undo_close(desk):
     ticket = stack_pop(desk['undo'])
     if ticket is None:
         return None
+    da_remove_last(desk['closed'])
     queue_push_front(desk['open'], ticket)
     return ticket
 
@@ -180,4 +187,4 @@ def brackets_balanced(text):
         elif ch in pairs:
             if stack_pop(stack) != pairs[ch]:
                 return False
-    return True
+    return stack_is_empty(stack)

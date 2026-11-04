@@ -1,6 +1,6 @@
 # A4: Bug Hunt
 
-> 來源：Canvas assignment 11814804（https://canvas.uw.edu/courses/1917417/assignments/11814804），抓取 2026-11-03 07:43 PST。
+> 來源：Canvas assignment 11814804（https://canvas.uw.edu/courses/1917417/assignments/11814804），抓取 2026-11-04 07:44 PST。
 > 這個檔案由 `scripts/assignment_specs.py` 產生，內容是原文，每次來源有變動就整份重寫，不要手改。整理過的版本在 README.md。
 
 - 截止（Canvas `due_at`）：2026-11-01 (Sun) 11:59 PM PST
@@ -99,9 +99,9 @@ are used for grading; changes to anything else in your repo are ignored.
 
 - [`.github/workflows/classroom.yml`](repo/.github/workflows/classroom.yml)（2294 bytes，blob 423ed3f）
 - [`.gitignore`](repo/.gitignore)（58 bytes，blob 538248f）
-- [`FINDINGS.md`](repo/FINDINGS.md)（1574 bytes，blob 1e5888a）
+- [`FINDINGS.md`](repo/FINDINGS.md)（3880 bytes，blob 57f6664）
 - [`check_hunt.py`](repo/check_hunt.py)（11503 bytes，blob aee6603）
-- [`help_desk.py`](repo/help_desk.py)（5610 bytes，blob 96992a5）
+- [`help_desk.py`](repo/help_desk.py)（5806 bytes，blob eb7fa83）
 - [`help_desk_original.py`](repo/help_desk_original.py)（5610 bytes，blob 44a44ce）
 - [`test_already_correct.py`](repo/test_already_correct.py)（3899 bytes，blob e97bb5f）
-- [`test_regressions.py`](repo/test_regressions.py)（1708 bytes，blob 905684e）
+- [`test_regressions.py`](repo/test_regressions.py)（3766 bytes，blob 53a490b）

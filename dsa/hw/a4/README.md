@@ -11,7 +11,7 @@
 
 本機工作 clone：`D:\Repos\assignment-4-mileschintw`（branch `main`；`gh` 確認你有 push 權限）。
 
-> **[repo/](repo/) 存的是 repo 目前的內容**。從 2026-11-03 起，`help_desk.py`、`test_regressions.py`、`FINDINGS.md` 是你自己 push 的版本，不是 starter。老師的原版還是 [repo/help_desk_original.py](repo/help_desk_original.py)（blob 44a44ce），下面的函式規格都取自 docstring，兩份的 docstring 一樣。
+> **[repo/](repo/) 存的是 repo 目前的內容**。從 2026-11-03 起，`help_desk.py`、`test_regressions.py`、`FINDINGS.md` 是你自己 push 的版本，不是 starter；2026-11-04 抓到的是最後一版（help_desk.py blob eb7fa83、test_regressions.py blob 53a490b、FINDINGS.md blob 57f6664，應對應 commit 6f83ede「Complete A4」）。老師的原版還是 [repo/help_desk_original.py](repo/help_desk_original.py)（blob 44a44ce），下面的函式規格都取自 docstring，兩份的 docstring 一樣。
 
 ## 學習目標
 （README 開頭）
@@ -86,7 +86,20 @@ python3 -m unittest test_already_correct -v  # 本來就對、必須維持的行
 python3 check_hunt.py                        # 全部檢查 + 摘要
 python3 check_hunt.py own|already|findings|reflection   # 單項，和 autograder 一樣
 ```
-`check_hunt.py` 會自己把 `help_desk_original.py` 複製成 `help_desk.py` 放到暫存資料夾去跑，不用手動換檔。2026-11-02 在 starter 上跑的結果：四項都是 `NOT YET`（只有 1 個範例 test；`help_desk.py` 和 original 一樣所以 already 不計；表格 0 列；reflection 空白）。2026-11-03 抓到的提交版本：`test_regressions.py` 有 3 個 test（範例 1 個 + 你寫的 2 個）、`FINDINGS.md` 表格填了 1 列（至少要 4 列）、reflection 還是空白、`help_desk.py` 改了 1 處。這次排程沒有跑 checker，請到 repo 的 Actions 分頁看 autograder 的結果。
+`check_hunt.py` 會自己把 `help_desk_original.py` 複製成 `help_desk.py` 放到暫存資料夾去跑，不用手動換檔。2026-11-02 在 starter 上跑的結果：四項都是 `NOT YET`（只有 1 個範例 test；`help_desk.py` 和 original 一樣所以 already 不計；表格 0 列；reflection 空白）。2026-11-03 抓到的提交版本：`test_regressions.py` 有 3 個 test（範例 1 個 + 你寫的 2 個）、`FINDINGS.md` 表格填了 1 列（至少要 4 列）、reflection 還是空白、`help_desk.py` 改了 1 處。2026-11-04 抓到的最後一版（應是 6f83ede）在暫存資料夾複製一份跑 `python check_hunt.py`：**四項都 `ok`**（own：9 個 test 在修好的 code 上全過、在 original 上至少一個 fail；already：12 個 test 全過；findings：6 列，每列的 test 都對得上；reflection：complete），和 6f83ede 的 Actions run **success** 一致。
+
+最後一版的 `FINDINGS.md` 6 列全部 `confirmed`，`help_desk.py` 修了 6 處：
+
+| # | 函式 | 嫌疑（FINDINGS.md 原文摘要） | 來源 | Test |
+|---|---|---|---|---|
+| 1 | `da_append` | 滿了容量只 +1 不加倍，n 次 append 變 O(n²) | me + AI | `test_append_is_linear_time`（另有 `test_append_size_per_expand`） |
+| 2 | `da_remove_last` | 讀 `slots[size]` 而不是 `slots[size-1]`，回傳 None | me + AI | `test_pop_return_correct_value` |
+| 3 | `stack_pop` | 空 stack 直接 `list.pop()`，raise IndexError 而不是回 None | me + AI | `test_stack_pop` |
+| 4 | `queue_push_front` | 加到尾端（等於 enqueue），不是最前面 | me + AI | `test_new_element_position_when_append_left`（另有 `test_push_front_after_dequeue`） |
+| 5 | `undo_close` | 放回 open queue 前面，但沒從 closed list 移除 | AI | `test_undo_close_removes_ticket_from_closed` |
+| 6 | `brackets_balanced` | 結尾沒檢查 stack 是空的，`((` 算 balanced | AI | `test_unclosed_brackets_are_unbalanced` |
+
+Reflection 三題都已回答（英文，每題數句）。截止後老師評的 36 分（每個真 bug 修好 3 + regression test 3）要等老師公布真 bug 清單才知道有沒有漏。
 
 ### 配分（README「Points」+ [repo/.github/workflows/classroom.yml](repo/.github/workflows/classroom.yml)）
 
@@ -149,5 +162,6 @@ push 時間取自 GitHub Actions run 的 `created_at`（伺服器端）；截止
 | 2026-11-02 | 第一次整理 |
 | 2026-11-03 | repo 檔案 FINDINGS.md、help_desk.py、test_regressions.py 改了（是你自己 push 的作業；Canvas spec 和 README 都沒變）。更新截止列的繳交狀態，註明 repo/ 現在是提交版本，補上提交版本的進度 |
 | 2026-11-03 晚 | Piazza @65 老師已回（只回邀請）；新增「延期與 Canvas comment」：各 push 時間、最後版 6f83ede、Canvas comment 草稿 |
+| 2026-11-04 | repo 檔案 FINDINGS.md、help_desk.py、test_regressions.py 改了（抓到最後一版，應是 6f83ede；Canvas spec 和 README 沒變）。補上最後一版的 6 個 finding、6 處修正，以及本機 checker 四項都 ok |
 
 DSA 課用了 AI 要附 chat session 或註明。

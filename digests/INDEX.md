@@ -9,12 +9,13 @@
 - 週規劃：11/1 日 21:05 ✅ 下週重點：GPU HW3 11/6 到期（11/2 開工）、DSA 期中 11/9；A4 今晚到期未交 → [2026-11-01-weekly.md](2026-11-01-weekly.md)
 - 截止提醒：11/3 二 21:57 ✅ 48h 內沒有到期作業；沒有新提醒 → —
 - 上課筆記：11/3 二 10:12 🆕 DSA 2026-11-02 Class 10 筆記：Big-O 套到程式碼、AVL 四種 case；期中 11/9 考到本堂 → [notes.md](../dsa/lectures/2026-11-02/notes.md)
-- 作業說明：11/3 二 07:44 🆕 改版：dsa/a4（repo 換成你 push 的版本，spec 沒變） → [README.md](../dsa/hw/README.md)
+- 作業說明：11/4 三 07:48 🆕 新：gpu/assignment-4-memory-access-patterns-mmul、dsa/a5；改版：dsa/a4 → [README.md](../gpu/hw/README.md)
 
 ## 紀錄
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 11/4 三 07:48 | 作業說明 | 🆕 | 新：gpu/assignment-4-memory-access-patterns-mmul、dsa/a5；改版：dsa/a4 | [README.md](../gpu/hw/README.md) |
 | 11/4 三 07:09 | 晨報 | 🆕 | GPU HW4 發布（11/13 到期）、L5 講義與錄影上線；HW3 11/6 未交 | [2026-11-04.md](2026-11-04.md) |
 | 11/3 二 21:57 | 截止提醒 | ✅ | 48h 內沒有到期作業；沒有新提醒 | — |
 | 11/3 二 18:09 | 截止提醒 | ✅ | 48h 內沒有到期作業；沒有新提醒 | — |

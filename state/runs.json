@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-04T07:48:39-08:00",
+  "task": "作業說明",
+  "status": "new",
+  "summary": "新：gpu/assignment-4-memory-access-patterns-mmul、dsa/a5；改版：dsa/a4",
+  "output": "gpu/hw/README.md"
+ },
+ {
   "at": "2026-11-04T07:09:33-08:00",
   "task": "晨報",
   "status": "new",

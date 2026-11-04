@@ -382,12 +382,12 @@
    "repo_files": {
     ".github/workflows/classroom.yml": "423ed3fa5d960cdb9309345562b7534cab844453",
     ".gitignore": "538248f34953e769c570cef880094fed816d6831",
-    "FINDINGS.md": "1e5888aca6056dde6bf5e19ba472fa5fc8c8ff9e",
+    "FINDINGS.md": "57f6664551cf0d750f65adcaa60ff0b872f7c020",
     "check_hunt.py": "aee6603792e86c1dfd8ebd3c5ec566e14a6bc850",
-    "help_desk.py": "96992a5b46635f6f2f35f326bb0ec2949d03425b",
+    "help_desk.py": "eb7fa836dc0b1ba460e6e2a8e27c98832756281a",
     "help_desk_original.py": "44a44ce520ba5035a93142f9a6b26fa98dc028f2",
     "test_already_correct.py": "e97bb5fea2e3e77b96e2ecbe34fcfeff5c17cb8c",
-    "test_regressions.py": "905684ea3ba2bc9be8e8894b544199e802c0d550"
+    "test_regressions.py": "53a490b6c8d401cb93a54741922cf8ecf2505162"
    },
    "due_at": "2026-11-02T07:59:59Z"
   },
@@ -402,7 +402,7 @@
    "repo/test_regressions.py",
    "spec.md"
   ],
-  "archived_at": "2026-11-03T07:43:49-08:00",
+  "archived_at": "2026-11-04T07:44:45-08:00",
   "summary_done": true,
   "changes": [
    "repo 檔案 FINDINGS.md 改了",
@@ -422,6 +422,118 @@
      "repo 檔案 FINDINGS.md 改了",
      "repo 檔案 help_desk.py 改了",
      "repo 檔案 test_regressions.py 改了"
+    ]
+   },
+   {
+    "at": "2026-11-04T07:44:45-08:00",
+    "changes": [
+     "repo 檔案 FINDINGS.md 改了",
+     "repo 檔案 help_desk.py 改了",
+     "repo 檔案 test_regressions.py 改了"
+    ]
+   }
+  ]
+ },
+ "11810623": {
+  "course": "gpu",
+  "slug": "assignment-4-memory-access-patterns-mmul",
+  "dir": "gpu/hw/assignment-4-memory-access-patterns-mmul",
+  "name": "Assignment #4 - Memory access patterns & MMULT coalesced corner turning kernel",
+  "due_at": "2026-11-14T07:59:59Z",
+  "fp": {
+   "text": "d0cf623872c16f2e",
+   "links": [],
+   "files": {
+    "155723325": "2026-11-04T05:40:29Z"
+   },
+   "readme": null,
+   "repo_files": {},
+   "due_at": "2026-11-14T07:59:59Z"
+  },
+  "files": [
+   "spec.pdf",
+   "spec.md"
+  ],
+  "archived_at": "2026-11-04T07:44:26-08:00",
+  "summary_done": true,
+  "changes": [
+   "new"
+  ],
+  "history": [
+   {
+    "at": "2026-11-04T07:44:26-08:00",
+    "changes": [
+     "new"
+    ]
+   }
+  ]
+ },
+ "11814818": {
+  "course": "dsa",
+  "slug": "a5",
+  "dir": "dsa/hw/a5",
+  "name": "A5: BSTs and AVLs",
+  "due_at": "2026-11-23T07:59:59Z",
+  "fp": {
+   "text": "e3b0c44298fc1c14",
+   "links": [],
+   "files": {},
+   "readme": "2d037e376ab712ec0d3f31f60da021e5aa36a626",
+   "repo_files": {
+    ".github/workflows/classroom.yml": "59e7d29d447e0b4eebe403a6e1ffabd20fe4e8a9",
+    ".gitignore": "538248f34953e769c570cef880094fed816d6831",
+    "part1/ANALYSIS.md": "fde4c021a8b467402a8c81fb457ce33a691d7b52",
+    "part1/README.md": "b50d4f465c0e7f7bc9f290a5b87db9e68c131f8d",
+    "part1/avl.py": "bc42062c5b4e815d4558d259b663c8ac3f7ed187",
+    "part1/bst.py": "52d62683c8f5a4d31bf8d429c93a78228fe550ed",
+    "part1/bst_test.py": "8629750a83df6100cbd58db1279072d6aa42c6df",
+    "part1/compare.py": "bf3aed81e359d67d5e44c3652de50064deab0918",
+    "part1/tree_tools.py": "63178a168c5dbd97454d18797dc3894da3a25b66",
+    "part2/AI_NOTE.md": "96a9ef9bfb49ca1dc462f39497bb86f1e2948719",
+    "part2/README.md": "8b886015e77b1a1a6f74fb38779c8803f80165bf",
+    "part2/bst_reference.py": "248176ec234a21eff09668a7a11cfad736b9d756",
+    "part2/check_tests.py": "30d89d96e063b7a22ee43b34413c92b6f0f2158a",
+    "part2/practice_mutants/p1.py": "49bee7d2296160ec4cbf839aa02dc09f5e6a1ec8",
+    "part2/practice_mutants/p2.py": "409cf85196bb93af8281a3b5b1c2287eae1826cd",
+    "part2/practice_mutants/p3.py": "07afe5f5abaf96682e3bf5814eb57207dd86e7e2",
+    "part2/practice_mutants/p4.py": "5cae3af605ca3eea886571f2eabe66589f8460b2",
+    "part2/test_bst.py": "bf966230bcf17758ee6b2dcade9aff3df8a34076",
+    "part2/tree_tools.py": "63178a168c5dbd97454d18797dc3894da3a25b66"
+   },
+   "due_at": "2026-11-23T07:59:59Z"
+  },
+  "files": [
+   "repo/.github/workflows/classroom.yml",
+   "repo/.gitignore",
+   "repo/part1/ANALYSIS.md",
+   "repo/part1/README.md",
+   "repo/part1/avl.py",
+   "repo/part1/bst.py",
+   "repo/part1/bst_test.py",
+   "repo/part1/compare.py",
+   "repo/part1/tree_tools.py",
+   "repo/part2/AI_NOTE.md",
+   "repo/part2/README.md",
+   "repo/part2/bst_reference.py",
+   "repo/part2/check_tests.py",
+   "repo/part2/practice_mutants/p1.py",
+   "repo/part2/practice_mutants/p2.py",
+   "repo/part2/practice_mutants/p3.py",
+   "repo/part2/practice_mutants/p4.py",
+   "repo/part2/test_bst.py",
+   "repo/part2/tree_tools.py",
+   "spec.md"
+  ],
+  "archived_at": "2026-11-04T07:44:55-08:00",
+  "summary_done": true,
+  "changes": [
+   "new"
+  ],
+  "history": [
+   {
+    "at": "2026-11-04T07:44:55-08:00",
+    "changes": [
+     "new"
     ]
    }
   ]

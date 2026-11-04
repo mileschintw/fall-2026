@@ -1,0 +1,137 @@
+name: Autograding Tests
+on:
+  push:
+    branches:
+      - '**'   # run on any branch push in this repo
+  workflow_dispatch:
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: "Part 1 - Insert"
+      id: part-1-insert
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Part 1 - Insert"
+        setup-command: ''
+        command: "cd part1 && timeout 60 python3 -m unittest bst_test.InsertTest"
+        timeout: 2
+        max-score: 8
+    - name: "Part 1 - Search"
+      id: part-1-search
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Part 1 - Search"
+        setup-command: ''
+        command: "cd part1 && timeout 60 python3 -m unittest bst_test.SearchTest"
+        timeout: 2
+        max-score: 8
+    - name: "Part 1 - Min and max"
+      id: part-1-min-and-max
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Part 1 - Min and max"
+        setup-command: ''
+        command: "cd part1 && timeout 60 python3 -m unittest bst_test.MinMaxTest"
+        timeout: 2
+        max-score: 4
+    - name: "Part 1 - Delete"
+      id: part-1-delete
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Part 1 - Delete"
+        setup-command: ''
+        command: "cd part1 && timeout 60 python3 -m unittest bst_test.DeleteTest"
+        timeout: 2
+        max-score: 10
+    - name: "Part 1 - Search steps"
+      id: part-1-search-steps
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Part 1 - Search steps"
+        setup-command: ''
+        command: "cd part1 && timeout 60 python3 -m unittest bst_test.SearchStepsTest"
+        timeout: 2
+        max-score: 5
+    - name: "Part 2 - Tests pass on the reference"
+      id: part-2-tests-pass-on-the-reference
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Part 2 - Tests pass on the reference"
+        setup-command: ''
+        command: "cd part2 && timeout 120 python3 check_tests.py gate"
+        timeout: 2
+        max-score: 15
+    - name: "Part 2 - Practice mutant 1"
+      id: part-2-practice-mutant-1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Part 2 - Practice mutant 1"
+        setup-command: ''
+        command: "cd part2 && timeout 120 python3 check_tests.py mutant p1"
+        timeout: 2
+        max-score: 5
+    - name: "Part 2 - Practice mutant 2"
+      id: part-2-practice-mutant-2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Part 2 - Practice mutant 2"
+        setup-command: ''
+        command: "cd part2 && timeout 120 python3 check_tests.py mutant p2"
+        timeout: 2
+        max-score: 4
+    - name: "Part 2 - Practice mutant 3"
+      id: part-2-practice-mutant-3
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Part 2 - Practice mutant 3"
+        setup-command: ''
+        command: "cd part2 && timeout 120 python3 check_tests.py mutant p3"
+        timeout: 2
+        max-score: 3
+    - name: "Part 2 - Practice mutant 4"
+      id: part-2-practice-mutant-4
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Part 2 - Practice mutant 4"
+        setup-command: ''
+        command: "cd part2 && timeout 120 python3 check_tests.py mutant p4"
+        timeout: 2
+        max-score: 3
+    - name: "Part 2 - AI note"
+      id: part-2-ai-note
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Part 2 - AI note"
+        setup-command: ''
+        command: "cd part2 && timeout 120 python3 check_tests.py note"
+        timeout: 2
+        max-score: 10
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        PART-1-INSERT_RESULTS: "${{steps.part-1-insert.outputs.result}}"
+        PART-1-SEARCH_RESULTS: "${{steps.part-1-search.outputs.result}}"
+        PART-1-MIN-AND-MAX_RESULTS: "${{steps.part-1-min-and-max.outputs.result}}"
+        PART-1-DELETE_RESULTS: "${{steps.part-1-delete.outputs.result}}"
+        PART-1-SEARCH-STEPS_RESULTS: "${{steps.part-1-search-steps.outputs.result}}"
+        PART-2-TESTS-PASS-ON-THE-REFERENCE_RESULTS: "${{steps.part-2-tests-pass-on-the-reference.outputs.result}}"
+        PART-2-PRACTICE-MUTANT-1_RESULTS: "${{steps.part-2-practice-mutant-1.outputs.result}}"
+        PART-2-PRACTICE-MUTANT-2_RESULTS: "${{steps.part-2-practice-mutant-2.outputs.result}}"
+        PART-2-PRACTICE-MUTANT-3_RESULTS: "${{steps.part-2-practice-mutant-3.outputs.result}}"
+        PART-2-PRACTICE-MUTANT-4_RESULTS: "${{steps.part-2-practice-mutant-4.outputs.result}}"
+        PART-2-AI-NOTE_RESULTS: "${{steps.part-2-ai-note.outputs.result}}"
+      with:
+        runners: part-1-insert,part-1-search,part-1-min-and-max,part-1-delete,part-1-search-steps,part-2-tests-pass-on-the-reference,part-2-practice-mutant-1,part-2-practice-mutant-2,part-2-practice-mutant-3,part-2-practice-mutant-4,part-2-ai-note
