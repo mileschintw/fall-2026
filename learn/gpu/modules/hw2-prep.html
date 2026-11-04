@@ -1,0 +1,229 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>HW2 準備日程</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+/* Layout: one narrow column; today's blocks as checklist cards with a sticky progress bar; tomorrow as a compact timeline at the bottom. */
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --fg: #1c2530;
+  --muted: #5d6877;
+  --line: #dde1e8;
+  --accent: #2a4fd6;
+  --accent-soft: #e6ebfc;
+  --warn: #a85a00;
+  --warn-soft: #fbeedb;
+  --ok: #1d7a4d;
+  --font-body: "IBM Plex Sans", "Noto Sans TC", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12161d; --surface: #1a2029; --fg: #e6e9ee; --muted: #9aa5b4; --line: #2b3441;
+    --accent: #8aa4ff; --accent-soft: #232c4a; --warn: #f0b062; --warn-soft: #3a2c16; --ok: #5cc890;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12161d; --surface: #1a2029; --fg: #e6e9ee; --muted: #9aa5b4; --line: #2b3441;
+  --accent: #8aa4ff; --accent-soft: #232c4a; --warn: #f0b062; --warn-soft: #3a2c16; --ok: #5cc890;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.6;
+  padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+h1 { font-size: 26px; line-height: 1.25; margin: 0; text-wrap: balance; }
+h2 { font-size: 17px; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.lede { color: var(--muted); max-width: 65ch; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.eyebrow { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+.deadline { background: var(--warn-soft); color: var(--warn); border-radius: 6px; padding: 10px 14px; font-weight: 500; }
+
+.progress { position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); padding-block: 8px; z-index: 5; display: flex; flex-direction: column; gap: 6px; }
+.bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+.progress-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
+
+.block { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.block-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.dur { font-family: var(--font-mono); font-size: 13px; color: var(--accent); background: var(--accent-soft); padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+.why { color: var(--muted); font-size: 14px; }
+ul.tasks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+ul.tasks li { display: flex; gap: 10px; align-items: flex-start; }
+ul.tasks input { margin-top: 5px; width: 16px; height: 16px; accent-color: var(--accent); flex: none; }
+ul.tasks label { min-width: 0; }
+ul.tasks input:checked + label { color: var(--muted); text-decoration: line-through; }
+code { font-family: var(--font-mono); font-size: 13px; background: var(--accent-soft); padding: 1px 5px; border-radius: 3px; }
+details { border-top: 1px solid var(--line); padding-top: 10px; }
+summary { cursor: pointer; font-weight: 500; }
+summary:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+details ol { margin: 8px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.note { font-size: 14px; color: var(--muted); border-left: 3px solid var(--line); padding-left: 12px; }
+
+.tomorrow { display: flex; flex-direction: column; }
+.tomorrow li { display: grid; grid-template-columns: 74px 1fr; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); list-style: none; }
+.tomorrow { margin: 0; padding: 0; }
+.tomorrow .t { font-family: var(--font-mono); font-size: 13px; color: var(--accent); }
+.tomorrow li > div { min-width: 0; }
+@media (max-width: 480px) { .tomorrow li { grid-template-columns: 1fr; gap: 2px; } }
+</style>
+
+<div class="wrap">
+  <header style="display:flex;flex-direction:column;gap:10px">
+    <div class="eyebrow">GPU Computing · HW2 · 10/26 準備日</div>
+    <h1>今天只做準備，明天一次做完</h1>
+    <p class="lede">今天的目標是讓明天開工時沒有任何東西要查、要裝、要搞懂。作業本身（kernel、P1、P2、profiling）全部留到明天。總共約 5 小時，可以分段做，勾選狀態會留在這個瀏覽器。</p>
+    <p class="deadline">截止：10/27（二）5:59 PM PDT。明天目標是 4:30 PM 前交出去，留 1 小時以上緩衝。</p>
+  </header>
+
+  <div class="progress" aria-live="polite">
+    <div class="bar"><i id="bar"></i></div>
+    <div class="progress-label"><span id="count">0 / 0 項完成</span><span>預估剩餘 <span class="mono" id="left">--</span></span></div>
+  </div>
+
+  <section class="block" data-min="25">
+    <div class="block-head"><h2>A. 環境與檔案</h2><span class="dur">25 分</span></div>
+    <p class="why">先做這個，因為 WorkSpace 排隊、登入、下載都可能卡住。今天發現問題，明天才不會浪費時間。</p>
+    <ul class="tasks">
+      <li><input type="checkbox" id="a1"><label for="a1">用本機 RTX 3050 開發，不使用 AWS。確認 <code>nvidia-smi</code> 看得到顯卡、Visual Studio 能開 HW1 project。</label></li>
+      <li><input type="checkbox" id="a2"><label for="a2">從 Canvas Files/Homeworks/Hw2_materials 下載 <code>hw2_starter.cu</code>、4 張 <code>hw2_testimage*.png</code>、<code>stb_image.h</code>、<code>stb_image_write.h</code>。</label></li>
+      <li><input type="checkbox" id="a3"><label for="a3">建好 HW2 的 CUDA project，刪掉預設 <code>kernel.cu</code>，加入 starter，確認空白狀態能 build。編譯目標：spec 寫 <code>sm_75</code>（T4），RTX 3050 是 CC 8.6，建議設 <code>compute_86,sm_86</code>（sm_75 的程式也能跑，但會走 JIT）。</label></li>
+      <li><input type="checkbox" id="a4"><label for="a4">把 project 備份到雲端硬碟或 git。</label></li>
+      <li><input type="checkbox" id="a5"><label for="a5">打開 <code>hw2_starter.cu</code>，只讀不改：記下每個 TODO 註解的位置，特別是計時 start/stop 要放哪裡、輸入輸出路徑在哪一行。</label></li>
+      <li><input type="checkbox" id="a6"><label for="a6">用 Admin command prompt 跑一次 <code>ncu --version</code>，確認 ncu 在 PATH 上、有權限。本機可能遇到 ERR_NVGPUCTRPERM，需要 Admin 或在 NVIDIA Control Panel 開啟 GPU performance counters 權限。</label></li>
+    </ul>
+  </section>
+
+  <section class="block" data-min="45">
+    <div class="block-head"><h2>B. 從空白檔重寫 HW1 的核心</h2><span class="dur">45 分</span></div>
+    <p class="why">不用重做整份 HW1，只重做 HW2 會直接依賴的部分。目標是不看原本的答案也寫得出來。</p>
+    <ul class="tasks">
+      <li><input type="checkbox" id="b1"><label for="b1">新建一個 scratch 檔，寫 vector add 的 host 流程：<code>cudaMalloc</code> → <code>cudaMemcpy</code> HtoD → launch → <code>cudaDeviceSynchronize</code> → <code>cudaMemcpy</code> DtoH → <code>cudaFree</code>，每個 API 都包 <code>checkCuda</code>。</label></li>
+      <li><input type="checkbox" id="b2"><label for="b2">kernel 用 <code>gid = blockIdx.x*blockDim.x + threadIdx.x</code> 加上邊界檢查，blocksPerGrid 用 <code>(n-1)/256+1</code> 的寫法。</label></li>
+      <li><input type="checkbox" id="b3"><label for="b3">寫一份 CPU 版本比對結果。老師的原則：算得快但答案錯就沒有用。</label></li>
+      <li><input type="checkbox" id="b4"><label for="b4">卡住時才去看 repo 的 <code>gpu/hw/hw1/src/kernel.cu</code>，並記下卡在哪裡。</label></li>
+    </ul>
+  </section>
+
+  <section class="block" data-min="70">
+    <div class="block-head"><h2>C. Lecture 2：2D index、blur、shared memory</h2><span class="dur">70 分</span></div>
+    <p class="why">這是程式題最直接的來源。讀 <code>gpu/lectures/2026-10-13/notes.md</code> 的重點 3、4、5、6、7、9、11，其他略過。</p>
+    <ul class="tasks">
+      <li><input type="checkbox" id="c1"><label for="c1">讀重點 3–5：row-major 公式、2D grid 的 row/col 公式、62×76 影像配 16×16 block 的邊界例子。</label></li>
+      <li><input type="checkbox" id="c2"><label for="c2">讀重點 6：box blur 的兩層邊界檢查（輸出位置、鄰域 pixel）。</label></li>
+      <li><input type="checkbox" id="c3"><label for="c3">在 scratch 專案裡寫一個 box blur（不用 Gaussian），blur width 10，用 starter 的 STB 範例讀一張測試影像，輸出圖，確認肉眼看得出模糊。</label></li>
+      <li><input type="checkbox" id="c4"><label for="c4">讀重點 9 和 11：<code>__shared__</code>、T4 的 40 個 SM、每個 SM 最多 16 block 和 1024 thread。</label></li>
+      <li><input type="checkbox" id="c5"><label for="c5">看 L2 逐字稿 [03:25:00]–[03:27:01] 的 Nsight debugger demo（Warp Info、Lanes、切換 thread），這是步驟 8–13 的預習。</label></li>
+    </ul>
+    <details>
+      <summary>合上筆記後，用自己的話答得出來嗎？</summary>
+      <ol>
+        <li>2D grid 裡一個 thread 的 row、col 怎麼算？為什麼要兩層邊界檢查？</li>
+        <li>240×240 的影像用 16×16 block，grid 要多大？850×850 呢？邊緣的 warp 會發生什麼事？</li>
+        <li>一個 block 有 256 個 thread，會切成幾個 warp？T4 一個 SM 最多同時放幾個 block、幾個 thread？</li>
+        <li>這和 Warp Info 那題「幾個 warp 在跑」有什麼關係？提示：debugger 停下時，是幾個 block 同時在 SM 上。</li>
+      </ol>
+    </details>
+  </section>
+
+  <section class="block" data-min="70">
+    <div class="block-head"><h2>D. Lecture 3：AI、roofline、tiling、shared memory 用法</h2><span class="dur">70 分</span></div>
+    <p class="why">書面題 Q1–Q3、P1、P2 的觀念來源，也是 shared memory kernel 的寫法。讀 <code>gpu/lectures/2026-10-20/notes.md</code> 的重點 7、8、10、11、12、13。</p>
+    <ul class="tasks">
+      <li><input type="checkbox" id="d1"><label for="d1">讀重點 7：AI 的定義、計算 W 和 Q 的步驟、老師現場算的 GEMM 和 GEMV 範例。</label></li>
+      <li><input type="checkbox" id="d2"><label for="d2">讀重點 8：roofline、ridge point、memory-bound 與 compute-bound 的判斷。</label></li>
+      <li><input type="checkbox" id="d3"><label for="d3">讀重點 10 和 12：naive MMULT 與 tiled MMULT，為什麼 tiling 讓 GMEM 存取減少 TILE_WIDTH 倍，為什麼要兩次 <code>__syncthreads()</code>。</label></li>
+      <li><input type="checkbox" id="d4"><label for="d4">讀重點 11：static（<code>__shared__ float x[N]</code>）與 dynamic（<code>extern __shared__</code> + launch 第三個參數）兩種宣告方式，以及投影片 p47 的 block-striding 複製係數。</label></li>
+      <li><input type="checkbox" id="d5"><label for="d5">讀重點 13：Windows high-performance timer 的用法（<code>QueryPerformanceCounter</code> / <code>QueryPerformanceFrequency</code>）。</label></li>
+      <li><input type="checkbox" id="d6"><label for="d6">建議補看 L3 投影片的 p24–p31（AI、roofline）和 p49–p74（tiling），逐字稿只在筆記不清楚時查。</label></li>
+    </ul>
+    <details>
+      <summary>合上筆記後，用自己的話答得出來嗎？（這些是理解檢查，不是作業答案）</summary>
+      <ol>
+        <li>AI 的分子分母各是什麼？為什麼老師用「perfect cache」當第一步假設？</li>
+        <li>ridge point 怎麼從 peak compute 和 peak bandwidth 求出？T4 的值大約是多少？</li>
+        <li>naive MMULT 每個 thread 讀多少資料？tiling 之後 GMEM 流量為什麼降低？降低的倍數和什麼有關？</li>
+        <li>shared memory 的 lifetime 和 scope 是什麼？一個 block 會有幾份？（這和 Q1 的觀念相同，但不要在這裡直接代入數字。）</li>
+        <li>1 次 DRAM burst 是 128 bytes，一個 32×32 的 float tile 有多少 bytes？（Q3 的觀念，答案留到明天寫。）</li>
+        <li>transpose、softmax、convolution 各自有幾個「讀」和「寫」的項？先不用算，只要知道要怎麼列項目。</li>
+      </ol>
+    </details>
+    <p class="note">P1 和 P2 的推導要自己完成。課程規定只有「找演算法的簡單式子」可以問 chatbot，FLOPs、bytes、AI 的拆項和數值都要自己算。</p>
+  </section>
+
+  <section class="block" data-min="30">
+    <div class="block-head"><h2>E. 預習 Nsight 與 NCU 流程</h2><span class="dur">30 分</span></div>
+    <p class="why">這部分是機械式的操作，每一步都可能因為環境卡住。今天走過一遍，明天只需要重複。</p>
+    <ul class="tasks">
+      <li><input type="checkbox" id="e1"><label for="e1">重讀 spec 的步驟 8–13（debugger）：記得先 build DEBUG；breakpoint 設在相鄰兩行；要截兩張圖（一般 launch、<code>&lt;&lt;&lt;1,1&gt;&gt;&gt;</code>）。</label></li>
+      <li><input type="checkbox" id="e2"><label for="e2">重讀步驟 14–26（NCU）：8 次 profiling = 4 張影像 × global／static shared；用 Release x64；每張影像一個獨立 exe。</label></li>
+      <li><input type="checkbox" id="e3"><label for="e3">把 ncu 指令（步驟 19）存成文字檔，並寫好 8 個 exe 的命名清單，例如 <code>hw2_rel_global_img1.exe</code> … <code>hw2_rel_smem_img4.exe</code>。</label></li>
+      <li><input type="checkbox" id="e4"><label for="e4">用 scratch 專案的 Release exe 實際跑一次 ncu，確認輸出長得和 spec 範例相近。（注意：步驟 25 的 <code>dram_bytes.sum</code> 實際名稱是 <code>dram__bytes.sum</code>。）</label></li>
+      <li><input type="checkbox" id="e5"><label for="e5">做一個簡單的計算表（試算表或文字檔）：欄位為 smsp cycles、cycles/ns、inst executed、dram Kbyte，並寫好 execution time 和 instruction intensity 的公式（記得單位換算）。</label></li>
+    </ul>
+  </section>
+
+  <section class="block" data-min="20">
+    <div class="block-head"><h2>F. 收工檢查</h2><span class="dur">20 分</span></div>
+    <ul class="tasks">
+      <li><input type="checkbox" id="f1"><label for="f1">寫下 3 個還不懂的點。能自己查的明天查；需要老師回答的，今晚發到 Teams。</label></li>
+      <li><input type="checkbox" id="f2"><label for="f2">確認 HW2 project、scratch 專案、ncu 指令檔、計算表都已經備份到雲端硬碟。</label></li>
+      <li><input type="checkbox" id="f3"><label for="f3">記下本機與 T4 的差異，寫報告時註明使用 RTX 3050：SM 數、CC、每 SM 最大 thread 數都不同，Warp Info 那題要用你自己 GPU 的規格回答。可以考慮在 Teams 問老師是否接受。</label></li>
+    </ul>
+    <p class="note">如果做到一半精力不夠，優先順序是 A → C → D → B → E。A 不做，明天最容易出意外。</p>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><h2>明天的順序</h2><span class="eyebrow">10/27，Pacific</span></div>
+    <p class="why">時間是建議值，順序比時間重要：越容易卡住、越吃機器時間的越先做。</p>
+    <ol class="tomorrow">
+      <li><span class="t">約 2.5 小時</span><div><strong>三個 kernel</strong>：先 GMEM，再 static SMEM，再 dynamic SMEM。每個都和 CPU 版本比對輸出，保存 #1–#3 的模糊影像。</div></li>
+      <li><span class="t">約 30 分</span><div><strong>計時</strong>：DEBUG 與 RELEASE 各量 4 張影像，不要在 debugger 裡跑。</div></li>
+      <li><span class="t">約 30 分</span><div><strong>Debugger 截圖</strong>：一般 launch 一張，<code>&lt;&lt;&lt;1,1&gt;&gt;&gt;</code> 一張，順便回答 warp 數量那題。</div></li>
+      <li><span class="t">約 60 分</span><div><strong>NCU 8 次</strong>：多數時間花在 build 和重複操作，開一份 build 就立刻跑 ncu 並存檔。</div></li>
+      <li><span class="t">約 90 分</span><div><strong>書面</strong>：Q1–Q3、P1、P2、兩個 HW Q。可以在 profiling 的空檔穿插。</div></li>
+      <li><span class="t">最後 30 分</span><div><strong>打包</strong>：只放 <code>.cu/.cpp/.h</code>，加上影像、計時、截圖、NCU 輸出與計算值，再檢查繳交清單。</div></li>
+    </ol>
+    <p class="note">Extra credit（CPU 對 GPU 計時表、理論 AI）等主要項目完成且有時間再做。遲交每天扣 1 分，總分 12 分，所以不要為了 extra credit 冒險。</p>
+  </section>
+</div>
+
+<script>
+(function () {
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('ul.tasks input[type=checkbox]'));
+  var KEY = 'hw2-prep-v1';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+  boxes.forEach(function (b) { if (saved[b.id]) b.checked = true; });
+
+  function fmt(m) { var h = Math.floor(m / 60), r = m % 60; return h ? h + ' 小時 ' + (r ? r + ' 分' : '') : r + ' 分'; }
+  function update() {
+    var done = boxes.filter(function (b) { return b.checked; }).length;
+    var left = 0;
+    document.querySelectorAll('section.block[data-min]').forEach(function (s) {
+      var inputs = s.querySelectorAll('input[type=checkbox]');
+      if (!inputs.length) return;
+      var d = 0; inputs.forEach(function (i) { if (i.checked) d++; });
+      left += Math.round(Number(s.dataset.min) * (1 - d / inputs.length));
+    });
+    document.getElementById('bar').style.width = (boxes.length ? done / boxes.length * 100 : 0) + '%';
+    document.getElementById('count').textContent = done + ' / ' + boxes.length + ' 項完成';
+    document.getElementById('left').textContent = left ? fmt(left) : '已完成';
+    var state = {}; boxes.forEach(function (b) { if (b.checked) state[b.id] = 1; });
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  boxes.forEach(function (b) { b.addEventListener('change', update); });
+  update();
+})();
+</script>
+</body></html>

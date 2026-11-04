@@ -1,0 +1,621 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>HW2 衝刺教材</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+/* Layout: one reading column with a sticky section bar; reference tables scroll sideways inside their own box; study blocks use plain sections so everything is visible at rest. */
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --fg: #1c2530;
+  --muted: #5d6877;
+  --line: #dde1e8;
+  --accent: #2a4fd6;
+  --accent-soft: #e6ebfc;
+  --must: #b3261e;
+  --must-soft: #fbe6e4;
+  --rec: #a85a00;
+  --rec-soft: #fbeedb;
+  --opt: #5d6877;
+  --opt-soft: #e9ecf1;
+  --ok: #1d7a4d;
+  --code-bg: #eef0f4;
+  --font-body: "IBM Plex Sans", "Noto Sans TC", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12161d; --surface: #1a2029; --fg: #e6e9ee; --muted: #9aa5b4; --line: #2b3441;
+    --accent: #8aa4ff; --accent-soft: #232c4a; --must: #ff8a80; --must-soft: #3d1f1d;
+    --rec: #f0b062; --rec-soft: #3a2c16; --opt: #9aa5b4; --opt-soft: #262e3a; --ok: #5cc890; --code-bg: #232b36;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12161d; --surface: #1a2029; --fg: #e6e9ee; --muted: #9aa5b4; --line: #2b3441;
+  --accent: #8aa4ff; --accent-soft: #232c4a; --must: #ff8a80; --must-soft: #3d1f1d;
+  --rec: #f0b062; --rec-soft: #3a2c16; --opt: #9aa5b4; --opt-soft: #262e3a; --ok: #5cc890; --code-bg: #232b36;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.65;
+  padding-block: 0 80px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); }
+.wrap { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1 { font-size: 28px; line-height: 1.25; margin: 0; text-wrap: balance; }
+h2 { font-size: 20px; margin: 0; text-wrap: balance; line-height: 1.35; }
+h3 { font-size: 16px; margin: 0; line-height: 1.4; }
+p { margin: 0; }
+ul, ol { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; }
+.lede { color: var(--muted); max-width: 65ch; }
+.eyebrow { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+code { font-family: var(--font-mono); font-size: 13px; background: var(--code-bg); padding: 1px 5px; border-radius: 3px; }
+pre { font-family: var(--font-mono); font-size: 13px; background: var(--code-bg); padding: 12px 14px; border-radius: 6px; overflow-x: auto; margin: 0; line-height: 1.55; }
+pre code { background: none; padding: 0; }
+a { color: var(--accent); }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+nav.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); border-bottom: 1px solid var(--line); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding-inline: max(16px, env(safe-area-inset-left, 0px)); }
+nav.top .row { max-width: 760px; margin: 0 auto; display: flex; gap: 6px; overflow-x: auto; padding-block: 8px; align-items: center; }
+nav.top a { white-space: nowrap; text-decoration: none; color: var(--muted); font-size: 13px; padding: 4px 10px; border-radius: 4px; }
+nav.top a:hover, nav.top a:focus-visible { background: var(--accent-soft); color: var(--accent); outline: none; }
+nav.top .pg { margin-left: auto; font-family: var(--font-mono); font-size: 12px; color: var(--accent); white-space: nowrap; padding-left: 10px; }
+
+header.hero { padding-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+.notice { background: var(--rec-soft); color: var(--rec); border-radius: 6px; padding: 10px 14px; font-weight: 500; }
+section { display: flex; flex-direction: column; gap: 14px; }
+section > header { display: flex; flex-direction: column; gap: 4px; border-top: 2px solid var(--fg); padding-top: 12px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.card.soft { background: var(--accent-soft); border-color: transparent; }
+.note { font-size: 14px; color: var(--muted); border-left: 3px solid var(--line); padding-left: 12px; }
+.warn { font-size: 14px; border-left: 3px solid var(--must); padding-left: 12px; }
+.tablebox { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 620px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; letter-spacing: 0.04em; color: var(--muted); font-weight: 600; background: var(--code-bg); }
+tr:last-child td { border-bottom: none; }
+.tag { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 4px; white-space: nowrap; }
+.tag.must { color: var(--must); background: var(--must-soft); }
+.tag.rec { color: var(--rec); background: var(--rec-soft); }
+.tag.opt { color: var(--opt); background: var(--opt-soft); }
+.dur { font-family: var(--font-mono); font-size: 12.5px; color: var(--accent); background: var(--accent-soft); padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+
+ul.tasks { list-style: none; padding: 0; gap: 8px; }
+ul.tasks li { display: flex; gap: 10px; align-items: flex-start; }
+ul.tasks input { margin-top: 5px; width: 16px; height: 16px; accent-color: var(--accent); flex: none; }
+ul.tasks label { min-width: 0; }
+ul.tasks input:checked + label { color: var(--muted); text-decoration: line-through; }
+input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.block-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.steps { counter-reset: s; list-style: none; padding: 0; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 26px 1fr; gap: 10px; }
+.steps li::before { content: counter(s); font-family: var(--font-mono); font-size: 12px; color: var(--accent); background: var(--accent-soft); width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; margin-top: 2px; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+.cols > * { min-width: 0; }
+</style>
+
+<nav class="top" aria-label="章節">
+  <div class="row">
+    <a href="#how">用法</a><a href="#map">對照地圖</a><a href="#video">影片精選</a><a href="#today">今日日程</a><a href="#core">核心觀念</a><a href="#arch">編譯設定</a><a href="#errata">勘誤</a><a href="#pitfalls">地雷</a><a href="#test">自測</a><a href="#tomorrow">明天</a>
+    <span class="pg" id="pg">0%</span>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">GPU Computing · HW2 · 10/26 衝刺</div>
+  <h1>HW2 衝刺教材</h1>
+  <p class="lede">把課堂逐字稿、投影片、你的筆記、HW2 原文、本機環境（RTX 3050）和今天的準備日程合在一頁。今天讀完、看完、準備好；明天只做作業。</p>
+  <p class="notice">截止 10/27（二）5:59 PM PDT。這份教材講觀念與課堂內容，不含 Q1–Q3、P1、P2、HW Q 的答案，也沒有完整的 Gaussian kernel。</p>
+</header>
+
+<!-- ========== 用法 ========== -->
+<section id="how">
+  <header><div class="eyebrow">怎麼讀</div><h2>筆記、投影片、影片怎麼搭配</h2></header>
+  <p>三種材料各有長處，不要平均用力。投影片給「圖和公式」，筆記給「解釋和重點」，影片給「老師現場推導」。依下面順序用，每個主題大約 25–40 分鐘。</p>
+  <ol class="steps">
+    <li><div><strong>先看投影片的指定頁（3–5 分鐘）。</strong>只看圖、公式、程式碼，不用讀字。頁碼在下一節的對照表。目的是先有畫面，知道等一下筆記在講什麼。</div></li>
+    <li><div><strong>再讀筆記對應的條目（10–15 分鐘）。</strong>筆記的「重點摘要」是解釋，「老師強調」附時間戳，「還要釐清」列出投影片和逐字稿矛盾的地方。遇到矛盾時，依序採信：老師口頭 &gt; Piazza/Teams &gt; 投影片。</div></li>
+    <li><div><strong>只在三種情況才開影片。</strong>(1) 老師現場推導（算 index、算 AI、畫 roofline）。(2) 操作示範（Nsight debugger）。(3) 作業直接相關的段落（Gaussian blur 預告、HW2 宣布）。下一節有精選清單，用 1.5 倍速。</div></li>
+    <li><div><strong>合上所有材料，自己寫一遍（10 分鐘）。</strong>在紙上推 2D index、算一個 AI、畫一次 tiling 的 phase。寫不出來就回到第 2 步，不要往下走。</div></li>
+    <li><div><strong>最後才寫程式。</strong>先寫 box blur（課堂版本），確認 index 和邊界都對，再進 HW2 的 Gaussian 與 shared memory。</div></li>
+  </ol>
+  <div class="card soft">
+    <h3>資料的可信度</h3>
+    <p>逐字稿是自動產生，專有名詞可能聽錯（筆記開頭有誤聽對照表）。投影片有幾處筆誤（見「勘誤」）。HW2 的題目以原文 <code>spec.md</code> 為準。</p>
+  </div>
+</section>
+
+<!-- ========== 地圖 ========== -->
+<section id="map">
+  <header><div class="eyebrow">對照地圖</div><h2>每個作業項目對應到哪裡</h2></header>
+  <p>L2 = 10/13，L3 = 10/20。「筆記 §」是 <code>gpu/lectures/&lt;日期&gt;/notes.md</code> 「重點摘要」的編號。影片時間是逐字稿時間，和播放器時間相同。</p>
+  <div class="tablebox"><table>
+    <thead><tr><th>主題</th><th>投影片</th><th>筆記 §</th><th>影片</th><th>用在 HW2 的哪裡</th></tr></thead>
+    <tbody>
+      <tr><td>2D 的 row/col index、邊界</td><td>L2 p12–p18、p26</td><td>L2 §4、§5</td><td>L2 01:31:04–01:42:04、02:09:00–02:17:04</td><td>所有 blur kernel</td></tr>
+      <tr><td>Box blur 與 Gaussian 預告</td><td>L2 p19–p23</td><td>L2 §6</td><td>L2 02:23:03–02:37:00</td><td>3 個 blur kernel</td></tr>
+      <tr><td>Host 流程、非同步</td><td>L2 p24–p27</td><td>L2 §7</td><td>L2 02:39:02–02:47:00</td><td>host code</td></tr>
+      <tr><td>CPU 驗證與 tolerance</td><td>L2 p37</td><td>L2 §10</td><td>L2 03:08:01–03:11:00</td><td>確認 kernel 正確（建議做）</td></tr>
+      <tr><td>GPU 硬體資源、occupancy</td><td>L2 p38–p44、p52</td><td>L2 §11、§12</td><td>L2 03:13:00–03:22:05</td><td>步驟 12 的 warp 數量題</td></tr>
+      <tr><td>Nsight debugger 示範</td><td>L2 p54</td><td>L2 §13</td><td>L2 03:23:07–03:32:01</td><td>步驟 8–13、2 張截圖</td></tr>
+      <tr><td>記憶體階層、<code>__shared__</code></td><td>L3 p43–p48</td><td>L3 §11</td><td>L3 02:38:03–02:51:05</td><td>SMEM kernel、Q1</td></tr>
+      <tr><td>Tiling 與 <code>__syncthreads()</code></td><td>L3 p49–p74</td><td>L3 §12</td><td>L3 03:00:01–03:25:00</td><td>Q2、Q3、SMEM kernel</td></tr>
+      <tr><td>Arithmetic intensity</td><td>L3 p24–p28、p36</td><td>L3 §7</td><td>L3 01:16:00–01:37:03</td><td>P1、extra credit</td></tr>
+      <tr><td>Roofline</td><td>L3 p29–p31</td><td>L3 §8</td><td>L3 01:41:03–01:51:05</td><td>P2</td></tr>
+      <tr><td>Naive MMULT 與 T4 數字</td><td>L3 p37–p42</td><td>L3 §10</td><td>L3 02:24:01–02:33:02</td><td>P1、P2 的範例</td></tr>
+      <tr><td>Host 計時、HW2 宣布</td><td>L3 p75–p76</td><td>L3 §13</td><td>L3 03:30:05–03:35:00</td><td>步驟 6–7</td></tr>
+      <tr><td>Nsight Compute CLI</td><td>（課堂沒講）</td><td>—</td><td>—</td><td>步驟 14–26，只看 spec 原文</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ========== 影片 ========== -->
+<section id="video">
+  <header><div class="eyebrow">影片精選</div><h2>值得看的段落</h2></header>
+  <p>其餘部分（Amdahl、Big-O、pop quiz、GPU 歷史、AWS 行政）對 HW2 沒有幫助，直接略過。L3 錄影在 18:27 開始，正式上課約 6:30 PM。</p>
+
+  <div class="cols">
+    <div class="card">
+      <h3>Lecture 2（10/13）</h3>
+      <div class="tablebox" style="border:none"><table style="min-width:0">
+        <tbody>
+          <tr><td><span class="tag must">必看</span></td><td class="mono">02:23:03–02:37:00</td><td>Blur kernel、兩層邊界檢查、作業要做 Gaussian 加權</td></tr>
+          <tr><td><span class="tag must">必看</span></td><td class="mono">03:13:00–03:22:05</td><td>T4 資源、每個 SM 的限制、occupancy</td></tr>
+          <tr><td><span class="tag must">必看</span></td><td class="mono">03:23:07–03:32:01</td><td>Nsight debugger 示範（Warp Info、Lanes）</td></tr>
+          <tr><td><span class="tag rec">建議</span></td><td class="mono">01:31:04–01:42:04</td><td>2D index 現場推導</td></tr>
+          <tr><td><span class="tag rec">建議</span></td><td class="mono">02:09:00–02:17:04</td><td>邊界與 warp divergence</td></tr>
+          <tr><td><span class="tag rec">建議</span></td><td class="mono">02:39:02–02:47:00</td><td>Host 流程、非同步 launch</td></tr>
+          <tr><td><span class="tag opt">選看</span></td><td class="mono">00:43:21–00:44:26</td><td>編譯目標和 GPU 不符時的錯誤</td></tr>
+          <tr><td><span class="tag opt">選看</span></td><td class="mono">03:08:01–03:11:00</td><td>結果驗證</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">必看 32 分，加建議 59 分，1.5 倍速約 40 分。</p>
+    </div>
+    <div class="card">
+      <h3>Lecture 3（10/20）</h3>
+      <div class="tablebox" style="border:none"><table style="min-width:0">
+        <tbody>
+          <tr><td><span class="tag must">必看</span></td><td class="mono">01:16:00–01:37:03</td><td>AI 定義、W 與 Q 的算法、GEMM 現場計算</td></tr>
+          <tr><td><span class="tag must">必看</span></td><td class="mono">01:41:03–01:51:05</td><td>Roofline、ridge point、memory-bound</td></tr>
+          <tr><td><span class="tag must">必看</span></td><td class="mono">02:38:03–02:51:05</td><td>記憶體階層、shared 宣告、合作搬移</td></tr>
+          <tr><td><span class="tag must">必看</span></td><td class="mono">03:00:01–03:25:00</td><td>Tiling、兩次 <code>__syncthreads()</code></td></tr>
+          <tr><td><span class="tag must">必看</span></td><td class="mono">03:30:05–03:35:00</td><td>Tiled 的 AI、HW2 宣布、host 計時</td></tr>
+          <tr><td><span class="tag rec">建議</span></td><td class="mono">02:24:01–02:33:02</td><td>Naive MMULT 的 AI、T4 的 8.14 TFLOPS 與 320 GB/s</td></tr>
+          <tr><td><span class="tag rec">建議</span></td><td class="mono">00:10:02–00:11:00</td><td>選擇題要附解釋才拿滿分</td></tr>
+          <tr><td><span class="tag opt">選看</span></td><td class="mono">00:35:04–00:38:06</td><td>2×8×4 block 對應 warp</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">必看 74 分，加建議 84 分，1.5 倍速約 60 分。</p>
+    </div>
+  </div>
+  <p class="note">兩堂的必看合計約 106 分鐘，1.5 倍速約 71 分鐘。看之前先讀完對應的筆記條目，影片只用來補筆記不清楚的地方。</p>
+</section>
+
+<!-- ========== 今日日程 ========== -->
+<section id="today">
+  <header><div class="eyebrow">今日日程</div><h2>今天只做準備</h2></header>
+  <p>總共約 5 小時，可以分段。勾選狀態存在這個瀏覽器。精力不夠時，優先順序是 A → C → D → B → E。</p>
+
+  <div class="card" data-min="25">
+    <div class="block-head"><h3>A. 本機環境與檔案</h3><span class="dur">25 分</span></div>
+    <ul class="tasks">
+      <li><input type="checkbox" id="a1"><label for="a1">確認本機 RTX 3050 可用：<code>nvidia-smi</code> 看得到顯卡，VS 2026 能開 HW1 solution 並 build。環境細節見 <code>gpu/hw/local-runbook.md</code>。</label></li>
+      <li><input type="checkbox" id="a2"><label for="a2">從 Canvas Files/Homeworks/Hw2_materials 下載 <code>hw2_starter.cu</code>、4 張 <code>hw2_testimage*.png</code>、<code>stb_image.h</code>、<code>stb_image_write.h</code>。</label></li>
+      <li><input type="checkbox" id="a3"><label for="a3">在既有 solution 加一個新 project <code>HW2</code>，刪掉預設 <code>kernel.cu</code>，加入 starter，build 一次。放在 <code>D:\Repos\Au26_GPU</code>，不要放進 fall-2026 repo。</label></li>
+      <li><input type="checkbox" id="a4"><label for="a4">決定編譯目標（見「編譯設定」一節）：我建議 HW2 改成 <code>compute_86,sm_86</code>。</label></li>
+      <li><input type="checkbox" id="a5"><label for="a5">打開 <code>hw2_starter.cu</code>，只讀不改：記下每個 TODO 的位置、計時 start/stop 的位置、輸入輸出路徑在第幾行。</label></li>
+      <li><input type="checkbox" id="a6"><label for="a6">用 Admin command prompt 跑 <code>ncu --version</code>。若之後出現 <code>ERR_NVGPUCTRPERM</code>，用 Admin 開 prompt，或在 NVIDIA Control Panel 的開發人員設定開啟 GPU performance counters 權限。</label></li>
+      <li><input type="checkbox" id="a7"><label for="a7">用 <code>devicequery.exe</code>（<code>gpu/hw/hw0/src/devicequery.cu</code>）記下 3050 的 SM 數、每 SM 最大 thread 數、每 SM 最大 block 數、shared memory。</label></li>
+    </ul>
+  </div>
+
+  <div class="card" data-min="45">
+    <div class="block-head"><h3>B. 從空白檔重寫 HW1 的核心</h3><span class="dur">45 分</span></div>
+    <p class="note">不看答案，從空白檔寫。能寫出來就代表基礎夠了。參考檔是 <code>gpu/hw/hw1/src/kernel.cu</code>。</p>
+    <ul class="tasks">
+      <li><input type="checkbox" id="b1"><label for="b1">寫 vector add 的 host 流程：<code>cudaMalloc</code> → <code>cudaMemcpy</code> HtoD → launch → <code>cudaDeviceSynchronize</code> → <code>cudaMemcpy</code> DtoH → <code>cudaFree</code>，全部包 <code>checkCuda</code>，方向明確寫出（老師不建議用 <code>cudaMemcpyDefault</code>）。</label></li>
+      <li><input type="checkbox" id="b2"><label for="b2">kernel 用 <code>gid = blockIdx.x*blockDim.x + threadIdx.x</code> 加邊界檢查；blocksPerGrid 用 <code>(n-1)/256+1</code>。</label></li>
+      <li><input type="checkbox" id="b3"><label for="b3">再改成 2D：row/col 加 <code>width</code>、<code>height</code> 邊界檢查，用 <code>dim3</code> 設定 grid 與 block。</label></li>
+      <li><input type="checkbox" id="b4"><label for="b4">卡住才去看 HW1 的參考檔，並記下卡在哪裡。</label></li>
+    </ul>
+  </div>
+
+  <div class="card" data-min="60">
+    <div class="block-head"><h3>C. Lecture 2：2D index、blur、T4、Nsight</h3><span class="dur">60 分</span></div>
+    <ul class="tasks">
+      <li><input type="checkbox" id="c1"><label for="c1">看 L2 投影片 p12–p18、p19–p23、p26，只看圖和公式。</label></li>
+      <li><input type="checkbox" id="c2"><label for="c2">讀 L2 筆記 §4、§5、§6、§11、§13，以及「老師強調」的 index space 和 T4 兩段。</label></li>
+      <li><input type="checkbox" id="c3"><label for="c3">看影片：02:23:03–02:37:00、03:13:00–03:22:05、03:23:07–03:32:01（1.5 倍速約 22 分）。</label></li>
+      <li><input type="checkbox" id="c4"><label for="c4">在 scratch 專案寫一個 box blur（課堂版本，blur width 10），讀一張測試影像、輸出圖，肉眼確認模糊。</label></li>
+      <li><input type="checkbox" id="c5"><label for="c5">合上材料，回答「自測」裡 L2 的題目。</label></li>
+    </ul>
+  </div>
+
+  <div class="card" data-min="90">
+    <div class="block-head"><h3>D. Lecture 3：AI、roofline、tiling、shared memory</h3><span class="dur">90 分</span></div>
+    <ul class="tasks">
+      <li><input type="checkbox" id="d1"><label for="d1">看 L3 投影片 p24–p31（AI、roofline）和 p43–p48、p49–p74（記憶體、tiling）。</label></li>
+      <li><input type="checkbox" id="d2"><label for="d2">讀 L3 筆記 §7、§8、§10、§11、§12、§13，加上「老師強調」的效能理論、MMULT v0、記憶體階層、tiled 四段。</label></li>
+      <li><input type="checkbox" id="d3"><label for="d3">看影片：01:16:00–01:37:03、01:41:03–01:51:05、02:38:03–02:51:05、03:00:01–03:25:00、03:30:05–03:35:00（1.5 倍速約 50 分）。</label></li>
+      <li><input type="checkbox" id="d4"><label for="d4">在紙上重做老師的 GEMM 例子：W、Q_r、Q_w、AI，確認和筆記一致。</label></li>
+      <li><input type="checkbox" id="d5"><label for="d5">在紙上畫一次 tiled MMULT 的 2 個 phase：哪些 thread 載入什麼、哪裡要同步。</label></li>
+      <li><input type="checkbox" id="d6"><label for="d6">合上材料，回答「自測」裡 L3 的題目。</label></li>
+    </ul>
+  </div>
+
+  <div class="card" data-min="30">
+    <div class="block-head"><h3>E. 預習 Nsight 與 NCU 流程</h3><span class="dur">30 分</span></div>
+    <ul class="tasks">
+      <li><input type="checkbox" id="e1"><label for="e1">重讀 spec 步驟 8–13、14–26（<code>gpu/hw/hw2/README.md</code> 有摘要）。</label></li>
+      <li><input type="checkbox" id="e2"><label for="e2">把 ncu 指令（步驟 19）存成文字檔，寫好 8 個 exe 的命名清單，例如 <code>hw2_rel_global_img1.exe</code>、<code>hw2_rel_smem_img1.exe</code>。</label></li>
+      <li><input type="checkbox" id="e3"><label for="e3">用 scratch 專案的 Release exe 實際跑一次 ncu，確認 metric 名稱都能收到（注意是 <code>dram__bytes.sum</code>，兩個底線）。</label></li>
+      <li><input type="checkbox" id="e4"><label for="e4">用 scratch 專案試一次 Nsight CUDA debugger（Debug build、兩行 breakpoint），確認本機單顆顯卡能 attach。這個最容易出意外，今天先測。</label></li>
+      <li><input type="checkbox" id="e5"><label for="e5">做計算表：smsp cycles、cycles/ns、inst executed、dram Kbyte，欄位寫好 execution time 和 instruction intensity 的公式與單位換算。</label></li>
+    </ul>
+  </div>
+
+  <div class="card" data-min="20">
+    <div class="block-head"><h3>F. 收工</h3><span class="dur">20 分</span></div>
+    <ul class="tasks">
+      <li><input type="checkbox" id="f1"><label for="f1">列出 3 個還不懂的點。能自己查的明天查，需要老師回答的今晚貼到 Teams HW2 channel。</label></li>
+      <li><input type="checkbox" id="f2"><label for="f2">在 Teams 問一句：用本機 RTX 3050 做，Warp Info 那題用 3050 的規格回答可以嗎；26b 的 naive vs tiled 是指 global vs shared 嗎。</label></li>
+      <li><input type="checkbox" id="f3"><label for="f3">備份 HW2 project 與 scratch 專案（git 或雲端硬碟）。</label></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 核心觀念 ========== -->
+<section id="core">
+  <header><div class="eyebrow">核心觀念</div><h2>依作業項目整理的教材</h2></header>
+
+  <div class="card">
+    <h3>1. 2D index、邊界與 blur 的結構</h3>
+    <p><strong>Index 公式</strong>（L2 p13）：</p>
+<pre><code>col = blockIdx.x * blockDim.x + threadIdx.x;   // x 是水平方向，移動最快
+row = blockIdx.y * blockDim.y + threadIdx.y;   // y 是垂直方向
+offset = row * width + col;                    // row-major 攤平成 1D</code></pre>
+    <ul>
+      <li>Host 端 <code>dim3</code> 的順序是 (x, y, z)，所以 grid 的 x 方向對應<strong>寬度（欄數）</strong>，y 對應高度。L2 p17 把這兩個寫反了，p26 才是對的。</li>
+      <li>Grid 大小用 ceil-div：<code>(width + bx - 1) / bx</code>。多出來的 thread 一定要擋掉。老師的例子是 62×76 影像配 16×16 block，grid 是 4×5，共 64×80 個 thread。</li>
+      <li>Kernel 裡的 <code>a[i][j]</code> 語法不能用，因為 host 傳來的是 1D buffer，要自己算 offset。</li>
+    </ul>
+    <p><strong>兩層邊界檢查</strong>（L2 p22–p23）：</p>
+    <ul>
+      <li>第一層：這個 thread 的輸出位置有沒有在影像內。沒有就不要處理。</li>
+      <li>第二層：鄰域裡的每個 pixel 有沒有在影像內。超出的就跳過，而且不能算進分母。</li>
+      <li>只讀資料可以被很多 thread 重疊讀取沒有問題；每個 thread 只寫自己的輸出 pixel，所以不需要同步，也沒有 race。</li>
+    </ul>
+    <p><strong>Box blur 的結構（課堂版本）</strong>：對輸出位置 (row, col)，雙層迴圈走過 [-r, r]²，每個在範圍內的鄰居累加 pixel 值並計數，最後用「累加 ÷ 計數」寫回。</p>
+    <p><strong>HW2 的 Gaussian 和 box blur 差在哪</strong>（spec 5b）：</p>
+    <ul>
+      <li>濾波器是提供的 9×9 float 係數，所以半徑 r = 4。係數的 index 要由鄰居的偏移量換算成 0..80 的一維位置。</li>
+      <li>每個「係數 × pixel」先<strong>四捨五入成 int</strong>，再用 32-bit int 累加，避免 overflow。</li>
+      <li>正規化改成除以<strong>實際用到的係數總和</strong>（只算在影像內的鄰居），不是除以 pixel 數。</li>
+      <li>最後轉回 <code>unsigned char</code> 寫出。除法後怎麼捨入，spec 沒有規定，自己決定並在報告寫明。</li>
+      <li>輸入是 8-bit 單色，host 和 device 都用 <code>unsigned char</code>；用 <code>stb_load()</code> 回傳的寬、高、channel 數確認是單色。</li>
+    </ul>
+    <p class="note">建議先做 CPU 版本當 reference。整數運算加固定的捨入規則，CPU 和 GPU 應該可以逐像素完全相同；如果不同，通常是邊界或捨入規則不一致。</p>
+  </div>
+
+  <div class="card">
+    <h3>2. 記憶體階層與 shared memory</h3>
+    <div class="tablebox"><table>
+      <thead><tr><th>種類</th><th>宣告</th><th>誰看得到</th><th>存活多久</th><th>速度</th></tr></thead>
+      <tbody>
+        <tr><td>register</td><td>一般區域變數</td><td>單一 thread</td><td>thread</td><td>最快</td></tr>
+        <tr><td>local</td><td>per-thread 陣列、register 溢出</td><td>單一 thread</td><td>thread</td><td>很慢（實際在 global）</td></tr>
+        <tr><td>shared</td><td><code>__shared__</code></td><td>同一個 block</td><td>block</td><td>快（SM 上的 SRAM）</td></tr>
+        <tr><td>global</td><td><code>__device__</code>、<code>cudaMalloc</code></td><td>整個 grid，host 也能存取</td><td>整個 application</td><td>慢（DRAM）</td></tr>
+        <tr><td>constant</td><td><code>__constant__</code></td><td>整個 grid，唯讀</td><td>整個 application</td><td>有 cache，容量小</td></tr>
+      </tbody>
+    </table></div>
+    <ul>
+      <li>Shared memory 是 scratchpad：宣告、搬入、使用都要自己寫，不會自動快取。每個 block 看不到別的 block 的 shared memory。</li>
+      <li><strong>Static</strong>：kernel 內 <code>__shared__ float name[SIZE];</code>，大小必須是編譯期常數。</li>
+      <li><strong>Dynamic</strong>：kernel 內 <code>extern __shared__ float name[];</code>，大小由 host 在 launch 的第三個參數給（bytes）：<code>kernel&lt;&lt;&lt;grid, block, sharedBytes&gt;&gt;&gt;(...)</code>。</li>
+      <li><strong>合作搬移</strong>（L3 p47）：block 內的 thread 先算出自己在 block 裡的線性編號（2D block 要用 <code>threadIdx.y * blockDim.x + threadIdx.x</code>），從這個編號開始，每次前進「block 內 thread 總數」，直到蓋完所有係數。這樣不管 block 大小比係數個數大或小都能搬完。spec 寫「前 N 個 thread」，block 小於 N 時就需要這個走法。</li>
+      <li>搬完一定要 <code>__syncthreads()</code>，否則有 thread 可能在資料還沒到位時就開始讀。</li>
+    </ul>
+    <p class="warn"><strong>最容易犯的錯：</strong><code>__syncthreads()</code> 是 block 範圍的 barrier，block 內<strong>所有</strong> thread 都要執行到，否則 deadlock 或未定義行為。影像邊緣的 block 有一部分 thread 在影像外。不要在 <code>__syncthreads()</code> 之前就讓這些 thread <code>return</code>。順序是：搬係數 → 同步 → 才檢查「我在不在影像內」。</p>
+    <p class="note">要多一個 kernel 參數把係數陣列（在 global memory）傳進來。三個版本的差別只在「讀係數的來源」：直接讀 global，或讀 shared 的副本（static / dynamic）。</p>
+  </div>
+
+  <div class="card">
+    <h3>3. Warp 與硬體資源（步驟 12 的 QUESTION）</h3>
+    <ul>
+      <li>Block 切成 warp：32 個連續 thread 一組，2D block 先以 x 最快的順序攤平再切。Warp 數 = ceil(block 的 thread 數 ÷ 32)。不滿 32 的補 inactive thread。</li>
+      <li>SM 同時能放多少 block、多少 thread 有上限，block 數量遠大於此時，分批排進 SM（wave）。</li>
+      <li>T4（作業題目問的，L2 p38–p44）：40 個 SM，每 SM 最多 16 個 block、1024 個 thread，每個 processing block 16 個 FP32 core。</li>
+      <li>你的 RTX 3050（本機 devicequery 實測）：<strong>20 個 SM，每 SM 最多 16 個 block、1536 個 thread</strong>，CC 8.6，shared memory 每 SM 100 KB。</li>
+    </ul>
+    <p><strong>回答「幾個 warp 在跑」的推理框架</strong>（答案自己算）：</p>
+    <ol>
+      <li>從 Warp Info 視窗直接數出實際看到的 warp 數。</li>
+      <li>算 launch 設定：總 block 數、每個 block 幾個 warp。</li>
+      <li>對照 SM 數和每 SM 的 block／thread 上限，推出同一時間「最多能有多少 block 常駐」。</li>
+      <li>debugger 停下來時，是被排進 SM 的那一批在執行，不是整張影像全部同時在跑。</li>
+      <li>報告裡兩個 GPU 都寫：題目指定的 T4 規格，以及你實際使用的 3050 規格。</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>4. Arithmetic intensity 與 roofline（P1、P2）</h3>
+    <p><strong>AI = W ÷ Q</strong>（FLOPs ÷ bytes）。老師說這是這門課「可能最重要的指標」（L3 [01:16:00]）。</p>
+    <ol class="steps">
+      <li><div>寫出演算法的式子，一個輸出元素是怎麼算出來的。</div></li>
+      <li><div><strong>算 W</strong>：每種運算各自數出來，分項寫。FMA = 2 FLOP，transcendental（exp、tanh、erf、sqrt）= 4 FLOP，其餘乘、加、減、比較各 1。</div></li>
+      <li><div><strong>算 Q = Q_read + Q_write</strong>：只算 global memory。每個項寫成「元素個數 × bytes 每個元素」。FP32 是 4 bytes，<strong>一定要乘</strong>（老師特別提醒過）。Register 與 cache 流量當作免費（perfect cache 假設）。</div></li>
+      <li><div>AI = W ÷ Q，化簡成 N 的函式，並檢查合理範圍。老師說大多數演算法落在 0.1 到幾百之間，超出就該回頭檢查。</div></li>
+      <li><div>表格欄位照 spec：<code>algorithm | FLOPs | Mem bytes | AI</code>，分子分母的每一項都要列出來。</div></li>
+    </ol>
+    <p><strong>老師現場算的例子：FP32 方陣 GEMM（C = AB）</strong>：W = 2N³（N³ 次 FMA，每次 2），Q_r = 2·N²·4、Q_w = N²·4，所以 Q = 12N²，AI = N/6。SGEMV 約 1/2，DGEMV 約 1/4。</p>
+    <p class="note">投影片 p36 寫成 N/3D（FP32 時 D=4，等於 N/12），差在 W 有沒有乘 2。依老師口頭，W = 2N³。HW2 的 P1 寫 FLOPs 時，把「乘和加各算一個 FLOP」寫清楚。</p>
+    <p class="warn"><strong>題目細節：</strong>P1b 是 3-pass、<strong>unfused</strong>。unfused 的意思是每個 pass 各自把資料讀進來、寫回去，pass 之間的中間結果要經過 global memory。P1b 沒有給輸入大小，自己定義變數（例如長度或 batch×維度）。</p>
+    <p><strong>Roofline</strong>（L3 p29–p31）：</p>
+    <ul>
+      <li>可達效能 P = min(peak compute, β × AI)，β 是 peak memory bandwidth。</li>
+      <li>Ridge point = peak compute ÷ β，單位 FLOP/byte。AI 在左邊是 memory-bound，在右邊是 compute-bound，靠近 ridge 是 transitional。「靠近」怎麼定義，自己訂一個門檻（例如 ridge 的 0.5×–2×）並寫明。</li>
+      <li>Log-log 圖上，斜線段的斜率永遠是 1。</li>
+      <li>必須把 P1 的 3 個 AI 代入具體數值再畫，並寫出用了哪些值。換一組值可能換 regime。</li>
+      <li>用 FP32 非 tensor 的 peak 值，與 P1 一致。</li>
+    </ul>
+    <p><strong>查規格的起點</strong>（老師在 L3 [01:49:07] 說可以向 Claude 或 Copilot 查，也可以看 spec sheet；以 NVIDIA 官方資料為準）：</p>
+    <div class="tablebox"><table>
+      <thead><tr><th>GPU</th><th>FP32 peak</th><th>Memory bandwidth</th><th>Ridge（約）</th><th>來源</th></tr></thead>
+      <tbody>
+        <tr><td>H100 SXM5</td><td>66.9 TFLOPS</td><td>3.35 TB/s</td><td>20 FLOP/B</td><td>L3 筆記 §12（老師的投影片）</td></tr>
+        <tr><td>Quadro RTX 6000（TU102）</td><td>約 16.3 TFLOPS</td><td>約 672 GB/s（GDDR6 384-bit）</td><td>約 24 FLOP/B</td><td>憑記憶，請對照官方 datasheet 確認</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">這是用來計算 ridge point 的起點。引用時寫明來源、精度（FP32、非 tensor core）和是否算 FMA 的 2 FLOP。</p>
+  </div>
+
+  <div class="card">
+    <h3>5. Tiling 與 Q1–Q3 的觀念</h3>
+    <ul>
+      <li><strong>為什麼 tiling 有效</strong>：在一個 block 內，每一列 M、每一行 N 會被不同的 thread 重複讀 TILE_WIDTH 次。把它們先搬進 shared memory，後面重複使用，global memory 流量減少 TILE_WIDTH 倍，AI 變成 TILE_WIDTH/4。</li>
+      <li><strong>Phase</strong>：把 dot product 拆成多段，每段是一個 phase，分成 LOAD（每個 thread 搬一個 M 元素和一個 N 元素進 shared）與 USE（用 shared 的 tile 算部分和）。</li>
+      <li><strong>兩次同步</strong>：LOAD 後一次（read-after-write，載入完才能用）；USE 後一次（write-after-read，這一輪用完才能讓下一個 phase 覆寫）。</li>
+      <li>輸出要等所有 phase 做完，才從 register 寫回 global 一次。</li>
+    </ul>
+    <p><strong>Q1、Q2、Q3 各自該想的事</strong>（不給答案）：</p>
+    <ul>
+      <li><strong>Q1</strong>：shared 變數的 scope 與 lifetime 是什麼單位？題目給了 block 數和每 block 的 thread 數，哪個數字和「份數」有關？</li>
+      <li><strong>Q2</strong>：L3 的結論是 tiling 使 global 存取減少「幾倍」，與 tile 的哪個尺寸有關？「使用量減少到原來的幾分之幾」是同一件事的倒數。</li>
+      <li><strong>Q3</strong>：先算一個 32×32 單精度 tile 共幾 bytes，再除以題目給的 DRAM burst 大小。這題只是一個除法，但要在答案中寫出步驟。</li>
+    </ul>
+    <p class="note">選擇題必須附解釋才拿滿分；答錯但解釋合理也能得分（L3 [00:10:02]）。</p>
+  </div>
+
+  <div class="card">
+    <h3>6. Host 端計時（步驟 6–7）</h3>
+    <p>用 <code>profileapi.h</code> 的 <code>QueryPerformanceCounter</code> 與 <code>QueryPerformanceFrequency</code>（解析度小於 1 µs）。基本寫法：</p>
+<pre><code>LARGE_INTEGER freq, t0, t1;
+QueryPerformanceFrequency(&amp;freq);
+QueryPerformanceCounter(&amp;t0);
+// ... 被量的工作 ...
+QueryPerformanceCounter(&amp;t1);
+double ms = (t1.QuadPart - t0.QuadPart) * 1000.0 / freq.QuadPart;</code></pre>
+    <ul>
+      <li>Kernel launch 是非同步的。停止計時前要 <code>cudaDeviceSynchronize()</code>，否則量到的只是 launch 的時間。</li>
+      <li>老師建議量兩種：單獨的 kernel 時間，以及包含 HtoD、kernel、DtoH 的完整 round-trip。與 CPU 比較時，round-trip 通常更有意義。</li>
+      <li>Starter 裡已有註解標出 start/stop 的位置，照放即可。</li>
+      <li>DEBUG 與 RELEASE 各量 4 張影像，<strong>不要在 debugger 裡跑</strong>。每個 timer、每張影像的結果都存下來。</li>
+      <li>第一次呼叫 CUDA 會建立 context，若編的是 <code>sm_75</code>，在 3050 上還會 JIT。第一次的數字可能偏大，建議先做一次 warm-up 呼叫，或在報告註明。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>7. Nsight VSE debugger（步驟 8–13）</h3>
+    <ol class="steps">
+      <li><div>先成功 build <strong>DEBUG</strong>（device code 會加 <code>-G</code>），否則 attach 失敗。</div></li>
+      <li><div>在 blur kernel 相鄰兩行設 breakpoint；launch 的 block 與 thread 要涵蓋整張影像。</div></li>
+      <li><div>Extensions → Nsight → Start CUDA Debugging（Next-Gen）。</div></li>
+      <li><div>停住後看 <code>col</code>、<code>row</code>。按 F10：多半停在同一行，這不是錯誤，因為很多 thread 先後到達同一行。再看一次 col、row，大概會變。</div></li>
+      <li><div>Extensions → Nsight → Windows 開 <strong>Lanes</strong> 與 <strong>Warp Info</strong>。點不同 thread 與 warp，觀察 col、row 的變化。</div></li>
+      <li><div><strong>截圖 1</strong>：<code>hw2_testimage1.png</code>（240×240）的一般 launch，兩個視窗同時開著。</div></li>
+      <li><div>停止，把 launch 改成 <code>&lt;&lt;&lt;1,1&gt;&gt;&gt;</code>，重新 debug，<strong>截圖 2</strong>。</div></li>
+    </ol>
+    <p class="note">其他縮小 debug 範圍的方法：kernel 內加 <code>if (threadIdx.x == k) {…}</code> 並把 breakpoint 放在大括號內。老師說 Conditional Breakpoint 不穩定。Kernel 的 <code>printf</code> 可看基本數值，但不要用來查 race 或 deadlock。</p>
+    <p class="warn">本機單顆顯卡能不能用 Next-Gen CUDA debugger，我沒有查證。今天先用 scratch 專案測一次（E4），不要等到明天。</p>
+  </div>
+
+  <div class="card">
+    <h3>8. Nsight Compute CLI 與兩個 HW Q（步驟 14–26）</h3>
+    <ul>
+      <li>共 <strong>8 次</strong>：4 張影像 × （global 版、static shared 版）。一律 Release、x64，Admin command prompt。</li>
+      <li>每次 <code>main()</code> 只 launch 一個 blur kernel；每張影像各 build 一個 exe（例如 <code>hw2_rel_global_img1.exe</code>），避免被覆蓋。</li>
+      <li>指令是 spec 步驟 19 那一整行 <code>ncu -k &lt;kernel名&gt; --metrics … ./&lt;exe&gt;</code>。範例輸出是 2022 年的舊版，只有 6 個 metric；以步驟 19 為準。</li>
+    </ul>
+    <div class="tablebox"><table>
+      <thead><tr><th>要算的值</th><th>公式（spec 步驟 25）</th><th>單位換算</th></tr></thead>
+      <tbody>
+        <tr><td>kernel execution time</td><td><code>smsp__cycles_elapsed.sum ÷ smsp__cycles_elapsed.sum.per_second</code></td><td>分母單位是 cycle/nsecond，結果是 ns，轉成秒</td></tr>
+        <tr><td>kernel instruction intensity</td><td><code>smsp__inst_executed.sum ÷ dram__bytes.sum</code></td><td>dram bytes 輸出是 Kbyte，轉成 byte</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">spec 寫的 <code>dram_bytes.sum</code> 少一個底線，正確是 <code>dram__bytes.sum</code>。可以用 <code>gpu__time_duration.sum</code> 當交叉檢查：算出的 execution time 應該與它同一個數量級。</p>
+    <p><strong>兩個 HW Q 的思考方向</strong>（用你的量測數字回答）：</p>
+    <ul>
+      <li><strong>26a</strong>：這個作業只有「濾波器係數」放在 shared memory，影像本身仍從 global 讀。81 個 float 很小，而且所有 thread 反覆讀同一批值，在硬體上很可能本來就被 cache 住。所以 shared 版<strong>不一定比較快</strong>：它多了搬移、同步和額外指令。回答時比較三項數據：execution time、instruction 數、dram bytes，並從記憶體型別的特性解釋差異（或沒有差異）。不要預設答案，以量到的為準。</li>
+      <li><strong>26b</strong>：題目問「naive vs tiled」，但作業沒有 tiled 的矩陣乘法。可能沿用舊題，或指 global vs shared。建議在 Teams 問清楚，並在答案中寫明你採用的解讀。</li>
+      <li>Extra credit 的理論 AI：global 版與 shared 版各自的 FLOPs 與 global bytes，和 P1 同樣的拆項方法。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 編譯設定 ========== -->
+<section id="arch">
+  <header><div class="eyebrow">編譯設定</div><h2>sm_75 在 RTX 3050 上會有問題嗎</h2></header>
+  <p><strong>不會有問題。</strong>HW1 就是這樣跑的，而且 <code>local-runbook.md</code> 已實測：</p>
+  <ul>
+    <li>VS 預設 <code>compute_75,sm_75</code> 會同時嵌入 sm_75 的 SASS 和 compute_75 的 PTX。3050 是 CC 8.6，跑不了 sm_75 的 SASS，driver 會把 PTX 即時編譯（JIT）成 sm_86 的版本來執行，並快取。實測在 driver 617.42 可以。</li>
+    <li>相反方向才會出錯：只編 8.0 拿到 7.5 的 T4 上跑會出現 <code>no kernel image is available</code>（L2 [00:43:21]）。</li>
+    <li>runbook 也實測過 <code>-gencode arch=compute_75,code=sm_75 -gencode arch=compute_86,code=sm_86</code> 的雙目標編法，結果一樣。</li>
+  </ul>
+  <div class="card soft">
+    <h3>HW2 的建議：改用 <code>compute_86,sm_86</code></h3>
+    <p>HW2 要量時間、要 profile、要用 debugger，原生的 sm_86 比 JIT 乾淨：</p>
+    <ul>
+      <li><strong>計時</strong>：JIT 的成本（通常幾秒）出現在第一次 launch，會污染第一個 timer 的數字。</li>
+      <li><strong>NCU</strong>：profile 的是 JIT 出來的程式碼。雖然也是 sm_86 的機器碼，但原生編譯更直接，也省掉每次新 exe 第一次執行的 JIT 時間。</li>
+      <li><strong>Debugger</strong>：L2 [03:24:03] 說除錯時編譯目標要和裝置相符，否則 kernel 不會跑。那是針對 T4 的說法，在 3050 上對應的是 8.6。</li>
+    </ul>
+    <p>設定位置：Project Properties → CUDA C/C++ → Device → Code Generation，填 <code>compute_86,sm_86</code>。想保留相容性可以填 <code>compute_75,sm_75;compute_86,sm_86</code>。</p>
+  </div>
+  <p class="note">spec 寫「設 sm_75 對應 T4」，那是為了 AWS 的 T4。你在 3050 上，設成 sm_86 沒有違反作業目的。報告中寫明「使用本機 RTX 3050（CC 8.6），編譯目標 sm_86」，以及它和 T4 的差異（SM 數、每 SM 的 thread 上限、記憶體頻寬）。NCU 數值會和 T4 不同，這是預期的。</p>
+</section>
+
+<!-- ========== 勘誤 ========== -->
+<section id="errata">
+  <header><div class="eyebrow">勘誤</div><h2>投影片與原文的已知錯誤</h2></header>
+  <div class="tablebox"><table>
+    <thead><tr><th>位置</th><th>問題</th><th>採用</th></tr></thead>
+    <tbody>
+      <tr><td>L2 p17</td><td><code>dimGrid(ceil(m/16.0), ceil(n/16.0))</code> 把列數放在 x</td><td>p26：x 對應寬度（欄），y 對應高度（列）</td></tr>
+      <tr><td>L2 p13</td><td>1D 公式不能直接套在 2D 圖上</td><td>用 2D 公式；老師算 block(1,0)、thread(1,1) = 13</td></tr>
+      <tr><td>L2 p44、p52</td><td>寫「每個 SM 最多 32 個 block」，那是 Volta 的數字；p52 範例也是 Volta</td><td>T4 與 3050 都是每 SM 16 個 block，上限 thread 數要看各自規格</td></tr>
+      <tr><td>L2 p39 / p42</td><td>L2 cache 6 MB 與 4194304 bytes 不一致</td><td>以 device query 實測為準</td></tr>
+      <tr><td>L2 p55</td><td>error macro 的呼叫語法少一個參數</td><td>使用更新版 L1 slide 55（<code>cuda_check.h</code>）</td></tr>
+      <tr><td>L3 p36</td><td>GEMM 的 AI 寫成 N/3D（N/12）</td><td>老師口頭 W = 2N³，AI = N/6</td></tr>
+      <tr><td>L3 p44</td><td>記憶體圖右邊的 block 應標成另一個 block</td><td>每個 block 看不到別的 block 的 shared</td></tr>
+      <tr><td>L3 p69–p73</td><td>載入 N 的 index 寫成 <code>t*TILE_WIDTH</code>，應為 <code>p*TILE_WIDTH</code>；<code>__synchthreads()</code> 拼錯</td><td>照正確拼法與 index 理解</td></tr>
+      <tr><td>L3 [00:17:00] vs L2 [03:14:01]</td><td>每個 sub-partition 的 FP32 core 數：32 與 16</td><td>寫 T4 時用 16（L2）</td></tr>
+      <tr><td>HW2 spec 步驟 20</td><td>NCU 範例輸出是 2022 年的舊版，6 個 metric</td><td>用步驟 19 的 14 個 metric</td></tr>
+      <tr><td>HW2 spec 步驟 25b</td><td><code>dram_bytes.sum</code> 少一個底線</td><td><code>dram__bytes.sum</code></td></tr>
+      <tr><td>HW2 spec 步驟 3b</td><td><code>hw2_testimage4.png</code> 寫 4023×3024</td><td>實測 PNG 檔頭是 <strong>4032×3024</strong>（四張都是 8-bit 灰階）</td></tr>
+      <tr><td>HW2 spec 步驟 13c</td><td>只有「c.」沒有內容</td><td>忽略</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ========== 地雷 ========== -->
+<section id="pitfalls">
+  <header><div class="eyebrow">地雷</div><h2>容易出錯的地方</h2></header>
+  <div class="card">
+    <ul class="tasks">
+      <li><input type="checkbox" id="p1"><label for="p1">x/y 對調：x 是欄（寬），y 是列（高）；offset = row × width + col。</label></li>
+      <li><input type="checkbox" id="p2"><label for="p2">邊界：輸出位置與鄰域 pixel 兩層都要檢查；超出的鄰居不能算進分母。</label></li>
+      <li><input type="checkbox" id="p3"><label for="p3">累加用 <code>int</code>，不要用 <code>unsigned char</code>；寫出時才轉回 <code>uchar</code>。</label></li>
+      <li><input type="checkbox" id="p4"><label for="p4">正規化除以「實際用到的係數總和」，不是 pixel 數。</label></li>
+      <li><input type="checkbox" id="p5"><label for="p5">每個「係數 × pixel」先四捨五入成 int 再累加。</label></li>
+      <li><input type="checkbox" id="p6"><label for="p6">shared 版：先搬係數、<code>__syncthreads()</code>、再檢查影像邊界，順序不能反。</label></li>
+      <li><input type="checkbox" id="p7"><label for="p7">dynamic shared：kernel 內用 <code>extern __shared__</code>，launch 第三個參數給 bytes（係數個數 × <code>sizeof(float)</code>）。</label></li>
+      <li><input type="checkbox" id="p8"><label for="p8">檔案路徑要改成實際位置（starter 裡是去年的 <code>c:/Temp/AUT22_GPUCompute/dat/</code>）；輸出檔名依影像與 kernel 版本分開。</label></li>
+      <li><input type="checkbox" id="p16"><label for="p16">starter 直接編不過（讀程式碼判斷，未編譯），先修：(1) <code>#include "../util/stb_image.h"</code> 與 <code>stb_image_write.h</code> 改成同資料夾；(2) <code>uchar</code> 改 <code>unsigned char</code>；(3) 宣告 <code>cudaError_t cudaStatus</code>；(4) 宣告並 malloc <code>h_imgOut</code>；(5) 所有宣告放在 <code>main()</code> 最前面，否則 <code>goto Error</code> 會報 jump bypasses initialization；(6) 自己引入 HW1 的 error-check macro。</label></li>
+      <li><input type="checkbox" id="p17"><label for="p17">starter 的 timer：#1 = 配置 device 記憶體 → H2D → kernel → D2H；#2 = 只含 kernel launch → <code>cudaDeviceSynchronize()</code>；#3（EC）= host 循序 blur。第二個 dynamic 的註解寫成 #2，是 #3 的筆誤。</label></li>
+      <li><input type="checkbox" id="p9"><label for="p9">計時前要同步；不要在 debugger 裡計時；DEBUG 與 RELEASE 都量。</label></li>
+      <li><input type="checkbox" id="p10"><label for="p10">NCU 一律 Release x64；每張影像各一個 exe；metric 是 <code>dram__bytes.sum</code>。</label></li>
+      <li><input type="checkbox" id="p11"><label for="p11">單位：Kbyte → byte，ns → s，不要漏換。</label></li>
+      <li><input type="checkbox" id="p12"><label for="p12">P1：Q 要乘 4 bytes；讀與寫分開列；FMA = 2、transcendental = 4；每一項個別寫出。</label></li>
+      <li><input type="checkbox" id="p13"><label for="p13">P2：代入具體數值並寫出來；每張圖標出 regime。</label></li>
+      <li><input type="checkbox" id="p14"><label for="p14">所有書面題都要附過程或理由。</label></li>
+      <li><input type="checkbox" id="p15"><label for="p15">繳交只放 <code>.cu/.cpp/.h</code>，不要放 project、solution 與 build 產物。</label></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 自測 ========== -->
+<section id="test">
+  <header><div class="eyebrow">自測</div><h2>合上材料後，答得出來嗎</h2></header>
+  <div class="cols">
+    <div class="card">
+      <h3>L2 範圍</h3>
+      <ol>
+        <li>2D grid 裡一個 thread 的 row、col 和 offset 怎麼算？</li>
+        <li>一張 W×H 的影像用 bx×by 的 block，grid 的 x、y 各是多少？為什麼不是反過來？</li>
+        <li>為什麼 blur 需要兩層邊界檢查？第二層超出範圍時，該做什麼？</li>
+        <li>為什麼 blur kernel 不需要 <code>__syncthreads()</code>，而 shared 版需要？</li>
+        <li>一個 block 有 256 個 thread，有幾個 warp？2D 的 16×16 呢？</li>
+        <li>F10 單步為什麼常停在同一行？</li>
+        <li>3050 的 SM 數與每 SM 的 thread 上限是多少？把它換成「同時最多幾個 warp」。</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>L3 範圍</h3>
+      <ol>
+        <li>AI 的分子與分母分別是什麼？為什麼分母一定要乘 bytes？</li>
+        <li>Ridge point 怎麼算？AI 比它小代表什麼？</li>
+        <li>Naive MMULT 為什麼 AI 只有 0.25 左右？Tiling 之後為什麼變成 TILE_WIDTH/4？</li>
+        <li>Tiled 的每個 phase 為什麼需要兩次 <code>__syncthreads()</code>？各自防止什麼？</li>
+        <li>Static 與 dynamic shared memory 的宣告與 launch 寫法差在哪？</li>
+        <li>Shared memory 的 scope 與 lifetime 是什麼？</li>
+        <li>「unfused 3-pass」對 global memory 流量意味著什麼？</li>
+        <li><code>QueryPerformanceCounter</code> 量 kernel 時，為什麼要先同步？</li>
+      </ol>
+    </div>
+  </div>
+  <p class="note">不確定的題目，回到「對照地圖」找對應的筆記條目和影片時間。</p>
+</section>
+
+<!-- ========== 明天 ========== -->
+<section id="tomorrow">
+  <header><div class="eyebrow">明天 10/27</div><h2>作業順序與繳交清單</h2></header>
+  <p>順序比時間重要：越容易卡住、越吃機器時間的越先做。目標 4:30 PM 前交出，留 1 小時以上緩衝。遲交每天扣 1 分（滿分 12），不要為了 extra credit 冒險。</p>
+  <div class="tablebox"><table>
+    <thead><tr><th>順序</th><th>建議時間</th><th>內容</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>約 2.5 小時</td><td>三個 kernel：global → static shared → dynamic shared。每個都用 CPU reference 驗證；存下 #1、#2、#3 的模糊影像</td></tr>
+      <tr><td>2</td><td>約 30 分</td><td>計時：DEBUG 與 RELEASE，4 張影像</td></tr>
+      <tr><td>3</td><td>約 30 分</td><td>Debugger 兩張截圖，順便回答 warp 數量題</td></tr>
+      <tr><td>4</td><td>約 60 分</td><td>NCU 8 次，邊 build 邊跑邊存檔</td></tr>
+      <tr><td>5</td><td>約 90 分</td><td>書面：Q1–Q3、P1、P2、兩個 HW Q；可穿插在 profiling 的等待時間</td></tr>
+      <tr><td>6</td><td>約 30 分</td><td>打包、對照繳交清單</td></tr>
+    </tbody>
+  </table></div>
+  <div class="card">
+    <h3>繳交清單（spec SUBMIT）</h3>
+    <ul class="tasks">
+      <li><input type="checkbox" id="s1"><label for="s1">Q1–Q3、P1、P2、HW Q 的答案，附過程與理由</label></li>
+      <li><input type="checkbox" id="s2"><label for="s2">Host 原始碼與三個 kernel（<code>.cu/.cpp/.h</code> only）</label></li>
+      <li><input type="checkbox" id="s3"><label for="s3">模糊後的測試影像 #1、#2、#3</label></li>
+      <li><input type="checkbox" id="s4"><label for="s4">三個 kernel 版本的計時結果（DEBUG 與 RELEASE）</label></li>
+      <li><input type="checkbox" id="s5"><label for="s5">Debugger 截圖 2 張（一般 launch、<code>&lt;&lt;&lt;1,1&gt;&gt;&gt;</code>）與 warp 數量的回答</label></li>
+      <li><input type="checkbox" id="s6"><label for="s6">NCU 8 次輸出，加上算出的 execution time 與 instruction intensity</label></li>
+      <li><input type="checkbox" id="s7"><label for="s7">報告註明使用 RTX 3050（CC 8.6）、編譯目標與和 T4 的差異</label></li>
+      <li><input type="checkbox" id="s8"><label for="s8">（選做）CPU 循序 blur 對 GPU 各版本的計時表；global vs shared 的理論 AI</label></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>還沒確定、值得問老師的事</h3>
+    <ul>
+      <li>用本機 RTX 3050 做，Warp Info 與 NCU 用 3050 的數字，可以嗎。</li>
+      <li>26b 的「naive vs tiled」是否就是 global vs shared。</li>
+      <li>Canvas 的繳交方式與各部分配分，spec 都沒寫。</li>
+      <li>P1 使用 chatbot 的界線：原文只允許用來找演算法的簡單式子，FLOPs、bytes、AI 的推導自己完成。課程政策禁止用 AI 產生作業解答。</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function () {
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]'));
+  var KEY = 'hw2-sprint-v1';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+  boxes.forEach(function (b) { if (saved[b.id]) b.checked = true; });
+  var pg = document.getElementById('pg');
+  var todayBoxes = boxes.filter(function (b) { return /^[a-f]\d+$/.test(b.id); });
+  function update() {
+    var done = todayBoxes.filter(function (b) { return b.checked; }).length;
+    pg.textContent = '今日 ' + done + '/' + todayBoxes.length;
+    var s = {}; boxes.forEach(function (b) { if (b.checked) s[b.id] = 1; });
+    try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  }
+  boxes.forEach(function (b) { b.addEventListener('change', update); });
+  update();
+})();
+</script>
+</body></html>

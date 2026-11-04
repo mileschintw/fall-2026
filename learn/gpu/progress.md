@@ -11,11 +11,11 @@
 | # | 模組 | 狀態 | Artifact | 最後上課 |
 |---|---|---|---|---|
 | 0 | 診斷 | 🟩（已批改） | — | 10/27 |
-| 1 | CPU vs GPU | 🟩（練習 2 全對、交叉點對；latency 定義和 SI 換算放待複習） | [GPU Round-Trip 帳單](https://claude.ai/artifact/UgjmP4Rsx5Lyrg8ko5wCjP)（`modules/01-cpu-vs-gpu.html`） | 10/28 |
+| 1 | CPU vs GPU | 🟩（練習 2 全對、交叉點對；latency 定義和 SI 換算放待複習） | [GPU Round-Trip 帳單](https://claude.ai/artifact/UiJfPnhxW2jTir3wFzGmxF)（`modules/01-cpu-vs-gpu.html`） | 10/28 |
 | 2 | CUDA 程式流程 | 🟩（診斷 Q2 對；10/28 掃描 S1 錯後重問對、S2、S3 對） | — | — |
 | 3 | Grid / block / thread | 🟩（Q3 對；Q4 經學生確認是筆誤，自行更正為 +col；10/28 掃描 S4 對） | — | — |
 | 4 | SIMT、warp | 🟩（診斷 Q5、Q6 對；10/28 掃描 S5 對、S6 部分對；L4 p34–41 新內容未測，見 curriculum 建議順序） | — | — |
-| 5 | 效能理論 | 🟨（進行中：熱身 2 題對；預測 WORK=100 錯，見錯題表） | [Roofline 兩條水管](https://claude.ai/artifact/Fs1fQTcsxcM2HMXz2vUUnX)（`modules/05-roofline.html`） | 10/28 |
+| 5 | 效能理論 | 🟨（進行中：熱身 2 題對；預測 WORK=100 錯，見錯題表） | [Roofline 兩條水管](https://claude.ai/artifact/9gsqya9U3wPvupxHZuzWrZ)（`modules/05-roofline.html`） | 10/28 |
 | 6 | 記憶體階層、tiling | ⬜（Q9 不會） | — | — |
 | 7 | 拆解 HW2 | ⬜ | — | — |
 | 8 | Occupancy 與 launch configuration | ⬜ | — | — |
@@ -81,3 +81,4 @@
 - 2026-10-28 14:40 PT｜約 55｜M2–M4 快速掃描（學生要求）：S1 host 寫 `d_x[0]` 錯（以為是 sync 問題，實測 access violation），反方向重問對；S2 非同步 launch 對；S3 只編 sm_75 對（實測 no kernel image）；S4 2D grid 全對；S5 不知道 2D block 怎麼切 warp → 講解 + show_widget 互動圖後答對，理由小錯；S6 latency hiding 部分對。進模組 5 熱身
 - 2026-10-28 17:00 PT｜0（不計）｜檢查 L4 新增的模組 8–11：頁碼正確；補時間戳、HW3 對照（FMAD、四個 divergence metric）、8 列 L4 觀念、建議順序 5→6→10→8→9→11。M5 熱身第 1 題重問，學生改到下個 session 再開始
 - 2026-10-28 17:50 PT｜約 25｜M5 熱身 1 SI 換算 5 μs × 200 GB/s = 1 MB ✔（μ×G 已修正）；熱身 2 Amdahl P=4 先不會，時間圖引導後算出 32.5 s、約 3× ✔；預測 WORK=100 猜 100 倍 ✘，實測 RTX 3050 WORK 1／100／1000 = 0.68／0.69／3.0 ms（1000 另兩次 16–17 ms，疑似未升頻）；做 roofline 互動頁
+- 2026-11-03 21:55 PT｜0（不計）｜換 claude.ai 帳號後恢復紀錄：比對 10/27–10/28 全部 GPU tutor transcript，最後一次上課（10/28 17:04–18:14 PT）已在 commit 0aeba43，沒有遺漏的進度；Artifact 網址改成新帳號的；HW2 準備日程、HW2 衝刺教材兩頁的原始檔存進 `modules/`。使用者給的 artifact_data 匯出只有學期中樞 dashboard 和 SGLang Item 28 tracker 的資料，沒有 GPU 學習資料
