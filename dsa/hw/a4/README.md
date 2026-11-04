@@ -4,7 +4,7 @@
 
 | 項目 | 內容 |
 |---|---|
-| 截止 | **2026-11-01（日）11:59 PM PST**（Canvas `due_at` 2026-11-02T07:59:59Z，和 `assignments.md` 一致；原本是 10/30（五））。截止後才交：Canvas 在 2026-11-03 晨報時已變成 `submitted`；Piazza @65 申請一次性免罰延期，待回覆 |
+| 截止 | **2026-11-01（日）11:59 PM PST**（Canvas `due_at` 2026-11-02T07:59:59Z，和 `assignments.md` 一致；原本是 10/30（五））。截止後才交：Canvas 在 2026-11-03 晨報時已變成 `submitted`；Piazza @65 申請一次性免罰延期，老師只回了重寄邀請、沒明講核准；最後一版 6f83ede 在 11/3 11:30 PM PST push |
 | 分數 | Canvas 100 分；README 寫 60 分（autograder 24 + 截止後老師評 36，見「還不確定的地方」） |
 | 繳交方式 | push 到 `uw-python-fall2026/assignment-4-mileschintw`，**再到 Canvas 交 repo URL**；每次 push 都會跑 autograder（repo 的 **Actions** 分頁） |
 | 要交的東西 | 只有這 3 個檔案會被評分：<br>1. `help_desk.py`（修好的版本）<br>2. `test_regressions.py`（你的 test，至少 3 個）<br>3. `FINDINGS.md`（嫌疑表格至少 4 列 + 3 題 reflection）<br>其他檔案改了也會被忽略 |
@@ -126,12 +126,28 @@ push 後 GitHub 顯示前 24 分；其餘 36 分老師截止後補上，並列�
 1. **分數**：README 寫 60 分（24 + 36），Canvas 是 100 分。可能 Canvas 會等比例換算，沒有公告。
 2. **分支**：README「Submit」說 push 到 `master`，但這個 repo 的預設分支是 **`main`**（`gh api` 和本機 clone 都是 `main`，沒有 `master`）。autograder 會在任何分支 push 時執行。推測 README 的 `master` 是從舊作業複製來的，push 到 `main` 應該就可以；不放心的話在 Piazza 確認。
 3. **真 bug 有幾個**：README 只說「several」，沒有給數量；漏掉的會在截止後由老師列出。
-4. **延期**：已過 11/1 截止，Piazza @65（申請重寄 repo 邀請 + 使用一次免罰延期）到 2026-11-02 晚上還沒有回覆。11/2 用 `gh` 查，你已經有這個 repo 的 push 權限，所以邀請的問題應該已經解決。
+4. **延期**：已過 11/1 截止。Piazza @65（11/1 晚上截止前發，申請重寄 repo 邀請 + 使用一次免罰延期）：Adrienne Slaughter 在 instructors' answer 回「Okay, should be re-invited now!」（11/3 抓取時顯示「1 day ago」），**只回了邀請，沒有明講延期核准**。見下方「延期與 Canvas comment」。
+
+## 延期與 Canvas comment（2026-11-03）
+push 時間取自 GitHub Actions run 的 `created_at`（伺服器端）；截止 = 2026-11-02T07:59:59Z（11/1 11:59 PM PST）。
+
+| push（PST） | commit | autograder |
+|---|---|---|
+| 11/3 12:20 AM | 95af31c Find first bug | failure |
+| 11/3 4:56 PM | 0425d64 Find third bug | failure |
+| 11/3 10:06 PM | 3829870 Add 2 new lines in findings | failure |
+| 11/3 11:30 PM（最後一版） | 6f83ede Complete A4 | **success** |
+
+- 最後一版晚約 1 天 23.5 小時，在 syllabus「最多晚 1 週」內；照每天 -25% 會扣 50%，所以一定要讓 grader 知道有用免罰延期。
+- 使用者決定在 Canvas submission comment 留言，讓 grader 打分時一開始就看到。草稿：
+
+> Hi, I'm using my one-time no-penalty extension for this quarter on A4. I requested it on Piazza @65 (https://piazza.com/class/muomkq9jzdj104/post/65) before the 11/1 11:59 PM deadline — my repo invitation had expired, and Prof. Slaughter re-sent it there. My final submission is commit 6f83ede ("Complete A4"), pushed 11/3 at 11:30 PM PST, about 2 days after the deadline and within the 1-week limit. Please grade that commit. Thank you!
 
 ## 改版紀錄
 | 日期 | 變動 |
 |---|---|
 | 2026-11-02 | 第一次整理 |
 | 2026-11-03 | repo 檔案 FINDINGS.md、help_desk.py、test_regressions.py 改了（是你自己 push 的作業；Canvas spec 和 README 都沒變）。更新截止列的繳交狀態，註明 repo/ 現在是提交版本，補上提交版本的進度 |
+| 2026-11-03 晚 | Piazza @65 老師已回（只回邀請）；新增「延期與 Canvas comment」：各 push 時間、最後版 6f83ede、Canvas comment 草稿 |
 
 DSA 課用了 AI 要附 chat session 或註明。
