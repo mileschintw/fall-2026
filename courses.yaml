@@ -2,7 +2,7 @@
 hub:
   repo: mileschintw/fall-2026          # GitHub private repo
   local_path: "D:/Repos/fall-2026"
-  dashboard_url: https://claude.ai/artifact/VaemajpQyP77JKSwxha8MG     # pinned dashboard (owned by the current claude.ai account)
+  dashboard_url: https://claude.ai/artifact/RTp52mVBaNpSCxNHRRSLCP     # pinned dashboard (owned by the current claude.ai account)
   dashboard_type_url: https://claude.ai/artifact/GZLZthZ2sQjn7T16skfdeF  # "Dashboard" Artifact type it was created from
   # Claude desktop app scheduled tasks. cron = local time (this PC is set to Pacific).
   # The app keeps the schedule per account; prompts live in automation/<prompt>.
