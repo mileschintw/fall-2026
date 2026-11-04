@@ -160,6 +160,27 @@
 - **Linked list 的 pointer 順序與常見錯誤**：Class 2（10/5）的檢查清單（改 pointer 前先存 next、更新 size、tail 的更新），套用到 doubly linked list 的 `prev`／`next`（`dsa/lectures/2026-10-05/notes.md`「和作業 / 考試的關聯」）。
 - **A2 的 `list_checks.py` invariant 檢查**：A3 的 `hand_invariants.py` 是同樣的概念（見 [A2 README](../a2/README.md)）。
 
+## 遲交與評分申訴（2026-11-03）
+使用者說 A3 被打低分，原因是部分功能隔天才完成，想跟 TA 爭取改用「遲交扣分、但用完成版」計分。Canvas 分數本身還沒抓到（11/3 晨報：已評分，沒有分數）。
+
+push 時間取自 GitHub Actions run 的 `created_at`（伺服器端記錄，不是本機 commit 時間）；截止 = 2026-10-26T06:59:59Z（10/25 11:59 PM PDT）。
+
+| push（PDT） | commit | autograder |
+|---|---|---|
+| 10/13 9:35 PM | 9abfe38（starter） | 0/100 |
+| 10/25 10:41 PM（準時，最後一版） | d43e3b0 | **55/100** |
+| 10/26 12:07 AM（晚 8 分鐘） | 71addd1 | 88/100 |
+| 10/26 1:49 AM | 27fabdd | 100/100 |
+| 10/26 1:58 AM（晚約 2 小時） | 870bc51 | **100/100** |
+
+- 規則：投影片 p8／課堂口頭為每天 -25%、超過 4 天不收（優先於 syllabus）。syllabus 的一次免罰延期要事先告知，而且已經用在 A4（Piazza @65），A3 不適用。
+- 比較：準時版 autograder 55；遲交版 100 × 0.75 = **75**。即使 -25% 套在整份作業（含 Assignment Review 25 分）上，只要 review 分數 ≥ 0，遲交版就比較高：0.75 × (100 + R) > 55 + R ⇔ R < 165。
+- 風險：有些 TA 固定只改截止前最後一個 commit，所以要寫成請求。先確認被扣的是 autograder 部分還是 review 部分。配分 125 vs 150 未定（@51），訊息裡用百分比。
+
+給 TA 的訊息草稿（Piazza private post 或 email）：
+
+> Hi, regarding my A3 grade: my last on-time push (d43e3b0, 10/25 10:41 PM) scored 55/100 on the autograder, but I finished the remaining Part 2 functions shortly after the deadline — commit 870bc51 was pushed at 1:58 AM on 10/26 (about 2 hours late, see the Actions run timestamps) and passes 100/100. Would it be possible to grade the 870bc51 version with the standard 1-day late penalty (−25%) instead? That would come to 75% vs. 55% for the on-time version. Thanks for considering it!
+
 ## 還不確定的地方
 - **配分對不上**：README 是 100 + 25 = 125 分，Canvas 是 150 分。Piazza @51（10/19 晚上）有同學問，老師和 TA 都還沒回覆（`digests/2026-10-20.md`）。
 - **標題有 Queues，內容沒有 queue**：Canvas 標題是「Stacks, Queues and Testing」，但 README 只要求 stack（deck）和 doubly linked list（hand），沒有 queue。Class 5 講的 queue 和 `deque`（`dsa/lectures/2026-10-14/notes.md`）在 A3 裡看起來用不到。以 README 為準。
@@ -173,5 +194,6 @@
 | 2026-10-20 | 第一次整理 |
 | 2026-10-24 | 排程原本只存 repo README；改成連 stub、測試、`hand_invariants.py`、`uw_euchre.py`、`classroom.yml` 一起存到 [repo/](repo/)，補上「函式規格」和「autograder 細節」 |
 | 2026-10-26 | repo 檔案 `game_play.py`、`game_structures.py` 改了：是使用者自己 push 的實作（把 stub 的 `pass`／`return` 換成程式碼，另加幾個 helper，原有行沒有刪改），題目、docstring、測試、`classroom.yml` 都沒變，摘要內容不用改；在「函式規格」註明 repo/ 現在是實作版 |
+| 2026-11-03 | 新增「遲交與評分申訴」：各 push 的時間與 autograder 分數、遲交 -25% 試算、給 TA 的訊息草稿 |
 
 DSA 課用了 AI 要附 chat session 或註明
