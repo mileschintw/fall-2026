@@ -78,17 +78,30 @@
   "canvas_id": 11810628
  },
  {
+  "key": "gpu-popquiz-l5",
+  "course": "GPU",
+  "item": "Pop Quiz - Lecture 5 11/2/26",
+  "kind": "小考",
+  "due": "2026-11-03T20:30:00-08:00",
+  "due_label": "11/3（二） 8:30 PM PST",
+  "points": 3,
+  "status": "已評分",
+  "done": true,
+  "note": "課堂 pop quiz，8:20–8:30 PM 開放（quiz 2460212）",
+  "canvas_id": 11881085
+ },
+ {
   "key": "gpu-hw4",
   "course": "GPU",
-  "item": "HW4",
+  "item": "HW4 Memory access patterns & MMULT coalesced corner turning kernel",
   "kind": "作業",
-  "due": "2026-11-10T23:59:59-08:00",
-  "due_label": "11/10（二） 11:59 PM PST",
+  "due": "2026-11-13T23:59:59-08:00",
+  "due_label": "11/13（五） 11:59 PM PST",
   "points": 15,
-  "status": "未發布",
+  "status": "未交",
   "done": false,
-  "note": "投影片寫 5:59 PM",
-  "canvas_id": null
+  "note": "11/3 Canvas 發布（HW4 PDF 同時上傳，file 155723325）；原預估 11/10，Canvas due_at 為 11/13",
+  "canvas_id": 11810623
  },
  {
   "key": "gpu-proposal",
