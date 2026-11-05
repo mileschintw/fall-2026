@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-05T07:08:44-08:00",
+  "task": "晨報",
+  "status": "new",
+  "summary": "GPU HW3 明晚 11:59 PM 未交；DSA 新錄影 Class 11 期中複習＋class_scribbles.pdf",
+  "output": "digests/2026-11-05.md"
+ },
+ {
   "at": "2026-11-04T18:09:01-08:00",
   "task": "截止提醒",
   "status": "ok",
