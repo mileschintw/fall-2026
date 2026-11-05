@@ -18,5 +18,8 @@
   "DSA|A4: Bug Hunt|2026-11-01T23:59-08:00": {
     "48h": "2026-10-31T08:10-07:00",
     "24h": "2026-11-01T08:10-08:00"
+  },
+  "GPU|Homework #3 - Control Divergence & Tiled MMULT improvements & NCU profiling|2026-11-06T23:59-08:00": {
+    "48h": "2026-11-05T08:09-08:00"
   }
 }
