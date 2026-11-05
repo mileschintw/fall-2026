@@ -9,12 +9,13 @@
 - 週規劃：11/1 日 21:05 ✅ 下週重點：GPU HW3 11/6 到期（11/2 開工）、DSA 期中 11/9；A4 今晚到期未交 → [2026-11-01-weekly.md](2026-11-01-weekly.md)
 - 截止提醒：11/4 三 18:09 ✅ 48h 內沒有到期作業（GPU HW3 11/6 11:59 PM，剩約 54h） → —
 - 上課筆記：11/4 三 10:14 🆕 GPU L5 11/03 筆記：DRAM burst、32B sector、coalescing、SGEMM K2、HW4 corner turning → [notes.md](../gpu/lectures/2026-11-03/notes.md)
-- 作業說明：11/4 三 07:48 🆕 新：gpu/assignment-4-memory-access-patterns-mmul、dsa/a5；改版：dsa/a4 → [README.md](../gpu/hw/README.md)
+- 作業說明：11/5 四 07:44 ✅ 沒有新東西 → —
 
 ## 紀錄
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 11/5 四 07:44 | 作業說明 | ✅ | 沒有新東西 | — |
 | 11/5 四 07:08 | 晨報 | 🆕 | GPU HW3 明晚 11:59 PM 未交；DSA 新錄影 Class 11 期中複習＋class_scribbles.pdf | [2026-11-05.md](2026-11-05.md) |
 | 11/4 三 18:09 | 截止提醒 | ✅ | 48h 內沒有到期作業（GPU HW3 11/6 11:59 PM，剩約 54h） | — |
 | 11/4 三 10:14 | 上課筆記 | 🆕 | GPU L5 11/03 筆記：DRAM burst、32B sector、coalescing、SGEMM K2、HW4 corner turning | [notes.md](../gpu/lectures/2026-11-03/notes.md) |
