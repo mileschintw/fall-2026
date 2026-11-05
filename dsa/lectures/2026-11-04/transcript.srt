@@ -1,0 +1,3781 @@
+1
+00:03:49,000 --> 00:03:53,000
+[該逐字稿自動產生。為清晰起見，可能已進行編輯。]
+Hi, everyone. How are y'all doing?
+
+2
+00:03:53,000 --> 00:03:56,000
+Can you hear me?
+
+3
+00:03:56,000 --> 00:03:58,000
+You can see me
+
+4
+00:03:58,000 --> 00:04:00,000
+I'm recording
+
+5
+00:04:00,000 --> 00:04:10,000
+Someone give a thumbs up or something if you can hear me just to make sure. Great. Yes. Okay. Thanks, Gus. Okay, glad you're doing great.
+
+6
+00:04:10,000 --> 00:04:14,000
+I like it.
+
+7
+00:04:14,000 --> 00:04:15,000
+sterile
+
+8
+00:04:15,000 --> 00:04:22,000
+Warm up a little bit. Let's start talking and get moving.
+
+9
+00:04:22,000 --> 00:04:28,000
+Today, Wednesday, and
+
+10
+00:04:28,000 --> 00:04:49,000
+It's our Wednesday before next Monday. Monday is our midterm, where we will be in class, in person, and doing it on paper, so be sure to bring a pen or a pencil, whatever you like to write with. We will do a review today, and I will also talk a little bit about
+
+11
+00:04:49,000 --> 00:04:55,000
+Got a little bit of content. I'm going to split it. So half of today is doing a review
+
+12
+00:04:55,000 --> 00:05:05,000
+And half the day doing content. And I'm leaving that
+
+13
+00:05:05,000 --> 00:05:22,000
+vague briefly and I'll go into details in just a minute. But before I get started there, I want to give a chance to, if anyone has any questions or anything, and I will preface this that
+
+14
+00:05:22,000 --> 00:05:36,000
+First, we're going to talk about some content, then we're going to do the review. And during the review, that's when, if you have specific questions about content or something related to the midterm, let's put that
+
+15
+00:05:36,000 --> 00:05:42,000
+Let's do that there, but right now, if anyone has questions more generally
+
+16
+00:05:42,000 --> 00:06:00,000
+Or about anything we've talked about recently, like asymptotic analysis, AVL, now's a great time to ask
+
+17
+00:06:00,000 --> 00:06:02,000
+Okay, I'm going to
+
+18
+00:06:02,000 --> 00:06:19,000
+If anyone does have anything, feel free to raise your hand, come off mute, and say something, drop it in the chat. But in the meantime, I'm going to go ahead and get started.
+
+19
+00:06:19,000 --> 00:06:23,000
+And I'm going to kind of go back just a little bit
+
+20
+00:06:23,000 --> 00:06:28,000
+Of what we've talked about the past few days.
+
+21
+00:06:28,000 --> 00:06:31,000
+So we talked about
+
+22
+00:06:31,000 --> 00:06:35,000
+Well, I guess maybe I'll tie this through the whole quarter
+
+23
+00:06:35,000 --> 00:06:42,000
+We have talked about arrays. Here you go in a little
+
+24
+00:06:42,000 --> 00:06:48,000
+We have talked about going back to the beginning of the quarter, arrays
+
+25
+00:06:48,000 --> 00:06:54,000
+As data structures, we have talked about linked lists
+
+26
+00:06:54,000 --> 00:07:00,000
+We have talked about trees.
+
+27
+00:07:00,000 --> 00:07:12,000
+And we have distinguished, we've when we've talked about arrays, we've talked about things like dynamic arrays
+
+28
+00:07:12,000 --> 00:07:14,000
+And
+
+29
+00:07:14,000 --> 00:07:19,000
+Python lists
+
+30
+00:07:19,000 --> 00:07:28,000
+But in general, our arrays are contiguous chunk of memory storing data sequentially. Everything is the same data type.
+
+31
+00:07:28,000 --> 00:07:32,000
+And our linked list is
+
+32
+00:07:32,000 --> 00:07:46,000
+nodes of data stored throughout memory. It can be different kinds of data, and we link from one node to the next node
+
+33
+00:07:46,000 --> 00:07:49,000
+to the next node to track our data
+
+34
+00:07:49,000 --> 00:08:02,000
+And then we started talking about trees and trees. What we've been talking about so far, we had, in particular, we talked about our VST
+
+35
+00:08:02,000 --> 00:08:16,000
+And our AVL. And when we talked about trees, our implementation or how we thought about them was very much like kind of like a linked list where
+
+36
+00:08:16,000 --> 00:08:19,000
+You have a node
+
+37
+00:08:19,000 --> 00:08:24,000
+And then instead of just one neighbor, you might have, say
+
+38
+00:08:24,000 --> 00:08:27,000
+Two children.
+
+39
+00:08:27,000 --> 00:08:29,000
+Right, so you have
+
+40
+00:08:29,000 --> 00:08:32,000
+You know, something that looks a little bit more like this
+
+41
+00:08:32,000 --> 00:08:35,000
+how we're storing our data.
+
+42
+00:08:35,000 --> 00:08:37,000
+Does this make make sense?
+
+43
+00:08:37,000 --> 00:08:41,000
+Everyone on board with me.
+
+44
+00:08:41,000 --> 00:08:42,000
+Okay.
+
+45
+00:08:42,000 --> 00:08:43,000
+Yes
+
+46
+00:08:43,000 --> 00:08:50,000
+Yay, thank you. Okay, so we have
+
+47
+00:08:50,000 --> 00:08:53,000
+So when we've been talking about trees
+
+48
+00:08:53,000 --> 00:08:59,000
+We have talked about only these search trees.
+
+49
+00:08:59,000 --> 00:09:20,000
+We want to search for a value within a data structure. And so our Bst and our AVL, they help us structure the data in such a way that we can be super efficient in finding something that we're looking for
+
+50
+00:09:20,000 --> 00:09:29,000
+So the real use we've had here is searching.
+
+51
+00:09:29,000 --> 00:09:44,000
+I want to introduce this idea of not just searching, but this idea of a I'm going to say a priority queue.
+
+52
+00:09:44,000 --> 00:10:02,000
+So some of y'all will know where I'm going with this. And what what we want with a priority queue is that we always take the most urgent or most important thing or highest priority item
+
+53
+00:10:02,000 --> 00:10:06,000
+Next, right? So
+
+54
+00:10:06,000 --> 00:10:14,000
+What I did not put on this list yet. We talked about arrays linked lists. We'll get back to that, but we also talked about stacks
+
+55
+00:10:14,000 --> 00:10:18,000
+And we talked about queues.
+
+56
+00:10:18,000 --> 00:10:26,000
+And if y'all have a noticed yet, I have
+
+57
+00:10:26,000 --> 00:10:38,000
+focused on this topic for today to try to pull together a bunch of the concepts we've pulled together, or at least hit on a bunch of the concepts we've talked about this quarter so far.
+
+58
+00:10:38,000 --> 00:10:58,000
+So our priority queue. We have our stack, which is, last in, first out. We have our queues, first in, first out. We have our search trees, which are efficient for us to go and find something within that data structure.
+
+59
+00:10:58,000 --> 00:11:08,000
+And now I'm going to introduce this idea of a priority queue, or a data structure that's going to help us find the most important thing
+
+60
+00:11:08,000 --> 00:11:15,000
+Most important thing.
+
+61
+00:11:15,000 --> 00:11:30,000
+So what might be a case where we want to use a priority queue or something where it's very easy to find the most important thing.
+
+62
+00:11:30,000 --> 00:11:34,000
+Anyone have
+
+63
+00:11:34,000 --> 00:11:52,000
+ideas, suggestions. I know when I'm doing my to-do list, I'm trying to find the most important thing next, right? If I go to the an emergency room, you might be triaged. You have a nurse that triages to identify
+
+64
+00:11:52,000 --> 00:12:05,000
+the person who has the most important or most concerning reason for being at the ER. We want the doctor to look at the sickest person first
+
+65
+00:12:05,000 --> 00:12:11,000
+That would be a high priority thing.
+
+66
+00:12:11,000 --> 00:12:16,000
+What else? What else? Anyone else have anything else that they'd use as an example?
+
+67
+00:12:16,000 --> 00:12:31,000
+But you can imagine that there's these situations where it's not just, can we find something specific, or first come, first serve, it's, we want the most important thing.
+
+68
+00:12:31,000 --> 00:12:39,000
+And, like, vehicle communications, you have different
+
+69
+00:12:39,000 --> 00:12:40,000
+Okay.
+
+70
+00:12:40,000 --> 00:12:41,000
+criticality of messages, so you can have
+
+71
+00:12:41,000 --> 00:12:45,000
+high priority
+
+72
+00:12:45,000 --> 00:12:55,000
+that are, like, safety critical messages, and then you could have lower priority that are
+
+73
+00:12:55,000 --> 00:12:59,000
+Nice to have messages, I guess, like
+
+74
+00:12:59,000 --> 00:13:00,000
+Or like
+
+75
+00:13:00,000 --> 00:13:06,000
+A heartbeat message that just notifies the system that this device is still alive
+
+76
+00:13:06,000 --> 00:13:23,000
+Yeah, I love that. Yeah, okay, so vehicle communication. If you can imagine, I'm going to take some liberty here. Feel free to correct me anywhere if you can imagine within a vehicle, we have all these sensors
+
+77
+00:13:23,000 --> 00:13:38,000
+That are sending messages to maybe a central location to surface messages to the user or the operator or something. And we would want to make sure that anything safety critical
+
+78
+00:13:38,000 --> 00:13:54,000
+gets bubbled to the top so that we see that first, so that we address that appropriately, as opposed to messages that are more like, yes, the system is alive and working, and everything's going
+
+79
+00:13:54,000 --> 00:13:59,000
+As expected.
+
+80
+00:13:59,000 --> 00:14:02,000
+That fair very much oversimplification.
+
+81
+00:14:02,000 --> 00:14:04,000
+No, yeah, that's good
+
+82
+00:14:04,000 --> 00:14:07,000
+Cool. I love it.
+
+83
+00:14:07,000 --> 00:14:17,000
+If we were to think about the tools that we have talked about so far this quarter to get this functionality
+
+84
+00:14:17,000 --> 00:14:21,000
+What would that look like?
+
+85
+00:14:21,000 --> 00:14:32,000
+So we have some options. We could build it, we could use a list
+
+86
+00:14:32,000 --> 00:14:34,000
+We could use
+
+87
+00:14:34,000 --> 00:14:38,000
+I'm gonna… I'm gonna go straight to AVL tree
+
+88
+00:14:38,000 --> 00:14:49,000
+Because we know that our AVL tree is a version of our binary search tree. It's just better.
+
+89
+00:14:49,000 --> 00:14:53,000
+our list. Let's see.
+
+90
+00:14:53,000 --> 00:14:56,000
+If we want to
+
+91
+00:14:56,000 --> 00:14:58,000
+Let's do this here
+
+92
+00:14:58,000 --> 00:15:10,000
+Giving a hint as I do this. If we are using a list to keep track of, say.
+
+93
+00:15:10,000 --> 00:15:14,000
+All of the items that we're concerned about
+
+94
+00:15:14,000 --> 00:15:17,000
+And we want to get the smallest
+
+95
+00:15:17,000 --> 00:15:21,000
+Or get the most important.
+
+96
+00:15:21,000 --> 00:15:25,000
+I'm going to say smallest.
+
+97
+00:15:25,000 --> 00:15:27,000
+And
+
+98
+00:15:27,000 --> 00:15:38,000
+We'll say that smaller number is higher priority.
+
+99
+00:15:38,000 --> 00:15:47,000
+If we are using a list and we want to get the smallest out of it, what's our runtime?
+
+100
+00:15:47,000 --> 00:15:51,000
+So this is, we just have a list of stuff
+
+101
+00:15:51,000 --> 00:16:07,000
+And they a list of stuff, but they have numbers associated with them. And we want the smallest. Those numbers are priority, and we want to get the smallest one. We find the smallest thing in a list.
+
+102
+00:16:07,000 --> 00:16:10,000
+It's a good review.
+
+103
+00:16:10,000 --> 00:16:12,000
+How do we find
+
+104
+00:16:12,000 --> 00:16:18,000
+Something in a list.
+
+105
+00:16:18,000 --> 00:16:25,000
+Find something list, we have to go through every single item in our list. Yeah, it's O of N.
+
+106
+00:16:25,000 --> 00:16:34,000
+And the O of N. So we have to go through every single item in the list to find something.
+
+107
+00:16:34,000 --> 00:16:45,000
+When we say O of N, that can be a tight bound or an upper bound. Is it a worst case scenario like the smallest item is the last item in the list?
+
+108
+00:16:45,000 --> 00:16:49,000
+Or is it a okay? It's an upper bound.
+
+109
+00:16:49,000 --> 00:16:54,000
+Want to say more?
+
+110
+00:16:54,000 --> 00:16:59,000
+Yeah, the item is going to be somewhere in the list
+
+111
+00:16:59,000 --> 00:17:02,000
+And you don't know how many
+
+112
+00:17:02,000 --> 00:17:05,000
+items you need to traverse through to get to that smallest item
+
+113
+00:17:05,000 --> 00:17:06,000
+Okay.
+
+114
+00:17:06,000 --> 00:17:07,000
+Oh.
+
+115
+00:17:07,000 --> 00:17:08,000
+Yeah.
+
+116
+00:17:08,000 --> 00:17:09,000
+You thought of something else, but
+
+117
+00:17:09,000 --> 00:17:15,000
+Actually, no, it would be you do need to go through the entire list, because then you need to compare
+
+118
+00:17:15,000 --> 00:17:27,000
+to every single item in the list to get to that, to make sure that it's the smallest item.
+
+119
+00:17:27,000 --> 00:17:28,000
+Yeah.
+
+120
+00:17:28,000 --> 00:17:36,000
+Yep. So if we're using a list, this is not just an upper bound, it is a tight bound because we have to go through every item in the list to make sure that even if this is the smallest item, we have to look at every item in the list to make sure
+
+121
+00:17:36,000 --> 00:17:53,000
+There's nothing smaller later in the list. Okay, so we've got O of N and in fact, I will say theta of n I will not hold y'all accountable for theta versus big O, but I'm going to note that here just to be specific
+
+122
+00:17:53,000 --> 00:17:57,000
+What characteristic makes this list
+
+123
+00:17:57,000 --> 00:18:03,000
+Finding the smallest thing, theta of n
+
+124
+00:18:03,000 --> 00:18:09,000
+What are we assuming about our list?
+
+125
+00:18:09,000 --> 00:18:11,000
+And I'm going to give a hint
+
+126
+00:18:11,000 --> 00:18:17,000
+Just like one, it's not like an array. Like it's, yeah, it's just like one
+
+127
+00:18:17,000 --> 00:18:18,000
+Instead of number… or one row of numbers
+
+128
+00:18:18,000 --> 00:18:22,000
+It's unsorted, or there's no order
+
+129
+00:18:22,000 --> 00:18:25,000
+Yep, it's unsorted
+
+130
+00:18:25,000 --> 00:18:32,000
+So in contrast, we could have a sorted list
+
+131
+00:18:32,000 --> 00:18:36,000
+So we could have a sorted list.
+
+132
+00:18:36,000 --> 00:18:47,000
+Two different approaches here. Our sorted list, what is the runtime to get the smallest thing in the list or find that highest
+
+133
+00:18:47,000 --> 00:18:52,000
+priority item.
+
+134
+00:18:52,000 --> 00:19:00,000
+You can do it two different ways here. Okay, so O1 Ethan tell me what you're thinking here.
+
+135
+00:19:00,000 --> 00:19:06,000
+Yes, just pop the leftmost item in the sort list
+
+136
+00:19:06,000 --> 00:19:23,000
+Up the leftmost item. Okay, couple things there. I'm going to make a note and I'm calling this out just because the midterm's coming up.
+
+137
+00:19:23,000 --> 00:19:26,000
+It's pop left and it's O of one
+
+138
+00:19:26,000 --> 00:19:33,000
+Only if we are using a Python queue
+
+139
+00:19:33,000 --> 00:19:41,000
+Gus, thank you. So we got a few things here. We've got a few threads here. So top left
+
+140
+00:19:41,000 --> 00:19:46,000
+Is O of 1 only if we're using a double-ended queue, a deck
+
+141
+00:19:46,000 --> 00:20:02,000
+Python's deck as opposed to a list, and I did not specify that, so that's valid. Or, as Gus says, if we have our list, it depends if we're storing largest first or smallest. So the other thing we could do is sort
+
+142
+00:20:02,000 --> 00:20:11,000
+Large to small.
+
+143
+00:20:11,000 --> 00:20:17,000
+And then we have just a regular list. We can do pop
+
+144
+00:20:17,000 --> 00:20:21,000
+And our pop is O of 1.
+
+145
+00:20:21,000 --> 00:20:25,000
+Because we're popping off the end of the list.
+
+146
+00:20:25,000 --> 00:20:30,000
+As opposed to the front of the list.
+
+147
+00:20:30,000 --> 00:20:42,000
+Both valid.
+
+148
+00:20:42,000 --> 00:21:02,000
+Yeah, okay, so we have path for O. To get the smallest thing from our AVL tree. If we were using an AVL tree. What is our runtime to get the smallest thing?
+
+149
+00:21:02,000 --> 00:21:14,000
+And in this case, remember our AVL tree, it's a binary search tree. So what it will look like is basically go to the left
+
+150
+00:21:14,000 --> 00:21:25,000
+To the left, to the left, and it's O of H, and what is H in an AVL tree
+
+151
+00:21:25,000 --> 00:21:26,000
+Right.
+
+152
+00:21:26,000 --> 00:21:27,000
+Log again
+
+153
+00:21:27,000 --> 00:21:28,000
+I like that. Yeah.
+
+154
+00:21:28,000 --> 00:21:43,000
+Yeah, yeah, yeah. O of H equals O of log n because AVL keeps our tree well balanced. It's
+
+155
+00:21:43,000 --> 00:21:51,000
+behaves nicely. It's a nice shape. It's not too deep. And so we know that we've got this good bound of log n
+
+156
+00:21:51,000 --> 00:22:07,000
+to find the smallest item in the tree, because in our ABL tree, we don't even have to know what we're looking for, we just know that we keep going left until we find… until we get to the end, until we can't go left any further, and then once we've done that
+
+157
+00:22:07,000 --> 00:22:10,000
+We've got the smallest item
+
+158
+00:22:10,000 --> 00:22:18,000
+So we can do this with our AVL tree. Okay, what are we liking so far for our get the smallest
+
+159
+00:22:18,000 --> 00:22:25,000
+item out of a data structure.
+
+160
+00:22:25,000 --> 00:22:31,000
+Which one's fastest?
+
+161
+00:22:31,000 --> 00:22:35,000
+This is for that list
+
+162
+00:22:35,000 --> 00:22:36,000
+Yeah.
+
+163
+00:22:36,000 --> 00:22:38,000
+Of course.
+
+164
+00:22:38,000 --> 00:22:49,000
+Sorted list O of 1, constant time, then log N, little bit slower, and then theta of n or big O of N. Slowest.
+
+165
+00:22:49,000 --> 00:22:58,000
+Okay, this is just taking something out. And as we've seen in particular with our Bst
+
+166
+00:22:58,000 --> 00:23:04,000
+And our AVL, putting stuff in, in order to
+
+167
+00:23:04,000 --> 00:23:22,000
+putting stuff into our data structure matters. So we can't just get things out. We have to think about how it is we're building that data structure. We have to put the things in. So let's look at our insert
+
+168
+00:23:22,000 --> 00:23:25,000
+If we are inserting into a list
+
+169
+00:23:25,000 --> 00:23:35,000
+excuse me, unsorted list. What's our runtime?
+
+170
+00:23:35,000 --> 00:23:44,000
+Drop it into chat. I'm pausing a little bit more here because I'm letting y'all use this as a review.
+
+171
+00:23:44,000 --> 00:23:46,000
+Hello everyone
+
+172
+00:23:46,000 --> 00:23:52,000
+Okay, so our insert into an unsorted list, we just put it on the end
+
+173
+00:23:52,000 --> 00:23:54,000
+Drop it in there.
+
+174
+00:23:54,000 --> 00:24:00,000
+We don't care because we're doing all the hard work on the retrieval, not on the storage.
+
+175
+00:24:00,000 --> 00:24:02,000
+Okay, sorted list
+
+176
+00:24:02,000 --> 00:24:12,000
+What do we, what do we do? How do we, what's our runtime for inserting something into
+
+177
+00:24:12,000 --> 00:24:19,000
+assorted list
+
+178
+00:24:19,000 --> 00:24:30,000
+So this, this one's a little trickier. If we've got our list, we're going to have to go through and find where it belongs. And then put it in in the right place.
+
+179
+00:24:30,000 --> 00:24:37,000
+We had a couple other options too. But let's go, let's stick with this just for today.
+
+180
+00:24:37,000 --> 00:24:44,000
+We're not going to do the put it on the end and and sort afterwards. We're we're gonna
+
+181
+00:24:44,000 --> 00:24:49,000
+find where it goes in our list, and then insert it in.
+
+182
+00:24:49,000 --> 00:24:54,000
+So what's that runtime going to be?
+
+183
+00:24:54,000 --> 00:25:04,000
+It's going to be O of N to find where to put the new item. And then it's also going to be O of N.
+
+184
+00:25:04,000 --> 00:25:11,000
+Depending where it goes in the list, because we have to shift stuff over
+
+185
+00:25:11,000 --> 00:25:14,000
+And
+
+186
+00:25:14,000 --> 00:25:29,000
+It doesn't matter if we use a Python list or a double-ended queue. If we are inserting into the middle of into the middle of an array
+
+187
+00:25:29,000 --> 00:25:33,000
+We have to shift things one way or other.
+
+188
+00:25:33,000 --> 00:25:40,000
+So that's always going to be O of N.
+
+189
+00:25:40,000 --> 00:25:43,000
+For our AVL tree
+
+190
+00:25:43,000 --> 00:25:55,000
+What is the runtime to insert something into our AVL tree?
+
+191
+00:25:55,000 --> 00:26:04,000
+Same as what we have here. It's going to be our O of log n
+
+192
+00:26:04,000 --> 00:26:09,000
+And we know that
+
+193
+00:26:09,000 --> 00:26:14,000
+List needs to shift to, oh, for this one. Yeah.
+
+194
+00:26:14,000 --> 00:26:17,000
+Great question.
+
+195
+00:26:17,000 --> 00:26:22,000
+Can anyone answer the question? And the question is, why is this O of 1?
+
+196
+00:26:22,000 --> 00:26:26,000
+Because
+
+197
+00:26:26,000 --> 00:26:27,000
+If we
+
+198
+00:26:27,000 --> 00:26:28,000
+This is just a regular list.
+
+199
+00:26:28,000 --> 00:26:32,000
+If we add it to the right side at the end of the list
+
+200
+00:26:32,000 --> 00:26:37,000
+Then we just include that, add that value to the list. We don't have to shift all the values down
+
+201
+00:26:37,000 --> 00:26:40,000
+So we can just add an item
+
+202
+00:26:40,000 --> 00:26:42,000
+At the end
+
+203
+00:26:42,000 --> 00:26:45,000
+That it… and that action is O1.
+
+204
+00:26:45,000 --> 00:26:52,000
+Yeah. So this is the case where we do something like list.append.
+
+205
+00:26:52,000 --> 00:27:01,000
+So this list doesn't need to shift.
+
+206
+00:27:01,000 --> 00:27:03,000
+Great.
+
+207
+00:27:03,000 --> 00:27:12,000
+Okay, so we are at, we've got for our unsorted list. Our
+
+208
+00:27:12,000 --> 00:27:29,000
+insert is going to be O of 1, because we're just going to pop it on the end of the list. I shouldn't say pop. We're just going to stick it on to the end of the list, and then in order to get the smallest thing, we have to iterate through that entire list to find the smallest item, and to be convinced
+
+209
+00:27:29,000 --> 00:27:32,000
+That it's the smallest item.
+
+210
+00:27:32,000 --> 00:27:37,000
+We might be able to do a little bit better with the sorted list.
+
+211
+00:27:37,000 --> 00:27:45,000
+If we have a sorted list, we know that we can use either a double-ended queue or a regular Python list
+
+212
+00:27:45,000 --> 00:27:48,000
+We have some some
+
+213
+00:27:48,000 --> 00:27:53,000
+decisions here. But we can get the smallest item
+
+214
+00:27:53,000 --> 00:28:00,000
+off of whatever end has the smallest item, depending if we're sorting increasing or decreasing.
+
+215
+00:28:00,000 --> 00:28:02,000
+And that's going to be O of 1.
+
+216
+00:28:02,000 --> 00:28:18,000
+But to do the insert is going to be O of N because we have to traverse that list to find where it belongs and then put it in
+
+217
+00:28:18,000 --> 00:28:31,000
+And then we have our AVL tree where we can get the smallest out by going to the left, left, left. And to insert, we just have to insert into the AVL tree, which is also going to be
+
+218
+00:28:31,000 --> 00:28:34,000
+Big O of the height of the tree, which is log n
+
+219
+00:28:34,000 --> 00:28:41,000
+Okay, does this change what we like
+
+220
+00:28:41,000 --> 00:28:44,000
+We're going to guess that the AVL tree is looking a little bit better now.
+
+221
+00:28:44,000 --> 00:28:47,000
+The list
+
+222
+00:28:47,000 --> 00:28:53,000
+unsorted list, fast for insertion, slow for getting what we need
+
+223
+00:28:53,000 --> 00:28:55,000
+Our sorted list
+
+224
+00:28:55,000 --> 00:29:04,000
+fast forgetting what we need, slow for inserting, so it's just a trade-off, right? All of engineering, it's a trade-off. This is our trade-off.
+
+225
+00:29:04,000 --> 00:29:11,000
+AVL tree gives us log N for both insertion and deletion.
+
+226
+00:29:11,000 --> 00:29:14,000
+Okay, we are going to look at a new
+
+227
+00:29:14,000 --> 00:29:17,000
+Data structure today.
+
+228
+00:29:17,000 --> 00:29:21,000
+And this is not going to be on the exam.
+
+229
+00:29:21,000 --> 00:29:26,000
+But I am going to introduce it as a way to, like I say, tie some of these
+
+230
+00:29:26,000 --> 00:29:30,000
+topics together. So our heap
+
+231
+00:29:30,000 --> 00:29:32,000
+Our heap is going to give us
+
+232
+00:29:32,000 --> 00:29:36,000
+O of log n
+
+233
+00:29:36,000 --> 00:29:38,000
+Retrieval
+
+234
+00:29:38,000 --> 00:29:42,000
+And it's going to give us O of log n
+
+235
+00:29:42,000 --> 00:29:44,000
+insertion
+
+236
+00:29:44,000 --> 00:29:54,000
+So we are probably going to ask if the performance is the same as this AVL tree, why bother?
+
+237
+00:29:54,000 --> 00:30:07,000
+Great question. So let's talk a little bit about what this heap looks like. And then when we get down to it, we will see how
+
+238
+00:30:07,000 --> 00:30:12,000
+How an AVL tree and a EEP are similar and different
+
+239
+00:30:12,000 --> 00:30:19,000
+Okay, any questions so far?
+
+240
+00:30:19,000 --> 00:30:26,000
+Okay.
+
+241
+00:30:26,000 --> 00:30:29,000
+Keep
+
+242
+00:30:29,000 --> 00:30:34,000
+With our heap, we're going to have two rules
+
+243
+00:30:34,000 --> 00:30:39,000
+It's going to have a shape associated with it.
+
+244
+00:30:39,000 --> 00:30:44,000
+And it is going to be a complete
+
+245
+00:30:44,000 --> 00:30:51,000
+binary trait
+
+246
+00:30:51,000 --> 00:30:53,000
+And with this
+
+247
+00:30:53,000 --> 00:30:57,000
+Every as
+
+248
+00:30:57,000 --> 00:31:10,000
+From this complete binary tree specification. We know it's a tree. We know it's binary, which means every node has zero, one, or two children
+
+249
+00:31:10,000 --> 00:31:14,000
+So no more than two children and complete
+
+250
+00:31:14,000 --> 00:31:28,000
+means that, every level is full
+
+251
+00:31:28,000 --> 00:31:31,000
+Yes, full
+
+252
+00:31:31,000 --> 00:31:34,000
+Except
+
+253
+00:31:34,000 --> 00:31:37,000
+Maybe
+
+254
+00:31:37,000 --> 00:31:40,000
+The last.
+
+255
+00:31:40,000 --> 00:31:45,000
+And fills left to right
+
+256
+00:31:45,000 --> 00:31:48,000
+And I'll show you what I mean by that in just a moment.
+
+257
+00:31:48,000 --> 00:31:51,000
+So we have our shape
+
+258
+00:31:51,000 --> 00:31:54,000
+And then we have the order.
+
+259
+00:31:54,000 --> 00:31:59,000
+So like we say
+
+260
+00:31:59,000 --> 00:32:00,000
+For our binary search tree
+
+261
+00:32:00,000 --> 00:32:17,000
+When we specified order or one of our rules around the binary search tree was that the left subtree, everything in the left subtree is smaller than the root, and everything in the right subtree is larger than the root
+
+262
+00:32:17,000 --> 00:32:30,000
+For our heap, we're going to say that every node
+
+263
+00:32:30,000 --> 00:32:36,000
+Is less than
+
+264
+00:32:36,000 --> 00:32:46,000
+less than or equal to its children.
+
+265
+00:32:46,000 --> 00:32:48,000
+So
+
+266
+00:32:48,000 --> 00:32:59,000
+The root is the smallest.
+
+267
+00:32:59,000 --> 00:33:00,000
+Okay.
+
+268
+00:33:00,000 --> 00:33:03,000
+Okay, that's all we've got.
+
+269
+00:33:03,000 --> 00:33:17,000
+This is not a binary search tree right or binary search tree says the left everything in the left subtree is smaller. Everything in the right subtree is larger.
+
+270
+00:33:17,000 --> 00:33:19,000
+Instead
+
+271
+00:33:19,000 --> 00:33:30,000
+What we're looking for is that every node is less than or equal to its children. The root is the smallest value. So we could have something like 5
+
+272
+00:33:30,000 --> 00:33:38,000
+And then 10 and 15
+
+273
+00:33:38,000 --> 00:33:43,000
+Which is a binary tree, but this is not a binary search tree.
+
+274
+00:33:43,000 --> 00:33:47,000
+This is bigger than 5, and this is bigger than 5.
+
+275
+00:33:47,000 --> 00:33:49,000
+That's what we're looking for
+
+276
+00:33:49,000 --> 00:34:08,000
+Okay, let me draw an example of a heap.
+
+277
+00:34:08,000 --> 00:34:11,000
+And as I'm drawing this
+
+278
+00:34:11,000 --> 00:34:18,000
+Y'all should pay attention and call me out if I'm doing anything that violates
+
+279
+00:34:18,000 --> 00:34:21,000
+the rules I've given so far
+
+280
+00:34:21,000 --> 00:34:26,000
+But ask yourself at every step if each node
+
+281
+00:34:26,000 --> 00:34:35,000
+is smaller than all of its children. That's what we're looking for. Okay, so I claim this is a heap.
+
+282
+00:34:35,000 --> 00:34:41,000
+Put on the so we have everything on the screen here.
+
+283
+00:34:41,000 --> 00:34:43,000
+We've got our definition
+
+284
+00:34:43,000 --> 00:34:47,000
+And we've got our example
+
+285
+00:34:47,000 --> 00:34:52,000
+And I'm going to look at this for a second. First thing I'm going to look at is the order.
+
+286
+00:34:52,000 --> 00:35:02,000
+And we're looking to see that every node is less than or equal to its children. So 2, its children are 5 and 3
+
+287
+00:35:02,000 --> 00:35:04,000
+Correct.
+
+288
+00:35:04,000 --> 00:35:08,000
+Three as eight and four. Yes
+
+289
+00:35:08,000 --> 00:35:14,000
+5, 9, and 6 are both larger. 9, 12, and 10 are both larger.
+
+290
+00:35:14,000 --> 00:35:27,000
+Okay. But you notice that's all the ordering there is to it. Here we have 2. We have three, and then eight is larger than 4. So
+
+291
+00:35:27,000 --> 00:35:35,000
+It doesn't matter if the children, if the left child is larger than the right child, and so on.
+
+292
+00:35:35,000 --> 00:35:36,000
+Okay.
+
+293
+00:35:36,000 --> 00:35:43,000
+Order makes sense. Any questions on the order?
+
+294
+00:35:43,000 --> 00:35:45,000
+And then we're going to look at
+
+295
+00:35:45,000 --> 00:35:47,000
+The shape
+
+296
+00:35:47,000 --> 00:35:51,000
+It's a complete binary tree.
+
+297
+00:35:51,000 --> 00:35:59,000
+Every level is full, except for maybe the last. So and we fill it left to right. So what we're looking at is that we've got the root here
+
+298
+00:35:59,000 --> 00:36:01,000
+and every level
+
+299
+00:36:01,000 --> 00:36:04,000
+is full
+
+300
+00:36:04,000 --> 00:36:11,000
+But this last level is not full, but we are filling it in from left to right.
+
+301
+00:36:11,000 --> 00:36:16,000
+So if we were to be inserting a new value into our heap
+
+302
+00:36:16,000 --> 00:36:24,000
+It would go here, and then it would go here, right? We'd fill it in like this.
+
+303
+00:36:24,000 --> 00:36:28,000
+And then once we've filled up this level
+
+304
+00:36:28,000 --> 00:36:31,000
+We start going down here
+
+305
+00:36:31,000 --> 00:36:34,000
+Okay, so that's what our shape
+
+306
+00:36:34,000 --> 00:36:42,000
+Our shape tells us it's that this is a complete binary tree
+
+307
+00:36:42,000 --> 00:36:49,000
+Every node has 0, 1 or 2 children, and we fill it in
+
+308
+00:36:49,000 --> 00:36:55,000
+On each level, level by level. Left to right.
+
+309
+00:36:55,000 --> 00:36:57,000
+Head.
+
+310
+00:36:57,000 --> 00:37:03,000
+Questions, thoughts, comments?
+
+311
+00:37:03,000 --> 00:37:08,000
+When they get rid of these for just a moment
+
+312
+00:37:08,000 --> 00:37:11,000
+When we
+
+313
+00:37:11,000 --> 00:37:13,000
+When we
+
+314
+00:37:13,000 --> 00:37:18,000
+have this these constraints.
+
+315
+00:37:18,000 --> 00:37:23,000
+The constraints in particular about the shape.
+
+316
+00:37:23,000 --> 00:37:28,000
+This means that we can store our tree just a little bit differently.
+
+317
+00:37:28,000 --> 00:37:39,000
+How we have been storing our trees so far are very much like a linked list, right? We have our tree node
+
+318
+00:37:39,000 --> 00:37:42,000
+Is a dictionary
+
+319
+00:37:42,000 --> 00:37:46,000
+Where we have a value
+
+320
+00:37:46,000 --> 00:37:48,000
+And then we have
+
+321
+00:37:48,000 --> 00:37:54,000
+A little more room here, and then we have the left child
+
+322
+00:37:54,000 --> 00:38:00,000
+And then we have the right child.
+
+323
+00:38:00,000 --> 00:38:02,000
+Okay.
+
+324
+00:38:02,000 --> 00:38:05,000
+Just like a list
+
+325
+00:38:05,000 --> 00:38:08,000
+But
+
+326
+00:38:08,000 --> 00:38:11,000
+When we have this very rigid
+
+327
+00:38:11,000 --> 00:38:13,000
+Structure
+
+328
+00:38:13,000 --> 00:38:18,000
+This complete binary tree that fills in level to level left to right
+
+329
+00:38:18,000 --> 00:38:23,000
+We can store it differently. We can store it in a list.
+
+330
+00:38:23,000 --> 00:38:25,000
+Or an array
+
+331
+00:38:25,000 --> 00:38:28,000
+I'm going to say an array, so I don't get
+
+332
+00:38:28,000 --> 00:38:32,000
+distracted by
+
+333
+00:38:32,000 --> 00:38:35,000
+linked list
+
+334
+00:38:35,000 --> 00:38:38,000
+So if I have an array
+
+335
+00:38:38,000 --> 00:38:42,000
+Draw this out right here
+
+336
+00:38:42,000 --> 00:38:50,000
+I'm going to put my indices in
+
+337
+00:38:50,000 --> 00:39:07,000
+I think I need some more.
+
+338
+00:39:07,000 --> 00:39:13,000
+If I have this heap and I'm storing it in an array like this
+
+339
+00:39:13,000 --> 00:39:19,000
+the way I'm going to the way this gets represented is
+
+340
+00:39:19,000 --> 00:39:23,000
+We're gonna go left to right and start with this right here.
+
+341
+00:39:23,000 --> 00:39:26,000
+That goes here
+
+342
+00:39:26,000 --> 00:39:31,000
+And then we've got our five and our three
+
+343
+00:39:31,000 --> 00:39:39,000
+And then we've got our 9, 6, 8, 4.
+
+344
+00:39:39,000 --> 00:39:44,000
+And then we've got our last row, 12 and 10.
+
+345
+00:39:44,000 --> 00:39:46,000
+Okay.
+
+346
+00:39:46,000 --> 00:39:48,000
+So
+
+347
+00:39:48,000 --> 00:39:51,000
+If this is our heap
+
+348
+00:39:51,000 --> 00:39:54,000
+Conceptually
+
+349
+00:39:54,000 --> 00:40:00,000
+This is a way that we can implement. This is how we can represent it in code.
+
+350
+00:40:00,000 --> 00:40:12,000
+and in a data structure. So how do we make sense of this? I'm going to map. We can. We can see right here. If this is our array
+
+351
+00:40:12,000 --> 00:40:16,000
+We have these indexes into our array
+
+352
+00:40:16,000 --> 00:40:21,000
+And I'm gonna put those… I'm just gonna match these up here.
+
+353
+00:40:21,000 --> 00:40:35,000
+It says zero one two three four five six, seven, eight.
+
+354
+00:40:35,000 --> 00:40:38,000
+Okay.
+
+355
+00:40:38,000 --> 00:40:46,000
+Apart from why we might do this, does this make sense so far?
+
+356
+00:40:46,000 --> 00:40:52,000
+Okay, I'm going to
+
+357
+00:40:52,000 --> 00:40:57,000
+Let's see… how are we on time? We got some time.
+
+358
+00:40:57,000 --> 00:41:04,000
+Anyone have some thoughts on why we might
+
+359
+00:41:04,000 --> 00:41:11,000
+Why we might with a tree that looks like this, why we might store it in something more like an array
+
+360
+00:41:11,000 --> 00:41:21,000
+Rather than using this dictionary node structure more similar to a linked list.
+
+361
+00:41:21,000 --> 00:41:33,000
+I think it's because each level is full, so we can use BFS to reverse structures that we don't need to
+
+362
+00:41:33,000 --> 00:41:39,000
+is pathway to save the structures. We can use BF to give each structure
+
+363
+00:41:39,000 --> 00:41:52,000
+Yeah, you got a couple of things. So yes, because this is a full complete binary tree
+
+364
+00:41:52,000 --> 00:42:05,000
+Yes, we can use breadth first search absolutely to kind of start here and traverse it, and this would be a breadth first search traversal of
+
+365
+00:42:05,000 --> 00:42:18,000
+Basically going through our tree and populating the array. Is that what you were saying? Did I get that right?
+
+366
+00:42:18,000 --> 00:42:23,000
+Yes, yes, we can traverse use the BFS so we know the structure
+
+367
+00:42:23,000 --> 00:42:33,000
+Yeah, yeah. And that does work. What else? Why might I want to use an array
+
+368
+00:42:33,000 --> 00:42:37,000
+Versus a structure that looks more like a linked list.
+
+369
+00:42:37,000 --> 00:42:45,000
+What are some of the trade-offs we had with an array versus a linked list?
+
+370
+00:42:45,000 --> 00:42:49,000
+We can use index instead of
+
+371
+00:42:49,000 --> 00:42:50,000
+Inters.
+
+372
+00:42:50,000 --> 00:42:55,000
+Indices, yes.
+
+373
+00:42:55,000 --> 00:43:07,000
+And when we know with an array, when we know the index of something we care about, we have O of 1 access time. We can go directly to that element.
+
+374
+00:43:07,000 --> 00:43:10,000
+And if we have
+
+375
+00:43:10,000 --> 00:43:24,000
+A list structure, a node structure, sorry, I feel like with Python, Python takes that list terminology and overloads it so that it makes
+
+376
+00:43:24,000 --> 00:43:38,000
+makes it difficult to express sometimes and be clear what I'm trying to say. But this this node structure, I will say when we have a node structure, the only way
+
+377
+00:43:38,000 --> 00:43:43,000
+to go to a particular node in our tree
+
+378
+00:43:43,000 --> 00:43:49,000
+Well, let's say in our tree is to traverse
+
+379
+00:43:49,000 --> 00:44:04,000
+Is to traverse with that node structure, just like with a linked list, right? With a linked list. You don't know where in memory a particular piece of data is. The only way you can get there is by going from node to node to node.
+
+380
+00:44:04,000 --> 00:44:15,000
+And so when we represent our tree like this, it's very natural. It's very, very nice for humans to think about it. It represents this picture very nicely
+
+381
+00:44:15,000 --> 00:44:24,000
+But it has the constraint that you have to do a traversal like you do a node traversal, which is… it's going to
+
+382
+00:44:24,000 --> 00:44:26,000
+Always
+
+383
+00:44:26,000 --> 00:44:28,000
+It's going to impact your your runtime
+
+384
+00:44:28,000 --> 00:44:34,000
+But if we can somehow utilize an array
+
+385
+00:44:34,000 --> 00:44:50,000
+And if we know the indices that we care about, if we can represent our tree in an array, and we can figure out which index we want to go to, we can go directly there. We don't have to traverse an entire tree
+
+386
+00:44:50,000 --> 00:44:53,000
+Or we don't have to traverse all those notes.
+
+387
+00:44:53,000 --> 00:44:57,000
+And one of the things that we see
+
+388
+00:44:57,000 --> 00:45:04,000
+If we look at this
+
+389
+00:45:04,000 --> 00:45:09,000
+Let's see. So when we have
+
+390
+00:45:09,000 --> 00:45:10,000
+a tree
+
+391
+00:45:10,000 --> 00:45:16,000
+That fits these characteristics. If we know we're at node 0.
+
+392
+00:45:16,000 --> 00:45:22,000
+We can calculate the indices of the children.
+
+393
+00:45:22,000 --> 00:45:35,000
+And if we are at this node two. I can calculate the index index of its parent, which makes it very easy to go from one to the other.
+
+394
+00:45:35,000 --> 00:45:46,000
+So our rule here, so
+
+395
+00:45:46,000 --> 00:45:52,000
+Children of node
+
+396
+00:45:52,000 --> 00:45:56,000
+Are gonna be two I
+
+397
+00:45:56,000 --> 00:45:58,000
+plus one
+
+398
+00:45:58,000 --> 00:46:03,000
+2 I plus 2, and the parent
+
+399
+00:46:03,000 --> 00:46:06,000
+of
+
+400
+00:46:06,000 --> 00:46:10,000
+Node I
+
+401
+00:46:10,000 --> 00:46:13,000
+Is going to be I minus one
+
+402
+00:46:13,000 --> 00:46:17,000
+Divide by 2.
+
+403
+00:46:17,000 --> 00:46:23,000
+Actually, I'll do it this way. We take the floor.
+
+404
+00:46:23,000 --> 00:46:33,000
+So if I look at this briefly
+
+405
+00:46:33,000 --> 00:46:45,000
+So if I'm at node two, that's i, i equals 2. Then one child is going to be two times two plus one.
+
+406
+00:46:45,000 --> 00:46:49,000
+Am I sharing the right thing? Y'all can see everything right?
+
+407
+00:46:49,000 --> 00:46:53,000
+Okay, 2 plus 2 plus 1, that's going to be 5.
+
+408
+00:46:53,000 --> 00:46:56,000
+2 times 2 plus 2.
+
+409
+00:46:56,000 --> 00:47:00,000
+4 plus 2 is 6. That gives us 6
+
+410
+00:47:00,000 --> 00:47:08,000
+I'm looking at node 6, I'm going to do 6 minus one here. 6 minus one, which is 5.
+
+411
+00:47:08,000 --> 00:47:19,000
+5 divided by 2, which is 2.5. And with this, I'm going to floor it, I'm gonna drop the remainder, that gives me 2. That's my parent.
+
+412
+00:47:19,000 --> 00:47:22,000
+So now I can go to my parent
+
+413
+00:47:22,000 --> 00:47:40,000
+And we can do this. We can use these calculations to find the parent index and then the children index because it's a binary tree and it is, it's a full binary tree and we fill it in like this
+
+414
+00:47:40,000 --> 00:47:48,000
+Okay.
+
+415
+00:47:48,000 --> 00:47:55,000
+How are we doing? Y'all want to
+
+416
+00:47:55,000 --> 00:48:09,000
+Trying to trying to think how much we can go into. So here, at this point, I'm going to do just a little bit of preview of what we will come back to when we talk about heaps after the bidterm.
+
+417
+00:48:09,000 --> 00:48:22,000
+So what I've shown here is it's an example heap. It follows the rules that I said we have for what a heap is.
+
+418
+00:48:22,000 --> 00:48:28,000
+And I've shown how we are going to hold. We're going to use an array
+
+419
+00:48:28,000 --> 00:48:32,000
+to hold the elements in our heap
+
+420
+00:48:32,000 --> 00:48:37,000
+And but I have not talked about how we're actually going to use our heat.
+
+421
+00:48:37,000 --> 00:48:47,000
+So what we are looking for is a data structure that helps us one find something well, that helps us find the most important thing
+
+422
+00:48:47,000 --> 00:48:49,000
+as fast as possible.
+
+423
+00:48:49,000 --> 00:48:53,000
+So, and I claimed
+
+424
+00:48:53,000 --> 00:48:57,000
+that our heap is going to do that, and O of log n
+
+425
+00:48:57,000 --> 00:49:03,000
+For both getting the smallest thing and inserting.
+
+426
+00:49:03,000 --> 00:49:05,000
+So if this is our heap
+
+427
+00:49:05,000 --> 00:49:09,000
+I want to get the smallest, most important item out of this
+
+428
+00:49:09,000 --> 00:49:15,000
+Where does the smallest, most important item live in this tree?
+
+429
+00:49:15,000 --> 00:49:19,000
+Daru.
+
+430
+00:49:19,000 --> 00:49:26,000
+Yep, the root. It's always at the root. So I always know, like, I don't know
+
+431
+00:49:26,000 --> 00:49:30,000
+Down here, I have no idea what's going on, but I do know
+
+432
+00:49:30,000 --> 00:49:33,000
+That this is the most important item.
+
+433
+00:49:33,000 --> 00:49:40,000
+That's all I know. Everything else, who knows how important they are. But I know this is the most important thing.
+
+434
+00:49:40,000 --> 00:49:43,000
+I'm gonna do a
+
+435
+00:49:43,000 --> 00:49:50,000
+I'm gonna copy this
+
+436
+00:49:50,000 --> 00:49:53,000
+So I can move it around
+
+437
+00:49:53,000 --> 00:50:06,000
+Just so that we can see what's coming up in the future. If I want the most important thing, what I'm going to do is I am going to
+
+438
+00:50:06,000 --> 00:50:12,000
+Take the most important thing out of the off the route.
+
+439
+00:50:12,000 --> 00:50:28,000
+And I know I'm gonna remove that. I'm going to return that back. We've now found the most important thing. But we are left with a tree or two trees. We don't know what's going on here. We no longer have a heap
+
+440
+00:50:28,000 --> 00:50:37,000
+So when we remove something for the tree, when we remove that root, we're going to have to make it a heap again.
+
+441
+00:50:37,000 --> 00:50:53,000
+And I'm gonna I'm gonna preview this. I'm gonna wave my hand and go very quickly. But basically what we are going to do is we no longer have a tree that is starts at the root and goes and fills in completely like this right
+
+442
+00:50:53,000 --> 00:51:01,000
+So what I'm going to do is I'm going to take this
+
+443
+00:51:01,000 --> 00:51:03,000
+I'm going to take
+
+444
+00:51:03,000 --> 00:51:11,000
+This very last item off the end, and I'm going to put it here. I'm going to put it at the root
+
+445
+00:51:11,000 --> 00:51:18,000
+And then I am going to bubble it down
+
+446
+00:51:18,000 --> 00:51:29,000
+I'm going to bubble it down until it's in the right place and I have found the most important thing again and moved the most important thing to the root
+
+447
+00:51:29,000 --> 00:51:38,000
+And how I'm going to do that is I am going to take this and I'm going to look at my children. I'm going to swap this
+
+448
+00:51:38,000 --> 00:51:55,000
+And I feel like I'm looking at the time and I'm not going to do this quite right. So I apologize if I get it wrong. Anyone feel free to correct me. I'm going to put this here. I'm going to put this here. And I see I've got three at the root. I've got 10 down here. I've
+
+449
+00:51:55,000 --> 00:52:02,000
+I'm comparing it with my children and I'm going to swap it once again.
+
+450
+00:52:02,000 --> 00:52:06,000
+And I forgot now what I put there. I think I did that
+
+451
+00:52:06,000 --> 00:52:08,000
+And
+
+452
+00:52:08,000 --> 00:52:16,000
+Now I am once again left think I'm left with the heap still. Smallest item is at the top
+
+453
+00:52:16,000 --> 00:52:31,000
+And then I kind of don't care about everything else. All I need to know is that this is the smallest thing and it's at the top.
+
+454
+00:52:31,000 --> 00:52:35,000
+Are we on time? Got just a couple minutes left.
+
+455
+00:52:35,000 --> 00:52:38,000
+I got one minute left. I won't. I won't
+
+456
+00:52:38,000 --> 00:52:44,000
+pretend. And then, if I'm inserting something into the tree.
+
+457
+00:52:44,000 --> 00:52:47,000
+We're going to do
+
+458
+00:52:47,000 --> 00:52:50,000
+We're going to keep it simple.
+
+459
+00:52:50,000 --> 00:52:56,000
+We're going to fill it in in this nice empty spot, right?
+
+460
+00:52:56,000 --> 00:53:07,000
+Because when we add to our tree, we're just going to fill out this level. Which means we're going to take this and I'm going to put a number one in there
+
+461
+00:53:07,000 --> 00:53:11,000
+But I've tacked this on
+
+462
+00:53:11,000 --> 00:53:12,000
+To our heap
+
+463
+00:53:12,000 --> 00:53:22,000
+It is no longer a heap. It's no longer a heap because I have something, I have one node here that is
+
+464
+00:53:22,000 --> 00:53:32,000
+Bigger than one of its children. So now I'm going to bubble this. I'm going to take this, and I'm going to bubble it up until I've got a heap again.
+
+465
+00:53:32,000 --> 00:53:43,000
+So one is smaller than 9, so I'm going to swap them.
+
+466
+00:53:43,000 --> 00:53:52,000
+And I'm going to look. One is smaller than 5, so I'm going to swap them
+
+467
+00:53:52,000 --> 00:54:01,000
+And one is smaller than 3, so I'm going to swap them.
+
+468
+00:54:01,000 --> 00:54:16,000
+And one is now at the root. I'm going to take just a minute and I'm going to look and see, okay, one's at the top, one is smaller than 3 and 4. 4 is smaller than 8 and 10. Three is smaller than
+
+469
+00:54:16,000 --> 00:54:21,000
+5 and 6. 5 is smaller than 12 and 9. I still have a heap
+
+470
+00:54:21,000 --> 00:54:26,000
+Okay, so I'm going to wrap this up right now.
+
+471
+00:54:26,000 --> 00:54:35,000
+So we can take our break. But what I want y'all to take away from now is just we have this idea of a heap
+
+472
+00:54:35,000 --> 00:54:47,000
+That is going to allow us to keep track of just the most important item. We're going to use an array to hold our data rather than a node like a linked list
+
+473
+00:54:47,000 --> 00:54:54,000
+When we do that, we get this O of 1 access time that an array provides to us
+
+474
+00:54:54,000 --> 00:54:58,000
+And
+
+475
+00:54:58,000 --> 00:55:05,000
+Basically, when we take something out, we're going to take it out of the root. We're going to move
+
+476
+00:55:05,000 --> 00:55:19,000
+The last item back up here and then bubble it down until we have a heap again. When we insert in, we insert into the next empty spot and then bubble it up until we have a heap again
+
+477
+00:55:19,000 --> 00:55:27,000
+Any questions before we take our break?
+
+478
+00:55:27,000 --> 00:55:38,000
+Okay, let's take our break. When we come back, we're going to do our midterm review. And I will reiterate heaps are not on the midterm
+
+479
+00:55:38,000 --> 00:55:48,000
+But I wanted to introduce them here so that we're prepared when we come back after the midterm and to help us tie some concepts together.
+
+480
+00:55:48,000 --> 00:55:51,000
+So that's why we're talking about them now.
+
+481
+00:55:51,000 --> 00:55:53,000
+Okay.
+
+482
+00:55:53,000 --> 00:55:56,000
+Break back at
+
+483
+00:55:56,000 --> 00:56:09,000
+532. And when we come back, if anyone has questions, feel free to bring questions of anything in particular you want to discuss for the midterm
+
+484
+00:56:09,000 --> 00:56:21,000
+CL in 10 minutes.
+
+485
+00:56:30,000 --> 00:56:32,000
+Okay, now we're back.
+
+486
+00:56:32,000 --> 00:56:35,000
+Okay.
+
+487
+00:56:35,000 --> 00:56:53,000
+I'm going to ask real quick. I have been sharing with y'all my notes, or at least versions of my notes, something very similar to my notes. And I have not been sharing the scribbles
+
+488
+00:56:53,000 --> 00:57:04,000
+Would it be helpful to you if I share these scribbles that I
+
+489
+00:57:04,000 --> 00:57:05,000
+Please.
+
+490
+00:57:05,000 --> 00:57:20,000
+Putting class. Okay, I'm seeing a nod. Okay. Okay, I will share those. I always feel like they're kind of a mess and that the notes align definitely is more helpful, but I'm more than happy to share. So these are all in one document. I'm going to just
+
+491
+00:57:20,000 --> 00:57:25,000
+Export the whole thing, and I'll put it up on Canvas, and y'all can have it.
+
+492
+00:57:25,000 --> 00:57:28,000
+Okay.
+
+493
+00:57:28,000 --> 00:57:41,000
+Before we get started with a review, does anyone have questions or anything in particular, that you'd like to go over?
+
+494
+00:57:41,000 --> 00:57:44,000
+Luke.
+
+495
+00:57:44,000 --> 00:57:51,000
+Is there, like, just like the general outline of the midterm, like one
+
+496
+00:57:51,000 --> 00:57:56,000
+Serial coding and multiple choice, or something like that
+
+497
+00:57:56,000 --> 00:58:01,000
+Okay, I'm not entirely sure because I haven't written the test yet.
+
+498
+00:58:01,000 --> 00:58:07,000
+I don't do this till the last minute, but in terms of format
+
+499
+00:58:07,000 --> 00:58:10,000
+Sorry.
+
+500
+00:58:10,000 --> 00:58:30,000
+I like to mix it up. I will probably have a section of like true, false, probably a section of like, I don't know, 5 to 10 true false questions, a couple multiple choice
+
+501
+00:58:30,000 --> 00:58:37,000
+A couple fill in the blank.
+
+502
+00:58:37,000 --> 00:58:47,000
+Or a short answer. Type questions. And then a couple of
+
+503
+00:58:47,000 --> 00:58:53,000
+probably about 3. I'm gonna say maybe
+
+504
+00:58:53,000 --> 00:58:58,000
+Questions, and I say that in quotes because
+
+505
+00:58:58,000 --> 00:59:13,000
+It's hard to say what meaty really means, but what I would consider a little bit more involved, you might have to read some pseudocode or write some code
+
+506
+00:59:13,000 --> 00:59:21,000
+I will be very clear if I'm looking for Python code versus pseudocode
+
+507
+00:59:21,000 --> 00:59:27,000
+I've said this before, and I will say it multiple times. If I'm asking you to write code
+
+508
+00:59:27,000 --> 00:59:35,000
+I will not be looking for perfect syntax.
+
+509
+00:59:35,000 --> 00:59:43,000
+And one of my rules is
+
+510
+00:59:43,000 --> 00:59:50,000
+I'm trying to summarize it in my head. I can't summarize it, but if you
+
+511
+00:59:50,000 --> 00:59:58,000
+can't remember something specific, or you're making an assumption or something like maybe you
+
+512
+00:59:58,000 --> 01:00:08,000
+are thinking of, you know, you have a deck, and you can't remember if it's pop left
+
+513
+01:00:08,000 --> 01:00:13,000
+Or, I don't know, pop one or something.
+
+514
+01:00:13,000 --> 01:00:28,000
+right? Like, maybe there's this case where you you you don't remember exactly what some call is or something. If you say write down exactly what your assumption is
+
+515
+01:00:28,000 --> 01:00:33,000
+and it's reasonable, but it happens to be wrong.
+
+516
+01:00:33,000 --> 01:00:38,000
+I will give you credit for it. Does that make sense? That was very wordy.
+
+517
+01:00:38,000 --> 01:00:41,000
+But pretty much
+
+518
+01:00:41,000 --> 01:00:46,000
+My go-to rule is, if you explain an assumption you made
+
+519
+01:00:46,000 --> 01:00:56,000
+Even if you then get an answer wrong, because your assumption was wrong, as long as your assumption was somewhat reasonable and you've explained it
+
+520
+01:00:56,000 --> 01:01:07,000
+then I will give you credit for it.
+
+521
+01:01:07,000 --> 01:01:11,000
+Other questions
+
+522
+01:01:11,000 --> 01:01:28,000
+I like to take this time to go over a list of topics. I like to start writing topics and let you guys shout out topics of things you remember throughout the quarter. I think it's a little bit more
+
+523
+01:01:28,000 --> 01:01:43,000
+Helpful for you all rather than me just saying the things. So I'm going to start out by acting as a scribe. With the first half of class today
+
+524
+01:01:43,000 --> 01:01:47,000
+Introducing heaps.
+
+525
+01:01:47,000 --> 01:01:59,000
+I tried to touch on some of the things that we have talked about so far this quarter. But how about we start out with just y'all
+
+526
+01:01:59,000 --> 01:02:01,000
+Start
+
+527
+01:02:01,000 --> 01:02:08,000
+Throwing out things you remember we talked about. You can put it in the chat. You can come off mute and yell it out.
+
+528
+01:02:08,000 --> 01:02:12,000
+Whatever you want.
+
+529
+01:02:12,000 --> 01:02:13,000
+All right
+
+530
+01:02:13,000 --> 01:02:18,000
+Oh.
+
+531
+01:02:18,000 --> 01:02:22,000
+Anyone remember anything particular about arrays
+
+532
+01:02:22,000 --> 01:02:27,000
+contiguous chunks, a memory, fixed eyes
+
+533
+01:02:27,000 --> 01:02:29,000
+Used to be the same type
+
+534
+01:02:29,000 --> 01:02:31,000
+has an index
+
+535
+01:02:31,000 --> 01:02:37,000
+Perfect. Contiguous chunks of memory
+
+536
+01:02:37,000 --> 01:02:40,000
+Our indexes
+
+537
+01:02:40,000 --> 01:02:48,000
+Constant access time
+
+538
+01:02:48,000 --> 01:02:52,000
+Fixed size
+
+539
+01:02:52,000 --> 01:02:54,000
+And same type.
+
+540
+01:02:54,000 --> 01:02:57,000
+Did I catch everything?
+
+541
+01:02:57,000 --> 01:03:02,000
+Anyone have anything to add there?
+
+542
+01:03:02,000 --> 01:03:06,000
+And one of the things about arrays
+
+543
+01:03:06,000 --> 01:03:19,000
+is that because it's this contiguous fixed size, that means when we add we can allocate space to start with. We can say, okay, this array is going to hold 15 items
+
+544
+01:03:19,000 --> 01:03:23,000
+And then we start putting the items in
+
+545
+01:03:23,000 --> 01:03:26,000
+Once we outgrow the allocated size
+
+546
+01:03:26,000 --> 01:03:29,000
+We then
+
+547
+01:03:29,000 --> 01:03:37,000
+if we want to put a 16th item in there, we have to resize that array
+
+548
+01:03:37,000 --> 01:03:46,000
+Anyone remember what we do to resize an array?
+
+549
+01:03:46,000 --> 01:04:00,000
+We have to allocate. We usually allocate twice as much space. So we allocate twice as much space. We copy everything from the original array into the new array. And then we start adding stuff on there.
+
+550
+01:04:00,000 --> 01:04:08,000
+When we take something off of the head of an array.
+
+551
+01:04:08,000 --> 01:04:17,000
+We want to remove this. We then have to move everything down.
+
+552
+01:04:17,000 --> 01:04:29,000
+We can't have any empty space at the start of our array. And if we wanted to say remove the data here, we've got to move everything down.
+
+553
+01:04:29,000 --> 01:04:35,000
+I can't have any blank chunks in our array.
+
+554
+01:04:35,000 --> 01:04:44,000
+What else? Anyone have anything else to add either to arrays or questions or other content?
+
+555
+01:04:44,000 --> 01:04:47,000
+O of N
+
+556
+01:04:47,000 --> 01:04:48,000
+Oh, got it
+
+557
+01:04:48,000 --> 01:04:51,000
+Or both inserting and removing
+
+558
+01:04:51,000 --> 01:04:52,000
+Sorry, will you repeat that, please?
+
+559
+01:04:52,000 --> 01:04:57,000
+Oh, I said, oh, VIN, whenever you insert or remove
+
+560
+01:04:57,000 --> 01:05:01,000
+Yes.
+
+561
+01:05:01,000 --> 01:05:03,000
+Insert
+
+562
+01:05:03,000 --> 01:05:06,000
+remove
+
+563
+01:05:06,000 --> 01:05:08,000
+And
+
+564
+01:05:08,000 --> 01:05:10,000
+Yeah, I'll leave it at
+
+565
+01:05:10,000 --> 01:05:20,000
+Okay, what else?
+
+566
+01:05:20,000 --> 01:05:22,000
+You gotta raise
+
+567
+01:05:22,000 --> 01:05:30,000
+Alongside arrays. Yeah, we did our linked list.
+
+568
+01:05:30,000 --> 01:05:37,000
+And with our linked list. We have nodes
+
+569
+01:05:37,000 --> 01:05:40,000
+That point
+
+570
+01:05:40,000 --> 01:05:45,000
+nodes and pointers. We point to the next element.
+
+571
+01:05:45,000 --> 01:05:52,000
+We can have a doubly linked list, so we can point back to the previous item
+
+572
+01:05:52,000 --> 01:05:56,000
+We can point to the head
+
+573
+01:05:56,000 --> 01:06:00,000
+We can point to the tail
+
+574
+01:06:00,000 --> 01:06:20,000
+And depending how we set up our linked list, we can insert at the head or remove at the head, we can insert at the tail or remove at the tail, or we can put something in the middle
+
+575
+01:06:20,000 --> 01:06:26,000
+What else?
+
+576
+01:06:26,000 --> 01:06:36,000
+Their linked list. Kind of in here, we also talked about so so these
+
+577
+01:06:36,000 --> 01:06:43,000
+We are talking about somewhat abstractly
+
+578
+01:06:43,000 --> 01:07:03,000
+Right? We have the abstract data type that is an array, and I put abstract in quotes because I feel like an array is about as least abstract of a data structure as you can. It's very concrete. It's very tied to specifically how much memory
+
+579
+01:07:03,000 --> 01:07:10,000
+memory we have and how we allocate that memory. But it's still… we are really
+
+580
+01:07:10,000 --> 01:07:16,000
+A lot of times concerned with the
+
+581
+01:07:16,000 --> 01:07:30,000
+this interface and these characteristics that we have called out about our array. And same with our linked list. But how we implement it behind the scenes
+
+582
+01:07:30,000 --> 01:07:34,000
+Might be a little different.
+
+583
+01:07:34,000 --> 01:07:41,000
+This gets a little complicated to talk about with Python
+
+584
+01:07:41,000 --> 01:07:46,000
+Because we have our Python list
+
+585
+01:07:46,000 --> 01:07:55,000
+Which looks like an array and kind of acts like an array. It's a dynamic array, but it kind of
+
+586
+01:07:55,000 --> 01:08:04,000
+Because it's called a list, kind of sometimes muddies that distinction between what a linked list is and what an array is. So I'm just calling that out
+
+587
+01:08:04,000 --> 01:08:13,000
+But our list and Python specifically is a dynamic array.
+
+588
+01:08:13,000 --> 01:08:18,000
+And
+
+589
+01:08:18,000 --> 01:08:24,000
+We should be clear on what our runtime of
+
+590
+01:08:24,000 --> 01:08:32,000
+Common list operations in Python are like append
+
+591
+01:08:32,000 --> 01:08:36,000
+What does append do?
+
+592
+01:08:36,000 --> 01:08:39,000
+adds an element to the end of the list
+
+593
+01:08:39,000 --> 01:08:50,000
+Yep, it puts something on the end of the list and that's going to be O of one and we have pop
+
+594
+01:08:50,000 --> 01:08:55,000
+Which is gonna take the last element off the list.
+
+595
+01:08:55,000 --> 01:09:00,000
+And then we have pop
+
+596
+01:09:00,000 --> 01:09:02,000
+of I
+
+597
+01:09:02,000 --> 01:09:07,000
+Where it's some index anywhere in the list
+
+598
+01:09:07,000 --> 01:09:10,000
+And it's going to be O of N.
+
+599
+01:09:10,000 --> 01:09:20,000
+But really, it's really it's going to be O of N, because if you remove the first element in the list, you have to move everything down
+
+600
+01:09:20,000 --> 01:09:24,000
+If you remove something closer to the end of the list
+
+601
+01:09:24,000 --> 01:09:27,000
+It's not gonna be
+
+602
+01:09:27,000 --> 01:09:32,000
+full and operations, that's where we
+
+603
+01:09:32,000 --> 01:09:43,000
+Where we start thinking about O of N, that big O notation, as being an upper bound, not a tight bound.
+
+604
+01:09:43,000 --> 01:09:50,000
+It's an upper bound. In the worst case. We're going to have to do
+
+605
+01:09:50,000 --> 01:09:58,000
+Moves of data.
+
+606
+01:09:58,000 --> 01:10:02,000
+What else?
+
+607
+01:10:02,000 --> 01:10:11,000
+Python list, append, pop, pop of I
+
+608
+01:10:11,000 --> 01:10:14,000
+Anyone else remember
+
+609
+01:10:14,000 --> 01:10:20,000
+Anything else we've talked about?
+
+610
+01:10:20,000 --> 01:10:22,000
+Stack at the queue
+
+611
+01:10:22,000 --> 01:10:26,000
+Thank you. We have a stack
+
+612
+01:10:26,000 --> 01:10:30,000
+And a queue
+
+613
+01:10:30,000 --> 01:10:36,000
+And with this stack is last in, first out.
+
+614
+01:10:36,000 --> 01:10:41,000
+and our queue is 1st in first out.
+
+615
+01:10:41,000 --> 01:10:54,000
+Now, this is where we start really being able to think about our data structure as an abstract data type
+
+616
+01:10:54,000 --> 01:11:03,000
+I'm going to say abstract data type over here.
+
+617
+01:11:03,000 --> 01:11:06,000
+And our abstract data type
+
+618
+01:11:06,000 --> 01:11:14,000
+This is where we are defining the behavior of the data structure, the data type that we're working with.
+
+619
+01:11:14,000 --> 01:11:24,000
+And that's what we're seeing here with our stack and our queue that we're defining that behavior, that last in, first out versus first in, first out.
+
+620
+01:11:24,000 --> 01:11:38,000
+And that's separate from the implementation.
+
+621
+01:11:38,000 --> 01:11:42,000
+And if I recall correctly
+
+622
+01:11:42,000 --> 01:11:49,000
+We looked at a couple of different ways that we could implement a stack and a queue
+
+623
+01:11:49,000 --> 01:11:52,000
+We could implement a stack
+
+624
+01:11:52,000 --> 01:11:58,000
+or a queue with either an array or with a linked list
+
+625
+01:11:58,000 --> 01:12:10,000
+And we can do our linked list differently. Have different linked list implementations.
+
+626
+01:12:10,000 --> 01:12:22,000
+Depending on how it is, we want our stack or our queue to behave, or what trade-offs we want, as long as we maintain
+
+627
+01:12:22,000 --> 01:12:31,000
+This predicted behavior, this specified behavior
+
+628
+01:12:31,000 --> 01:12:41,000
+We in particular, though, with our stack in our queue, we did look at that we could implement it with a linked list or an array
+
+629
+01:12:41,000 --> 01:12:46,000
+But then we've also talked about how
+
+630
+01:12:46,000 --> 01:12:50,000
+If you are writing Python code
+
+631
+01:12:50,000 --> 01:12:55,000
+How it is you are the I'm going to say the best way
+
+632
+01:12:55,000 --> 01:13:04,000
+to implement a stack and a queue. Does anyone recall
+
+633
+01:13:04,000 --> 01:13:08,000
+If I want to use a stack in Python
+
+634
+01:13:08,000 --> 01:13:11,000
+What do I… what do I use
+
+635
+01:13:11,000 --> 01:13:14,000
+We use PassionList
+
+636
+01:13:14,000 --> 01:13:16,000
+I use a list
+
+637
+01:13:16,000 --> 01:13:17,000
+Yeah.
+
+638
+01:13:17,000 --> 01:13:34,000
+Yeah. I'm just going to use a list, regular list. If I want to stack, a Python list is going to give me what I need. I append, and because I'm appending at the end, that's O of 1 and I pop and I pop off the end, that's O of
+
+639
+01:13:34,000 --> 01:13:41,000
+This is an efficient implementation, an efficient way to use a Python list
+
+640
+01:13:41,000 --> 01:13:45,000
+as a stack implementation.
+
+641
+01:13:45,000 --> 01:13:52,000
+Can we use a Python list for our queue
+
+642
+01:13:52,000 --> 01:14:09,000
+Because I mean, don't we just depend on one end and pop of eye off of pop of zero?
+
+643
+01:14:09,000 --> 01:14:16,000
+So I will say, I see someone come off mute. Go ahead. You say it.
+
+644
+01:14:16,000 --> 01:14:32,000
+I will say if we pop at zero, it would be ON, so it would be moved to left or no, no, no, we can use the list because we can use the index as a
+
+645
+01:14:32,000 --> 01:14:35,000
+to finally
+
+646
+01:14:35,000 --> 01:14:48,000
+Yeah, okay. So, oh, you said a couple couple things there. So I'm gonna unpack that. So one, you said, no, we do not want to use a list because pop of zero is going to be O
+
+647
+01:14:48,000 --> 01:14:51,000
+because we have to move everything down.
+
+648
+01:14:51,000 --> 01:14:52,000
+Yeah. Yes.
+
+649
+01:14:52,000 --> 01:14:59,000
+Okay, but then you said, oh, we can use a list
+
+650
+01:14:59,000 --> 01:15:09,000
+Because we could do something like maybe our list holds our queue, and we append on the end here, and what we keep track of a head like this
+
+651
+01:15:09,000 --> 01:15:10,000
+Yes, yes.
+
+652
+01:15:10,000 --> 01:15:13,000
+And that we take stuff off the end here
+
+653
+01:15:13,000 --> 01:15:14,000
+Yeah.
+
+654
+01:15:14,000 --> 01:15:17,000
+And then added on the other end, right?
+
+655
+01:15:17,000 --> 01:15:18,000
+Yes, yes.
+
+656
+01:15:18,000 --> 01:15:22,000
+Okay, I like it, I like it.
+
+657
+01:15:22,000 --> 01:15:26,000
+Thirds
+
+658
+01:15:26,000 --> 01:15:30,000
+I want other people to chime in.
+
+659
+01:15:30,000 --> 01:15:37,000
+Because this is and let's keep in mind, it's always about trade-offs. We can do whatever we want.
+
+660
+01:15:37,000 --> 01:15:46,000
+But some things are going to be more efficient than others. So what do we like about this idea of using a list as a cue
+
+661
+01:15:46,000 --> 01:15:51,000
+And it's just we're going to keep track of
+
+662
+01:15:51,000 --> 01:15:53,000
+The next element
+
+663
+01:15:53,000 --> 01:15:55,000
+We're not actually going to
+
+664
+01:15:55,000 --> 01:16:01,000
+pop off and move everything down. We're just gonna, like, keep track of
+
+665
+01:16:01,000 --> 01:16:06,000
+The next item
+
+666
+01:16:06,000 --> 01:16:12,000
+First, let me ask, is it clear what I mean when I say this?
+
+667
+01:16:12,000 --> 01:16:20,000
+Or is this confusing?
+
+668
+01:16:20,000 --> 01:16:26,000
+Wait, sorry, can you explain what
+
+669
+01:16:26,000 --> 01:16:27,000
+Yeah.
+
+670
+01:16:27,000 --> 01:16:28,000
+What this or what you're asking
+
+671
+01:16:28,000 --> 01:16:34,000
+Yeah, so, one way we could implement a queue
+
+672
+01:16:34,000 --> 01:16:39,000
+Would be something like NQ
+
+673
+01:16:39,000 --> 01:16:47,000
+I'm going to do make queue.
+
+674
+01:16:47,000 --> 01:16:53,000
+Right, a make Q function and it's something like return
+
+675
+01:16:53,000 --> 01:16:55,000
+List
+
+676
+01:16:55,000 --> 01:17:00,000
+Like, actually, I'm gonna do this
+
+677
+01:17:00,000 --> 01:17:05,000
+But make a dictionary and I'm all my data
+
+678
+01:17:05,000 --> 01:17:11,000
+My data is going to be a list and my
+
+679
+01:17:11,000 --> 01:17:15,000
+Head is going to be something like this 0.
+
+680
+01:17:15,000 --> 01:17:22,000
+And then when I enqueue
+
+681
+01:17:22,000 --> 01:17:25,000
+My queue.
+
+682
+01:17:25,000 --> 01:17:29,000
+I'm just going to do that and data
+
+683
+01:17:29,000 --> 01:17:31,000
+I'm going to say
+
+684
+01:17:31,000 --> 01:17:39,000
+You dot data. Sorry, I did this wrong.
+
+685
+01:17:39,000 --> 01:17:45,000
+Because Python data
+
+686
+01:17:45,000 --> 01:18:00,000
+Actually, I'm going to
+
+687
+01:18:00,000 --> 01:18:07,000
+So my enqueue step, all I'm going to do is I'm going to append our new piece of data onto that list.
+
+688
+01:18:07,000 --> 01:18:15,000
+And DQ
+
+689
+01:18:15,000 --> 01:18:21,000
+I'm going to do something like
+
+690
+01:18:21,000 --> 01:18:24,000
+Q of
+
+691
+01:18:24,000 --> 01:18:49,000
+Data
+
+692
+01:18:49,000 --> 01:18:54,000
+Less equals one
+
+693
+01:18:54,000 --> 01:18:56,000
+Sorry.
+
+694
+01:18:56,000 --> 01:18:59,000
+Return.
+
+695
+01:18:59,000 --> 01:19:02,000
+Q.
+
+696
+01:19:02,000 --> 01:19:05,000
+Data
+
+697
+01:19:05,000 --> 01:19:08,000
+Ed minus one
+
+698
+01:19:08,000 --> 01:19:12,000
+I don't really like
+
+699
+01:19:12,000 --> 01:19:16,000
+But this is the idea
+
+700
+01:19:16,000 --> 01:19:26,000
+It's not the best, but this is the idea. We're going to our queue is going to be a list that holds the data, and then a pointer.
+
+701
+01:19:26,000 --> 01:19:35,000
+And then, when we enqueue something, we just put it on the end of our data, and when we dequeue something, we increment this head pointer
+
+702
+01:19:35,000 --> 01:19:40,000
+Here, and then we return the data
+
+703
+01:19:40,000 --> 01:19:42,000
+That was at that place. So
+
+704
+01:19:42,000 --> 01:19:53,000
+We're kind of like, what will happen is we'll build up this… this queue, we insert, 1, 2, 3
+
+705
+01:19:53,000 --> 01:19:58,000
+And then we remove one
+
+706
+01:19:58,000 --> 01:20:09,000
+And now we're looking at 3, and then we add 4 and 5, and then we remove two, we're pointing at 3, remove 3
+
+707
+01:20:09,000 --> 01:20:15,000
+Blah, blah, blah. Does that make more sense?
+
+708
+01:20:15,000 --> 01:20:17,000
+It's a trade-off
+
+709
+01:20:17,000 --> 01:20:20,000
+Is this what you were thinking of, Shaoqing?
+
+710
+01:20:20,000 --> 01:20:21,000
+Yes
+
+711
+01:20:21,000 --> 01:20:22,000
+Yeah.
+
+712
+01:20:22,000 --> 01:20:31,000
+And sometimes if the listing is very long, we can use a cyclist.
+
+713
+01:20:31,000 --> 01:20:32,000
+Use a cyclist.
+
+714
+01:20:32,000 --> 01:20:34,000
+Yeah.
+
+715
+01:20:34,000 --> 01:20:47,000
+Okay, so now you're saying I like this, I like where you're going. Because what happened is you'll see over time, the list will grow long and longer and longer
+
+716
+01:20:47,000 --> 01:20:48,000
+Yes
+
+717
+01:20:48,000 --> 01:20:52,000
+And we have all this stuff over here that we're not actually using
+
+718
+01:20:52,000 --> 01:20:55,000
+This is wasted space
+
+719
+01:20:55,000 --> 01:21:07,000
+So maybe at some point we, I don't know, trim our list, or we go back to the beginning. I don't know. We do something to clean it all up.
+
+720
+01:21:07,000 --> 01:21:11,000
+So I'm gonna… I'm just gonna… I'm gonna stop going down this path right now
+
+721
+01:21:11,000 --> 01:21:20,000
+And, say that, yeah, there are times when this is, something along this line
+
+722
+01:21:20,000 --> 01:21:28,000
+is perfectly reasonable, but we do run into this case of we have more record keeping to do.
+
+723
+01:21:28,000 --> 01:21:38,000
+And if we are in a very constrained setting and we know it's very predictable, then this could be fine.
+
+724
+01:21:38,000 --> 01:21:42,000
+And I went down this path because
+
+725
+01:21:42,000 --> 01:21:53,000
+I wanted to make sure to be clear about this, like, abstract data type versus concrete implementation. There's all kinds of ways that we can do our implementation, and
+
+726
+01:21:53,000 --> 01:22:03,000
+I want to say that it doesn't necessarily mean that one is particularly better than the rest. There's always a time and a place
+
+727
+01:22:03,000 --> 01:22:04,000
+But I will say
+
+728
+01:22:04,000 --> 01:22:07,000
+We're going to go back to this question.
+
+729
+01:22:07,000 --> 01:22:09,000
+If you are
+
+730
+01:22:09,000 --> 01:22:11,000
+In Python
+
+731
+01:22:11,000 --> 01:22:15,000
+And we answered this question for the stack
+
+732
+01:22:15,000 --> 01:22:25,000
+What are we going to what are we going to use in Python for a stack implementation? We said we're going to use our list, append on the end, we pop off the end.
+
+733
+01:22:25,000 --> 01:22:31,000
+What do we use for acute? What's our go-to queue implementation for
+
+734
+01:22:31,000 --> 01:22:33,000
+Python.
+
+735
+01:22:33,000 --> 01:22:35,000
+Thank you
+
+736
+01:22:35,000 --> 01:22:37,000
+Yeah, our deck
+
+737
+01:22:37,000 --> 01:22:40,000
+Our deck
+
+738
+01:22:40,000 --> 01:22:52,000
+And this is in the collections. This is a double-ended cube
+
+739
+01:22:52,000 --> 01:23:10,000
+And we did not go too much into the implementation of this. What this double-ended queue looks like in Python, our deck. But basically what Python is doing behind the scenes
+
+740
+01:23:10,000 --> 01:23:14,000
+Is it's using a dynamic array like this.
+
+741
+01:23:14,000 --> 01:23:17,000
+And it's keeping track
+
+742
+01:23:17,000 --> 01:23:23,000
+Of the last item that's in our array. And the first item
+
+743
+01:23:23,000 --> 01:23:28,000
+And it's basically keeping track of all of this stuff for us.
+
+744
+01:23:28,000 --> 01:23:33,000
+And it's trimming off the front
+
+745
+01:23:33,000 --> 01:23:50,000
+of the data structure and the back, and so on and so forth. It's making sure that the tail and the head do not pass each other when we have nothing left in the queue. It's doing all of that for us
+
+746
+01:23:50,000 --> 01:23:59,000
+And it's going to be a little bit more efficient for this. When we use our double-ended queue. We can
+
+747
+01:23:59,000 --> 01:24:04,000
+append left
+
+748
+01:24:04,000 --> 01:24:07,000
+Or append
+
+749
+01:24:07,000 --> 01:24:09,000
+And we can pop
+
+750
+01:24:09,000 --> 01:24:19,000
+Or we can pop left. I should have probably put these the other way around. Because you can pop pop off the front or pop off the end all of one
+
+751
+01:24:19,000 --> 01:24:29,000
+pop a pen to the left or append to the to the end of our double-ended queue.
+
+752
+01:24:29,000 --> 01:24:35,000
+And it's this kind of idea
+
+753
+01:24:35,000 --> 01:24:46,000
+But Python is being efficient about implementing that properly so that we as implementers don't have to actually put all this into practice.
+
+754
+01:24:46,000 --> 01:24:50,000
+Okay, I like that. Hopefully that was not
+
+755
+01:24:50,000 --> 01:24:53,000
+It's worth a bit of a detour.
+
+756
+01:24:53,000 --> 01:24:55,000
+What else have we talked about?
+
+757
+01:24:55,000 --> 01:25:06,000
+Oh, wait, let me just take one moment and say. So you need to know what the stack and the Q implementation or abstract
+
+758
+01:25:06,000 --> 01:25:16,000
+Behavior is expected, and then to know specifically for Python that you're going to use a list to implement a stack and a deck to implement a queue.
+
+759
+01:25:16,000 --> 01:25:22,000
+That's something you need to know and what those run times are.
+
+760
+01:25:22,000 --> 01:25:26,000
+But we also might see on the exam
+
+761
+01:25:26,000 --> 01:25:34,000
+Kind of a pseudocode approach of implementing our stack RQ using something else.
+
+762
+01:25:34,000 --> 01:25:42,000
+What else have we talked about?
+
+763
+01:25:42,000 --> 01:25:44,000
+AVL trees
+
+764
+01:25:44,000 --> 01:25:48,000
+Yeah, ABL trees
+
+765
+01:25:48,000 --> 01:25:56,000
+AVL trees and what is special about AVL trees?
+
+766
+01:25:56,000 --> 01:25:59,000
+Someone else, someone else.
+
+767
+01:25:59,000 --> 01:26:03,000
+It's a team effort here. We're all going to jump in and
+
+768
+01:26:03,000 --> 01:26:06,000
+contribute.
+
+769
+01:26:06,000 --> 01:26:10,000
+What's something we remember about AVL trees? So
+
+770
+01:26:10,000 --> 01:26:13,000
+Moments factor
+
+771
+01:26:13,000 --> 01:26:19,000
+Balance factor, yes.
+
+772
+01:26:19,000 --> 01:26:29,000
+What problem do AVL trees solve?
+
+773
+01:26:29,000 --> 01:26:39,000
+They solve a very particular problem that we see sometimes with
+
+774
+01:26:39,000 --> 01:26:43,000
+Someone shout it out
+
+775
+01:26:43,000 --> 01:26:46,000
+Someone new, someone new, shout it out or toss it in the chat.
+
+776
+01:26:46,000 --> 01:26:48,000
+Binary search trees
+
+777
+01:26:48,000 --> 01:27:01,000
+Yeah, or binary search trees are a binary search tree, an AVL tree is a special case of a binary search tree. Our binary search trees
+
+778
+01:27:01,000 --> 01:27:11,000
+are very… can be very efficient
+
+779
+01:27:11,000 --> 01:27:16,000
+But can be very efficient to search for things
+
+780
+01:27:16,000 --> 01:27:32,000
+But they… and they are a nice simple data structure, a nice simple characterization, simple implementation, but they have this very terrible property that they can become
+
+781
+01:27:32,000 --> 01:27:35,000
+very inefficient.
+
+782
+01:27:35,000 --> 01:27:47,000
+When our tree, when we insert everything in order or close to order, our tree can become very lopsided
+
+783
+01:27:47,000 --> 01:27:51,000
+And when the tree becomes lopsided
+
+784
+01:27:51,000 --> 01:28:00,000
+It's going to be slow to search, because at that point, it's more like a linked list rather than a binary search tree.
+
+785
+01:28:00,000 --> 01:28:04,000
+One of the things we saw is that search time
+
+786
+01:28:04,000 --> 01:28:12,000
+It depends when we were talking about searching through things like a linked list
+
+787
+01:28:12,000 --> 01:28:17,000
+We would say that it's O of N
+
+788
+01:28:17,000 --> 01:28:21,000
+For search
+
+789
+01:28:21,000 --> 01:28:23,000
+And
+
+790
+01:28:23,000 --> 01:28:28,000
+With our binary search tree, we started talking about O of H
+
+791
+01:28:28,000 --> 01:28:32,000
+Rather than the number of items
+
+792
+01:28:32,000 --> 01:28:38,000
+or nodes that are in our binary search tree. We started talking about how high that tree is.
+
+793
+01:28:38,000 --> 01:28:43,000
+which is basically, in this example, the the length of the list and the
+
+794
+01:28:43,000 --> 01:28:48,000
+And happens to equal H in this case
+
+795
+01:28:48,000 --> 01:28:53,000
+And when H is small. Which we can do
+
+796
+01:28:53,000 --> 01:28:57,000
+If our binary tree is well-behaved
+
+797
+01:28:57,000 --> 01:29:04,000
+When our binary tree is not well behaved, H is going to be bigger. And we don't like that.
+
+798
+01:29:04,000 --> 01:29:06,000
+So AVL trees
+
+799
+01:29:06,000 --> 01:29:11,000
+are going to use this thing called a balance factor
+
+800
+01:29:11,000 --> 01:29:22,000
+To assess our tree. As we start inserting things into it. To make sure that it doesn't get unbalanced.
+
+801
+01:29:22,000 --> 01:29:24,000
+When the tree is unbalanced.
+
+802
+01:29:24,000 --> 01:29:27,000
+That's when the height starts to grow.
+
+803
+01:29:27,000 --> 01:29:31,000
+And when the height grows, it becomes less efficient.
+
+804
+01:29:31,000 --> 01:29:37,000
+So we're going to use that balance factor to make sure that the tree stays well behaved.
+
+805
+01:29:37,000 --> 01:29:40,000
+That it stays more balanced
+
+806
+01:29:40,000 --> 01:29:43,000
+And when it stays more balanced, it's going to be shorter.
+
+807
+01:29:43,000 --> 01:29:50,000
+And so it's going to make our runtime to search for things in that tree
+
+808
+01:29:50,000 --> 01:29:53,000
+more efficient.
+
+809
+01:29:53,000 --> 01:29:57,000
+Once in our AVL tree
+
+810
+01:29:57,000 --> 01:30:03,000
+Once we use balance factor to identify where in the tree
+
+811
+01:30:03,000 --> 01:30:06,000
+We have something that is
+
+812
+01:30:06,000 --> 01:30:08,000
+Out of balance
+
+813
+01:30:08,000 --> 01:30:14,000
+What do we do to fix the tree?
+
+814
+01:30:14,000 --> 01:30:16,000
+Rotate
+
+815
+01:30:16,000 --> 01:30:18,000
+Yeah, we're going to rotate it.
+
+816
+01:30:18,000 --> 01:30:26,000
+And that rotate basically means that we're gonna take one node, we're gonna pull it up
+
+817
+01:30:26,000 --> 01:30:33,000
+And we're going to kind of drop its parent down
+
+818
+01:30:33,000 --> 01:30:36,000
+Try to do this.
+
+819
+01:30:36,000 --> 01:30:53,000
+We're going to drop its parent down. And as we rotate that, it's going to even out that balance factor a little bit
+
+820
+01:30:53,000 --> 01:30:59,000
+And
+
+821
+01:30:59,000 --> 01:31:02,000
+Yeah, I believe that.
+
+822
+01:31:02,000 --> 01:31:09,000
+I'm going to say, I'm just looking through my list real quick. The other thing we
+
+823
+01:31:09,000 --> 01:31:12,000
+talked about, I think the only thing that
+
+824
+01:31:12,000 --> 01:31:16,000
+We're missing here is Big O.
+
+825
+01:31:16,000 --> 01:31:24,000
+An asymptotic analysis.
+
+826
+01:31:24,000 --> 01:31:27,000
+And I will say
+
+827
+01:31:27,000 --> 01:31:40,000
+that what you need for the assignment is, or for the midterm. You should be able to you should know Big O
+
+828
+01:31:40,000 --> 01:31:46,000
+for the kinds of things that we've talked about like we should know O of H.
+
+829
+01:31:46,000 --> 01:31:51,000
+O of N
+
+830
+01:31:51,000 --> 01:32:03,000
+O of one all of all of these operations get this common stuff, you should know what the big O is of those.
+
+831
+01:32:03,000 --> 01:32:13,000
+And you should we, or I introduced the idea of Big O, Big Theta, and big omega
+
+832
+01:32:13,000 --> 01:32:32,000
+I will probably not ask you anything in particular about theta and omega because we didn't really talk about it, but we did go very deep into Big O and what it means and what its implications are. And I think it would be reasonable for
+
+833
+01:32:32,000 --> 01:32:45,000
+Me to say something like, oh, the given the definition that f of n is big O of G of n if
+
+834
+01:32:45,000 --> 01:32:59,000
+There exists a sea such that f of n is less than or equal to C times G of n for all n greater than n not
+
+835
+01:32:59,000 --> 01:33:09,000
+Did I get that right? Someone check me on that?
+
+836
+01:33:09,000 --> 01:33:12,000
+Maybe. Sound close enough?
+
+837
+01:33:12,000 --> 01:33:20,000
+I'm gonna go with sounds close enough now. So I would sweet, got a thumbs up.
+
+838
+01:33:20,000 --> 01:33:28,000
+I will not expect any of y'all to have to be able to do what I just did right there and spout it off.
+
+839
+01:33:28,000 --> 01:33:35,000
+But I think it would be reasonable to expect that if I give you this definition
+
+840
+01:33:35,000 --> 01:33:47,000
+and ask you a question about, like, if f of n equals 3n squared plus
+
+841
+01:33:47,000 --> 01:33:57,000
+for an + 3 is that I might ask for a C that makes
+
+842
+01:33:57,000 --> 01:34:02,000
+f of n, big O of some other function.
+
+843
+01:34:02,000 --> 01:34:12,000
+My point being is you should feel comfortable with what this means and how to
+
+844
+01:34:12,000 --> 01:34:19,000
+plug in the values for this and answer a question about it, but I will not make you, I will not expect that you know this.
+
+845
+01:34:19,000 --> 01:34:25,000
+That you have that definition memorized. Does that make sense?
+
+846
+01:34:25,000 --> 01:34:42,000
+Should we test big O from O1 to get the right one? No. So what I would do is say something like maybe I'll give you an F of N. I would also say g of n equals
+
+847
+01:34:42,000 --> 01:34:45,000
+I'll say n cubed for this.
+
+848
+01:34:45,000 --> 01:34:55,000
+So I would give you in a situation like this, I would give you the f of n and I'd give you the g of n. So it would be clear what you're comparing
+
+849
+01:34:55,000 --> 01:34:59,000
+You wouldn't have to like go through it all yourself.
+
+850
+01:34:59,000 --> 01:35:06,000
+Does that answer your question?
+
+851
+01:35:06,000 --> 01:35:13,000
+Okay.
+
+852
+01:35:13,000 --> 01:35:23,000
+Okay, we got about 10 min left.
+
+853
+01:35:23,000 --> 01:35:37,000
+I'm going to make. Does anyone have specific questions?
+
+854
+01:35:37,000 --> 01:35:41,000
+Regarding the debt
+
+855
+01:35:41,000 --> 01:35:49,000
+Under the implementation of debt without the same ideas that
+
+856
+01:35:49,000 --> 01:35:51,000
+talk about before using the
+
+857
+01:35:51,000 --> 01:36:02,000
+Entire head and place so it's it is built on top of the place or another structures
+
+858
+01:36:02,000 --> 01:36:11,000
+Okay, so you're cutting in and out a little bit. I'm not quite entirely sure I captured the whole I got the whole question, but you're asking about this deck, right?
+
+859
+01:36:11,000 --> 01:36:18,000
+Yes, I was also asking if it's based on the Python list at least state
+
+860
+01:36:18,000 --> 01:36:19,000
+Before
+
+861
+01:36:19,000 --> 01:36:21,000
+Listeness page.
+
+862
+01:36:21,000 --> 01:36:31,000
+Yeah, so I think you're asking if this deck is based on just a normal regular Python list
+
+863
+01:36:31,000 --> 01:36:42,000
+And now that you're asking me specifically, I'm getting a little nervous about my answer. So I would say we can look it up and double check
+
+864
+01:36:42,000 --> 01:36:56,000
+confirm what I'm saying. I don't think it's exactly a Python list. It's… it's underlying implementation is similar to a list, but it's got this kind of other piece of it
+
+865
+01:36:56,000 --> 01:37:00,000
+That's tracking the head rather than
+
+866
+01:37:00,000 --> 01:37:09,000
+That gives us that ability to add to the head as well as remove from the head.
+
+867
+01:37:09,000 --> 01:37:10,000
+So
+
+868
+01:37:10,000 --> 01:37:15,000
+summary similar to a Python list, not exactly the same.
+
+869
+01:37:15,000 --> 01:37:17,000
+And does that answer your question?
+
+870
+01:37:17,000 --> 01:37:18,000
+Yes, thank you.
+
+871
+01:37:18,000 --> 01:37:25,000
+Okay. And the Python documentation goes into this.
+
+872
+01:37:25,000 --> 01:37:29,000
+It's super nice. So
+
+873
+01:37:29,000 --> 01:37:34,000
+Trust what they say more than what I say right now.
+
+874
+01:37:34,000 --> 01:37:40,000
+Other questions?
+
+875
+01:37:40,000 --> 01:37:47,000
+I got a little code snippet. Should we look for
+
+876
+01:37:47,000 --> 01:37:50,000
+Oh, we didn't talk about traversals.
+
+877
+01:37:50,000 --> 01:38:01,000
+We put on here trees, binary search trees, ALV trees traversals.
+
+878
+01:38:01,000 --> 01:38:07,000
+We had our depth first search. We had our breadth first search.
+
+879
+01:38:07,000 --> 01:38:15,000
+And we had recursive and we had iterative.
+
+880
+01:38:15,000 --> 01:38:17,000
+So I want to
+
+881
+01:38:17,000 --> 01:38:24,000
+Do a linked list problem.
+
+882
+01:38:24,000 --> 01:38:31,000
+All right, little chunk here.
+
+883
+01:38:31,000 --> 01:38:35,000
+While I'm writing this
+
+884
+01:38:35,000 --> 01:38:40,000
+You should think through it. We're going to
+
+885
+01:38:40,000 --> 01:39:10,000
+Try to find the problem.
+
+886
+01:39:38,000 --> 01:39:51,000
+Okay, so we have this definition for pushing onto a stack
+
+887
+01:39:51,000 --> 01:40:21,000
+A question, a reasonable exam question might be something like here
+
+888
+01:40:23,000 --> 01:40:24,000
+Okay.
+
+889
+01:40:24,000 --> 01:40:32,000
+So given a little chunk of code that pushes a value onto a stack
+
+890
+01:40:32,000 --> 01:40:38,000
+Looks like at first glance, a reasonable implementation. We have a node
+
+891
+01:40:38,000 --> 01:40:45,000
+We create a new node. We update the stack head blah blah. Fix it up
+
+892
+01:40:45,000 --> 01:40:52,000
+So we're going to push A onto an empty stack
+
+893
+01:40:52,000 --> 01:41:00,000
+Anyone, does anyone want to tell me what to draw or should I walk through it myself?
+
+894
+01:41:00,000 --> 01:41:02,000
+Just to give you
+
+895
+01:41:02,000 --> 01:41:15,000
+A few seconds to think through it.
+
+896
+01:41:15,000 --> 01:41:17,000
+So I'm going to start here.
+
+897
+01:41:17,000 --> 01:41:22,000
+So we have stack. This is going to be a
+
+898
+01:41:22,000 --> 01:41:27,000
+First thing we do is we create a node
+
+899
+01:41:27,000 --> 01:41:32,000
+With the payload is
+
+900
+01:41:32,000 --> 01:41:36,000
+And next is nothing
+
+901
+01:41:36,000 --> 01:41:45,000
+And then a stack of head is going to point at this node
+
+902
+01:41:45,000 --> 01:41:53,000
+And then we're going to point next at the head
+
+903
+01:41:53,000 --> 01:41:57,000
+So we get rid of the none and we point this at the head.
+
+904
+01:41:57,000 --> 01:42:06,000
+And then we update the size plus equals one. So now I'm going to say size
+
+905
+01:42:06,000 --> 01:42:08,000
+Equals one
+
+906
+01:42:08,000 --> 01:42:18,000
+Okay, that's our first step. Then we're going to put B in the stack. So we call push stack B
+
+907
+01:42:18,000 --> 01:42:23,000
+And the first thing we do is create a node
+
+908
+01:42:23,000 --> 01:42:25,000
+I'm getting a node here
+
+909
+01:42:25,000 --> 01:42:28,000
+And our payload is going to be B
+
+910
+01:42:28,000 --> 01:42:32,000
+And next is nothing
+
+911
+01:42:32,000 --> 01:42:36,000
+Now we're here, stack head equals node.
+
+912
+01:42:36,000 --> 01:42:40,000
+So now
+
+913
+01:42:40,000 --> 01:42:42,000
+This
+
+914
+01:42:42,000 --> 01:42:49,000
+No point here
+
+915
+01:42:49,000 --> 01:42:51,000
+And
+
+916
+01:42:51,000 --> 01:42:53,000
+Our node
+
+917
+01:42:53,000 --> 01:42:56,000
+We're going to update the next
+
+918
+01:42:56,000 --> 01:43:00,000
+It's no longer none. It's pointing at stack head.
+
+919
+01:43:00,000 --> 01:43:06,000
+Which is right here. And we're going to increment the size.
+
+920
+01:43:06,000 --> 01:43:13,000
+So size is no longer one. It's now 2.
+
+921
+01:43:13,000 --> 01:43:14,000
+Okay.
+
+922
+01:43:14,000 --> 01:43:19,000
+Does that look right
+
+923
+01:43:19,000 --> 01:43:26,000
+Okay, there's two ways we can answer that. Does that look like what the code says to do?
+
+924
+01:43:26,000 --> 01:43:27,000
+Yes.
+
+925
+01:43:27,000 --> 01:43:29,000
+Sweet.
+
+926
+01:43:29,000 --> 01:43:37,000
+Does it look like what we would expect to be building if we were really, truly implementing a stack that works properly?
+
+927
+01:43:37,000 --> 01:43:39,000
+No.
+
+928
+01:43:39,000 --> 01:43:58,000
+Thank you. No, no, it doesn't. So, this would be the, this, I think, reasonable question for the exam. A little chunk of code. Okay, assume you're running it with this data, or this information, whatever
+
+929
+01:43:58,000 --> 01:44:12,000
+draw it, and then maybe something like fix the code. What would be the fix to the code here?
+
+930
+01:44:12,000 --> 01:44:18,000
+I think maybe move these two around.
+
+931
+01:44:18,000 --> 01:44:21,000
+No, I don't know
+
+932
+01:44:21,000 --> 01:44:25,000
+I'm looking at the clock turned 620.
+
+933
+01:44:25,000 --> 01:44:41,000
+Oh, I'll let y'all puzzle over this for a couple of hours, or however long you want to puzzle over it. I will put my notes on Canvas later tonight
+
+934
+01:44:41,000 --> 01:44:54,000
+And it has… I'm not going to say it's midterm practice questions. I will say there are some questions that you can use to kind of think through and practice
+
+935
+01:44:54,000 --> 01:44:57,000
+Practice stuff about it
+
+936
+01:44:57,000 --> 01:45:18,000
+Make sure you don't know the stuff. I will take these notes. The scribble notes that I have, I will export them and also put them on Canvas. Does anyone have any other questions before we finish tonight?
+
+937
+01:45:18,000 --> 01:45:19,000
+Okay.
+
+938
+01:45:19,000 --> 01:45:24,000
+I'm gonna let y'all go. I will say just one last time
+
+939
+01:45:24,000 --> 01:45:29,000
+I know I repeat this a million times. Next Monday
+
+940
+01:45:29,000 --> 01:45:45,000
+Class, midterm in person in the classroom, bring pens or pencils or whatever you want to write with. And I will give you the whole time and hopefully it will only be a one hour exam, but we'll have the whole time
+
+941
+01:45:45,000 --> 01:45:49,000
+So if there are no other questions, I will let y'all go.
+
+942
+01:45:49,000 --> 01:45:51,000
+Thank you.
+
+943
+01:45:51,000 --> 01:46:00,000
+I will be online for office hours on Saturday, and also feel free to put things on Piazza if you have questions.
+
+944
+01:46:00,000 --> 01:46:03,000
+And have a great weekend, everyone.
+
+945
+01:46:03,000 --> 01:46:08,000
+Thanks, Professor
+
