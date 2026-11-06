@@ -86,7 +86,13 @@
 - **Q1、Q6（MMULT 邊界檢查的 divergence）**：L4 p42–p48 的 M tile Type 1／Type 2 分析（`gpu/lectures/2026-10-27/notes.md`「重點摘要」9，[02:35:01]–[02:45:00]；[02:41:05] 說明只有跨過邊界的 warp 會 diverge）。HW3 Part 2 用同樣方法分析 N tile（[../hw3/README.md](../hw3/README.md)）。
 - **Q2–Q5（2D grid 的 warp 數和 divergence）**：L4 p34–p37 warp 線性化（row-major 排 thread）、p38–p41 control divergence（`gpu/lectures/2026-10-27/notes.md`「重點摘要」7–8）。
 - **Q7（SM 的 thread／block 上限）**：L4 p5–p11 occupancy（同檔「重點摘要」2–4，[00:57:01]–[01:13:01]）；HW3 Question I 是同類題。
-- **Q8–Q10、2.1、2.2（coalescing、記憶體階層、corner turning）**：L5（11/3）。投影片 `Au26_GPU-Compute_Lecture5.pdf`（Canvas file 155723617）和課堂筆記版 `Au26_GPU-Compute_Lecture5_w_notes.pptx`（file 155737575）已上線，錄影在 SharePoint `General/Recordings/Weekly Live Lecture-20261103_183100-Meeting Recording.mp4`（`digests/2026-11-04.md`）。原文指定 **slide 28**（complicating factors）、**slide 35**（coalesced 判斷準則、corner turning）。repo 裡還沒有 L5 的 `notes.md`，整理後再補連結。
+- **Q8–Q10、2.1、2.2（coalescing、記憶體階層、corner turning）**：L5（11/3），筆記 [`gpu/lectures/2026-11-03/notes.md`](../../lectures/2026-11-03/notes.md)。投影片 `Au26_GPU-Compute_Lecture5.pdf`（Canvas file 155723617）和課堂筆記版 `Au26_GPU-Compute_Lecture5_w_notes.pptx`（file 155737575），錄影在 SharePoint `General/Recordings/Weekly Live Lecture-20261103_183100-Meeting Recording.mp4`（`digests/2026-11-04.md`）。
+  - **原文的 slide 編號和 PDF 頁碼對不上**（`slides.txt`）：投影片角落印的編號 = PDF 頁碼 + 2（p26 印「28」、p45 印「50」…），p27–p35 是舊 deck 的頁，沒有印編號。
+    - 「slide #28」（complicating factors，2.1 步驟 6b）：印著「28」的是 **PDF p26「Caches and stores: what happens beyond L1」**（L1 每個 SM 各一份、不 coherent、store 直接送 L2；L2 write-back、partial sector；「caches are not a substitute for coalescing」）。PDF p28 是「Un-coalesced Accesses」（跨 burst section 邊界），也可能是老師指的頁。兩頁都看。
+    - 「slide 35」（Q10 的 coalesced 判斷準則）：準則本身在 **PDF p29「How to judge if an access is coalesced?」**（`A[(與 threadIdx.x 無關的項) + threadIdx.x]`），用的正是 Q10 的 naive kernel；p30–p34 逐格推 A／B 的存取。PDF p35 是 Transpose Pattern。
+    - 「slide 35」（2.2 corner turning）：**PDF p35「Transpose Pattern for Coalesced Access」**，對得上。
+  - 課堂補充（原文沒寫）：corner-turning kernel 要和之前的 SMEM tiled kernel **一起用 NCU profile 比較**，應該看到效能提升（notes [01:42:03]）；一定要用 demo 的方法 profile，證明看到預期的行為並解釋原因（[03:10:01]）；Extra Credit 的 transpose kernel 也要驗證正確性並簡單 profile，它的 AI 是 0，全是記憶體存取，所以本身也要注意 coalescing（[03:10:01]–[03:11:02]；投影片 p49「Be sure to verify correctness and profile performance!」）。
+  - NCU 指標（投影片 p45）：`l1tex__t_requests_pipe_lsu_mem_global_op_ld.sum`、`l1tex__t_sectors_pipe_lsu_mem_global_op_ld.sum`（相除得 sectors/request，32×4 B 理想值 4、完全分散 32）、`dram__bytes_read.sum`、`dram__throughput.avg.pct_of_peak_sustained_elapsed`、`lts__t_sector_hit_rate.pct`。課堂 demo 的預測→驗證範例（4×4、32×32 矩陣的 requests／sectors 推算）在 notes [02:35:00]–[03:02:03]，2.1 的 6a 可以照同樣方法推。
 - **MMULTv0／v1**：L3 p37–p42（naive）、p49–p74（tiled）（`gpu/lectures/2026-10-20/notes.md`「重點摘要」10、12）；HW3 3.2 已實作通用版。
 - **NCU GUI**：L4 p49–p51 和 demo（`gpu/lectures/2026-10-27/notes.md`「重點摘要」10–11）。Memory Workload Analysis 是這次新用到的 section。
 - **Windows profiling API（`profileapi.h`）**：HW2 步驟和 L3（[../hw2/README.md](../hw2/README.md)；AWS WorkSpace 上的 header 路徑也記在那裡）。
@@ -97,7 +103,8 @@
 - **Q5 的選項 a 和 c 的差別**：`(37+50)*8` 和 `37+50*8`，要注意括號。
 - **kernel 名稱不一致**：2.2 標題和步驟 5c 叫 **MMULTv1b**，步驟 4 叫 **MMULTv2b**，應該是同一個 corner-turning kernel。
 - **SUBMIT 4a 的「question #4」**：指的應該是 2.1 的步驟 4（TILE_WIDTH 8／16／32），不是 Questions 第 4 題。
-- **2.2 要不要也用 NCU profile**：學習目標寫「profile to verify improved memory access pattern」，SUBMIT 4 也要 Corner Turning 的 NCU 報告和分析，但 2.2 的步驟本身只要求 host 端計時和驗證；矩陣大小和 TILE_WIDTH 也沒指定（2.1 用 256×256）。
+- **2.2 要不要也用 NCU profile**：要。學習目標和 SUBMIT 4 都要求，老師課堂上也說要和 SMEM kernel 一起 profile 比較（L5 notes [01:42:03]、[03:10:01]）。還沒說清楚的是矩陣大小和 TILE_WIDTH（2.1 用 256×256，沿用最自然）。
+- **原文引用的 slide 編號**：見上面「和上課內容的關聯」的對照；最好在 Teams 問一下 slide 28／35 指的是印的編號還是 PDF 頁碼。
 - **round-trip 時間的範圍**：「full round-trip execution」包不包含 host↔device 傳輸、轉置 kernel（或 host 端轉置），原文沒說清楚。
 - **驗證的誤差容許值**：原文說「same (correct) results」，沒給 tolerance；HW3 用 abs error fraction。
 - **書面分析的格式和頁數**：HW3 指定一頁 PDF 或 Word，HW4 只說「a separate write-up」。
@@ -109,5 +116,6 @@
 | 日期 | 變動 |
 |---|---|
 | 2026-11-04 | 第一次整理 |
+| 2026-11-06 | 補 L5 筆記連結、slide 編號↔PDF 頁碼對照、課堂對 profiling 和 Extra Credit 的補充要求；Canvas 原文沒有重抓（Canvas 登入過期） |
 
 GPU 課禁止用 AI 產生作業解答
