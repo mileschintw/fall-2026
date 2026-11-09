@@ -3,7 +3,7 @@
 > 每次上課結束更新。時間用 Pacific。掌握程度：⬜ 未學、🟨 看過但不穩、🟩 能自己解釋並做對題目。
 
 ## 目前位置
-- 下一步：期中衝刺。學生自己用 [DSA Midterm Sprint](https://claude.ai/artifact/YbhLzEk8ce1D5hPBfdm7BU)（`modules/midterm-sprint.html`）由上往下讀，再做「模擬題」65 題。學生回來時先問模擬題做到第幾題、哪幾題錯，從錯題的節開始講。
+- 下一步：期中衝刺。學生自己用 [DSA Midterm Sprint](https://claude.ai/artifact/YbhLzEk8ce1D5hPBfdm7BU)（`modules/midterm-sprint.html`）由上往下讀，再做「模擬題」67 題。學生回來時先問模擬題做到第幾題、哪幾題錯，從錯題的節開始講。
 - 待補材料：Class 11 notes（file 155891168，有練習題）和 `class_scribbles.pdf` 都在 Canvas Module 7，但 module 鎖到 11/16 12 AM PST（11/8 重新登入後確認），學生打不開。學生在 Piazza 請老師解鎖的話，再抓下來補進衝刺頁的模擬題；否則 11/16 後補。
 - 期中之後：問長期目標、做診斷，模組 9（heap）接 A6。
 - 上次上課：2026-11-08 18:25 PT（只做了衝刺頁，還沒有互動問答）

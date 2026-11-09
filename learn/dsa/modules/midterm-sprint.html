@@ -45,9 +45,9 @@ h3{font-family:var(--f-display);font-weight:600;font-size:18.5px;margin:22px 0 8
 p{margin:0 0 10px;max-width:72ch}
 ul,ol{margin:0 0 10px;padding-left:22px}
 li{margin:3px 0}
-.src{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);white-space:nowrap}
+.src{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);overflow-wrap:anywhere}
 code,.mono{font-family:var(--f-mono);font-size:.9em}
-code{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:0 4px}
+code{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:0 4px;overflow-wrap:anywhere}
 pre{font-family:var(--f-mono);font-size:13px;line-height:1.55;background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;overflow-x:auto;margin:0 0 12px}
 pre .c{color:var(--muted)} pre .k{color:var(--accent);font-weight:600} pre .bad{background:var(--red-soft);color:var(--red)} pre .good{background:var(--green-soft)}
 .tbl{overflow-x:auto;margin:0 0 14px}
@@ -108,7 +108,7 @@ svg text{font-family:var(--f-mono)}
 .score{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom,0px));display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;background:var(--ink);color:var(--sheet);border-radius:10px;padding:8px 14px;margin-top:12px;font-size:14px;z-index:5}
 .score button{background:transparent;color:var(--sheet);border-color:var(--muted)}
 .score button.on{background:var(--sheet);color:var(--ink)}
-.ll-code{display:grid;gap:2px;font-family:var(--f-mono);font-size:13px}
+.ll-code{display:grid;gap:2px;font-family:var(--f-mono);font-size:13px;overflow-x:auto;min-width:0}
 .ll-code div{padding:1px 8px;border-radius:4px;white-space:pre}
 .ll-code div.cur{background:var(--accent-soft);outline:1px solid var(--accent)}
 .ll-code div.bug{color:var(--red)}
@@ -123,7 +123,7 @@ footer{color:var(--muted);font-size:13px}
 <header class="top"><div class="wrap">
   <p class="eyebrow">EE P 590 A · Data Structures &amp; Algorithms · Midterm</p>
   <h1>DSA 期中考衝刺本</h1>
-  <p class="sub">Class 1（9/30）到 Class 10（11/2，AVL）全部內容的濃縮版。每一節都是：重點表 → 可以自己按的互動圖 → 紙上要會寫的 pseudocode。最後一節是 50 題模擬題，答案附出處，可以只重做錯的。</p>
+  <p class="sub">Class 1（9/30）到 Class 10（11/2，AVL）全部內容的濃縮版。每一節都是：重點表 → 可以自己按的互動圖 → 紙上要會寫的 pseudocode。最後一節是 67 題模擬題，答案附出處，可以只重做錯的。</p>
   <div class="facts">
     <span class="chip"><b>11/9（一）4:30 PM PST</b> Moore 220</span>
     <span class="chip">實體紙筆，帶筆</span>
@@ -230,6 +230,7 @@ footer{color:var(--muted);font-size:13px}
   <div class="trap"><p><b>「Linked list 的插入一定比較好」是錯的。</b>Array 尾端有空位時插入 O(1)，比沒有 tail 的 linked list 快；linked list 不用 shift，但要 traverse，還是 O(n)。作答時寫清楚有沒有把 traverse 算進去。<span class="src">Class 2 [00:37:02]–[00:42:00]</span></p></div>
   <div class="note"><p><b>Array 中間插入要先 shift 再放，而且從尾端開始搬</b>，不然會把下一格蓋掉。例：<code>[3,7,1,9,4]</code>（已滿）在 index 2 放 5：先 resize（開兩倍、全部複製）→ 4、9、1 依序往後一格 → 放 5 → size+1。<span class="src">Class 2 [00:27:04]–[00:36:04]</span></p></div>
   <p>什麼時候用 linked list：常常刪除／插入開頭（queue 類）、已經走到某個位置要在那裡插入、記憶體破碎找不到大塊連續空間。<span class="src">Class 2 [00:42:00]–[00:49:06]</span></p>
+  <p><b>Doubly linked list</b>：每個 node 多一個 <code>prev</code> pointer，list 記 head 和 tail；刪除比較容易，因為不用另外追蹤前一個 node。<span class="src">Class 1 p41–42、Class 11 [01:05:01]</span></p>
 
   <div class="lab" id="lab-ll">
     <div class="lab-h"><span class="t">互動：Linked-list stack 的 push，正確順序 vs 11/4 考古 bug</span>
@@ -407,18 +408,31 @@ footer{color:var(--muted);font-size:13px}
     </div>
     <div>
       <svg viewBox="0 0 420 150" width="100%" style="max-width:420px" role="img" aria-label="right rotation 示意圖">
-        <g class="edge"><line x1="70" y1="30" x2="40" y2="72"/><line x1="70" y1="30" x2="100" y2="72"/><line x1="40" y1="72" x2="18" y2="118"/><line x1="40" y1="72" x2="62" y2="118"/></g>
+        <g class="edge"><line x1="70" y1="30" x2="40" y2="72"/><line x1="70" y1="30" x2="96" y2="64"/><line x1="40" y1="72" x2="22" y2="106"/><line x1="40" y1="72" x2="58" y2="106"/></g>
         <g class="nd"><circle cx="70" cy="30" r="15"/><text class="v" x="70" y="30">y</text></g>
         <g class="nd hl"><circle cx="40" cy="72" r="15"/><text class="v" x="40" y="72">x</text></g>
         <g><text x="100" y="78" fill="var(--ink)" font-size="14" text-anchor="middle">C</text><text x="18" y="124" fill="var(--ink)" font-size="14" text-anchor="middle">A</text><text x="62" y="124" fill="var(--red)" font-size="14" font-weight="600" text-anchor="middle">B</text></g>
         <text x="210" y="70" fill="var(--accent)" font-size="13" text-anchor="middle">rotate right at y</text>
         <text x="210" y="90" fill="var(--accent)" font-size="20" text-anchor="middle">⟶</text>
-        <g class="edge"><line x1="340" y1="30" x2="310" y2="72"/><line x1="340" y1="30" x2="370" y2="72"/><line x1="370" y1="72" x2="348" y2="118"/><line x1="370" y1="72" x2="392" y2="118"/></g>
+        <g class="edge"><line x1="340" y1="30" x2="314" y2="64"/><line x1="340" y1="30" x2="370" y2="72"/><line x1="370" y1="72" x2="352" y2="106"/><line x1="370" y1="72" x2="388" y2="106"/></g>
         <g class="nd hl"><circle cx="340" cy="30" r="15"/><text class="v" x="340" y="30">x</text></g>
         <g class="nd"><circle cx="370" cy="72" r="15"/><text class="v" x="370" y="72">y</text></g>
         <g><text x="310" y="78" fill="var(--ink)" font-size="14" text-anchor="middle">A</text><text x="348" y="124" fill="var(--red)" font-size="14" font-weight="600" text-anchor="middle">B</text><text x="392" y="124" fill="var(--ink)" font-size="14" text-anchor="middle">C</text></g>
       </svg>
-      <p style="font-size:14px">x 升上來，y 變 x 的 right child，<b style="color:var(--red)">B 從 x 的右邊搬到 y 的左邊</b>。前後由左到右都是 A, x, B, y, C → inorder 不變 → 還是 BST。只改三個 link，O(1)。Left rotation 是鏡像。<span class="src">Class 9 [01:06:01]–[01:12:02]</span></p>
+      <p style="font-size:14px">x 升上來，y 變 x 的 right child，<b style="color:var(--red)">B 從 x 的右邊搬到 y 的左邊</b>。前後由左到右都是 A, x, B, y, C → inorder 不變 → 還是 BST。只改三個 link，O(1)。<span class="src">Class 9 [01:06:01]–[01:12:02]</span></p>
+      <svg viewBox="0 0 420 150" width="100%" style="max-width:420px;margin-top:6px" role="img" aria-label="left rotation 示意圖">
+        <g class="edge"><line x1="70" y1="30" x2="44" y2="64"/><line x1="70" y1="30" x2="100" y2="72"/><line x1="100" y1="72" x2="118" y2="106"/><line x1="100" y1="72" x2="82" y2="106"/></g>
+        <g class="nd"><circle cx="70" cy="30" r="15"/><text class="v" x="70" y="30">x</text></g>
+        <g class="nd hl"><circle cx="100" cy="72" r="15"/><text class="v" x="100" y="72">y</text></g>
+        <g><text x="40" y="78" fill="var(--ink)" font-size="14" text-anchor="middle">A</text><text x="78" y="124" fill="var(--red)" font-size="14" font-weight="600" text-anchor="middle">B</text><text x="122" y="124" fill="var(--ink)" font-size="14" text-anchor="middle">C</text></g>
+        <text x="210" y="70" fill="var(--accent)" font-size="13" text-anchor="middle">rotate left at x</text>
+        <text x="210" y="90" fill="var(--accent)" font-size="20" text-anchor="middle">⟶</text>
+        <g class="edge"><line x1="370" y1="30" x2="396" y2="64"/><line x1="370" y1="30" x2="340" y2="72"/><line x1="340" y1="72" x2="358" y2="106"/><line x1="340" y1="72" x2="322" y2="106"/></g>
+        <g class="nd hl"><circle cx="370" cy="30" r="15"/><text class="v" x="370" y="30">y</text></g>
+        <g class="nd"><circle cx="340" cy="72" r="15"/><text class="v" x="340" y="72">x</text></g>
+        <g><text x="400" y="78" fill="var(--ink)" font-size="14" text-anchor="middle">C</text><text x="318" y="124" fill="var(--ink)" font-size="14" text-anchor="middle">A</text><text x="362" y="124" fill="var(--red)" font-size="14" font-weight="600" text-anchor="middle">B</text></g>
+      </svg>
+      <p style="font-size:14px">鏡像：y 升上來，x 變 y 的 left child，<b style="color:var(--red)">B 從 y 的左邊搬到 x 的右邊</b>，inorder 一樣是 A, x, B, y, C。</p>
     </div>
   </div>
   <h3>四種 case（看 ±2 的 node，再看重的那一邊的 child）</h3>
@@ -467,7 +481,7 @@ footer{color:var(--muted);font-size:13px}
         <option value="4">f = n·(n−1)/2，g = n²（三角形迴圈）</option>
       </select>
     </div>
-    <div class="row"><label for="bo-c" class="lbl">c</label><input type="range" id="bo-c" min="1" max="30" step="1" value="3" style="flex:1;min-width:160px"><b id="bo-cv" class="mono"></b></div>
+    <div class="row"><label for="bo-c" class="lbl">c</label><input type="range" id="bo-c" min="1" max="30" step="1" value="4" style="flex:1;min-width:160px"><b id="bo-cv" class="mono"></b></div>
     <div class="svgbox" style="margin-top:10px"><svg id="bo-svg" viewBox="0 0 560 250" width="100%" style="max-width:560px" role="img" aria-label="f(n) 與 c·g(n) 的圖"></svg></div>
     <div class="cap" id="bo-cap"></div>
   </div>
@@ -572,6 +586,29 @@ def find(stack, value):
         cur = cur['next']
         index += 1                      <span class="c"># 老師第一版漏了</span>
     return -1</pre>
+<pre><span class="c"># Linked queue：tail 加、head 拿，都 O(1)</span>
+<span class="c"># （Class 11 [01:24:04]：可能考用別的結構實作 queue）</span>
+queue = {'head': None, 'tail': None, 'size': 0}
+
+def enqueue(queue, x):
+    node = {'payload': x, 'next': None}
+    if queue['tail'] is None:           <span class="c"># 空的：兩個都設</span>
+        queue['head'] = node
+        queue['tail'] = node
+    else:
+        queue['tail']['next'] = node
+        queue['tail'] = node
+    queue['size'] += 1
+
+def dequeue(queue):
+    if queue['head'] is None:
+        raise IndexError('empty')
+    node = queue['head']
+    queue['head'] = node['next']
+    if queue['head'] is None:           <span class="c"># 拿走最後一個</span>
+        queue['tail'] = None            <span class="c"># tail 要歸零</span>
+    queue['size'] -= 1
+    return node['payload']</pre>
 <pre><span class="c"># Queue（Class 5）</span>
 from collections import deque
 q = deque()
@@ -734,9 +771,9 @@ function preorderVals(n,o){if(n){o.push(n.v);preorderVals(n.l,o);preorderVals(n.
 function drawTree(box,root,o){
   o=o||{};box.innerHTML="";
   const pos=new Map();let i=0,maxD=0;
-  (function w(n,d){if(!n)return;w(n.l,d+1);pos.set(n.id,{x:i++,d:d,n:n});if(d>maxD)maxD=d;w(n.r,d+1)})(root,0);
+  (function w(n,d,side){if(!n)return;w(n.l,d+1,"l");pos.set(n.id,{x:i++,d:d,n:n,side:side});if(d>maxD)maxD=d;w(n.r,d+1,"r")})(root,0,null);
   const cnt=Math.max(i,1),W=Math.max(cnt*46+30,200),Hh=(maxD+1)*62+28;
-  const svg=el("svg",{viewBox:"0 0 "+W+" "+Hh,width:W,height:Hh,role:"img","aria-label":o.label||"tree"},box);
+  const svg=el("svg",{viewBox:"0 0 "+W+" "+Hh,width:"100%",style:"max-width:"+W+"px;height:auto",role:"img","aria-label":o.label||"tree"},box);
   if(!root){el("text",{x:W/2,y:Hh/2,"text-anchor":"middle",fill:"var(--muted)","font-size":13},svg,"（空樹）");return}
   const X=p=>22+p.x*46+12,Y=p=>26+p.d*62;
   pos.forEach(p=>{["l","r"].forEach(s=>{const c=p.n[s];if(c){const q=pos.get(c.id);el("line",{x1:X(p),y1:Y(p),x2:X(q),y2:Y(q),class:"edge"},svg)}})});
@@ -749,7 +786,7 @@ function drawTree(box,root,o){
     const g=el("g",{class:cls},svg);
     el("circle",{cx:X(p),cy:Y(p),r:16},g);
     el("text",{class:"v",x:X(p),y:Y(p)},g,n.v);
-    if(o.bf){const b=bf(n);el("text",{class:"bf"+(Math.abs(b)>1?" bad":""),x:X(p)+15,y:Y(p)-13},g,(b>0?"+":"")+b)}
+    if(o.bf){const b=bf(n),lft=p.side==="l";el("text",{class:"bf"+(Math.abs(b)>1?" bad":""),x:lft?X(p)-15:X(p)+15,y:Y(p)-13,"text-anchor":lft?"end":"start"},g,(b>0?"+":"")+b)}
   });
 }
 
@@ -872,9 +909,10 @@ function drawTree(box,root,o){
 })();
 
 /* ---------- BST / AVL playground ---------- */
-function Playground(boxSel,defMode,presets,intro){
+function Playground(boxSel,defMode,presets,intro,opt){
+  opt=opt||{};
   const box=$(boxSel);const P=boxSel.slice(1);
-  box.innerHTML='<div class="lab-h"><span class="t">'+intro+'</span><button data-mode="bst">BST</button><button data-mode="avl">AVL</button></div>'+
+  box.innerHTML='<div class="lab-h"><span class="t">'+intro+'</span>'+(opt.lockMode?"":'<button data-mode="bst">BST</button><button data-mode="avl">AVL</button>')+'</div>'+
     '<div class="row" style="margin-bottom:8px"><input type="text" id="'+P+'-in" aria-label="輸入數字" placeholder="數字，可用逗號一次輸入多個" style="flex:1;min-width:170px"><button class="pri" data-act="ins">Insert</button><button data-act="del">Delete</button><button data-act="find">Search</button></div>'+
     '<div class="row" style="margin-bottom:10px"><span class="lbl">預設</span>'+presets.map((p,i)=>'<button data-pre="'+i+'">'+p[0]+"</button>").join("")+'<button data-act="clear">清空</button></div>'+
     '<div class="svgbox" id="'+P+'-svg"></div>'+
@@ -924,23 +962,24 @@ function Playground(boxSel,defMode,presets,intro){
   }
   function find(v){const path=[];let n=root;while(n){path.push(n);if(n.v===v)break;n=v<n.v?n.l:n.r}
     frame("Search "+v+"：visit "+path.map(x=>x.v).join(" → ")+(n?" → 找到，"+path.length+" 步。":(path.length?" → 掉出樹外，回傳 None（"+path.length+" 步）。":"空樹 → None。"))+" 步數 ≤ height + 1。",{hl:path.map(x=>x.id),cur:n?n.id:undefined})}
-  function run(fn,vals){frames=[];vals.forEach(v=>fn(v));if(!frames.length)frame("（沒有變化）");fi=0;render()}
-  function render(){const f=frames[fi];if(!f){drawTree($("#"+P+"-svg"),root,{bf:true});$("#"+P+"-cap").textContent="輸入數字開始，或按一個預設。";$("#"+P+"-st").textContent="";$("#"+P+"-pre").textContent="";return}
+  /* 停在第一個有壞掉 node 的步驟（看得到 rotation 前的樣子）；沒有的話停在最後一步 */
+  function run(fn,vals){frames=[];vals.forEach(v=>fn(v));if(!frames.length)frame("（沒有變化）");const k=frames.findIndex(f=>f.mark!==undefined);fi=k>=0?k:frames.length-1;render()}
+  function render(){const f=frames[fi];if(!f){drawTree($("#"+P+"-svg"),root,{bf:true});$("#"+P+"-cap").textContent="輸入數字開始，或按一個預設。";$("#"+P+"-st").textContent="模式："+mode.toUpperCase();$("#"+P+"-pre").textContent="";return}
     drawTree($("#"+P+"-svg"),f.t,{bf:true,hl:f.hl,mark:f.mark,cur:f.cur,label:mode.toUpperCase()});
-    $("#"+P+"-cap").textContent=f.cap;$("#"+P+"-st").textContent="步驟 "+(fi+1)+" / "+frames.length+"　節點旁的數字 = balance factor";
+    $("#"+P+"-cap").textContent=f.cap;$("#"+P+"-st").textContent="模式："+mode.toUpperCase()+(mode==="avl"?"（會自動 rotate）":"（不 rotate）")+"　步驟 "+(fi+1)+" / "+frames.length+"　節點旁的數字 = balance factor";
     $("#"+P+"-pre").textContent=f.t?"preorder: "+preorderVals(f.t,[]).join(" "):"";
     box.querySelector('[data-act=prev]').disabled=fi===0;box.querySelector('[data-act=next]').disabled=fi===frames.length-1;box.querySelector('[data-act=last]').disabled=fi===frames.length-1}
   const parse=()=>$("#"+P+"-in").value.split(/[\s,，]+/).filter(Boolean).map(Number).filter(x=>!isNaN(x));
   function setMode(m){mode=m;box.querySelectorAll("[data-mode]").forEach(b=>b.classList.toggle("on",b.dataset.mode===m))}
   box.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>{setMode(b.dataset.mode);root=null;frames=[];render();$("#"+P+"-cap").textContent="切到 "+b.dataset.mode.toUpperCase()+" 模式，樹清空了。"});
   box.addEventListener("click",e=>{const a=e.target.dataset.act,p=e.target.dataset.pre;
-    if(p!==undefined){const pr=presets[+p];if(pr[2])setMode(pr[2]);root=null;run(insert,pr[1]);if(pr[3]){fi=frames.length-1;run(x=>pr[3][0]==="del"?del(x):find(x),pr[3][1])}return}
+    if(p!==undefined){const pr=presets[+p];if(pr[2])setMode(pr[2]);root=null;run(insert,pr[1]);if(pr[3])run(x=>pr[3][0]==="del"?del(x):find(x),pr[3][1]);return}
     if(a==="ins")run(insert,parse());if(a==="del")run(del,parse());if(a==="find")run(find,parse());
     if(a==="clear"){root=null;frames=[];render()}
     if(a==="prev"&&fi>0){fi--;render()}if(a==="next"&&fi<frames.length-1){fi++;render()}if(a==="last"){fi=frames.length-1;render()}});
   $("#"+P+"-in").addEventListener("keydown",e=>{if(e.key==="Enter")run(insert,parse())});
   setMode(mode);
-  const first=presets[0];if(first[2])setMode(first[2]);run(insert,first[1]);fi=frames.length-1;render();
+  const first=presets[0];if(first[2])setMode(first[2]);run(insert,first[1]);
 }
 Playground("#lab-bst","bst",[
   ["範例樹",[8,3,10,1,6,14,4,7,13],"bst"],
@@ -948,15 +987,16 @@ Playground("#lab-bst","bst",[
   ["範例樹 + search 5",[8,3,10,1,6,14,4,7,13],"bst",["find",[5]]],
   ["範例樹 + delete 3",[8,3,10,1,6,14,4,7,13],"bst",["del",[3]]],
   ["範例樹 + delete 8",[8,3,10,1,6,14,4,7,13],"bst",["del",[8]]]
-],"互動：BST 的 insert / search / delete（一步一步看）");
+],"互動：BST 的 insert / search / delete（一步一步看）",{lockMode:true});
 Playground("#lab-avl","avl",[
   ["3,2,1（LL）",[3,2,1],"avl"],
   ["1,2,3（RR）",[1,2,3],"avl"],
   ["3,1,2（LR）",[3,1,2],"avl"],
   ["1,3,2（RL）",[1,3,2],"avl"],
   ["範例樹順序（13 觸發 RL）",[8,3,10,1,6,14,4,7,13],"avl"],
-  ["1–7 依序",[1,2,3,4,5,6,7],"avl"]
-],"互動：AVL insert / delete，自動判斷 case 並一步一步 rotate");
+  ["1–7 依序",[1,2,3,4,5,6,7],"avl"],
+  ["20,10,30,5,15,3（課堂 LL）",[20,10,30,5,15,3],"avl"]
+],"互動：AVL insert / delete，自動判斷 case 並一步一步 rotate",{lockMode:true});
 
 /* ---------- Big-O ---------- */
 (function(){
@@ -1037,7 +1077,7 @@ const Q=[
  {t:"mc",q:"刪除資料夾（先刪裡面再刪自己）、算 fault tree 機率，要用哪種 traversal？",o:["Postorder","Preorder","Inorder","BFS"],a:0,ex:"先處理 children，最後處理 parent。",s:"Class 7 [01:22:01]、Class 8 [00:22:01]"},
  {t:"mc",q:"Iterative preorder（list 當 stack）為什麼先 push right child？（CYK）",o:["Stack 後進先出，left 最後放才會先拿出來","因為 right 比較大","BST 規則要求","不這樣會無限迴圈"],a:0,ex:"不反著 push 就會得到「先走右邊的 preorder」：8 10 14 13 3 6 7 4 1。",s:"Class 6 講義 p10 CYK 4"},
  {t:"mc",q:"高度 6 的 AVL tree 最少有幾個 node？（CYK）",o:["33","20","64","127"],a:0,ex:"N(h) = 1 + N(h−1) + N(h−2)：1, 2, 4, 7, 12, 20, 33。",s:"Class 9 講義 p6"},
- {t:"sa",q:"老師 11/4 的考試範例：下面這個 linked-list stack 的 push，push A 再 push B 之後畫出 list。哪裡錯？怎麼修？<pre>def push(stack, x):\n    node = {'payload': x, 'next': None}\n    stack['head'] = node\n    node['next'] = stack['head']\n    stack['size'] += 1</pre>",a:"push A 之後 head 指 A，A.next 讀到的 head 已經是自己 → A 指向自己。push B 之後 head 指 B、B 指向自己，A 接不到了（size 卻是 2）。pop 會一直回傳 B。修法：兩行對調，先 <code>node['next'] = stack['head']</code>，再 <code>stack['head'] = node</code>（先讀再寫）。上面 Linked list 那節的互動圖可以一步一步看。",s:"Class 11 [01:38:01]–[01:44:12]、Class 4 [00:28:03]"},
+ {t:"sa",q:"老師 11/4 的考試範例：下面這個 linked-list stack 的 push，push A 再 push B 之後畫出 list。哪裡錯？怎麼修？<pre>def push(stack, x):\n    node = {'payload': x, 'next': None}\n    stack['head'] = node\n    node['next'] = stack['head']\n    stack['size'] += 1</pre>",a:"push A 之後 head 指 A，A.next 讀到的 head 已經是自己 → A 指向自己。push B 之後 head 指 B、B 指向自己，A 接不到了（size 卻是 2）。pop 會一直回傳 B。修法：兩行對調，先 <code>node['next'] = stack['head']</code>，再 <code>stack['head'] = node</code>（先讀再寫）。上面 Linked list 那節的互動圖可以一步一步看。（逐字稿看不到螢幕上的 code，老師也沒公布答案，所以這個修法是從口述推出來的，見 Class 11 notes 第 9 節。）",s:"Class 11 [01:38:01]–[01:44:12]、Class 4 [00:28:03]"},
  {t:"sa",q:"用 pseudocode 寫 linked-list stack 的 <code>pop</code>（node 用 dict，有 head、size）。要處理什麼邊界情況？",a:"<pre>def pop(stack):\n    if stack['size'] == 0:\n        raise IndexError('empty')\n    node = stack['head']\n    stack['head'] = node['next']\n    stack['size'] -= 1\n    return node['payload']</pre>邊界：空 stack。課堂上漏了這個檢查，跑出 <code>'NoneType' object is not subscriptable</code>。",s:"Class 3 [01:48:09]–[01:52:05]"},
  {t:"sa",q:"Big-O 定義：f(n) = O(g(n)) 若存在 C &gt; 0、n₀，使 n ≥ n₀ 時 f(n) ≤ C·g(n)。f(n) = 3n² + 4n + 3、g(n) = n³，給一組 C 和 n₀。",a:"C = 10、n₀ = 1：n ≥ 1 時 3n² ≤ 3n³、4n ≤ 4n³、3 ≤ 3n³，相加得 f(n) ≤ 10n³。（C = 4、n₀ = 2 也行：n = 2 時 23 ≤ 32。只要寫出一組並說明為什麼成立。）",s:"Class 11 [01:33:09]"},
  {t:"sa",q:"找 c 和 n₀，證明 2n + 10 是 O(n)。（CYK）",a:"n ≥ 10 時 10 ≤ n，所以 2n + 10 ≤ 3n → c = 3、n₀ = 10。（c = 12、n₀ = 1 也行：n ≥ 1 時 2n + 10 ≤ 2n + 10n。）",s:"Class 9 講義 p8 CYK 5"},
@@ -1050,16 +1090,18 @@ const Q=[
  {t:"sa",q:"為什麼 N(h) &gt; 2·N(h−2) 推得出 AVL 的 height 是 O(log n)？（CYK）",a:"每兩層 node 數至少翻倍，所以 n ≥ 2^(h/2)。兩邊取 log₂：h ≤ 2 log₂ n，是常數倍的 log n → O(log n)。",s:"Class 9 講義 p8 CYK 4"},
  {t:"sa",q:"10,000 個 node 的 AVL tree 可能高 20 嗎？（CYK）",a:"不可能。N(17) = 6,764、N(18) = 10,945，所以 10,000 個 node 最多高 17。高 20 至少要 N(20) = 28,656 個 node。",s:"Class 9 講義 p6"},
  {t:"sa",q:"怎麼用兩個 stack 做 queue？成本？（CYK／面試題）",a:"enqueue：push 到 inbox。dequeue：outbox 空的話，把 inbox 全部 pop 再 push 到 outbox（反轉成 FIFO），然後從 outbox pop。每個值最多被搬兩次 → 每個操作 amortized O(1)；倒 inbox 的那一次是 O(n)。",s:"Class 5 講義 p10 CYK 6"},
- {t:"sa",q:"為什麼 doubling 時 push 是 O(1) amortized？如果每次只 +10 呢？（CYK）",a:"每次 grow 搬 4 + 8 + … + c 個，總和 &lt; 2c，c &lt; n，所以 n 次 push 總共不到 2n 次搬移，平均每次不到 2。每次 +10 則總共約 n²/20 次，平均每次 O(n)。",s:"Class 5 講義 p10 CYK 1"},
+ {t:"sa",q:"為什麼 doubling 時 push 是 O(1) amortized？如果每次只 +10 呢？（CYK）",a:"每次 grow 搬 5 + 10 + 20 + … + c 個，總和 &lt; 2c，c &lt; n，所以 n 次 push 總共不到 2n 次搬移，平均每次不到 2。每次 +10 則總共約 n²/20 次，平均每次 O(n)。",s:"Class 5 講義 p10 CYK 1"},
  {t:"sa",q:"用 stack 算 postfix <code>5 1 2 + 4 * + 3 -</code>，寫出每一步的 stack。",a:"[5] → [5,1] → [5,1,2] → +：[5,3] → [5,3,4] → *：[5,12] → +：[17] → [17,3] → −：[14]。答案 <b>14</b>。（上面 Stack 那節可以選這題逐步看。）",s:"Class 7 [01:30:01]–[01:34:13]"},
  {t:"sa",q:"Array <code>[3, 7, 1, 9, 4]</code>（capacity 5，已滿）要在 index 2 插入 5，寫出步驟和成本。",a:"1. 滿了 → resize：開一個兩倍大的新 array（10 格），把 5 個元素逐一複製，O(n)。2. 從尾端開始把 4、9、1 各往後移一格（先移 4，不然會蓋掉）。3. 在 index 2 放 5。4. size + 1。總共 O(n)。Linked list 版：traverse 到 7，新 node 5 指向 7 原本的 next（1），再讓 7 指向 5。",s:"Class 2 [00:27:04]–[00:36:04]"},
  {t:"sa",q:"為什麼說 BST search 的成本是 O(h) 而不是 O(n)？100 萬個值最少和最多要幾步？（CYK）",a:"每層最多 visit 一個 node，所以被 height 綁住；h 和 n 的關係看形狀（插入順序決定）。最少 1 步（在 root）；最多：一條鏈要 1,000,000 步，完美平衡約 20 步（height 19）。",s:"Class 8 講義 p9 CYK 5–6"},
  {t:"sa",q:"<code>grid = [[0] * 3] * 3</code> 之後 <code>grid[0][0] = 1</code>，會發生什麼？為什麼？（CYK）",a:"三列的第一格都變 1。Python list 是 pointer 組成的 array，外層的三格指向同一個內層 list。正確寫法 <code>[[0] * 3 for _ in range(3)]</code>。",s:"Class 5 講義 p10 CYK 5"},
  {t:"sa",q:"一棵 5,000 個 node 的 chain 跑 recursive <code>tree_height</code> 會怎樣？為什麼？要怎麼辦？（CYK）",a:"RecursionError。chain 高 4,999，遞迴要巢狀約 5,000 層，Python 預設上限約 1,000。不要調高上限，改用 iterative（自己用 stack／loop）。",s:"Class 6 講義 p10 CYK 6"},
- {t:"sa",q:"讓 BST 保持平衡有哪三種做法？各自的問題？",a:"(1) 先 shuffle 再插入：資料要一開始就到齊（串流不行），而且沒有保證。(2) 太糟就整棵 rebuild：O(n)，很貴，還要定義什麼叫糟。(3) 邊插入邊修：AVL，插入後沿路徑檢查 BF、rotation 修。",s:"Class 9 [00:28:01]–[00:37:04]"}
+ {t:"sa",q:"讓 BST 保持平衡有哪三種做法？各自的問題？",a:"(1) 先 shuffle 再插入：資料要一開始就到齊（串流不行），而且沒有保證。(2) 太糟就整棵 rebuild：O(n)，很貴，還要定義什麼叫糟。(3) 邊插入邊修：AVL，插入後沿路徑檢查 BF、rotation 修。",s:"Class 9 [00:28:01]–[00:37:04]"},
+ {t:"sa",q:"課堂上的樹：root 20 的 children 是 10 和 30；10 的 children 是 5 和 15；5 只有 left child 3。寫出每個 node 的 balance factor。這是 AVL 嗎？要怎麼修？",a:"高度：3、15、30 是 0，5 是 1，10 是 2。BF：<b>3 = 0、5 = +1、15 = 0、10 = +1、30 = 0、20 = +2</b>。20 是 +2 → 不是 AVL。多出來的高度在 left child 10 的 left subtree（10 是 +1，同號）→ <b>Left-left，在 20 rotate right</b>：10 升上來當 root，20 變成 10 的 right child，15 搬到 20 的左邊。結果 10(5(3), 20(15, 30))。AVL 那節的「20,10,30,5,15,3（課堂 LL）」預設可以一步一步看。",s:"Class 10 [01:19:13]–[01:23:01]、[01:31:05]–[01:32:01]"},
+ {t:"sa",q:"用 singly linked list（有 head、tail）實作 queue 的 <code>enqueue</code> 和 <code>dequeue</code>，寫 pseudocode。成本？要處理哪些邊界情況？",a:"<pre>def enqueue(queue, x):\n    node = {'payload': x, 'next': None}\n    if queue['tail'] is None:      # 空的\n        queue['head'] = node\n        queue['tail'] = node\n    else:\n        queue['tail']['next'] = node\n        queue['tail'] = node\n    queue['size'] += 1\n\ndef dequeue(queue):\n    if queue['head'] is None:\n        raise IndexError('empty')\n    node = queue['head']\n    queue['head'] = node['next']\n    if queue['head'] is None:      # 拿走最後一個\n        queue['tail'] = None\n    queue['size'] -= 1\n    return node['payload']</pre>從 tail 加、從 head 拿，兩個都 O(1)。邊界：空 list 的 enqueue 要同時設 head 和 tail；dequeue 拿走最後一個 node 時 tail 要改回 None，不然 tail 還指著被拿走的 node。反過來（head 加、tail 拿）不行：singly linked 拿掉 tail 要先找到前一個 node，O(n)。老師說考試可能考用別的結構實作 stack／queue。",s:"Class 11 [01:24:04]–[01:25:06]"}
 ];
 (function(){
-  const KEY="dsa-mid-quiz-v1";let st=store(KEY)||{};let filter="all";
+  const KEY="dsa-mid-quiz-v2";let st=store(KEY)||{};let filter="all";
   const box=$("#qz");
   function render(){
     box.innerHTML="";let n=0;
