@@ -1,9 +1,9 @@
 {
- "fetched_at": "2026-11-01T21:04:36.129775-08:00",
+ "fetched_at": "2026-11-08T21:04:26.968405-08:00",
  "stats": {
   "GPU": {
-   "raw": 9,
-   "kept": 5
+   "raw": 10,
+   "kept": 7
   },
   "DSA": {
    "raw": 126,
@@ -219,6 +219,15 @@
    "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5120540"
   },
   {
+   "course": "GPU",
+   "summary": "Pop Quiz - Lecture 5 11/2/26 [EE P 524 A]",
+   "start": "2026-11-03T20:30:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917398&month=11&year=2026#assignment_11881085"
+  },
+  {
    "course": "DSA",
    "summary": "EEP 590A: Class Meeting [EE P 590 A]",
    "start": "2026-11-04T16:30:00-08:00",
@@ -271,6 +280,15 @@
    "location": null,
    "kind": "event",
    "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5120543"
+  },
+  {
+   "course": "GPU",
+   "summary": "Assignment #4 - Memory access patterns & MMULT coalesced corner turning kernel [EE P 524 A]",
+   "start": "2026-11-13T00:00:00-08:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917398&month=11&year=2026#assignment_11810623"
   },
   {
    "course": "DSA",

@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-08T21:05:40-08:00",
+  "task": "週規劃",
+  "status": "ok",
+  "summary": "11/9 DSA 期中 Moore 220；HW4 11/13 期中後開工；A5、Proposal 11/14 開工；HW3 待確認",
+  "output": "digests/2026-11-08-weekly.md"
+ },
+ {
   "at": "2026-11-08T18:09:39-08:00",
   "task": "截止提醒",
   "status": "new",
