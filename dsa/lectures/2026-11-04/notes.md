@@ -133,6 +133,8 @@
 
 ## 還要釐清的問題
 
+- **11/8 18:30 PT 更新（Canvas 重新登入後確認）**：老師的 notes 已經上傳，是 `EE590a_Class_2026-11-04_Wed_midterm_review_and_heaps_student_copy.pdf`（file 155891168，Module 7 item 27668750，533 KB，2026-11-07T02:41:09Z，也就是 11/6 6:41 PM PST 上傳）。`class_scribbles.pdf`（file 155795267，37 MB）也在。兩個都是 `locked_for_user: true`：**Module 7: Heaps 的 `unlock_at` 是 2026-11-16T08:00:00Z（11/16 12 AM PST）**，Canvas 顯示「This file is locked until Nov 16 at 12am」。files API 沒有 `url`，直接下載會回 403。所以 11/5 的 `FILE_ERROR` 是因為 module 上鎖，不是登入問題。考前要看就得請老師解鎖（Piazza）；11/16 解鎖後補 `slides.txt`。
+
 - `class_scribbles.pdf` 的 files API 回傳空 `url`，是還鎖著，還是只能從網頁下載？下次跑時再試；拿到後補 `slides.txt`，並對照範例 heap 和 stack push 的程式碼。
 - 老師說「今晚」要上傳的 notes（含練習題）在 11/5 早上還沒出現在 Module 7，要再看 Canvas，也可能放在 Week 6: Midterm 或別的 module。
 - Stack push bug 的正確修法：逐字稿看不到程式碼，上面的修法是推論，要對照 scribbles 確認。
