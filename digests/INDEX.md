@@ -8,13 +8,14 @@
 - 晨報：11/11 三 07:09 🆕 GPU HW4 截止延到 11/15（日）；新 L6 講義、11/10 錄影；HW1 已評分 → [2026-11-11.md](2026-11-11.md)
 - 週規劃：11/8 日 21:05 ✅ 11/9 DSA 期中 Moore 220；HW4 11/13 期中後開工；A5、Proposal 11/14 開工；HW3 待確認 → [2026-11-08-weekly.md](2026-11-08-weekly.md)
 - 截止提醒：11/11 三 08:09 ✅ 沒有新東西：48h 內無作業或考試到期（GPU HW4 11/15 還有 112h） → —
-- 上課筆記：11/10 二 10:10 ⏭ DSA 2026-11-09 錄影尚未發布（當天整堂是期中考，可能不會有錄影） → —
+- 上課筆記：11/11 三 10:13 🆕 GPU 11/10 L6：Final Project（ResNet-18）說明、SRAM/L1TEX/bank conflict、padding 與 XOR swizzle → [notes.md](../gpu/lectures/2026-11-10/notes.md)
 - 作業說明：11/11 三 07:45 🆕 改版：gpu/hw4（截止延到 11/15 日 11:59 PM PST） → [README.md](../gpu/hw/README.md)
 
 ## 紀錄
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 11/11 三 10:13 | 上課筆記 | 🆕 | GPU 11/10 L6：Final Project（ResNet-18）說明、SRAM/L1TEX/bank conflict、padding 與 XOR swizzle | [notes.md](../gpu/lectures/2026-11-10/notes.md) |
 | 11/11 三 08:09 | 截止提醒 | ✅ | 沒有新東西：48h 內無作業或考試到期（GPU HW4 11/15 還有 112h） | — |
 | 11/11 三 07:45 | 作業說明 | 🆕 | 改版：gpu/hw4（截止延到 11/15 日 11:59 PM PST） | [README.md](../gpu/hw/README.md) |
 | 11/11 三 07:09 | 晨報 | 🆕 | GPU HW4 截止延到 11/15（日）；新 L6 講義、11/10 錄影；HW1 已評分 | [2026-11-11.md](2026-11-11.md) |

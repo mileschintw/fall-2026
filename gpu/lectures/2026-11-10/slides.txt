@@ -1,0 +1,1329 @@
+=== p1 ===
+EEP 524 
+Applied High - Performance 
+GPU Computing 
+LECTURE 6 :   Tuesday, Nov 10, 2026 
+Instructor: Dr. Colin Reinhardt 
+University of Washington   -   Professional Masters Program 
+Autumn 2026
+
+=== p2 ===
+Lecture 6 : Outline 
+Final Project Overview 
+GPU HW Architecture : CUDA Performance Topics 
+ GPU memory subsystems: on - chip 
+   GPU SRAM shared memory and caches 
+   Shared - memory bank conflicts 
+ Case Study 
+ Bank - conflict - avoidant CUDA transpose kernels 
+   Padding 
+   XOR swizzle
+
+=== p3 ===
+Recall from Lecture 4… 
+Two key concepts for GPU Performance 
+1.   Provide a lot of threads to allow latency hiding 
+2.   Make efficient use of the   device memory hierarchy 
+1.   Many requests in flight 
+In today’s lecture we continue to delve 
+into the GPU multi - level memory hierarchy
+
+=== p4 ===
+SRAM Architecture Basics 
+How a bit is held in six transistors, 
+how an array reads a word, 
+and why shared memory is built from 32   banks   behind a crossbar. 
+Cell (6T)   Array / 
+subarray   Bank   32 banks   Crossbar   L1 / shared 
+memory
+
+=== p5 ===
+PART 1 · SRAM BASICS 
+The SRAM cell: six transistors 
+Precharge: both bitlines to VDD 
+BL   BLB 
+Wordline (row select) 
+M5   M6 
+gate 
+Q   QB 
+Cross - coupled inverters (M1 – M4) hold the bit; 
+M5/M6 connect it to the bitlines 
+Differential sense amp 
+VDD 
+small ΔV 
+amplified 
+bitline pair voltage vs. time (read) 
+1   Hold:   Two inverters feed each other, so the bit stays put as 
+long as power is on. 
+No refresh (“static” volatile RAM). 
+2   Read:   Precharge   both   bitlines   high, raise the   wordline . The 
+side holding 0 pulls its   bitline   down slightly; the sense amp 
+turns that small ΔV into a full logic level. 
+Non - destructive: nothing to restore. 
+3   Write:   Drive BL and BLB to opposite full levels, raise the 
+wordline . The write drivers overpower the cell and flip it. 
+4   Trade - off:   6 transistors per bit vs. DRAM’s 1T1C, so far less 
+dense, but fast and built in the same logic process as the SM. 
+Also 8T variant for high - speed GPU SRAM, with a separate 
+read port 
+Compared with DRAM (L5): no row to open, no destructive read, no 
+refresh.
+
+=== p6 ===
+PART 1 · SRAM BASICS 
+Inside an SRAM array 
+row address ↓ 
+Row 
+decoder 
+Precharge (bitlines to VDD) 
+selected 
+wordline 
+each column = 
+bitline pair 
+Column mux   ← column address 
+Sense amps 
+one word out 
+1   Precharge   both bitlines of every 
+column. 
+2   Decode + wordline:   the row decoder 
+raises one wordline; every cell in that 
+row starts pulling one of its bitlines. 
+3   Select + sense:   the column mux picks 
+the columns holding the requested 
+word; sense amps resolve them. 
+4   Pipelined:   a new address can start 
+every cycle. No row to open or close. 
+Key constraint: long bitlines are slow (more 
+cells, more capacitance). Large SRAMs are 
+built from many small subarrays, each with 
+its own decoder and sense amps.
+
+=== p7 ===
+PART 1 · SRAM BASICS 
+SRAM Banking: 32 banks, not 32 ports 
+Shared memory as 32 banks   ×   4 bytes: successive 4 - byte words go to successive banks 
+0 
+0 
+32 
+64 
+96 
+1 
+1 
+33 
+65 
+97 
+2 
+2 
+34 
+66 
+98 
+3 
+3 
+35 
+67 
+99 
+4 
+4 
+36 
+68 
+100 
+5 
+5 
+37 
+69 
+101 
+6 
+6 
+38 
+70 
+102 
+7 
+7 
+39 
+71 
+103 
+8 
+8 
+40 
+72 
+104 
+9 
+9 
+41 
+73 
+105 
+10 
+10 
+42 
+74 
+106 
+11 
+11 
+43 
+75 
+107 
+12 
+12 
+44 
+76 
+108 
+13 
+13 
+45 
+77 
+109 
+14 
+14 
+46 
+78 
+110 
+15 
+15 
+47 
+79 
+111 
+16 
+16 
+48 
+80 
+112 
+17 
+17 
+49 
+81 
+113 
+18 
+18 
+50 
+82 
+114 
+19 
+19 
+51 
+83 
+115 
+20 
+20 
+52 
+84 
+116 
+21 
+21 
+53 
+85 
+117 
+22 
+22 
+54 
+86 
+118 
+23 
+23 
+55 
+87 
+119 
+24 
+24 
+56 
+88 
+120 
+25 
+25 
+57 
+89 
+121 
+26 
+26 
+58 
+90 
+122 
+27 
+27 
+59 
+91 
+123 
+28 
+28 
+60 
+92 
+124 
+29 
+29 
+61 
+93 
+125 
+30 
+30 
+62 
+94 
+126 
+31 
+31 
+63 
+95 
+127 
+bank   = (byte address   ÷   4) mod 32   row   = byte address   ÷   128   Words 5, 37, 69, 101 (stride 32 words = 128 B) all live in bank 5 
+Option A: multi - ported cells 
+Each extra port adds a   wordline ,   bitline (s) and access 
+transistors to   every   bit. 
+Cell area grows roughly with the square of the port 
+count (wire - limited). 
+Used where ports are few and must be fully general: 
+register files . 
+Option B: banking (shared memory) 
+32 independent single - ported arrays, each one 4 bytes 
+wide. 
+Up to 32 accesses per cycle (128 B), at roughly the cost 
+of 32 small SRAMs. 
+The catch: two different words in the same bank in one 
+request must take turns. That is a   bank conflict .
+
+=== p8 ===
+PART 1 · SRAM BASICS 
+Lanes to banks: the crossbar 
+Warp request: 32 lane addresses 
+Address crossbar + arbiter 
+Which bank does each lane need? 
+Any bank asked for 2+ different words? 
+32 banks: one 4 - byte word each per cycle 
+Data crossbar interconnect 
+Route each word back to its lane(s); broadcast duplicates 
+Conflict found?   The arbiter serves one word per 
+bank now and replays the rest. Each pass is one 
+wavefront . An N - way conflict costs N wavefronts. 
+Conceptual model: NVIDIA does not publish the exact circuit. 
+Distinct banks 
+any permutation 
+T0 
+B0 
+T1 
+B1 
+T2 
+B2 
+T3 
+B3 
+lanes 
+banks 
+1 wavefront 
+Same word 
+broadcast 
+T0 
+B0 
+T1 
+B1 
+T2 
+B2 
+T3 
+B3 
+lanes 
+banks 
+1 wavefront 
+Same bank 
+different words 
+T0 
+B0 
+T1 
+B1 
+T2 
+B2 
+T3 
+B3 
+lanes 
+banks 
+2 wavefronts 
+T0, T1 → bank 1, rows 0 and 1 
+Reading Nsight Compute:   8 - byte and 16 - byte accesses need at least 2 
+and 4 wavefronts even with no conflict (128 B per wavefront). 
+Compare actual vs. ideal wavefronts; the excess on the Source page is 
+the bank - conflict cost.
+
+=== p9 ===
+PART 1 · SRAM BASICS 
+SRAM vs. DRAM: different bottlenecks 
+On - chip SRAM (registers, L1/SMEM, L2)   Off - chip DRAM (global memory, L5) 
+Read   Non - destructive; no row to open   Destructive; open a row, then restore 
+Parallelism   32 banks per SM, every cycle   Channels   ×   banks across chips 
+Address → bank   Simple: word index mod 32   Hashed across channels and banks 
+Costly pattern   Lanes hit one bank, different words: bank conflict   Scattered addresses: row misses, wasted sectors 
+Fix   Padding, swizzling, broadcast   Coalescing, streaming access 
+On our T4:   96 KB of SRAM per SM, split between L1 and shared memory (32 or 
+64 KB SMEM). 32 banks   ×   4 B = 128 B per cycle per SM. 
+Further reading 
+Weste & Harris, CMOS VLSI Design, Ch. 12 
+Muralimanohar et al., CACTI 6.0 (MICRO ’07) 
+Jia et al., Dissecting the Turing T4 (2019)
+
+=== p10 ===
+NVIDIA GPU Memory 
+   Review of CUDA device memory hierarchy and access scopes, lifetimes
+
+=== p11 ===
+GPU Memory Subsystems 
+Global ( Local,Constant ) Memory : GMEM 
+•   DRAM multi - bank/rank memory channels 
+•   1 rank = 8 banks x 8bits = 64bit = 8 Bytes 
+•   leverage burst - mode for optimal perf 
+L1/Shared Memory : SMEM 
+•   SRAM multi - bank memory 
+•   32 banks x 4 Bytes = 128 Byte access width 
+•   full cache line width (128Byte = 4 sectors)
+
+=== p12 ===
+SM, L1$, L2$   logical memory units 
+•   global 
+•   local 
+•   texture 
+•   surface 
+•   shared 
+•   load global store shared 
+physical memory units 
+•   L1/TEX cache 
+•   Shared Memory 
+•   L2 Cache/L2 Compression 
+•   Off - Chip (On board) 
+•   System 
+•   Device 
+•   Peer
+
+=== p13 ===
+Caches: brief review 
+   Key concepts: 
+   spatial and temporal locality 
+   cache HIT and MISS 
+   cache block = cache line = 128 Bytes 
+   associativity : 
+   fully, direct mapped, set associative 
+   Cache Example: 
+   8 cache block frames 
+   32 block main memory 
+   Replacement policy 
+   random, LRU, FIFO 
+   Write Policy 
+   write through, write back 
+   dirty bit   reduces writeback   freq   on replacement 
+Address structure : set - assoc   and direct - mapped 
+•   valid bit   added to cache block tag
+
+=== p14 ===
+L1 / Shared Memory : Overview 
+   Combined L1 Data Cache and Shared Memory 
+   1 L1TEX unit per SM 
+   Same physical memory used for L1 cache and shared memory 
+   Carveout reserves part of physical memory for shared memory 
+   User configurable   carveout   sizes 
+   Specification of Physical Memory (Turing T4): 
+   Total Size per SM: 96 KB 
+   Shared Memory Configs: 32, 48, 64 KB 
+   Number of Banks: 32 
+   Successive 4Byte words map to successive banks 
+   4Byte data access per bank per cycle 
+GA100
+
+=== p15 ===
+L1/Shared Mem Unified Cache Properties 
+   For Turing T4 
+   96 KB total L1TEX per SM : variable split (carveout) between L1 / SMEM : 32/48/64 or 64/48/32 
+   must use dynamic shared memory allocation method 
+   also set device config using CUDA Runtime API   cudaFuncSetAttribute ( ) 
+GA100 
+For Ampere A100
+
+=== p16 ===
+L1TEX Data Cache: Details
+
+=== p17 ===
+* wavefront metrics loosely correlate/scale with the amount of GPU work being done 
+L1TEX Data Cache: Details
+
+=== p18 ===
+L1TEX Data Cache: Details 
+   L1TEX Cache 
+   Load Store Pipeline
+
+=== p19 ===
+[   Strengert   (NVIDIA), GTC 21, S32089 ]
+
+=== p20 ===
+fully   coalesced ! 
+= optimal
+
+=== p21 ===
+
+
+=== p22 ===
+
+
+=== p23 ===
+L2 Cache Unit 
+L2 sits on - chip, between L1 and 'memory' 
+organized into partitions for scaling, 
+•   partitions have multiple slices (LTS = L2 Slice) 
+L2 fabric responsible for inter - partition coherence 
+also has L2 atomic units
+
+=== p24 ===
+L2 Cache Properties 
+On Turing T4 
+•   4 MiB total L2 (l2_cache_size) 
+•   32 slices (l2s_count) 
+GA100
+
+=== p25 ===
+L2 Cache Details 
+   LTS = L2 Slice 
+L2 sits on - chip, between L1 and 'memory' 
+organized into partitions for scaling, 
+•   partitions have multiple slices 
+L2 fabric responsible for inter - partition coherence 
+also has L2 atomic units
+
+=== p26 ===
+L2 Cache Mapped to Nsight Compute
+
+=== p27 ===
+L1 / SMEM : Physical Memory Layout 
+   Same physical memory used for L1 
+cache and SMEM “scratchpad” 
+   Programmer assigned ‘carveout’ 
+   Number of banks = 32 
+   Successive 4 Byte words map to 
+successive banks 
+   L1 cache line size 
+   32 x 4 Bytes = 128 Bytes 
+   1 cache line access per cycle 
+   4 Byte data access per bank per cycle
+
+=== p28 ===
+L1 / SMEM : Carveout Example 
+   Based on GA100 Arch 
+   192 KB total L1/SMEM per SM 
+   Carveout reserves part of physical 
+memory for SMEM 
+   user configurable 
+   requires dynamic shared mem   alloc 
+   set device w   cudaFuncSetAttribute ()
+
+=== p29 ===
+L1/Shared : SMEM Access Perspective
+
+=== p30 ===
+L1/Shared : SMEM Access Perspective
+
+=== p31 ===
+L1/Shared : SMEM : Bank Conflicts
+
+=== p32 ===
+Nsight Compute: Source Page metrics
+
+=== p33 ===
+Nsight Compute : Details -   Memory Workload Analysis
+
+=== p34 ===
+In Practice: complicating factors exist! 
+Results may not always be what you initially expect from a pure execution environment 
+Nsight Compute : Details -   Memory Workload Analysis
+
+=== p35 ===
+
+
+=== p36 ===
+SMEM: Takeaways 
+   SMs have combined L1 Data Cache and Shared Memory units 
+   Common physical data memory 
+   Common overall basic performance characteristics 
+   Very different optimization strategies! 
+   Consider Shared Memory, when … 
+   Accessing subset of data multiple times within block 
+   Using data synchronization across threads/warps of a block 
+   Cooperative parallel algorithms within threads/warps of block 
+   Benefiting from user - managed cache, i.e. you are in charge what is stored for how long 
+   Requiring memory access pattern that do not fit well to L1 Cache Sectors or Cache Lines 
+   ‘Diagonal’ accesses in memory banks 
+   Sweet spots of   strided   accesses with no bank conflicts 
+   Reducing or improving global memory traffic through L2 
+   Use shared memory atomics for local reductions = less global atomics 
+   Shared atomics have higher throughput than global L2 atomics
+
+=== p37 ===
+Nsight Compute: Hierarchical Rooflines 
+   Select the roofline metric set when running kernel profile 
+   View on Details   –   GPU Speed of Light   –   GPU Throughput Rooflines
+
+=== p38 ===
+Shared - Memory Bank Conflicts in 
+CUDA Transpose Kernels 
+Padding (Kernel 3) and XOR swizzling (Kernel 4) on the NVIDIA Turing T4 · verifying the fix with 
+Nsight Compute 
+0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+32 shared - memory banks · one warp - level column read after swizzling: eight of its lanes shown, one bank each 
+Graduate GPU Programming · University of Washington 
+Department of Electrical & Computer Engineering · Autumn 2026
+
+=== p39 ===
+A matrix   transpose   kernel   progression 
+40 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+K0   copy 
+Bandwidth ceiling: 
+row - wise load and store, 
+nothing to transpose ! 
+K1   naive 
+Coalesced loads,   strided 
+stores : 
+32 sectors per warp store, 
+1/8 DRAM efficiency. 
+K2   SMEM tile 
+Stage a 32 × 32 tile; both 
+global sides coalesced   —   but 
+the column read of the tile 
+has   32 - way bank conflicts . 
+K3   padding 
+tile[32][33] : one extra 
+word per row skews the 
+banks. 
+Today 
+K4   swizzle 
+tile[ i ][j   ^   i ] : same 
+memory, permuted 
+columns. 
+Today 
+Effective bandwidth (GB/s), 1024 × 1024 floats, ECC on   —   published reference numbers on a Tesla K20c 
+K0 copy   K1 naive   K2 coalesced   K3 padding   K4 swizzle 
+Tesla K20c (Kepler, 2013)   136.2   55.2   93.0   142.9   n/a 
+Limiter removed   ceiling   —   strided global stores   32 - way SMEM conflicts   same as K3 
+Tesla T4   ____   ____   ____   ____   ____
+
+=== p40 ===
+Shared memory is 32 banks of 4 - byte words 
+42 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+bank   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
++0 B   w0   w1   w2   w3   w4   w5   w6   w7   w8   w9   w10   w11   w12   w13   w14   w15   w16   w17   w18   w19   w20   w21   w22   w23   w24   w25   w26   w27   w28   w29   w30   w31 
++128 B   w32   w33   w34   w35   w36   w37   w38   w39   w40   w41   w42   w43   w44   w45   w46   w47   w48   w49   w50   w51   w52   w53   w54   w55   w56   w57   w58   w59   w60   w61   w62   w63 
++256 B   w64   w65   w66   w67   w68   w69   w70   w71   w72   w73   w74   w75   w76   w77   w78   w79   w80   w81   w82   w83   w84   w85   w86   w87   w88   w89   w90   w91   w92   w93   w94   w95 
+word w lives at byte address 4w; consecutive words → consecutive banks; every 128 B the pattern wraps around 
+bank(addr) =   ⌊   addr / 4   ⌋   mod 32 
+for a float array: bank(a[k]) = k mod 32 
+•   A warp instruction touching 32   ×   4 B = 128 B needs   one wavefront   if its 32 
+words sit in 32 different banks. 
+•   Lanes that read the   same word   are served by one broadcast   —   no penalty. 
+•   Lanes that hit the   same bank, different words   are serialized: an n - way 
+conflict costs n wavefronts. 
+Wavefront 
+The unit of shared - memory work: 
+one pass through the 32 banks, 128 B at most. 
+Ideal: 1 per warp - level LDS / STS of 4 - byte data. 
+Conflict degree 
+Lanes   k   reading words   k·s   ( word   stride s) 
+R each   32 /   gcd (s, 32) distinct banks, 
+so the   conflict   degree is   gcd (s, 32) : 
+stride 32 → 32 - way; 
+any odd stride → conflict - free. 
+What Nsight counts 
+Instructions,   Wavefronts   actually issued 
+bank conflicts   = wavefronts beyond the ideal 
+count.   (excessive wavefronts) 
+Zero conflicts   ⇔   wavefronts = instructions.
+
+=== p41 ===
+Three access patterns, three costs 
+43 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+Conflict - free 
+lane k → bank k 
+lanes 0 – 7 
+banks 0 – 7 
+0 
+0 
+1 
+1 
+2 
+2 
+3 
+3 
+4 
+4 
+5 
+5 
+6 
+6 
+7 
+7 
+words 0 – 7: one bank each 
+1 wavefront 
+Tile row: tile[r][x], x = lane 
+Broadcast 
+all lanes → bank 3, same word 
+lanes 0 – 7 
+banks 0 – 7 
+0 
+0 
+1 
+1 
+2 
+2 
+3 
+3 
+4 
+4 
+5 
+5 
+6 
+6 
+7 
+7 
+one word (w3) fanned out to every lane 
+1 wavefront 
+e.g. every lane reads tile[r][3] 
+8 - way conflict 
+all lanes → bank 3, 8 different words 
+lanes 0 – 7 
+banks 0 – 7 
+0 
+0 
+1 
+1 
+2 
+2 
+3 
+3 
+4 
+4 
+5 
+5 
+6 
+6 
+7 
+7 
+words 3, 35, 67, …, 227   —   one per lane, all in bank 3 
+8 wavefronts 
+Tile column: tile[x][c], x = lane 
+8 lanes are drawn; a real warp has 32. In the transpose, the row access is the load phase (store into the tile) and the colum n a ccess is the store phase (load from the tile)   — 
+one tile, read two ways.
+
+=== p42 ===
+Kernel 2: coalesced via a 32 × 32   SMEM   tile 
+44 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+__global__ void   transposeCoalesced (float*   odata , 
+const float*   idata , int rows, int cols) 
+{ 
+__shared__ float tile[TILE_DIM][TILE_DIM];   // 32 x 32 
+int x =   blockIdx.x   * TILE_DIM +   threadIdx.x ; 
+int y =   blockIdx.y   * TILE_DIM +   threadIdx.y ; 
+for (int j = 0; j < TILE_DIM; j += BLOCK_ROWS)   // (1) 
+tile[ threadIdx.y   + j][ threadIdx.x ] = 
+idata [(y + j) * cols + x]; 
+__ syncthreads ();   // (2) 
+x =   blockIdx.y   * TILE_DIM +   threadIdx.x ;   // (3) 
+y =   blockIdx.x   * TILE_DIM +   threadIdx.y ; 
+for (int j = 0; j < TILE_DIM; j += BLOCK_ROWS)   // (4) 
+odata [(y + j) * rows + x] = 
+tile[ threadIdx.x ][ threadIdx.y   + j];   // column! 
+} 
+1   Load phase: warp = one tile row 
+The warp reads 32 consecutive floats of A (coalesced) and 
+writes tile row r: banks (32r + x) mod 32 = x   —   all distinct, 
+conflict - free. 
+2   The barrier is required 
+BLOCK_ROWS = 8, so a thread later reads tile entries that 
+other warps wrote. 
+3   Swap blockIdx, not threadIdx 
+The output tile position is transposed; threadIdx.x stays the 
+fastest - varying index so the global store still coalesces. 
+4   Store phase: warp = one tile column 
+threadIdx.y is constant across the warp and threadIdx.x = 
+0…31, so the warp reads tile[0..31][c]: 32 words, one bank.
+
+=== p43 ===
+Kernel 2: a column read hits one   SMEM   bank 32 times 
+45 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+j=0   j=8   j=16   j=24   j=31 
+i=0   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+i=1   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+i=2   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+i=3   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+i=4   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+i=5   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+i=6   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+i=7   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+⋮   rows i = 8 … 31 continue the same pattern. Cell text = bank number;   orange   = tile[i][5], read by lane i in the store phase 
+Lanes hitting each bank for the column read tile[0..31][5]   —   float tile[32][32] 
+0 
+0 
+0 
+1 
+0 
+2 
+0 
+3 
+0 
+4 
+32 
+5 
+0 
+6 
+0 
+7 
+0 
+8 
+0 
+9 
+0 
+10 
+0 
+11 
+0 
+12 
+0 
+13 
+0 
+14 
+0 
+15 
+0 
+16 
+0 
+17 
+0 
+18 
+0 
+19 
+0 
+20 
+0 
+21 
+0 
+22 
+0 
+23 
+0 
+24 
+0 
+25 
+0 
+26 
+0 
+27 
+0 
+28 
+0 
+29 
+0 
+30 
+0 
+31 
+bank 
+word(i, j) = 32·i + j   ⇒   bank(i, j) = (32·i + j) mod 32 = j 
+The bank does not depend on the row: every element of column c sits in 
+bank c. 
+32 - way conflict → 32 wavefronts per warp load 
+Each of the 4 store - phase loads per warp takes 32 shared - memory cycles instead of 
+1: ≈ 1 000 extra cycles per block.
+
+=== p44 ===
+Kernel 3: pad the   SMEM   row   —   tile[32][33] 
+46 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+__global__ void   transposeNoBankConflicts (float*   odata , 
+const float*   idata , int rows, int cols) 
+{ 
+__shared__ float tile[TILE_DIM][TILE_DIM   + 1 ];   // 32x33 
+int x =   blockIdx.x   * TILE_DIM +   threadIdx.x ; 
+int y =   blockIdx.y   * TILE_DIM +   threadIdx.y ; 
+for (int j = 0; j < TILE_DIM; j += BLOCK_ROWS) 
+tile[ threadIdx.y   + j][ threadIdx.x ] =   // row write 
+idata [(y + j) * cols + x]; 
+__ syncthreads (); 
+x =   blockIdx.y   * TILE_DIM +   threadIdx.x ; 
+y =   blockIdx.x   * TILE_DIM +   threadIdx.y ; 
+for (int j = 0; j < TILE_DIM; j += BLOCK_ROWS) 
+odata [(y + j) * rows + x] = 
+tile[ threadIdx.x ][ threadIdx.y   + j];   // column read 
+} 
+1   The entire fix is one token 
++ 1   adds a 33rd word to every row. No index expression 
+changes; 
+the compiler multiplies the row index by 33 instead of 32. 
+2   What changed in the address math 
+word( i , j) =   33·i   + j, 
+so bank( i , j) = ( i   + j) mod 32 
+the row index now moves the bank. 
+3   Cost 
+32   ×   33   ×   4 B = 4 224 B per block instead of 4 096 B (+3 %). 
+The 33rd column is never read or written. 
+4   Both phases stay conflict - free 
+Row write: bank = (r + x) mod 32 with x = lane   —   a 
+permutation. Column read: bank = (i + c) mod 32 with i = 
+lane   —   a permutation.
+
+=== p45 ===
+Kernel 3: padding skews each row by one bank 
+47 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+j=0   j=8   j=16   j=24   j=31   pad 
+i=0   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   0 
+i=1   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   0   1 
+i=2   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   0   1   2 
+i=3   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   0   1   2   3 
+i=4   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   0   1   2   3   4 
+i=5   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   0   1   2   3   4   5 
+i=6   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   0   1   2   3   4   5   6 
+i=7   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   0   1   2   3   4   5   6   7 
+⋮   rows i = 8 … 31 continue the same pattern. Cell text = bank number;   orange   = tile[i][5], read by lane i in the store phase 
+Lanes hitting each bank for the column read tile[0..31][5]   —   float tile[32][33] 
+1 
+0 
+1 
+1 
+1 
+2 
+1 
+3 
+1 
+4 
+1 
+5 
+1 
+6 
+1 
+7 
+1 
+8 
+1 
+9 
+1 
+10 
+1 
+11 
+1 
+12 
+1 
+13 
+1 
+14 
+1 
+15 
+1 
+16 
+1 
+17 
+1 
+18 
+1 
+19 
+1 
+20 
+1 
+21 
+1 
+22 
+1 
+23 
+1 
+24 
+1 
+25 
+1 
+26 
+1 
+27 
+1 
+28 
+1 
+29 
+1 
+30 
+1 
+31 
+bank 
+word( i , j) = 33·i + j   ⇒   bank( i , j) = ( i   + j) mod 32 
+Column 5 now visits banks 5, 6, 7, …, 4: a rotation through all 32 banks. 
+Conflict - free → 1 wavefront per warp load 
+Each row starts one bank further right than the row above it; the grey column is 
+the unused padding word.
+
+=== p46 ===
+Why the padding must be odd 48 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+•   Row stride   S = 32 + P   words   ⇒   bank( i , j) = ( S·i   + j) mod 32 = 
+( P·i   + j) mod 32 
+•   Column read :   j fixed, lanes   i   = 0…31: conflict - free   ⇔   the map   i 
+↦   P·i   (mod 32) is a   bijection on   ℤ ₃₂ 
+•   That holds exactly when   gcd (P, 32) = 1 , i.e. P is   odd   —   the 
+stride rule again: degree =   gcd (P, 32) 
+•   P = 1   is the cheapest odd choice:   results in   +128 B per tile 
+•   Row write :   i   fixed, lanes x = 0…31: bank = ( P·i   + x) mod 32 is 
+just a shift of x   —   conflict - free for any P 
+Conflict degree of the column read as a function of the padding P 
+P 
+degree 
+0 
+32 - way 
+1 
+1 (free) 
+2 
+2 - way 
+3 
+1 (free) 
+4 
+4 - way 
+8 
+8 - way 
+16 
+16 - way 
+32 
+32 - way 
+P = 0 is the unpadded tile. Even P leaves gcd(P, 32) lanes in each bank; every odd P (1, 3, 5, …) works   —   1 is 
+simply the smallest. 
+Padding: trade - offs 
+•   +   one - token change, trivially correct 
+•   +   works for any   odd P   and any 4 - byte element 
+type 
+•   –   +3 % shared memory per tile (rarely matters) 
+•   –   row stride becomes 132 B   —   not 16 - byte 
+aligned , so float4,   ld.shared.v4   and   ldmatrix 
+rows are misaligned 
+•   –   every new tiling needs its own re - derivation 
+•   –   8 - byte elements: the naive +1 analysis leaves 2 - 
+way conflicts; re - analyze per 128 - B wavefront 
+Rule of thumb 
+Pad when you need a one - line fix and the tile is read 
+with scalar 4 - byte loads. 
+Switch to a swizzle as soon as the tile is read with float4 
+/   ldmatrix   or feeds tensor cores.
+
+=== p47 ===
+Kernel 4: XOR - swizzle the column index 
+49 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+__global__ void transposeSwizzled(float* odata, 
+const float* idata, int rows, int cols) 
+{ 
+__shared__ float tile[TILE_DIM][TILE_DIM];   // no pad 
+int x = blockIdx.x * TILE_DIM + threadIdx.x; 
+int y = blockIdx.y * TILE_DIM + threadIdx.y; 
+for (int j = 0; j < TILE_DIM; j += BLOCK_ROWS) { 
+const int   r =   threadIdx.y +   j,   c =   threadIdx.x; 
+tile[r][c ^ r] = idata[(y + j) * cols + x]; // (1) 
+} 
+__syncthreads(); 
+x = blockIdx.y * TILE_DIM + threadIdx.x; 
+y = blockIdx.x * TILE_DIM + threadIdx.y; 
+for (int j = 0; j < TILE_DIM; j += BLOCK_ROWS) { 
+const int   r =   threadIdx.x,   c =   threadIdx.y +   j; 
+odata[(y + j) * rows + x] = tile[r][c ^ r]; // (2) 
+} 
+} 
+1   Logical (r, c) → physical column c   ⊕   r 
+The tile stays 32   ×   32. Element (r, c) is stored in row r at 
+column c   ⊕   r   —   a per - row permutation of the columns. 
+2   The same formula reads it back 
+XOR is an involution: (c   ⊕   r)   ⊕   r = c, so the store phase 
+addresses the element with identical code   —   no inverse 
+mapping to maintain. 
+3   Row write stays conflict - free 
+r fixed, c = lane: c   ↦   c   ⊕   r is a bijection of {0…31} → 32 
+distinct banks. 
+4   Column read becomes conflict - free 
+c fixed, r = lane: r   ↦   c   ⊕   r is also a bijection → 32 distinct 
+banks. Zero extra memory.
+
+=== p48 ===
+Kernel 4: the column scatters across all 32 banks 
+50 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+j=0   j=8   j=16   j=24   j=31 
+i=0   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+i=1   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+i=2   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+i=3   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+i=4   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+i=5   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+i=6   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+i=7   0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+⋮   rows i = 8 … 31 continue the same pattern. Cell text = bank number;   orange   = physical cell holding logical element (i, 5), i.e. column p = 5   ⊕   i 
+Lanes hitting each bank for the logical column read tile[0..31][5]   —   swizzled float tile[32][32] 
+1 
+0 
+1 
+1 
+1 
+2 
+1 
+3 
+1 
+4 
+1 
+5 
+1 
+6 
+1 
+7 
+1 
+8 
+1 
+9 
+1 
+10 
+1 
+11 
+1 
+12 
+1 
+13 
+1 
+14 
+1 
+15 
+1 
+16 
+1 
+17 
+1 
+18 
+1 
+19 
+1 
+20 
+1 
+21 
+1 
+22 
+1 
+23 
+1 
+24 
+1 
+25 
+1 
+26 
+1 
+27 
+1 
+28 
+1 
+29 
+1 
+30 
+1 
+31 
+bank 
+physical p = j   ⊕   i   ⇒   bank(i, j) = (32·i + (j   ⊕   i)) mod 32 = j   ⊕   i 
+Column 5 lands in banks 5 ⊕ 0, 5 ⊕ 1, 5 ⊕ 2, … = 5, 4, 7, 6, 1, 0, 3, 2, …   —   a 
+permutation of all 32 banks. 
+Conflict - free → 1 wavefront per warp load 
+Same 4 096 B tile as Kernel 2; only the placement of elements inside each row 
+changed.
+
+=== p49 ===
+Why the XOR swizzle works   and is preferred 51 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+•   bank( i , j) = (32·i + (j   ⊕   i )) mod 32 =   j   ⊕   i 
+•   Fixed row   i   (write): j   ↦   j   ⊕   i   is a bijection of {0…31} → conflict - free 
+•   Fixed column j (read):   i   ↦   j   ⊕   i   is a bijection → conflict - free 
+•   Involution: (j   ⊕   i )   ⊕   i   = j → store and load share one formula, no inverse 
+table   (self - inverse) 
+•   Zero extra memory; the row stride stays 128 B, a power of two 
+Worked example, logical column j = 5 
+lane / row i   0   1   2   3   4   5   6   7 
+5   ⊕   i (physical column = bank)   5   4   7   6   1   0   3   2 
+(5   ⊕   i)   ⊕   i   5   5   5   5   5   5   5   5 
+Row 2 is a permutation of 0…7 (and of 0…31 over the full warp); row 3 recovers the logical column   — 
+XOR undoes itself. 
+Why production code swizzles 
+•   Vector accesses move 16 - byte chunks; a 128 - B 
+row holds 8 of them. Swizzle   the chunk index   — 
+p = j ^ (( i   & 7) << 2)   —   so each float4 
+stays contiguous and aligned . 
+•   Padding cannot do this: a 132 - B row stride 
+misaligns every row for   ld.shared.v4   and 
+ldmatrix . 
+•   This is the   Swizzle<B, M, S>   family in 
+CUTLASS /   CuTe   (B = 3, M = 2, S = 3 for the case 
+above). 
+•   Used by   cuBLAS , CUTLASS GEMM, 
+FlashAttention   and every tensor - core kernel that 
+stages tiles in shared memory.
+
+=== p50 ===
+Padding vs. swizzling 52 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+Kernel 3   —   padding   Kernel 4   —   XOR swizzle 
+Shared memory per 32 × 32 float tile   4 , 224 B (+3.1 %)   4 , 096 B 
+Source change   one token:   [TILE_DIM   +   1]   index expression   c   ^   r   in two places 
+Row stride   33 words = 132 B   —   not 16 - B aligned   32 words = 128 B   —   power of two, aligned 
+float4 / ldmatrix friendly   No   Yes, with a chunk - level swizzle 
+Conflict - free accesses   rows and columns of 4 - B elements   rows and columns; extends to 8/16 - B chunks 
+Generality   re - derive the pad for every new tiling   one formula family ( CuTe   Swizzle<B,M,S> ) 
+Where you meet it   textbooks, SDK samples, quick fixes   CUTLASS,   cuBLAS ,   FlashAttention , TMA layouts 
+Effect on this transpose   0 excess wavefronts; ≈ copy bandwidth   0 excess wavefronts; ≈ copy bandwidth 
+For this   transpose   kernel both fixes are equivalent: 1 wavefront per warp - level shared access. 
+Choose padding for a one - line repair; 
+choose swizzling when the tile feeds vectorized or tensor - core loads.
+
+=== p51 ===
+Part 2   —   Nsight Compute workflow 
+53 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+1   Build with line info 
+•   nvcc   - O3   - lineinfo   - 
+gencode 
+arch=compute_75,code=sm_ 
+75 
+•   line info lets ncu map 
+counters to source lines; it 
+does not change the 
+generated code 
+2   Collect 
+•   ncu   -- set   full   - k 
+regex:transpose   - o 
+transpose   ./transpose_t4 
+1024 1024   1 
+•   reps = 1 keeps it to three 
+launches per kernel 
+3   Inspect 
+•   ncu - ui   transpose.ncu - rep 
+•   Memory Workload Analysis → 
+Shared Memory table; Warp 
+State Statistics; Source page 
+4   Compare 
+•   Add Kernel 2 as the   baseline , 
+then open Kernel 3 / 4 
+•   every metric is shown as a 
+delta against the baseline 
+How ncu gets its numbers 
+•   Hardware counters are few, so ncu   replays   each kernel launch many 
+times (kernel replay), collecting a subset of metrics per pass and 
+restoring memory in between. 
+•   Launches are serialized and clocks are locked to base → timings differ 
+from the harness; compare counters, not milliseconds. 
+Practicalities 
+•   Linux:   ERR_NVGPUCTRPERM   → run as root or set 
+NVreg_RestrictProfilingToAdminUsers=0 . Windows: run the 
+terminal as Administrator. 
+•   - k regex:   selects kernels by name;   -- launch - skip   /   -- launch - 
+count   select launches. 
+•   A   -- set full   pass replays ~40 × ; profile a 1024² problem, not 8192².
+
+=== p52 ===
+NCU   Metrics that expose bank conflicts 
+54 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+Metric (append .sum unless noted)   What it counts   K2 → K3 / K4 
+smsp__sass_inst_executed_op_shared_ld   Warp - level shared load instructions (LDS)   —   the number of 
+requests   unchanged 
+l1tex__data_pipe_lsu_wavefronts_mem_shared_op_ld   Wavefronts the shared pipe actually needed to serve those 
+loads   32 ×   → 1 × 
+l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld   Excess wavefronts beyond the ideal = bank conflicts on loads   ≫   0 → 0 
+l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_st   The same for shared stores (the load - phase row writes)   0 → 0 
+l1tex__data_pipe_lsu_wavefronts_mem_shared 
+.pct_of_peak_sustained_elapsed   Utilization of the shared - memory pipe   high → low 
+smsp__average_warps_issue_stalled_short_scoreboard 
+_per_issue_active.ratio 
+Warps waiting on shared - memory (MIO) results per issued 
+instruction   high → low 
+Source page: L1 Wavefronts Shared Excessive   Per - SASS - line excess wavefronts   —   lands on 
+tile[threadIdx.x][threadIdx.y + j]   N → 0 
+Global - memory counterpart for K1 → K2:   l1tex__t_sectors_pipe_lsu_mem_global_op_st.sum   ÷ 
+l1tex__t_requests_pipe_lsu_mem_global_op_st.sum   = sectors per warp store: 32 for the naive kernel, 4 for every other kernel. DRAM bytes barely 
+change   —   L2 merges the partial sectors; the cost shows up in L1→L2 traffic.
+
+=== p53 ===
+Predict first: 1024   ×   1024, one launch 
+55 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+Counting the work 
+•   Grid 32   ×   32 =   1 024 blocks ; block 32   ×   8 =   8 
+warps 
+•   Each warp executes   4   store - phase loads (j = 0, 
+8, 16, 24) → 1 024 · 8 · 4 =   32 768 LDS 
+•   Ideal: 1 wavefront each (32 lanes   ×   4 B = 128 
+B) 
+•   K2: 32 wavefronts per LDS →   1 048 576 ; 
+excess = 31 · 32 768 =   1 015 808 
+•   K3 / K4: wavefronts = LDS = 32 768; excess =   0 
+•   Shared stores (row writes): 32 768 STS, 0 
+excess for K2 – K4 
+•   Global stores: 32 768 warp stores; K1 → 32 
+sectors each = 1 048 576; K2 – K4 → 4 each = 
+131 072 
+Counter (per launch)   K1 naive   K2 coalesced   K3 padding   K4 swizzle 
+shared LD instructions   0   32 768   32 768   32 768 
+shared LD wavefronts   (total)   0   1 048 576   32 768   32 768 
+shared LD bank conflicts   (excess 
+wavefronts)   0   1 015 808   0   0 
+shared ST bank conflicts   0   0   0   0 
+global ST sectors   1 048 576   131 072   131 072   131 072 
+sectors per global ST request   32   4   4   4 
+Assumption to verify in the Source page 
+The compiler keeps one 32 - bit LDS per j - iteration (4 per warp)   —   true at   - O3 for these kernels. If it 
+unrolled or vectorized differently, the instruction counts change but the ratio wavefronts : instructions 
+(32 : 1 vs 1 : 1) does not.
+
+=== p54 ===
+Nsight Compute: commands to run 
+56 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+COMMAND - LINE   INTERFACE (CLI): 
+# 1. Full profile   for the   GUI   (replays each   kernel ~40x) 
+ncu   -- set full   - k   regex:transpose   - o   transpose_t4   \ 
+./transpose_t4   1024 1024 1 
+# 2. Just the bank - conflict story,   in the terminal 
+ncu   - k   regex:"transpose ( Coalesced|NoBankConflicts|Swizzled )"   \ 
+-- metrics   smsp __ sass_inst_executed_op_shared_ld.sum , \ 
+l1tex__data_pipe_lsu_wavefronts_mem_shared_op_ld.sum, \ 
+l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum, \ 
+l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_st.sum   \ 
+./transpose_t4   1024 1024 1 
+# 3. The global - memory counterpart   (K1 vs K2) 
+ncu   - k   regex:" transposeNaive|transposeCoalesced "   \ 
+-- metrics l1tex__t_requests_pipe_lsu_mem_global_op_st.sum, \ 
+l1tex__t_sectors_pipe_lsu_mem_global_op_st.sum   \ 
+./transpose_t4   1024 1024 1 
+# 4. Open the report 
+ncu - ui   transpose_t4.ncu - rep 
+In the GUI 
+•   Collect FULL metrics set 
+•   Memory Workload Analysis   → Shared 
+Memory table: Instructions · Wavefronts · 
+Bank Conflicts 
+•   Warp State Statistics : Stall Short Scoreboard 
+/ MIO Throttle drop from K2 to K3 
+•   Source   page: sort by   L1 Wavefronts Shared 
+Excessive 
+Practical tips 
+•   Windows:   ncu.exe   is in   C: \ Program 
+Files \ NVIDIA   Corporation \ Nsight 
+Compute < ver > \ ; run the terminal as 
+Administrator 
+•   In cmd.exe drop the backslash continuations; 
+keep the regex in double quotes 
+•   Add   -- csv   to command 2 to paste the table 
+into your lab report
+
+=== p55 ===
+Nsight Compute Demo 
+analyzing kernel SMEM and cache usage and bank conflicts 
+rooflines
+
+=== p56 ===
+Transpose Matrices Bank Conflicts Analysis : 
+Takeaways 58 
+UW ECE · Graduate GPU Programming · Shared - memory bank conflicts: padding & swizzling 
+•   bank =   ⌊ addr   / 4 ⌋   mod 32.   A warp's 32   ×   4 - byte access is one wavefront only if it covers 32 distinct banks (or the same 
+word). 
+•   A 32 × 32 float tile makes bank = column.   Reading a column is a 32 - way conflict: 32 wavefronts, 32 cycles, per warp load. 
+•   Padding (K3):   stride 33 → bank = ( i   + j) mod 32. 
+•   Any odd pad works   —   degree =   gcd (P, 32). Cost: +128 B and lost 16 - B alignment. 
+•   Swizzling (K4):   column j   ⊕   i . Same banks, no extra memory, alignment preserved 
+•   the form used by CUTLASS,   cuBLAS   and   FlashAttention . 
+•   Prove it with   NCU :   wavefronts = instructions   ⇔   zero conflicts. 
+•   l1tex__data_bank_conflicts_*   for the count, the Source page for the line. 
+References 
+•   Harris,   An Efficient Matrix Transpose in CUDA C/C++ , NVIDIA Technical Blog, 2013 
+•   Ruetsch &   Micikevicius ,   Optimizing Matrix Transpose in CUDA , NVIDIA, 2010 
+•   CUDA C++ Programming Guide   —   Shared Memory; Nsight Compute Kernel Profiling 
+Guide 
+•   NVIDIA Turing Architecture Whitepaper; CUTLASS /   CuTe   Swizzle   documentation
