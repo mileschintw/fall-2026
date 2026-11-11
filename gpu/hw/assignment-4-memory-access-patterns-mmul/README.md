@@ -4,7 +4,7 @@
 
 | 項目 | 內容 |
 |---|---|
-| 截止 | **2026-11-13（五）11:59 PM PST**（Canvas `due_at` 2026-11-14T07:59:59Z、PDF p1「DUE: 13 November 2026, 11:59 PM」、`assignments.md` 一致）；lock 12/13。原本依 syllabus 預估 11/10（週規劃 `digests/2026-11-01-weekly.md`），以 Canvas 為準 |
+| 截止 | **2026-11-15（日）11:59 PM PST**（Canvas `due_at` 2026-11-16T07:59:59Z，和 `assignments.md` 一致）；lock 12/13。11/11 發現 Canvas 由 11/13（五）延到 11/15（`digests/2026-11-11.md`）。PDF p1 仍寫「DUE: 13 November 2026, 11:59 PM」，沒有跟著改，**採信 Canvas `due_at`**。更早依 syllabus 預估 11/10（週規劃 `digests/2026-11-01-weekly.md`） |
 | 分數 | 15 分（`assignments.md`）＋ **Extra Credit 4 分**（GPU 上的 matrix transpose kernel）；原文沒寫各部分配分 |
 | 繳交方式 | Canvas（原文只寫「SUBMIT」，沒寫 submission type） |
 | 要交的東西 | 1. Questions 1–10 的答案，**要附過程和理由**<br>2. CUDA host application 原始碼：**只交 `.cu`、`.cpp`、`.h`**，不要交 project／solution 檔和 build 產物<br>3. CUDA kernel functions（可以和 host code 放同一個 `.cu`）<br>4. NCU profiling 報告，加一份**獨立的書面分析**，涵蓋 Memory Access Pattern Profiler Analysis 和 Coalesced Corner Turning 兩部分；Profiler Analysis 要附用到的 tile／block 大小（SUBMIT 4a 說的「question #4」） |
@@ -80,7 +80,7 @@
 - 原始碼只交 `.cu`、`.cpp`、`.h`，不要交 project／solution 和 build 產物（spec.md p6「SUBMIT」2a）。
 - 分析要寫成獨立的 write-up，和 NCU 報告一起交，並列出 Profiler Analysis 用的 tile／block 大小（spec.md p6「SUBMIT」4、4a）。
 - 遲交：每人 **7 個 late days**（10/27 起生效），週末（六＋日）算 1 天，沒用完的每天 +0.5 分 extra credit（`gpu/lectures/2026-10-27/notes.md`「重點摘要」1，[00:09:02]–[00:11:04]）。原本 syllabus 的扣分：遲 1 天 -1，之後每 24h 再 -1（`gpu/assignments.md`）。
-- 截止是 PST（UTC−8，11/1 已結束夏令時間）。HW3 同週 11/6 到期，HW4 的 2.1 會用到 HW3 寫好的 MMULTv0／v1。
+- 截止是 PST（UTC−8，11/1 已結束夏令時間），11/11 起延到 11/15（日）（Canvas `due_at`）。HW3 在 11/6 到期，HW4 的 2.1 會用到 HW3 寫好的 MMULTv0／v1。
 
 ## 和上課內容的關聯
 - **Q1、Q6（MMULT 邊界檢查的 divergence）**：L4 p42–p48 的 M tile Type 1／Type 2 分析（`gpu/lectures/2026-10-27/notes.md`「重點摘要」9，[02:35:01]–[02:45:00]；[02:41:05] 說明只有跨過邊界的 warp 會 diverge）。HW3 Part 2 用同樣方法分析 N tile（[../hw3/README.md](../hw3/README.md)）。
@@ -98,6 +98,7 @@
 - **Windows profiling API（`profileapi.h`）**：HW2 步驟和 L3（[../hw2/README.md](../hw2/README.md)；AWS WorkSpace 上的 header 路徑也記在那裡）。
 
 ## 還不確定的地方
+- **截止日延後的出處**：只看到 Canvas `due_at` 改成 11/15，PDF 原文還是 11/13；repo 裡沒有老師在課堂或 Teams 上宣布延期的紀錄（11/10 的課還沒有筆記）。
 - **Q1 的「L1 slides 31–35」**：L1 是課程導論，M tile 邊界檢查的 divergence 分析在 L4 p42–p48；推測是筆誤，應該是 L4（或 L5 的某幾頁）。
 - **Q1「maximal number of warps」的範圍**：原文說 within EACH thread block、throughout the kernel execution，但不同位置的 block 結果不同；「最多」應是取最差的那種 block。
 - **Q5 的選項 a 和 c 的差別**：`(37+50)*8` 和 `37+50*8`，要注意括號。
@@ -117,5 +118,6 @@
 |---|---|
 | 2026-11-04 | 第一次整理 |
 | 2026-11-06 | 補 L5 筆記連結、slide 編號↔PDF 頁碼對照、課堂對 profiling 和 Extra Credit 的補充要求；Canvas 原文沒有重抓（Canvas 登入過期） |
+| 2026-11-11 | 截止延後：Canvas `due_at` 2026-11-14T07:59:59Z → 2026-11-16T07:59:59Z（11/13 五 → 11/15 日 11:59 PM PST）；說明內容沒變 |
 
 GPU 課禁止用 AI 產生作業解答

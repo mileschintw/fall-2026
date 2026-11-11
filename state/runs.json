@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-11T07:45:01-08:00",
+  "task": "作業說明",
+  "status": "new",
+  "summary": "改版：gpu/hw4（截止延到 11/15 日 11:59 PM PST）",
+  "output": "gpu/hw/README.md"
+ },
+ {
   "at": "2026-11-11T07:09:29-08:00",
   "task": "晨報",
   "status": "new",

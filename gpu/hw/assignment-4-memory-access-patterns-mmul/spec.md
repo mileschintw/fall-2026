@@ -1,9 +1,9 @@
 # Assignment #4 - Memory access patterns & MMULT coalesced corner turning kernel
 
-> 來源：Canvas assignment 11810623（https://canvas.uw.edu/courses/1917398/assignments/11810623），抓取 2026-11-04 07:44 PST。
+> 來源：Canvas assignment 11810623（https://canvas.uw.edu/courses/1917398/assignments/11810623），抓取 2026-11-11 07:43 PST。
 > 這個檔案由 `scripts/assignment_specs.py` 產生，內容是原文，每次來源有變動就整份重寫，不要手改。整理過的版本在 README.md。
 
-- 截止（Canvas `due_at`）：2026-11-13 (Fri) 11:59 PM PST
+- 截止（Canvas `due_at`）：2026-11-15 (Sun) 11:59 PM PST
 
 ## Canvas 作業說明
 

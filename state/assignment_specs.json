@@ -439,7 +439,7 @@
   "slug": "assignment-4-memory-access-patterns-mmul",
   "dir": "gpu/hw/assignment-4-memory-access-patterns-mmul",
   "name": "Assignment #4 - Memory access patterns & MMULT coalesced corner turning kernel",
-  "due_at": "2026-11-14T07:59:59Z",
+  "due_at": "2026-11-16T07:59:59Z",
   "fp": {
    "text": "d0cf623872c16f2e",
    "links": [],
@@ -448,22 +448,28 @@
    },
    "readme": null,
    "repo_files": {},
-   "due_at": "2026-11-14T07:59:59Z"
+   "due_at": "2026-11-16T07:59:59Z"
   },
   "files": [
    "spec.pdf",
    "spec.md"
   ],
-  "archived_at": "2026-11-04T07:44:26-08:00",
+  "archived_at": "2026-11-11T07:43:59-08:00",
   "summary_done": true,
   "changes": [
-   "new"
+   "due_at 2026-11-14T07:59:59Z → 2026-11-16T07:59:59Z"
   ],
   "history": [
    {
     "at": "2026-11-04T07:44:26-08:00",
     "changes": [
      "new"
+    ]
+   },
+   {
+    "at": "2026-11-11T07:43:59-08:00",
+    "changes": [
+     "due_at 2026-11-14T07:59:59Z → 2026-11-16T07:59:59Z"
     ]
    }
   ]
