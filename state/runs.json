@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-12T07:09:09-08:00",
+  "task": "晨報",
+  "status": "new",
+  "summary": "GPU final project 分組開放（每組≤3）；L6 講義備註版；Piazza @76",
+  "output": "digests/2026-11-12.md"
+ },
+ {
   "at": "2026-11-11T18:09:51-08:00",
   "task": "截止提醒",
   "status": "ok",
