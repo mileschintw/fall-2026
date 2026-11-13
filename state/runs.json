@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-13T07:08:30-08:00",
+  "task": "晨報",
+  "status": "new",
+  "summary": "Teams 老師貼 Win27 SLN 開放；GPU HW4 11/15 到期未交",
+  "output": "digests/2026-11-13.md"
+ },
+ {
   "at": "2026-11-12T18:08:58-08:00",
   "task": "截止提醒",
   "status": "ok",
