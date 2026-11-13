@@ -93,12 +93,12 @@
     - 「slide 35」（2.2 corner turning）：**PDF p35「Transpose Pattern for Coalesced Access」**，對得上。
   - 課堂補充（原文沒寫）：corner-turning kernel 要和之前的 SMEM tiled kernel **一起用 NCU profile 比較**，應該看到效能提升（notes [01:42:03]）；一定要用 demo 的方法 profile，證明看到預期的行為並解釋原因（[03:10:01]）；Extra Credit 的 transpose kernel 也要驗證正確性並簡單 profile，它的 AI 是 0，全是記憶體存取，所以本身也要注意 coalescing（[03:10:01]–[03:11:02]；投影片 p49「Be sure to verify correctness and profile performance!」）。
   - NCU 指標（投影片 p45）：`l1tex__t_requests_pipe_lsu_mem_global_op_ld.sum`、`l1tex__t_sectors_pipe_lsu_mem_global_op_ld.sum`（相除得 sectors/request，32×4 B 理想值 4、完全分散 32）、`dram__bytes_read.sum`、`dram__throughput.avg.pct_of_peak_sustained_elapsed`、`lts__t_sector_hit_rate.pct`。課堂 demo 的預測→驗證範例（4×4、32×32 矩陣的 requests／sectors 推算）在 notes [02:35:00]–[03:02:03]，2.1 的 6a 可以照同樣方法推。
+- **2.1 的 NCU 讀法、Extra Credit transpose kernel**：L6（11/10），筆記 [`gpu/lectures/2026-11-10/notes.md`](../../lectures/2026-11-10/notes.md)。[01:46]–[01:54] 的 stride 實驗（sectors/request = 4、8、32）就是 2.1 分析 global 存取的方法；p38–p50 的 transpose case study（K1 naive → K2 SMEM tile → K3 padding → K4 XOR swizzle）直接對應 Extra Credit，K2 的 32×32 tile column read 有 32-way bank conflict，padding（`[32][33]`）一行就能修好。課堂上老師也口頭確認截止延到 11/15（日）（notes [00:02:01]）。
 - **MMULTv0／v1**：L3 p37–p42（naive）、p49–p74（tiled）（`gpu/lectures/2026-10-20/notes.md`「重點摘要」10、12）；HW3 3.2 已實作通用版。
 - **NCU GUI**：L4 p49–p51 和 demo（`gpu/lectures/2026-10-27/notes.md`「重點摘要」10–11）。Memory Workload Analysis 是這次新用到的 section。
 - **Windows profiling API（`profileapi.h`）**：HW2 步驟和 L3（[../hw2/README.md](../hw2/README.md)；AWS WorkSpace 上的 header 路徑也記在那裡）。
 
 ## 還不確定的地方
-- **截止日延後的出處**：只看到 Canvas `due_at` 改成 11/15，PDF 原文還是 11/13；repo 裡沒有老師在課堂或 Teams 上宣布延期的紀錄（11/10 的課還沒有筆記）。
 - **Q1 的「L1 slides 31–35」**：L1 是課程導論，M tile 邊界檢查的 divergence 分析在 L4 p42–p48；推測是筆誤，應該是 L4（或 L5 的某幾頁）。
 - **Q1「maximal number of warps」的範圍**：原文說 within EACH thread block、throughout the kernel execution，但不同位置的 block 結果不同；「最多」應是取最差的那種 block。
 - **Q5 的選項 a 和 c 的差別**：`(37+50)*8` 和 `37+50*8`，要注意括號。
@@ -119,5 +119,6 @@
 | 2026-11-04 | 第一次整理 |
 | 2026-11-06 | 補 L5 筆記連結、slide 編號↔PDF 頁碼對照、課堂對 profiling 和 Extra Credit 的補充要求；Canvas 原文沒有重抓（Canvas 登入過期） |
 | 2026-11-11 | 截止延後：Canvas `due_at` 2026-11-14T07:59:59Z → 2026-11-16T07:59:59Z（11/13 五 → 11/15 日 11:59 PM PST）；說明內容沒變 |
+| 2026-11-12 | 補 L6（11/10）的關聯：老師課堂確認延期、NCU stride 讀法、transpose case study 對應 Extra Credit；刪掉「延期出處不明」 |
 
 GPU 課禁止用 AI 產生作業解答
