@@ -98,9 +98,9 @@
   "due": "2026-11-15T23:59:59-08:00",
   "due_label": "11/15（日） 11:59 PM PST",
   "points": 15,
-  "status": "未交",
-  "done": false,
-  "note": "11/3 Canvas 發布（HW4 PDF 同時上傳，file 155723325）；原預估 11/10，Canvas due_at 為 11/13；11/11 晨報：Canvas due_at 由 11/13 改為 11/15（2026-11-16T07:59:59Z）",
+  "status": "已交",
+  "done": true,
+  "note": "11/3 Canvas 發布（HW4 PDF 同時上傳，file 155723325）；原預估 11/10，Canvas due_at 為 11/13；11/11 晨報：Canvas due_at 由 11/13 改為 11/15（2026-11-16T07:59:59Z）；11/14 晨報：Canvas 顯示已交（submitted）",
   "canvas_id": 11810623
  },
  {
