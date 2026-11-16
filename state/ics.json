@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-11-08T21:04:26.968405-08:00",
+ "fetched_at": "2026-11-15T21:04:34.341134-08:00",
  "stats": {
   "GPU": {
    "raw": 10,
@@ -282,15 +282,6 @@
    "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5120543"
   },
   {
-   "course": "GPU",
-   "summary": "Assignment #4 - Memory access patterns & MMULT coalesced corner turning kernel [EE P 524 A]",
-   "start": "2026-11-13T00:00:00-08:00",
-   "all_day": true,
-   "location": null,
-   "kind": "due",
-   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917398&month=11&year=2026#assignment_11810623"
-  },
-  {
    "course": "DSA",
    "summary": "Adrienne's OH  [EE P 590 A]",
    "start": "2026-11-14T09:30:00-08:00",
@@ -298,6 +289,15 @@
    "location": null,
    "kind": "event",
    "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5131638"
+  },
+  {
+   "course": "GPU",
+   "summary": "Assignment #4 - Memory access patterns & MMULT coalesced corner turning kernel [EE P 524 A]",
+   "start": "2026-11-15T00:00:00-08:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917398&month=11&year=2026#assignment_11810623"
   },
   {
    "course": "DSA",
