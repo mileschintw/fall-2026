@@ -1,5 +1,19 @@
 [
  {
+  "at": "2026-11-16T15:52:17-08:00",
+  "task": "截止提醒",
+  "status": "new",
+  "summary": "GPU Proposal 11/17 11:59 PM 剩 32h；預設 python 3.14 缺 tzdata，改用 3.13",
+  "output": "state/alerts_sent.json"
+ },
+ {
+  "at": "2026-11-16T15:52:03-08:00",
+  "task": "作業說明",
+  "status": "fail",
+  "summary": "python 3.14 缺 tzdata：No time zone found with key America/Los_Angeles",
+  "output": ""
+ },
+ {
   "at": "2026-11-15T21:05:51-08:00",
   "task": "週規劃",
   "status": "ok",

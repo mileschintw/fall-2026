@@ -7,14 +7,16 @@
 ## 最新狀態
 - 晨報：11/15 日 15:13 ⚠️ 需要重新登入：Canvas；其他來源沒有新東西；GPU HW4 今晚到期（11/14 已交） → [2026-11-15.md](2026-11-15.md)
 - 週規劃：11/15 日 21:05 ✅ 11/16 GPU 分組截止；Proposal 11/17（課堂說 11/18）；A5 11/22 還沒開工，11/16 開始 → [2026-11-15-weekly.md](2026-11-15-weekly.md)
-- 截止提醒：11/15 日 18:09 ✅ 沒有新東西：48h 內唯一到期的 GPU HW4（今晚 11:59 PM）已交；Proposal 11/17 還有 54h → —
+- 截止提醒：11/16 一 15:52 🆕 GPU Proposal 11/17 11:59 PM 剩 32h；預設 python 3.14 缺 tzdata，改用 3.13 → [alerts_sent.json](../state/alerts_sent.json)
 - 上課筆記：11/12 四 10:10 ⏭ DSA 2026-11-11 錄影尚未發布（Panopto 有 session 但字幕尚未產生） → —
-- 作業說明：11/15 日 15:12 ⚠️ 需要重新登入：Canvas → —
+- 作業說明：11/16 一 15:52 ❌ python 3.14 缺 tzdata：No time zone found with key America/Los_Angeles → —
 
 ## 紀錄
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 11/16 一 15:52 | 截止提醒 | 🆕 | GPU Proposal 11/17 11:59 PM 剩 32h；預設 python 3.14 缺 tzdata，改用 3.13 | [alerts_sent.json](../state/alerts_sent.json) |
+| 11/16 一 15:52 | 作業說明 | ❌ | python 3.14 缺 tzdata：No time zone found with key America/Los_Angeles | — |
 | 11/15 日 21:05 | 週規劃 | ✅ | 11/16 GPU 分組截止；Proposal 11/17（課堂說 11/18）；A5 11/22 還沒開工，11/16 開始 | [2026-11-15-weekly.md](2026-11-15-weekly.md) |
 | 11/15 日 18:09 | 截止提醒 | ✅ | 沒有新東西：48h 內唯一到期的 GPU HW4（今晚 11:59 PM）已交；Proposal 11/17 還有 54h | — |
 | 11/15 日 15:13 | 晨報 | ⚠️ | 需要重新登入：Canvas；其他來源沒有新東西；GPU HW4 今晚到期（11/14 已交） | [2026-11-15.md](2026-11-15.md) |
