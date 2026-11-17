@@ -8,7 +8,7 @@
 | Task 0 - self introductions | 10/9（五）11:59 PM PDT | 0 | 已發布（id 11810624），lock 12/18 | unsubmitted | online_url；**不計分**（omit_from_final_grade）；內容是在 Teams 貼自介；L1 老師說 task zero 不用交 [00:57:05] |
 | HW1 SAXPY, 2D & 3D Matrix addition | **10/20（二）5:59 PM PDT** | 11 | 已發布（id 11810625），lock 12/11 | graded（11/11 晨報確認） | online_upload；Canvas 與 §2 一致 |
 | Pop Quiz - Lecture 3 - 10/20/26 | 10/20（二）8:30 PM PDT | 3 | 已發布（id 11860726，quiz 2457138），8:20–8:30 PM 開放 | graded | 課堂 pop quiz |
-| HW2 Parallel performance theory, Gaussian blur kernels and more! | **10/27（二）5:59 PM PDT** | 12 | 已發布（id 11810626），lock 12/13 | submitted（10/28 確認） | 10/20 發布；說明 PDF「Homework #2 (HW2) - Au26 - GPUCompute.pdf」（Canvas file 154697826） |
+| HW2 Parallel performance theory, Gaussian blur kernels and more! | **10/27（二）5:59 PM PDT** | 12 | 已發布（id 11810626），lock 12/13 | graded（11/17 確認） | 10/20 發布；說明 PDF「Homework #2 (HW2) - Au26 - GPUCompute.pdf」（Canvas file 154697826） |
 | Pop Quiz - Lecture 4 - 10/27 | 10/27（二）8:25 PM PDT（lock；due_at null） | 5 | 已發布（id 11860516，quiz 2457104） | graded（10/28 確認） | 課堂 pop quiz |
 | HW3 Control Divergence & Tiled MMULT improvements & NCU profiling | **11/6（五）11:59 PM PST**（Canvas due_at 2026-11-07T07:59:59Z） | 12 | 已發布（id 11810628），lock 12/14 | submitted | 10/27 發布；說明 PDF「Homework #3 (HW3) - Au26 - GPU Compute .pdf」（Canvas file 155100870）；原預估 11/3，以 Canvas 為準 |
 | Pop Quiz - Lecture 5 11/2/26 | 11/3（二）8:30 PM PST | 3 | 已發布（id 11881085，quiz 2460212），8:20–8:30 PM 開放 | graded（11/4 確認） | 課堂 pop quiz |

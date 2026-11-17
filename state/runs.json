@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-17T01:35:59-08:00",
+  "task": "晨報",
+  "status": "new",
+  "summary": "Canvas 補抓：GPU 新 ResNet18 kit 2 檔；HW2、A4、DSA Midterm 已評分",
+  "output": "digests/2026-11-16.md"
+ },
+ {
   "at": "2026-11-16T18:09:18-08:00",
   "task": "截止提醒",
   "status": "ok",
