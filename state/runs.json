@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-17T10:11:45-08:00",
+  "task": "上課筆記",
+  "status": "new",
+  "summary": "DSA 11/16 Class 12 筆記：heap pop 常見錯誤、build heap O(n)；字幕只有後半",
+  "output": "dsa/lectures/2026-11-16/notes.md"
+ },
+ {
   "at": "2026-11-17T08:09:25-08:00",
   "task": "截止提醒",
   "status": "ok",

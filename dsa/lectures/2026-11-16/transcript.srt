@@ -1,0 +1,2489 @@
+1
+00:52:07,000 --> 00:52:14,000
+[該逐字稿自動產生。為清晰起見，可能已進行編輯。]
+We had 4385 before we bubbled and 3485.
+
+2
+00:52:14,000 --> 00:52:16,000
+I think we've got a heap.
+
+3
+00:52:16,000 --> 00:52:18,000
+Proper at the bottom.
+
+4
+00:52:18,000 --> 00:52:22,000
+And we returned the right value.
+
+5
+00:52:22,000 --> 00:52:26,000
+Okay, any questions before we take a break?
+
+6
+00:52:26,000 --> 00:52:37,000
+Okay, let's take our break and we'll come back. We'll make sure we put all this together.
+
+7
+00:52:37,000 --> 00:52:42,000
+And I will give
+
+8
+00:52:42,000 --> 00:52:52,000
+tests back for anyone who's in the
+
+9
+00:53:02,000 --> 00:53:05,000
+Okay.
+
+10
+00:53:05,000 --> 00:53:06,000
+We're back.
+
+11
+00:53:06,000 --> 00:53:12,000
+We're back, and we have a
+
+12
+00:53:12,000 --> 00:53:15,000
+see, I'm gonna try to
+
+13
+00:53:15,000 --> 00:53:22,000
+Arrange this. I put our heap from the drawing
+
+14
+00:53:22,000 --> 00:53:24,000
+Let's see.
+
+15
+00:53:24,000 --> 00:53:27,000
+Sharing video
+
+16
+00:53:27,000 --> 00:53:32,000
+Sharing audio, resumed. I'm sharing my screen, resume the recording. Okay
+
+17
+00:53:32,000 --> 00:53:44,000
+I put the heap here from our pictures, and then we took a quick look at our our
+
+18
+00:53:44,000 --> 00:53:55,000
+keep remove that took a value out and then bubbled, rearranged it and bubbled it down so that we still had a heap.
+
+19
+00:53:55,000 --> 00:54:10,000
+I'm not convinced that we have covered all of the common problems that we usually have when we implement a heap. So let me, I would call out the things that
+
+20
+00:54:10,000 --> 00:54:15,000
+go wrong and we will look at our double bubble down and see if
+
+21
+00:54:15,000 --> 00:54:20,000
+Let's see if we did it right or not.
+
+22
+00:54:20,000 --> 00:54:24,000
+Let me move and
+
+23
+00:54:24,000 --> 00:54:26,000
+Problems.
+
+24
+00:54:26,000 --> 00:54:30,000
+Okay, first one
+
+25
+00:54:30,000 --> 00:54:31,000
+is
+
+26
+00:54:31,000 --> 00:54:36,000
+always swapping with the left child
+
+27
+00:54:36,000 --> 00:54:43,000
+When the right child is smaller. Okay, this is one of our common problems.
+
+28
+00:54:43,000 --> 00:54:48,000
+Is that we
+
+29
+00:54:48,000 --> 00:54:56,000
+We always swap with one child rather than the correct child.
+
+30
+00:54:56,000 --> 00:55:10,000
+So we want to make sure that we're always swapping with the smaller child. If we look at our implementation here for our bubble down, are we always swapping with the smaller child?
+
+31
+00:55:10,000 --> 00:55:11,000
+I think so.
+
+32
+00:55:11,000 --> 00:55:17,000
+We went through this one a lot, so I feel okay that we're swapping with the smaller child, not just
+
+33
+00:55:17,000 --> 00:55:21,000
+consistent, consistently the left of the right
+
+34
+00:55:21,000 --> 00:55:24,000
+And we see this here with our smallest index
+
+35
+00:55:24,000 --> 00:55:27,000
+We check
+
+36
+00:55:27,000 --> 00:55:30,000
+Compared to the left child, compare it to the right child.
+
+37
+00:55:30,000 --> 00:55:35,000
+And then do our swap. So I think that's okay.
+
+38
+00:55:35,000 --> 00:55:43,000
+Let's see another common error is checking
+
+39
+00:55:43,000 --> 00:55:47,000
+For children off the links
+
+40
+00:55:47,000 --> 00:55:49,000
+Of the list
+
+41
+00:55:49,000 --> 00:55:52,000
+And we hit that one
+
+42
+00:55:52,000 --> 00:55:56,000
+We did that. We hit that here
+
+43
+00:55:56,000 --> 00:56:07,000
+When we started to do this and said, nope, we have to, we have to check and make sure that, once we've calculated the left child and the right child, that they actually exist in the list
+
+44
+00:56:07,000 --> 00:56:10,000
+And
+
+45
+00:56:10,000 --> 00:56:13,000
+I think that's what we've got so far.
+
+46
+00:56:13,000 --> 00:56:18,000
+I think that's good.
+
+47
+00:56:18,000 --> 00:56:21,000
+Okay.
+
+48
+00:56:21,000 --> 00:56:24,000
+Next common problem
+
+49
+00:56:24,000 --> 00:56:28,000
+is
+
+50
+00:56:28,000 --> 00:56:32,000
+A one value heap
+
+51
+00:56:32,000 --> 00:56:37,000
+Removing
+
+52
+00:56:37,000 --> 00:56:47,000
+What happens when we remove something from a one value heap?
+
+53
+00:56:47,000 --> 00:56:54,000
+One thing in our I'm going to do this real quick right here.
+
+54
+00:56:54,000 --> 00:56:58,000
+I'm going to say heap 2 equals
+
+55
+00:56:58,000 --> 00:57:02,000
+Two, I'm just going to put one element in it
+
+56
+00:57:02,000 --> 00:57:06,000
+And
+
+57
+00:57:06,000 --> 00:57:10,000
+I'm going to beep, pop
+
+58
+00:57:10,000 --> 00:57:12,000
+You too.
+
+59
+00:57:12,000 --> 00:57:14,000
+Just going to call it and see what happens.
+
+60
+00:57:14,000 --> 00:57:17,000
+Any guesses
+
+61
+00:57:17,000 --> 00:57:24,000
+You gonna be okay?
+
+62
+00:57:24,000 --> 00:57:29,000
+An error. What kind of error?
+
+63
+00:57:29,000 --> 00:57:31,000
+Let's see, let's see
+
+64
+00:57:31,000 --> 00:57:40,000
+That's the thing, hitting run is cheap. Okay, we got an error. Woohoo! Yay, we knew. Okay.
+
+65
+00:57:40,000 --> 00:57:42,000
+So what happened here
+
+66
+00:57:42,000 --> 00:57:45,000
+We popped
+
+67
+00:57:45,000 --> 00:57:56,000
+And it was at line 38. We access heap of zero.
+
+68
+00:57:56,000 --> 00:57:58,000
+Yeah, the heaps
+
+69
+00:57:58,000 --> 00:58:01,000
+Sorry.
+
+70
+00:58:01,000 --> 00:58:05,000
+Yeah, so our heap.pop
+
+71
+00:58:05,000 --> 00:58:13,000
+takes the last element out of the list. The list is now empty. So when we try to assign a value
+
+72
+00:58:13,000 --> 00:58:15,000
+To the element
+
+73
+00:58:15,000 --> 00:58:17,000
+and X, 0.
+
+74
+00:58:17,000 --> 00:58:23,000
+We get… we get… we get an error. We get this
+
+75
+00:58:23,000 --> 00:58:34,000
+Index out of range error because there are zero elements in that list. So we need to do something about that.
+
+76
+00:58:34,000 --> 00:58:39,000
+Here
+
+77
+00:58:39,000 --> 00:58:43,000
+Let's do something more like last
+
+78
+00:58:43,000 --> 00:58:48,000
+Equals pop that last element out
+
+79
+00:58:48,000 --> 00:58:50,000
+And then
+
+80
+00:58:50,000 --> 00:58:53,000
+If
+
+81
+00:58:53,000 --> 00:58:59,000
+We have a heap and a heap zero equals last
+
+82
+00:58:59,000 --> 00:59:02,000
+So we're gonna now we're going to put
+
+83
+00:59:02,000 --> 00:59:19,000
+Little extra check in here. So instead of just doing that one statement that allows us to pop off the end and put it in Part 0, we're instead, we're going to pop off and remember that last value, and then if we still have a he
+
+84
+00:59:19,000 --> 00:59:24,000
+We're going to we're going to put it
+
+85
+00:59:24,000 --> 00:59:27,000
+Back in at
+
+86
+00:59:27,000 --> 00:59:31,000
+Put it back into the list.
+
+87
+00:59:31,000 --> 00:59:34,000
+And then
+
+88
+00:59:34,000 --> 00:59:37,000
+We'll go ahead and bubble it down
+
+89
+00:59:37,000 --> 00:59:41,000
+And at this point, if we no longer have a heap
+
+90
+00:59:41,000 --> 00:59:45,000
+My list is empty at this point. We just return the value. We're done. We have nothing left.
+
+91
+00:59:45,000 --> 00:59:47,000
+Our heap is empty. That's great.
+
+92
+00:59:47,000 --> 00:59:51,000
+Okay.
+
+93
+00:59:51,000 --> 00:59:54,000
+I'm going to run this. Confirm
+
+94
+00:59:54,000 --> 00:59:58,000
+Okay, no complaints. So I think we got that.
+
+95
+00:59:58,000 --> 01:00:03,000
+And then the other. I think this is our last one.
+
+96
+01:00:03,000 --> 01:00:08,000
+Thing that goes wrong is
+
+97
+01:00:08,000 --> 01:00:15,000
+Swapping root last value but not
+
+98
+01:00:15,000 --> 01:00:21,000
+Shrinking
+
+99
+01:00:21,000 --> 01:00:24,000
+Okay, so
+
+100
+01:00:24,000 --> 01:00:28,000
+This one we swap the root
+
+101
+01:00:28,000 --> 01:00:30,000
+With the last value.
+
+102
+01:00:30,000 --> 01:00:36,000
+But we forget to shrink. What's going on there?
+
+103
+01:00:36,000 --> 01:00:49,000
+What's what's the problem here?
+
+104
+01:00:49,000 --> 01:00:55,000
+So this is the case where we're swapping the root with the last value. So this is
+
+105
+01:00:55,000 --> 01:01:00,000
+We have just removed the root from the tree
+
+106
+01:01:00,000 --> 01:01:03,000
+Because we're… we're
+
+107
+01:01:03,000 --> 01:01:06,000
+returning back the root of the tree
+
+108
+01:01:06,000 --> 01:01:08,000
+But
+
+109
+01:01:08,000 --> 01:01:18,000
+In order to make it a tree again, we take the last value and we move it up to the root so that we can bubble it down.
+
+110
+01:01:18,000 --> 01:01:21,000
+So what happens here?
+
+111
+01:01:21,000 --> 01:01:28,000
+Okay, so we did see this, I think, before I did the pop here.
+
+112
+01:01:28,000 --> 01:01:33,000
+If we don't shrink that list
+
+113
+01:01:33,000 --> 01:01:35,000
+We don't do the pop.
+
+114
+01:01:35,000 --> 01:01:43,000
+That shrinks the list down, then we end up with extra elements still in our list.
+
+115
+01:01:43,000 --> 01:01:46,000
+That will start to cause problems later
+
+116
+01:01:46,000 --> 01:01:49,000
+But Pop
+
+117
+01:01:49,000 --> 01:01:53,000
+Make sure that the list shrinks to the values that we're
+
+118
+01:01:53,000 --> 01:01:54,000
+That we're using.
+
+119
+01:01:54,000 --> 01:02:01,000
+That we're… that are still in the
+
+120
+01:02:01,000 --> 01:02:04,000
+Like, we're okay with this one. We're okay with this one?
+
+121
+01:02:04,000 --> 01:02:15,000
+I think so because we ran into that problem here when I started off with, I'll forget what I had. I just had to swap without the pop
+
+122
+01:02:15,000 --> 01:02:17,000
+Put the pop in
+
+123
+01:02:17,000 --> 01:02:20,000
+So that pops that
+
+124
+01:02:20,000 --> 01:02:23,000
+Super important because it shrinks the list to make sure that we don't have
+
+125
+01:02:23,000 --> 01:02:25,000
+Extra data
+
+126
+01:02:25,000 --> 01:02:26,000
+Line around.
+
+127
+01:02:26,000 --> 01:02:30,000
+Okay, so this look okay.
+
+128
+01:02:30,000 --> 01:02:36,000
+Okay, do we want to run it a couple of times?
+
+129
+01:02:36,000 --> 01:02:39,000
+More examples?
+
+130
+01:02:39,000 --> 01:02:44,000
+I'm going to I'm going to comment out all this
+
+131
+01:02:44,000 --> 01:03:00,000
+So that we have something clean to work with
+
+132
+01:03:00,000 --> 01:03:07,000
+New heap equals, okay. Now, the lovely thing about
+
+133
+01:03:07,000 --> 01:03:17,000
+Our heap, and the fact that we can model it with a list underneath is that I don't have to do this whole build up the heap by calling insert.
+
+134
+01:03:17,000 --> 01:03:24,000
+I can populate it just by reading off of this diagram that we have.
+
+135
+01:03:24,000 --> 01:03:26,000
+So here's my new heap
+
+136
+01:03:26,000 --> 01:03:30,000
+I want to populate my heap with what we see from the diagram.
+
+137
+01:03:30,000 --> 01:03:34,000
+What's the first element that goes in the list
+
+138
+01:03:34,000 --> 01:03:41,000
+What's next?
+
+139
+01:03:41,000 --> 01:03:45,000
+That's right.
+
+140
+01:03:45,000 --> 01:03:49,000
+What kind of traversal is that?
+
+141
+01:03:49,000 --> 01:03:58,000
+The breadth-first search. We are just going from the top level by level, left to right. And that then
+
+142
+01:03:58,000 --> 01:04:01,000
+Oh, I need a comma here
+
+143
+01:04:01,000 --> 01:04:04,000
+We now have a Python list
+
+144
+01:04:04,000 --> 01:04:09,000
+That represents this heap just by reading off the tree.
+
+145
+01:04:09,000 --> 01:04:14,000
+So we're going to pop
+
+146
+01:04:14,000 --> 01:04:21,000
+Yes, this is New Heap
+
+147
+01:04:21,000 --> 01:04:25,000
+Let's run this. Let's see what we've got. And
+
+148
+01:04:25,000 --> 01:04:30,000
+So we started I forgot where we were printing here.
+
+149
+01:04:30,000 --> 01:04:36,000
+And then we wanted to print at the end.
+
+150
+01:04:36,000 --> 01:04:39,000
+Okay, so I think it pulled out the root
+
+151
+01:04:39,000 --> 01:04:47,000
+And then it swapped. 10 was the very last item in our heap. So it moved it to the beginning.
+
+152
+01:04:47,000 --> 01:04:49,000
+Everything else is the same.
+
+153
+01:04:49,000 --> 01:04:54,000
+And then it took our 10, and it bubbled it down.
+
+154
+01:04:54,000 --> 01:04:58,000
+Let me see one more time.
+
+155
+01:04:58,000 --> 01:05:00,000
+And then
+
+156
+01:05:00,000 --> 01:05:07,000
+Our 10 gets bubbled down to just before the 12th.
+
+157
+01:05:07,000 --> 01:05:09,000
+Levels down that one
+
+158
+01:05:09,000 --> 01:05:20,000
+Can you see at the bottom there is a two part two part at the bottom or is it okay?
+
+159
+01:05:20,000 --> 01:05:25,000
+Would it be helpful to walk through this and trace it down?
+
+160
+01:05:25,000 --> 01:05:27,000
+Thank you.
+
+161
+01:05:27,000 --> 01:05:38,000
+I mean, what I am going to point to right now is this visual algo. I don't know if I'm gonna
+
+162
+01:05:38,000 --> 01:05:47,000
+Run it right now, but I'm going to point it out. Maybe I'll run it quickly. Got a little bit of info there. But
+
+163
+01:05:47,000 --> 01:05:53,000
+This is also a good place to go to look at your heap and
+
+164
+01:05:53,000 --> 01:05:59,000
+Play with it so that we can
+
+165
+01:05:59,000 --> 01:06:02,000
+inspect and
+
+166
+01:06:02,000 --> 01:06:10,000
+Explore how inserting and removing things from our heap works.
+
+167
+01:06:10,000 --> 01:06:14,000
+Okay.
+
+168
+01:06:14,000 --> 01:06:16,000
+Back to
+
+169
+01:06:16,000 --> 01:06:22,000
+Let's say I have
+
+170
+01:06:22,000 --> 01:06:24,000
+Some list
+
+171
+01:06:24,000 --> 01:06:26,000
+And…
+
+172
+01:06:26,000 --> 01:06:36,000
+Yeah, let's do it. I'm gonna copy what I've got in my notes. 47182
+
+173
+01:06:36,000 --> 01:06:40,000
+So it's 3, 5. Okay.
+
+174
+01:06:40,000 --> 01:06:42,000
+I've got this list
+
+175
+01:06:42,000 --> 01:06:46,000
+Is this a heap? Is this a min heap?
+
+176
+01:06:46,000 --> 01:06:48,000
+Or a maxi.
+
+177
+01:06:48,000 --> 01:06:53,000
+specifically a minute
+
+178
+01:06:53,000 --> 01:07:01,000
+Thank you. No, it is not. What is one giveaway that this is not the menu?
+
+179
+01:07:01,000 --> 01:07:06,000
+Thank you. The nine. The nine is not the smallest value in this list.
+
+180
+01:07:06,000 --> 01:07:23,000
+So that means this is absolutely not a minheap. I don't care about anything else. All we know is that the smallest value in the list is not in the very first spot. So it is absolutely not a menu. What if I want to turn this list into a heap
+
+181
+01:07:23,000 --> 01:07:27,000
+Go ahead. Go about doing that. And this list of numbers
+
+182
+01:07:27,000 --> 01:07:30,000
+I want to turn it into a heap. What do we do
+
+183
+01:07:30,000 --> 01:07:44,000
+It is.
+
+184
+01:07:44,000 --> 01:07:49,000
+Okay, once it's a heat, we will have one at index zero. Yes.
+
+185
+01:07:49,000 --> 01:07:52,000
+Try to get it there
+
+186
+01:07:52,000 --> 01:07:56,000
+Bubbling down the
+
+187
+01:07:56,000 --> 01:07:59,000
+Bubbling up the last
+
+188
+01:07:59,000 --> 01:08:01,000
+So start at the end
+
+189
+01:08:01,000 --> 01:08:04,000
+And bubble up
+
+190
+01:08:04,000 --> 01:08:12,000
+So we will bubble up five into place. So maybe something like
+
+191
+01:08:12,000 --> 01:08:15,000
+Let's see
+
+192
+01:08:15,000 --> 01:08:28,000
+Was there a bubble up is a index. So bubble up
+
+193
+01:08:28,000 --> 01:08:34,000
+Some lists and index blend of some lists
+
+194
+01:08:34,000 --> 01:08:43,000
+This one, something like this. Okay, so we start there.
+
+195
+01:08:43,000 --> 01:08:49,000
+Okay.
+
+196
+01:08:49,000 --> 01:08:57,000
+Looks like it did not move five anywhere. Do we expect that?
+
+197
+01:08:57,000 --> 01:09:01,000
+This is the point where I wish I had scribble
+
+198
+01:09:01,000 --> 01:09:06,000
+And I can do scribbling and coding. Anyone want to
+
+199
+01:09:06,000 --> 01:09:11,000
+You know, I think a piece of paper right here.
+
+200
+01:09:11,000 --> 01:09:15,000
+I know I could go on the board.
+
+201
+01:09:15,000 --> 01:09:18,000
+We have 9
+
+202
+01:09:18,000 --> 01:09:26,000
+4718
+
+203
+01:09:26,000 --> 01:09:27,000
+Thanks.
+
+204
+01:09:27,000 --> 01:09:31,000
+3, 5. Okay.
+
+205
+01:09:31,000 --> 01:09:36,000
+Oh no, this, we can't see it. Is that
+
+206
+01:09:36,000 --> 01:09:42,000
+Is that useless for everyone. It might be useless for everyone. Maybe it's worth just plugging back into the iPad.
+
+207
+01:09:42,000 --> 01:09:48,000
+But what I'm looking at here is that five is at the very bottom.
+
+208
+01:09:48,000 --> 01:09:52,000
+And one is its parent
+
+209
+01:09:52,000 --> 01:09:58,000
+So is finding the right spot so that our bubble up do the right thing? Yeah.
+
+210
+01:09:58,000 --> 01:10:02,000
+Okay, bubble up did the right thing. So what's next? We
+
+211
+01:10:02,000 --> 01:10:18,000
+bubbled up 5, and it didn't go anywhere. What else? What what else do we do? What's our approach to turning this list into a heap?
+
+212
+01:10:18,000 --> 01:10:20,000
+Okay, so we could start at the top.
+
+213
+01:10:20,000 --> 01:10:22,000
+and bubbled down
+
+214
+01:10:22,000 --> 01:10:28,000
+Okay. So something more like
+
+215
+01:10:28,000 --> 01:10:33,000
+Bubble down
+
+216
+01:10:33,000 --> 01:10:38,000
+some list. And what was our
+
+217
+01:10:38,000 --> 01:10:41,000
+Double down 0.
+
+218
+01:10:41,000 --> 01:10:44,000
+So what happens
+
+219
+01:10:44,000 --> 01:10:48,000
+Okay, did I print it first
+
+220
+01:10:48,000 --> 01:10:50,000
+It's almost add notes
+
+221
+01:10:50,000 --> 01:11:01,000
+So we got somewhere because our one did bubble up
+
+222
+01:11:01,000 --> 01:11:03,000
+What bubbled all the way down
+
+223
+01:11:03,000 --> 01:11:07,000
+9 bubbled. Nine bubbled all the way down and
+
+224
+01:11:07,000 --> 01:11:11,000
+That makes sense. Mine's now down at the very bottom.
+
+225
+01:11:11,000 --> 01:11:14,000
+Okay.
+
+226
+01:11:14,000 --> 01:11:16,000
+We could
+
+227
+01:11:16,000 --> 01:11:25,000
+We could just go through every item in the list and insert it into a new heap.
+
+228
+01:11:25,000 --> 01:11:29,000
+Yeah?
+
+229
+01:11:29,000 --> 01:11:31,000
+How much
+
+230
+01:11:31,000 --> 01:11:34,000
+What's that?
+
+231
+01:11:34,000 --> 01:11:37,000
+Oh, we're going to use more space.
+
+232
+01:11:37,000 --> 01:11:41,000
+Yeah, okay, so it might… we could just do something like
+
+233
+01:11:41,000 --> 01:11:45,000
+For I and some list.
+
+234
+01:11:45,000 --> 01:11:49,000
+New heap equals
+
+235
+01:11:49,000 --> 01:11:53,000
+And do something like ends keep
+
+236
+01:11:53,000 --> 01:11:55,000
+Insert
+
+237
+01:11:55,000 --> 01:11:56,000
+new
+
+238
+01:11:56,000 --> 01:11:59,000
+Abe, aye
+
+239
+01:11:59,000 --> 01:12:04,000
+Something like this. But to your point, we're now, we now have a new list
+
+240
+01:12:04,000 --> 01:12:13,000
+So we're using twice as much space. So it seems like it feels like we think that there might be a way to
+
+241
+01:12:13,000 --> 01:12:16,000
+turn this into a heap without having to copy it.
+
+242
+01:12:16,000 --> 01:12:19,000
+create and use more space.
+
+243
+01:12:19,000 --> 01:12:21,000
+We should be able to
+
+244
+01:12:21,000 --> 01:12:23,000
+Rearrange this
+
+245
+01:12:23,000 --> 01:12:32,000
+All in place, I'm gonna say. Just using the array or the list that we are we already have. Not going to create a new one.
+
+246
+01:12:32,000 --> 01:12:35,000
+We like that. I like that idea.
+
+247
+01:12:35,000 --> 01:12:52,000
+So what do we do?
+
+248
+01:12:52,000 --> 01:12:58,000
+bubble up all of the elements from the root to the first element
+
+249
+01:12:58,000 --> 01:13:07,000
+Oh, from the root. So start here.
+
+250
+01:13:07,000 --> 01:13:09,000
+So bubble it up
+
+251
+01:13:09,000 --> 01:13:13,000
+So
+
+252
+01:13:13,000 --> 01:13:19,000
+Okay, so I want to make sure.
+
+253
+01:13:19,000 --> 01:13:20,000
+F.
+
+254
+01:13:20,000 --> 01:13:22,000
+So, like this
+
+255
+01:13:22,000 --> 01:13:24,000
+And bubble this up
+
+256
+01:13:24,000 --> 01:13:33,000
+But this doesn't go anywhere, which is fine. And then bubble this up.
+
+257
+01:13:33,000 --> 01:13:41,000
+Okay, so bubble up five. But five doesn't swap. So then we check the parent
+
+258
+01:13:41,000 --> 01:13:50,000
+And then we check the parent. So we take the path going up, swapping when we can swap and not when we can't.
+
+259
+01:13:50,000 --> 01:14:03,000
+Is that what you mean? Yes, okay, I like it. Let me try to put that into code here and repeat it for everyone else. So the idea here is
+
+260
+01:14:03,000 --> 01:14:09,000
+Not just one bubble up, but we're going to start at the end, and we're going to
+
+261
+01:14:09,000 --> 01:14:12,000
+follow the whole chain up until we get to the root
+
+262
+01:14:12,000 --> 01:14:18,000
+Yeah, okay. And we'll do that over and over until we get a heat.
+
+263
+01:14:18,000 --> 01:14:24,000
+Okay.
+
+264
+01:14:24,000 --> 01:14:32,000
+So let's go backwards. And
+
+265
+01:14:32,000 --> 01:14:35,000
+Okay, let's go backwards.
+
+266
+01:14:35,000 --> 01:14:38,000
+Ed
+
+267
+01:14:38,000 --> 01:14:45,000
+I am going to delete the stuff that doesn't work because I'm going to lose track.
+
+268
+01:14:45,000 --> 01:15:00,000
+But we know that we have some list. And we want to turn this into a heap. We're going to start at the end and we're going to go back backwards all the way up the tree via its parents.
+
+269
+01:15:00,000 --> 01:15:02,000
+And
+
+270
+01:15:02,000 --> 01:15:04,000
+Do swaps where needed.
+
+271
+01:15:04,000 --> 01:15:09,000
+So
+
+272
+01:15:09,000 --> 01:15:10,000
+Ape
+
+273
+01:15:10,000 --> 01:15:17,000
+Take in some, not some list. Take in a list
+
+274
+01:15:17,000 --> 01:15:24,000
+And… that's all we need for i and range
+
+275
+01:15:24,000 --> 01:15:30,000
+Then list
+
+276
+01:15:30,000 --> 01:15:36,000
+List length of list
+
+277
+01:15:36,000 --> 01:15:44,000
+And I'm going to come back to this a little bit. But we're going to do minus one, minus one.
+
+278
+01:15:44,000 --> 01:15:52,000
+Okay. What's this give us?
+
+279
+01:15:52,000 --> 01:15:58,000
+I don't think I've used the syntax, so I'm going to come over here. And I'm just going to
+
+280
+01:15:58,000 --> 01:16:03,000
+Let's do this
+
+281
+01:16:03,000 --> 01:16:10,000
+My code's down there. What this gives me
+
+282
+01:16:10,000 --> 01:16:12,000
+And
+
+283
+01:16:12,000 --> 01:16:18,000
+Fine.
+
+284
+01:16:18,000 --> 01:16:22,000
+Our IN range
+
+285
+01:16:22,000 --> 01:16:26,000
+Brent
+
+286
+01:16:26,000 --> 01:16:29,000
+Thought this would be a little easier. What's this doing for us?
+
+287
+01:16:29,000 --> 01:16:40,000
+This range with the length of the list and the minus ones tells us start at the length of the list and go backwards
+
+288
+01:16:40,000 --> 01:16:50,000
+until we hit minus one, and then we stop, and that allows us to get all of our indices.
+
+289
+01:16:50,000 --> 01:16:56,000
+We probably want another minus one in here. Where do we want another minus one?
+
+290
+01:16:56,000 --> 01:16:58,000
+Yeah.
+
+291
+01:16:58,000 --> 01:17:04,000
+Because we don't want to start at index 5, we want to start at index 4.
+
+292
+01:17:04,000 --> 01:17:11,000
+Okay, so that will allow us to go through all of the items in our list and
+
+293
+01:17:11,000 --> 01:17:13,000
+We are going to bubble
+
+294
+01:17:13,000 --> 01:17:22,000
+Bubble up or bubble down?
+
+295
+01:17:22,000 --> 01:17:25,000
+It doesn't matter
+
+296
+01:17:25,000 --> 01:17:27,000
+We bubble up
+
+297
+01:17:27,000 --> 01:17:31,000
+Small numbers are going to let's do both.
+
+298
+01:17:31,000 --> 01:17:34,000
+Let's see if it matters. You said bubble up, right?
+
+299
+01:17:34,000 --> 01:17:39,000
+Our bubble up
+
+300
+01:17:39,000 --> 01:17:42,000
+List
+
+301
+01:17:42,000 --> 01:17:47,000
+An index
+
+302
+01:17:47,000 --> 01:17:50,000
+I think that looks right
+
+303
+01:17:50,000 --> 01:17:52,000
+Let's see, print
+
+304
+01:17:52,000 --> 01:17:55,000
+Next.
+
+305
+01:17:55,000 --> 01:18:00,000
+I did before, let's print it after. Let's see what we've got.
+
+306
+01:18:00,000 --> 01:18:04,000
+Okay.
+
+307
+01:18:04,000 --> 01:18:09,000
+Got this in here. Let's get this out of here
+
+308
+01:18:09,000 --> 01:18:14,000
+She's distracting. Okay, so we had a list
+
+309
+01:18:14,000 --> 01:18:18,000
+Did I do this right
+
+310
+01:18:18,000 --> 01:18:21,000
+It's exactly the same.
+
+311
+01:18:21,000 --> 01:18:23,000
+We'll print the list
+
+312
+01:18:23,000 --> 01:18:25,000
+We
+
+313
+01:18:25,000 --> 01:18:29,000
+take the list. Oh, I didn't call Bill deep
+
+314
+01:18:29,000 --> 01:18:38,000
+I expected a little bit more than this.
+
+315
+01:18:38,000 --> 01:18:43,000
+To be honest here, does that look right?
+
+316
+01:18:43,000 --> 01:18:45,000
+Okay, good.
+
+317
+01:18:45,000 --> 01:18:47,000
+Okay
+
+318
+01:18:47,000 --> 01:18:54,000
+We have one, two, six, and yes, I have to draw the picture because
+
+319
+01:18:54,000 --> 01:19:04,000
+2648. Anyone looking at this knows if it's a heap or not?
+
+320
+01:19:04,000 --> 01:19:06,000
+Vince it's a heap?
+
+321
+01:19:06,000 --> 01:19:12,000
+I've got something like one at the root. I'm only then 2 and 6 underneath it.
+
+322
+01:19:12,000 --> 01:19:18,000
+Two smaller than 4 and 8, 6 is smaller than 9 and 7, 4 is smaller than 3 and 5.
+
+323
+01:19:18,000 --> 01:19:23,000
+-
+
+324
+01:19:23,000 --> 01:19:26,000
+So someone confirm
+
+325
+01:19:26,000 --> 01:19:28,000
+This for me
+
+326
+01:19:28,000 --> 01:19:33,000
+From here
+
+327
+01:19:33,000 --> 01:19:35,000
+What happened?
+
+328
+01:19:35,000 --> 01:19:37,000
+So I think I've got
+
+329
+01:19:37,000 --> 01:19:42,000
+Want me to draw the picture.
+
+330
+01:19:42,000 --> 01:19:46,000
+I've got let me make sure I
+
+331
+01:19:46,000 --> 01:19:52,000
+1, 2, 6, 4, 8, 9, 7, 3, yes
+
+332
+01:19:52,000 --> 01:19:55,000
+Okay. So we've got
+
+333
+01:19:55,000 --> 01:19:58,000
+We've got three
+
+334
+01:19:58,000 --> 01:19:59,000
+At the bottom here
+
+335
+01:19:59,000 --> 01:20:05,000
+And 3 is smaller than its parent 4.
+
+336
+01:20:05,000 --> 01:20:07,000
+We're close
+
+337
+01:20:07,000 --> 01:20:09,000
+We're close.
+
+338
+01:20:09,000 --> 01:20:16,000
+We said, do we bubble up or bubble down? We said, let's try it. Why don't we throw bubble down in there, see what happens? Just, you know
+
+339
+01:20:16,000 --> 01:20:18,000
+So just because
+
+340
+01:20:18,000 --> 01:20:25,000
+Yes. We want to think it through and be a little bit regimented, but you know, we've got time.
+
+341
+01:20:25,000 --> 01:20:28,000
+Or we don't have time or something.
+
+342
+01:20:28,000 --> 01:20:33,000
+Okay, bubble down.
+
+343
+01:20:33,000 --> 01:20:35,000
+Keep an eye
+
+344
+01:20:35,000 --> 01:20:38,000
+Our list
+
+345
+01:20:38,000 --> 01:20:43,000
+And I
+
+346
+01:20:43,000 --> 01:20:45,000
+So
+
+347
+01:20:45,000 --> 01:21:03,000
+This is it.
+
+348
+01:21:03,000 --> 01:21:05,000
+Still get the same thing.
+
+349
+01:21:05,000 --> 01:21:16,000
+Okay, let me… let me run this real quick.
+
+350
+01:21:16,000 --> 01:21:19,000
+3, 2…
+
+351
+01:21:19,000 --> 01:21:20,000
+for
+
+352
+01:21:20,000 --> 01:21:24,000
+8, 7, 6, 5…
+
+353
+01:21:24,000 --> 01:21:30,000
+We still have four is the parent of
+
+354
+01:21:30,000 --> 01:21:35,000
+Actually
+
+355
+01:21:35,000 --> 01:21:38,000
+I'll share this in just a second.
+
+356
+01:21:38,000 --> 01:21:42,000
+Chat real quick.
+
+357
+01:21:42,000 --> 01:21:48,000
+1, 3, 2, 4, 8, 7,
+
+358
+01:21:48,000 --> 01:21:50,000
+6…
+
+359
+01:21:50,000 --> 01:21:56,000
+9… 5
+
+360
+01:21:56,000 --> 01:22:12,000
+I'm sure.
+
+361
+01:22:12,000 --> 01:22:16,000
+I'm just trying to be quick. That's when it's like most
+
+362
+01:22:16,000 --> 01:22:17,000
+Okay.
+
+363
+01:22:17,000 --> 01:22:21,000
+So this is what I got.
+
+364
+01:22:21,000 --> 01:22:28,000
+1, 3, 2, 3 is less than 4 and 8, 2 is less than 7 and 6, 4 is less than 9 and 5
+
+365
+01:22:28,000 --> 01:22:30,000
+This gives us a heat
+
+366
+01:22:30,000 --> 01:22:32,000
+It's not an accident.
+
+367
+01:22:32,000 --> 01:22:37,000
+Why did bubble down work and bubble up did not work?
+
+368
+01:22:37,000 --> 01:22:41,000
+And is it just this heap, or is there something there?
+
+369
+01:22:41,000 --> 01:22:58,000
+You have a
+
+370
+01:22:58,000 --> 01:23:05,000
+Okay, wait. I think you're a step ahead of everyone else. Put a pin in it real quick. Let me just repeat what you said.
+
+371
+01:23:05,000 --> 01:23:21,000
+Okay, so my question was, when we did bubble down, it worked, but we did bubble up and it did not work. The question is, is that just an accident? Does that make sense? Or did we just get lucky
+
+372
+01:23:21,000 --> 01:23:27,000
+So if we were to look at this
+
+373
+01:23:27,000 --> 01:23:31,000
+This is what we started with.
+
+374
+01:23:31,000 --> 01:23:45,000
+This is what we started with. So we start here and we say bubble down. Okay, this one, nowhere to go, it's bubbled down. Three, bubble down, nowhere to go. It's fine. Six.
+
+375
+01:23:45,000 --> 01:23:52,000
+Already bubbled down, it's a leaf. Two is a leaf, 8 is a leaf. 1. We bubbled down one.
+
+376
+01:23:52,000 --> 01:23:56,000
+It's smaller than its children, so it's okay.
+
+377
+01:23:56,000 --> 01:24:06,000
+And then we come here, we bubble it down, and when we bubble down, we swap these 2, and that's what you see here in the final tree.
+
+378
+01:24:06,000 --> 01:24:15,000
+And then we come over here and we say 4. And we want to bubble it down. We compare it to its children. We swap these two.
+
+379
+01:24:15,000 --> 01:24:28,000
+And we end up with one here and 4 here, which is why you see the 4 here in the output. And then our last… our 9 bubbles down, our 9 swaps with 1, swaps with 4
+
+380
+01:24:28,000 --> 01:24:31,000
+And ends up down at the bottom
+
+381
+01:24:31,000 --> 01:24:33,000
+Okay.
+
+382
+01:24:33,000 --> 01:24:34,000
+So
+
+383
+01:24:34,000 --> 01:24:39,000
+What did you say?
+
+384
+01:24:39,000 --> 01:24:51,000
+Okay, so we did this the way we implemented it was we started at the end, at the bottom of the heap and we bubbled down.
+
+385
+01:24:51,000 --> 01:24:55,000
+What if we started at the top?
+
+386
+01:24:55,000 --> 01:25:03,000
+and bubbled down. Okay, so we're looking at this one. I'm going to write it in green.
+
+387
+01:25:03,000 --> 01:25:08,000
+We start at 9, we bubble 9 all the way down. Swap here
+
+388
+01:25:08,000 --> 01:25:13,000
+Swap here, swap here, we end up with nine
+
+389
+01:25:13,000 --> 01:25:17,000
+3, 1,
+
+390
+01:25:17,000 --> 01:25:19,000
+Four
+
+391
+01:25:19,000 --> 01:25:21,000
+And then we still have
+
+392
+01:25:21,000 --> 01:25:23,000
+7
+
+393
+01:25:23,000 --> 01:25:27,000
+So it's
+
+394
+01:25:27,000 --> 01:25:29,000
+2 and 6.
+
+395
+01:25:29,000 --> 01:25:33,000
+Okay, so first thing we did was bubble nine down.
+
+396
+01:25:33,000 --> 01:25:49,000
+And anyone tell me to fix this if I didn't get it right. Then we come here and we bubble down. So that's really here and we bubble one down. It's smaller than its children. It doesn't go anywhere. Then we come over here, we bubble down
+
+397
+01:25:49,000 --> 01:25:58,000
+It's bigger than both of its children. We choose the smaller one. So at this point we take the 2 and the 7, 7, 2.
+
+398
+01:25:58,000 --> 01:26:04,000
+And then we come over here, three, we bubble down.
+
+399
+01:26:04,000 --> 01:26:10,000
+Smaller than its child, it stays. Come to eight, we bubble down.
+
+400
+01:26:10,000 --> 01:26:13,000
+It's nothing, nothing, nothing.
+
+401
+01:26:13,000 --> 01:26:20,000
+Is this a heap
+
+402
+01:26:20,000 --> 01:26:24,000
+Say aloud. No, it is not a heap
+
+403
+01:26:24,000 --> 01:26:36,000
+Why didn't this work? Okay, so we now have two approaches that we tried. We first tried, we thought, okay, let's start at the bottom
+
+404
+01:26:36,000 --> 01:26:38,000
+and bubble up
+
+405
+01:26:38,000 --> 01:26:46,000
+So we said, okay, take this, bubble it up. Take this bubble it up. And so on. And it didn't work.
+
+406
+01:26:46,000 --> 01:26:50,000
+We saw that the heap at the end didn't work. It was not a heap.
+
+407
+01:26:50,000 --> 01:27:00,000
+We said, okay, instead of bubbling up, let's bubble down. So we started at the end, and we bubbled it down.
+
+408
+01:27:00,000 --> 01:27:04,000
+As we went through, we went backwards through the tree.
+
+409
+01:27:04,000 --> 01:27:07,000
+bubbling down. And it worked
+
+410
+01:27:07,000 --> 01:27:11,000
+And then we said, okay, what if we start at the root?
+
+411
+01:27:11,000 --> 01:27:13,000
+And bubble down
+
+412
+01:27:13,000 --> 01:27:16,000
+And that's what we saw here
+
+413
+01:27:16,000 --> 01:27:17,000
+We
+
+414
+01:27:17,000 --> 01:27:26,000
+Did this swapped it down, 9 ended up here, 4 is at the root. And then we came here. And bubbled it down
+
+415
+01:27:26,000 --> 01:27:35,000
+It didn't move. That's a problem. So what happened?
+
+416
+01:27:35,000 --> 01:27:38,000
+What happened in this case
+
+417
+01:27:38,000 --> 01:27:43,000
+Was that
+
+418
+01:27:43,000 --> 01:27:46,000
+Floor got moved to the root
+
+419
+01:27:46,000 --> 01:27:49,000
+With this first bubble down
+
+420
+01:27:49,000 --> 01:27:53,000
+And really, the rest of the tree kept moving.
+
+421
+01:27:53,000 --> 01:27:56,000
+So this got into place
+
+422
+01:27:56,000 --> 01:28:04,000
+And because we were going forwards
+
+423
+01:28:04,000 --> 01:28:07,000
+We've we never had a chance to go back
+
+424
+01:28:07,000 --> 01:28:10,000
+and make sure that this was in the right place.
+
+425
+01:28:10,000 --> 01:28:14,000
+It's like the tree is moving underneath us.
+
+426
+01:28:14,000 --> 01:28:18,000
+So that's why that didn't work. So
+
+427
+01:28:18,000 --> 01:28:21,000
+By going
+
+428
+01:28:21,000 --> 01:28:25,000
+backwards up through the tree
+
+429
+01:28:25,000 --> 01:28:29,000
+At every step when we're doing a bubble down
+
+430
+01:28:29,000 --> 01:28:32,000
+The rest of the tree hasn't been touched yet
+
+431
+01:28:32,000 --> 01:28:37,000
+So it can still move to its right place.
+
+432
+01:28:37,000 --> 01:28:42,000
+Which means that if we want to do the bubble up
+
+433
+01:28:42,000 --> 01:28:45,000
+We can do a bubble up
+
+434
+01:28:45,000 --> 01:28:50,000
+But to bubble up, we're going to have to start at the root.
+
+435
+01:28:50,000 --> 01:28:58,000
+So here we would bubble up. That wouldn't work. I'll put a bubble up. Let's do a purple tree for bubble up
+
+436
+01:28:58,000 --> 01:29:00,000
+So you start at 9.
+
+437
+01:29:00,000 --> 01:29:05,000
+bubble up, it has nowhere to go.
+
+438
+01:29:05,000 --> 01:29:10,000
+We then go to four. We're bubbling it up.
+
+439
+01:29:10,000 --> 01:29:16,000
+It swaps with 9.
+
+440
+01:29:16,000 --> 01:29:21,000
+We have seven. We're bubbling it up
+
+441
+01:29:21,000 --> 01:29:24,000
+But we have to compare it to four because it's now four here
+
+442
+01:29:24,000 --> 01:29:29,000
+Still, it's bigger, so 7 stays in place.
+
+443
+01:29:29,000 --> 01:29:32,000
+We have one
+
+444
+01:29:32,000 --> 01:29:45,000
+One is smaller than 9, so we can swap it.
+
+445
+01:29:45,000 --> 01:29:52,000
+Moving track myself here. We're now at 8. We want to bubble it up.
+
+446
+01:29:52,000 --> 01:29:55,000
+I feel like I got something wrong here.
+
+447
+01:29:55,000 --> 01:29:59,000
+Oh, I didn't finish bubbling one up all the way to the top.
+
+448
+01:29:59,000 --> 01:30:04,000
+We have to bubble one all the way up.
+
+449
+01:30:04,000 --> 01:30:07,000
+So we end up with one here, 4 here.
+
+450
+01:30:07,000 --> 01:30:10,000
+And then we have eight
+
+451
+01:30:10,000 --> 01:30:13,000
+It's parent is smaller, so it's okay.
+
+452
+01:30:13,000 --> 01:30:17,000
+And then we have our two
+
+453
+01:30:17,000 --> 01:30:27,000
+And our six. Two needs to bubble up. So we swap these
+
+454
+01:30:27,000 --> 01:30:41,000
+I'm going to put two here, seven here, six, two compared to one stays in place, six stays in place. And then we have our three and our five.
+
+455
+01:30:41,000 --> 01:30:49,000
+And three, we bubble up. We swap three and nine.
+
+456
+01:30:49,000 --> 01:30:51,000
+3, 9
+
+457
+01:30:51,000 --> 01:31:01,000
+We keep bubbling and we swap three and four
+
+458
+01:31:01,000 --> 01:31:07,000
+And we have a heap
+
+459
+01:31:07,000 --> 01:31:13,000
+Okay, so what we have kind of doesn't doesn't matter which way we go.
+
+460
+01:31:13,000 --> 01:31:18,000
+But whichever way we go
+
+461
+01:31:18,000 --> 01:31:23,000
+If we're going to bubble up, we have to start at the
+
+462
+01:31:23,000 --> 01:31:29,000
+We're going to bubble up. We have to start at the beginning and if we're going to bubble down, we have to start at the end.
+
+463
+01:31:29,000 --> 01:31:33,000
+I said that the right way.
+
+464
+01:31:33,000 --> 01:31:38,000
+Yeah.
+
+465
+01:31:38,000 --> 01:31:39,000
+Let me re-share.
+
+466
+01:31:39,000 --> 01:31:52,000
+Go back to the code for a second
+
+467
+01:31:52,000 --> 01:32:03,000
+Okay. I want to look at this line right here.
+
+468
+01:32:03,000 --> 01:32:07,000
+When we do
+
+469
+01:32:07,000 --> 01:32:12,000
+So many questions worth
+
+470
+01:32:12,000 --> 01:32:15,000
+What is
+
+471
+01:32:15,000 --> 01:32:21,000
+What's a runtime of our build heath
+
+472
+01:32:21,000 --> 01:32:22,000
+Well then
+
+473
+01:32:22,000 --> 01:32:33,000
+Why
+
+474
+01:32:33,000 --> 01:32:39,000
+Yeah, so this is going through every single item of the list.
+
+475
+01:32:39,000 --> 01:32:46,000
+I need every single item to list. Can we do any better?
+
+476
+01:32:46,000 --> 01:32:50,000
+Here's another question.
+
+477
+01:32:50,000 --> 01:32:56,000
+This loop runs n times
+
+478
+01:32:56,000 --> 01:33:00,000
+So we do n times whatever this
+
+479
+01:33:00,000 --> 01:33:11,000
+Runtime is. What's our runtime of bubble down?
+
+480
+01:33:11,000 --> 01:33:13,000
+The way we think
+
+481
+01:33:13,000 --> 01:33:15,000
+What's that?
+
+482
+01:33:15,000 --> 01:33:17,000
+Log in
+
+483
+01:33:17,000 --> 01:33:29,000
+Okay, why log n? You start at the roots, bubble down, let's say, best case, worst case, whatever. We have one. We're going to bubble down. We go swap, swap, swap.
+
+484
+01:33:29,000 --> 01:33:34,000
+Worst case scenario. Swap, swap, swap. Because this is a complete
+
+485
+01:33:34,000 --> 01:33:39,000
+This is a complete binary tree.
+
+486
+01:33:39,000 --> 01:33:46,000
+We know that our bubble down and our bubble up worst case is always going to be log N.
+
+487
+01:33:46,000 --> 01:33:53,000
+Because we have one way to go. And if 3 needs to go all the way down to the bottom, or vice versa.
+
+488
+01:33:53,000 --> 01:33:56,000
+And the height of the tree is never more than log N.
+
+489
+01:33:56,000 --> 01:34:00,000
+Okay, so our bubble down is log N.
+
+490
+01:34:00,000 --> 01:34:06,000
+So let's go back to our build heap
+
+491
+01:34:06,000 --> 01:34:16,000
+What runtime do we get for our build heap?
+
+492
+01:34:16,000 --> 01:34:18,000
+n log n
+
+493
+01:34:18,000 --> 01:34:21,000
+Do we like that
+
+494
+01:34:21,000 --> 01:34:23,000
+I don't like that
+
+495
+01:34:23,000 --> 01:34:29,000
+We do better
+
+496
+01:34:29,000 --> 01:34:34,000
+In particular, what I'm looking at is I'm looking at this
+
+497
+01:34:34,000 --> 01:34:36,000
+argument right here.
+
+498
+01:34:36,000 --> 01:34:39,000
+The length of the list
+
+499
+01:34:39,000 --> 01:34:41,000
+Minus one, or the length of
+
+500
+01:34:41,000 --> 01:34:46,000
+Well, basically iterating through every single item on our list.
+
+501
+01:34:46,000 --> 01:34:57,000
+Do we have to?
+
+502
+01:34:57,000 --> 01:35:06,000
+We have to go through every item. It works. It works.
+
+503
+01:35:06,000 --> 01:35:10,000
+Okay, start from the last parent
+
+504
+01:35:10,000 --> 01:35:17,000
+So you're… So if we were to do something like start here
+
+505
+01:35:17,000 --> 01:35:25,000
+Okay, so here what we're doing, we would start at 10.
+
+506
+01:35:25,000 --> 01:35:38,000
+And you're saying we would bubble down
+
+507
+01:35:38,000 --> 01:35:42,000
+Okay, so
+
+508
+01:35:42,000 --> 01:35:47,000
+So we go to the parent and bubble down.
+
+509
+01:35:47,000 --> 01:35:56,000
+And then from this one
+
+510
+01:35:56,000 --> 01:36:00,000
+So we bubbled down in this path
+
+511
+01:36:00,000 --> 01:36:03,000
+until we get to the root.
+
+512
+01:36:03,000 --> 01:36:14,000
+Okay, so, well
+
+513
+01:36:14,000 --> 01:36:15,000
+You're close
+
+514
+01:36:15,000 --> 01:36:16,000
+You're close.
+
+515
+01:36:16,000 --> 01:36:22,000
+So you have an idea that it seems like
+
+516
+01:36:22,000 --> 01:36:27,000
+We're doing more work than we really need to.
+
+517
+01:36:27,000 --> 01:36:29,000
+So
+
+518
+01:36:29,000 --> 01:36:33,000
+I think… tell me if this is what you're seeing.
+
+519
+01:36:33,000 --> 01:36:43,000
+When I'm at 10, if this is the tree that we're turning into a list that we're turning into a heap
+
+520
+01:36:43,000 --> 01:36:46,000
+When I bubble this one down
+
+521
+01:36:46,000 --> 01:36:50,000
+It doesn't do anything. This one doesn't do anything.
+
+522
+01:36:50,000 --> 01:37:03,000
+Doesn't do anything, doesn't do anything, doesn't do anything. So let's… what you're saying is not start at the parent necessarily of this one, but to start at the first non-leaf node
+
+523
+01:37:03,000 --> 01:37:08,000
+Okay. Okay. I like that. First non-leaf node or something along those lines.
+
+524
+01:37:08,000 --> 01:37:17,000
+How do we decide which node to start with? So basically, we're saying we don't have to start at the very last element in the list
+
+525
+01:37:17,000 --> 01:37:23,000
+We can we know that we're we can start earlier in the list.
+
+526
+01:37:23,000 --> 01:37:30,000
+And then bubble down because we know that like, for example, if I start here, this will bubble down all the way to the bottom.
+
+527
+01:37:30,000 --> 01:37:34,000
+We're not really doing anything here. So let's start.
+
+528
+01:37:34,000 --> 01:37:38,000
+earlier in the list
+
+529
+01:37:38,000 --> 01:37:40,000
+Does that make sense?
+
+530
+01:37:40,000 --> 01:37:42,000
+We like that idea. Seem promising.
+
+531
+01:37:42,000 --> 01:37:45,000
+Yeah, so kind of like
+
+532
+01:37:45,000 --> 01:37:51,000
+Turns out about half of this list. We don't have to do anything with
+
+533
+01:37:51,000 --> 01:37:59,000
+We start about halfway through and then just start bubbling down. Everything else will get hit
+
+534
+01:37:59,000 --> 01:38:04,000
+So let's stop. Let's
+
+535
+01:38:04,000 --> 01:38:11,000
+Change this a little bit. Let's stop doing the operations that do nothing.
+
+536
+01:38:11,000 --> 01:38:17,000
+And let's
+
+537
+01:38:17,000 --> 01:38:22,000
+Let's see, 0, 1, 2, 3, 4, 5, 6, 7, 8
+
+538
+01:38:22,000 --> 01:38:27,000
+Divide in half
+
+539
+01:38:27,000 --> 01:38:36,000
+Or, did you say divine four? Oh, sorry. Oh, no.
+
+540
+01:38:36,000 --> 01:38:43,000
+Let's divide this in half.
+
+541
+01:38:43,000 --> 01:38:50,000
+Let's divide this in half
+
+542
+01:38:50,000 --> 01:38:56,000
+That's right. Length of our list divided
+
+543
+01:38:56,000 --> 01:38:57,000
+And
+
+544
+01:38:57,000 --> 01:39:00,000
+Minus one
+
+545
+01:39:00,000 --> 01:39:13,000
+I'm gonna run this. And by running this, I'm going to confirm is that it still looks like this.
+
+546
+01:39:13,000 --> 01:39:20,000
+Okay.
+
+547
+01:39:20,000 --> 01:39:26,000
+I think it's the same that we had before. Yes
+
+548
+01:39:26,000 --> 01:39:27,000
+Okay
+
+549
+01:39:27,000 --> 01:39:35,000
+It's the same, we ended up with the same thing, but we only went through half of the we only
+
+550
+01:39:35,000 --> 01:39:36,000
+This loop
+
+551
+01:39:36,000 --> 01:39:38,000
+Got divided in half
+
+552
+01:39:38,000 --> 01:39:51,000
+Okay, I brought this up in particular because I said, hey, n log n, I do not like n log n. Can we do better than n log n? So what does this give us?
+
+553
+01:39:51,000 --> 01:39:55,000
+How does this improve us?
+
+554
+01:39:55,000 --> 01:39:59,000
+That
+
+555
+01:39:59,000 --> 01:40:04,000
+Yeah, so we
+
+556
+01:40:04,000 --> 01:40:08,000
+by
+
+557
+01:40:08,000 --> 01:40:13,000
+Splitting this in half
+
+558
+01:40:13,000 --> 01:40:15,000
+We said
+
+559
+01:40:15,000 --> 01:40:19,000
+Does this give us O of N runtime?
+
+560
+01:40:19,000 --> 01:40:24,000
+This is a tricky question. Might be a tricky. Might be tricky for some, might not be tricky.
+
+561
+01:40:24,000 --> 01:40:26,000
+Does this give us O n?
+
+562
+01:40:26,000 --> 01:40:32,000
+We divided N by 2.
+
+563
+01:40:32,000 --> 01:40:38,000
+Okay, so you seem like you're within the realm of possibility.
+
+564
+01:40:38,000 --> 01:40:47,000
+Okay, but and any of you at this point in time can say, yes, of course, this is, oh wait
+
+565
+01:40:47,000 --> 01:40:59,000
+Because of N is smaller than O n log n. So we're still O n log n as an upper bound. Were you about to add something?
+
+566
+01:40:59,000 --> 01:41:22,000
+ON? Yeah, tell me why.
+
+567
+01:41:22,000 --> 01:41:25,000
+That's okay. So
+
+568
+01:41:25,000 --> 01:41:30,000
+Is what you're seeing that down at the bottom here
+
+569
+01:41:30,000 --> 01:41:34,000
+There's a lot of no's at this level.
+
+570
+01:41:34,000 --> 01:41:37,000
+There's a lot fewer nodes as we go up
+
+571
+01:41:37,000 --> 01:41:38,000
+Yeah?
+
+572
+01:41:38,000 --> 01:41:46,000
+Yep. So how many fewer nodes as we go up the tree?
+
+573
+01:41:46,000 --> 01:41:56,000
+Yeah. So half. So just by flipping every row
+
+574
+01:41:56,000 --> 01:42:00,000
+Every row has half as many nodes in the previous node.
+
+575
+01:42:00,000 --> 01:42:04,000
+In the previous row. So just by
+
+576
+01:42:04,000 --> 01:42:09,000
+Starting at the middle of our list
+
+577
+01:42:09,000 --> 01:42:13,000
+And decreasing
+
+578
+01:42:13,000 --> 01:42:19,000
+The second half, just ignoring the second half of the list. We end up
+
+579
+01:42:19,000 --> 01:42:21,000
+Making our runtime O of N
+
+580
+01:42:21,000 --> 01:42:26,000
+Because of the fact that each level is half the size
+
+581
+01:42:26,000 --> 01:42:29,000
+As we go up
+
+582
+01:42:29,000 --> 01:42:31,000
+So
+
+583
+01:42:31,000 --> 01:42:37,000
+It's if we were to sum up over all of our lists, because we're
+
+584
+01:42:37,000 --> 01:42:41,000
+Each bubble operation is log n
+
+585
+01:42:41,000 --> 01:42:47,000
+But because we're going up and we have half at every level, half
+
+586
+01:42:47,000 --> 01:42:49,000
+It ends up canceling it
+
+587
+01:42:49,000 --> 01:42:50,000
+So
+
+588
+01:42:50,000 --> 01:42:55,000
+That's how you get your OVEN.
+
+589
+01:42:55,000 --> 01:42:56,000
+Yeah?
+
+590
+01:42:56,000 --> 01:42:59,000
+Yeah.
+
+591
+01:42:59,000 --> 01:43:02,000
+To put the math up here. Maybe next time.
+
+592
+01:43:02,000 --> 01:43:16,000
+I do like to, when we're doing tree stuff. If anyone is into the math and the summations and stuff, you can list out how much work is done on every level and add that up. You're not into summations.
+
+593
+01:43:16,000 --> 01:43:23,000
+Don't do that. I will put your put the notes on
+
+594
+01:43:23,000 --> 01:43:32,000
+Canvas so you can convince yourselves of this, that this build heap operation is O of N and not O of N log N.
+
+595
+01:43:32,000 --> 01:43:37,000
+But our bubble up and our bubble down are log in.
+
+596
+01:43:37,000 --> 01:43:38,000
+Thank you.
+
+597
+01:43:38,000 --> 01:43:44,000
+Anyone need anything before Wednesday?
+
+598
+01:43:44,000 --> 01:43:51,000
+Yeah, I'll push it to GitHub. And the link is in the resources on campus.
+
+599
+01:43:51,000 --> 01:43:55,000
+The codes there.
+
+600
+01:43:55,000 --> 01:43:58,000
+HEPA 5.
+
+601
+01:43:58,000 --> 01:44:00,000
+Kind of
+
+602
+01:44:00,000 --> 01:44:07,000
+We will talk about I was supposed to, I was supposed to introduce it today and lost track of time.
+
+603
+01:44:07,000 --> 01:44:08,000
+But yes, yes.
+
+604
+01:44:08,000 --> 01:44:10,000
+It is a HEPA 5.
+
+605
+01:44:10,000 --> 01:44:13,000
+It's not quite exactly the same, but it's close.
+
+606
+01:44:13,000 --> 01:44:18,000
+What he supplied us and we're done so y'all can leave, but I'm going to just
+
+607
+01:44:18,000 --> 01:44:29,000
+voluntarily tell you a little bit more. Keepify. What Heapify is doing, it's doing bubble up and bubble down at the same time, a meeting in the middle
+
+608
+01:44:29,000 --> 01:44:35,000
+So it's more efficient. Yeah, you end up bubbling up and bubbling down kind of at the same time.
+
+609
+01:44:35,000 --> 01:44:50,000
+Yeah, yeah. So we will look at HEPA 5 on Wednesday and we will see how you do not have to build your heap in Python for yourself because Python has a built in heap that you can use.
+
+610
+01:44:50,000 --> 01:44:59,000
+I received the answers. I don't publish answers. But
+
+611
+01:44:59,000 --> 01:45:09,000
+Let me see, actually, let me see if I care anymore. I used to care much more. Who wants to see solutions for the test?
+
+612
+01:45:09,000 --> 01:45:25,000
+So that's a month away. I don't know. I would say I would say what's fair is like I probably won't specifically put anything that's covered on this test on the midterm on the final, but
+
+613
+01:45:25,000 --> 01:45:31,000
+You should be able… it builds on. It builds on it, right? Like
+
+614
+01:45:31,000 --> 01:45:42,000
+Does that help answer your question? Yeah, it's not specifically this content is not specifically going to be on the final, but it's fair game.
+
+615
+01:45:42,000 --> 01:45:52,000
+Any other questions? I will give solutions. I will publish solutions. Yes. Any other questions? Who else?
+
+616
+01:45:52,000 --> 01:45:56,000
+Okay.
+
+617
+01:45:56,000 --> 01:46:07,000
+We have class next Monday, but not next Wednesday, because it's Thanksgiving next week, isn't it? Class next Monday, no class on Wednesday. Do y'all want a recorded lecture?
+
+618
+01:46:07,000 --> 01:46:09,000
+On Wednesday
+
+619
+01:46:09,000 --> 01:46:12,000
+Is anyone going to watch a recorded lecture? If I record a lecture?
+
+620
+01:46:12,000 --> 01:46:15,000
+Thank you for your honesty.
+
+621
+01:46:15,000 --> 01:46:26,000
+You'll watch it. We got one taker. Anyone else? Anyone else can watch it? I appreciate the honesty. I will probably not post the lectures.
+
+622
+01:46:26,000 --> 01:46:31,879
+Thank you. Have a good night.
+
