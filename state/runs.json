@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-17T07:08:27-08:00",
+  "task": "晨報",
+  "status": "new",
+  "summary": "GPU Proposal 今天 5:59 PM（保守）；SharePoint 新 ResNet18 spec；DSA 11/16 錄影上線",
+  "output": "digests/2026-11-17.md"
+ },
+ {
   "at": "2026-11-17T01:38:07-08:00",
   "task": "截止提醒",
   "status": "new",
