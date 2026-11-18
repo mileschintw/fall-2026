@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-18T10:13:51-08:00",
+  "task": "上課筆記",
+  "status": "new",
+  "summary": "GPU 11/17 L7 筆記：conv→GEMM（im2col/implicit）、CUDA Events、專題 starter kit",
+  "output": "gpu/lectures/2026-11-17/notes.md"
+ },
+ {
   "at": "2026-11-18T08:09:22-08:00",
   "task": "截止提醒",
   "status": "ok",

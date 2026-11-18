@@ -11,3 +11,4 @@
 | 2026-10-27 Lecture 4 | Weekly Live Lecture-20261027_182817-Meeting Recording.mp4 | — | 2346 | 錄影 18:28 開始，[00:02:07] 就開始上課；[01:44]–[01:59] pop quiz＋休息空白；老師生病；大小未記錄 |
 | 2026-11-03 Lecture 5 | Weekly Live Lecture-20261103_183100-Meeting Recording.mp4 | — | 2072 | 錄影 18:31 開始，[00:00:03] 就開始上課；[01:44]–[01:59] pop quiz＋休息空白；[02:00]–[03:05] Nsight Compute demo；大小未記錄 |
 | 2026-11-10 Lecture 6 | Weekly Live Lecture-20261110_183022-Meeting Recording.mp4 | — | 2243 | 錄影 18:30 開始，[00:00:11] 就開始上課；沒有 pop quiz；[00:07]–[00:49] final project 說明（投影片不在 L6 PDF 裡）；[01:09]–[01:15] 休息；[02:51]–[03:10] Nsight Compute demo（transpose K2–K4）；大小未記錄 |
+| 2026-11-17 Lecture 7 | Weekly Live Lecture-20261117_183030-Meeting Recording.mp4 | — | 2345 | 錄影 18:30 開始，[00:00:04] 就開始上課；沒有 pop quiz（改不計分 poll）；[01:27]–[01:40] 休息＋poll；[03:12]–[03:14] 換電腦沒聲音；[03:14]–[03:29] starter kit 導覽與 NCU demo；[03:30:10] 結束；大小未記錄 |

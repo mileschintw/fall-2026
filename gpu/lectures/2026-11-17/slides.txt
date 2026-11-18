@@ -1,0 +1,1049 @@
+=== p1 ===
+EE 590 A/B 
+Applied High - Performance 
+GPU Computing 
+LECTURE   7   : Tuesday, November   17 ,   2026 
+Instructor: Dr. Colin Reinhardt 
+University of Washington   -   Professional Masters Program 
+Autumn   2026
+
+=== p2 ===
+Lecture 7 : Outline 
+   Fast Convolution Layers on GPUs 
+   Direct 
+   Explicit GEMM 
+   Implicit GEMM 
+   CUDA Events 
+   Timer class 
+   Final Project 
+   Starter Kit Code Review 
+REMINDERS   -   UPCOMING 
+Late HWs deadline   Friday, 27 NOV by 11:59 PM 
+Final Project Proposal   Friday, 20 NOV by 11:59 PM 
+Final Project Presentations Sign Up   Tuesday, 24 NOV by 6 PM
+
+=== p3 ===
+Convolution   Layers   on GPUs: 
+From Direct Kernels to GEMM 
+A careful development in 
+CUDA C++   —   CUDA cores   →   Tensor Cores   →   TMA im 2 col 
+EEP524 A/B · GPU - Accelerated Computing: Hardware and Software Foundations
+
+=== p4 ===
+Overview 
+Roadmap for the   L 7   session 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   2 
+•   1   Foundations   —   the layer, the symbols, the loop nest, 
+• 2 D irect kernels , im2col identity, FPROP/WGRAD/DGRAD convolution passes 
+• 3.1 Explicit im2col / im2row + SGEMM, CUDA cores only 
+• 3.2 Implicit GEMM on CUDA cores: I1   / I2 
+• 3.6 Twelve modern variants and how each changes the GEMM mapping
+
+=== p5 ===
+Section   1 
+Convolution for ML: 
+Foundations and direct kernels 
+The layer, the symbols, the loop nest, and three kernels that show why GEMM is coming. 
+10
+
+=== p6 ===
+1   · Foundations 
+The   C onvolutional   L ayer:   General Formulation 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   11 
+A common misconception is “one filter per channel, sum, then K filters”. 
+The real structure: K independent filters, each spanning all C channels; 
+the channel sum happens inside each filter. 
+This is exactly why the GEMM reduction dimension will be C·R·S.
+
+=== p7 ===
+1   · Foundations 
+Dimension symbols (NVIDIA convention, used by cuDNN, CUTLASS and this course) 
+Convolution on GPUs: From Direct Kernels to GEMM · Course   1   12 
+Symbol   Meaning   Tensor   Notes 
+N   batch size   input, output 
+C   input channels   input, filter   per group: Cg = C / G 
+H, W   input height, width   input   3 - D adds D (depth) 
+K   output channels = number of filters   filter, output   per group: Kg = K / G 
+R, S   filter height, width   filter   3 - D adds T (filter depth); “3 × 3” means R = S = 3 
+P, Q   output height, width   output   P =   ⌊ (H + 2·pad − dil·(R−1) − 1)/stride ⌋   + 1 
+G   groups   —   G = 1 standard, G = C depthwise 
+stride, pad, dil   step, zero - padding, dilation   factor   —   “same” padding: pad = dil·(R−1)/2 for stride 1 
+M g , N g , 
+K_gemm 
+GEMM dimensions   —   M g   = K (or N·P·Q), N g   = N·P·Q (or K),   K_gemm   =   Cg·R·S 
+Input X : N × C × H × W (NCHW) or N × H × W × C (NHWC). 
+Filter W : K × C × R × S (KCRS) or R × S × C × K (RSCK). 
+Output Y : N × K × P × Q or N × P × Q × K. 
+Caution :   N,   K   are   overloaded (output channels vs. GEMM reduction)   —   we always write   Mg, Ng,   K_gemm   for the latter. 
+PyTorch   docs use   k_H ,   k_W ,   H_out ,   W_out .
+
+=== p8 ===
+1   · Foundations 
+The convolution equation and its three parameters 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   13 
+• X[·] = 0 outside the image: every window that hangs over the border reads zeros for the missing 
+taps (this is what pad means in practice) 
+• Deep - learning “convolution” is cross - correlation: the filter is not flipped. A flipped - kernel network 
+learns flipped weights, so nothing changes algorithmically 
+•   stride   —   how many input pixels the window advances per output pixel (stride 2 halves P and Q: 
+downsampling   inside the layer) 
+•   pad   —   zero rows/columns conceptually added around the image so windows may hang over 
+the border; X is read as 0 there (kernels never store the zeros) 
+•   dil   (dilation)   —   spacing between the filter taps: tap r lands   dil·r   pixels from the window origin, so 
+the receptive field grows to   dil ·(R−1)+1 without new weights 
+• Each term of the sum is one multiply - add; the three sums together are the GEMM reduction we 
+build in   § 2.3
+
+=== p9 ===
+1   · Foundations 
+Output size, padding modes, and the   AI   cost model 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   14 
+• Reading the   P/Q   formula: 
+•   H + 2·pad is the padded height;   dil ·(R−1)+1 is the window extent, 
+•   H + 2·pad −   dil ·(R−1) − 1 is the distance the window origin can travel; 
+•   divide by the stride (floor: partial steps are dropped) and add 1 for the starting position 
+•   “valid”   padding: pad = 0   —   only windows fully inside the image; P =   ⌊ (H −   dil ·(R−1) − 1)/stride ⌋   + 1 < H (3 × 3, stride 1 → P = H − 2) 
+•   “same”   padding: choose pad so the output keeps the input size at stride 1. From the formula that requires 2·pad =   dil ·(R−1): pad = 1 for 
+3 × 3, pad = 3 for 7 × 7, pad = 2 for 3 × 3 with   dil   = 2 (second line above). With stride 2, “same” means P =   ⌈ H/stride ⌉ 
+•   Cost model   : FLOPs count a multiply and an add per weight per output; compulsory bytes read X and W once and write Y once; the 
+arithmetic   intensity   A I is what we place on the roofline 
+•   Ex:   ResNet - 50 stage - 2 3 × 3 → FLOPs = 2·32·64·56·56·64·9 = 7.40 GFLOP; bytes = 25.7 MB + 0.15 MB + 25.7 MB = 51.5 MB; I = 144 FLOP/B 
+Arithmetic Intensity Cost Model
+
+=== p10 ===
+1   · Foundations 
+Roofline on the RTX 4090 Laptop GPU: where the benchmark shapes sit before any 
+kernel is written 
+Convolution on GPUs: From Direct Kernels to GEMM · Course   1   10 
+Ceilings from Nsight Compute's report for this GPU: 28 TFLOP/s on FP32 cores, 448 GB/s DRAM; Tensor Core ceilings are approxi mat e. 
+Filled markers: compulsory - traffic intensity; hollow: with an explicit im2col matrix. 
+•   The 3 × 3 layer (144) is compute - bound; 
+•   the 1 × 1 (26) and   depthwise   (12) layers are memory - bound, 
+•   explicit im2col pushes the 3 × 3 layer down to 14.
+
+=== p11 ===
+Key Considerations 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   7 
+The layer’s shape fixes the minimum bytes that must cross HBM 
+( compulsory bytes ). 
+A kernel’s design decides how close to that minimum it gets, 
+and which units do the arithmetic.
+
+=== p12 ===
+Step 0 →   direct   convolution: the three tensors, and   the   output value s 
+Supplement: From SGEMM to Implicit - GEMM Convolution, step by step · Course   1   12 
+The colors : 
+•   orange = the input and its patches, 
+•   green = the filters, red = the output. 
+P and Q are the output height and width; with stride 1 and 'same' padding they equal H and W. 
+1   · Foundations
+
+=== p13 ===
+//   ----   CPU reference: direct convolution   ------------------------------------------ 
+// NCHW input, KCRS filter, NKPQ output.   Supports stride/pad/dilation/groups. 
+inline void conv2d_ref_nchw(const std::vector<float>& x, const std::vector<float>& w, std::vector<float>& y, 
+const   ConvShape & s) { 
+const int P =   s.P (), Q =   s.Q (), Cg =   s.C   /   s.groups , Kg =   s.K   /   s.groups ; 
+y.assign (( size_t ) s.N   *   s.K   * P * Q, 0.f); 
+for (int n = 0; n <   s.N ; ++n) 
+for (int k = 0; k <   s.K ; ++k) { 
+const int g = k / Kg; 
+for (int p = 0; p < P; ++p) 
+for (int q = 0; q < Q; ++q) { 
+double acc = 0.0; 
+for (int cg = 0; cg < Cg; ++cg) {   // compute a single output pixel 
+const int c = g * Cg + cg; 
+for (int r = 0; r <   s.R ; ++r) { 
+const int h = p *   s.stride   -   s.pad   + r *   s.dil ; 
+if (h < 0 || h >=   s.H ) continue; 
+for (int t = 0; t <   s.S ; ++t) { 
+const int ww = q *   s.stride   -   s.pad   + t *   s.dil ; 
+if (ww < 0 || ww >=   s.W ) continue; 
+acc += (double)x[((( size_t )n *   s.C   + c) *   s.H   + h) *   s.W   + ww] * 
+(double)w[((( size_t )k * Cg + cg) *   s.R   + r) *   s.S   + t]; 
+}   // t 
+}   // r 
+}   // cg 
+y[((( size_t )n *   s.K   + k) * P + p) * Q + q] = (float)acc; 
+}   // q 
+}   // p 
+}   // k 
+}   // n 
+}   // END 
+CPU Sequential reference : direct convolution   –   7 - loop nest
+
+=== p14 ===
+2   · Foundations · D1 
+D1   —   naive direct   GPU   conv: one thread per output element (01_direct_naive.cu) 
+Convolution on GPUs: From Direct Kernels to GEMM · Course   1 
+16 
+__global__ void conv2d_direct_naive(const float* __restrict__ X, const float* __restrict__   Wt , 
+float* __restrict__ Y, int N, int C, int H, int W, int K, int R, int S, 
+int P, int Q, int stride, int pad, int   dil ) { 
+const int   pq   =   blockIdx.x   *   blockDim.x   +   threadIdx.x ;   // flattened ( p,q ) 
+const int k =   blockIdx.y , n =   blockIdx.z ;   // filter #, image # 
+if ( pq   >= P * Q) return; 
+const int p =   pq   / Q, q =   pq   % Q; 
+float acc = 0.f; 
+for (int c = 0; c < C; ++c) { 
+const float* xc = X   + (( size_t )n * C + c) * H * W;   // input channel plane 
+const float*   wc   =   Wt   + (( size_t )k * C + c) * R * S;   // filter slice   for   (k, c) 
+for (int r = 0; r < R; ++r) { 
+const int h = p * stride   -   pad + r *   dil ; 
+if (h < 0 || h >= H) continue;   // zero - padding: skip the tap 
+for (int s = 0; s < S; ++s) { 
+const int w = q * stride   -   pad + s *   dil ; 
+if (w < 0 || w >= W) continue; 
+acc = __ fmaf_rn (xc[h * W + w],   wc [r * S + s], acc);   // consecutive q   - > consecutive   w 
+} 
+} 
+} 
+Y[((( size_t )n * K + k) * P + p) * Q + q] = acc;   // output layout: NKPQ 
+} 
+Grid = ( ⌈ P·Q/256 ⌉ , K, N). 
+INPUT: X : [NCHW], filters [KCRS] 
+The four outer loops of the 7 - loop   reference   nest become the grid; the three inner loops stay in the thread. 
+Every output re - reads the filter and R·S input values from global memory.
+
+=== p15 ===
+2   · Foundations · D1 
+D1   —   kernel   implementation details 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   17 
+•   const float ∗   __restrict__ X   —   a promise that X,   Wt   and Y do not alias. 
+•   It lets the compiler keep loaded values in registers across the stores to Y and route the loads 
+through the read - only (non - coherent) path: SASS shows LDG.E.CONSTANT, PTX shows 
+ld.global.nc   —   the same effect as __ ldg () 
+•   ( size_t )n   ∗   C   —   the index   n·C·H·W   is formed in   64 - bit before the multiply chain. In   32 - bit it overflows at 
+2 ³¹   elements ( 8   GB of FP 32 ; a ( 64 ,   256 ,   256 ² ) activation is already   1.07   G elements). Offsets inside a plane 
+stay int:   64 - bit integer math costs two instructions per operation on the GPU 
+•   on   64 - bit windows/Linux   size_t   =   64 - bit unsigned integer 
+•   __ fmaf_rn (a, b, c)   —   one fused multiply - add with a single round - to - nearest - even: exactly the FFMA 
+instruction, no intermediate rounding of   a ∗ b . Writing   a ∗ b   + c usually compiles to the same thing ( nvcc 
+contracts by default,   - fmad =true), but the intrinsic makes it explicit and stable across compiler flags   —   the 
+CPU reference uses std:: fma   for the same reason 
+•   Grid mapping of the four outer loops : 
+( p,q )   →   blockIdx.x· 256   +   threadIdx.x   with p =   pq   / Q, q =   pq   % Q; 
+k   →   blockIdx.y ; n   →   blockIdx.z . 
+Grid = ( ⌈ P·Q/ 256 ⌉ , K, N) = ( 13 ,   64 ,   32 ) blocks of   256   threads for the   ResNet   shape 
+( gridDim.y ,   gridDim.z   ≤   65 535   —   fine for K and N). 
+The three inner loops (c, r, s) stay sequential inside the thread 
+•   Why q is fastest: lanes   0 .. 31   of a warp hold consecutive q, hence consecutive w for stride   1   —   the 
+coalescing argument on the next slide depends on this choice
+
+=== p16 ===
+2 · Foundations · D1 
+D1 analysis   —   what to look for in Nsight Compute 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   16 
+•   Coalescing : lanes of a warp hold consecutive q → consecutive w → one 
+128 - byte transaction per 32 loads (stride 1). Filter reads are warp - uniform 
+•   Reuse exists only in the caches   —   and on this GPU the caches deliver it: 
+L1 hit rate 88 %, L2 98 %, DRAM throughput 1 % of peak. The naive kernel is not 
+short of bytes 
+•   S hort o n   useful work per instruction : 
+2.94 billion warp instructions for 116 million warp - level FMAs   —   about 25 
+instructions per FMA (index arithmetic, bounds tests, two loads per tap), at 14 
+cycles each 
+• The bounds tests are if - converted by   ptxas : 8 of the 14 LDGs are 
+predicated (SASS, sm_89 , will show   the @P prefix on LDG) 
+•   40 registers, no shared memory, 93 % occupancy   —   occupancy is not the 
+issue either 
+• Measured (RTX 4090 Laptop GPU, Nsight cycles at 1.45 GHz): 
+8.40   ms , 0.88 TFLOP/s   —   3 % of the 28 TFLOP/s FP32 peak
+
+=== p17 ===
+2 · Foundations · im2col 
+Receptive fields and the im2col identity 
+Convolution on GPUs: From Direct Kernels to GEMM · Course   1   23 
+Receptive field : the set R( p,q ) of input values that contribute to output pixel ( p,q ) for every channel c, 
+the R × S window at rows   p·stride−pad+r·dil   and columns   q·stride−pad+s·dil   (the orange square, for all C channels). 
+im2col   writes each receptive field as one column of length C·R·S. 
+Then Y is a GEMM: the sum over channels and the sum over taps are the same reduction, 
+K_gemm   = C·R·S.
+
+=== p18 ===
+2 · Foundations · im2col 
+im2col vs. im2row   —   the layout decides which operand is transposed 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   24 
+im2col (Caffe, NCHW)   im2row (NHWC) 
+patch matrix   X ̃   [C·R·S]   ×   [N·P·Q]   (one column per output pixel)   X ̃   ᵀ   [N·P·Q]   ×   [R·S·C]   (one row per pixel, c fastest) 
+weights   W [K]   ×   [C·R·S] = KCRS flattened   W ᵀ   [R·S·C]   ×   [K] = RSCK layout 
+GEMM   Y [ K ][ N·P·Q ] =   W ·   X ̃   (M = K, N = NPQ)   Y [ N·P·Q ][ K ] =   X ̃   ᵀ   · W ᵀ   (M = NPQ, N = K) 
+output lands as   [K][N·P·Q]   —   needs a permute to NKPQ when N > 1   NHWC directly, no permute 
+both are   NN GEMMs once the weights are pre - arranged 
+offline   (NN = no transpose / no transpose BLAS) 
+Nothing but layout differs. 
+The NHWC form is the one implicit GEMM ( § 3.2) and   eventually the   TMA im2col ( § 3.3) will absorb.
+
+=== p19 ===
+2 · Foundations · passes 
+fprop ,   dgrad ,   wgrad   —   the three convolution passes of   ML   training 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   25 
+• fprop (forward propagation) computes the layer output Y from the input X and the weights W   —   the only pass 
+needed at inference 
+• dgrad (data gradient) computes ∂L/∂X from ∂L/∂Y and W: the same weights applied “backwards” (a transposed 
+convolution: each output gradient is scattered through the filter to the inputs it came from). It is needed to keep 
+back - propagating into earlier layers 
+• wgrad (weight gradient) computes ∂L/∂W from X and ∂L/∂Y: for each tap (c,r,s) a correlation of the input with the 
+output gradient summed over all images and pixels   —   the learning signal 
+• Every pass is a sum of products of the same three tensors with one of them unknown, so every pass is a GEMM 
+with the roles of M, N and K_gemm permuted (next slide). Each costs 2 FLOPs per weight per output pixel: training ≈ 
+3 ×   the fprop FLOPs   —   the “6·N·D” rule from the earlier lecture, seen per layer
+
+=== p20 ===
+2 · Foundations · im2col 
+GEMM dimensions for the three convolution passes ,   and the price of materializing   X ̃ 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   26 
+Pass   M _gemm   N _gemm   K_gemm   Note 
+fprop Y = conv(X, W)   K   N·P·Q   C·R·S   the GEMM of this lecture 
+dgrad dX = conv ᵀ (dY, W)   C   N·P·Q   K·R·S   needs col2im (scatter - add) after the GEMM 
+wgrad   dW   =   X ̃   ·   dY ᵀ   K   C·R·S   N·P·Q   reduces over the LARGEST dimension → split - K / 
+stream - K (L5) 
+memory expansion of explicit   X ̃   × R·S: 9 for 3 × 3, 49 for 7 × 7, 27 for 3 × 3 × 3 
+ResNet - 50 3 × 3, batch 32, FP32   X ̃   =   576   ×   100 352   floats =   231   MB; input is   25.7   MB 
+( × 9 ); with N =   128 :   0.92   GB 
+The expansion factor is the number that motivates   § 3.2. The per - pass table also tells you that dgrad and wgrad are 
+the same machinery with roles swapped.
+
+=== p21 ===
+Section   3.1 
+Explicit im2col / im2row + SGEMM 
+CUDA cores, FP32,   ( no Tensor Cores yet ) 
+I solate the algorithmic transformation from the hardware one. 
+27
+
+=== p22 ===
+3.1 · Explicit im2col 
+What “explicit” means   —   and the three other places the patch matrix can live 
+Convolution on GPUs: From Direct Kernels to GEMM · Course   1   28 
+Formulation   Where the patch matrix   X ̃   lives   Kernels launched   Extra memory / traffic   Covered in 
+Explicit im2col / 
+im2row 
+materialized   in HBM: a real array you 
+could print 
+2: a transform kernel, then 
+an unmodified library 
+GEMM 
+× R·S of the input; 
+written once, read 
+once more 
+§ 3.1 (E1 – E4) 
+Implicit GEMM 
+(software) 
+nowhere   —   the GEMM   mainloop 
+computes each element's input 
+address on the fly and zero - fills 
+padding 
+1: a convolution - aware 
+GEMM kernel 
+none; gather replaces 
+contiguous loads 
+§ 3.2 (I1 – I4), 
+§ 3.3 T1 
+Implicit GEMM 
+(hardware im2col) 
+nowhere   —   the TMA unit generates 
+the addresses from a descriptor and 
+fills shared memory asynchronously 
+1: TMA + WGMMA 
+pipeline 
+none; no address 
+arithmetic in the kernel 
+§ 3.3 (T2, T3) 
+im2win   a compact window - order 
+intermediate in HBM 
+2   between im2col and 
+implicit 
+Transform domain 
+(Winograd, FFT) 
+transformed tiles / spectra   3: transform, element - 
+wise or batched GEMM, 
+inverse 
+transform buffers; 
+fewer multiplications 
+“Explicit” = the im2col matrix exists in memory, produced by its own kernel, and the GEMM that follows knows nothing about co nvo lution. 
+Everything after   § 3.1 removes that materialization step   —   first by doing the addressing in software inside the GEMM ( § 3.2), then by handing 
+the addressing to a hardware unit ( § 3.3). 
+The arithmetic is identical in all three; only where the bytes go changes.
+
+=== p23 ===
+3.1 · Explicit im2col 
+A short history of the oldest trick in CNN acceleration 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   29 
+•   2006   —   Chellapilla, Puri & Simard (Microsoft): unroll the receptive fields of a 
+CNN into a matrix and call GEMM; written for document recognition on CPUs 
+•   2014   —   Yangqing   Jia's Caffe makes im2col.cu +   cuBLAS   the default GPU 
+convolution; the NCHW/“columns” convention we use in file 04 is Caffe's 
+•   2014   —   cuDNN   v1 ( Chetlur   et al.) ships with the same algorithm as its 
+baseline, already noting the memory cost 
+•   2015 – 2017   —   low - memory relatives: MEC (Cho & Brand, ICML 2017) lowers 
+one spatial dimension at a time; kn2row (Anderson & Gregg) unrolls the 
+kernel instead of the image 
+•   Today   —   explicit im2col survives as   torch.nn.Unfold , in prototypes, and in 
+the first line of every explanation of implicit GEMM
+
+=== p24 ===
+Orientation 1   —   NCHW / im2col: the patch matrix is operand B (files 04, 08) 
+Supplement: From SGEMM to Implicit - GEMM Convolution, step by step · Course 1   24 
+Kernels   Patch matrix   X ̃   (hatched)   Result Y 
+Explicit: E1 + E3 (file 04)   Built in global memory as Xcol [C·R·S][N·P·Q], up to 
+R·S   ×   the size of X. 
+Stored as drawn, order K, N, P, Q (= N   ×   K   ×   P   ×   Q when N 
+= 1); reordered on the CPU for a batch. 
+Implicit: I1 (file 08)   Never stored: tiles are gathered from X into shared 
+memory as the GEMM loads them. 
+A logical view only: the epilogue writes each value 
+straight to its N   ×   K   ×   P   ×   Q location. 
+Left: the layouts these kernels use. W is stored as K   ×   C   ×   R   ×   S for both; viewing it as [K][C·R·S] moves no data.
+
+=== p25 ===
+Orientation 2   —   NHWC / im2row: the patch matrix is operand A (files 05, 09 – 12) 
+Supplement: From SGEMM to Implicit - GEMM Convolution, step by step · Course 1   25 
+Kernels   Patch matrix   X ̃   ᵀ   (hatched)   Result Y 
+Explicit: E2 + E3 (file 05)   Built in global memory as   Xrow   [N·P·Q][R·S·C], up to 
+R·S   ×   the size of X. 
+Stored as drawn, order N, P, Q, K: already the NHWC 
+output, nothing to reorder. 
+Implicit: I2 to T1 (files 09 – 
+12) 
+Never stored: tiles are gathered from X into shared 
+memory as the GEMM loads them. 
+Written by the epilogue in the same N, P, Q, K order: no 
+difference from explicit. 
+Left: the layouts these kernels use. W is stored as R   ×   S   ×   C   ×   K for both; viewing it as [R·S·C][K] moves no data.
+
+=== p26 ===
+3.1 · Explicit GEMM · E1 im2col 
+E1 im2col (file 04): which input element each thread copies   —   X stored as NCHW 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   26 
+Each X cell shows its value, with its memory index underneath; 
+a value's digits give its row and column, plus 50 in channel 1. 
+Consecutive threads share one channel and one tap, so at stride 1 reads and writes are both coalesced. 
+Row 5 is channel 0 shifted left by one column, with 0 where the shift leaves the image. 
+Example   Toy sizes : C = 2,   N=1, ( PxQ )   4   ×   4 image,   ( RxS )   3   ×   3 filter, padding 1; 
+8 threads per block, warps of 4 (really 256 and 32).
+
+=== p27 ===
+3.1 · Explicit im2col · E1 
+E 1   —   im 2 col kernel ,   NCHW   →   X ̃   [C·R·S][N·P·Q] 
+( 04 _im 2 col_nchw_sgemm.cu) 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   30 
+__global__ void im 2 col_nchw(const float* __restrict__ X, float* __restrict__   Xcol , int 
+N, int C, int H, int W, int R, int S, int P, int Q, int stride, int pad, int   dil ) 
+{ 
+const long   long   total = (long long)C * R * S * N * P * Q; 
+const long   long   idx   = (long long) blockIdx.x   *   blockDim.x   +   threadIdx.x ;   //   one thread per   X̃   element 
+if ( idx   >= total) return; 
+const int NPQ = N * P * Q; 
+const int   krow   = (int)( idx   / NPQ);   // (c, r, s) flattened = GEMM reduction index 
+const int col   = (int)( idx   % NPQ);   // (n, p, q) flattened = GEMM N index 
+const int s =   krow   % S, r = ( krow   / S) % R, c =   krow   / (R * S); 
+const int q = col % Q, p = (col / Q) % P, n = col / (P * Q); 
+const int h = p * stride   -   pad + r *   dil , w = q * stride   -   pad + s *   dil ; 
+const bool in = (h >=   0   && h < H && w >=   0   && w < W); 
+Xcol [ idx ] = in ? X[((( size_t )n * C + c) * H + h) * W + w] :   0 .f;   // zero padding materialized 
+} 
+Consecutive threads → consecutive columns → coalesced writes; 
+the gathered reads follow w (contiguous for stride 1 except at row ends and padding). 
+Nsight signature: memory - bound, writes ≈ R·S   ×   the input. 
+ptxas : 25 registers.
+
+=== p28 ===
+3.1 · Explicit GEMM · E2 im2row 
+E2 im2row (file 05): which input element each thread copies   —   X stored as NHWC 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   28 
+The same X with the same values, now stored pixel by pixel (NHWC). 
+Consecutive threads share one output pixel and step through its patch, channel first, then tap, so each filter row is one run   of   S·C 
+consecutive elements. 
+Blocks do not line up with rows: three blocks write this row. 
+Interior pixel shown; at the border, out - of - image taps become 0. 
+Example   Toy sizes : C = 2,   N=1, ( PxQ )   4   ×   4 image,   ( RxS )   3   ×   3 filter, padding 1; 
+8 threads per block, warps of 4 (really 256 and 32).
+
+=== p29 ===
+3.1   · Explicit im 2 col · E 2 
+E 2   —   im 2 row kernel ,   NHWC   →   X ̃ ᵀ   [N·P·Q][R·S·C] with c fastest 
+( 05 _im 2 row_nhwc_sgemm.cu) 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   31 
+__global__ void im2row_nhwc(const float* __restrict__ X, float* __restrict__   Xrow , int 
+N, int C, int H, int W, int R, int S, int P, int Q, int stride, int pad, int   dil ) 
+{ 
+const long   long   RSC = (long long)R * S * C, total = (long long)N * P * Q * RSC; 
+const long   long   idx   = (long long) blockIdx.x   *   blockDim.x   +   threadIdx.x ; 
+if ( idx   >= total) return; 
+const int pix   = (int)( idx   / RSC);   // (n, p, q) 
+const int   kidx   = (int)( idx   % RSC);   // (r, s, c) with c fastest 
+const int c =   kidx   % C, s = ( kidx   / C) % S, r =   kidx   / (C * S); 
+const int q = pix % Q, p = (pix / Q) % P, n = pix / (P * Q); 
+const int h = p * stride   -   pad + r *   dil , w = q * stride   -   pad + s *   dil ; 
+const bool in = (h >= 0 && h < H && w >= 0 && w < W); 
+Xrow [ idx ] = in ? X[((( size_t )n * H + h) * W + w) * C + c] : 0.f;   // contiguous in   C on both sides 
+} 
+// host:   Y[NPQ][K] =   Xrow [NPQ][RSC] *   Wrsck [RSC][K]   - >   sgemm_launch (NPQ, K, RSC,   1.f,   Xrow ,   Wrsck , 0.f, Y) 
+Same arithmetic, different ordering of the reduction index. 
+Reads AND writes are now contiguous along C, and the GEMM output is already NHWC. 
+The weights were re - laid out offline as [R][S][C][K] ( kcrs_to_rsck   in   conv_ref.h ) so that this is also an NN GEMM.
+
+=== p30 ===
+E3   —   the base kernel (1/3): prologue and the two tile loads ( sgemm_tiled.cuh ) 
+Supplement: From SGEMM to Implicit - GEMM Convolution, step by step · Course 1   30 
+template <int BM, int BN, int BK, int TM, int TN> 
+__global__ void __ launch_bounds __((BM / TM) * (BN / TN)) 
+sgemm_tiled (int M, int N, int K, float alpha, const float* __restrict__ A, const float* __restrict__ B, 
+float beta, float* __restrict__ C) { 
+constexpr   int NT = (BM / TM) * (BN / TN);   //   256   threads 
+__shared__ float As[BM][BK];   // [ 64 ][ 8 ]   k contiguous 
+__shared__ float Bs[BK][BN];   // [ 8 ][ 64 ]   n contiguous 
+const int   tid   =   threadIdx.x ; 
+const int   trow   =   tid   / (BN / TN),   tcol   =   tid   % (BN / TN);   //   16   x   16   thread grid,   4   x   4   outputs each 
+const int m 0   =   blockIdx.y   * BM, n 0   =   blockIdx.x   * BN;   // tile origin in C 
+f loat acc[TM][TN];   //   4 x 4   register tile 
+for (int   i   =   0 ;   i   < TM; ++ i ) for (int j =   0 ; j < TN; ++j) acc[ i ][j] =   0 .f; 
+for (int k 0   =   0 ; k 0   < K; k 0   += BK) {   //   ----   MAINLOOP over the reduction dim 
+for (int   i   =   tid ;   i   < BM * BK;   i   += NT) {   // A tile:   512   elements,   2   per thread 
+const int r =   i   / BK, kk =   i   % BK;   const int gm = m 0   + r,   gk   = k 0   + kk; 
+As[r][kk] = (gm < M &&   gk   < K) ? A[( size_t )gm * K +   gk ] :   0 .f; 
+} 
+for (int   i   =   tid ;   i   < BK * BN;   i   += NT) {   // B tile:   512   elements,   2   per thread 
+const int kk =   i   / BN, c =   i   % BN;   const int   gk   = k 0   + kk,   gn   = n 0   + c; 
+Bs[kk][c] = ( gk   < K &&   gn   < N) ? B[( size_t ) gk   * N +   gn ] :   0 .f; 
+} 
+__ syncthreads (); 
+Prologue: tile origin, thread mapping, zeroed accumulators. 
+Loads: every thread fetches two elements of each 512 - element tile with bounds checks (zero - fill beyond M, N, K). 
+3.1 · Explicit im2col · E3 
+E3   —   This   GEMM is   a   register - tiled SGEMM ( sgemm_tiled.cuh ), bounds - checked 
+Everything in   § 3.2   keeps this loop and changes only the two tile loads   (A, B) . 
+ptxas :   64   registers ,   4   KB shared,   0   spills ( 64   regs   ×   256   threads   ⇒   4   blocks/SM on H 100   =   50   % occupancy   —   not the limiter).
+
+=== p31 ===
+E3   —   the base kernel (2/3): the compute block   —   the invariant 
+Supplement: From SGEMM to Implicit - GEMM Convolution, step by step · Course 1   31 
+for (int kk =   0 ; kk < BK; ++kk) {   / /   ----   COMPUTE:   8   shared loads,   16   FFMAs 
+float a[TM], b[TN]; 
+for (int   i   =   0 ;   i   < TM; ++ i ) a[ i ] = As[ trow   * TM +   i ][kk]; 
+for (int j =   0 ; j < TN; ++j) b[j] = Bs[kk][ tcol   * TN + j]; 
+for (int   i   =   0 ;   i   < TM; ++ i ) for (int j =   0 ; j < TN; ++j) acc[ i ][j] = 
+__ fmaf_rn (a[ i ], b[j], acc[ i ][j]); 
+} 
+__ syncthreads ();   // tiles may be overwritten after this 
+}   //   ----   end of MAINLOOP 
+Thread ( trow ,   tcol ) holds a 4 × 4 register tile of C and, per shared - memory K - step, reads 4 values of A and 4 of B to 
+perform 16 fused multiply - adds. 
+This block is unchanged through steps 1 – 4 (only the   smem   arrays gain a stage index in step 4) 
+and is replaced by Tensor Core fragments in step 5. 
+3.1 · Explicit im2col · E3
+
+=== p32 ===
+Step 0 · sgemm_tiled 
+E 3 —   the base kernel ( 3 / 3 ): the epilogue 
+Supplement: From SGEMM to Implicit - GEMM Convolution, step by step · Course 1   32 
+//   ----   EPILOGUE: registers   - > C,   C = alpha * A*B + beta * C,   bounds - checked 
+for (int   i   =   0 ;   i   < TM; ++ i ) { 
+const int gm = m 0   +   trow   * TM +   i ; 
+if (gm >= M) continue;   //   handle partial tile   bottom edge 
+for (int j =   0 ; j < TN; ++j) { 
+const int   gn   = n 0   +   tcol   * TN + j; 
+if ( gn   < N) {   //   handle partial   tile   right edge 
+float* cp = &C[( size_t )gm * N +   gn ]; 
+*cp = alpha * acc[ i ][j] + (beta !=   0 .f ? beta * *cp :   0 .f);   // beta ==   0 : C 
+is never read 
+} 
+} 
+} 
+} 
+} 
+Thread ( trow ,   tcol ) owns output rows m 0   +   4 ·trow .. + 3   and columns n 0   +   4 ·tcol .. + 3 . 
+The epilogue is where every convolution variant decides how GEMM coordinates map back onto the output tensor 
+—   NKPQ in   I 1   (im 2 col) , NHWC in   I 2   (im 2 row) . 
+The launcher   sgemm_launch () (files   04 – 07 ,   17 ) picks grid = ( ⌈ N/ 64 ⌉ ,   ⌈ M/ 64 ⌉ )   ×   256   threads.
+
+=== p33 ===
+S ix benchmark shapes   (from the modern families) 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   8 
+Name   N   C → K   H × W   R × S / stride / pad   GEMM (NHWC view) M   ×   N   ×   K_gemm   GFLOP 
+ResNet - 50 stage - 2 3 × 3   32   64 → 64   56 × 56   3 × 3 / 1 / 1   100 352   ×   64   ×   576   7.40 
+ResNet - 50 1 × 1   32   256 → 64   56 × 56   1 × 1 / 1 / 0   100 352   ×   64   ×   256   3.29 
+ConvNeXt - T   depthwise   7 × 7   32   96 (DW)   56 × 56   7 × 7 / 1 / 3   per channel: 100 352   ×   1   ×   49   0.94 
+DiT patchify p=16   32   3 → 1152   256 × 256   16 × 16 / 16 / 0   8 192   ×   1152   ×   768   14.5 
+video - VAE 3D   1   128 → 128   17 × 64 × 64   3 × 3 × 3 / 1 / 1   69 632   ×   128   ×   3456   61.6 
+Mamba causal conv1d   8   4096 (DW)   L = 8192   width 4, causal   no GEMM structure   2.1 
+GEMM dimensions: M = N·P·Q output pixels, N = K output channels, K_gemm = C·R·S (per group). Keep these 
+numbers in view: they decide every kernel choice.
+
+=== p34 ===
+Convolution Kernels : Input, Filters, Output Layouts
+
+=== p35 ===
+Section 3.2 
+Implicit GEMM on CUDA cores 
+Keep the   mainloop . 
+Replace the tile load with on - the - fly convolution addressing. 
+The patch matrix   is   never   materialized . 
+35
+
+=== p36 ===
+3.2 · Implicit GEMM 
+The   “implicit”   idea : the   X patch   tile is gathered, not loaded   (materialized) 
+Convolution on GPUs: From Direct Kernels to GEMM · Course   1   36 
+Per K - step the block needs   64   pixels   ×   8   channels of one filter tap. 
+In   § 3.1   those came from a contiguous row of   the   X   patch   matri x ̃   ; 
+now the loader computes each pixel's input address (n,   p·stride   −   pad + r,   q·stride   −   pad + s, c 0 ..c 0 + 7 ) 
+and zero - fills taps outside the image. 
+Same FLOPs as D 1 , zero extra memory. 
+For the im 2 row case: A =   Xrow [NHWC], B = W [RSCK]
+
+=== p37 ===
+Step   1   · I 1   NCHW 
+I1 diff: the loads (compute block omitted   —   unchanged) 
+the B tile becomes a gather with per - element bounds 
+Supplement: From SGEMM to Implicit - GEMM Convolution, step by step · Course 1   37 
++ for (int kg 0   =   0 ; kg 0   < CRS; kg 0   += BK) {   // was: for (k 0   =   0 ; k 0   < K; k 0   += BK) 
+for (int   i   =   tid ;   i   < BM * BK;   i   += NT) {   //   Wt - > A s : weights, contiguous along kg 
++   const int r =   i   / BK, kk =   i   % BK,   gk   = k 0   + r,   gkg   = kg 0   + kk; 
++   As[r][kk] = ( gk   < K &&   gkg   < CRS) ?   Wt [( size_t ) gk   * CRS +   gkg ] :   0 .f; 
+} 
+for (int   i   =   tid ;   i   < BK * BN;   i   += NT) {   //   X - > B s : the VIRTUAL patch matrix 
+const int kk =   i   / BN, col =   i   % BN; 
+-   const int   gk   = k 0   + kk,   gn   = n 0   + c; 
+-   Bs[kk][c] = ( gk   < K &&   gn   < N) ? B[( size_t ) gk   * N +   gn ] :   0 .f; 
++   const int kg = kg 0   + kk, pix = n 0   + col; 
++   float v =   0 .f; 
++   if (kg < CRS && pix < NPQ) { 
++   const int c = kg / RS, r = (kg % RS) / S, s = kg % S;   // reduction index   - > (c, r, s) 
++   const int n = pix / PQ, p = (pix % PQ) / Q, q = pix % Q;   // pixel index   - > (n, p, q) 
++   const int h = p * stride   -   pad + r *   dil , w = q * stride   -   pad + s *   dil ; 
++   if (h >=   0   && h < H && w >=   0   && w < W) v = X[((( size_t )n * C + c) * H + h) * W + w]; 
++   } 
++   Bs[kk][col] = v;   // zero - fill = the padding 
+} 
+__ syncthreads (); 
+/* compute block: identical to   sgemm_tiled   */ 
+__ syncthreads (); 
+} 
+orange = new or changed relative to the previous step   ·   grey (−) = removed   ·   dark = unchanged 
+The B tile row kk is one filter tap/channel (c, r, s); its   64   columns are   64   consecutive output pixels, which for stride   1 
+are   64   consecutive w   —   the gather still coalesces. 
+I 1   —   implicit GEMM, NCHW: ( 08 _implicit_gemm_v 1 _nchw.cu) 
+Consecutive lanes hold consecutive pixels   →   consecutive w   →   the gather still coalesces (stride   1 ). 
+But every element carries its own (h, w) test and its own division chain.   ptxas :   64   registers,   4   KB shared,   0   spills.
+
+=== p38 ===
+Step 1 · I1 NCHW 
+I1 diff: the epilogue (GEMM (k, pix) → NKPQ) 
+Supplement: From SGEMM to Implicit - GEMM Convolution, step by step · Course 1   38 
+for (int   i   = 0;   i   < TM; ++ i ) { 
+-   const int gm = m0 +   trow   * TM +   i ; 
+-   if (gm >= M) continue; 
++   const int k = k0 +   trow   * TM +   i ;   // GEMM row = output channel 
++   if (k >= K) continue; 
+for (int j = 0; j < TN; ++j) { 
+-   const int   gn   = n0 +   tcol   * TN + j; 
+-   if ( gn   < N) { 
+-   float* cp = &C[( size_t )gm * N +   gn ]; 
+-   *cp = alpha * acc[ i ][j] + (beta != 0.f ? beta * *cp : 0.f); 
+-   } 
++   const int pix = n0 +   tcol   * TN + j;   // GEMM column = pixel (n, p,   q) 
++   if (pix < NPQ) { 
++   const int n = pix / PQ,   pq   = pix % PQ; 
++   Y[(( size_t )n * K + k) * PQ +   pq ] = acc[ i ][j];   // alpha = 1, beta = 0: plain store 
++   } 
+} 
+} 
+orange = new or changed relative to the previous step   ·   grey ( − ) = removed   ·   dark = unchanged 
+alpha/beta disappear (a convolution forward pass is C = A·B) 
+and the only new work is splitting the pixel index into (n,   pq ) so the row lands in the right image of the NKPQ tensor.
+
+=== p39 ===
+3.2   · Implicit GEMM · layout 
+Why channels - last: the same tap for one pixel is 8 contiguous channels 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   40 
+NCHW: one scalar gather and one bounds test per element, coalesced along pixels. NHWC: one   16 - byte 
+vector per (pixel, tap,   4   channels) and one bounds test per pixel row. This is why PyTorch has 
+memory_format=torch.channels_last and why cuDNN's Tensor Core paths want NHWC.
+
+=== p40 ===
+3.2 · Implicit GEMM · I2 
+I 2   —   NHWC: ( 09 _implicit_gemm_v 2 _nhwc.cu) 
+Convolution on GPUs: From Direct Kernels to GEMM · Course   1   39 
+// GEMM view (im2row orientation): Y[N*P*Q][K] =   Xrow [N*P*Q][R*S*C] *   Wrsck [R*S*C][K] 
+// reduction index runs over (r, s, c) with c fastest: a BK=8 step = 8 consecutive channels of ONE tap 
+PTX shows ld.global.nc.v4.f32   × 2, st.shared.v4.f32, st.global.v4.f32   × 4. 
+The epilogue writes NHWC directly: the GEMM C matrix is the output tensor. 
+Constraint of the vector path: C % 8 == 0 (every real layer here). 
++ const int m0 =   blockIdx.x   * BM;   // first pixel   (GEMM M) 
++ const int k0 =   blockIdx.y   * BN;   // first output channel (GEMM N) 
++ const int PQ = P * Q, NPQ = N * PQ,   ksteps_per_tap   = C / BK,   nsteps   = R * S *   ksteps_per_tap ; 
+... 
+-   for (int kg0 = 0; kg0 < CRS; kg0 += BK) { 
++ for (int   ks   = 0;   ks   <   nsteps ; ++ ks ) {   // one tap x 8 channels per step 
++   const int tap =   ks   /   ksteps_per_tap , c0 = ( ks   %   ksteps_per_tap ) * BK; 
++   const int r = tap / S, s = tap % S; 
++   if ( tid   < 128) {   /   ----   A   ( Xrow ) : thread   - > (pixel row, 4 - channel   chunk) 
++   const int row =   tid   / 2, chunk = ( tid   % 2) * 4; 
++   const int pix = m0 + row; 
++   float4 v = make_float4(0.f, 0.f, 0.f, 0.f);   // v is float4 vector   –   vectorized loads/stores 
++   if (pix < NPQ) { 
++   const int n = pix / PQ, p = (pix % PQ) / Q, q = pix % Q;   // loop - invariant ( nvcc   hoists) 
++   const int h = p * stride   -   pad + r *   dil , w = q * stride   -   pad + s *   dil ; 
++   if (h >= 0 && h < H && w >= 0 && w < W)   // ONE test per pixel row 
++   v = ld4(&X[((( size_t )n * H + h) * W + w) * C + c0 + chunk]);   // 16 B = 4 channels 
++   } 
++   st4(&As[row][chunk], v); 
++   } else { /* B loader: next slide */ } 
+__ syncthreads (); 
+I 2   diff ( 1 / 3 ): prologue, reindexed K loop, the A loader (threads   0 – 127 ) 
+one bounds test per pixel row, float 4   channel vectors
+
+=== p41 ===
+Step 2 · I2 NHWC 
+I 2   —   NHWC —   diff ( 2 / 3 ): the B loader (threads   128 – 255 ) and the vector read of b 
+Supplement: From SGEMM to Implicit - GEMM Convolution, step by step · Course   1   41 
+} else {   //   ----   B   ( Wrsck ) : thread   - > (channel row, 4 - K chunk) 
++   const int t =   tid   -   128, row = t / 16, chunk = (t % 16) * 4; 
++   const int kg = (tap * C + c0 + row), kk = k0 + chunk;   // weights W[r][s][c][k], contiguous   along k 
++   float4 v = make_float4(0.f, 0.f, 0.f, 0.f); 
++   if (kk + 3 < K) v = ld4(& Wrsck [( size_t )kg * K + kk]); 
++   else { float*   vv   = & v.x ; for (int j = 0; j < 4; ++j)   vv [j] = (kk + j < K) ?   Wrsck [( size_t )kg * K   + kk + j] : 0.f; } 
++   st4(&Bs[row][chunk], v); 
+} 
+__ syncthreads (); 
+// compute block: one change 
+for (int kk = 0; kk < BK; ++kk) { 
+float a[TM], b[TN]; 
+for (int   i   = 0;   i   < TM; ++ i ) a[ i ] = As[ trow   * TM +   i ][kk]; 
+-   for (int j = 0; j < TN; ++j) b[j] = Bs[kk][ tcol   * TN + j]; 
++   const float4 b4 = ld4(&Bs[kk][ tcol   * TN]); b[0] = b4.x; b[1] = b4.y; b[2] = b4.z; b[3] = b4.w; 
+for (int   i   = 0;   i   < TM; ++ i ) for (int j = 0; j < TN; ++j) acc[ i ][j] = __ fmaf_rn (a[ i ], b[j], acc[ i ][j]); 
+} 
+__ syncthreads (); 
+} 
+orange = new or changed relative to the previous step   ·   grey (−) = removed   ·   dark = unchanged 
+The   strided   for - loops of steps 0 – 1 (two scalars per thread per tile) became a thread - role split with 
+one 16 - byte vector per thread per tile. 
+The 16 FFMAs are untouched.
+
+=== p42 ===
+Step   2   · I 2   NHWC 
+I2   —   NHWC —   diff (3/3): the NHWC epilogue 
+Supplement: From SGEMM to Implicit - GEMM Convolution, step by step · Course   1   42 
+//   ----   epilogue: NHWC output IS the GEMM C matrix [pixel][K] 
+for (int   i   =   0 ;   i   < TM; ++ i ) { 
+-   const int k = k 0   +   trow   * TM +   i ;   if (k >= K) continue;   // I 1 : row = channel 
++   const int pix = m 0   +   trow   * TM +   i ;   // I 2 : row = pixel 
++   if (pix >= NPQ) continue; 
++   const int kk = k 0   +   tcol   * TN; 
+-   for (int j =   0 ; j < TN; ++j) { pix = n 0   +   tcol *TN + j; n = pix / PQ;   pq   = pix % PQ; 
++   if (kk +   3   < K) st 4 (&Y[( size_t )pix * K + kk], make_float 4 (acc[ i ][ 0 ], acc[ i ][ 1 ], acc[ i ][ 2 ], acc[ i ][ 3 ])); 
++   else for (int j =   0 ; j < TN; ++j)   { 
++   if (kk + j < K)   Y[( size_t )pix * K + kk + j] = acc[ i ][j]; 
+} 
+} 
+orange = new or changed relative to the previous step   ·   grey (−) = removed   ·   dark = unchanged 
+Compared with step 1: no (n,   pq ) split and one 16 - byte store per output row. 
+This is the concrete payoff of channels - last on the output side; 
+PTX shows st.global.v4.f32   × 4.
+
+=== p43 ===
+3.2 · Implicit GEMM · synthesis 
+T he CUDA - core ladder   —   measured on the RTX   4090   Laptop GPU ( 3 × 3   shape) 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   43 
+Kernel   Load mechanism   ms   TFLOP/s   % of FP32 
+peak 
+Instructions 
+per FMA 
+Cycles per 
+instruction 
+D1 naive   scalar LDG per tap   8.40   0.88   3 %   25   14.0 
+E1 + E3 im2col + SGEMM   contiguous; + 2   ×   231 MB   2.37   3.12   11 %   5.9   13   –   15 
+I1 NCHW   predicated scalar gather   1.68   4.40   16 %   4.6   10.3 
+I2 NHWC   branch - guarded float4 gather   0.747   9.91   35 %   1.9   10.9 
+Nsight Compute cycle counts at the   1.45   GHz clock; FP 32   peak   28   TFLOP/s. 
+Instructions per FMA = executed warp instructions   ÷   warp - level FMAs. 
+Cycles per instruction hardly move: the   13 ×   gain from D 1   to I 3   is fewer instructions per FMA, and I 4   ties with I 3 . 
+On the   1 × 1   shape I 2 , I 3   and I 4   all take   0.41 – 0.43   ms   at   60   % of DRAM bandwidth   —   memory - bound, the hook for   § 3.6 .
+
+=== p44 ===
+Section   4 
+Convolution in 2026 machine learning 
+It did not disappear with Transformers   —   it changed shape. 
+4
+
+=== p45 ===
+4   ·   Modern Convolution 
+Convolution families in current models (1 of 2) 
+Convolution on GPUs: From Direct Kernels to GEMM · Course   1   5 
+Family   Where it appears today   Representative shape (N, 
+C→K, H × W, R × S) 
+GEMM mapping 
+Dense   k × k , many 
+channels 
+ResNet/EfficientNet/YOLO; U - Net encoders; conv 
+diffusion revival: DiC (CVPR'25), DiCo (NeurIPS'25), 
+FCDM (2026) 
+(32, 64→64, 56², 3 × 3)   im2col / implicit GEMM   —   § 3 
+Pointwise 1 × 1   every bottleneck;   ConvNeXt   MLP;   MobileNet 
+expand/project 
+(32, 256→64, 56², 1 × 1)   already a GEMM 
+Patchify   (kernel = 
+stride) 
+ViT, DiT (SD3, Flux), video DiTs   —   first layer of nearly 
+every vision model 
+(32, 3→1152, 256², 16 × 16 s16)   GEMM on non - overlapping 
+patches 
+Depthwise k × k   ConvNeXt V2 (7 × 7), MobileNetV4/V5 (V5 = 
+Gemma 3n vision encoder), MambaOut (CVPR'25) 
+(32, 96 DW, 56², 7 × 7)   degenerate: K_gemm = R·S 
+—   direct kernels win 
+Large - kernel 
+depthwise 
+RepLKNet 31 × 31, SLaK 51 × 51, UniRepLKNet (2024)   (32, 128 DW, 56², 31 × 31)   direct / FFT / decomposition 
+The channel count and kernel shape   —   not the word “convolution”   —   decide the right kernel. This table returns as a 
+decision chart in   § 4.
+
+=== p46 ===
+4 · Modern Convolution 
+Convolution families in current models (2 of 2) 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   6 
+Family   Where it appears today   Representative shape   GEMM mapping 
+Causal depthwise 
+conv1d 
+inside every Mamba / Mamba - 2 / Jamba block 
+(causal - conv1d library) 
+(B=8, D=4096, L=8192, width 4)   no GEMM   —   a streaming 1 - D 
+stencil 
+3D and causal 3D   video VAEs: CogVideoX, HunyuanVideo 
+(CausalConv3D), Wan 2.x 
+(1, 128→128, 17 × 64², 3 × 3 × 3)   implicit GEMM in 3D 
+( K_gemm   = 27·C) 
+Transposed / sub - 
+pixel 
+VAE & GAN decoders, segmentation heads, 
+super - resolution (PixelShuffle) 
+(1, 512→256, 32²→64², 4 × 4 s2)   dgrad GEMM + col2im; or 
+GEMM + reshape 
+Dilated ( atrous )   DeepLab ASPP, WaveNet - style audio   3 × 3, dilation 2/4/8   same GEMM, different tap 
+offsets 
+Deformable   InternImage (DCNv3), FlashInternImage (DCNv4, 
+CVPR'24) 
+3 × 3 + learned offsets   bilinear gather → GEMM 
+Sparse / submanifold 
+3D 
+LiDAR perception: spconv 2.x, MinkowskiEngine, 
+TorchSparse 
+3 × 3 × 3 on ~100K active voxels   rulebook gather → GEMM → 
+scatter
+
+=== p47 ===
+3.6.11 · re - parameterization 
+3.6.11   Linearity tricks: BatchNorm folding and structural re - parameterization 
+(RepVGG, RepLKNet branches) 
+Convolution on GPUs: From Direct Kernels to GEMM · Course   1   69 
+• Convolution is linear in its weights and 
+in its input. Two consequences for the 
+GEMM you actually run at inference: 
+• BN folding: y = γ·(conv(x) − μ)/σ + β   ⇒ 
+conv with W' = W·γ/σ and b' = β − μγ/σ. 
+One GEMM, no normalization kernel 
+• Re - parameterization: parallel 
+branches of 3 × 3, 1 × 1 and identity 
+(RepVGG) or large + small kernels 
+(RepLKNet) sum to one kernel: pad the 
+small kernels to the large size and add. 
+Train with branches, deploy one conv 
+• Lesson: the weight matrix in the 
+deployed GEMM is often not the one 
+that was trained 
+// BatchNorm folding (per output channel k) 
+scale_k = gamma_k / sqrt(var_k + eps) 
+W'[k,:,:,:] = scale_k * W[k,:,:,:] 
+b'[k]   = beta_k   -   scale_k * mean_k 
+// RepVGG branch merge (3x3 + 1x1 + identity   - > 
+3x3) 
+W3 += pad_to_3x3(W1)   // 1x1 at the 
+centre tap 
+W3[k, k, 1, 1] += 1   // identity = 
+centre tap of channel k 
+b3   = b3 + b1 + b_id 
+// inference: a single conv kernel, same GEMM as 
+any 3x3
+
+=== p48 ===
+3.6.12 · epilogue fusion 
+3.6.12 Epilogue fusion   —   where modern libraries win (bias, activation, residual, 
+quantization) 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   70 
+•   After the K loop the output tile is in registers. Anything per - element can be applied 
+there for free: + bias, ReLU/GELU/SiLU, + residual input, scale and round to FP 8 /INT 8 
+•   Without fusion each of those is a separate memory - bound kernel reading and writing 
+the whole activation ( 25.7   MB each way for our   3 × 3   shape) 
+•   cuDNN   9   graph API with runtime fusion compiles conv + bias + activation + residual 
+into one kernel; CUTLASS's Epilogue Visitor Tree (EVT) composes the same ops as a tree 
+of functors over the accumulator fragment 
+•   Our kernels have the hook: the epilogue loop in sgemm_tiled / I - series is where a 
+fused bias+ReLU would go (one line). Course   3   revisits this for quantized inference 
+(FP 8 /INT 4   scales live in the epilogue) 
+•   Measure it: time conv alone vs conv+bias+ReLU as three kernels vs one fused   —   the 
+fused version is faster by the two extra passes over Y
+
+=== p49 ===
+Convolution:   Core readings 
+Convolution on GPUs: From Direct Kernels to GEMM · Course 1   74 
+• NVIDIA, Convolutional Layers User's Guide (implicit GEMM vs transform - based algorithms); 
+cuDNN   9 Graph API documentation 
+•   Chetlur   et al.,   cuDNN : Efficient Primitives for Deep Learning, 2014. 
+•   Chellapilla, Puri, Simard, 2006 (the first im2col for CNNs) 
+• Zhou et al., Characterizing and Demystifying the Implicit Convolution Algorithm on 
+Commercial Matrix - Multiplication Accelerators, IISWC 2021 
+• CUTLASS 3.5 changelog; include/cute/arch/copy_sm90_tma.hpp; 
+include/cute/atom/copy_traits_sm90_im2col.hpp; PTX ISA   § cp.async.bulk.tensor   (im2col 
+mode); CUDA Driver API cuTensorMapEncodeIm2col 
+• Triton Gluon tutorial TMA im2col mode and Convolution via Implicit GEMM (its examples 1 – 
+5 are our probe's test cases) 
+• Lu et al., Im2win (2023) and Memory - efficient Im2win on Tensor Cores (2026); Lavin & Gray, 
+Fast Algorithms for CNNs, CVPR 2016; Fu et al.,   FlashFFTConv , ICLR 2024 
+• Xiong et al., DCNv4, CVPR 2024; Ding et al.,   RepVGG   (2021),   RepLKNet   (2022);   spconv   2.x 
+documentation; Dao - AILab/causal - conv1d
+
+=== p50 ===
+CUDA EVENTS 
+NOTE : for now we are running in the “default” NULL stream 0. 
+We’ll be learning all about   cuda   streams and how to use them in the 
+Winter 2027 course ( ScalingMLGPU ).
+
+=== p51 ===
+MANAGING EVENTS
+
+=== p52 ===
+Timer class using CUDA Events 
+class Timer { 
+float time; 
+const uint64_t   gpu ; 
+cudaEvent_t   a, b; 
+public: 
+Timer (uint64_t   gpu =0) :   gpu ( gpu ) { 
+cudaSetDevice ( gpu ); 
+cudaEventCreate (&a); 
+cudaEventCreate (&b); } 
+~Timer ( ) { 
+cudaSetDevice ( gpu ); 
+cudaEventDestroy (a); 
+cudaEventDestroy (b); } 
+void start ( ) { 
+cudaSetDevice ( gpu ); 
+cudaEventRecord (a, 0); 
+} 
+void stop (std::string label) { 
+cudaSetDevice ( gpu ); 
+cudaEventRecord (b, 0); 
+// call   EventSynchronize   prior to   EventElapsedTime 
+// to ensure both events have recorded 
+cudaEventSynchronize (b); 
+cudaEventElapsedTime (&time, a, b); 
+std:: cout   << "EVENT TIMING: " << time << 
+"   ms   (" << label << ")" << 
+std:: endl ; 
+} 
+};   // end Timer class 
+CUDA event timing is critical for the final project!
+
+=== p53 ===
+Final Project : Full Timeline 
+Task   Due Date 
+Project Team formation/registration   16 NOV, 11:59 PM* 
+Project student starter kit released   16 NOV, 10:00 PM 
+Project Proposal (2 pager) DUE   20 NOV, 11:59 PM 
+Tier T0   smoketest   leaderboard submission DUE   22 NOV, 11:59 PM 
+Team Presentation date/time sign up   24 NOV, 5:59 PM* 
+Tiers T1   –   Tn leaderboard submissions window   22 NOV   –   15 DEC 
+Project Design Specification DUE   2 DEC, 11:59 PM 
+Leaderboard Freeze and Final Project code 
+submissions DUE 
+15 DEC, 5 PM* 
+Project team presentations (10min + 5min Q&A)   15 - 17 DEC, 6 - 9 PM* 
+Final Report (with code analysis) DUE   17 DEC, 11:59 PM* 
+* Late Days cannot be used for these deliverable due dates
+
+=== p54 ===
+Final Project   –   Starter Kit 
+   Resnet 18   Student Kit Code Review 
+   Published on class Canvas website 
+   \ Files \ Final Project   -   ResNet 18 \ resnet 18 _student_kit_v 06 .zip 
+   https://canvas.uw.edu/courses/ 1917398 /files/folder/Final% 20 Project% 20 - 
+% 20 ResNet 18 /StudentKit#
+
+=== p55 ===
+Suggested optimization progression 
+Submit each Tier. Get as far as you can! 
+15 
+ResNet - 18 Inference Engine in CUDA · project technical overview 
+T0   Baseline   Build the starter, pass check.py, profile it: where do the 12 shape classes 
+spend their time? Choose a batch size. Get initial leaderboard entry.   L1 – L6 · by Nov 10 
+T 1   Batched GEMM path   NHWC + batching; explicit im2col + your SMEM - tiled SGEMM; 
+bank - conflict - free tiles; bias/ReLU fused into the kernel epilogue.   L3 – L6 · by Nov 10 
+T2   Implicit GEMM   Drop the im2col buffer: compute the gather in the tile load. Residual add 
+fused. Per - shape launch configs.   L7 · by Nov 17 
+T 3   Register tiling   Thread coarsening, 2 - D block/register tiles, float4 loads, tile sizes tuned per 
+shape class.   L8 · by Nov 24 
+T4   Tensor cores   FP16 WMMA / mma.sync with fp32 accumulation; fp16 weights and 
+activations. Opens the FP16 reduced - precision category.   L9 · by Dec 1 
+T 5   Fusion and tuning   Stem conv + maxpool fused; downsample sharing the block input read; warp - 
+shuffle avgpool and top - 5; fewer, fatter launches; per - shape tile autotuning.   L9+ · stretch 
+Required background
+
+=== p56 ===
+Getting started: Starter kit released 16 NOV 17 
+ResNet - 18 Inference Engine in CUDA · project technical overview 
+1 
+Read the spec 
+The PDF has the manifest schema, file formats, checker usage and rules in full. 
+Submit any questions to Teams “Final Project” channel! 
+2 
+Build and run the starter code 
+cmake for sm_75 and your dev GPU; run the 8 - image debug set, then the dev subset. 
+It passes check.py as shipped. 
+3 
+Read the starter, top to bottom 
+Executor, manifest walker, every naive kernel. 
+Know what each kernel does before you replace it. 
+4 
+Profile before optimizing 
+NCU on the Tier 0 engine: where does the time go across the 12 shape classes? 
+Where are the optimization “hot spots”? 
+5 
+Plan your tiers   –   Share the Work! 
+Proposal with work breakdown due Nov 18: Planned tiers and pseudocode by the 
+design spec (Dec 2), final implementations (Dec 15) and report by the final (Dec 17) 
+6 
+Smoke - test (T 0 ) the leaderboard 
+Submit the unmodified starter using leaderboard scripts. 
+The first entry tests plumbing, not performance, and sets your baselines to beat! 
+Initial goals (by 22 NOV) 
+•   The starter builds and passes check.py 
+on your dev GPU and on AWS T4 
+•   One NCU report of the slowest kernel 
+•   A first “ smoketest ” entry on the 
+leaderboard 
+•   Team groups formed 
+•   Project proposal submitted 
+•   Planned tiers you will attempt 
+to reach 
+•   Work breakdown: who owns 
+which kernel and other tasks 
+Spec PDF, starter kit and leaderboard links: 
+course canvas site / Files. 
+Timeline, grading and teams: next slides.
+
+=== p57 ===
+Final Project : Project Proposal Details 
+Canvas Assignment will go live tonight at 10 PM for submissions 
+Project Proposal   : MUST include the following elements/sections: 
+1.   Format:   PDF, 2 pages maximum 
+2.   Structure: 
+1.   Project Team Members:   (should be 3), registered on Canvas/People/Groups 
+2.   Initial Planned tiers   your team will attempt to reach 
+1.   This can be adjusted as the project progresses 
+3.   Work breakdown : which team members own which kernels and other project tasks 
+4.   A list of specific Nsight Compute   profiling metrics   which will be evaluated, and their 
+relevance to the algorithm performance. 
+5.   List of primary references   to be used/studied for the project implementation 
+1.   Open source literature, textbooks, other code sources and/or samples
