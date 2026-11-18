@@ -488,10 +488,10 @@
    "repo_files": {
     ".github/workflows/classroom.yml": "59e7d29d447e0b4eebe403a6e1ffabd20fe4e8a9",
     ".gitignore": "538248f34953e769c570cef880094fed816d6831",
-    "part1/ANALYSIS.md": "fde4c021a8b467402a8c81fb457ce33a691d7b52",
+    "part1/ANALYSIS.md": "9fe1a313e1eec58047a41c5edde6724b3fe076e9",
     "part1/README.md": "b50d4f465c0e7f7bc9f290a5b87db9e68c131f8d",
     "part1/avl.py": "bc42062c5b4e815d4558d259b663c8ac3f7ed187",
-    "part1/bst.py": "52d62683c8f5a4d31bf8d429c93a78228fe550ed",
+    "part1/bst.py": "29befed06d08bb812be889c0d8dcd3c03c2114ee",
     "part1/bst_test.py": "8629750a83df6100cbd58db1279072d6aa42c6df",
     "part1/compare.py": "bf3aed81e359d67d5e44c3652de50064deab0918",
     "part1/tree_tools.py": "63178a168c5dbd97454d18797dc3894da3a25b66",
@@ -530,14 +530,53 @@
    "repo/part2/tree_tools.py",
    "spec.md"
   ],
-  "archived_at": "2026-11-04T07:44:55-08:00",
+  "archived_at": "2026-11-18T07:44:11-08:00",
+  "summary_done": true,
+  "changes": [
+   "repo 檔案 part1/ANALYSIS.md 改了",
+   "repo 檔案 part1/bst.py 改了"
+  ],
+  "history": [
+   {
+    "at": "2026-11-04T07:44:55-08:00",
+    "changes": [
+     "new"
+    ]
+   },
+   {
+    "at": "2026-11-18T07:44:11-08:00",
+    "changes": [
+     "repo 檔案 part1/ANALYSIS.md 改了",
+     "repo 檔案 part1/bst.py 改了"
+    ]
+   }
+  ]
+ },
+ "11810636": {
+  "course": "gpu",
+  "slug": "final-project-proposal",
+  "dir": "gpu/hw/final-project-proposal",
+  "name": "Final Project - Proposal ",
+  "due_at": "2026-11-21T07:59:59Z",
+  "fp": {
+   "text": "3649216b490423ff",
+   "links": [],
+   "files": {},
+   "readme": null,
+   "repo_files": {},
+   "due_at": "2026-11-21T07:59:59Z"
+  },
+  "files": [
+   "spec.md"
+  ],
+  "archived_at": "2026-11-18T07:43:42-08:00",
   "summary_done": true,
   "changes": [
    "new"
   ],
   "history": [
    {
-    "at": "2026-11-04T07:44:55-08:00",
+    "at": "2026-11-18T07:43:42-08:00",
     "changes": [
      "new"
     ]

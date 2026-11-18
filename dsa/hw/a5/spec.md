@@ -1,6 +1,6 @@
 # A5: BSTs and AVLs
 
-> 來源：Canvas assignment 11814818（https://canvas.uw.edu/courses/1917417/assignments/11814818），抓取 2026-11-04 07:44 PST。
+> 來源：Canvas assignment 11814818（https://canvas.uw.edu/courses/1917417/assignments/11814818），抓取 2026-11-18 07:44 PST。
 > 這個檔案由 `scripts/assignment_specs.py` 產生，內容是原文，每次來源有變動就整份重寫，不要手改。整理過的版本在 README.md。
 
 - 截止（Canvas `due_at`）：2026-11-22 (Sun) 11:59 PM PST
@@ -74,10 +74,10 @@ original files.
 
 - [`.github/workflows/classroom.yml`](repo/.github/workflows/classroom.yml)（5428 bytes，blob 59e7d29）
 - [`.gitignore`](repo/.gitignore)（58 bytes，blob 538248f）
-- [`part1/ANALYSIS.md`](repo/part1/ANALYSIS.md)（1622 bytes，blob fde4c02）
+- [`part1/ANALYSIS.md`](repo/part1/ANALYSIS.md)（6518 bytes，blob 9fe1a31）
 - [`part1/README.md`](repo/part1/README.md)（4353 bytes，blob b50d4f4）
 - [`part1/avl.py`](repo/part1/avl.py)（2434 bytes，blob bc42062）
-- [`part1/bst.py`](repo/part1/bst.py)（1758 bytes，blob 52d6268）
+- [`part1/bst.py`](repo/part1/bst.py)（3165 bytes，blob 29befed）
 - [`part1/bst_test.py`](repo/part1/bst_test.py)（4054 bytes，blob 8629750）
 - [`part1/compare.py`](repo/part1/compare.py)（1943 bytes，blob bf3aed8）
 - [`part1/tree_tools.py`](repo/part1/tree_tools.py)（1614 bytes，blob 63178a1）

@@ -12,22 +12,46 @@ def bst_insert(root, value):
     An empty tree (None) gets a brand-new node, which is returned.
     A value already in the tree is ignored.
     """
-    raise NotImplementedError('TODO: bst_insert')
+    if root is None:
+        return create_tree_node(value)
+
+    if value < root['payload']:
+        root['left'] = bst_insert(root['left'], value)
+    elif value > root['payload']:
+        root['right'] = bst_insert(root['right'], value)
+
+    return root
+
 
 
 def bst_search(root, value):
     """Return the node holding value, or None if it is not in the tree."""
-    raise NotImplementedError('TODO: bst_search')
+    if root is None:
+        return None
+    if value == root['payload']:
+        return root
+    if value < root['payload']:
+        return bst_search(root['left'], value)
+    if value > root['payload']:
+        return bst_search(root['right'], value)
 
 
 def bst_min(root):
     """Return the node with the smallest value, or None for an empty tree."""
-    raise NotImplementedError('TODO: bst_min')
+    if root is None:
+        return None
+
+    left_min = bst_min(root['left'])
+    return left_min if left_min is not None else root
 
 
 def bst_max(root):
     """Return the node with the largest value, or None for an empty tree."""
-    raise NotImplementedError('TODO: bst_max')
+    if root is None:
+        return None
+
+    right_max = bst_max(root['right'])
+    return right_max if right_max is not None else root
 
 
 def bst_delete(root, value):
@@ -37,7 +61,28 @@ def bst_delete(root, value):
     is removed (no children, one child, or two children; see the README).
     The result is still a binary search tree.
     """
-    raise NotImplementedError('TODO: bst_delete')
+    if root is None:
+        return None
+
+    if value < root['payload']:
+        root['left'] = bst_delete(root['left'], value)
+    elif value > root['payload']:
+        root['right'] = bst_delete(root['right'], value)
+    else:
+        if not root['left'] and not root['right']:
+            return None
+
+        if not root['left']:
+            return root['right']
+
+        if not root['right']:
+            return root['left']
+
+        successor = bst_min(root['right'])
+        root['payload'] = successor['payload']
+        root['right'] = bst_delete(root['right'], successor['payload'])
+
+    return root
 
 
 def search_steps(root, value):
@@ -48,4 +93,17 @@ def search_steps(root, value):
     This works on the AVL tree in avl.py too, because its nodes have the same
     'payload', 'left' and 'right' keys.
     """
-    raise NotImplementedError('TODO: search_steps')
+    node = root
+    cnt = 0
+    while node is not None:
+        if value == node['payload']:
+            cnt += 1
+            return cnt
+        elif value < node['payload']:
+            node = node['left']
+            cnt += 1
+        else:
+            node = node['right']
+            cnt += 1
+
+    return cnt

@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-18T07:45:50-08:00",
+  "task": "作業說明",
+  "status": "new",
+  "summary": "新：gpu/final-project-proposal；改版：dsa/a5",
+  "output": "gpu/hw/README.md"
+ },
+ {
   "at": "2026-11-18T07:08:52-08:00",
   "task": "晨報",
   "status": "new",
