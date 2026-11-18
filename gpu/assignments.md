@@ -13,7 +13,7 @@
 | HW3 Control Divergence & Tiled MMULT improvements & NCU profiling | **11/6（五）11:59 PM PST**（Canvas due_at 2026-11-07T07:59:59Z） | 12 | 已發布（id 11810628），lock 12/14 | submitted | 10/27 發布；說明 PDF「Homework #3 (HW3) - Au26 - GPU Compute .pdf」（Canvas file 155100870）；原預估 11/3，以 Canvas 為準 |
 | Pop Quiz - Lecture 5 11/2/26 | 11/3（二）8:30 PM PST | 3 | 已發布（id 11881085，quiz 2460212），8:20–8:30 PM 開放 | graded（11/4 確認） | 課堂 pop quiz |
 | HW4 Memory access patterns & MMULT coalesced corner turning kernel | **11/15（日）11:59 PM PST**（Canvas due_at 2026-11-16T07:59:59Z） | 15 | 已發布（id 11810623），lock 12/13 | submitted | 11/3 發布；說明 PDF「Homework #4 (HW4) - Au26 - GPUCompute.pdf」（Canvas file 155723325）；原預估 11/10，以 Canvas 為準；11/11 晨報：Canvas due_at 由 11/13 改為 11/15 |
-| Project Proposal | 11/17（二） | 專題 10% | 未發布 | — | syllabus 11:59 PM vs 投影片 5:59 PM |
+| Final Project - Proposal | **11/20（五）11:59 PM PST**（Canvas due_at 2026-11-21T07:59:59Z） | 專題 10%（10 pts） | 已發布（id 11810636） | unsubmitted | 11/18 晨報：Canvas 發布，截止由原預估 11/17 延到 11/20；Team sign-up 重開到 11/18 11:59 PM PT，所有組別已重置，要到 People → Project Teams 重新加入（每組最多 3 人） |
 | Project Design Spec | 12/1（二）5:59 PM | 專題 30% | 未發布 | — | |
 | Project 發表 | 12/15（二）～12/17（四） | — | — | — | 線上 |
 | Project Final Report + Code | **12/17（四）11:59 PM，不能延期** | 專題 60% | 未發布 | — | |
