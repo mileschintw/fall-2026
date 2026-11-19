@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-19T14:58:14-08:00",
+  "task": "晨報",
+  "status": "new",
+  "summary": "手動更正 GPU Final Project 時程：Design Spec 12/2、新增 T0 11/22、sign-up 11/24、freeze 12/15",
+  "output": "gpu/assignments.md"
+ },
+ {
   "at": "2026-11-19T10:10:16-08:00",
   "task": "上課筆記",
   "status": "warn",
