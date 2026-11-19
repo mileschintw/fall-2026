@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-19T07:08:29-08:00",
+  "task": "晨報",
+  "status": "warn",
+  "summary": "GPU Proposal 明天11:59PM未交；DSA 新錄影2+heaps講義；Panopto 需重新登入",
+  "output": "digests/2026-11-19.md"
+ },
+ {
   "at": "2026-11-18T18:09:26-08:00",
   "task": "截止提醒",
   "status": "ok",

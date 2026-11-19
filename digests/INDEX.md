@@ -5,7 +5,7 @@
 > 🆕 有新東西　✅ 正常　⏭ 跳過　⚠️ 部分來源失敗／需要重新登入　❌ 失敗
 
 ## 最新狀態
-- 晨報：11/18 三 07:08 🆕 GPU 組隊重開今晚11:59PM截止須重加；Proposal 改11/20；L7投影片/錄影；DSA期中解答 → [2026-11-18.md](2026-11-18.md)
+- 晨報：11/19 四 07:08 ⚠️ GPU Proposal 明天11:59PM未交；DSA 新錄影2+heaps講義；Panopto 需重新登入 → [2026-11-19.md](2026-11-19.md)
 - 週規劃：11/15 日 21:05 ✅ 11/16 GPU 分組截止；Proposal 11/17（課堂說 11/18）；A5 11/22 還沒開工，11/16 開始 → [2026-11-15-weekly.md](2026-11-15-weekly.md)
 - 截止提醒：11/18 三 18:09 ✅ 沒有新東西：GPU Proposal 11/20 11:59 PM 剩 54h 未達 48h → —
 - 上課筆記：11/18 三 10:13 🆕 GPU 11/17 L7 筆記：conv→GEMM（im2col/implicit）、CUDA Events、專題 starter kit → [notes.md](../gpu/lectures/2026-11-17/notes.md)
@@ -15,6 +15,7 @@
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 11/19 四 07:08 | 晨報 | ⚠️ | GPU Proposal 明天11:59PM未交；DSA 新錄影2+heaps講義；Panopto 需重新登入 | [2026-11-19.md](2026-11-19.md) |
 | 11/18 三 18:09 | 截止提醒 | ✅ | 沒有新東西：GPU Proposal 11/20 11:59 PM 剩 54h 未達 48h | — |
 | 11/18 三 10:13 | 上課筆記 | 🆕 | GPU 11/17 L7 筆記：conv→GEMM（im2col/implicit）、CUDA Events、專題 starter kit | [notes.md](../gpu/lectures/2026-11-17/notes.md) |
 | 11/18 三 08:09 | 截止提醒 | ✅ | 沒有新東西：GPU Proposal 改 11/20 11:59 PM，剩 64h 未達 48h | — |
