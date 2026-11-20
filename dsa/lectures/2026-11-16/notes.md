@@ -1,6 +1,6 @@
 # DSA Class 12 — 2026-11-16（週一，Module 7 Heaps：heap `pop` / bubble down 的常見錯誤、build heap 的方向、只從一半開始做到 O(n)、heapify 預告）
 
-> 來源：transcript（Panopto 自動字幕 `transcript.srt`，622 cues，**只有 00:52:07–01:46:26**；錄影本身約 106 分鐘，session `67a9552d-b891-4cf3-9627-b50500303882`，Panopto 標題還是預設的「EEP 590A: Class Meeting」）。**前 52 分鐘沒有字幕**，可能是那段沒錄到聲音，也可能是 Panopto 還在處理；從後半的話推測，前半在發還 midterm 考卷，並現場寫 heap 的 `pop`（移除 root → 最後一個元素補到 root → bubble down）。slides：**講義尚未發布**。Canvas Module 7（Week of Nov 16）只有 Class 11 的 `class_scribbles.pdf`（155795267）和 11/04 的 student copy，沒有這堂課的檔案。老師說程式碼會 push 到 GitHub，連結放在 Canvas 的 resources（[01:43:02]），build heap 是 O(n) 的推導也會放 notes 到 Canvas。
+> 來源：transcript（Panopto 自動字幕 `transcript.srt`，622 cues，**只有 00:52:07–01:46:26**；錄影本身約 106 分鐘，session `67a9552d-b891-4cf3-9627-b50500303882`，Panopto 標題還是預設的「EEP 590A: Class Meeting」）。**前 52 分鐘沒有字幕**，可能是那段沒錄到聲音，也可能是 Panopto 還在處理；從後半的話推測，前半在發還 midterm 考卷，並現場寫 heap 的 `pop`（移除 root → 最後一個元素補到 root → bubble down）。slides：`EE590a_Class_2026-11-16_Mon_heaps_code_build_heapsort_student_copy.pdf`（Canvas file 156443404，7 頁，文字在 `slides.txt`；PDF 頁尾的列印時間是 11/18 8:51 PM，是課後才放上 Canvas 的）。**11/20 補**：寫這份筆記時（11/17）講義還沒發布，下面「講義補充」一節是之後依講義加的，前面各節的時間戳內容沒有改。老師說程式碼會 push 到 GitHub，連結放在 Canvas 的 resources（[01:43:02]），build heap 是 O(n) 的推導也會放 notes 到 Canvas。
 >
 > 閱讀：課程沒有指定章節。下面是自行對照的：Grokking Algorithms 沒有 heap 專章；Ch 7（Dijkstra）會用到 priority queue 的概念，下下週 Module 8 Graphs 會接上。build heap 是 O(n) 的嚴格證明可以參考 CLRS Ch 6.3（自行對照）。逐字稿是自動產生，專有名詞可能聽錯。
 >
@@ -47,6 +47,117 @@
    - final：midterm 的內容**不會特別出**，但後面的東西建立在它上面，所以「fair game」（[01:45:09]）。
    - **下週一（11/23）有課；週三（11/25）感恩節停課**。問大家要不要錄非同步課，只有一個人說會看，老師說**應該不會錄**（[01:45:09]–[01:46:07]）。
 
+## 講義補充（11/20 補，講義 p1–p7）
+
+這一節全部來自講義，不是逐字稿。它補上前 52 分鐘沒有字幕的部分（recap、bubble up、bubble down 的程式），也確認了前面幾個原本是推測的地方。講義排的進度比實際上課多：heapsort 和 `heapq` 是 11/18 才講的，見 `../2026-11-18/notes.md`。
+
+1. **Recap 與兩題暖身**（講義 p1–p2、p6）
+   - 兩條規則：shape（complete binary tree，最後一層由左填起）和 order（min heap：每個 node ≤ children）。index 公式：children `2i+1`、`2i+2`，parent `(i-1)//2`。
+   - 11/4 的 heap：`[2, 5, 3, 9, 6, 8, 4, 12, 10]`。
+   - insert 7：放在 index 9，parent 是 index 4 的 6，6 ≤ 7，**一次都不用換**。bubble up 有時完全不 swap。
+   - 從原本的 heap 連續 remove-min 兩次：依序拿出 2、3，剩 `[4, 5, 8, 9, 6, 12, 10]`。
+
+2. **`bubble_up` / `heap_insert`**（講義 p2）
+
+   ```python
+   def bubble_up(a, i):
+       while i > 0:
+           parent = (i - 1) // 2
+           if a[parent] <= a[i]:
+               return              # in order: done
+           a[i], a[parent] = a[parent], a[i]
+           i = parent
+
+   def heap_insert(a, x):
+       a.append(x)                 # keeps the shape rule
+       bubble_up(a, len(a) - 1)    # fixes the order rule
+   ```
+
+   - `while i > 0`：root 沒有 parent。少了這個檢查，index 0 的「parent」是 `(0-1)//2 = -1`，Python 會把它讀成最後一個元素，不會報錯。
+   - `<=`：相等就停，省掉不必要的 swap。
+   - 例：insert 1 到 11/4 的 heap，1 依序和 6、5、2 交換。每層最多一次比較、一次 swap，所以是 O(log n)。
+
+3. **`bubble_down` / `heap_remove_min`**（講義 p3）
+
+   ```python
+   def bubble_down(a, i, n=None):
+       if n is None:
+           n = len(a)
+       while True:
+           left, right = 2 * i + 1, 2 * i + 2
+           smallest = i
+           if left < n and a[left] < a[smallest]:
+               smallest = left
+           if right < n and a[right] < a[smallest]:
+               smallest = right
+           if smallest == i:
+               return              # no child is smaller: done
+           a[i], a[smallest] = a[smallest], a[i]
+           i = smallest
+
+   def heap_remove_min(a):
+       if not a:
+           raise IndexError('remove from an empty heap')
+       top = a[0]
+       last = a.pop()              # shrink first, so the shape stays complete
+       if a:
+           a[0] = last
+           bubble_down(a, 0)
+       return top
+   ```
+
+   - 邊界條件是 `left < n` 和 `right < n`，**沒有 `- 1`**。11/18 課堂上 heap sort 排錯，就是現場那份 `bubble_down` 的邊界多減了 1（見 11/18 筆記）；講義這份是對的。
+   - `n` 參數讓 bubble down 只作用在 list 的前段，in-place heapsort 會用到。
+   - `smallest` 從自己開始，同一串比較就處理了「沒有 child」「只有 left」「兩個 child」三種情況。
+   - 講義列的 common bugs 和上面重點摘要第 1 點的四個一樣；多一個細節：少了 `right < n` 的檢查，除了 `IndexError`，更糟的是會比到 heap 範圍外的值（heapsort 已排好的那段）。
+   - 例：從 11/4 的 heap remove-min，10 移到 root，先和 3 換，再和 4 換。
+
+4. **build heap**（講義 p4–p5）
+
+   ```python
+   def build_heap(a):
+       for i in range(len(a) // 2 - 1, -1, -1):
+           bubble_down(a, i)
+   ```
+
+   - 範例 list 確認是 `[9, 4, 7, 1, 8, 2, 6, 3, 5]`（n = 9，parents 是 index 3, 2, 1, 0）：
+     - index 3（1）：children 是 3、5，不用換。
+     - index 2（7）：和 2 換。
+     - index 1（4）：和 1 換，再和 3 換。
+     - index 0（9）：和 1、3、4 各換一次。
+     - 結果 `[1, 3, 2, 4, 8, 7, 6, 9, 5]`，共 0+1+2+3 = 6 次 swap，和 `heapq.heapify` 在這個 list 上的結果一樣。其他 list 上 `heapify` 可能給出不同但同樣合法的 heap，因為同一組值可以排成不只一種 heap。
+   - **為什麼是 O(n)**：一半的 node 是 leaf，不用做；1/4 的 node 最多 1 次 swap；1/8 最多 2 次；1/16 最多 3 次。總和 n/4·1 + n/8·2 + n/16·3 + … 小於 n。大部分 node 靠近底層，bubble down 很短。反過來，逐一 insert 時，大部分 insert 發生在 heap 已經又大又深的時候。
+   - 實測 swap 次數（輸入是遞減排列，對逐一 insert 是最壞情況）：
+
+     | n | 逐一 insert | bottom-up |
+     |---|---|---|
+     | 1,000 | 7,987 | 992 |
+     | 100,000 | 1,468,946 | 99,990 |
+     | 1,000,000 | 17,951,445 | 999,988 |
+
+5. **Heapsort**（講義 p5、p7；實際在 11/18 講，而且課堂上只講了「全部 insert 再全部 pop」的版本）
+   - 簡單版：`build_heap`（O(n)）之後 remove-min n 次（每次 O(log n)），總共 **O(n log n)，任何輸入都是**，不只是平均。A3 的 bubble sort 是 O(n²)；Python 的 `sorted` 是 Timsort，也是 O(n log n)。
+   - in-place 版（教科書的做法）：建 **max heap**；重複「root 和 heap 區段的最後一個交換 → heap 區段縮 1 → 新 root 只在 heap 區段內 bubble down」。O(n log n) 時間、O(1) 額外空間。
+     - 例 `[4, 10, 3, 5, 1]`：max heap `[10, 5, 3, 4, 1]` → `[5, 4, 3, 1, 10]` → `[4, 1, 3, 5, 10]` → `[3, 1, 4, 5, 10]` → `[1, 3, 4, 5, 10]`。
+   - heapsort **不是 stable**：相等的值出來的順序可能和進去時不同。排數字沒差，依某個欄位排 record 時有差。
+
+6. **`heapq` 的進階用法**（講義 p5–p6；11/18 課堂只講到 `heappush` / `heappop` / `heapify` / `h[0]`）
+   - priority 用 tuple：push `(priority, item)`，tuple 逐項比較。
+   - 急診室例子：push `(2, 'flu')`、`(1, 'heart attack')`、`(3, 'sprained ankle')`、`(2, 'broken arm')`，pop 順序是 heart attack、broken arm、flu、sprained ankle。broken arm 排在 flu 前面，是因為 priority 相同時比第二項的字母順序。
+   - item 不能比較（例如 dict）時，平手會丟 `TypeError: '<' not supported between instances of 'dict' and 'dict'`。解法：push `(priority, counter, item)`，counter 每次加 1，平手就先到先服務。
+   - `heapq.nsmallest(3, [7, 2, 9, 4, 1, 8])` → `[1, 2, 4]`；`heapq.nlargest(2, ...)` → `[9, 8]`。
+   - `heapq` 沒有 max heap，常用的做法是 push 取負號的值。
+
+7. **總表**（講義 p6）
+
+   | 操作 | 成本 |
+   |---|---|
+   | 看最小值 | O(1) |
+   | insert（bubble up） | O(log n) |
+   | remove-min（bubble down） | O(log n) |
+   | 從 n 個值 build heap | O(n) |
+   | heapsort | O(n log n)，任何輸入 |
+
 ## 名詞解釋
 
 - **min heap**：complete binary tree，每個 node 都 ≤ 它的 children，所以最小值一定在 root（index 0）。**max heap** 相反。
@@ -85,9 +196,9 @@
 
 ## 還要釐清的問題
 
-- **前 52 分鐘的內容**：字幕從 00:52:07 才開始。前半的 `pop` / bubble down 實作（包括「4385 → 3485」那個例子）要等 GitHub 上的 code，或之後 Panopto 補上字幕再看。可以晚點重抓一次 SRT 確認是不是處理中。
-- 範例 list 的確切值：逐字稿聽到「9 4 7 1 8 2 6 3 5」和「47182 … 3, 5」，上面是拼出來的推測，要用 GitHub 上的 code 確認。
+- **前 52 分鐘的內容**：字幕從 00:52:07 才開始。11/20 重抓 SRT，還是 622 cues、從 00:52:07 開始，Panopto 沒有補上。前半的 `bubble_up` / `bubble_down` / remove-min 程式已由講義補上（見「講義補充」）；老師前半實際怎麼講、「4385 → 3485」那個例子是什麼，仍然不知道。
+- ~~範例 list 的確切值~~：講義 p4 確認是 `[9, 4, 7, 1, 8, 2, 6, 3, 5]`，結果 `[1, 3, 2, 4, 8, 7, 6, 9, 5]`（11/20 補）。
 - 從頭到尾做 bubble up 的手算過程中，老師自己說「I feel like I got something wrong」（[01:29:00]），之後才補完。結論沒錯，但中間步驟可以自己再手算一遍。
-- build heap 是 O(n) 的級數推導（Σ n/2^(h+1) · h = O(n)）：等老師的 Canvas notes。
+- ~~build heap 是 O(n) 的級數推導~~：講義 p4 給了逐層的算法（n/4·1 + n/8·2 + n/16·3 + … < n）和實測 swap 次數（11/20 補）。
 - 老師說程式碼在 GitHub，連結在 Canvas resources。要確認是哪個 repo（`uw-python-fall2026` 底下？）。
 - heapify 是不是真的像同學說的「bubble up 和 down 同時做」？Python `heapq.heapify` 其實就是今天這個「從 `n//2-1` 往回 sift down」的做法，週三上課時確認老師怎麼說。

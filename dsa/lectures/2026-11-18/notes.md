@@ -143,7 +143,7 @@
 - priority queue 不一定要用 heap 實作，heap 只是剛好很有效率（[00:09:08]）。
 - heap 裡左右 child 沒有大小順序，這是它和 BST 的差別（[00:11:03]）。
 - insert 和 pop 都是 O(log n)，因為樹高永遠是 log n（[00:13:03]）。
-- heap sort 是老師最喜歡的排序演算法之一，她的說法是「sort by data structure」（[00:17:03]）：資料結構本身替你完成排序。
+- heap sort 是老師最喜歡的排序演算法之一，老師的說法是「sort by data structure」（[00:17:03]）：資料結構本身替你完成排序。
 - 全部放進 heap 之後，那個 list 不是排序好的，只有 root 保證最重要（[00:23:00]–[00:24:00]）。
 - 除錯的方法：先畫圖確認 heap 建對了，再逐步 pop、每一步和程式 print 的結果對照，找出第一個不一致的步驟（[00:27:01]–[00:38:05]）。
 - bubble down 要和**較小的** child 交換（min heap）（[00:33:04]）。
@@ -171,6 +171,7 @@
 
 ## 還要釐清的問題
 
+0. （11/20 補）11/16 的講義 `EE590a_Class_2026-11-16_Mon_heaps_code_build_heapsort_student_copy.pdf` 後來放上 Canvas，裡面有這堂前半的內容：正確的 `bubble_down`（邊界是 `left < n`、`right < n`）、heapsort 的 O(n log n)、in-place 版、not stable、`heapq` 用 tuple 當 priority。整理在 `../2026-11-16/notes.md` 的「講義補充」，下面第 1、2 題可以對照那裡。
 1. `bubble_down` 的 off-by-one 到底在哪一行？逐字稿只聽得到 Steven 指出兩處、老師說是「that minus one」（[00:51:06]）。要看 GitHub 上修正後的程式碼，確認是 `left < len(heap) - 1` 之類的條件改成 `left < len(heap)`。
 2. heap sort 的整體 runtime 老師沒有明說。用 n 次 insert 建 heap 是 O(n log n)；改用 `heapify`（O(n)）建 heap 之後，n 次 pop 仍是 O(n log n)。另外 in-place 的 heap sort（用 max heap，把 root 換到 list 尾端）這堂沒講，VisuAlgo 示範的是那個版本。
 3. collision 的其他處理方式（老師說「there are alternatives」，[01:30:02]）：應該是 open addressing（linear probing 等），下週會不會講？

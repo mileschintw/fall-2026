@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-20T14:52:08-08:00",
+  "task": "上課筆記",
+  "status": "new",
+  "summary": "盤點：兩門課筆記都齊；DSA 11/16 補上後來發布的講義（bubble up/down 程式、O(n) 推導）",
+  "output": "dsa/lectures/2026-11-16/notes.md"
+ },
+ {
   "at": "2026-11-20T08:09:17-08:00",
   "task": "截止提醒",
   "status": "ok",

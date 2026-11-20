@@ -1,0 +1,259 @@
+=== p1 ===
+
+
+ 
+EE   590 a :   C l a ss   outl i n e ,   hea ps   i n   c o de ,   b u i l di n g   a   hea p , 
+a n d   hea psort 
+M on da y ,   N ov embe r   16   · 
+P l a n   a t   a   g l a n ce 
+F i rst   c l a ss   af t e r   t he   m id t e rm .   O n   N ov e m be r   4   stu de nts   s a w   hea ps   a t   t he   b o a r d :   t he   two   rul e s ,   t he   l i st   l a yout   a n d   i n de x
+m a t h ,   a n d   i ns e rt   a n d   r e mov e - m i n   b y   ha n d . 
+T o da y   turns   t ha t   i nto   c o de   ( b u bb l e - up ,   b u bb l e - d own ,   i ns e rt ,   r e mov e - m i n ),   t he n   b u i l d s   a   hea p   f rom   a   w h ol e   l i st   i n   O ( n ), 
+t he n   sorts   w i t h   a   hea p . 
+E n d s   w i t h   P yt h on ' s   heapq   ,   w hich   i s   w ha t   t he y ' d   us e   i n   r ea l   c o de . 
+A ll   c o de   i s   i n   A pp e n di x   A ,   a n d   e v e ry   output   quot ed   he r e   c om e s   f rom   runn i n g   i t . 
+R eca p 
+T he   two   rul e s 
+S ha p e :   a   c ompl e t e   bi n a ry   tr ee .   E v e ry   l e v e l   f ull   e x ce pt   m a y be   t he   l a st ,   w hich   fi lls   f rom   t he   l ef t . 
+O r de r   ( m i n - hea p ):   e v e ry   no de   i s   l e ss   t ha n   or   e qu a l   to   i ts   chi l d r e n ,   so   t he   sm a ll e st   v a lu e   i s   a t   t he   root . 
+S tor ed   i n   a   l i st ,   l e v e l   b y   l e v e l .   C hi l d r e n   o f   i :   2 i   +   1   a n d   2 i   +   2.   P a r e nt   o f   i :   ( i   −   1)   //   2. 
+T he   hea p   f ro m   N ov embe r   4 :   [2 ,   5 ,   3 ,   9 ,   6 ,   8 ,   4 ,   12 ,   10] . 
+P ai r   t a s k :   two   qu ick   tr ace s   O n   t hi s   hea p : 
+11/18/26, 8:51 PM   EE590a_Class_2026-11-16_Mon_heaps_code_build_heapsort_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/159.html   1/7
+
+=== p2 ===
+
+ 
+I ns e rt   7.   W he r e   d o e s   i t   e n d   up ? 
+I t   g o e s   i n   a t   i n de x   9,   t he   r igh t   chi l d   o f   i n de x   4   ( v a lu e   6).   6   ≤   7,   so   not hi n g   mov e s .   S a y   t hi s   out   lou d :   som e t i m e s 
+b u bb l e - up   d o e s   no   sw a ps   a t   a ll . 
+S t a rt   agai n   f rom   t he   or igi n a l   hea p   a n d   r e mov e   t he   sm a ll e st   v a lu e   tw ice .   W ha t   c om e s   out ,   a n d   w ha t   i s   t he   l i st 
+af t e rw a r d ? 
+2,   t he n   3.   T he   l i st   i s   [4,   5,   8,   9,   6,   12,   10]. 
+I ns e rt   i n   c o de :   b u bb l e - up 
+W hi l e   t he   n e w   v a lu e   i s   sm a ll e r   t ha n   i ts   p a r e nt ,   sw a p   t he m . 
+def   bubble_up ( a ,   i ): 
+while   i   >   0 : 
+parent   =   ( i   -   1 )   //   2 
+if   a [ parent ]   <=   a [ i ]: 
+return   #   in   order:   done 
+a [ i ],   a [ parent ]   =   a [ parent ],   a [ i ] 
+i   =   parent 
+def   heap_insert ( a ,   x ): 
+a . append ( x )   #   keeps   the   shape   rule 
+bubble_up ( a ,   len ( a )   -   1 )   #   fixes   the   order   rule 
+append   kee ps   t he   s ha p e :   t he   n e w   v a lu e   g o e s   i n   t he   n e xt   slot ,   w hich   i s   a lw a ys   t he   n e xt   spot   i n   t he   tr ee . 
+while   i   >   0   :   t he   root   ha s   no   p a r e nt .   A s k   w ha t   ha pp e ns   w i t h out   t ha t   check :   i n de x   0' s   " p a r e nt "   i s   (0   −   1)   //   2   =   −1, 
+w hich   P yt h on   ha pp i ly   r ead s   a s   t he   l a st   e l e m e nt . 
+<=   m ea ns   e qu a l   v a lu e s   stop .   E i t he r   wor k s ,   b ut   stopp i n g   ea rly   s a v e s   sw a ps . 
+R un   i t   I ns e rt   1   i nto   t he   N ov e m be r   4   hea p   a n d   pr i nt   t he   l i st   af t e r   each   sw a p :   1   sw a ps   w i t h   6,   t he n   5,   t he n   2. 
+I ns e rt   1 :   on e   sw a p   p e r   le v el   on   t he   w a y   up . 
+C ost   O n e   c omp a r i son   a n d   a t   most   on e   sw a p   p e r   l e v e l .   T he   hea p   i s   c ompl e t e ,   so   i t   ha s   ⌊ lo g ₂   n ⌋   l e v e ls   be low   t he   root :   i ns e rt 
+i s   O ( lo g   n ). 
+R e mov e   t he   sm a ll e st   i n   c o de :   b u bb l e - d own 
+I n   E n g l i s h :   " w hi l e   t he   v a lu e   i s   bigge r   t ha n   on e   o f   i ts   chi l d r e n ,   sw a p   i t   w i t h   t he   sm a ll e r   chi l d ." 
+11/18/26, 8:51 PM   EE590a_Class_2026-11-16_Mon_heaps_code_build_heapsort_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/159.html   2/7
+
+=== p3 ===
+def   bubble_down ( a ,   i ,   n = None ): 
+if   n   is   None : 
+n   =   len ( a ) 
+while   True : 
+left ,   right   =   2   *   i   +   1 ,   2   *   i   +   2 
+smallest   =   i 
+if   left   <   n   and   a [ left ]   <   a [ smallest ]: 
+smallest   =   left 
+if   right   <   n   and   a [ right ]   <   a [ smallest ]: 
+smallest   =   right 
+if   smallest   ==   i : 
+return   #   no   child   is   smaller:   done 
+a [ i ],   a [ smallest ]   =   a [ smallest ],   a [ i ] 
+i   =   smallest 
+def   heap_remove_min ( a ): 
+if   not   a : 
+raise   IndexError ( 'remove   from   an   empty   heap' ) 
+top   =   a [ 0 ] 
+last   =   a . pop ()   #   shrink   first,   so   the   shape   stays   complete 
+if   a : 
+a [ 0 ]   =   last 
+bubble_down ( a ,   0 ) 
+return   top 
+T he   n   p a r a m e t e r   l e ts   b u bb l e - d own   wor k   on   j ust   t he   f ront   o f   a   l i st .   ( W i ll   be   us ed   w i t h   H ea psort   l a t e r ) 
+smallest   st a rts   a s   t he   no de   i ts e l f ,   so   on e   c omp a r i son   chai n   ha n d l e s   " no   chi l d r e n ",   " only   a   l ef t   chi l d "   a n d   " two 
+chi l d r e n ". 
+C ommon   B u g s 
+A lw a ys   sw a pp i n g   w i t h   t he   l ef t   chi l d .   I f   t he   r igh t   chi l d   i s   sm a ll e r ,   t he   or de r   rul e   b r eak s   on e   l e v e l   d own . 
+C hecki n g   a[right]   w i t h out   right   <   n   :   a n   I n de x E rror ,   or ,   wors e ,   c omp a r i n g   agai nst   a   v a lu e   p a st   t he   e n d   o f   t he   hea p 
+( hea psort ' s   sort ed   p a rt ). 
+R e mov i n g   f rom   a   on e - v a lu e   hea p :   a.pop()   e mpt ie s   t he   l i st ,   so   a[0]   =   last   woul d   r ai s e .   T ha t ' s   w ha t   if   a:   i s   f or . 
+S w a pp i n g   t he   root   w i t h   t he   l a st   v a lu e   b ut   f or ge tt i n g   to   s h r i n k :   t he   ol d   m i n i mum   st a ys   i n   t he   hea p . 
+R un   i t   R e mov e   t he   sm a ll e st   f rom   t he   N ov e m be r   4   hea p :   10   mov e s   to   t he   root ,   sw a ps   w i t h   3,   t he n   w i t h   4. 
+R em ov e - mi n :   on e   sw a p   p e r   le v el   on   t he   w a y   d own ,   al w a ys   w i t h   t he   s malle r   child .   A l so   O ( l o g   n ) . 
+11/18/26, 8:51 PM   EE590a_Class_2026-11-16_Mon_heaps_code_build_heapsort_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/159.html   3/7
+
+=== p4 ===
+ 
+B u i l di n g   a   hea p   f rom   a   w h ol e   l i st 
+T he   qu e st i on   " I   ha v e   n   v a lu e s   i n   a   l i st .   H ow   d o   I   m ake   i t   a   hea p ?" 
+T he   o b v i ous   on e :   i ns e rt   t he m   on e   a t   a   t i m e .   n   i ns e rts   a t   O ( lo g   n )   each   i s   O ( n   lo g   n ). 
+B ottom - up   i nst ead 
+L ea v e s   ( t he   s ec on d   ha l f   o f   t he   l i st )   a r e   a lr ead y   hea ps   o f   on e   no de . 
+S o   g o   back w a r d   t h rou gh   t he   p a r e nts ,   f rom   i n de x   n   //   2   −   1   d own   to   0,   a n d   b u bb l e   each   on e   d own .   E ach   b u bb l e - d own 
+j o i ns   two   hea ps   un de r   on e   no de . 
+def   build_heap ( a ): 
+for   i   in   range ( len ( a )   //   2   -   1 ,   - 1 ,   - 1 ): 
+bubble_down ( a ,   i ) 
+T r ace   i t   on   [9,   4,   7,   1,   8,   2,   6,   3,   5]   ( n   =   9,   so   t he   p a r e nts   a r e   i n de x e s   3,   2,   1,   0): 
+O r a n ge :   p a r e nts   st ill   to   b u bble   d own .   B l u e :   v al u e s   t ha t   m ov ed . 
+I n de x   3   (1):   i ts   chi l d r e n   a r e   3   a n d   5.   A lr ead y   i n   or de r ,   so   no   sw a ps . 
+I n de x   2   (7):   sw a ps   w i t h   2. 
+I n de x   1   (4):   sw a ps   w i t h   1,   t he n   w i t h   3. 
+I n de x   0   (9):   sw a ps   w i t h   1,   t he n   3,   t he n   4. 
+R e sult :   [1,   3,   2,   4,   8,   7,   6,   9,   5],   a   hea p   af t e r   s i x   sw a ps .   P yt h on ' s   heapq.heapify   gi v e s   e x ac tly   t he   s a m e   l i st   he r e .   ( O n
+ot he r   l i sts   i t   ca n   gi v e   a   diffe r e nt ,   e qu a lly   v a l id   hea p :   i ts   b u bb l e - d own   i s   a   sl igh tly   diffe r e nt   v a r ia nt .   A   l i st   ca n   be
+a rr a n ged   a s   a   hea p   i n   mor e   t ha n   on e   w a y .) 
+W h y   i t ' s   O ( n ),   not   O ( n   lo g   n )   C ount   t he   most   wor k   each   l e v e l   ca n   d o . 
+H a l f   t he   no de s   a r e   l ea v e s :   no   wor k . 
+A   qu a rt e r   a r e   on e   l e v e l   up :   a t   most   1   sw a p   each .   A n   eigh t h :   a t   most   2.   A   s i xt ee nt h :   a t   most   3. 
+T ot a l   a t   most   n /4   ·   1   +   n /8   ·   2   +   n /16   ·   3   +   …,   a n d   t ha t   sum   i s   l e ss   t ha n   n .   M ost   no de s   a r e   n ea r   t he   b ottom ,   w he r e
+b u bb l e - d own   i s   s h ort . 
+C ontr a st   w i t h   i ns e rt i n g :   most   i ns e rts   ha pp e n   w he n   t he   hea p   i s   a lr ead y   big   a n d   dee p . 
+M ea sur ed   S w a ps   to   b u i l d   a   hea p   f rom   v a lu e s   i n   dec r ea s i n g   or de r ,   w hich   i s   t he   worst   ca s e   f or   i ns e rt i n g : 
+n   n   i ns e rts   B ottom - up 
+1,000   7,987   992 
+100,000   1,468,946   99,990 
+11/18/26, 8:51 PM   EE590a_Class_2026-11-16_Mon_heaps_code_build_heapsort_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/159.html   4/7
+
+=== p5 ===
+
+ 
+n   n   i ns e rts   B ottom - up 
+1,000,000   17,951,445   999,988 
+B ottom - up   st a ys   j ust   un de r   n .   I ns e rt i n g   g rows   l ike   n   lo g   n . 
+H ea psort 
+T he   s i mpl e   v e rs i on   B u i l d   a   hea p ,   t he n   r e mov e   t he   sm a ll e st   v a lu e   n   t i m e s .   T he   v a lu e s   c om e   out   i n   sort ed   or de r . 
+def   heapsort_new_list ( values ): 
+a   =   list ( values ) 
+build_heap ( a )   #   O(n) 
+return   [ heap_remove_min ( a )   for   _   in   range ( len ( a ))]   #   n   times   O(log   n) 
+heapsort_new_list([5,   2,   8,   1,   9,   3])   r e turns   [1,   2,   3,   5,   8,   9]. 
+C ost :   O ( n )   +   n   ·   O ( lo g   n )   =   O ( n   lo g   n ),   i n   e v e ry   ca s e ,   not   only   on   a v e r age . 
+C omp a r e   w i t h   w ha t ' s   wr i tt e n :   t he   b u bb l e   sort   i n   A ss ig nm e nt   3   i s   O ( n ² ).   P yt h on ' s   sorted   i s   a lso   O ( n   lo g   n )   ( i t ' s 
+T i msort ,   a   diffe r e nt   a l g or i t h m ). 
+T he   i n - pl ace   v e rs i on ,   a s   t he   t e xt b oo k s   d o   i t   N o   s ec on d   l i st :   us e   a   m a x - hea p ,   a n d   put   each   r e mov ed   m a x i mum   a t   t he   e n d 
+o f   t he   s a m e   l i st . 
+B u i l d   a   m a x - hea p   ( s a m e   c o de   w i t h   t he   c omp a r i sons   f l i pp ed ). 
+R e p ea t :   sw a p   t he   root   ( t he   m a x i mum )   w i t h   t he   l a st   v a lu e   o f   t he   hea p   p a rt ,   s h r i n k   t he   hea p   p a rt   b y   on e ,   a n d   b u bb l e   t he 
+n e w   root   d own   w i t hi n   t he   hea p   p a rt   only .   T ha t ' s   w ha t   t he   n   p a r a m e t e r   o f   b u bb l e - d own   i s   f or . 
+T r ace   on   [4,   10,   3,   5,   1]: 
+M a x - hea p :   [10,   5,   3,   4,   1]. 
+P l ace   10:   [5,   4,   3,   1,   10 ].   P l ace   5:   [4,   1,   3,   5,   10 ].   P l ace   4:   [3,   1,   4,   5,   10 ].   P l ace   3:   [1,   3,   4,   5,   10 ]. 
+O ( n   lo g   n )   t i m e ,   O (1)   e xtr a   sp ace . 
+O n e   prop e rty   to   m e nt i on   H ea psort   i s   not   st ab l e :   e qu a l   v a lu e s   ca n   c om e   out   i n   a   diffe r e nt   or de r   t ha n   t he y   w e nt   i n .   I t   r a r e ly
+m a tt e rs   f or   num be rs ,   b ut   i t   m a tt e rs   w he n   sort i n g   r ec or d s   b y   on e   fie l d . 
+P yt h on   heapq   ,   a n d   wr a p - up 
+heapq   T he   s a m e   idea s ,   on   a   pl ai n   P yt h on   l i st ,   a s   a   m i n - hea p . 
+heapq.heappush(h,   x)   ,   heapq.heappop(h)   ,   heapq.heapify(h)   ,   a n d   h[0]   to   loo k   a t   t he   sm a ll e st . 
+P r i or i t ie s   a s   tupl e s :   pus h   ( pr i or i ty ,   i t e m )   a n d   tupl e s   c omp a r e   e l e m e nt   b y   e l e m e nt . 
+E m e r ge n c y   room :   pus h   (2,   ' f lu '),   (1,   ' hea rt   a tt ack '),   (3,   ' spr ai n ed   a n k l e '),   (2,   ' b ro ke n   a rm ').   P op   or de r :   hea rt   a tt ack , 
+b ro ke n   a rm ,   f lu ,   spr ai n ed   a n k l e . 
+A s k   w h y   b ro ke n   a rm   c om e s   bef or e   f lu .   E qu a l   pr i or i t ie s ,   so   P yt h on   c omp a r e s   t he   s ec on d   e l e m e nts :   a lp habe t ica l
+or de r .   P ro bab ly   not   w ha t   t he   h osp i t a l   w a nts . 
+I f   t he   i t e ms   ca n ' t   be   c omp a r ed   ( dic ts ,   s a y ),   a   t ie   r ai s e s   TypeError:   '<'   not   supported   between   instances   of 
+'dict'   and   'dict'   .   T he   fi x :   pus h   ( pr i or i ty ,   c ount e r ,   i t e m ),   w i t h   a   c ount e r   t ha t   g o e s   up   b y   on e   each   pus h .   T ie s
+t he n   g o   fi rst   c om e ,   fi rst   s e rv ed . 
+heapq.nsmallest(3,   [7,   2,   9,   4,   1,   8])   gi v e s   [1,   2,   4],   a n d   heapq.nlargest(2,   ...)   gi v e s   [9,   8]. 
+T he r e ' s   no   m a x - hea p   i n   heapq   .   T he   usu a l   tr ick :   pus h   n ega t ed   v a lu e s . 
+W r a p - up 
+11/18/26, 8:51 PM   EE590a_Class_2026-11-16_Mon_heaps_code_build_heapsort_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/159.html   5/7
+
+=== p6 ===
+
+ 
+O p e r a t i on   C ost 
+L oo k   a t   t he   sm a ll e st   O (1) 
+I ns e rt   ( b u bb l e - up )   O ( lo g   n ) 
+R e mov e   t he   sm a ll e st   ( b u bb l e - d own )   O ( lo g   n ) 
+B u i l d   a   hea p   f rom   n   v a lu e s   O ( n ) 
+H ea psort   O ( n   lo g   n ),   a ny   i nput 
+A nsw e r   ke y 
+I ns e rt   7   i nto   [2,   5,   3,   9,   6,   8,   4,   12,   10]:   [2,   5,   3,   9,   6,   8,   4,   12,   10,   7].   I ts   p a r e nt   ( i n de x   4)   i s   6,   w hich   i s   sm a ll e r ,   so   no
+sw a ps . 
+R e mov e   t he   sm a ll e st   tw ice   f rom   t he   s a m e   hea p :   2,   t he n   3.   A f t e rw a r d :   [4,   5,   8,   9,   6,   12,   10]. 
+B u i l d - hea p   on   [9,   4,   7,   1,   8,   2,   6,   3,   5]:   [1,   3,   2,   4,   8,   7,   6,   9,   5],   af t e r   0   +   1   +   2   +   3   =   6   sw a ps . 
+I n - pl ace   hea psort   o f   [4,   10,   3,   5,   1]:   m a x - hea p   [10,   5,   3,   4,   1],   t he n   [5,   4,   3,   1,   10],   [4,   1,   3,   5,   10],   [3,   1,   4,   5,   10],   [1,   3,
+4,   5,   10]. 
+T he   e m e r ge n c y   room   pop   or de r :   (1,   ' hea rt   a tt ack '),   (2,   ' b ro ke n   a rm '),   (2,   ' f lu '),   (3,   ' spr ai n ed   a n k l e '). 
+A pp e n di x   A :   t he   c o de 
+T he   m i n - hea p   f un c t i ons   us ed   i n   c l a ss : 
+def   bubble_up ( a ,   i ): 
+while   i   >   0 : 
+parent   =   ( i   -   1 )   //   2 
+if   a [ parent ]   <=   a [ i ]: 
+return 
+a [ i ],   a [ parent ]   =   a [ parent ],   a [ i ] 
+i   =   parent 
+def   bubble_down ( a ,   i ,   n = None ): 
+if   n   is   None : 
+n   =   len ( a ) 
+while   True : 
+left ,   right   =   2   *   i   +   1 ,   2   *   i   +   2 
+smallest   =   i 
+if   left   <   n   and   a [ left ]   <   a [ smallest ]: 
+smallest   =   left 
+if   right   <   n   and   a [ right ]   <   a [ smallest ]: 
+smallest   =   right 
+if   smallest   ==   i : 
+return 
+a [ i ],   a [ smallest ]   =   a [ smallest ],   a [ i ] 
+i   =   smallest 
+def   heap_insert ( a ,   x ): 
+a . append ( x ) 
+bubble_up ( a ,   len ( a )   -   1 ) 
+def   heap_remove_min ( a ): 
+if   not   a : 
+raise   IndexError ( 'remove   from   an   empty   heap' ) 
+top   =   a [ 0 ] 
+11/18/26, 8:51 PM   EE590a_Class_2026-11-16_Mon_heaps_code_build_heapsort_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/159.html   6/7
+
+=== p7 ===
+last   =   a . pop () 
+if   a : 
+a [ 0 ]   =   last 
+bubble_down ( a ,   0 ) 
+return   top 
+def   build_heap ( a ): 
+for   i   in   range ( len ( a )   //   2   -   1 ,   - 1 ,   - 1 ): 
+bubble_down ( a ,   i ) 
+def   heapsort_new_list ( values ): 
+a   =   list ( values ) 
+build_heap ( a ) 
+return   [ heap_remove_min ( a )   for   _   in   range ( len ( a ))] 
+T he   i n - pl ace   hea psort   w i t h   a   m a x - hea p : 
+def   bubble_down_max ( a ,   i ,   n ): 
+while   True : 
+left ,   right   =   2   *   i   +   1 ,   2   *   i   +   2 
+largest   =   i 
+if   left   <   n   and   a [ left ]   >   a [ largest ]: 
+largest   =   left 
+if   right   <   n   and   a [ right ]   >   a [ largest ]: 
+largest   =   right 
+if   largest   ==   i : 
+return 
+a [ i ],   a [ largest ]   =   a [ largest ],   a [ i ] 
+i   =   largest 
+def   heapsort_in_place ( a ): 
+n   =   len ( a ) 
+for   i   in   range ( n   //   2   -   1 ,   - 1 ,   - 1 ):   #   build   a   max-heap 
+bubble_down_max ( a ,   i ,   n ) 
+for   end   in   range ( n   -   1 ,   0 ,   - 1 ): 
+a [ 0 ],   a [ end ]   =   a [ end ],   a [ 0 ]   #   the   maximum   goes   to   its   final   place 
+bubble_down_max ( a ,   0 ,   end )   #   fix   the   heap   part   only 
+11/18/26, 8:51 PM   EE590a_Class_2026-11-16_Mon_heaps_code_build_heapsort_student_copy 
+fi le:///private/var/folders/zq/tfzltc_11p98vb30yv_k0z0w0000gn/T/159.html   7/7
