@@ -8,13 +8,14 @@
 - 晨報：11/20 五 07:08 🆕 GPU 新作業 Tier Submissions 12/15、kit v07、spec PDF；Proposal 已交；DSA Class 13 錄影 → [2026-11-20.md](2026-11-20.md)
 - 週規劃：11/15 日 21:05 ✅ 11/16 GPU 分組截止；Proposal 11/17（課堂說 11/18）；A5 11/22 還沒開工，11/16 開始 → [2026-11-15-weekly.md](2026-11-15-weekly.md)
 - 截止提醒：11/20 五 08:09 ✅ 沒有新東西（DSA A5 11/22 11:59 PM 剩 64h，48h 提醒未到；Proposal 已交） → —
-- 上課筆記：11/20 五 14:52 🆕 盤點：兩門課筆記都齊；DSA 11/16 補上後來發布的講義（bubble up/down 程式、O(n) 推導） → [notes.md](../dsa/lectures/2026-11-16/notes.md)
+- 上課筆記：11/20 五 15:02 🆕 DSA 11/16 前 52 分鐘用 Whisper 轉錄補上；找到 off-by-one 來源（len(heap)-1） → [notes.md](../dsa/lectures/2026-11-16/notes.md)
 - 作業說明：11/20 五 07:44 🆕 新：gpu/final-project-tier-submissions → [README.md](../gpu/hw/README.md)
 
 ## 紀錄
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 11/20 五 15:02 | 上課筆記 | 🆕 | DSA 11/16 前 52 分鐘用 Whisper 轉錄補上；找到 off-by-one 來源（len(heap)-1） | [notes.md](../dsa/lectures/2026-11-16/notes.md) |
 | 11/20 五 14:52 | 上課筆記 | 🆕 | 盤點：兩門課筆記都齊；DSA 11/16 補上後來發布的講義（bubble up/down 程式、O(n) 推導） | [notes.md](../dsa/lectures/2026-11-16/notes.md) |
 | 11/20 五 08:09 | 截止提醒 | ✅ | 沒有新東西（DSA A5 11/22 11:59 PM 剩 64h，48h 提醒未到；Proposal 已交） | — |
 | 11/20 五 07:44 | 作業說明 | 🆕 | 新：gpu/final-project-tier-submissions | [README.md](../gpu/hw/README.md) |

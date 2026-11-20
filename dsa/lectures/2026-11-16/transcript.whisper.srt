@@ -1,0 +1,1552 @@
+1
+00:02:03,890 --> 00:02:06,950
+Okay, let's see. Check in here.
+
+2
+00:02:08,290 --> 00:02:09,350
+Got online.
+
+3
+00:02:09,890 --> 00:02:11,930
+See people in the classroom. Good to see you.
+
+4
+00:02:12,410 --> 00:02:22,550
+We are doing tests at the end of class. I will give tests back at the break as well. I'm happy to do that. I don't like doing that at the beginning because it tends to waste a lot of time and
+
+5
+00:02:27,030 --> 00:02:28,290
+sharing my screen.
+
+6
+00:02:28,290 --> 00:02:53,700
+while we get started um anyone have um any questions okay anyone remember what we started
+
+7
+00:02:53,700 --> 00:03:06,630
+talking about right before the midterm heaps yes thank you um so um we will continue on with heaps
+
+8
+00:03:06,630 --> 00:03:22,780
+and um what can anyone remember about heaps that's plugged in in the right place
+
+9
+00:03:22,780 --> 00:03:31,060
+plugged in in the right place here we go okay so we're displaying we are recording
+
+10
+00:03:31,060 --> 00:03:39,330
+you guys can hear me online let me know if you can't hear me I feel like I'm missing something
+
+11
+00:03:39,330 --> 00:03:47,230
+missing one day of class feels like so long and then between the test and then no class
+
+12
+00:03:47,230 --> 00:03:56,450
+feels like it's been a long time um so let's start off heaps what do we remember what do
+
+13
+00:03:56,450 --> 00:04:08,820
+we remember about heaps it's a complete binary tree the tree and more specifically it's a complete
+
+14
+00:04:08,820 --> 00:04:25,740
+binary tree. So our binary tree is every node has zero, one, or two children. And complete means that
+
+15
+00:04:25,740 --> 00:04:32,760
+it is a full tree from the top down and only that bottom level might be not fully full.
+
+16
+00:04:34,100 --> 00:04:45,480
+What else do we remember about our heaps? So we looked at something just a little bit different
+
+17
+00:04:45,480 --> 00:04:52,520
+with our heaps than we did with binary trees leading up to heaps. When we start looking at
+
+18
+00:04:52,520 --> 00:05:03,060
+binary trees, we looked at a BST, we looked at an AVL, and when we modeled those, we modeled those
+
+19
+00:05:03,060 --> 00:05:17,620
+like nodes. And by that, I mean the implementation looked more like a linked list node rather than
+
+20
+00:05:17,620 --> 00:05:27,060
+something more linear like an array. And what we saw with our heap was that because it's a complete
+
+21
+00:05:27,060 --> 00:05:43,260
+binary tree, we could model it as a model or implement it as an array. Okay, what else about
+
+22
+00:05:43,260 --> 00:05:57,150
+what do we do with a heap? What's important or interesting about a heap? Anyone online want to
+
+23
+00:05:57,150 --> 00:06:02,350
+put something in the chat shout it out loud anyone in the classroom
+
+24
+00:06:02,350 --> 00:06:22,620
+yeah it makes the min or the max is really cheap or it's at the root um and what do we use
+
+25
+00:06:22,620 --> 00:06:28,880
+once we have this characteristic that we can get the min or the max very easily what can we do
+
+26
+00:06:28,880 --> 00:06:41,190
+without them. We've got our implementation and we've got our abstract data type of a priority
+
+27
+00:06:41,190 --> 00:06:53,970
+queue. And the priority queue allows us to put everything in. And then we know that as we start
+
+28
+00:06:53,970 --> 00:07:00,430
+taking things out, the thing we take out is the most important. And I'm going to say the most
+
+29
+00:07:00,430 --> 00:07:07,590
+important in quotes, because sometimes the most important thing is a small number. And sometimes
+
+30
+00:07:07,590 --> 00:07:13,990
+the most important thing is a big number, which is why we have this min versus max. So we can
+
+31
+00:07:13,990 --> 00:07:20,870
+implement, um, I think we only looked at a min last time, a min heap, I think is what we talked
+
+32
+00:07:20,870 --> 00:07:29,210
+about. Um, and, uh, but we can do the same thing, flipping, uh, flipping the sign and making it a
+
+33
+00:07:29,210 --> 00:07:36,970
+max. What is a case where we have a priority where the smallest thing is more important than
+
+34
+00:07:36,970 --> 00:08:01,050
+the bigger thing, bigger number? Any ideas, any thoughts? I'm thinking of something like a
+
+35
+00:08:01,050 --> 00:08:06,950
+golf game. Does anyone here play golf? Anyone here know anything about golf? I know very little about
+
+36
+00:08:06,950 --> 00:08:15,830
+golf, but one thing I know about golf is that the lowest score wins. Can anyone correct me on that?
+
+37
+00:08:15,850 --> 00:08:21,090
+feel free to correct me. Lowest score wins, right? Like you're playing golf, you want to have the
+
+38
+00:08:21,090 --> 00:08:26,470
+lowest score. Yeah. Okay, good. So we all don't know anything about golf, but we know that the
+
+39
+00:08:26,470 --> 00:08:36,310
+lowest score wins. So if we were to put golf scores into a heap so that we can know the
+
+40
+00:08:36,310 --> 00:08:43,370
+best golf score, we would use a min heap. We want the smallest value coming out first,
+
+41
+00:08:43,370 --> 00:08:53,770
+because that's the best score. Reasonable? Okay. Thank you. What about a case where in a priority
+
+42
+00:08:53,770 --> 00:09:11,270
+queue, the max value is most important? Anyone have any thoughts? Yeah, bidding more. Okay,
+
+43
+00:09:11,270 --> 00:09:16,610
+good. That's what I thought of too, like an auction. So in an auction, you have bids coming
+
+44
+00:09:16,610 --> 00:09:25,890
+min and the winner is the highest bid. So if we put all the bids into a heap and we want to pull
+
+45
+00:09:25,890 --> 00:09:34,050
+out the highest bid, we're going to use a max heap because it's biggest value. But those are
+
+46
+00:09:34,050 --> 00:09:44,710
+two examples where the most important thing is min versus max. So we will look at our heaps.
+
+47
+00:09:44,710 --> 00:09:52,110
+We'll go a little bit deeper into our heaps today, and we will stick with one of these,
+
+48
+00:09:52,190 --> 00:09:56,130
+but then we'll show how we just flip the sign and we get the other one.
+
+49
+00:09:57,870 --> 00:10:06,450
+Anyone remember anything else about a heap before we move on?
+
+50
+00:10:09,550 --> 00:10:10,230
+Our picture.
+
+51
+00:10:15,120 --> 00:10:16,880
+There's one more thing we need to know about a heap.
+
+52
+00:10:16,880 --> 00:10:25,880
+We care about that shape, that it's a complete binary tree.
+
+53
+00:10:25,880 --> 00:10:33,880
+We have the characteristic that it is going to give us this min-max or the priority queue.
+
+54
+00:10:33,880 --> 00:10:40,880
+And in order to get this, we need to have the ordering.
+
+55
+00:10:40,880 --> 00:10:48,950
+It needs to follow a particular ordering.
+
+56
+00:10:48,950 --> 00:11:06,950
+And the order rule is that every node is less than or equal to, I don't know why I do it like that, less than or equal to its children.
+
+57
+00:11:13,690 --> 00:11:18,430
+And this is more relaxed than a binary search tree.
+
+58
+00:11:19,190 --> 00:11:21,490
+A binary search tree says that each node,
+
+59
+00:11:22,110 --> 00:11:23,990
+everything in its left subtree is smaller,
+
+60
+00:11:24,210 --> 00:11:26,030
+everything in its right subtree is bigger.
+
+61
+00:11:27,170 --> 00:11:29,870
+But this is not quite so rigid.
+
+62
+00:11:30,190 --> 00:11:33,290
+This is that each node is less than or equal to its children.
+
+63
+00:11:34,070 --> 00:11:37,770
+So I will draw out a heap.
+
+64
+00:11:38,610 --> 00:11:40,250
+And we'll start with two.
+
+65
+00:11:40,250 --> 00:11:58,360
+and we've got 5, 3, 8, 4, 6, 9, 12, and 10.
+
+66
+00:11:59,360 --> 00:12:02,340
+So what we're noticing is our complete binary tree.
+
+67
+00:12:02,960 --> 00:12:06,740
+Every level is full except for that bottom level.
+
+68
+00:12:07,520 --> 00:12:15,820
+And as we put things into our heap, we will fill in this bottom level left to right.
+
+69
+00:12:17,020 --> 00:12:23,980
+And then the other thing we said about our heap is that each node is less than both of its children.
+
+70
+00:12:24,980 --> 00:12:27,080
+So two is less than five and three.
+
+71
+00:12:27,680 --> 00:12:29,300
+Three is less than eight and four.
+
+72
+00:12:30,180 --> 00:12:31,940
+Five is less than nine and six.
+
+73
+00:12:32,860 --> 00:12:34,480
+Nine is less than 12 and 10.
+
+74
+00:12:34,480 --> 00:12:44,700
+okay so this gives us a heap um anyone remember what happens when we want to put something into
+
+75
+00:12:44,700 --> 00:12:54,330
+our heap how do we insert something into our heap i'm going to insert that's a good value
+
+76
+00:12:54,330 --> 00:13:02,870
+to insert i'm going to insert seven where does what do i put how do i put a new value into my
+
+77
+00:13:02,870 --> 00:13:14,170
+heap. Yes, we are going to start. We're going to make it a child of six. Why a child of six?
+
+78
+00:13:17,860 --> 00:13:24,240
+That's right. We're doing it because we're filling in the tree. And so when we insert something new,
+
+79
+00:13:24,300 --> 00:13:30,440
+we put it in the first empty spot. And then we have to look and see, hey, is this still a heap?
+
+80
+00:13:30,440 --> 00:13:37,400
+and if this is not still a heap we need to make it a heap. How do we do that? We take this and
+
+81
+00:13:37,400 --> 00:13:47,080
+we check with its parent and we bubble the value up if we need to bubble it up. So here
+
+82
+00:13:47,080 --> 00:13:57,170
+does this need to be bubbled up at all? No because we're going to look at this and we say oh
+
+83
+00:13:57,170 --> 00:14:04,090
+its parent is six, its parent is smaller than it, so it can stay in place. And we still have a heap.
+
+84
+00:14:09,420 --> 00:14:15,420
+Okay, what happens? So that's our insert. We'll look at a bubble up in just a little bit.
+
+85
+00:14:15,820 --> 00:14:20,500
+What happens when we take something out of our heap? So if we take something out,
+
+86
+00:14:20,580 --> 00:14:28,900
+we'll be taking the most important value out, which in this case is a min heap. So we're going
+
+87
+00:14:28,900 --> 00:14:44,970
+to take the smallest value out. So what happens? What's that? Oh, am I going to put the seven? Okay,
+
+88
+00:14:45,050 --> 00:14:50,890
+well, first I have to take this out. So let's, let's get rid of our two. We're going to take
+
+89
+00:14:50,890 --> 00:14:58,470
+this out. And we're going to remember our two so that we can handle it later. And then we're left
+
+90
+00:14:58,470 --> 00:15:08,760
+with, we're left with two trees. It's no longer a binary tree, and it is no longer a heap. So now
+
+91
+00:15:08,760 --> 00:15:18,300
+we will make it a heap. We'll make it a heap by taking, oopsie, by taking the last item in our
+
+92
+00:15:18,300 --> 00:15:27,640
+heap and we're going to put it at the root and then we're going to fix it. So let's take our seven
+
+93
+00:15:27,640 --> 00:15:37,770
+and move it up here. And it's now at the root. And now we're going to check, is this a heap?
+
+94
+00:15:37,770 --> 00:15:42,370
+and we're going to do this by bubbling down because we just put something at the root.
+
+95
+00:15:42,910 --> 00:15:47,790
+So we're going to start here and we're going to check, is this smaller than both of its children?
+
+96
+00:15:48,670 --> 00:15:59,000
+No, it's not. So what do we do? We're just going to swap these, put seven here and three here.
+
+97
+00:16:01,520 --> 00:16:07,620
+And then we're going to check, we're going to see, is this a heap or is this,
+
+98
+00:16:07,620 --> 00:16:18,520
+now that the seven is here, is it smaller than both of its children? So we are going to swap
+
+99
+00:16:18,520 --> 00:16:25,920
+seven here, eight here. Oh, um, I actually, I was not consistent with which ones I,
+
+100
+00:16:27,920 --> 00:16:37,440
+um, which, with which one I swapped. Yes. Tell me, what did I do wrong? I should have swapped
+
+101
+00:16:37,440 --> 00:16:49,130
+it with the 4. Why is that? So the 8 should have stayed here, the 4 should have gone here,
+
+102
+00:16:49,230 --> 00:16:56,590
+and the 7 should have gone here. Is that right? Okay. So why should I have, why did I need to
+
+103
+00:16:56,590 --> 00:17:06,160
+swap the 7 with the 4 instead of the 8? Yeah, there's kind of two reasons here. One, we want
+
+104
+00:17:06,160 --> 00:17:10,680
+to choose the smallest number every time. When we're bubbling down, we're going to swap it with
+
+105
+00:17:10,680 --> 00:17:18,520
+smallest number so the smallest number goes up um but also this it was particularly broken here
+
+106
+00:17:18,520 --> 00:17:27,890
+because i would have put the eight the eight is bigger than the seven right yeah i would have put
+
+107
+00:17:27,890 --> 00:17:35,490
+the eight here and then this would have made it bigger than the seven which would have broken the
+
+108
+00:17:35,490 --> 00:17:53,360
+the heap properly. Okay. So now do we have a heap now? Yeah. Why is it going to the right side and
+
+109
+00:17:53,360 --> 00:18:08,900
+not to the left side? Great question. Let me see if I can come up with a good example. Okay. I'm
+
+110
+00:18:08,900 --> 00:18:16,660
+not going to be able to come up with a good example to prove differently. It's just by chance
+
+111
+00:18:16,660 --> 00:18:22,400
+that we happen to be going to the right in these examples as opposed to the left. It's just by
+
+112
+00:18:22,400 --> 00:18:28,780
+chance. We could have our heap be a little bit different, and we would have swapped down to the
+
+113
+00:18:28,780 --> 00:18:36,340
+left versus the right. What's the rule of swapping? The rule of swapping is you're going to swap it
+
+114
+00:18:36,340 --> 00:18:41,840
+with, for a min heap, you're going to swap with the smaller value. Yep, because you want the
+
+115
+00:18:41,840 --> 00:18:51,850
+smaller value to bubble up. And because there is not a relationship, like there's not a rule
+
+116
+00:18:51,850 --> 00:18:57,110
+on whether the smaller child is to the left or the right, that's why it can go to the left or
+
+117
+00:18:57,110 --> 00:19:04,650
+the right. We're going to have to look at both of them and check. Okay, so we've just gone,
+
+118
+00:19:04,930 --> 00:19:12,450
+how are we on time? We have just gone through kind of a quick review of what our heap is,
+
+119
+00:19:12,450 --> 00:19:14,970
+what it looks like to insert something into the heap,
+
+120
+00:19:15,330 --> 00:19:16,990
+what it looks like to take it out of the heap.
+
+121
+00:19:17,330 --> 00:19:18,350
+Should we write some code?
+
+122
+00:19:19,710 --> 00:19:20,510
+Ready for some code?
+
+123
+00:19:21,150 --> 00:19:21,990
+Let's write some code.
+
+124
+00:19:40,100 --> 00:19:40,300
+Okay.
+
+125
+00:19:42,550 --> 00:19:43,030
+Okay.
+
+126
+00:19:43,450 --> 00:19:45,510
+So got our heaps.
+
+127
+00:19:47,070 --> 00:19:48,010
+File here.
+
+128
+00:19:48,730 --> 00:19:55,650
+We need, first we need a node to build.
+
+129
+00:19:55,890 --> 00:19:56,410
+Oh, wait.
+
+130
+00:19:57,130 --> 00:19:58,150
+We don't need a node.
+
+131
+00:19:58,250 --> 00:19:59,190
+Why don't we need a node?
+
+132
+00:20:01,190 --> 00:20:04,390
+we're building a tree but we're not using nodes we're using our list
+
+133
+00:20:07,830 --> 00:20:27,880
+so let's see what's okay so I'm gonna say my heap equals my heap is just going to be a list
+
+134
+00:20:27,880 --> 00:20:41,240
+That's all it's going to be. I want to def heap insert. And for that, I need to pass in a heap.
+
+135
+00:20:43,000 --> 00:20:51,240
+And then I need to pass in a new vowel. Okay. Remembering
+
+136
+00:20:51,240 --> 00:21:02,760
+what we do with our insert, we are storing our values in the array.
+
+137
+00:21:04,120 --> 00:21:09,800
+And so when we insert, we're going to put the new value at the end of the array,
+
+138
+00:21:09,800 --> 00:21:25,770
+and then we're going to bubble it up. So not sure. We're going to start with heap.append.
+
+139
+00:21:25,770 --> 00:21:28,270
+And we're just going to use a Python list.
+
+140
+00:21:28,270 --> 00:21:30,050
+I'm going to append to it.
+
+141
+00:21:30,050 --> 00:21:35,250
+We're going to go with that to start with heat.append newVal.
+
+142
+00:21:35,250 --> 00:21:41,740
+And then we're going to bubble up.
+
+143
+00:21:41,740 --> 00:21:44,780
+And we're going to bubble up the heap.
+
+144
+00:21:44,780 --> 00:21:48,480
+And I'm going to specify an index.
+
+145
+00:21:48,480 --> 00:21:50,140
+So which value?
+
+146
+00:21:50,140 --> 00:21:51,140
+Yeah.
+
+147
+00:21:51,140 --> 00:21:53,140
+So it's the bubble up.
+
+148
+00:21:53,140 --> 00:21:54,140
+Yes.
+
+149
+00:21:54,140 --> 00:21:57,040
+And I'm going to bubble up the heap.
+
+150
+00:21:57,040 --> 00:21:59,360
+We've got to write that function.
+
+151
+00:21:59,640 --> 00:22:08,360
+yes so let's write that function because i'm not going to be happy let me write it so def bubble up
+
+152
+00:22:09,720 --> 00:22:21,000
+takes in a heap and takes in an index okay um so we remember um we've just um inserted
+
+153
+00:22:21,000 --> 00:22:26,920
+something into our heap and we have to check its parent um how do we know
+
+154
+00:22:26,920 --> 00:22:45,620
+know what, do we remember what the parent, what the parent of a given index is? Is that, yes, do we,
+
+155
+00:22:47,060 --> 00:22:56,140
+I think we got to subtract one and divide by two, not 22. Okay,
+
+156
+00:22:56,140 --> 00:23:14,360
+just looking at i minus one divided by two oh not my index so call the index okay
+
+157
+00:23:14,360 --> 00:23:23,380
+um so we check our parent we get our parent index um then what do we do we check to see
+
+158
+00:23:23,380 --> 00:23:28,620
+if the parent we're doing a min heap so we're checking to see if the parent is smaller than
+
+159
+00:23:28,620 --> 00:23:32,780
+the current value. And if it's smaller than the current value, then we're going to swap.
+
+160
+00:23:33,840 --> 00:23:53,640
+So if heap of parent index is less than the heap of index, then we're going to swap.
+
+161
+00:23:53,640 --> 00:24:10,620
+Oh wait, no. If it's less than, we're done. Wait, hang on a second. Yes, if it's less than,
+
+162
+00:24:10,620 --> 00:24:19,660
+we're done because you're putting small numbers to the top. Otherwise, we've got to swap them.
+
+163
+00:24:19,660 --> 00:24:39,850
+So we're going to take our heap of our index and the heap of the parent
+
+164
+00:24:39,850 --> 00:24:44,410
+and swap them.
+
+165
+00:24:55,520 --> 00:25:07,870
+I feel like this is, we do our swap
+
+166
+00:25:07,870 --> 00:25:11,470
+because the parent was larger than the child
+
+167
+00:25:11,470 --> 00:25:14,550
+because we want the small number to go up to the top.
+
+168
+00:25:16,370 --> 00:25:19,210
+And then, and then what do we do?
+
+169
+00:25:22,990 --> 00:25:25,030
+We're going to have to repeat this a little bit
+
+170
+00:25:25,030 --> 00:25:27,850
+until we're going to have to keep this,
+
+171
+00:25:28,150 --> 00:25:29,810
+keep doing this until we get to the bird.
+
+172
+00:25:29,810 --> 00:25:39,210
+um so we could call this recursively i'm not going to call it recursively i'm going to put a loop
+
+173
+00:25:39,210 --> 00:26:11,060
+around this um we do our swap and then we say index equals yeah
+
+174
+00:26:11,060 --> 00:26:20,840
+sorry repeat that please
+
+175
+00:26:20,840 --> 00:26:27,400
+oh the syntax
+
+176
+00:26:27,400 --> 00:26:54,120
+Yes. It works because it's Python. You can't do this in every language. But let's run it. Let's play with it. Let's, let's, if my favorite tool to use, I'm going to use my Python. There we go.
+
+177
+00:26:54,120 --> 00:27:01,600
+when we come across something that we want to explore the syntax of and just double check
+
+178
+00:27:01,600 --> 00:27:11,420
+ourselves, Python console is a lovely way to do that. I'm going to say my list equals one, two,
+
+179
+00:27:11,420 --> 00:27:20,940
+three, four, five, and then I've got the parent equals, let's make our parent equal to zero,
+
+180
+00:27:20,940 --> 00:27:31,560
+and our child equal to should have done that one let's call it two and then let's do I'm going to
+
+181
+00:27:31,560 --> 00:27:50,520
+say my list of child comma my list of parent equals my list of parent my list of child
+
+182
+00:27:50,940 --> 00:28:25,200
+Um, did I get them swapped properly? Parent equals zero, child equals zero. Um, is this the correct statement? I'm going to hit enter. What we're looking at here, I'm looking at one, two, three, four, five. If, after I hit enter, we want to see one in three swap places with this syntax. And we see one in three swap places.
+
+183
+00:28:25,200 --> 00:28:31,960
+okay but yes that doesn't work in every language a lot of language you're going to have to do the
+
+184
+00:28:31,960 --> 00:28:51,850
+whole val equals something parent equals child child equals saved okay okay um so that's our
+
+185
+00:28:51,850 --> 00:28:58,250
+insert our insert is we put the new value at the end of the list and then we bubble it up so let's
+
+186
+00:28:58,250 --> 00:29:05,290
+do um just a little bit here we have an empty heap let's insert into our heap um i'm gonna copy
+
+187
+00:29:06,250 --> 00:29:14,250
+the i guess i don't have the i'm gonna copy i'll come back to the um
+
+188
+00:29:16,410 --> 00:29:24,490
+heap we were looking at shortly but we're gonna heap insert our heap and we will do um
+
+189
+00:29:24,490 --> 00:29:45,960
+Oh, let's do five, five, three, eight, four, and then we'll put two.
+
+190
+00:29:47,240 --> 00:29:49,680
+I'm going to be able to print out the heat after each time.
+
+191
+00:29:51,020 --> 00:29:51,820
+Print it.
+
+192
+00:30:00,340 --> 00:30:09,560
+Hey, no one want to try to draw it out so that we know what heat we're getting before we run the code?
+
+193
+00:30:09,820 --> 00:30:10,700
+Should we just run the code?
+
+194
+00:30:14,480 --> 00:30:15,080
+Go for it.
+
+195
+00:30:16,360 --> 00:30:17,840
+Yeah, just go for it.
+
+196
+00:30:17,840 --> 00:30:20,360
+Okay, see what happens.
+
+197
+00:30:30,070 --> 00:30:42,750
+Oh, some facts, I got index run plays.
+
+198
+00:30:58,010 --> 00:31:03,010
+I think index is a, like, where did I not pass it?
+
+199
+00:31:08,960 --> 00:31:12,260
+Oh, I'm with you, yes.
+
+200
+00:31:14,260 --> 00:31:16,460
+I didn't specify which value it is.
+
+201
+00:31:16,460 --> 00:31:18,820
+Yes, okay, so what goes here?
+
+202
+00:31:18,820 --> 00:31:37,110
+length of heap minus one. Yep, seems reasonable. Okay, so we inserted, thank you for catching that,
+
+203
+00:31:38,190 --> 00:31:46,510
+five. So when we put five in the heap, it's only one item. So it's the root. It's as expected.
+
+204
+00:31:46,510 --> 00:31:55,930
+we inserted three in. And if we were to, here, let me know if I should print out some intermediate
+
+205
+00:31:55,930 --> 00:32:03,660
+steps I can print out. Would that be helpful? Anyone want to see intermediate stuff? Yes? No?
+
+206
+00:32:03,660 --> 00:32:26,530
+yes okay so um print um here um and i'm gonna i'm just gonna print it right after we've inserted it
+
+207
+00:32:26,530 --> 00:32:31,930
+and then at the end i'm not gonna do it as it bubbles up quite yet unless anyone feels strongly
+
+208
+00:32:31,930 --> 00:32:40,910
+about it. Okay. So first thing, we put that first item in and there was nothing in there. So now
+
+209
+00:32:40,910 --> 00:32:51,910
+there's one item in there. Same after. We put, we inserted three. We put it at the end and then
+
+210
+00:32:51,910 --> 00:32:59,630
+we bubbled it up. So it swapped. And this is what we ended up with. We inserted eight,
+
+211
+00:33:00,690 --> 00:33:06,290
+put it at the very end, bubbled it up because it was big. It didn't go anywhere.
+
+212
+00:33:08,510 --> 00:33:23,060
+We inserted four. What's four's parent? Zero and three, it's going to be five. So three is going
+
+213
+00:33:23,060 --> 00:33:27,620
+to have five on the left eight on the right three five is going to have four on the left
+
+214
+00:33:28,820 --> 00:33:38,660
+and so once we bubbled that up we swapped once and it was there and then we inserted two
+
+215
+00:33:40,180 --> 00:33:46,260
+and i did not print after we inserted two so i'll do that one more time and we'll see at the end
+
+216
+00:33:46,260 --> 00:33:50,400
+that two was put at the end
+
+217
+00:33:50,400 --> 00:33:51,420
+and then it bubbled
+
+218
+00:33:51,420 --> 00:33:52,660
+all the way up to the root.
+
+219
+00:33:54,800 --> 00:33:54,920
+Okay.
+
+220
+00:33:59,120 --> 00:34:00,140
+Questions, thoughts?
+
+221
+00:34:01,800 --> 00:34:03,080
+You ready to remove
+
+222
+00:34:03,080 --> 00:34:05,140
+and fix the tree by bubbling down?
+
+223
+00:34:05,820 --> 00:34:06,560
+Let's do it.
+
+224
+00:34:19,720 --> 00:34:23,000
+F heap top the heap.
+
+225
+00:34:23,840 --> 00:34:24,100
+Okay.
+
+226
+00:34:24,760 --> 00:34:25,720
+Our remove.
+
+227
+00:34:26,340 --> 00:34:28,460
+We're taking out the bottom value.
+
+228
+00:34:29,720 --> 00:34:30,960
+So we're going to say
+
+229
+00:34:30,960 --> 00:34:35,840
+let's just say val equals heap of zero.
+
+230
+00:34:38,150 --> 00:34:39,730
+That's the very first thing.
+
+231
+00:34:39,830 --> 00:34:44,630
+And we know that the whatever item
+
+232
+00:34:44,630 --> 00:34:46,490
+is in that very first spot,
+
+233
+00:34:46,850 --> 00:34:48,910
+index zero is always going to be the most important.
+
+234
+00:34:49,910 --> 00:34:51,190
+We're doing a min heap.
+
+235
+00:34:51,290 --> 00:34:53,050
+So it's always going to be the smallest value.
+
+236
+00:34:53,230 --> 00:34:54,550
+So we're going to take that out.
+
+237
+00:34:55,550 --> 00:34:57,650
+Then we are going to,
+
+238
+00:34:57,650 --> 00:35:03,210
+Um, uh, um, we have basically two trees.
+
+239
+00:35:03,210 --> 00:35:09,290
+Now we're going to take the very last value in our tree, we're going to move it up to
+
+240
+00:35:09,290 --> 00:35:10,730
+the root and then we're going to bubble it down.
+
+241
+00:35:11,450 --> 00:35:24,030
+Um, so now we say heap of zero equals heap of one heap minus one, minus one minus one.
+
+242
+00:35:28,620 --> 00:35:39,740
+Okay, so we move that very last item till the end. What's happening to my Python list right
+
+243
+00:35:39,740 --> 00:35:56,960
+here? Should be like this. Should be like this. I typed it like this because Python isn't always
+
+244
+00:35:56,960 --> 00:36:07,390
+my first language. What's going to happen to our Python list after I do this? How many elements
+
+245
+00:36:07,390 --> 00:36:13,010
+are going to be in the list.
+
+246
+00:36:13,010 --> 00:36:17,490
+That same value is still going to be at the end of the list.
+
+247
+00:36:17,490 --> 00:36:20,720
+What's that?
+
+248
+00:36:20,720 --> 00:36:22,960
+I'm sorry.
+
+249
+00:36:22,960 --> 00:36:24,880
+I need to delete the last one.
+
+250
+00:36:24,880 --> 00:36:28,160
+Yeah, I got to actually remove that last element
+
+251
+00:36:28,160 --> 00:36:29,600
+from that list.
+
+252
+00:36:29,600 --> 00:36:32,160
+Otherwise, it's going to just kind of stick around
+
+253
+00:36:32,160 --> 00:36:34,080
+and cause trouble.
+
+254
+00:36:34,080 --> 00:36:44,050
+So how do I rewrite this?
+
+255
+00:36:44,050 --> 00:36:46,530
+Let's just pop it off the end.
+
+256
+00:36:46,530 --> 00:36:48,330
+So when I pop it off the end, that
+
+257
+00:36:48,330 --> 00:36:52,150
+That means I take the very last item in the list,
+
+258
+00:36:52,150 --> 00:36:54,510
+take it out of the list, and then I'm gonna take the value
+
+259
+00:36:54,510 --> 00:36:58,870
+and I'm gonna put it at index zero.
+
+260
+00:36:58,870 --> 00:37:00,290
+Now I moved it to the top.
+
+261
+00:37:00,290 --> 00:37:09,100
+And now I need, sorry, and now I need to bubble it down.
+
+262
+00:37:09,100 --> 00:37:14,100
+Down, heap, and I think we're gonna have to specify
+
+263
+00:37:24,210 --> 00:37:27,410
+the index at some point, but we don't have to right here.
+
+264
+00:37:28,150 --> 00:37:32,160
+because we're just gonna bubble down.
+
+265
+00:37:32,160 --> 00:37:36,520
+Bubble down, takes a heap.
+
+266
+00:37:36,520 --> 00:37:39,220
+And I think we'll need some more stuff,
+
+267
+00:37:39,220 --> 00:37:41,440
+but we will start here.
+
+268
+00:37:45,540 --> 00:37:50,080
+When we look at the root, we start at the root,
+
+269
+00:37:50,080 --> 00:37:52,720
+and then we're gonna look at its children,
+
+270
+00:37:52,720 --> 00:37:56,000
+its left children and its left child and its right child.
+
+271
+00:37:56,000 --> 00:38:00,180
+And we're gonna see if either one of them is smaller,
+
+272
+00:38:00,180 --> 00:38:11,630
+And if so, we're gonna bubble it up.
+
+273
+00:38:11,630 --> 00:38:16,630
+Two times i plus one, two times i.
+
+274
+00:38:18,810 --> 00:38:24,160
+Okay, so we have our left index and our right index.
+
+275
+00:38:24,160 --> 00:38:29,160
+So I'm gonna do a check on my math right here
+
+276
+00:38:29,160 --> 00:38:34,160
+because this is the point where we wanna make sure
+
+277
+00:38:34,380 --> 00:38:36,700
+that we get the arithmetic right.
+
+278
+00:38:36,700 --> 00:38:40,260
+So if I have a node at index zero,
+
+279
+00:38:40,260 --> 00:38:42,760
+The left child is going to be one
+
+280
+00:38:42,760 --> 00:38:44,180
+and the right child is gonna be two.
+
+281
+00:38:44,180 --> 00:38:48,700
+So zero, two times zero plus one,
+
+282
+00:38:48,700 --> 00:38:51,180
+I'm looking at this, that gives me one.
+
+283
+00:38:51,180 --> 00:38:54,100
+That's my left child, great, that looks good.
+
+284
+00:38:54,100 --> 00:38:55,780
+Two times zero plus two, that's two,
+
+285
+00:38:55,780 --> 00:38:57,900
+that's my right child, that looks good.
+
+286
+00:38:57,900 --> 00:38:59,980
+Okay, so I think I'm okay.
+
+287
+00:38:59,980 --> 00:39:02,340
+I'm always gonna double check my arithmetic here
+
+288
+00:39:02,340 --> 00:39:06,860
+and make sure I've got the right thing.
+
+289
+00:39:06,860 --> 00:39:11,140
+And then we are going to,
+
+290
+00:39:11,140 --> 00:39:13,520
+we want to swap with the smallest child.
+
+291
+00:39:13,520 --> 00:39:24,340
+So we're going to figure out which one is the smallest.
+
+292
+00:39:24,340 --> 00:39:25,500
+This is what I did not pass in.
+
+293
+00:39:25,500 --> 00:39:27,160
+I did not pass in the index.
+
+294
+00:39:27,160 --> 00:39:29,920
+So we're going to start with our index here
+
+295
+00:39:29,920 --> 00:39:34,420
+of wherever the node that we're looking to bubble down.
+
+296
+00:39:34,420 --> 00:40:09,880
+And if left is less than, if left is less than the value, I'm just double checking here.
+
+297
+00:40:10,340 --> 00:40:27,430
+First, we want to check, we want to make sure that left doesn't go off the end of the array.
+
+298
+00:40:29,190 --> 00:40:33,260
+I'm going to come back to that.
+
+299
+00:40:33,260 --> 00:40:46,480
+We are going to say if our heap of left is less than heap of i, that means the left child
+
+300
+00:40:46,480 --> 00:40:50,460
+is smaller than the node that we're at.
+
+301
+00:40:50,460 --> 00:41:02,530
+If our heap of left is less than the heap of i, then smallest goes left.
+
+302
+00:41:02,530 --> 00:41:09,450
+I'm going to call this index because I like to keep track of if I'm saving a value versus an
+
+303
+00:41:09,450 --> 00:41:17,090
+index. So I keep on writing smallest and thinking, oh, that's the value. I don't want that to be the
+
+304
+00:41:17,090 --> 00:41:21,730
+value. I want it to be the index. So I'm going to, I'm going to help myself out a little, call it the
+
+305
+00:41:21,730 --> 00:41:30,810
+index. Okay. Smallest index is left because this is saying that the left child is smaller than the
+
+306
+00:41:30,810 --> 00:41:52,760
+node that we're at is less than a, actually I got this. I don't
+
+307
+00:41:52,760 --> 00:41:58,940
+want this to be, I want this to be smallest. Okay, so now I'm
+
+308
+00:41:58,940 --> 00:42:01,340
+going to check to see if the right's even smaller than that.
+
+309
+00:42:03,310 --> 00:42:23,350
+The right is smaller than okay, so we check to see is the left
+
+310
+00:42:23,350 --> 00:42:26,550
+smaller than the current node is the right smaller than the
+
+311
+00:42:26,550 --> 00:42:30,230
+current node, we're going to get the smallest of the left and
+
+312
+00:42:30,230 --> 00:42:47,940
+right children. And if we're still at the smallest to still need the root, we're done.
+
+313
+00:42:50,330 --> 00:42:55,650
+This is left child smaller. This is the right child is smaller. This is none of the children
+
+314
+00:42:55,650 --> 00:43:04,070
+are smaller. So we're done. But if we are not done, then we are going to do our swap.
+
+315
+00:43:04,070 --> 00:43:08,490
+So now we know which index is the smaller one, holds a smaller child.
+
+316
+00:43:08,590 --> 00:43:12,970
+So now we're going to swap around, and we're going to do what we did before.
+
+317
+00:43:18,600 --> 00:43:29,720
+Smallest end equals heap of smallest end heap of i.
+
+318
+00:43:32,910 --> 00:43:35,510
+And we swap them around.
+
+319
+00:43:35,510 --> 00:43:39,410
+and now we're going to update our i.
+
+320
+00:43:40,750 --> 00:43:42,850
+This is the index where that root,
+
+321
+00:43:43,350 --> 00:43:45,270
+that new value was at
+
+322
+00:43:45,270 --> 00:43:47,310
+and we're following it as it goes down
+
+323
+00:43:47,310 --> 00:43:49,210
+to see if we need to bubble down more.
+
+324
+00:43:53,960 --> 00:43:57,460
+Which means we need to repeat this some more.
+
+325
+00:43:58,260 --> 00:43:59,560
+So I'm going to wrap this in a loop
+
+326
+00:43:59,560 --> 00:44:12,700
+so that this goes around and around and around
+
+327
+00:44:12,700 --> 00:44:15,980
+until it gets bubbled down.
+
+328
+00:44:17,120 --> 00:44:22,890
+Okay, should we try it?
+
+329
+00:44:23,050 --> 00:44:27,930
+there's a couple of edge cases in here that I've pulled out or a couple of checks in here that I've
+
+330
+00:44:27,930 --> 00:44:33,930
+pulled out, but we've got our core, that core idea here captured in code, is that
+
+331
+00:44:34,650 --> 00:44:48,810
+that core idea being if i is the, and we can, if i is the index of the node that we want to bubble
+
+332
+00:44:48,810 --> 00:44:56,700
+down. We're going to repeatedly find the index of the left child, the index of the right child,
+
+333
+00:44:57,820 --> 00:45:01,980
+and then we're going to keep track of the smallest index. And we're going to see if the left child
+
+334
+00:45:01,980 --> 00:45:06,620
+is, the value of the left child is smaller than the value of the node that we're looking to bubble
+
+335
+00:45:06,620 --> 00:45:13,420
+down. Then we'll keep track of that. Then we compare the smallest to the right child, see if
+
+336
+00:45:13,420 --> 00:45:17,980
+the right child is smaller. And by the time we've gotten down here, if we have, if none of the
+
+337
+00:45:17,980 --> 00:45:25,740
+children are smaller than that we're looking to bubble down, then we're done. Otherwise,
+
+338
+00:45:25,740 --> 00:45:34,860
+we do the swap, and then we update the location of the node we're bubbling down,
+
+339
+00:45:34,860 --> 00:45:42,260
+and then we're going to repeat it over and over. Do we run this? Does anyone know what's going
+
+340
+00:45:42,260 --> 00:45:53,620
+to go wrong here? What if there's no right child? What if there's no left child? What if there's no
+
+341
+00:45:53,620 --> 00:45:59,620
+children this is the problem okay so we got to check to see do we actually have children
+
+342
+00:46:00,820 --> 00:46:14,280
+so where do we do that um uh what do we what do we like size size of the list
+
+343
+00:46:16,040 --> 00:46:23,640
+um okay where do we want to check it let's see smallest index left right um so
+
+344
+00:46:23,640 --> 00:46:28,490
+So we could check it.
+
+345
+00:46:29,090 --> 00:46:35,360
+I'm going to check it in line here.
+
+346
+00:46:36,300 --> 00:46:39,340
+So kind of what I was thinking about was,
+
+347
+00:46:39,560 --> 00:46:41,980
+okay, we have our left and our right index.
+
+348
+00:46:42,280 --> 00:46:45,480
+I want to check and make sure that those are in the list
+
+349
+00:46:45,480 --> 00:46:48,440
+or in the tree, that they are valid indexes.
+
+350
+00:46:50,160 --> 00:46:55,360
+So here we know that, so I could check right here.
+
+351
+00:46:55,360 --> 00:46:58,280
+I could put a line in here that says something like,
+
+352
+00:46:58,280 --> 00:47:15,520
+And if left is less than the length of the list or greater than or whatever, bail at this point, I'm going to go ahead and roll it into this one.
+
+353
+00:47:15,520 --> 00:47:29,520
+And I'm going to put this second because if left is outside of off the end of the array or list, then it's it's going to fail anyway.
+
+354
+00:47:29,520 --> 00:47:32,640
+um so okay
+
+355
+00:47:32,640 --> 00:47:46,170
+if this
+
+356
+00:47:46,170 --> 00:47:51,210
+if this exists
+
+357
+00:47:51,210 --> 00:48:01,190
+oh yeah um so something like you're saying there's something like if if keep of left
+
+358
+00:48:01,190 --> 00:48:04,600
+and keep
+
+359
+00:48:04,600 --> 00:48:06,700
+smallest.
+
+360
+00:48:07,180 --> 00:48:07,760
+Is that what you had in mind?
+
+361
+00:48:11,180 --> 00:48:12,020
+Oh, yeah.
+
+362
+00:48:18,370 --> 00:48:19,710
+Yeah? Okay.
+
+363
+00:48:27,980 --> 00:48:32,590
+Let's do this.
+
+364
+00:48:32,730 --> 00:48:34,770
+And then we'll add this
+
+365
+00:48:34,770 --> 00:48:35,570
+here too.
+
+366
+00:48:42,330 --> 00:48:45,650
+What are you saying?
+
+367
+00:48:49,590 --> 00:48:50,190
+Yes.
+
+368
+00:48:50,890 --> 00:48:52,970
+Yes. Okay. So what this is doing
+
+369
+00:48:52,970 --> 00:48:54,890
+is, and we'll run this
+
+370
+00:48:54,890 --> 00:49:05,450
+in C. This is saying if heap of left exists, and the value at heap of left is smaller than
+
+371
+00:49:05,450 --> 00:49:14,650
+the smallest end up. And then, yeah, you know what? Let's run it. We'll see what happens.
+
+372
+00:49:14,650 --> 00:49:36,300
+um heap pop um bubble down heap uh zero okay so our bubble down um we're gonna print our heap here
+
+373
+00:49:36,300 --> 00:49:59,190
+oh and then at the end we return value let's do this um should log this let's see well okay so
+
+374
+00:49:59,190 --> 00:50:23,480
+So we're going to, and then print heap up of heap, see what I can do before the break.
+
+375
+00:50:23,480 --> 00:50:25,480
+And heap, the end.
+
+376
+00:50:25,480 --> 00:50:34,300
+Well, let's see what happens.
+
+377
+00:50:34,300 --> 00:50:39,300
+So we started, oh, I got an index.
+
+378
+00:50:39,300 --> 00:50:44,300
+I've got heap, index out of range.
+
+379
+00:50:44,300 --> 00:50:45,300
+Okay.
+
+380
+00:50:45,300 --> 00:50:47,300
+So our heap writes.
+
+381
+00:50:47,300 --> 00:51:12,520
+Okay, so what happened here? It didn't like this. It didn't like this because it was not enough to test for the existence. It doesn't get to the existence test. It requests off of the end of the list before it gets to say, hey, there's nothing there.
+
+382
+00:51:12,520 --> 00:51:28,520
+So I think we do have to check that it is less than the length of the list right there.
+
+383
+00:51:28,520 --> 00:51:41,560
+is less than 1 heap minus 1. And this is a little clunky, but we're going to go with it for right
+
+384
+00:51:41,560 --> 00:51:54,890
+now. I'm going to do the same thing for left so that we don't length of heap minus 1. Oh, oh, oh,
+
+385
+00:51:54,890 --> 00:52:03,210
+let's run take that okay it looks like okay this was our heap two three eight five four
+
+386
+00:52:03,210 --> 00:52:12,190
+two is at the root um at the end we had four three eight five before we bubbled and three four eight
+
+387
+00:52:12,190 --> 00:52:20,250
+five i think we've got a heap proper at the bottom and we returned the right value
+
+388
+00:52:20,250 --> 00:52:44,650
+Okay. Okay. Any questions before we take our break? Okay. Let's take our break and we'll come back. We'll make sure we put all this together. And I will give tests back for anyone who's in the room.
+

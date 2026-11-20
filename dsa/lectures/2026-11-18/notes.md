@@ -172,7 +172,7 @@
 ## 還要釐清的問題
 
 0. （11/20 補）11/16 的講義 `EE590a_Class_2026-11-16_Mon_heaps_code_build_heapsort_student_copy.pdf` 後來放上 Canvas，裡面有這堂前半的內容：正確的 `bubble_down`（邊界是 `left < n`、`right < n`）、heapsort 的 O(n log n)、in-place 版、not stable、`heapq` 用 tuple 當 priority。整理在 `../2026-11-16/notes.md` 的「講義補充」，下面第 1、2 題可以對照那裡。
-1. `bubble_down` 的 off-by-one 到底在哪一行？逐字稿只聽得到 Steven 指出兩處、老師說是「that minus one」（[00:51:06]）。要看 GitHub 上修正後的程式碼，確認是 `left < len(heap) - 1` 之類的條件改成 `left < len(heap)`。
+1. （11/20 已解）11/16 前半堂用 Whisper 轉錄後確認：老師當時把邊界寫成 `left < len(heap) - 1`、`right < len(heap) - 1`（11/16 `transcript.whisper.srt` [00:51:12]），最後一個 index 永遠不會被比到；正確是 `< len(heap)`。原本的問題：`bubble_down` 的 off-by-one 到底在哪一行？逐字稿只聽得到 Steven 指出兩處、老師說是「that minus one」（[00:51:06]）。要看 GitHub 上修正後的程式碼，確認是 `left < len(heap) - 1` 之類的條件改成 `left < len(heap)`。
 2. heap sort 的整體 runtime 老師沒有明說。用 n 次 insert 建 heap 是 O(n log n)；改用 `heapify`（O(n)）建 heap 之後，n 次 pop 仍是 O(n log n)。另外 in-place 的 heap sort（用 max heap，把 root 換到 list 尾端）這堂沒講，VisuAlgo 示範的是那個版本。
 3. collision 的其他處理方式（老師說「there are alternatives」，[01:30:02]）：應該是 open addressing（linear probing 等），下週會不會講？
 4. load factor 的門檻是多少才 resize？老師只說「too big」（[01:39:04]）。Python `dict` 的實際做法（open addressing、約 2/3 滿就擴大）和課堂的 chaining 模型不同，這是我自己的補充，不是課堂內容。

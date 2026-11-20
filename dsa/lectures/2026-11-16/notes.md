@@ -1,6 +1,6 @@
 # DSA Class 12 — 2026-11-16（週一，Module 7 Heaps：heap `pop` / bubble down 的常見錯誤、build heap 的方向、只從一半開始做到 O(n)、heapify 預告）
 
-> 來源：transcript（Panopto 自動字幕 `transcript.srt`，622 cues，**只有 00:52:07–01:46:26**；錄影本身約 106 分鐘，session `67a9552d-b891-4cf3-9627-b50500303882`，Panopto 標題還是預設的「EEP 590A: Class Meeting」）。**前 52 分鐘沒有字幕**，可能是那段沒錄到聲音，也可能是 Panopto 還在處理；從後半的話推測，前半在發還 midterm 考卷，並現場寫 heap 的 `pop`（移除 root → 最後一個元素補到 root → bubble down）。slides：`EE590a_Class_2026-11-16_Mon_heaps_code_build_heapsort_student_copy.pdf`（Canvas file 156443404，7 頁，文字在 `slides.txt`；PDF 頁尾的列印時間是 11/18 8:51 PM，是課後才放上 Canvas 的）。**11/20 補**：寫這份筆記時（11/17）講義還沒發布，下面「講義補充」一節是之後依講義加的，前面各節的時間戳內容沒有改。老師說程式碼會 push 到 GitHub，連結放在 Canvas 的 resources（[01:43:02]），build heap 是 O(n) 的推導也會放 notes 到 Canvas。
+> 來源：transcript（Panopto 自動字幕 `transcript.srt`，622 cues，**只有 00:52:07–01:46:26**；錄影本身約 106 分鐘，session `67a9552d-b891-4cf3-9627-b50500303882`，Panopto 標題還是預設的「EEP 590A: Class Meeting」）。**前 52 分鐘沒有字幕**，可能是那段沒錄到聲音，也可能是 Panopto 還在處理；從後半的話推測，前半在發還 midterm 考卷，並現場寫 heap 的 `pop`（移除 root → 最後一個元素補到 root → bubble down）。slides：`EE590a_Class_2026-11-16_Mon_heaps_code_build_heapsort_student_copy.pdf`（Canvas file 156443404，7 頁，文字在 `slides.txt`；PDF 頁尾的列印時間是 11/18 8:51 PM，是課後才放上 Canvas 的）。**11/20 補**：前 52 分鐘另外用 Whisper 轉錄成 `transcript.whisper.srt`（388 段，00:02:03–00:52:44），整理在「前半堂」一節，所以上面「推測前半在發還考卷」那句已經過時：考卷是休息時和課後發的。寫這份筆記時（11/17）講義還沒發布，下面「講義補充」一節是之後依講義加的，前面各節的時間戳內容沒有改。老師說程式碼會 push 到 GitHub，連結放在 Canvas 的 resources（[01:43:02]），build heap 是 O(n) 的推導也會放 notes 到 Canvas。
 >
 > 閱讀：課程沒有指定章節。下面是自行對照的：Grokking Algorithms 沒有 heap 專章；Ch 7（Dijkstra）會用到 priority queue 的概念，下下週 Module 8 Graphs 會接上。build heap 是 O(n) 的嚴格證明可以參考 CLRS Ch 6.3（自行對照）。逐字稿是自動產生，專有名詞可能聽錯。
 >
@@ -46,6 +46,105 @@
    - **midterm 解答會公布**。老師本來不公布解答，這次願意給（[01:44:00]–[01:45:09]）。
    - final：midterm 的內容**不會特別出**，但後面的東西建立在它上面，所以「fair game」（[01:45:09]）。
    - **下週一（11/23）有課；週三（11/25）感恩節停課**。問大家要不要錄非同步課，只有一個人說會看，老師說**應該不會錄**（[01:45:09]–[01:46:07]）。
+
+## 前半堂（11/20 補，Whisper 轉錄 [00:02:03]–[00:52:44]）
+
+> 來源：`transcript.whisper.srt`（388 段）。Panopto 沒有產生這段字幕，但錄影有聲音；11/20 從 Panopto 串流抓前 53 分鐘音訊，在本機用 faster-whisper `large-v3-turbo`（GPU，career-log 的 `~/.career-log/speech` 環境）轉錄。音訊檔沒有留。時間戳和 Panopto 錄影同一條時間軸，Whisper 的時間是以段為單位，大約準到幾秒。這一節的時間戳都指這個檔，不是 `transcript.srt`。
+>
+> Whisper 誤聽對照：new vowel → `new_val`；heap top / heap up → `heap_pop`；one heap / len of heap → `len(heap)`；get to the bird → get to the root；smallest end / smallest in → `smallest_index`；min（"bids coming min"）→ in；run plays → 推測是 index 相關的錯誤訊息；bubble it up（[00:38:00]，講 bubble down 時）→ 口誤，指 swap。
+
+1. **開場與行政**（[00:02:03]）
+   - 考卷在**下課休息時和課後**發還，不在一開始發，因為開頭發會浪費很多時間（[00:02:03]、[00:52:20]）。
+   - 這堂有實體教室也有線上同學。
+
+2. **Heap 複習（問答）**（[00:03:06]–[00:11:13]）
+   - heap 是 **complete binary tree**：每個 node 有 0、1 或 2 個 child；由上到下都是滿的，只有最底層可以不滿。
+   - BST、AVL 是用 node（像 linked list 的 node）實作；heap 因為是 complete，可以直接用 **array** 實作（[00:05:03]）。
+   - min 或 max 在 root，拿取很便宜；heap 是 **priority queue** 這個 ADT 的實作（[00:06:02]）。
+   - 「most important」要加引號：有時是最小的數，有時是最大的數，所以有 min heap 和 max heap（[00:07:00]）。
+     - min heap 的例子：**高爾夫球**，桿數最低的贏（[00:08:01]）。
+     - max heap 的例子：**拍賣**，出價最高的贏（同學答 bidding，[00:09:11]）。
+     - 這堂用 min heap；要 max 就把比較方向（或正負號）反過來。
+   - **order rule**：每個 node ≤ 它的 children。比 BST 寬鬆：BST 要求左子樹全部較小、右子樹全部較大（[00:10:09]–[00:11:13]）。
+
+3. **白板範例：insert 和 remove**（[00:11:13]–[00:18:08]）
+   - 老師畫的 heap，唸出來的順序是「2, 5, 3, 8, 4, 6, 9, 12, 10」，之後核對時說 3 的 children 是 8、4，5 的 children 是 9、6，9 的 children 是 12、10（[00:12:02]）。所以 list 應該是 `[2, 5, 3, 9, 6, 8, 4, 12, 10]`，和講義 p1 一樣（唸的順序不是 level order）。
+   - **insert 7**：放在第一個空位，成為 6 的 child。parent 6 比 7 小，不用 bubble up（[00:13:02]）。
+   - **remove（拿掉 2）**：拿掉 root 之後剩兩棵樹，不是 heap。把**最後一個元素**（剛放進去的 7）搬到 root，再 bubble down（[00:14:09]–[00:15:08]）。
+     - 7 和 children 5、3 比，和 3 換。
+     - 接著老師**誤把 7 和 8 換**，同學指出應該和 4 換（[00:16:01]）。
+   - 為什麼一定要和較小的 child 換（[00:17:06]）：
+     - 要讓最小的往上。
+     - 如果和 8 換，8 會變成 4 的 parent，直接破壞 heap property。
+   - 同學問為什麼都往右邊走。老師：只是這個例子剛好，左右 child 誰小沒有規則，所以**兩個都要看**（[00:18:08]）。
+
+4. **現場寫 `heap_insert` / `bubble_up`**（[00:19:04]–[00:33:00]）
+   - 不需要 node class，heap 就是一個 Python list（[00:20:01]）。
+   - 依逐字稿重建（變數名稱是推測，以 GitHub 為準）：
+
+     ```python
+     heap = []
+
+     def bubble_up(heap, index):
+         while index > 0:                       # 迴圈條件沒唸出來，推測
+             parent_index = (index - 1) // 2
+             if heap[parent_index] < heap[index]:
+                 break                          # parent 比較小：完成
+             heap[index], heap[parent_index] = heap[parent_index], heap[index]
+             index = parent_index
+
+     def heap_insert(heap, new_val):
+         heap.append(new_val)
+         bubble_up(heap, len(heap) - 1)
+     ```
+
+   - parent 的 index 是 `(index - 1) // 2`（[00:22:09]）。
+   - 老師一開始把條件寫反，隨即更正：parent 比較小就**結束**，否則才 swap（[00:23:14]–[00:24:10]）。
+   - 可以用 recursion，老師選擇用 loop 包起來（[00:25:07]）。
+   - 同學問 `a, b = b, a` 這種 swap 語法。老師開 Python console 現場驗證：`my_list = [1, 2, 3, 4, 5]`，swap index 0 和 2 之後 1 和 3 互換。這是 Python 才有的寫法，很多語言要用暫存變數（[00:26:11]–[00:28:25]）。
+   - 第一次跑出錯：`bubble_up` 呼叫時沒有傳 index。同學提醒，補上 `len(heap) - 1`（[00:30:00]–[00:31:08]）。
+   - 依序 insert 5, 3, 8, 4, 2，每次 print：
+     - 5 → `[5]`。
+     - 3 → 放尾巴，和 5 換。
+     - 8 → 放尾巴，不動。
+     - 4 → parent 是 5，換一次。
+     - 2 → 一路 bubble 到 root（[00:31:08]–[00:33:00]）。最後的 heap 是 `[2, 3, 8, 5, 4]`（[00:51:12]）。
+
+5. **現場寫 `heap_pop` / `bubble_down`**（[00:34:01]–[00:52:12]）
+   - 第一版 `heap_pop`：`val = heap[0]`，再 `heap[0] = heap[len(heap) - 1]`。老師問這樣 list 裡有幾個元素；同學答最後一個還留在尾巴，要刪掉。改成 `heap.pop()` 取出最後一個再放到 index 0（[00:35:03]–[00:36:07]）。
+   - children 的 index：`left = 2*i + 1`、`right = 2*i + 2`。老師用 i = 0 驗算得到 1 和 2，並說這裡的算術每次都要驗（[00:38:00]）。
+   - 用 `smallest_index` 而不是 `smallest`：變數名字要看得出存的是 index 還是 value（[00:41:02]）。
+   - 先和 left 比，再拿目前最小的和 right 比；如果最小的還是自己就結束，否則 swap、更新 `i`，外面包 loop（[00:40:10]–[00:44:12]）。
+   - 老師問哪裡會出錯；同學：沒有 right child、沒有 left child、沒有 children 的情況（[00:45:01]）。
+   - 第一次嘗試只檢查「`heap[left]` 存不存在」，跑出 `IndexError: index out of range`：還沒檢查到就已經讀到 list 外面了（[00:50:23]）。
+   - 改成比較 index 和長度。**老師寫的是 `left < len(heap) - 1`、`right < len(heap) - 1`**，並說「a little clunky」但先這樣（[00:51:12]）。
+     - **這就是 11/18 那個 off-by-one 的來源**：`< len(heap) - 1` 會把最後一個 index 排除，最後一個元素永遠不會被當成 child 比較。正確的是 `< len(heap)`（講義 p3 是 `left < n`）。這堂的測試剛好沒踩到，11/18 做 heap sort 時才出錯。
+   - 下課前的版本（依逐字稿重建，含上面那個 bug）：
+
+     ```python
+     def bubble_down(heap, i):
+         while True:
+             left = 2 * i + 1
+             right = 2 * i + 2
+             smallest_index = i
+             if left < len(heap) - 1 and heap[left] < heap[smallest_index]:    # bug：應為 left < len(heap)
+                 smallest_index = left
+             if right < len(heap) - 1 and heap[right] < heap[smallest_index]:  # bug：應為 right < len(heap)
+                 smallest_index = right
+             if smallest_index == i:
+                 break
+             heap[i], heap[smallest_index] = heap[smallest_index], heap[i]
+             i = smallest_index
+
+     def heap_pop(heap):
+         val = heap[0]
+         heap[0] = heap.pop()        # 只有一個元素時會出錯，後半堂修掉
+         bubble_down(heap, 0)
+         return val
+     ```
+
+   - 測試：`[2, 3, 8, 5, 4]` pop 之後，bubble down 前是 `[4, 3, 8, 5]`，之後是 `[3, 4, 8, 5]`，回傳 2（[00:51:12]–[00:52:12]）。
+   - [00:52:20] 休息。後半堂從檢查這份 `pop` 的常見錯誤開始，接上面「重點摘要」第 1 點。
 
 ## 講義補充（11/20 補，講義 p1–p7）
 
@@ -196,7 +295,8 @@
 
 ## 還要釐清的問題
 
-- **前 52 分鐘的內容**：字幕從 00:52:07 才開始。11/20 重抓 SRT，還是 622 cues、從 00:52:07 開始，Panopto 沒有補上。前半的 `bubble_up` / `bubble_down` / remove-min 程式已由講義補上（見「講義補充」）；老師前半實際怎麼講、「4385 → 3485」那個例子是什麼，仍然不知道。
+- ~~前 52 分鐘的內容~~：Panopto 字幕到 11/20 仍從 00:52:07 開始，但錄影有聲音，已用 Whisper 轉錄補上（見「前半堂」）。「4385 → 3485」就是 `[2, 3, 8, 5, 4]` pop 之後 `[4, 3, 8, 5]` → `[3, 4, 8, 5]` 那個測試。
+- 「前半堂」裡重建的程式碼是從口述拼出來的，`bubble_up` 的迴圈條件、變數名稱要用 GitHub 上的 code 核對。
 - ~~範例 list 的確切值~~：講義 p4 確認是 `[9, 4, 7, 1, 8, 2, 6, 3, 5]`，結果 `[1, 3, 2, 4, 8, 7, 6, 9, 5]`（11/20 補）。
 - 從頭到尾做 bubble up 的手算過程中，老師自己說「I feel like I got something wrong」（[01:29:00]），之後才補完。結論沒錯，但中間步驟可以自己再手算一遍。
 - ~~build heap 是 O(n) 的級數推導~~：講義 p4 給了逐層的算法（n/4·1 + n/8·2 + n/16·3 + … < n）和實測 swap 次數（11/20 補）。

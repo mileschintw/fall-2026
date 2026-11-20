@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-20T15:02:31-08:00",
+  "task": "上課筆記",
+  "status": "new",
+  "summary": "DSA 11/16 前 52 分鐘用 Whisper 轉錄補上；找到 off-by-one 來源（len(heap)-1）",
+  "output": "dsa/lectures/2026-11-16/notes.md"
+ },
+ {
   "at": "2026-11-20T14:52:08-08:00",
   "task": "上課筆記",
   "status": "new",
