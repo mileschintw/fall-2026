@@ -582,5 +582,36 @@
     ]
    }
   ]
+ },
+ "11909772": {
+  "course": "gpu",
+  "slug": "final-project-tier-submissions",
+  "dir": "gpu/hw/final-project-tier-submissions",
+  "name": "Final Project Tier Submissions",
+  "due_at": "2026-12-16T01:00:00Z",
+  "fp": {
+   "text": "cb9e9768703855a8",
+   "links": [],
+   "files": {},
+   "readme": null,
+   "repo_files": {},
+   "due_at": "2026-12-16T01:00:00Z"
+  },
+  "files": [
+   "spec.md"
+  ],
+  "archived_at": "2026-11-20T07:43:36-08:00",
+  "summary_done": true,
+  "changes": [
+   "new"
+  ],
+  "history": [
+   {
+    "at": "2026-11-20T07:43:36-08:00",
+    "changes": [
+     "new"
+    ]
+   }
+  ]
  }
 }

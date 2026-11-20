@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-20T07:44:50-08:00",
+  "task": "作業說明",
+  "status": "new",
+  "summary": "新：gpu/final-project-tier-submissions",
+  "output": "gpu/hw/README.md"
+ },
+ {
   "at": "2026-11-20T07:08:24-08:00",
   "task": "晨報",
   "status": "new",

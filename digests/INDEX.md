@@ -9,12 +9,13 @@
 - 週規劃：11/15 日 21:05 ✅ 11/16 GPU 分組截止；Proposal 11/17（課堂說 11/18）；A5 11/22 還沒開工，11/16 開始 → [2026-11-15-weekly.md](2026-11-15-weekly.md)
 - 截止提醒：11/19 四 18:10 ✅ 沒有新東西（GPU Proposal 11/20 11:59 PM 剩 30h，24h 提醒未到） → —
 - 上課筆記：11/19 四 16:19 🆕 DSA 11/18 Class 13 筆記：heap sort、heapq、hash table 入門（chaining、load factor） → [notes.md](../dsa/lectures/2026-11-18/notes.md)
-- 作業說明：11/19 四 07:44 ✅ 沒有新東西 → —
+- 作業說明：11/20 五 07:44 🆕 新：gpu/final-project-tier-submissions → [README.md](../gpu/hw/README.md)
 
 ## 紀錄
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 11/20 五 07:44 | 作業說明 | 🆕 | 新：gpu/final-project-tier-submissions | [README.md](../gpu/hw/README.md) |
 | 11/20 五 07:08 | 晨報 | 🆕 | GPU 新作業 Tier Submissions 12/15、kit v07、spec PDF；Proposal 已交；DSA Class 13 錄影 | [2026-11-20.md](2026-11-20.md) |
 | 11/19 四 18:10 | 截止提醒 | ✅ | 沒有新東西（GPU Proposal 11/20 11:59 PM 剩 30h，24h 提醒未到） | — |
 | 11/19 四 16:19 | 上課筆記 | 🆕 | DSA 11/18 Class 13 筆記：heap sort、heapq、hash table 入門（chaining、load factor） | [notes.md](../dsa/lectures/2026-11-18/notes.md) |
