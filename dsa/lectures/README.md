@@ -17,6 +17,7 @@ Panopto folder：`Autumn 2026 - EE P 590 A Au 26`（`9b12e253-ce65-412c-837a-b4d
 | 2026-11-02（一） | Mod 4 AVL, Asymptotic Analysis [Mon, Class 10] | 5414766c-8f41-465d-9a81-b4f70039291b | 106 min | 1151 |
 | 2026-11-04（三） | Heaps, Midterm Review [Wed, Class 11] | 63942a74-515a-4069-9dc0-b4f90039f2f3 | 102 min | 945 |
 | 2026-11-16（一） | EEP 590A: Class Meeting（Panopto 預設標題；Module 7 Heaps，Class 12） | 67a9552d-b891-4cf3-9627-b50500303882 | 106 min | 622 |
+| 2026-11-18（三） | Heaps, Hashtable Intro [Wed, Class 13] | b6779590-a8a5-4d8b-9d98-b507003b7050 | 108 min | 944 |
 
 - Class 1 在 Panopto 的 StartTime 是 10/02，應是上傳時間；上課日以 Canvas Module 0 與 BOOTSTRAP 為準（9/30）。
 - 資料夾內另有一支 9 秒的「EEP 590A: Class Meeting」（`0c21a835-…`），是空錄影，忽略。
@@ -24,3 +25,4 @@ Panopto folder：`Autumn 2026 - EE P 590 A Au 26`（`9b12e253-ce65-412c-837a-b4d
 - Class 10 的字幕從 00:06:44 才開始，第一句是 Panopto 插入的中文說明「該逐字稿自動產生…」；長度以最後一句 01:52:40 計。
 - Class 11 的字幕從 00:03:49 才開始，第一句同樣是 Panopto 插入的中文說明；長度以最後一句 01:46:08 計。
 - Class 12（11/16）的字幕從 00:52:07 才開始（前 52 分鐘沒有字幕），第一句同樣是 Panopto 插入的中文說明；長度以錄影 Duration 6392 秒計，最後一句 01:46:26。11/9 是 midterm、11/11 Veterans Day 停課，資料夾裡 11/11 有三支 1–7 分鐘的「EEP 590A: Class Meeting」（`a03a1152-…`、`46982037-…`、`e0a2fda0-…`），字幕是空的，忽略。
+- Class 13（11/18）的字幕從 00:07:27 才開始，第一句同樣是 Panopto 插入的中文說明；長度以最後一句 01:47:52 計。錄影掛在 Canvas 的 Module 5: Hashtables 底下。

@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-19T16:19:02-08:00",
+  "task": "上課筆記",
+  "status": "new",
+  "summary": "DSA 11/18 Class 13 筆記：heap sort、heapq、hash table 入門（chaining、load factor）",
+  "output": "dsa/lectures/2026-11-18/notes.md"
+ },
+ {
   "at": "2026-11-19T14:58:14-08:00",
   "task": "晨報",
   "status": "new",

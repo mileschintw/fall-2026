@@ -1,0 +1,3777 @@
+1
+00:07:27,000 --> 00:07:33,000
+[該逐字稿自動產生。為清晰起見，可能已進行編輯。]
+Hi, everyone. Can you hear me okay?
+
+2
+00:07:33,000 --> 00:07:35,000
+How's everyone doing?
+
+3
+00:07:35,000 --> 00:07:39,000
+Great. I got some thumbs up. I like that.
+
+4
+00:07:39,000 --> 00:07:45,000
+Let's see, I'm going to make sure we've got
+
+5
+00:07:45,000 --> 00:07:52,000
+Got everything up and going here.
+
+6
+00:07:52,000 --> 00:07:57,000
+As we get to Zoom as we get started.
+
+7
+00:07:57,000 --> 00:08:06,000
+Anyone have any questions or anything to to start off with?
+
+8
+00:08:06,000 --> 00:08:09,000
+Anyone remember
+
+9
+00:08:09,000 --> 00:08:22,000
+Anyone remember what we started talking about or what we talked about on Monday?
+
+10
+00:08:22,000 --> 00:08:37,000
+Anyone want to drop something into the chat? If not, say it out loud.
+
+11
+00:08:37,000 --> 00:08:39,000
+My screen is sharing.
+
+12
+00:08:39,000 --> 00:08:44,000
+Can anyone remember anything?
+
+13
+00:08:44,000 --> 00:08:53,000
+Okay, well, I will start with we were talking about heaps.
+
+14
+00:08:53,000 --> 00:09:08,000
+And we mostly got through everything. I'm just going to do a bit of a wrap up, kind of tie everything together, look at a couple one, maybe two more examples of things that we do with heaps
+
+15
+00:09:08,000 --> 00:09:15,000
+And then we'll move on to our next data structure today, hash tables.
+
+16
+00:09:15,000 --> 00:09:30,000
+Hash tables. But first we'll start with our heaps. Anyone remember what is interesting and important about heaps?
+
+17
+00:09:30,000 --> 00:09:39,000
+We use heaps to help us implement a priority queue.
+
+18
+00:09:39,000 --> 00:09:42,000
+And
+
+19
+00:09:42,000 --> 00:09:57,000
+We don't have to use a heap to help to implement a priority queue. A heap just happens to be a very efficient way to do it. Something we could do with our priority queue, we could
+
+20
+00:09:57,000 --> 00:10:15,000
+Use just a list to represent a priority queue, and we could wrap some functions around it that basically did something like sort the list every time and always return the smallest value, always remove the smallest value from the list.
+
+21
+00:10:15,000 --> 00:10:30,000
+But that's always going to be a little bit more inefficient. And our heap is going to give us a more efficient implementation to implement the behavior that we want associated with a priority queue. So
+
+22
+00:10:30,000 --> 00:10:48,000
+That's why we usually use a heap when we use a prior when we are thinking about a priority queue. And that is because our heaps, they are complete binary trees
+
+23
+00:10:48,000 --> 00:10:59,000
+And they fill in from as we fill it in. They fill the bottom bottom row left to right.
+
+24
+00:10:59,000 --> 00:11:03,000
+And we can store it in a list.
+
+25
+00:11:03,000 --> 00:11:05,000
+And they
+
+26
+00:11:05,000 --> 00:11:09,000
+maintain the, the behavior
+
+27
+00:11:09,000 --> 00:11:15,000
+That the
+
+28
+00:11:15,000 --> 00:11:22,000
+Each node. Well, we know that the root node
+
+29
+00:11:22,000 --> 00:11:30,000
+Is most important.
+
+30
+00:11:30,000 --> 00:11:49,000
+And that maintains for all of the nodes in the list that the most that the that each node is more important than its children. But there's no order on the left or the right child being more or less important than the root
+
+31
+00:11:49,000 --> 00:11:54,000
+So that's one of those differences that
+
+32
+00:11:54,000 --> 00:12:02,000
+We see to make this not just, for example, a binary search tree or something more like a binary search tree.
+
+33
+00:12:02,000 --> 00:12:15,000
+We looked at an implementation. We looked at our implementations the other day. We had basically our heap here, I'll
+
+34
+00:12:15,000 --> 00:12:19,000
+Do this example
+
+35
+00:12:19,000 --> 00:12:23,000
+Can't remember. I think this one's a heap.
+
+36
+00:12:23,000 --> 00:12:36,000
+This looks like a heat at quick glance. Our heap, when we add something to the heap, when we do an insert, we're going to add it to the next empty spot in the bottom here.
+
+37
+00:12:36,000 --> 00:12:50,000
+So that we would… we would add some value. Let's see, we'll add 10 here. And then in order to make sure that it is still a heap, we will take this and we will bubble it up
+
+38
+00:12:50,000 --> 00:12:55,000
+to maintain that… that heap characteristic.
+
+39
+00:12:55,000 --> 00:13:03,000
+when we take something out of the heap, when we use that most important item, we take it out, we're left with two heaps
+
+40
+00:13:03,000 --> 00:13:18,000
+We take the very last item and we put it up here, and then we bubble it down into the right place. So those are our two operations that we think about. We think about taking something out and then putting something in
+
+41
+00:13:18,000 --> 00:13:26,000
+Inserting is going to be a log n
+
+42
+00:13:26,000 --> 00:13:31,000
+We lost that one second.
+
+43
+00:13:31,000 --> 00:13:36,000
+See if this comes back. Insert
+
+44
+00:13:36,000 --> 00:13:40,000
+It's going to be a log n
+
+45
+00:13:40,000 --> 00:13:46,000
+Operation, because the height of the tree is always going to be log N
+
+46
+00:13:46,000 --> 00:13:51,000
+and remove or pop.
+
+47
+00:13:51,000 --> 00:13:54,000
+Is always going to be login
+
+48
+00:13:54,000 --> 00:14:08,000
+Because we remove the value. And then put the last value at the top and worst case, it has to go all the way down the height of the tree and the height of the tree is limited by log N.
+
+49
+00:14:08,000 --> 00:14:10,000
+Now, when we left off
+
+50
+00:14:10,000 --> 00:14:21,000
+The other day, we were looking at if we had a list of items, so something like 6, 8
+
+51
+00:14:21,000 --> 00:14:25,000
+2, 9, 4.
+
+52
+00:14:25,000 --> 00:14:30,000
+We have a list. Can we turn this list into a heap?
+
+53
+00:14:30,000 --> 00:14:33,000
+And we saw that
+
+54
+00:14:33,000 --> 00:14:38,000
+We could do that by if
+
+55
+00:14:38,000 --> 00:14:47,000
+In fact, I think this is what we were this was our example. One of these was our examples that we were turning into a heap
+
+56
+00:14:47,000 --> 00:14:53,000
+And what we saw is that we were going to basically ignore
+
+57
+00:14:53,000 --> 00:14:55,000
+The
+
+58
+00:14:55,000 --> 00:14:58,000
+All of the leaves of the tree
+
+59
+00:14:58,000 --> 00:15:15,000
+that nothing's going to move on, and we're gonna start around here, and we're just gonna… we're gonna bubble down. So check to see, can this… can this element go down anymore? Nope, it can't. It's in its right place
+
+60
+00:15:15,000 --> 00:15:21,000
+So now we go here. Can this bubble down? Yeah, actually, we can swap these 2.
+
+61
+00:15:21,000 --> 00:15:27,000
+Then we'll say, can this one bubble down? Yep, we would swap these 2, and then
+
+62
+00:15:27,000 --> 00:15:33,000
+Can this one bubble down and then this would bubble down, and I'm not going through the details because we
+
+63
+00:15:33,000 --> 00:15:42,000
+Did that all on Monday. But just a reminder of what that process. And then once we've done that
+
+64
+00:15:42,000 --> 00:15:47,000
+Our list that we started with will have been turned into a heap.
+
+65
+00:15:47,000 --> 00:15:54,000
+So why do we care about this? Why? Why is this helpful or interesting?
+
+66
+00:15:54,000 --> 00:16:01,000
+One of the lovely things we like to do
+
+67
+00:16:01,000 --> 00:16:12,000
+With our heap is something called heap sort.
+
+68
+00:16:12,000 --> 00:16:25,000
+Now, we have not gone into detail on all of our sorting algorithms this quarter.
+
+69
+00:16:25,000 --> 00:16:29,000
+Anyone familiar, let's see
+
+70
+00:16:29,000 --> 00:16:41,000
+Anyone here of the sorting algorithm heap sort before?
+
+71
+00:16:41,000 --> 00:16:49,000
+Where is this new
+
+72
+00:16:49,000 --> 00:16:56,000
+Okay, I'm gonna go with it's new. And y'all haven't heard of heap sort before.
+
+73
+00:16:56,000 --> 00:17:03,000
+Keep sort is one of my favorite
+
+74
+00:17:03,000 --> 00:17:10,000
+one of my favorite authority in algorithms. It's sort by data structure is how I think about it.
+
+75
+00:17:10,000 --> 00:17:23,000
+How can you imagine that we could use a heap to sort a list of data?
+
+76
+00:17:23,000 --> 00:17:28,000
+We have this data structure that can hold a bunch of data.
+
+77
+00:17:28,000 --> 00:17:33,000
+And it holds it in the
+
+78
+00:17:33,000 --> 00:17:36,000
+And the
+
+79
+00:17:36,000 --> 00:17:51,000
+With the characteristic that the most important thing Which could be the smallest thing or the biggest thing, but that's at its root.
+
+80
+00:17:51,000 --> 00:18:04,000
+So any ideas, any thoughts?
+
+81
+00:18:04,000 --> 00:18:08,000
+Are y'all thinking, are we kind of out of it today?
+
+82
+00:18:08,000 --> 00:18:12,000
+It's feeling a little quiet. I'm not sure if
+
+83
+00:18:12,000 --> 00:18:24,000
+No one has an idea, or if you're thinking about it, or we're just feeling shy or quiet.
+
+84
+00:18:24,000 --> 00:18:27,000
+I'm going to give, I'm going to
+
+85
+00:18:27,000 --> 00:18:38,000
+There's a few different ways that we can use our heap structure to give us a sort, but the easiest way to think about it is
+
+86
+00:18:38,000 --> 00:18:42,000
+If we have a list of data
+
+87
+00:18:42,000 --> 00:18:46,000
+Let's take every element in our list of data, let's put it into our heap
+
+88
+00:18:46,000 --> 00:19:03,000
+The heap is gonna form some structure around that data, and then we're just going to pull each element out one at a time, and when we pull each item out, we know that we're going to get the most important item, be it smallest or largest
+
+89
+00:19:03,000 --> 00:19:06,000
+If it's a… if it's a max heap, MIN heap
+
+90
+00:19:06,000 --> 00:19:13,000
+And so just by taking all of our data, putting it into a heap, and then taking it out of the heap.
+
+91
+00:19:13,000 --> 00:19:16,000
+The data structure does the sort for us
+
+92
+00:19:16,000 --> 00:19:30,000
+Let's look at, let's go to our code from the other day. And let's use that to do a very quick heap sort implementation.
+
+93
+00:19:30,000 --> 00:19:39,000
+Just reshare.
+
+94
+00:19:39,000 --> 00:19:41,000
+Okay.
+
+95
+00:19:41,000 --> 00:19:48,000
+Can y'all see my screen? And we've got the code from the other day
+
+96
+00:19:48,000 --> 00:19:53,000
+We have our bubble up. We have our heap insert.
+
+97
+00:19:53,000 --> 00:19:58,000
+We have our bubble down, we have our heap pop
+
+98
+00:19:58,000 --> 00:20:05,000
+And then we have. I'm just going to delete a bunch of this. All of this is in Github.
+
+99
+00:20:05,000 --> 00:20:12,000
+All this is in GitHub. If anyone wants to look at it or play with it. And then we have our
+
+100
+00:20:12,000 --> 00:20:18,000
+The last function we did, which was take a list and build a heap out of the list.
+
+101
+00:20:18,000 --> 00:20:22,000
+So I am going to
+
+102
+00:20:22,000 --> 00:20:27,000
+We started with a list.
+
+103
+00:20:27,000 --> 00:20:40,000
+We'll come back to that, but we're just I'm going to do a super simple heap sort. Just like I described
+
+104
+00:20:40,000 --> 00:20:44,000
+Let's take a
+
+105
+00:20:44,000 --> 00:20:46,000
+A number list
+
+106
+00:20:46,000 --> 00:20:56,000
+That's all we're going to do. I'm going to take the list as the input and I am going to say that my heap is an empty list
+
+107
+00:20:56,000 --> 00:21:01,000
+And I'm going to, for I in none list
+
+108
+00:21:01,000 --> 00:21:05,000
+He got
+
+109
+00:21:05,000 --> 00:21:16,000
+We have heap insert
+
+110
+00:21:16,000 --> 00:21:20,000
+Our heat and our value.
+
+111
+00:21:20,000 --> 00:21:25,000
+Okay, so we're just going to put everything into the heat. And now
+
+112
+00:21:25,000 --> 00:21:41,000
+While
+
+113
+00:21:41,000 --> 00:21:43,000
+We're just going to pull it out
+
+114
+00:21:43,000 --> 00:21:47,000
+I'll do a new list.
+
+115
+00:21:47,000 --> 00:22:02,000
+Well, and sorted
+
+116
+00:22:02,000 --> 00:22:04,000
+Okay
+
+117
+00:22:04,000 --> 00:22:10,000
+Stop it thing for a second and make sure that I actually did
+
+118
+00:22:10,000 --> 00:22:12,000
+Did I do this
+
+119
+00:22:12,000 --> 00:22:15,000
+Yeah, okay, that's fine.
+
+120
+00:22:15,000 --> 00:22:19,000
+That's right. Okay, we have a heap sort.
+
+121
+00:22:19,000 --> 00:22:34,000
+We create a list that is going to be our heap. We go through everything that is in the list that we want to sort. We insert it into that heap, and then we create a new list. And while we have anything left in our
+
+122
+00:22:34,000 --> 00:22:37,000
+heat, we're just gonna pop
+
+123
+00:22:37,000 --> 00:22:39,000
+the head off
+
+124
+00:22:39,000 --> 00:22:43,000
+And then we're going to return sorted
+
+125
+00:22:43,000 --> 00:22:45,000
+So now
+
+126
+00:22:45,000 --> 00:22:47,000
+I've got this list
+
+127
+00:22:47,000 --> 00:22:52,000
+Well, let's use that again. And print
+
+128
+00:22:52,000 --> 00:22:54,000
+I'm going to print some list
+
+129
+00:22:54,000 --> 00:22:57,000
+And then I'm going to print
+
+130
+00:22:57,000 --> 00:23:00,000
+heat sort
+
+131
+00:23:00,000 --> 00:23:04,000
+Of some list.
+
+132
+00:23:04,000 --> 00:23:11,000
+Okay, does that look okay? Anyone notice me doing something wrong? Does it look reasonable from a
+
+133
+00:23:11,000 --> 00:23:15,000
+First glance
+
+134
+00:23:15,000 --> 00:23:23,000
+Let's run it and find out.
+
+135
+00:23:23,000 --> 00:23:28,000
+move the stuff. Okay, let's run it.
+
+136
+00:23:28,000 --> 00:23:40,000
+Oh yeah, we have all the intermediate things printing out. But yeah, here we can see that we started out with, this was the list we started out with
+
+137
+00:23:40,000 --> 00:23:52,000
+And then we're printing out all those intermediate steps, but we took our nine and our four and our seven, all of these we just kept on putting them into the heap.
+
+138
+00:23:52,000 --> 00:23:57,000
+And then notice once we put everything into the heap
+
+139
+00:23:57,000 --> 00:23:59,000
+This is not a sorted list
+
+140
+00:23:59,000 --> 00:24:00,000
+Right.
+
+141
+00:24:00,000 --> 00:24:08,000
+as a heap, and we've got our most important item at the top. But it is not a sorted list
+
+142
+00:24:08,000 --> 00:24:16,000
+And then at this point, we just start taking items out, and once we take everything out and
+
+143
+00:24:16,000 --> 00:24:19,000
+We got a problem.
+
+144
+00:24:19,000 --> 00:24:22,000
+This is not fully sorted
+
+145
+00:24:22,000 --> 00:24:25,000
+What's wrong?
+
+146
+00:24:25,000 --> 00:24:31,000
+Anyone see a problem?
+
+147
+00:24:31,000 --> 00:24:39,000
+6, 7. I got my 8, my 7 SWAT.
+
+148
+00:24:39,000 --> 00:24:42,000
+How can I debug this? How can I figure out
+
+149
+00:24:42,000 --> 00:24:58,000
+What's wrong here?
+
+150
+00:24:58,000 --> 00:25:06,000
+I don't have any thoughts
+
+151
+00:25:06,000 --> 00:25:15,000
+So it's feeling a lot more quiet than it usually is.
+
+152
+00:25:15,000 --> 00:25:30,000
+Can I just get a check-in? Is it just we're feeling quiet and low energy today, or are we lost?
+
+153
+00:25:30,000 --> 00:25:34,000
+Thank you. Okay, if we're lost. Excellent.
+
+154
+00:25:34,000 --> 00:25:40,000
+Okay, if I know we're lost, then I can back up and I can, yeah, get us on the same page.
+
+155
+00:25:40,000 --> 00:26:06,000
+It can someone give me a little bit of a piece of where something made sense and where we got lost or should I back up fully
+
+156
+00:26:06,000 --> 00:26:08,000
+Okay.
+
+157
+00:26:08,000 --> 00:26:10,000
+I'm going to go back
+
+158
+00:26:10,000 --> 00:26:20,000
+Are we lost on the heap sort or are we lost on heap?
+
+159
+00:26:20,000 --> 00:26:29,000
+And if anyone wants to put something in a private message to me and not to the whole class, you can do that too.
+
+160
+00:26:29,000 --> 00:26:31,000
+Okay, the sword. We're lost on the sword.
+
+161
+00:26:31,000 --> 00:26:35,000
+Excellent
+
+162
+00:26:35,000 --> 00:26:37,000
+Okay
+
+163
+00:26:37,000 --> 00:26:43,000
+Great. Okay, so we're lost on the heap sort. Okay.
+
+164
+00:26:43,000 --> 00:26:54,000
+So I agree. I am not sure why the heat. Oh, wait, when you say it's not clear why the heap wasn't sorted. Are you saying in this step right here
+
+165
+00:26:54,000 --> 00:27:01,000
+Or at the end when it was clearly broken.
+
+166
+00:27:01,000 --> 00:27:07,000
+Okay, so we definitely have a bug here, and we'll have to find the bug.
+
+167
+00:27:07,000 --> 00:27:14,000
+Is anyone
+
+168
+00:27:14,000 --> 00:27:30,000
+Is anyone wondering why the heap after we put everything into the heat, why the heap itself was not sorted at this step here?
+
+169
+00:27:30,000 --> 00:27:38,000
+Okay, I'm going to take that as we don't know why it wasn't sorted at the end.
+
+170
+00:27:38,000 --> 00:27:51,000
+But we understand why it's not sorted at this step. So, I'm gonna guess we have a bug somewhere, and we're gonna find the bug
+
+171
+00:27:51,000 --> 00:27:58,000
+I'm going to look at this for just a second and convince myself that this is a proper heap.
+
+172
+00:27:58,000 --> 00:28:14,000
+Just to help me figure out if I think that it's the building of the heap or taking things out of the heap that is the problem. So I'm going to stare at that for a second. And anyone, if anyone is looking at this and
+
+173
+00:28:14,000 --> 00:28:16,000
+It has a sense
+
+174
+00:28:16,000 --> 00:28:21,000
+Then feel free to point me in the right direction.
+
+175
+00:28:21,000 --> 00:28:28,000
+But I'm just… I'm gonna draw this out, and then I will share my screen as well, once I draw it out.
+
+176
+00:28:28,000 --> 00:28:31,000
+3, 2, 4
+
+177
+00:28:31,000 --> 00:28:33,000
+8
+
+178
+00:28:33,000 --> 00:28:36,000
+7, 6.
+
+179
+00:28:36,000 --> 00:28:39,000
+9… 5
+
+180
+00:28:39,000 --> 00:28:52,000
+Okay
+
+181
+00:28:52,000 --> 00:28:55,000
+I'm going to share this
+
+182
+00:28:55,000 --> 00:29:21,000
+Just a second, I'm gonna put this.
+
+183
+00:29:21,000 --> 00:29:27,000
+Oh, well, that's okay. I can share that. You guys can still, you can see what I just drew, right?
+
+184
+00:29:27,000 --> 00:29:30,000
+Okay.
+
+185
+00:29:30,000 --> 00:29:32,000
+So
+
+186
+00:29:32,000 --> 00:29:39,000
+One is at the root, three, two, two is smaller than seven and six
+
+187
+00:29:39,000 --> 00:29:48,000
+3 is smaller than 4 and 8, 4 is smaller than 9 and 5. Okay, this is a proper heap. We built a proper heap
+
+188
+00:29:48,000 --> 00:29:54,000
+And I'm going to go back here and I'm going to look at
+
+189
+00:29:54,000 --> 00:30:01,000
+I don't know what we were. I'm gonna check and see as we're pulling things out of the heap
+
+190
+00:30:01,000 --> 00:30:12,000
+If we are what we're printing out.
+
+191
+00:30:12,000 --> 00:30:22,000
+I'm going to print after we bubble down.
+
+192
+00:30:22,000 --> 00:30:29,000
+So that I can see if it looks like we're doing the right thing. Okay, so here
+
+193
+00:30:29,000 --> 00:30:45,000
+We end up with two is smaller than 3 and 5.
+
+194
+00:30:45,000 --> 00:30:54,000
+If anyone wants to, I'm going to put the bubble down on the screen. If anyone wants to look at our bubble down and see if it's
+
+195
+00:30:54,000 --> 00:31:06,000
+So if you notice a bug in the bubble down
+
+196
+00:31:06,000 --> 00:31:12,000
+Because we put the 5 here and then five
+
+197
+00:31:12,000 --> 00:31:14,000
+Goes down
+
+198
+00:31:14,000 --> 00:31:25,000
+to those here, 5 goes here, so we should have 2, 3, 5, and then we take 2 out and we put
+
+199
+00:31:25,000 --> 00:31:36,000
+9 at the top and 9 then swaps with
+
+200
+00:31:36,000 --> 00:31:39,000
+Three
+
+201
+00:31:39,000 --> 00:32:03,000
+And would it be helpful for me to walk through this? I'm trying to trace it through on with scribbles, would it be helpful for me to do that showing to the whole class or are you guys looking through the bubble now?
+
+202
+00:32:03,000 --> 00:32:07,000
+Okay.
+
+203
+00:32:07,000 --> 00:32:09,000
+Let me
+
+204
+00:32:09,000 --> 00:32:11,000
+Reshare
+
+205
+00:32:11,000 --> 00:32:19,000
+Okay, so I'm at this step right here. and just a second. I'm going to reshare my screen.
+
+206
+00:32:19,000 --> 00:32:21,000
+So that we are
+
+207
+00:32:21,000 --> 00:32:38,000
+We're going to trace it all the way through
+
+208
+00:32:38,000 --> 00:32:40,000
+Okay.
+
+209
+00:32:40,000 --> 00:32:45,000
+Okay, so this is the heap that we had
+
+210
+00:32:45,000 --> 00:32:52,000
+That was produced by the putting everything into the heat. Now we're taking everything out
+
+211
+00:32:52,000 --> 00:32:55,000
+We take out one
+
+212
+00:32:55,000 --> 00:32:58,000
+So I'm going to take one out.
+
+213
+00:32:58,000 --> 00:33:04,000
+And then we have this, and we take 5, and we put it at the root.
+
+214
+00:33:04,000 --> 00:33:23,000
+And once we put it at the root, we bubble it down. So we take 5, and it should be 2 or 3. You want to swap it with the smallest child, so we're going to swap, 5 and 2.
+
+215
+00:33:23,000 --> 00:33:28,000
+And we still have a heap.
+
+216
+00:33:28,000 --> 00:33:34,000
+We're going to remove the next item. That's our 2. We take two out.
+
+217
+00:33:34,000 --> 00:33:39,000
+We take the item at the end, put it at the top
+
+218
+00:33:39,000 --> 00:33:43,000
+And we're going to bubble it down
+
+219
+00:33:43,000 --> 00:33:54,000
+We're going to check its children. We're going to swap with the smallest child. Wait, why is this a one here?
+
+220
+00:33:54,000 --> 00:34:00,000
+Is this supposed to be a four? Did I
+
+221
+00:34:00,000 --> 00:34:04,000
+Yeah, I think that's supposed to be a four
+
+222
+00:34:04,000 --> 00:34:07,000
+Yeah. Okay.
+
+223
+00:34:07,000 --> 00:34:13,000
+Okay, so now our 9 were bubbling down. We're going to swap it with the smallest child.
+
+224
+00:34:13,000 --> 00:34:16,000
+Which is the 3
+
+225
+00:34:16,000 --> 00:34:19,000
+So we put our 9 here and our three is here
+
+226
+00:34:19,000 --> 00:34:30,000
+And then we do that again, we check its children, swap with the smallest one, which is the 4. So we move the 4 up
+
+227
+00:34:30,000 --> 00:34:34,000
+And we move the 9 down
+
+228
+00:34:34,000 --> 00:34:49,000
+And we still have a heap. And I'm just checking with the stuff that got printed out as we go along. Three, four, five, nine, eight, seven, six. Right. Okay. And now we hop again
+
+229
+00:34:49,000 --> 00:34:57,000
+So we take our 3 out, and we take the very last item, and we put it at the root
+
+230
+00:34:57,000 --> 00:35:03,000
+And then we bubble it down, we swap it with the smallest child
+
+231
+00:35:03,000 --> 00:35:08,000
+Which is 4, so 4 comes up, 6 goes down.
+
+232
+00:35:08,000 --> 00:35:10,000
+And
+
+233
+00:35:10,000 --> 00:35:13,000
+We are left with four
+
+234
+00:35:13,000 --> 00:35:23,000
+Four is smaller than 6 and 5, 9, 8, 7, still got a heap. Let's see four, six
+
+235
+00:35:23,000 --> 00:35:26,000
+5, 9, 8, 7.
+
+236
+00:35:26,000 --> 00:35:39,000
+Still looking okay. And then we pop again. When we pop, we take the root out, we take the very last item, and we put it at the root
+
+237
+00:35:39,000 --> 00:35:53,000
+And we compare it with its children. We swap with the smallest child.
+
+238
+00:35:53,000 --> 00:36:06,000
+Still a heap. Checking with our 5, 6, 7, 9, 8. Okay. We take the root out. We keep going. Put the last item at the root.
+
+239
+00:36:06,000 --> 00:36:19,000
+And then we bubble it down 8 compared to 6 and 7 swap with the smallest child. We move 6 up 8 down
+
+240
+00:36:19,000 --> 00:36:24,000
+6, 8, 7, 9. Okay.
+
+241
+00:36:24,000 --> 00:36:29,000
+Still doing okay. We're still tracking. This is still matching what the
+
+242
+00:36:29,000 --> 00:36:32,000
+Code reported it was doing
+
+243
+00:36:32,000 --> 00:36:41,000
+We have something. We have more left in there. So we pop out the 6. We move the 9 to the root.
+
+244
+00:36:41,000 --> 00:36:53,000
+We bubble it down, compare it with both the children. 7 is smaller. We move the 9 here, the 7 here
+
+245
+00:36:53,000 --> 00:36:55,000
+Still a heap
+
+246
+00:36:55,000 --> 00:37:03,000
+And this is the point
+
+247
+00:37:03,000 --> 00:37:04,000
+Wait.
+
+248
+00:37:04,000 --> 00:37:12,000
+That's 7. This the this is the point where it is not matching what the code was
+
+249
+00:37:12,000 --> 00:37:15,000
+Showing
+
+250
+00:37:15,000 --> 00:37:19,000
+6, 8, 7.
+
+251
+00:37:19,000 --> 00:37:31,000
+So we, this is about the point that we got something wrong in the code.
+
+252
+00:37:31,000 --> 00:37:37,000
+I'm going to go back to the code now. Or I'm going to stop and look at this for just a second.
+
+253
+00:37:37,000 --> 00:37:40,000
+Because when we had
+
+254
+00:37:40,000 --> 00:37:42,000
+Because I'm not
+
+255
+00:37:42,000 --> 00:37:47,000
+Smith.
+
+256
+00:37:47,000 --> 00:37:52,000
+Keep on knocking the
+
+257
+00:37:52,000 --> 00:38:05,000
+Okay, because when we go back to the go back a few steps
+
+258
+00:38:05,000 --> 00:38:07,000
+6, 8, 7.
+
+259
+00:38:07,000 --> 00:38:19,000
+6, 8, 7, 9 is right.
+
+260
+00:38:19,000 --> 00:38:25,000
+Take the six out. Move the nine up here, swap it with the child
+
+261
+00:38:25,000 --> 00:38:29,000
+And it's this last one. It's this last step.
+
+262
+00:38:29,000 --> 00:38:42,000
+That does not go right.
+
+263
+00:38:42,000 --> 00:38:48,000
+Good. We're going to look at the code now and we're going to look and see if
+
+264
+00:38:48,000 --> 00:38:58,000
+There's something about it. This feels like because this is the case where we
+
+265
+00:38:58,000 --> 00:39:04,000
+This is the case where we're getting very small with our tree, so I am looking at our bubble down
+
+266
+00:39:04,000 --> 00:39:15,000
+And I'm wondering if we did not bubble down properly
+
+267
+00:39:15,000 --> 00:39:25,000
+Because the root, when we put 9 at the root, 9 swapped with 7 instead of with or stop swapped with eight instead of 7.
+
+268
+00:39:25,000 --> 00:39:29,000
+So do we have any
+
+269
+00:39:29,000 --> 00:39:33,000
+Any items here where
+
+270
+00:39:33,000 --> 00:39:46,000
+Is this right? Our left and our right child. Is that correct?
+
+271
+00:39:46,000 --> 00:39:48,000
+If we have zero
+
+272
+00:39:48,000 --> 00:40:01,000
+2 times 0 plus 1 is 1. 2 times 0 plus 2 is 2. That looks right. If left is length, then I'm wondering if our
+
+273
+00:40:01,000 --> 00:40:08,000
+Boundaries here. We haven't gone off the end of the
+
+274
+00:40:08,000 --> 00:40:11,000
+We haven't gone off the end of the list yet, but is this correct?
+
+275
+00:40:11,000 --> 00:40:14,000
+Because what we're looking for
+
+276
+00:40:14,000 --> 00:40:17,000
+is
+
+277
+00:40:17,000 --> 00:40:30,000
+The left child, we have a left child
+
+278
+00:40:30,000 --> 00:40:42,000
+And compare with
+
+279
+00:40:42,000 --> 00:40:56,000
+This will still be right. Because we haven't taken anything off
+
+280
+00:40:56,000 --> 00:41:01,000
+Okay. I'm thinking about this and I feel like
+
+281
+00:41:01,000 --> 00:41:04,000
+There is a bug in here
+
+282
+00:41:04,000 --> 00:41:07,000
+I'm not quite sure what it is.
+
+283
+00:41:07,000 --> 00:41:11,000
+And
+
+284
+00:41:11,000 --> 00:41:16,000
+Y'all haven't been able to point it out to me either. So I'm going to put a pin in this.
+
+285
+00:41:16,000 --> 00:41:24,000
+And I'm going to I I will look at this and figure out exactly what the what the
+
+286
+00:41:24,000 --> 00:41:31,000
+what the problem is with this code. There's something wrong with this implementation.
+
+287
+00:41:31,000 --> 00:41:46,000
+Instead, here's what we're going to do. What I was going to do after I talked about heap sort was introduce to you the heaps and Python. So I'm going to tell you, I'm going to show you how we use heaps and Python, Python's implementation
+
+288
+00:41:46,000 --> 00:41:52,000
+And then we're going to use Python's implementation to do the sort and show us how it works.
+
+289
+00:41:52,000 --> 00:41:58,000
+Does that make sense?
+
+290
+00:41:58,000 --> 00:42:03,000
+So
+
+291
+00:42:03,000 --> 00:42:06,000
+AICON has a
+
+292
+00:42:06,000 --> 00:42:10,000
+A
+
+293
+00:42:10,000 --> 00:42:14,000
+Package. It's called HeatQ.
+
+294
+00:42:14,000 --> 00:42:17,000
+And EQ
+
+295
+00:42:17,000 --> 00:42:21,000
+helps us will build a heap for us
+
+296
+00:42:21,000 --> 00:42:25,000
+So we can import
+
+297
+00:42:25,000 --> 00:42:36,000
+The heat cube.
+
+298
+00:42:36,000 --> 00:42:39,000
+Once we've imported heap queue
+
+299
+00:42:39,000 --> 00:42:42,000
+We've got
+
+300
+00:42:42,000 --> 00:42:49,000
+We've got a few, got a few functions. We've got
+
+301
+00:42:49,000 --> 00:42:51,000
+Keep Q
+
+302
+00:42:51,000 --> 00:42:55,000
+heap push
+
+303
+00:42:55,000 --> 00:42:58,000
+That takes would take a heap
+
+304
+00:42:58,000 --> 00:43:03,000
+And some value. We have heapq.heap
+
+305
+00:43:03,000 --> 00:43:05,000
+Pop
+
+306
+00:43:05,000 --> 00:43:13,000
+That takes a heap that will pop off the smallest value and then fix up the heap
+
+307
+00:43:13,000 --> 00:43:15,000
+We have heapq.heapify
+
+308
+00:43:15,000 --> 00:43:24,000
+That takes a heap. Again, a heap is just a list. And heapify is going to turn that list into a heap.
+
+309
+00:43:24,000 --> 00:43:34,000
+like we were doing at the end of class on Monday. and then we can always just look at the the start
+
+310
+00:43:34,000 --> 00:43:44,000
+At the smallest item. So I'm going to use Python's heap queue package to do the same thing.
+
+311
+00:43:44,000 --> 00:43:46,000
+So
+
+312
+00:43:46,000 --> 00:43:49,000
+I'm going to start with some list
+
+313
+00:43:49,000 --> 00:43:56,000
+And I'm going to I'm going to defeat sort
+
+314
+00:43:56,000 --> 00:43:58,000
+With Q.
+
+315
+00:43:58,000 --> 00:44:03,000
+That takes in a num list
+
+316
+00:44:03,000 --> 00:44:07,000
+And I am going to create a heap
+
+317
+00:44:07,000 --> 00:44:08,000
+Here
+
+318
+00:44:08,000 --> 00:44:16,000
+And I'm going to heap for X and num list
+
+319
+00:44:16,000 --> 00:44:21,000
+Keep queue.keep push
+
+320
+00:44:21,000 --> 00:44:22,000
+8
+
+321
+00:44:22,000 --> 00:44:29,000
+X. So this is going to be, this is replacing what I did up here. I'm not going to insert. I'm going to
+
+322
+00:44:29,000 --> 00:44:32,000
+I'm going to
+
+323
+00:44:32,000 --> 00:44:34,000
+Keep push.
+
+324
+00:44:34,000 --> 00:44:40,000
+And then sorted equals a new list
+
+325
+00:44:40,000 --> 00:44:50,000
+While
+
+326
+00:44:50,000 --> 00:44:57,000
+Is greater than zero. Whoops, not right.
+
+327
+00:44:57,000 --> 00:45:00,000
+Started to append
+
+328
+00:45:00,000 --> 00:45:03,000
+EQ.keep top
+
+329
+00:45:03,000 --> 00:45:07,000
+Yeah.
+
+330
+00:45:07,000 --> 00:45:12,000
+And then return sorted
+
+331
+00:45:12,000 --> 00:45:18,000
+And we're going to do this again.
+
+332
+00:45:18,000 --> 00:45:21,000
+Are y'all following me?
+
+333
+00:45:21,000 --> 00:45:30,000
+With this implementation.
+
+334
+00:45:30,000 --> 00:45:36,000
+This is the same heap sort, but instead of using the
+
+335
+00:45:36,000 --> 00:45:37,000
+Keep
+
+336
+00:45:37,000 --> 00:45:40,000
+insert and heat pop
+
+337
+00:45:40,000 --> 00:45:46,000
+Functions that we defined ourselves, we're using Python's implementation.
+
+338
+00:45:46,000 --> 00:45:49,000
+So we're going to hope that there's not a bug in this.
+
+339
+00:45:49,000 --> 00:45:51,000
+A heap sort
+
+340
+00:45:51,000 --> 00:45:54,000
+With Q
+
+341
+00:45:54,000 --> 00:45:57,000
+So now I've still got my list
+
+342
+00:45:57,000 --> 00:46:06,000
+I'm going to print it and then I'm going to use this Python version of heap sort.
+
+343
+00:46:06,000 --> 00:46:09,000
+And here at the end
+
+344
+00:46:09,000 --> 00:46:11,000
+We started with
+
+345
+00:46:11,000 --> 00:46:15,000
+This is what we started with
+
+346
+00:46:15,000 --> 00:46:22,000
+And here we have a properly sorted list
+
+347
+00:46:22,000 --> 00:46:29,000
+Okay.
+
+348
+00:46:29,000 --> 00:46:40,000
+So let me stop for just a second because I know I lost some of y'all on the heap sort. And part of it was the code was broken.
+
+349
+00:46:40,000 --> 00:46:49,000
+So that was confusing and it didn't make sense. And there's still a bug there. We'll figure out the bug, but there's clearly a bug in our heap pop
+
+350
+00:46:49,000 --> 00:46:54,000
+So we'll deal with that. But now that we're using Python's heap.
+
+351
+00:46:54,000 --> 00:46:57,000
+Does the heap sort make sense?
+
+352
+00:46:57,000 --> 00:47:10,000
+At the top level, just at the idea of we're going to put everything into the heap, and then we're going to take it all out.
+
+353
+00:47:10,000 --> 00:47:25,000
+Or are you still lost?
+
+354
+00:47:25,000 --> 00:47:36,000
+What would be helpful right now?
+
+355
+00:47:36,000 --> 00:47:55,000
+Pretty sure I've lost y'all and I'm not sure how to how to bring it back.
+
+356
+00:47:55,000 --> 00:48:05,000
+Okay.
+
+357
+00:48:05,000 --> 00:48:07,000
+Let me thank you
+
+358
+00:48:07,000 --> 00:48:14,000
+Can I be more specific and should I be more specific in asking questions about
+
+359
+00:48:14,000 --> 00:48:27,000
+Where we're lost
+
+360
+00:48:27,000 --> 00:48:34,000
+Okay.
+
+361
+00:48:34,000 --> 00:48:38,000
+Let's see here
+
+362
+00:48:38,000 --> 00:48:47,000
+You know what? Let's try the Vidu Algo
+
+363
+00:48:47,000 --> 00:48:50,000
+Let's see if this
+
+364
+00:48:50,000 --> 00:49:00,000
+Actually, I'm not quite sure. Let's see, I'm going to look and see what this is doing for heap sort.
+
+365
+00:49:00,000 --> 00:49:05,000
+Yeah. Okay.
+
+366
+00:49:05,000 --> 00:49:08,000
+I'm going to run this
+
+367
+00:49:08,000 --> 00:49:25,000
+I'm gonna run the visualization with heap sort. And I'm going to see if this helps unstick us a little bit.
+
+368
+00:49:25,000 --> 00:49:34,000
+Yes
+
+369
+00:49:34,000 --> 00:49:36,000
+So what do we
+
+370
+00:49:36,000 --> 00:49:50,000
+This is actually doing heap sort a little bit different than what we just implemented.
+
+371
+00:49:50,000 --> 00:50:18,000
+Because it is pulling out the max. It's pulling the items out in reverse using a maxi rather than a minheap. So I don't know if that helps.
+
+372
+00:50:18,000 --> 00:50:33,000
+Let me
+
+373
+00:50:33,000 --> 00:50:40,000
+Let me think.
+
+374
+00:50:40,000 --> 00:50:44,000
+I'm trying to
+
+375
+00:50:44,000 --> 00:50:48,000
+Trying to
+
+376
+00:50:48,000 --> 00:50:51,000
+Trying to guess
+
+377
+00:50:51,000 --> 00:50:59,000
+Okay, so we've got
+
+378
+00:50:59,000 --> 00:51:06,000
+A suggestion on the bug in the bubble
+
+379
+00:51:06,000 --> 00:51:12,000
+Do you know what line that is, Steven?
+
+380
+00:51:12,000 --> 00:51:17,000
+Is that here and here?
+
+381
+00:51:17,000 --> 00:51:21,000
+Okay, gotcha. Let's run this.
+
+382
+00:51:21,000 --> 00:51:25,000
+Thank you. Thanks for looking at that.
+
+383
+00:51:25,000 --> 00:51:36,000
+Let's… I'm just going to, I'm going to comment this out just to not confuse us.
+
+384
+00:51:36,000 --> 00:51:40,000
+1, 2, 3, 4, 5, 6, 7, 8, 9. That's it.
+
+385
+00:51:40,000 --> 00:51:48,000
+Thank you. Thank you, Steven. Okay, we found the bug. The bug was the off by one error.
+
+386
+00:51:48,000 --> 00:51:50,000
+Which
+
+387
+00:51:50,000 --> 00:51:56,000
+gets all of us in our bubble down.
+
+388
+00:51:56,000 --> 00:51:59,000
+that minus one, and that
+
+389
+00:51:59,000 --> 00:52:03,000
+Totally makes sense, and I'm glad you found that.
+
+390
+00:52:03,000 --> 00:52:12,000
+I'm just gonna give a quick summary of heap sort and why I think it's
+
+391
+00:52:12,000 --> 00:52:21,000
+interesting, and then we're going to we'll take our break, and we will move on. But
+
+392
+00:52:21,000 --> 00:52:25,000
+Keep sort. I always think
+
+393
+00:52:25,000 --> 00:52:27,000
+It's it's
+
+394
+00:52:27,000 --> 00:52:45,000
+It's a data structure. That data structure is giving us structure to our data. So it's a super simple sorting algorithm where we can take that structure and we just put items in it and then just take items out. And as we take them out, it's sorted
+
+395
+00:52:45,000 --> 00:52:58,000
+And I sometimes have this image of, like, a laundry basket where it's a magic laundry basket. And does anyone here… y'all do laundry, I'm gonna assume.
+
+396
+00:52:58,000 --> 00:53:02,000
+Who hates folding their laundry and putting it away? Anyone?
+
+397
+00:53:02,000 --> 00:53:15,000
+You can think of your heap as kind of like this magic laundry basket where you put all your clothes in, and then as you take them out, they're magically folded and put into place.
+
+398
+00:53:15,000 --> 00:53:18,000
+And
+
+399
+00:53:18,000 --> 00:53:32,000
+I know that might be a little silly, but that's kind of how I think about it, is this this magic structure that just does the work for you. You don't have to think about it. Just put everything and take everything out, and the work is done.
+
+400
+00:53:32,000 --> 00:53:35,000
+But
+
+401
+00:53:35,000 --> 00:53:39,000
+What's more important
+
+402
+00:53:39,000 --> 00:53:54,000
+That I wanted to make sure that we saw was the heap queue. Python's Python's implementation of a heap. So when we talked about stacks and queues, we talked about Python's implementation of those
+
+403
+00:53:54,000 --> 00:53:59,000
+how we have Pythons Python's deck
+
+404
+00:53:59,000 --> 00:54:06,000
+that we can use for our queue, because we can push and pop from both ends of the data structure
+
+405
+00:54:06,000 --> 00:54:11,000
+versus when we want to stack, we're going to use a Python list
+
+406
+00:54:11,000 --> 00:54:14,000
+And here, with a heap
+
+407
+00:54:14,000 --> 00:54:30,000
+We saw a heap is just a list, but then we order it certain ways and we've got those implementations. Python provides us with those implementations already.
+
+408
+00:54:30,000 --> 00:54:42,000
+So that's what we will use instead of hand rolling a heap all of the time.
+
+409
+00:54:42,000 --> 00:54:47,000
+I'm looking at… I'm just checking to see if there's
+
+410
+00:54:47,000 --> 00:54:52,000
+Anything else I want to say about the heap?
+
+411
+00:54:52,000 --> 00:54:57,000
+We like a heap because it gives us that priority.
+
+412
+00:54:57,000 --> 00:54:59,000
+Status
+
+413
+00:54:59,000 --> 00:55:19,000
+that priority functionality, and it's it ends up being cheaper than using something heavier weight like a binary search tree or our AVL tree
+
+414
+00:55:19,000 --> 00:55:26,000
+Anyone have any questions about heaps?
+
+415
+00:55:26,000 --> 00:55:30,000
+I'm going to guess y'all have a whole bunch of questions, but don't know what questions.
+
+416
+00:55:30,000 --> 00:55:35,000
+So
+
+417
+00:55:35,000 --> 00:55:48,000
+If any of y'all can think of something concrete to ask, feel free to drop it in the chat either directly to me or to everyone in chat. And
+
+418
+00:55:48,000 --> 00:55:55,000
+We can I can answer specific questions.
+
+419
+00:55:55,000 --> 00:56:03,000
+I am planning the second half of class to talk about hash tables and not heaps.
+
+420
+00:56:03,000 --> 00:56:09,000
+But I don't want to leave everyone
+
+421
+00:56:09,000 --> 00:56:15,000
+Lost.
+
+422
+00:56:15,000 --> 00:56:19,000
+Okay, we're going to take a break now.
+
+423
+00:56:19,000 --> 00:56:21,000
+When we come back
+
+424
+00:56:21,000 --> 00:56:32,000
+I will answer questions about heaps and if we get unjammed there, we will talk more. Otherwise, we'll start talking about hash tables.
+
+425
+00:56:32,000 --> 00:56:34,000
+doesn't satisfy me
+
+426
+00:56:34,000 --> 00:56:37,000
+Feeling feel like
+
+427
+00:56:37,000 --> 00:56:40,000
+I've led y'all astray, but
+
+428
+00:56:40,000 --> 00:56:44,000
+We'll find, we'll find our way.
+
+429
+00:56:44,000 --> 00:56:50,000
+Okay, let's come back at 5:30.
+
+430
+00:56:50,000 --> 00:56:54,000
+Okay.
+
+431
+00:56:54,000 --> 00:57:02,000
+Thanks, everyone. See you in a few minutes.
+
+432
+00:57:17,000 --> 00:57:20,000
+Okay.
+
+433
+00:57:20,000 --> 00:57:22,000
+Welcome back.
+
+434
+00:57:22,000 --> 00:57:26,000
+How are we doing?
+
+435
+00:57:26,000 --> 00:57:37,000
+Anyone have concrete questions on specifically heaps? Can I unblock anyone there or
+
+436
+00:57:37,000 --> 00:57:44,000
+Or not
+
+437
+00:57:44,000 --> 00:57:47,000
+Okay.
+
+438
+00:57:47,000 --> 00:58:02,000
+Not getting any input, so I'm gonna go ahead and move on. If anyone at any point can give me a little bit of input about what would be helpful or what was unclear, or, or
+
+439
+00:58:02,000 --> 00:58:09,000
+How to how to clarify anything. Let me know.
+
+440
+00:58:09,000 --> 00:58:15,000
+A note on Piazza, whatever would be helpful.
+
+441
+00:58:15,000 --> 00:58:21,000
+In the meantime, we will move on to hash tables
+
+442
+00:58:21,000 --> 00:58:24,000
+And, hopefully
+
+443
+00:58:24,000 --> 00:58:29,000
+We, let's see, it's going to show up. Hopefully
+
+444
+00:58:29,000 --> 00:58:32,000
+But we will
+
+445
+00:58:32,000 --> 00:58:35,000
+I'll stay together on this.
+
+446
+00:58:35,000 --> 00:58:36,000
+Where's the
+
+447
+00:58:36,000 --> 00:58:43,000
+Share.
+
+448
+00:58:43,000 --> 00:58:44,000
+Okay.
+
+449
+00:58:44,000 --> 00:58:58,000
+Okay, so hash tables
+
+450
+00:58:58,000 --> 00:59:11,000
+Hash tables. This is what's going to help us solve. We're going to start with a question, a problem that we want to solve. And our problem is that we want to look up
+
+451
+00:59:11,000 --> 00:59:18,000
+A student record
+
+452
+00:59:18,000 --> 00:59:26,000
+By net ID.
+
+453
+00:59:26,000 --> 00:59:44,000
+Student ID. Net ID, whatever. So our net ID looks something like maybe it's 9800006243.
+
+454
+00:59:44,000 --> 00:59:47,000
+Something like this.
+
+455
+00:59:47,000 --> 01:00:04,000
+And depending on where we are or the context, our student, our net ID might even be something like 98006243.
+
+456
+01:00:04,000 --> 01:00:07,000
+right might have some numbers in it.
+
+457
+01:00:07,000 --> 01:00:12,000
+Might be just a bunch of digits
+
+458
+01:00:12,000 --> 01:00:20,000
+We wanted to look up a student's record by an ID, an identifier like this
+
+459
+01:00:20,000 --> 01:00:24,000
+What are our options so far?
+
+460
+01:00:24,000 --> 01:00:35,000
+So far, we have looked at an unsorted list
+
+461
+01:00:35,000 --> 01:00:42,000
+We have looked at a sorted list
+
+462
+01:00:42,000 --> 01:00:50,000
+And we could also say, you know, leave it at that sorted list
+
+463
+01:00:50,000 --> 01:01:01,000
+We have looked at an AVL tree. Our AVL tree gives us search capabilities.
+
+464
+01:01:01,000 --> 01:01:13,000
+And let's talk about what the runtime is to look up a key.
+
+465
+01:01:13,000 --> 01:01:26,000
+So if we are looking up looking for the value of a key in our unsorted list, what is our runtime?
+
+466
+01:01:26,000 --> 01:01:31,000
+Unsorted list, we have to look through every single item in the list.
+
+467
+01:01:31,000 --> 01:01:36,000
+This is going to be O of N.
+
+468
+01:01:36,000 --> 01:01:40,000
+Our sorted list
+
+469
+01:01:40,000 --> 01:01:43,000
+We can do something like binary search with this.
+
+470
+01:01:43,000 --> 01:01:50,000
+What is our runtime to find something in a sorted list using
+
+471
+01:01:50,000 --> 01:01:57,000
+a binary search approach.
+
+472
+01:01:57,000 --> 01:02:03,000
+Oh, login. Thank you.
+
+473
+01:02:03,000 --> 01:02:19,000
+And if we were going to use an AVL tree to help us search what what is our lookup time to find something in an AVL tree
+
+474
+01:02:19,000 --> 01:02:23,000
+Also, log in.
+
+475
+01:02:23,000 --> 01:02:30,000
+And our insert, let's do our insert because we know that
+
+476
+01:02:30,000 --> 01:02:38,000
+Only looking up and finding something in our data structure is only half the problem. We still have to put something in
+
+477
+01:02:38,000 --> 01:02:43,000
+Inserting something into our unsorted list
+
+478
+01:02:43,000 --> 01:02:49,000
+This is going to be quick. Our O of 1. We just put something on the end. We don't care about the order.
+
+479
+01:02:49,000 --> 01:02:51,000
+So we just put it in
+
+480
+01:02:51,000 --> 01:02:53,000
+And move on.
+
+481
+01:02:53,000 --> 01:02:56,000
+Our sorted list
+
+482
+01:02:56,000 --> 01:03:06,000
+What's our runtime to put something into our sorted list?
+
+483
+01:03:06,000 --> 01:03:08,000
+This is
+
+484
+01:03:08,000 --> 01:03:12,000
+O of N
+
+485
+01:03:12,000 --> 01:03:18,000
+Because we need to find where it goes in the list and
+
+486
+01:03:18,000 --> 01:03:21,000
+move everything else down.
+
+487
+01:03:21,000 --> 01:03:28,000
+So that's going to be O of N to make sure that the new thing we insert is going to be put into the right order
+
+488
+01:03:28,000 --> 01:03:30,000
+And we have to move things down.
+
+489
+01:03:30,000 --> 01:03:37,000
+Our AVL tree inserting something into our AVL tree
+
+490
+01:03:37,000 --> 01:03:41,000
+Is going to be O of log n
+
+491
+01:03:41,000 --> 01:03:57,000
+Because we start by start at the root of our AVL tree and then we traverse the tree until we find where it belongs. We insert it and then we rotate to keep our tree
+
+492
+01:03:57,000 --> 01:04:01,000
+Compact as needed.
+
+493
+01:04:01,000 --> 01:04:06,000
+But so this is if we want to look up something
+
+494
+01:04:06,000 --> 01:04:08,000
+Very specific
+
+495
+01:04:08,000 --> 01:04:14,000
+And our data structure, these are the runtimes of the items that we've looked
+
+496
+01:04:14,000 --> 01:04:16,000
+At so far
+
+497
+01:04:16,000 --> 01:04:21,000
+We are introducing today our hash table
+
+498
+01:04:21,000 --> 01:04:31,000
+Which is a magical, beautiful data structure that gives us lookup time of O of 1.
+
+499
+01:04:31,000 --> 01:04:37,000
+And an insert of O1.
+
+500
+01:04:37,000 --> 01:04:40,000
+On average
+
+501
+01:04:40,000 --> 01:04:58,000
+Like some of the other data structures and operations we've seen. It's not always going to be exactly OF one. But on average it's going to work out to O of 1.
+
+502
+01:04:58,000 --> 01:05:01,000
+Let's
+
+503
+01:05:01,000 --> 01:05:14,000
+Let's look at let's start with a simple example. And this is called direct addressing.
+
+504
+01:05:14,000 --> 01:05:16,000
+With our hash table.
+
+505
+01:05:16,000 --> 01:05:25,000
+Example, we could do something like have just a nice table
+
+506
+01:05:25,000 --> 01:05:34,000
+I'm going to store this in store this in memory.
+
+507
+01:05:34,000 --> 01:05:43,000
+And we could we could have this be basically an array
+
+508
+01:05:43,000 --> 01:05:52,000
+So we have that same kind of characteristic of our ray, but it's a contiguous chunk of memory.
+
+509
+01:05:52,000 --> 01:06:00,000
+And we know what these addresses are. So we can go directly to those addresses in memory and look them up.
+
+510
+01:06:00,000 --> 01:06:07,000
+But what this means is that we have to, we've got
+
+511
+01:06:07,000 --> 01:06:19,000
+a known number of keys. We have something like 0, 1, 2, 3, dot dot dot 999
+
+512
+01:06:19,000 --> 01:06:27,000
+And we could do something like put the record here.
+
+513
+01:06:27,000 --> 01:06:33,000
+And if we were to store our data something like this
+
+514
+01:06:33,000 --> 01:06:39,000
+And we know what these indices are.
+
+515
+01:06:39,000 --> 01:06:51,000
+Then we can very quickly go directly to just like an array, go directly to this location in memory and look up this record.
+
+516
+01:06:51,000 --> 01:07:05,000
+But we have some constraints on this. And it's a similar kind of constraint that we saw with our arrays. In that we have to know exactly how many things we're storing
+
+517
+01:07:05,000 --> 01:07:12,000
+And we are constrained on how many things we can put into this table.
+
+518
+01:07:12,000 --> 01:07:15,000
+And
+
+519
+01:07:15,000 --> 01:07:20,000
+We can only put numbers into this table.
+
+520
+01:07:20,000 --> 01:07:22,000
+And that makes it efficient.
+
+521
+01:07:22,000 --> 01:07:28,000
+So this is
+
+522
+01:07:28,000 --> 01:07:36,000
+This gives us one approach where if we are in a restricted enough scenario
+
+523
+01:07:36,000 --> 01:07:42,000
+This kind a data structure that looks something like this will give us that ability
+
+524
+01:07:42,000 --> 01:07:47,000
+to given an identifier
+
+525
+01:07:47,000 --> 01:07:54,000
+go to that place in memory and look up the record.
+
+526
+01:07:54,000 --> 01:07:55,000
+Okay.
+
+527
+01:07:55,000 --> 01:08:05,000
+How are we doing so far? I'm going to check in with y'all because I know I lost you the first half of class
+
+528
+01:08:05,000 --> 01:08:09,000
+How are we doing right now?
+
+529
+01:08:09,000 --> 01:08:15,000
+Are we on board with the problem that we want to
+
+530
+01:08:15,000 --> 01:08:21,000
+look up records given some kind of identifier like this.
+
+531
+01:08:21,000 --> 01:08:26,000
+And we want to do it efficiently.
+
+532
+01:08:26,000 --> 01:08:28,000
+I have a question, Professor.
+
+533
+01:08:28,000 --> 01:08:31,000
+Yes, please.
+
+534
+01:08:31,000 --> 01:08:38,000
+So I know we've kind of used like a dictionary in the past to implement like a link list or something.
+
+535
+01:08:38,000 --> 01:08:39,000
+Yeah
+
+536
+01:08:39,000 --> 01:08:41,000
+Is that
+
+537
+01:08:41,000 --> 01:08:48,000
+Like, I would imagine you would use the dictionary to implement something like this
+
+538
+01:08:48,000 --> 01:08:50,000
+Or like, yeah, just use the dictionary.
+
+539
+01:08:50,000 --> 01:08:52,000
+Yes.
+
+540
+01:08:52,000 --> 01:08:53,000
+But I don't
+
+541
+01:08:53,000 --> 01:08:54,000
+Excellent.
+
+542
+01:08:54,000 --> 01:08:55,000
+Oh, yeah, yeah.
+
+543
+01:08:55,000 --> 01:09:03,000
+Yes, absolutely. Yeah. Why? Why are we talking about something silly like this whole
+
+544
+01:09:03,000 --> 01:09:11,000
+table with direct addressing and blah blah blah, why don't we just use a dictionary? Our Python dictionary gives us
+
+545
+01:09:11,000 --> 01:09:16,000
+We use our curly braces, and it gives us a key
+
+546
+01:09:16,000 --> 01:09:18,000
+Value pair.
+
+547
+01:09:18,000 --> 01:09:23,000
+And we can we can specify a whole bunch of them.
+
+548
+01:09:23,000 --> 01:09:24,000
+Right
+
+549
+01:09:24,000 --> 01:09:34,000
+And so why don't we just use a dictionary? What it would look like if we want to look up student records is the
+
+550
+01:09:34,000 --> 01:09:43,000
+The net ID is the key. And then we have some record, some Python, something that we put in as a value, right?
+
+551
+01:09:43,000 --> 01:09:44,000
+Yes.
+
+552
+01:09:44,000 --> 01:09:48,000
+Cool. That's what we're doing with the hash table.
+
+553
+01:09:48,000 --> 01:09:54,000
+That's what it looks like. It looks like in Python, a dictionary.
+
+554
+01:09:54,000 --> 01:09:57,000
+But it's a hash table behind the scenes
+
+555
+01:09:57,000 --> 01:10:10,000
+And so what we are looking at is how a dictionary, a Python dictionary or a hash table. How it has the magic of this O of one lookup time.
+
+556
+01:10:10,000 --> 01:10:17,000
+So let's just jump straight in there.
+
+557
+01:10:17,000 --> 01:10:28,000
+Anyone else have anything to add on or expand on?
+
+558
+01:10:28,000 --> 01:10:31,000
+Okay, so
+
+559
+01:10:31,000 --> 01:10:44,000
+So we are, we now have the vision, the idea that a Python dictionary is really what we're looking to build here
+
+560
+01:10:44,000 --> 01:10:48,000
+With our hash table.
+
+561
+01:10:48,000 --> 01:10:50,000
+So let's look at
+
+562
+01:10:50,000 --> 01:10:54,000
+What's behind the scenes?
+
+563
+01:10:54,000 --> 01:11:00,000
+I'm going
+
+564
+01:11:00,000 --> 01:11:02,000
+I'm going to start
+
+565
+01:11:02,000 --> 01:11:06,000
+Rudy, do you mind if I use you as an example?
+
+566
+01:11:06,000 --> 01:11:07,000
+Sure.
+
+567
+01:11:07,000 --> 01:11:16,000
+I'm gonna say we want to do something like we have our key
+
+568
+01:11:16,000 --> 01:11:19,000
+Rudy
+
+569
+01:11:19,000 --> 01:11:25,000
+And we have, I'm just gonna put a list here for
+
+570
+01:11:25,000 --> 01:11:32,000
+something, just some object, some record that goes around. So this is how we think about it.
+
+571
+01:11:32,000 --> 01:11:43,000
+This is how we think about it, based on how we write the Python code that is a dictionary. But
+
+572
+01:11:43,000 --> 01:12:03,000
+What's the magic behind us? How do we go from something like a name to any data structures that we've looked at so far? So all of the data structures we've looked at, we talk about the behavior
+
+573
+01:12:03,000 --> 01:12:11,000
+For the contract or we talk about it in terms of maybe an ADT, abstract data type.
+
+574
+01:12:11,000 --> 01:12:20,000
+How we expect it to perform. And then we also talk about the implementation.
+
+575
+01:12:20,000 --> 01:12:27,000
+So we know with our dictionary. We know the behavior we want it to
+
+576
+01:12:27,000 --> 01:12:29,000
+we wanted to have.
+
+577
+01:12:29,000 --> 01:12:36,000
+But what's the underlying implementation? In Python, we have our lists
+
+578
+01:12:36,000 --> 01:12:41,000
+Or just in general, we have our lists, we have our arrays
+
+579
+01:12:41,000 --> 01:12:51,000
+We have trees
+
+580
+01:12:51,000 --> 01:13:03,000
+Mostly covers what we have so far. How can we use these to give us this dictionary behavior?
+
+581
+01:13:03,000 --> 01:13:13,000
+Anyone have thoughts, ideas
+
+582
+01:13:13,000 --> 01:13:25,000
+Gonna put our hash table idea here
+
+583
+01:13:25,000 --> 01:13:35,000
+We're going to do this. We're going to have a list of
+
+584
+01:13:35,000 --> 01:13:37,000
+Buckets.
+
+585
+01:13:37,000 --> 01:13:38,000
+And
+
+586
+01:13:38,000 --> 01:13:42,000
+We can think of this as like
+
+587
+01:13:42,000 --> 01:13:45,000
+an array
+
+588
+01:13:45,000 --> 01:13:50,000
+And then each
+
+589
+01:13:50,000 --> 01:14:08,000
+item of our array. We're going to have each bucket is a each bucket is a list.
+
+590
+01:14:08,000 --> 01:14:20,000
+I'm gonna write all this out first, define this all first, and then we'll walk through our example.
+
+591
+01:14:20,000 --> 01:14:27,000
+We will use a hash function
+
+592
+01:14:27,000 --> 01:14:30,000
+That maps
+
+593
+01:14:30,000 --> 01:14:36,000
+Any key
+
+594
+01:14:36,000 --> 01:14:41,000
+To a number
+
+595
+01:14:41,000 --> 01:14:47,000
+And then we're going to say
+
+596
+01:14:47,000 --> 01:14:51,000
+And then we're going to use that number to index into
+
+597
+01:14:51,000 --> 01:14:54,000
+Our list of buckets
+
+598
+01:14:54,000 --> 01:15:03,000
+So I'm going to I'm going to skip over the idea of a hash function right now.
+
+599
+01:15:03,000 --> 01:15:15,000
+What we want, what we care about is that it maps a key to a number. So our hash, it does something like hash of 42 equals, it can be 42.
+
+600
+01:15:15,000 --> 01:15:22,000
+We might hash of book
+
+601
+01:15:22,000 --> 01:15:27,000
+Gives us something like, I don't know, 174.
+
+602
+01:15:27,000 --> 01:15:29,000
+Cash
+
+603
+01:15:29,000 --> 01:15:32,000
+of
+
+604
+01:15:32,000 --> 01:15:37,000
+X, Y, Z, 1, 2, 3
+
+605
+01:15:37,000 --> 01:15:41,000
+equals 6
+
+606
+01:15:41,000 --> 01:15:46,000
+Okay, doesn't really matter.
+
+607
+01:15:46,000 --> 01:15:53,000
+Fully. But right now we're going to think of our hash function. All we care about is that it's going to take some arbitrary key
+
+608
+01:15:53,000 --> 01:16:02,000
+It can be a number, it can be a string, it could be an image, and it's going to turn that into a number.
+
+609
+01:16:02,000 --> 01:16:12,000
+Our hash function, it's going to be predictable. It's going to be deterministic, which means every time we gave it the give it the same input, it gives us the same output.
+
+610
+01:16:12,000 --> 01:16:17,000
+But what we care about right now is that our hash function goes from
+
+611
+01:16:17,000 --> 01:16:20,000
+Anything as the input to a number as the output.
+
+612
+01:16:20,000 --> 01:16:24,000
+We're going to use this number of the output
+
+613
+01:16:24,000 --> 01:16:28,000
+To go to a bucket
+
+614
+01:16:28,000 --> 01:16:36,000
+And then from there, we're going to find our record that we're looking for.
+
+615
+01:16:36,000 --> 01:16:39,000
+So we'll come back to the hash functions.
+
+616
+01:16:39,000 --> 01:16:43,000
+We'll look at what we're doing here.
+
+617
+01:16:43,000 --> 01:16:45,000
+So
+
+618
+01:16:45,000 --> 01:16:50,000
+What do we like about using arrays?
+
+619
+01:16:50,000 --> 01:16:54,000
+What are some of the characteristics of an array
+
+620
+01:16:54,000 --> 01:16:55,000
+that
+
+621
+01:16:55,000 --> 01:17:08,000
+make it nice to work with.
+
+622
+01:17:08,000 --> 01:17:11,000
+of one access time for indexing
+
+623
+01:17:11,000 --> 01:17:15,000
+Yeah, when you know the index
+
+624
+01:17:15,000 --> 01:17:18,000
+It's going to be O of 1 access time.
+
+625
+01:17:18,000 --> 01:17:39,000
+So if we know that the data we want lives at index 6, it's O of 1 access time. Now, we've got some rigidity in that we have to declare our array. We have to know exactly how big it's going to be. We can't
+
+626
+01:17:39,000 --> 01:17:44,000
+add on to the end, we want to know how big it's going to be. We want that to be stable, but we know that
+
+627
+01:17:44,000 --> 01:17:53,000
+Sometimes we might have to resize it. But once we have that, if we can go directly to that index, it's quick to look at it.
+
+628
+01:17:53,000 --> 01:17:56,000
+So, if we have our hash
+
+629
+01:17:56,000 --> 01:18:01,000
+That can take anything as input and give us a number as output
+
+630
+01:18:01,000 --> 01:18:04,000
+We can use that number
+
+631
+01:18:04,000 --> 01:18:09,000
+To map to a location in our array
+
+632
+01:18:09,000 --> 01:18:17,000
+And that's O of 1 access time. We go to this location in the array, and then we're going to look in here for the record.
+
+633
+01:18:17,000 --> 01:18:22,000
+So now, how do we do this?
+
+634
+01:18:22,000 --> 01:18:29,000
+Because our array, we know that our array can only handle, hold one thing, one type
+
+635
+01:18:29,000 --> 01:18:32,000
+So
+
+636
+01:18:32,000 --> 01:18:36,000
+Let's let's add in here something like
+
+637
+01:18:36,000 --> 01:18:44,000
+A linked list
+
+638
+01:18:44,000 --> 01:18:47,000
+So in this
+
+639
+01:18:47,000 --> 01:18:51,000
+But this diagram here
+
+640
+01:18:51,000 --> 01:18:53,000
+This array
+
+641
+01:18:53,000 --> 01:18:58,000
+This is going to be our list of buckets
+
+642
+01:18:58,000 --> 01:19:07,000
+And in our bucket, we're going to have a linked list where we can have anything that goes into that bucket.
+
+643
+01:19:07,000 --> 01:19:10,000
+Yeah, with me so far?
+
+644
+01:19:10,000 --> 01:19:13,000
+I'm going to tie it all together, hopefully.
+
+645
+01:19:13,000 --> 01:19:20,000
+I'm planning on tying it together. I hope I bring all of you along with me when we do this. So this is what our our
+
+646
+01:19:20,000 --> 01:19:23,000
+our structure looks like
+
+647
+01:19:23,000 --> 01:19:33,000
+And we're going to take our hash and if I want to hash, say, if I want to put book into my hash table
+
+648
+01:19:33,000 --> 01:19:40,000
+I am going to call my hash function with the key book
+
+649
+01:19:40,000 --> 01:19:44,000
+And it's going to give me a number back
+
+650
+01:19:44,000 --> 01:19:48,000
+Do I like this number?
+
+651
+01:19:48,000 --> 01:19:51,000
+My number is 174.
+
+652
+01:19:51,000 --> 01:20:05,000
+I then want to use this to go index into my array. How do I do that? 174 does not fit here.
+
+653
+01:20:05,000 --> 01:20:18,000
+Well, I'm gonna… That's okay. My hash gives me 174. I'm gonna just mod it down until it's in this spot. So in this range.
+
+654
+01:20:18,000 --> 01:20:20,000
+Someone is a mod
+
+655
+01:20:20,000 --> 01:20:23,000
+We've got seven buckets
+
+656
+01:20:23,000 --> 01:20:28,000
+I don't know what 174 mod 7 is.
+
+657
+01:20:28,000 --> 01:20:32,000
+And when anyone want to do the male math for me
+
+658
+01:20:32,000 --> 01:20:34,000
+Tell me which bucket
+
+659
+01:20:34,000 --> 01:20:37,000
+What's 174 mod 7?
+
+660
+01:20:37,000 --> 01:20:38,000
+Six
+
+661
+01:20:38,000 --> 01:20:43,000
+Thank you. Sixth. So
+
+662
+01:20:43,000 --> 01:20:47,000
+We're going to then go to
+
+663
+01:20:47,000 --> 01:20:50,000
+Bucket 6
+
+664
+01:20:50,000 --> 01:20:58,000
+And we're going to say, hey, we've got nothing here. So I'm going to put an item in here.
+
+665
+01:20:58,000 --> 01:21:04,000
+And this is going to be
+
+666
+01:21:04,000 --> 01:21:08,000
+Mrs. Book
+
+667
+01:21:08,000 --> 01:21:11,000
+And I've got some data there
+
+668
+01:21:11,000 --> 01:21:13,000
+And it's just a linked list.
+
+669
+01:21:13,000 --> 01:21:16,000
+Now
+
+670
+01:21:16,000 --> 01:21:18,000
+Quite conveniently.
+
+671
+01:21:18,000 --> 01:21:23,000
+We also want to put this item into our hash table.
+
+672
+01:21:23,000 --> 01:21:27,000
+So we have hash X by Z123
+
+673
+01:21:27,000 --> 01:21:31,000
+And our hash gives us 6 back
+
+674
+01:21:31,000 --> 01:21:36,000
+And 6 mod 7 is 6.
+
+675
+01:21:36,000 --> 01:21:44,000
+So this is also going to fit in going to hash to the same location.
+
+676
+01:21:44,000 --> 01:21:50,000
+So now I go to our location here and I say, oh, hey.
+
+677
+01:21:50,000 --> 01:21:52,000
+I've already got something in here
+
+678
+01:21:52,000 --> 01:22:05,000
+Well, I'm going to add something new here.
+
+679
+01:22:05,000 --> 01:22:09,000
+And in this way
+
+680
+01:22:09,000 --> 01:22:13,000
+We're going to have a number of buckets.
+
+681
+01:22:13,000 --> 01:22:15,000
+That's going to be an array
+
+682
+01:22:15,000 --> 01:22:19,000
+We're going to have keys that we put into our buckets
+
+683
+01:22:19,000 --> 01:22:27,000
+We're going to map the keys to an index in our array by using our hash function
+
+684
+01:22:27,000 --> 01:22:29,000
+Along with a mod
+
+685
+01:22:29,000 --> 01:22:38,000
+And then we go to that location in memory. We index into that array. And then we can use a linked list
+
+686
+01:22:38,000 --> 01:22:47,000
+There's a couple other things we can do, but we can we can go to this location and we can find our items that we were looking for
+
+687
+01:22:47,000 --> 01:22:48,000
+I have a question, Professor.
+
+688
+01:22:48,000 --> 01:22:50,000
+Yes.
+
+689
+01:22:50,000 --> 01:22:57,000
+You… so, the link list, it stores the value, right?
+
+690
+01:22:57,000 --> 01:23:08,000
+Yeah, I'm kind of sloppy here, huh? It was very small, so I put the key
+
+691
+01:23:08,000 --> 01:23:17,000
+But yes, we want the value here. So what we're going to do to make sure that we can do this, we're going to put book, and then we're going to also put the value in here.
+
+692
+01:23:17,000 --> 01:23:18,000
+Okay.
+
+693
+01:23:18,000 --> 01:23:25,000
+So what we will want to do is to make sure that we have both
+
+694
+01:23:25,000 --> 01:23:28,000
+both the key and the value
+
+695
+01:23:28,000 --> 01:23:34,000
+We're going to want to put them both in there so that we can find it and we'll see that in just a minute. But yes, you are right
+
+696
+01:23:34,000 --> 01:23:36,000
+This is where the value goes.
+
+697
+01:23:36,000 --> 01:23:38,000
+Okay.
+
+698
+01:23:38,000 --> 01:23:40,000
+Okay.
+
+699
+01:23:40,000 --> 01:23:44,000
+Okay.
+
+700
+01:23:44,000 --> 01:23:48,000
+How are we doing?
+
+701
+01:23:48,000 --> 01:23:54,000
+Questions so far?
+
+702
+01:23:54,000 --> 01:23:57,000
+So
+
+703
+01:23:57,000 --> 01:23:59,000
+Let's do
+
+704
+01:23:59,000 --> 01:24:04,000
+Let's do a bit of an example. Let's
+
+705
+01:24:04,000 --> 01:24:08,000
+Start with
+
+706
+01:24:08,000 --> 01:24:14,000
+I'm going to draw, I'm going to do new one. I'm going to say hash table.
+
+707
+01:24:14,000 --> 01:24:31,000
+We're going to put 10 items in, and right now I'm just going to… I actually don't even know if that's 10. What is this? 0, 1, 2, 3, 4, 5, 6. We're going to do 6 and we're gonna fill up our hash table here
+
+708
+01:24:31,000 --> 01:24:42,000
+To keep things simple right now, I'm only going to put numbers in. So we're going to insert into our hash table.
+
+709
+01:24:42,000 --> 01:24:45,000
+Yeah, I'll start throwing out some numbers.
+
+710
+01:24:45,000 --> 01:24:49,000
+You can put them in the chat, shout them out loud.
+
+711
+01:24:49,000 --> 01:24:56,000
+And I'm going to make a list here of numbers we're going to put into our hash table.
+
+712
+01:24:56,000 --> 01:25:00,000
+42 goes first.
+
+713
+01:25:00,000 --> 01:25:03,000
+I'm gonna put six
+
+714
+01:25:03,000 --> 01:25:05,000
+Anyone? Just a number.
+
+715
+01:25:05,000 --> 01:25:07,000
+15
+
+716
+01:25:07,000 --> 01:25:09,000
+12
+
+717
+01:25:09,000 --> 01:25:12,000
+84
+
+718
+01:25:12,000 --> 01:25:13,000
+Three
+
+719
+01:25:13,000 --> 01:25:15,000
+Okay
+
+720
+01:25:15,000 --> 01:25:17,000
+Let's see what happens.
+
+721
+01:25:17,000 --> 01:25:26,000
+So with our hash table, what we're going to do, and we can think of these these are going to be both keys and values right now.
+
+722
+01:25:26,000 --> 01:25:33,000
+So with our hash table, we've created our array that is going to hold our buckets
+
+723
+01:25:33,000 --> 01:25:44,000
+And we're gonna just start inserting values into our hash table. So
+
+724
+01:25:44,000 --> 01:25:47,000
+Our
+
+725
+01:25:47,000 --> 01:25:54,000
+We knew something like insert
+
+726
+01:25:54,000 --> 01:25:57,000
+Third key
+
+727
+01:25:57,000 --> 01:26:03,000
+Is that we are going to say bucket
+
+728
+01:26:03,000 --> 01:26:05,000
+Equals hash
+
+729
+01:26:05,000 --> 01:26:08,000
+Of key
+
+730
+01:26:08,000 --> 01:26:10,000
+Mod
+
+731
+01:26:10,000 --> 01:26:21,000
+The number of buckets, which we've got still seven buckets.
+
+732
+01:26:21,000 --> 01:26:40,000
+And then we say
+
+733
+01:26:40,000 --> 01:26:41,000
+Okay.
+
+734
+01:26:41,000 --> 01:26:43,000
+So
+
+735
+01:26:43,000 --> 01:26:46,000
+Does our insert make sense?
+
+736
+01:26:46,000 --> 01:26:49,000
+This is our hash table
+
+737
+01:26:49,000 --> 01:26:52,000
+This is our insert operation.
+
+738
+01:26:52,000 --> 01:26:54,000
+We're given a key
+
+739
+01:26:54,000 --> 01:26:58,000
+We're assuming key equals value right now.
+
+740
+01:26:58,000 --> 01:27:06,000
+And first we find which bucket by saying, taking the hash of the key and modding it by 7.
+
+741
+01:27:06,000 --> 01:27:14,000
+Fun fact in Python
+
+742
+01:27:14,000 --> 01:27:20,000
+Hash of a small number
+
+743
+01:27:20,000 --> 01:27:27,000
+Equals that number.
+
+744
+01:27:27,000 --> 01:27:30,000
+So I'm going to pretend our hash is doing nothing right now.
+
+745
+01:27:30,000 --> 01:27:33,000
+So we're going to insert 42.
+
+746
+01:27:33,000 --> 01:27:42,000
+We take 42. We say we're going to insert it. Bucket equals hash of 42 mod 7
+
+747
+01:27:42,000 --> 01:27:48,000
+42, 6, 7. That's 0, right?
+
+748
+01:27:48,000 --> 01:27:52,000
+6 times 7 is 42. Okay.
+
+749
+01:27:52,000 --> 01:28:07,000
+Or so our bucket is 0. So we now take our bucket list and we go to bucket 0, and we put that value in
+
+750
+01:28:07,000 --> 01:28:09,000
+Does that make sense?
+
+751
+01:28:09,000 --> 01:28:17,000
+So the under the insert column, is that the value or the key?
+
+752
+01:28:17,000 --> 01:28:19,000
+Oh, here
+
+753
+01:28:19,000 --> 01:28:20,000
+Yeah.
+
+754
+01:28:20,000 --> 01:28:24,000
+I am going to simplify and say key equals value right now.
+
+755
+01:28:24,000 --> 01:28:25,000
+Okay.
+
+756
+01:28:25,000 --> 01:28:27,000
+It's gonna be both.
+
+757
+01:28:27,000 --> 01:28:30,000
+Okay.
+
+758
+01:28:30,000 --> 01:28:39,000
+Just to keep it a little simple. But we can imagine that some extra data is coming along for the ride. That's going to be the value.
+
+759
+01:28:39,000 --> 01:28:40,000
+Okay.
+
+760
+01:28:40,000 --> 01:28:41,000
+Yeah.
+
+761
+01:28:41,000 --> 01:28:46,000
+Any other questions?
+
+762
+01:28:46,000 --> 01:28:49,000
+So now insert 6
+
+763
+01:28:49,000 --> 01:28:56,000
+When I go to my insert, we're going to figure out which bucket by doing hash of six, which is six
+
+764
+01:28:56,000 --> 01:29:08,000
+Mod 7, still 6, so now we're gonna go and we're gonna save bucket list of 6, and put it in here.
+
+765
+01:29:08,000 --> 01:29:12,000
+Okay, we're going to insert the next one, 15.
+
+766
+01:29:12,000 --> 01:29:19,000
+Key is 15. So which bucket is hash of 15, which is 15 mod 7.
+
+767
+01:29:19,000 --> 01:29:33,000
+Which is 15, 7, I think that's one. And when feel free to correct me when I get this wrong. So we're going for bucket one and we're putting 15 in here
+
+768
+01:29:33,000 --> 01:29:39,000
+We got 12. We're going to insert hash of 12.
+
+769
+01:29:39,000 --> 01:29:51,000
+Is 12 mod 7 12 minus 7 is 5. Should be bucket 5. So we're going to go and we're going to put that put 12 in bucket 5
+
+770
+01:29:51,000 --> 01:29:53,000
+It's gone
+
+771
+01:29:53,000 --> 01:29:56,000
+84.
+
+772
+01:29:56,000 --> 01:29:59,000
+Hash of 84 is 84. BOD7
+
+773
+01:29:59,000 --> 01:30:02,000
+One
+
+774
+01:30:02,000 --> 01:30:06,000
+14 to… I think it's 0.
+
+775
+01:30:06,000 --> 01:30:10,000
+So now we have
+
+776
+01:30:10,000 --> 01:30:19,000
+bucket of 0. Okay, now we have a decision to make.
+
+777
+01:30:19,000 --> 01:30:24,000
+What's happening here?
+
+778
+01:30:24,000 --> 01:30:26,000
+Collision.
+
+779
+01:30:26,000 --> 01:30:31,000
+Yeah, this is our collision. So we have
+
+780
+01:30:31,000 --> 01:30:39,000
+We have two things that go into the same bucket
+
+781
+01:30:39,000 --> 01:30:52,000
+Now we have a bit of a decision we can make. What I kind of hinted at here is that one thing we can do is we can just make a list of all of the things that go into that bucket.
+
+782
+01:30:52,000 --> 01:31:05,000
+So let's do that for now. And there are options, there's alternatives, there are different ways to do this, but right now, let's just keep it a list. And I'm going to wave my hands a little bit on here, just
+
+783
+01:31:05,000 --> 01:31:12,000
+For time, and I'm going to say, okay, we're just going to add we're going to make this a little linked list.
+
+784
+01:31:12,000 --> 01:31:22,000
+And so now every time we get a collision, we just make it a linked list.
+
+785
+01:31:22,000 --> 01:31:26,000
+So let's look at our insert
+
+786
+01:31:26,000 --> 01:31:36,000
+Oh, let's go ahead and put our last item in there. Three. Which bucket does three go into?
+
+787
+01:31:36,000 --> 01:31:37,000
+Sorry.
+
+788
+01:31:37,000 --> 01:31:39,000
+Three
+
+789
+01:31:39,000 --> 01:31:44,000
+Okay, so 3 goes in here.
+
+790
+01:31:44,000 --> 01:31:54,000
+We've now inserted a bunch of stuff into our hash table.
+
+791
+01:31:54,000 --> 01:32:00,000
+What is the runtime to insert into our hash table?
+
+792
+01:32:00,000 --> 01:32:07,000
+We have our buckets. These are, this is an array that is indexed
+
+793
+01:32:07,000 --> 01:32:11,000
+Our inserts
+
+794
+01:32:11,000 --> 01:32:13,000
+Calculate the hash
+
+795
+01:32:13,000 --> 01:32:15,000
+And then takes mod
+
+796
+01:32:15,000 --> 01:32:19,000
+of however many buckets we're using
+
+797
+01:32:19,000 --> 01:32:34,000
+So, one thing I said about our hash is that our hash has to be deterministic
+
+798
+01:32:34,000 --> 01:32:46,000
+And I hinted that our hash table is super efficient and fast. It's O of 1. So our hash function also needs to be fast.
+
+799
+01:32:46,000 --> 01:32:51,000
+So put that down there as something we care about.
+
+800
+01:32:51,000 --> 01:32:53,000
+So what's our runtime?
+
+801
+01:32:53,000 --> 01:32:56,000
+To calculate which buckets
+
+802
+01:32:56,000 --> 01:33:05,000
+We've got O of 1, right? This is of one. And then to go to this location and put a value in is O of 1.
+
+803
+01:33:05,000 --> 01:33:15,000
+To put it in this location.
+
+804
+01:33:15,000 --> 01:33:25,000
+Let's look at, let's look at remove or look up
+
+805
+01:33:25,000 --> 01:33:27,000
+Okay.
+
+806
+01:33:27,000 --> 01:33:28,000
+Our lookup
+
+807
+01:33:28,000 --> 01:33:32,000
+is going to do the same thing.
+
+808
+01:33:32,000 --> 01:33:43,000
+I look up, we're going to say take our bucket, figure out which bucket that key goes in
+
+809
+01:33:43,000 --> 01:33:49,000
+So we're using that same calculation to figure out which bucket a particular key goes to
+
+810
+01:33:49,000 --> 01:34:01,000
+And then we say return
+
+811
+01:34:01,000 --> 01:34:06,000
+This is where
+
+812
+01:34:06,000 --> 01:34:09,000
+This is where it gets a little
+
+813
+01:34:09,000 --> 01:34:11,000
+Little Effie
+
+814
+01:34:11,000 --> 01:34:24,000
+We'll get to go into a little bit more detail. So I'm gonna wave my hands on this, but we will look at the implementation of this. So if I want to look up 42.
+
+815
+01:34:24,000 --> 01:34:28,000
+I'm going to calculate which bucket it goes into
+
+816
+01:34:28,000 --> 01:34:38,000
+And it goes into bucket 0, and I go to bucket 0. And I return the value.
+
+817
+01:34:38,000 --> 01:34:43,000
+I've found it. And because this is O of one
+
+818
+01:34:43,000 --> 01:34:45,000
+And then
+
+819
+01:34:45,000 --> 01:34:51,000
+I'm gonna wave my hands and say this is O of 1. But we're gonna… is anyone
+
+820
+01:34:51,000 --> 01:35:00,000
+Anyone want to call me out on why I say I'm going to wave my hands and say this is O of 1.
+
+821
+01:35:00,000 --> 01:35:04,000
+I have some, maybe I guess
+
+822
+01:35:04,000 --> 01:35:09,000
+So, like, we're using a linked list for each one of the indices, but
+
+823
+01:35:09,000 --> 01:35:19,000
+As we kind of add more items, there are going to be more and more collisions, which means our link lists are going to get larger and larger
+
+824
+01:35:19,000 --> 01:35:25,000
+So I think at at some point kind of similar to like the
+
+825
+01:35:25,000 --> 01:35:31,000
+array size problem similar to like how we have to double the size
+
+826
+01:35:31,000 --> 01:35:42,000
+We're gonna have to eventually take care of the super long linked lists that are going to start generating because
+
+827
+01:35:42,000 --> 01:35:43,000
+Yep.
+
+828
+01:35:43,000 --> 01:35:48,000
+There are just so many collisions. So like we'll have to redistribute somehow
+
+829
+01:35:48,000 --> 01:35:49,000
+Yeah
+
+830
+01:35:49,000 --> 01:36:08,000
+So I put a few more things in here that we're going to insert into this hash table. And if y'all notice, it's 14, 21, 28, 35, 49. These are all multiples of 7. So these are all going to hash to the same place. So we're going to end up with
+
+831
+01:36:08,000 --> 01:36:11,000
+If we put these all in 14
+
+832
+01:36:11,000 --> 01:36:15,000
+21, 28, 35,
+
+833
+01:36:15,000 --> 01:36:17,000
+49
+
+834
+01:36:17,000 --> 01:36:23,000
+So in this, with this particular hash table.
+
+835
+01:36:23,000 --> 01:36:27,000
+As it's populated
+
+836
+01:36:27,000 --> 01:36:33,000
+We… in all of these cases
+
+837
+01:36:33,000 --> 01:36:41,000
+Our lookup time is going to be O of 1 because we go to that bucket and there's only one thing there.
+
+838
+01:36:41,000 --> 01:36:49,000
+But in this case, we have a whole bunch of items in this bucket. And we said we're going to make this a linked list.
+
+839
+01:36:49,000 --> 01:37:03,000
+Which means if I want to find out if key 49 is in the list, I have to go to bucket 0, and then I start traversing this. Is this 49? Is this 49? Is this 49? 49? And
+
+840
+01:37:03,000 --> 01:37:14,000
+This is getting to be the case where going through this bucket is closer to O of N rather than O of 1.
+
+841
+01:37:14,000 --> 01:37:21,000
+So like Rudy said, at some point, we're going to want to do something to
+
+842
+01:37:21,000 --> 01:37:28,000
+To make this better.
+
+843
+01:37:28,000 --> 01:37:32,000
+At what point do we want to
+
+844
+01:37:32,000 --> 01:37:34,000
+Do something.
+
+845
+01:37:34,000 --> 01:37:36,000
+And what might we do
+
+846
+01:37:36,000 --> 01:37:42,000
+something like a resize
+
+847
+01:37:42,000 --> 01:37:55,000
+So you can duplicate. Where's my duplicate page.
+
+848
+01:37:55,000 --> 01:38:00,000
+I could paste it after this.
+
+849
+01:38:00,000 --> 01:38:14,000
+So what I'm going to be looking at is, let's see, let's let's give you another definition right now. Why not? Let me give you a load factor.
+
+850
+01:38:14,000 --> 01:38:23,000
+Load factor is the number of items
+
+851
+01:38:23,000 --> 01:38:26,000
+And
+
+852
+01:38:26,000 --> 01:38:31,000
+Number of items in the hash table
+
+853
+01:38:31,000 --> 01:38:37,000
+Divided by number of buckets
+
+854
+01:38:37,000 --> 01:38:43,000
+So once
+
+855
+01:38:43,000 --> 01:38:49,000
+Let's look at this. This is basically your average number of
+
+856
+01:38:49,000 --> 01:38:53,000
+Average number
+
+857
+01:38:53,000 --> 01:38:55,000
+Of elements.
+
+858
+01:38:55,000 --> 01:38:59,000
+In a bucket
+
+859
+01:38:59,000 --> 01:39:04,000
+And we want to keep the average number of elements in a bucket pretty small.
+
+860
+01:39:04,000 --> 01:39:09,000
+So
+
+861
+01:39:09,000 --> 01:39:14,000
+If we keep the average number of buckets
+
+862
+01:39:14,000 --> 01:39:21,000
+Average number of elements in a bucket small, then we're never going to have to traverse this giant long list.
+
+863
+01:39:21,000 --> 01:39:27,000
+So what we will do and
+
+864
+01:39:27,000 --> 01:39:31,000
+What we will do is our lookup, or sorry, our insert
+
+865
+01:39:31,000 --> 01:39:37,000
+When we insert into our hash table
+
+866
+01:39:37,000 --> 01:39:41,000
+After we do an insert, we will calculate the load factor
+
+867
+01:39:41,000 --> 01:39:54,000
+And if our load factor has gotten too big. We have too many items, average number of items in a bucket. We're going to resize our
+
+868
+01:39:54,000 --> 01:40:05,000
+resize our hash table.
+
+869
+01:40:05,000 --> 01:40:15,000
+And what we're going to do there is we're going to say numb buckets
+
+870
+01:40:15,000 --> 01:40:23,000
+There's a few different ways to do this, but this is times equal to. We're going to double the number of buckets we have
+
+871
+01:40:23,000 --> 01:40:30,000
+And we are going to take everything out
+
+872
+01:40:30,000 --> 01:40:36,000
+of… we're going to take everything out of the current hash table
+
+873
+01:40:36,000 --> 01:40:44,000
+And we're going to put it in our new hash table that has twice as many buckets.
+
+874
+01:40:44,000 --> 01:40:50,000
+And what that gives us is that the number of buckets doubles
+
+875
+01:40:50,000 --> 01:40:55,000
+And so therefore we end up with a fewer number of items.
+
+876
+01:40:55,000 --> 01:40:59,000
+In each bucket, average
+
+877
+01:40:59,000 --> 01:41:06,000
+And then our lookup time is no longer going to be
+
+878
+01:41:06,000 --> 01:41:12,000
+Our lookup time is no longer going to be dominated by a whole bunch of items in a single bucket.
+
+879
+01:41:12,000 --> 01:41:18,000
+So I'm looking at time. I'm looking to see if we have
+
+880
+01:41:18,000 --> 01:41:24,000
+We'll have time to go through and see with an example
+
+881
+01:41:24,000 --> 01:41:25,000
+Actually
+
+882
+01:41:25,000 --> 01:41:29,000
+I am going to. I'm going to go to the Visu Algo
+
+883
+01:41:29,000 --> 01:41:34,000
+And use that as
+
+884
+01:41:34,000 --> 01:41:51,000
+An example right now
+
+885
+01:41:51,000 --> 01:41:57,000
+Sorry, there's our hash table, here's our hash table.
+
+886
+01:41:57,000 --> 01:42:08,000
+Let's create a hash table. Let's start with seven and we're going to put, let's put I'm going to put
+
+887
+01:42:08,000 --> 01:42:12,000
+Let's put 4 items in it
+
+888
+01:42:12,000 --> 01:42:18,000
+Okay, so this is our hash table. These are the buckets
+
+889
+01:42:18,000 --> 01:42:20,000
+that we've put in
+
+890
+01:42:20,000 --> 01:42:23,000
+We have zero through six buckets
+
+891
+01:42:23,000 --> 01:42:33,000
+And then these are the items that were inserted. 73, 74, 97, 55. If I insert
+
+892
+01:42:33,000 --> 01:42:39,000
+Let's insert 51.1, and then let's insert the 14
+
+893
+01:42:39,000 --> 01:42:40,000
+21.
+
+894
+01:42:40,000 --> 01:42:46,000
+28, I'm inserting all these
+
+895
+01:42:46,000 --> 01:42:52,000
+Factors of multiples of seven so that we can really
+
+896
+01:42:52,000 --> 01:42:55,000
+see that that balance
+
+897
+01:42:55,000 --> 01:42:59,000
+So we're going to insert this is
+
+898
+01:42:59,000 --> 01:43:04,000
+Really fast.
+
+899
+01:43:04,000 --> 01:43:08,000
+Let me see.
+
+900
+01:43:08,000 --> 01:43:13,000
+Okay, that's a little bit better.
+
+901
+01:43:13,000 --> 01:43:21,000
+Okay.
+
+902
+01:43:21,000 --> 01:43:29,000
+And how many items do we have in this this hash table? We have a lot of 11 items.
+
+903
+01:43:29,000 --> 01:43:34,000
+We have, this is the number of
+
+904
+01:43:34,000 --> 01:43:44,000
+buckets we have. And so our alpha, that load factor is 1.6
+
+905
+01:43:44,000 --> 01:43:48,000
+11 divided by 7. Yeah.
+
+906
+01:43:48,000 --> 01:43:52,000
+Let's put
+
+907
+01:43:52,000 --> 01:43:58,000
+I'm not sure if it's going to resize, but let's put a few more things in here.
+
+908
+01:43:58,000 --> 01:44:03,000
+1642.
+
+909
+01:44:03,000 --> 01:44:08,000
+7
+
+910
+01:44:08,000 --> 01:44:10,000
+77.
+
+911
+01:44:10,000 --> 01:44:12,000
+But a few more things
+
+912
+01:44:12,000 --> 01:44:16,000
+Let's see if
+
+913
+01:44:16,000 --> 01:44:18,000
+Resizes
+
+914
+01:44:18,000 --> 01:44:27,000
+It is not going to resize for us.
+
+915
+01:44:27,000 --> 01:44:29,000
+Oh, we don't want that.
+
+916
+01:44:29,000 --> 01:44:40,000
+Okay, so it's not gonna I'm surprised it doesn't do the resizing for us.
+
+917
+01:44:40,000 --> 01:44:50,000
+We are close to the end. We will come back to this on Monday and we will go through and we will see an implementation of how we
+
+918
+01:44:50,000 --> 01:44:54,000
+Start with our hash table.
+
+919
+01:44:54,000 --> 01:45:00,000
+And we model it with an array to hold those buckets, and then
+
+920
+01:45:00,000 --> 01:45:02,000
+Link lists
+
+921
+01:45:02,000 --> 01:45:09,000
+to hold our chains within each bucket, and then we will look at that resize process.
+
+922
+01:45:09,000 --> 01:45:33,000
+of what it looks like to double the size, double the number of buckets, and then redistribute all of those items, so that we have nice short chains to make that access time quick.
+
+923
+01:45:33,000 --> 01:45:41,000
+Just looking at what else we've got. We will
+
+924
+01:45:41,000 --> 01:45:47,000
+Yeah, I'm going to leave it here because we are at just about a minute left.
+
+925
+01:45:47,000 --> 01:45:58,000
+Which means there's not much more to say. Or not much more that we can squeeze in
+
+926
+01:45:58,000 --> 01:46:01,000
+But our hash table
+
+927
+01:46:01,000 --> 01:46:15,000
+Our Python dictionary is an example of a hash table. So that's our use case. That's what we're looking to do, is to have a key value pairs and to efficiently insert into a data structure
+
+928
+01:46:15,000 --> 01:46:23,000
+a key, so that we can also efficiently find and look up that key and get its value.
+
+929
+01:46:23,000 --> 01:46:30,000
+And what we the way we do that is by combining our
+
+930
+01:46:30,000 --> 01:46:32,000
+array
+
+931
+01:46:32,000 --> 01:46:38,000
+That holds buckets, and then our linked list that holds multiple things. And
+
+932
+01:46:38,000 --> 01:46:45,000
+using the hash function to determine which bucket we go into, and we'll
+
+933
+01:46:45,000 --> 01:46:48,000
+look at the code for that on Monday.
+
+934
+01:46:48,000 --> 01:46:58,000
+Any questions before we finish for tonight?
+
+935
+01:46:58,000 --> 01:46:59,000
+Okay.
+
+936
+01:46:59,000 --> 01:47:03,000
+Good to see everyone.
+
+937
+01:47:03,000 --> 01:47:20,000
+I would love any input if anyone can give me any input, especially about the first half of class, because I know it felt rocky on my side. So if there was anything anyone can let me know about
+
+938
+01:47:20,000 --> 01:47:25,000
+What would help? I always glad to hear it.
+
+939
+01:47:25,000 --> 01:47:35,000
+We will do more hash tables Monday. Have a great weekend, everyone. Oh, also, next week is Thanksgiving.
+
+940
+01:47:35,000 --> 01:47:38,000
+We will not have class on Wednesday.
+
+941
+01:47:38,000 --> 01:47:44,000
+No class on Wednesday. We still have class in person on Monday
+
+942
+01:47:44,000 --> 01:47:45,000
+Okay.
+
+943
+01:47:45,000 --> 01:47:48,000
+Everyone have a great weekend.
+
+944
+01:47:48,000 --> 01:47:52,341
+Thanks, Professor. You too.
+
