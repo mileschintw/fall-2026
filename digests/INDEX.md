@@ -7,7 +7,7 @@
 ## 最新狀態
 - 晨報：11/19 四 14:58 🆕 手動更正 GPU Final Project 時程：Design Spec 12/2、新增 T0 11/22、sign-up 11/24、freeze 12/15 → [assignments.md](../gpu/assignments.md)
 - 週規劃：11/15 日 21:05 ✅ 11/16 GPU 分組截止；Proposal 11/17（課堂說 11/18）；A5 11/22 還沒開工，11/16 開始 → [2026-11-15-weekly.md](2026-11-15-weekly.md)
-- 截止提醒：11/19 四 08:09 🆕 GPU Proposal 11/20 11:59 PM 剩 40h 未交（48h 提醒） → —
+- 截止提醒：11/19 四 18:10 ✅ 沒有新東西（GPU Proposal 11/20 11:59 PM 剩 30h，24h 提醒未到） → —
 - 上課筆記：11/19 四 16:19 🆕 DSA 11/18 Class 13 筆記：heap sort、heapq、hash table 入門（chaining、load factor） → [notes.md](../dsa/lectures/2026-11-18/notes.md)
 - 作業說明：11/19 四 07:44 ✅ 沒有新東西 → —
 
@@ -15,6 +15,7 @@
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 11/19 四 18:10 | 截止提醒 | ✅ | 沒有新東西（GPU Proposal 11/20 11:59 PM 剩 30h，24h 提醒未到） | — |
 | 11/19 四 16:19 | 上課筆記 | 🆕 | DSA 11/18 Class 13 筆記：heap sort、heapq、hash table 入門（chaining、load factor） | [notes.md](../dsa/lectures/2026-11-18/notes.md) |
 | 11/19 四 14:58 | 晨報 | 🆕 | 手動更正 GPU Final Project 時程：Design Spec 12/2、新增 T0 11/22、sign-up 11/24、freeze 12/15 | [assignments.md](../gpu/assignments.md) |
 | 11/19 四 10:10 | 上課筆記 | ⚠️ | 需要重新登入：Panopto（Canvas OAuth 確認頁）；DSA 11/18 筆記未做 | — |
