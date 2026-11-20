@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-20T07:08:24-08:00",
+  "task": "晨報",
+  "status": "new",
+  "summary": "GPU 新作業 Tier Submissions 12/15、kit v07、spec PDF；Proposal 已交；DSA Class 13 錄影",
+  "output": "digests/2026-11-20.md"
+ },
+ {
   "at": "2026-11-19T18:10:00-08:00",
   "task": "截止提醒",
   "status": "ok",

@@ -5,7 +5,7 @@
 > 🆕 有新東西　✅ 正常　⏭ 跳過　⚠️ 部分來源失敗／需要重新登入　❌ 失敗
 
 ## 最新狀態
-- 晨報：11/19 四 14:58 🆕 手動更正 GPU Final Project 時程：Design Spec 12/2、新增 T0 11/22、sign-up 11/24、freeze 12/15 → [assignments.md](../gpu/assignments.md)
+- 晨報：11/20 五 07:08 🆕 GPU 新作業 Tier Submissions 12/15、kit v07、spec PDF；Proposal 已交；DSA Class 13 錄影 → [2026-11-20.md](2026-11-20.md)
 - 週規劃：11/15 日 21:05 ✅ 11/16 GPU 分組截止；Proposal 11/17（課堂說 11/18）；A5 11/22 還沒開工，11/16 開始 → [2026-11-15-weekly.md](2026-11-15-weekly.md)
 - 截止提醒：11/19 四 18:10 ✅ 沒有新東西（GPU Proposal 11/20 11:59 PM 剩 30h，24h 提醒未到） → —
 - 上課筆記：11/19 四 16:19 🆕 DSA 11/18 Class 13 筆記：heap sort、heapq、hash table 入門（chaining、load factor） → [notes.md](../dsa/lectures/2026-11-18/notes.md)
@@ -15,6 +15,7 @@
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 11/20 五 07:08 | 晨報 | 🆕 | GPU 新作業 Tier Submissions 12/15、kit v07、spec PDF；Proposal 已交；DSA Class 13 錄影 | [2026-11-20.md](2026-11-20.md) |
 | 11/19 四 18:10 | 截止提醒 | ✅ | 沒有新東西（GPU Proposal 11/20 11:59 PM 剩 30h，24h 提醒未到） | — |
 | 11/19 四 16:19 | 上課筆記 | 🆕 | DSA 11/18 Class 13 筆記：heap sort、heapq、hash table 入門（chaining、load factor） | [notes.md](../dsa/lectures/2026-11-18/notes.md) |
 | 11/19 四 14:58 | 晨報 | 🆕 | 手動更正 GPU Final Project 時程：Design Spec 12/2、新增 T0 11/22、sign-up 11/24、freeze 12/15 | [assignments.md](../gpu/assignments.md) |

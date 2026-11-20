@@ -111,8 +111,8 @@
   "due": "2026-11-20T23:59:59-08:00",
   "due_label": "11/20（五） 11:59 PM PST",
   "points": 10,
-  "status": "未交",
-  "done": false,
+  "status": "已交",
+  "done": true,
   "note": "Final Project 是固定題目：ResNet-18 inference engine（forward only，T0–T5 分 tier 提交、各 tier 排 leaderboard），不是自選題目。PDF 最多 2 頁；Canvas id 11810636，due_at 2026-11-21T07:59:59Z（原預估 11/17）；組別 11/18 重置後要重加。各階段比重未定（Canvas 10 pts）",
   "canvas_id": 11810636
  },
@@ -167,6 +167,19 @@
   "done": false,
   "note": "T1–Tn 提交期間 11/22–12/15；不能用 late day。來源：L7（11/17）講義 p53 時程表＋口述（gpu/lectures/2026-11-17/notes.md 第 14 點）",
   "canvas_id": null
+ },
+ {
+  "key": "gpu-tier-submissions",
+  "course": "GPU",
+  "item": "Final Project Tier Submissions",
+  "kind": "專題",
+  "due": "2026-12-15T17:00:00-08:00",
+  "due_label": "12/15（二） 5:00 PM PST",
+  "points": 1,
+  "status": "未交",
+  "done": false,
+  "note": "11/20 晨報：Canvas 新作業（due_at 2026-12-16T01:00:00Z，lock 同時）；時間和 leaderboard freeze 相同",
+  "canvas_id": 11909772
  },
  {
   "key": "gpu-present",
