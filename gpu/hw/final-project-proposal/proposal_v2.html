@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ResNet-18 CUDA Inference Engine Project Proposal</title>
+<style>
+  @page { size: Letter; margin: 0.5in 0.6in; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 9.4pt; line-height: 1.22; color: #000; margin: 0; }
+  h1 { font-size: 16pt; margin: 0 0 4pt; }
+  h2 { font-size: 12pt; margin: 7pt 0 2pt; }
+  p { margin: 0 0 3pt; }
+  table { border-collapse: collapse; width: 100%; margin: 2pt 0 3pt; }
+  th, td { border: 0.6pt solid #999; padding: 1.2pt 4pt; text-align: left; vertical-align: top; }
+  td.m { font-size: 8.4pt; white-space: nowrap; }
+  td.nw { white-space: nowrap; }
+  th { font-weight: bold; border-bottom: 1.2pt solid #000; }
+  td.b { font-weight: bold; }
+  td.n, th.n { text-align: right; white-space: nowrap; }
+  code, .m { font-family: Arial, Helvetica, sans-serif; overflow-wrap: anywhere; }
+  ol.refs { margin: 0; padding-left: 22pt; }
+  ol.refs li { margin-bottom: 1.5pt; }
+  .two { display: flex; gap: 10pt; }
+  .two > div { flex: 1; }
+  .page2 { break-before: page; }
+</style>
+</head>
+<body>
+<h1>ResNet-18 CUDA Inference Engine Project Proposal</h1>
+
+<h2>1. Project Team</h2>
+<p>Team name: <b>Project Team 13</b>.</p>
+<table>
+<tr><th style="width:30%">Member</th><th>Primary role</th></tr>
+<tr><td class="b">Chun-Wei (William) Liao</td><td>Convolution kernels (GEMM path, tiling, tensor cores)</td></tr>
+<tr><td class="b">Eric Peng</td><td>Non-conv kernels, executor, batching and fusion</td></tr>
+<tr><td class="b">Miles Chin</td><td>Profiling, correctness, build/submission, autotuning</td></tr>
+</table>
+
+<h2>2. Tier 0 Baseline</h2>
+<p>Unmodified starter (direct conv, FP32), built for sm_75 + sm_86 and run on our own GPU (NVIDIA GeForce RTX 3050, 8 GB) on the dev set (500 images) with <span class="m">check.py --iters 3 --warmup 1</span>: <b>12.0 images/s at batch 32</b> (median 41,686 ms per pass) and 11.9 images/s at batch 64. The correctness gate passes (top-1 / top-5 error 19.20% / 3.20%, identical to the reference; top-1 agreement 100%). The course T4 figure for the same starter is 18.5 images/s. Per-layer time from nsys (batch 32, one dev pass, kernel launches mapped to manifest ops):</p>
+<table>
+<tr><th>Shape class (k, stride, C<sub>in</sub>&rarr;C<sub>out</sub>)</th><th class="n">Convs</th><th class="n">MMAC / image</th><th class="n">Time (ms)</th><th class="n">Share</th></tr>
+<tr><td>3&times;3 s1 512&rarr;512 (stage 4)</td><td class="n">3</td><td class="n">346.8</td><td class="n">22,061</td><td class="n"><b>52.8%</b></td></tr>
+<tr><td>3&times;3 s1 64&rarr;64 (stage 1)</td><td class="n">4</td><td class="n">462.4</td><td class="n">6,132</td><td class="n">14.7%</td></tr>
+<tr><td>3&times;3 s1 128&rarr;128 (stage 2)</td><td class="n">3</td><td class="n">346.8</td><td class="n">4,500</td><td class="n">10.8%</td></tr>
+<tr><td>3&times;3 s1 256&rarr;256 (stage 3)</td><td class="n">3</td><td class="n">346.8</td><td class="n">4,333</td><td class="n">10.4%</td></tr>
+<tr><td>3&times;3 s2 (three stage-entry convs)</td><td class="n">3</td><td class="n">173.4</td><td class="n">3,921</td><td class="n">9.4%</td></tr>
+<tr><td>7&times;7 s2 stem; 1&times;1 s2 downsample (3); all non-conv ops</td><td class="n">4</td><td class="n">137.7</td><td class="n">806</td><td class="n">1.9%</td></tr>
+</table>
+<p>Stage 4 does the same MACs per conv as the other stages but takes over half the time: the direct conv runs one thread per output element, and stage 4 has only 49&times;512 outputs per image, each with a serial K = 4,608 loop, so the GPU is short of parallelism. Batching alone does not help the starter (12.0 vs. 11.9 images/s); it starts to matter once the GEMM path tiles over M = B&middot;H<sub>out</sub>&middot;W<sub>out</sub>.</p>
+
+<h2>3. Planned Tiers and Batch Size</h2>
+<p>We target <b>Tier 2 by the design specification (2 Dec)</b> and <b>Tier 4 (FP16 tensor cores) by the leaderboard freeze (15 Dec)</b>, with Tier 5 items as stretch goals. We will hold entries in both the FP32 and FP16 categories. Targets will be revised as measurements come in.</p>
+<table>
+<tr><th style="width:11%">Tier</th><th>Content</th><th style="width:12%">Target date</th></tr>
+<tr><td class="b">T0</td><td>Unmodified starter, smoke-test submission</td><td>22 Nov</td></tr>
+<tr><td class="b">T1</td><td>im2col + SMEM-tiled SGEMM, fused bias/ReLU epilogue</td><td>28 Nov</td></tr>
+<tr><td class="b">T2</td><td>Implicit GEMM (gather in tile load), fused residual add, per-shape launch configs</td><td>2 Dec</td></tr>
+<tr><td class="b">T3</td><td>Register tiling, float4 loads, tile sizes tuned per shape class</td><td>8 Dec</td></tr>
+<tr><td class="b">T4</td><td>FP16 WMMA / mma.sync (m16n8k8) with FP32 accumulation</td><td>13 Dec</td></tr>
+<tr><td class="b nw">T5 (stretch)</td><td>Stem conv + maxpool fusion, shared downsample read, warp-shuffle avgpool/top-5</td><td>15 Dec</td></tr>
+</table>
+<p><b>Batch size.</b> T0 uses batch 32 (the starter is insensitive to it). From T1 on we plan <b>batch 64</b>. Stage 4 has only M = 49 rows per image, so at B = 64 its GEMM is 3,136 &times; 512 and a 64&times;64 tile grid gives 392 blocks, about 10 per SM on the T4's 40 SMs (196 blocks at B = 32). The cost is memory: at B = 64 the explicit im2col A matrix of a stage-1 conv is 200,704 &times; 576 &times; 4 B &asymp; 462 MB, which fits in 16 GB but is the bandwidth-bound traffic that T2's implicit GEMM removes. 500 dev images = 7 &times; 64 + a tail batch of 52. Miles will sweep B &isin; {32, 50, 64, 100, 128} at each tier and declare the fastest valid one in submit.py.</p>
+
+<h2>4. Work Breakdown</h2>
+<p>Each kernel has one owner and one reviewer. The reviewer runs check.py --layers and reads the Nsight Compute report before a change is merged.</p>
+<table>
+<tr><th>Kernel / task</th><th style="width:20%">Owner</th><th style="width:14%">Reviewer</th></tr>
+<tr><td>Conv GEMM: im2col + tiled SGEMM (T1), implicit GEMM gather (T2)</td><td>Chun-Wei</td><td>Miles</td></tr>
+<tr><td>Conv register tiling, float4, per-shape tile configs (T3)</td><td>Chun-Wei</td><td>Eric</td></tr>
+<tr><td>Tensor-core conv: WMMA / mma.sync, FP16 path (T4)</td><td>Chun-Wei + Eric</td><td>Miles</td></tr>
+<tr><td>Fused epilogue: bias, residual add, ReLU</td><td>Eric</td><td>Chun-Wei</td></tr>
+<tr><td>Normalize, maxpool, avgpool kernels</td><td>Eric</td><td>Miles</td></tr>
+<tr><td>FC layer and top-5 kernels</td><td>Eric</td><td>Chun-Wei</td></tr>
+<tr><td>Executor: batching, buffer reuse, launch reduction, fusion (T5)</td><td>Eric</td><td>Chun-Wei</td></tr>
+<tr><td>Nsight Compute / nsys profiling, per-layer time breakdown, roofline plots</td><td>Miles</td><td>Chun-Wei</td></tr>
+<tr><td>Correctness: per-layer checks, FP16 tolerance tracking</td><td>Miles</td><td>Eric</td></tr>
+<tr><td>Build, sm_75 compatibility, forbidden-name scan, submit.py</td><td>Miles</td><td>Eric</td></tr>
+<tr><td>Per-shape autotuning sweeps (tile size, batch)</td><td>Miles</td><td>Chun-Wei</td></tr>
+<tr><td>Proposal, design spec, final report, presentation</td><td class="nw">All three (equally)</td><td>—</td></tr>
+</table>
+
+<h2>5. Nsight Compute Metrics</h2>
+<p>We will profile the top three shape classes by time at every tier and record these metrics per kernel, so each optimization is backed by a measured change.</p>
+<table>
+<tr><th style="width:47%">Metric</th><th>What it tells us about conv-as-GEMM</th></tr>
+<tr><td class="m">sm__throughput.avg.pct_of_peak_sustained_elapsed<br>dram__throughput.avg.pct_of_peak_sustained_elapsed</td><td>Roofline position: whether a kernel is compute- or memory-bound, and whether a tier moved it (e.g. im2col vs. implicit GEMM).</td></tr>
+<tr><td class="m">sm__warps_active.avg.pct_of_peak_sustained_active</td><td>Achieved occupancy. Shows the trade-off register tiling makes between occupancy and ILP.</td></tr>
+<tr><td class="m">launch__registers_per_thread<br>(and shared memory per block)</td><td>The resources that limit occupancy as tiles grow; spills are checked separately with -Xptxas -v and local-memory traffic.</td></tr>
+<tr><td>Warp State Statistics (stall reasons)</td><td>Long scoreboard = waiting on global memory, MIO throttle = shared-memory pressure, barrier = __syncthreads imbalance.</td></tr>
+<tr><td class="m">l1tex__data_bank_conflicts_pipe_lsu_mem_shared.sum</td><td>Shared-memory bank conflicts in tile loads/reads. Target near zero after padding or swizzling.</td></tr>
+<tr><td class="m">l1tex__t_sectors_pipe_lsu_mem_global_op_ld.sum /<br>l1tex__t_requests_pipe_lsu_mem_global_op_ld.sum</td><td>Global-load coalescing (sectors per request, 4 is ideal for 32-bit loads), critical for the NHWC gather.</td></tr>
+<tr><td class="m">sm__pipe_tensor_op_hmma_cycles_active<br>.avg.pct_of_peak_sustained_active</td><td>Tensor-core pipe utilization for the Tier 4 FP16 kernels.</td></tr>
+<tr><td>Per-layer time (cudaEvent / nsys)</td><td>Which shape classes dominate total time. Guides where to optimize next.</td></tr>
+</table>
+
+<h2>6. Primary References</h2>
+<ol class="refs">
+<li>K. He, X. Zhang, S. Ren, J. Sun. <i>Deep Residual Learning for Image Recognition.</i> CVPR 2016. arxiv.org/abs/1512.03385</li>
+<li>W. Hwu, D. Kirk, I. El Hajj. <i>Programming Massively Parallel Processors</i>, 4th ed. Morgan Kaufmann, 2022 (tiling, convolution, GEMM chapters).</li>
+<li>S. Boehm. <i>How to Optimize a CUDA Matmul Kernel for cuBLAS-like Performance.</i> siboehm.com/articles/22/CUDA-MMM; code: github.com/siboehm/SGEMM_CUDA (kernels 4–5 for register tiling).</li>
+<li>NVIDIA. <i>CUDA C++ Programming Guide</i> (Warp Matrix Functions / WMMA) and <i>PTX ISA</i> (mma.sync). docs.nvidia.com/cuda</li>
+<li>NVIDIA. <i>Turing Tuning Guide</i> and <i>T4 Tensor Core GPU Datasheet</i>. docs.nvidia.com/cuda/turing-tuning-guide</li>
+<li>NVIDIA. <i>Nsight Compute Kernel Profiling Guide</i>. docs.nvidia.com/nsight-compute/ProfilingGuide</li>
+<li>torchvision ResNet-18 model/weights (IMAGENET1K_V1) and fuse_conv_bn_eval for BatchNorm folding (reference only). docs.pytorch.org</li>
+<li>Course lecture notes L3–L10 and the project specification (Au26 GPUCompute).</li>
+</ol>
+</body>
+</html>
