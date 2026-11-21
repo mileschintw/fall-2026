@@ -37,7 +37,7 @@
 </table>
 
 <h2>2. Tier 0 Baseline</h2>
-<p>Unmodified starter (direct conv, FP32), built for sm_75 + sm_86 and run on our own GPU (NVIDIA GeForce RTX 3050, 8 GB) on the dev set (500 images) with <span class="m">check.py --iters 3 --warmup 1</span>: <b>12.0 images/s at batch 32</b> (median 41,686 ms per pass) and 11.9 images/s at batch 64. The correctness gate passes (top-1 / top-5 error 19.20% / 3.20%, identical to the reference; top-1 agreement 100%). The course T4 figure for the same starter is 18.5 images/s. Per-layer time from nsys (batch 32, one dev pass, kernel launches mapped to manifest ops):</p>
+<p>Unmodified starter (direct conv, FP32), built for sm_75 + sm_86 and run on our own GPU (NVIDIA GeForce RTX 3050, 8 GB) on the dev set (500 images) with <span class="m">check.py --iters 3 --warmup 1</span>: <b>12.0 images/s at batch 32</b> (median 41,686 ms per pass) and 11.9 images/s at batch 64. The correctness gate passes (top-1 / top-5 error 19.20% / 3.20%, identical to the reference; top-1 agreement 100%). The course T4 figure for the same starter is 18.5 images/s (full val set). Time per shape class from nsys (batch 32, one dev pass, kernel launches mapped to manifest ops):</p>
 <table>
 <tr><th>Shape class (k, stride, C<sub>in</sub>&rarr;C<sub>out</sub>)</th><th class="n">Convs</th><th class="n">MMAC / image</th><th class="n">Time (ms)</th><th class="n">Share</th></tr>
 <tr><td>3&times;3 s1 512&rarr;512 (stage 4)</td><td class="n">3</td><td class="n">346.8</td><td class="n">22,061</td><td class="n"><b>52.8%</b></td></tr>
@@ -47,7 +47,7 @@
 <tr><td>3&times;3 s2 (three stage-entry convs)</td><td class="n">3</td><td class="n">173.4</td><td class="n">3,921</td><td class="n">9.4%</td></tr>
 <tr><td>7&times;7 s2 stem; 1&times;1 s2 downsample (3); all non-conv ops</td><td class="n">4</td><td class="n">137.7</td><td class="n">806</td><td class="n">1.9%</td></tr>
 </table>
-<p>Stage 4 does the same MACs per conv as the other stages but takes over half the time: the direct conv runs one thread per output element, and stage 4 has only 49&times;512 outputs per image, each with a serial K = 4,608 loop, so the GPU is short of parallelism. Batching alone does not help the starter (12.0 vs. 11.9 images/s); it starts to matter once the GEMM path tiles over M = B&middot;H<sub>out</sub>&middot;W<sub>out</sub>.</p>
+<p>Each stage-4 conv performs the same MACs as a conv in the other stages but runs about 5&times; slower (64 vs. 13 ms per MMAC). The direct conv runs one thread per output with C<sub>out</sub> fastest, so neighbouring threads stream different filter rows; with a 9.4 MB filter and a serial K = 4,608 loop the weight reads likely stop hitting in cache and the kernel becomes memory-bound (to be confirmed in Nsight Compute). Batching alone does not help the starter (12.0 vs. 11.9 images/s); it starts to matter once the GEMM path tiles over M = B&middot;H<sub>out</sub>&middot;W<sub>out</sub>.</p>
 
 <h2>3. Planned Tiers and Batch Size</h2>
 <p>We target <b>Tier 2 by the design specification (2 Dec)</b> and <b>Tier 4 (FP16 tensor cores) by the leaderboard freeze (15 Dec)</b>, with Tier 5 items as stretch goals. We will hold entries in both the FP32 and FP16 categories. Targets will be revised as measurements come in.</p>
@@ -60,9 +60,9 @@
 <tr><td class="b">T4</td><td>FP16 WMMA / mma.sync (m16n8k8) with FP32 accumulation</td><td>13 Dec</td></tr>
 <tr><td class="b nw">T5 (stretch)</td><td>Stem conv + maxpool fusion, shared downsample read, warp-shuffle avgpool/top-5</td><td>15 Dec</td></tr>
 </table>
-<p><b>Batch size.</b> T0 uses batch 32 (the starter is insensitive to it). From T1 on we plan <b>batch 64</b>. Stage 4 has only M = 49 rows per image, so at B = 64 its GEMM is 3,136 &times; 512 and a 64&times;64 tile grid gives 392 blocks, about 10 per SM on the T4's 40 SMs (196 blocks at B = 32). The cost is memory: at B = 64 the explicit im2col A matrix of a stage-1 conv is 200,704 &times; 576 &times; 4 B &asymp; 462 MB, which fits in 16 GB but is the bandwidth-bound traffic that T2's implicit GEMM removes. 500 dev images = 7 &times; 64 + a tail batch of 52. Miles will sweep B &isin; {32, 50, 64, 100, 128} at each tier and declare the fastest valid one in submit.py.</p>
+<p><b>Batch size.</b> Tier 0 uses batch 32 (the starter is insensitive to it). From Tier 1 on we plan <b>batch 64</b>. Stage 4 has only M = 49 rows per image, so at B = 64 its GEMM is 3,136 &times; 512 and a 64 &times; 64 tile grid gives 392 blocks, about 10 per SM on the T4's 40 SMs (200 blocks at B = 32). The cost is memory: at B = 64 the explicit im2col A matrix of a stage-1 conv is 200,704 &times; 576 &times; 4 bytes &asymp; 462 MB, which fits in 16 GB but is the bandwidth-bound traffic that Tier 2's implicit GEMM removes. 500 dev images = 7 &times; 64 + a tail batch of 52. Miles will sweep B &isin; {32, 50, 64, 100, 128} at each tier and declare the fastest valid one in submit.py.</p>
 
-<h2>4. Work Breakdown</h2>
+<h2 class="page2">4. Work Breakdown</h2>
 <p>Each kernel has one owner and one reviewer. The reviewer runs check.py --layers and reads the Nsight Compute report before a change is merged.</p>
 <table>
 <tr><th>Kernel / task</th><th style="width:20%">Owner</th><th style="width:14%">Reviewer</th></tr>
