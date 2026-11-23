@@ -14,7 +14,7 @@
 | Pop Quiz - Lecture 5 11/2/26 | 11/3（二）8:30 PM PST | 3 | 已發布（id 11881085，quiz 2460212），8:20–8:30 PM 開放 | graded（11/4 確認） | 課堂 pop quiz |
 | HW4 Memory access patterns & MMULT coalesced corner turning kernel | **11/15（日）11:59 PM PST**（Canvas due_at 2026-11-16T07:59:59Z） | 15 | 已發布（id 11810623），lock 12/13 | submitted | 11/3 發布；說明 PDF「Homework #4 (HW4) - Au26 - GPUCompute.pdf」（Canvas file 155723325）；原預估 11/10，以 Canvas 為準；11/11 晨報：Canvas due_at 由 11/13 改為 11/15 |
 | Final Project - Proposal | **11/20（五）11:59 PM PST**（Canvas due_at 2026-11-21T07:59:59Z） | 專題 10%（10 pts） | 已發布（id 11810636） | submitted（11/20 晨報確認） | 11/18 晨報：Canvas 發布，截止由原預估 11/17 延到 11/20；Team sign-up 重開到 11/18 11:59 PM PT，所有組別已重置，要到 People → Project Teams 重新加入（每組最多 3 人） |
-| Project T0 smoke test | **11/22（日）11:59 PM PST** | — | 交到 leaderboard（不是 Canvas） | — | build、過 `check.py`、profile、`submit.py`；L7 講義 p53 |
+| Project T0 smoke test | **11/22（日）11:59 PM PST** | — | `submit.py` 產生 ZIP，上傳到 Canvas「Final Project Tier Submissions」（id 11909772），留言寫「Tier0」；grader 評完才上 leaderboard | — | 原封不動的 starter；`--category fp32 --batch 32 --tier 0`（proposal）；L7 講義 p53、專題 spec §8／§10（[gpu/hw/final-project-tier-submissions/](hw/final-project-tier-submissions/README.md)）；11/22 更正：之前寫「交到 leaderboard（不是 Canvas）」是錯的 |
 | Project 發表 sign-up | 11/24（二）5:59 PM PST，不能用 late day | — | 未發布 | — | L7 講義 p53 |
 | Project Design Spec | **12/2（三）11:59 PM PST** | 未定 | 未發布 | — | L7 講義 p53；原記 12/1 5:59 PM（10/6 syllabus）作廢 |
 | Project leaderboard freeze＋code | **12/15（二）5:00 PM PST，不能用 late day** | 未定 | — | — | T1–Tn 提交期間 11/22–12/15，每個 tier 各自排名 |

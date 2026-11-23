@@ -1,0 +1,531 @@
+> 來源：GPU SharePoint `Shared Documents/Final Project - ResNet18/Au26_GPUCompute_ResNet18_FinalProject_Spec.pdf`（Modified 2026-11-20T06:43:22Z = 11/19 10:43 PM PST），2026-11-22 抓取，`pdftotext -layout` 轉出的原文。PDF 原檔在同資料夾。
+
+Final Project: A ResNet-18 Inference Engine in CUDA
+Project specification · Au26 GPUCompute (UW ECE EEP 524 A/B)
+Generated 2026-11-19 from MASTER kit v09, pack_schema.py (format resnet18-pack v1). The tables in sections 4–8 are produced from
+the same module that writes the data pack, the checker reads and the grader enforces, so this document and the tools cannot disagree.
+
+
+
+
+1. The project in one page
+You will build a standalone inference engine in CUDA C++ that reproduces the forward pass of a pretrained ResNet-18 on
+a batch of images and writes classification logits. Nothing from PyTorch, cuDNN, cuBLAS or any other library runs in the
+scored path: every kernel is yours. The network has 20 convolutions and every one of them is a GEMM, so the whole
+optimization arc of this course (coalescing, shared-memory tiling, bank conflicts, thread coarsening, register tiling, tensor
+cores) applies directly, and the leaderboard rewards exactly those skills.
+You receive a complete, correct and deliberately naive starter engine, a data pack with the folded weights, preprocessed
+images, labels and reference activations, a checker and a submission tool. You deliver a fast engine, a report backed by
+Nsight Compute evidence, and a 10-minute presentation. What is scored: correctness (a hard gate), images/s on a T4
+(the leaderboard), top-1 and top-5 error, the optimization tier reached, the report and the presentation.
+Teams of three. Work on any GPU you like; every leaderboard number is measured on the course's T4 (AWS g4dn.xlarge,
+sm_75). Start with GETTING_STARTED.md in the student kit: it takes you from the two downloads to a verified build and
+your team's first (smoke-test) leaderboard entry. This document is the reference behind it.
+Questions: class Teams channel: Final Project - ResNet18
+
+Timeline
+ Event                                                                                                Due
+ Project team formation / registration                                                                16 Nov, 11:59 PM*
+ Project starter kit released                                                                         16 Nov, 9:00 AM
+ Project proposal (2 pages) due                                                                       20 Nov, 11:59 PM
+ Tier T0 smoke-test leaderboard submission due                                                        22 Nov, 11:59 PM
+ Team presentation date/time sign-up                                                                  24 Nov, 5:59 PM*
+ Tiers T1 - Tn leaderboard submission window                                                          22 Nov - 15 Dec
+ Project design specification due                                                                     2 Dec, 11:59 PM
+ Leaderboard freeze; final project code submission due                                                15 Dec, 5:00 PM*
+ Project team presentations, 10 min + 5 min questions                                                 15-17 Dec, 6-9 PM*
+ Final report (with code analysis) due                                                                17 Dec, 11:59 PM*
+* not eligible for Late Days usage
+Grading weights and the late-day policy are announced separately by the instructor.
+
+
+2. The network: ResNet-18 with BatchNorm folded
+torchvision's ResNet-18 (He, Zhang, Ren, Sun, Deep Residual Learning for Image Recognition, CVPR 2016; weights
+IMAGENET1K_V1) is a 7×7 stride-2 stem convolution, a 3×3 stride-2 max-pool, four stages of two BasicBlocks each, a
+global average pool and a 512→1000 fully connected layer. Each BasicBlock is conv3×3 → BN → ReLU → conv3×3 → BN
+→ (+ skip) → ReLU; the first block of stages 2–4 uses stride 2 and a 1×1 stride-2 convolution (with BN) on the skip path.
+That gives 17 main-path convolutions plus 3 downsample convolutions: 20 in total, 11,684,712 parameters after folding.
+BatchNorm folding
+At inference BatchNorm is an affine map per channel using the stored running statistics: y = γ · (x − μ) / √(σ2 + ε) + β. The
+convolution in front of it is linear, so with s = γ / √(σ2 + ε) the pair collapses into a rescaled filter and a bias: W′ = s · W, b′
+= β − s · μ, y = W′ a + b′. The pack ships W′ and b′ (folded in fp32 with ε = 10−5, model in eval mode). There are no BN
+layers in your graph; every conv has a bias, and its epilogue is bias → optional residual add → optional ReLU, applied in
+fp32 registers before the store.
+
+Op list (execution order)
+ op                   type          in → out                         details
+ normalize            normalize     image_u8 → input                 (x/255 − mean) / std per channel
+ conv1                conv          input → stem                     7×7 s2 p3, 3→64, 224²→112², epilogue relu
+ maxpool              maxpool       stem → pool0                     3×3 s2 p1, c=64, 112²→56²
+ l1b0_conv1           conv          pool0 → l1b0_h                   3×3 s1 p1, 64→64, 56²→56², epilogue relu
+ l1b0_conv2           conv          l1b0_h → l1b0_out                3×3 s1 p1, 64→64, 56²→56², epilogue add_relu, skip pool0
+ l1b1_conv1           conv          l1b0_out → l1b1_h                3×3 s1 p1, 64→64, 56²→56², epilogue relu
+ l1b1_conv2           conv          l1b1_h → l1b1_out                3×3 s1 p1, 64→64, 56²→56², epilogue add_relu, skip l1b0_out
+ l2b0_conv1           conv          l1b1_out → l2b0_h                3×3 s2 p1, 64→128, 56²→28², epilogue relu
+ l2b0_ds              conv          l1b1_out → l2b0_ds               1×1 s2 p0, 64→128, 56²→28², epilogue none
+ l2b0_conv2           conv          l2b0_h → l2b0_out                3×3 s1 p1, 128→128, 28²→28², epilogue add_relu, skip l2b0_ds
+ l2b1_conv1           conv          l2b0_out → l2b1_h                3×3 s1 p1, 128→128, 28²→28², epilogue relu
+ l2b1_conv2           conv          l2b1_h → l2b1_out                3×3 s1 p1, 128→128, 28²→28², epilogue add_relu, skip l2b0_out
+ l3b0_conv1           conv          l2b1_out → l3b0_h                3×3 s2 p1, 128→256, 28²→14², epilogue relu
+ l3b0_ds              conv          l2b1_out → l3b0_ds               1×1 s2 p0, 128→256, 28²→14², epilogue none
+ l3b0_conv2           conv          l3b0_h → l3b0_out                3×3 s1 p1, 256→256, 14²→14², epilogue add_relu, skip l3b0_ds
+ l3b1_conv1           conv          l3b0_out → l3b1_h                3×3 s1 p1, 256→256, 14²→14², epilogue relu
+ l3b1_conv2           conv          l3b1_h → l3b1_out                3×3 s1 p1, 256→256, 14²→14², epilogue add_relu, skip l3b0_out
+ l4b0_conv1           conv          l3b1_out → l4b0_h                3×3 s2 p1, 256→512, 14²→7², epilogue relu
+ l4b0_ds              conv          l3b1_out → l4b0_ds               1×1 s2 p0, 256→512, 14²→7², epilogue none
+ l4b0_conv2           conv          l4b0_h → l4b0_out                3×3 s1 p1, 512→512, 7²→7², epilogue add_relu, skip l4b0_ds
+ l4b1_conv1           conv          l4b0_out → l4b1_h                3×3 s1 p1, 512→512, 7²→7², epilogue relu
+ l4b1_conv2           conv          l4b1_h → l4b1_out                3×3 s1 p1, 512→512, 7²→7², epilogue add_relu, skip l4b0_out
+ avgpool              avgpool       l4b1_out → feat                  c=512, 7²→1×1
+ fc                   fc            feat → logits                    512→1000
+ top5                 topk          logits → top5                    k=5, descending, lowest class index on ties
+Conv shape classes
+As an implicit GEMM, a convolution computes out[M, N] = A[M, K] × W[K, N] with M = B·H ·W , N = C , K = k·k·C ,
+                                                                                        out out          out    in
+where A(m, k) is a gather from the padded NHWC input (not a copy). All 20 convolutions fall into these classes:
+ k, stride       Cin → Cout          out        M per image        N            K            count        MMAC
+ 7×7 s2          3→64                112²       12,544             64           147          1            118.0
+ 3×3 s1          64→64               56²        3,136              64           576          4            115.6
+ 3×3 s2          64→128              28²        784                128          576          1            57.8
+ 1×1 s2          64→128              28²        784                128          64           1            6.4
+ 3×3 s1          128→128             28²        784                128          1,152        3            115.6
+ 3×3 s2          128→256             14²        196                256          1,152        1            57.8
+ 1×1 s2          128→256             14²        196                256          128          1            6.4
+ 3×3 s1          256→256             14²        196                256          2,304        3            115.6
+ 3×3 s2          256→512             7²         49                 512          2,304        1            57.8
+ 1×1 s2          256→512             7²         49                 512          256          1            6.4
+ 3×3 s1          512→512             7²         49                 512          4,608        3            115.6
+ fc              512→1000            —          1 (×B)             1000         512          1            0.5
+Three things to notice: the stem has K = 147 and the downsample convs K = 64/128/256, which no tile width divides, so
+generalized tiling with bounds checks (L4) is required; stage 4 presents only M = 49 rows per image, so batching is how
+the T4 gets filled; and every full 3×3 conv costs the same 115.6 MMAC while the GEMM aspect ratio swings from tall to
+wide, so one tile configuration will not be best everywhere.
+
+
+3. The target device and the size of the job
+Per image the network costs 3.63 GFLOP (1.81 GMAC). On the T4's 8.1 TFLOPS FP32 peak that is a ceiling of about 2,231
+images/s; on the 65 TFLOPS FP16 tensor-core peak about 17,906 images/s. Nobody reaches a ceiling; a well-tuned
+SGEMM reaches a large fraction of it, and the starter's direct convolution sits orders of magnitude below. The
+leaderboard is scored on the dev set: 500 images, about 1.8 TFLOP per pass (the full val set is 3,925 images, about 14
+TFLOP).
+ T4 (Turing, sm_75)
+ Compute                40 SMs, 2,560 CUDA cores, 320 tensor cores; 8.1 TFLOPS FP32, 65 TFLOPS FP16 tensor core, 130 TOPS INT8
+ Memory                 16 GB GDDR6 at 320 GB/s; 4 MB L2; 64 KB shared memory per block; 32 resident warps per SM
+ Available              WMMA and mma.sync (FP16, INT8), warp intrinsics, cooperative groups, cuda_fp16 conversions
+ Not available          cp.async, TMA, wgmma, thread-block clusters, FP8 (Ampere/Hopper features do not apply)
+ Power                  70 W cap; the card throttles under sustained tensor-core load, so the grader records the achieved SM clock with every
+                        score
+
+
+
+4. The data pack
+The pack is a directory built once by the instructor; every team uses the same one (checksums.sha256 inside the pack
+lets you verify your copy with check.py --verify-pack). Images are the Imagenette validation split (fast.ai's 10-class
+ImageNet subset, full-size imagenette2 release), preprocessed exactly as torchvision's IMAGENET1K_V1 transform does
+up to the uint8 crop: shorter side resized to 256 (bilinear), center-cropped to 224, stored as uint8 NHWC (RGB).
+Normalization — x/255, then (x − mean)/std with mean [0.485, 0.456, 0.406] and std [0.229, 0.224, 0.225] — is the
+engine's first op. Labels are ImageNet-1k class indices and the model keeps its full 1000-way head, so top-1/top-5 error is
+1000-way. Sets: dev (500 images, 50 per class drawn from val: the scored set, and the one to iterate on), val (3,925
+images, the full validation split, for broader testing), debug (8 images, one per class, with per-layer references).
+ Getting the pack
+ On the course AWS T4 instances          pre-installed at C:\resnet18\resnet18_pack: nothing to download, verify it and
+                                         use it as PACK
+
+ Download (your own machine)             Course Canvas: Files/Final Project - ResNet18/resnet18_pack.zip
+
+ SHA-256 of resnet18_pack.zip            177780D29AF38D8CEBFD2E836DDF60A297C5CD05EAD7D9635B5429CF3283E3D2
+ SHA-256 of checksums.sha256             359370C13F34961BDF159DEC3221347A0BA605E1140B017E058FC9FCF7A38E94
+
+ Verify your copy                        python tools\check.py --pack PACK --verify-pack --no-e2e, then compare the
+                                         SHA-256 of PACK\checksums.sha256 with the value above
+PACK is the folder that contains manifest.json (not its parent). The Imagenette validation images are ImageNet photographs and may
+overlap the data the pretrained model was trained on, so the reference accuracy below is a correctness target for your engine, not an
+evaluation of the model.
+
+Reference engine (PyTorch fp32) on the dev set: top-1 error 19.20%, top-5 error 3.20%. These are the targets the
+leaderboard gate compares against; check.py prints them as the reference figures. On the full val set the same reference
+gives 19.03% and 4.03%.
+ file                             contents
+ manifest.json                    Graph, shapes, weight offsets, image sets and references (this schema).
+ weights_fp32.bin                 All folded parameters as little-endian float32, concatenated in op order.
+ weights_fp16.bin                 The same parameters, same element order, as IEEE binary16.
+ images_val.bin                   Validation images: count x 224 x 224 x 3, uint8, NHWC (row-major, RGB).
+ labels_val.bin                   int32 ImageNet-1k class index per validation image.
+ ref_logits_val.bin               Reference logits for the validation set: count x 1000 float32.
+ images_dev.bin                   Dev subset of the validation images (same format); fast iteration set.
+ labels_dev.bin                   int32 labels for the dev subset.
+ ref_logits_dev.bin               Reference logits for the dev subset.
+ dev_indices.bin                  int32 index into the validation set for each dev image.
+ images_debug.bin                 Debug set (8 images in the real pack) used for per-layer checks.
+ labels_debug.bin                 int32 labels for the debug set.
+ ref_logits_debug.bin             Reference logits for the debug set.
+ ref/<tensor>.bin                 Per-layer reference activation for the debug set: count x [tensor shape], float32 (top5: int32). One file per
+                                  tensor named in manifest.tensors, except image_u8.
+ checksums.sha256                 SHA-256 of every other file (sha256sum format); check.py --verify-pack or sha256sum -c.
+
+
+Weights
+All folded parameters are concatenated into one blob in op order (filter then bias for each conv and the fc), as float32 in
+weights_fp32.bin and as IEEE binary16 in weights_fp16.bin with the same element offsets. Conv filters are stored
+[cout][kh][kw][cin] so that the K dimension of the implicit GEMM is contiguous in memory and matches the NHWC
+activations; the fc weight is [cout][cin]. Offsets and counts come from the manifest, never from assumptions about
+order.
+Class mapping
+ WordNet id                 ImageNet-1k index             class
+ n01440764                  0                             tench
+ n02102040                  217                           English springer
+ n02979186                  482                           cassette player
+ n03000684                  491                           chain saw
+ n03028079                  497                           church
+ n03394916                  566                           French horn
+ n03417042                  569                           garbage truck
+ n03425413                  571                           gas pump
+ n03445777                  574                           golf ball
+ n03888257                  701                           parachute
+
+
+
+5. manifest.json
+The manifest is the graph. The starter's manifest walker (src/manifest.cpp) parses it into Op structs and the executor
+runs the ops in order; you never hard-code a layer. Top-level fields:
+ field                            meaning
+ format, version                  "resnet18-pack", 1
+ source                           model provenance; synthetic flag; reference error figures
+ layout                           "NHWC" (all activations [H][W][C] per image, batch outermost)
+ num_classes,                     1000; [224, 224, 3]
+ image_shape
+ preprocess                       resize, crop, mean, std (also carried on the normalize op)
+ weights                          fp32 and fp16 file names; elements = total parameter count
+ image_sets                       val / dev / debug: images, labels, ref_logits, count (dev: val_indices; debug: ref_dir)
+ tensors                          name → per-image shape for every activation, including image_u8, input, logits [1000] and top5 [5]
+ ops                              the ordered op list; fields per type below
+
+
+Op fields
+Every op carries the common fields; each type adds its own.
+ field             type                 meaning
+ name              string               Unique op name (also used in timing breakdowns).
+ type              string               One of: normalize, conv, maxpool, avgpool, fc, topk.
+ in                string               Input tensor name (must exist in manifest.tensors or be image_u8).
+ out               string               Output tensor name (must exist in manifest.tensors).
+
+type = normalize
+ field             type                 meaning
+ mean              float[3]             Per-channel mean (RGB).
+ std               float[3]             Per-channel std (RGB).
+type = conv
+ field            type           meaning
+ k                int            Kernel size (square).
+ stride           int            Stride (same in H and W).
+ pad              int            Zero padding (same on all sides).
+ cin              int            Input channels.
+ cout             int            Output channels.
+ in_hw            int[2]         Input spatial size [H, W].
+ out_hw           int[2]         Output spatial size [H, W] = floor((in + 2 pad - k) / stride) + 1.
+ w_offset         int            Element offset of the filter tensor in the weights blob.
+ w_count          int            cout * k * k * cin elements, laid out [cout][kh][kw][cin] (row-major).
+ b_offset         int            Element offset of the bias vector (BN folded in).
+ b_count          int            cout.
+ epilogue         string         none | relu | add_relu : out = f(acc + bias [+ skip]).
+ skip             string|null    Tensor added before the ReLU when epilogue = add_relu, else null.
+ torch_name       string         Name of the originating torchvision module (for reference only).
+
+type = maxpool
+ field            type           meaning
+ k                int            Window size.
+ stride           int            Stride.
+ pad              int            Padding (-inf outside).
+ c                int            Channels.
+ in_hw            int[2]         Input [H, W].
+ out_hw           int[2]         Output [H, W].
+
+type = avgpool
+ field            type           meaning
+ c                int            Channels.
+ in_hw            int[2]         Input [H, W]; output is 1 x 1 x c (global average).
+
+type = fc
+ field            type           meaning
+ cin              int            Input features (512).
+ cout             int            Output classes (1000).
+ w_offset         int            Element offset of the weight matrix, laid out [cout][cin].
+ w_count          int            cout * cin.
+ b_offset         int            Element offset of the bias.
+ b_count          int            cout.
+ torch_name       string         Originating module name.
+
+type = topk
+ field            type           meaning
+ k                int            Number of top classes (5). Output is int32 class indices, descending, lowest index on ties.
+Example: the second convolution of the first block of stage 2, whose epilogue adds the downsample output:
+ {
+     "name": "l2b0_conv2",
+     "type": "conv",
+     "in": "l2b0_h",
+     "out": "l2b0_out",
+     "k": 3,
+     "stride": 1,
+     "pad": 1,
+     "cin": 128,
+     "cout": 128,
+     "in_hw": [28, 28],
+     "out_hw": [28, 28],
+     "w_offset": 239360,
+     "w_count": 147456,
+     "b_offset": 386816,
+     "b_count": 128,
+     "epilogue": "add_relu",
+     "skip": "l2b0_ds",
+     "torch_name": "layer2.0.conv2"
+ }
+
+Tensor names: input (normalized image), stem, pool0, then per block l{stage}b{block}_h (after conv1+ReLU), l{stage}b{block}_ds
+(downsample output, stages 2–4 block 0), l{stage}b{block}_out (block output), then feat [1,1,512], logits [1000], top5 [5].
+
+
+6. The starter engine and the command-line contract
+The starter is complete, correct and deliberately naive. It passes the checker as shipped; every kernel in it is yours to
+replace. Layout:
+ starter/
+   CMakeLists.txt            GPU build, sm_75 default; options CPU_EMULATION (no GPU), ENABLE_FP16 (Tier 4)
+   include/cuda_compat.h     real CUDA headers or the CPU-emulation layer; LAUNCH(kernel, grid, block, ...)
+   include/kernels.h         ConvParams/PoolParams/NormParams, to_f32/from_f32<T>, launch_* declarations
+   include/manifest.h        manifest.json -> Op structs (src/manifest.cpp); --print-graph
+   include/executor.h        Engine<T>: buffers, batching loop, compute-only timing, outputs, --dump
+   src/main.cu               the command line
+   src/kernels/normalize.cu uint8 -> normalized T               (one thread per element)
+   src/kernels/conv_direct.cu direct conv + fused epilogue      (one thread per output element)
+   src/kernels/conv_im2col.cu im2col + naive GEMM + epilogue    (one thread per element, twice)
+   src/kernels/pool.cu       maxpool, global avgpool
+   src/kernels/fc_topk.cu    fc GEMM; top-5 by five linear scans per image
+   third_party/nlohmann/json.hpp
+
+Every kernel is templated on the storage type T (float, or half with ENABLE_FP16) and does its arithmetic in fp32: convert
+with to_f32 at the load, accumulate, apply bias/skip/ReLU, convert with from_f32<T> at the store. The starter
+instantiates float only; the half instantiations are one macro away. The tensor-core kernel (Tier 4) is a new kernel body
+that reuses the gather index math, the epilogue and the launcher, not a half instantiation of the SIMT kernel.
+
+Command line
+ engine --pack DIR --set {val|dev|debug} --out OUTDIR [--batch B] [--precision fp32|fp16]
+        [--conv direct|im2col] [--iters N] [--warmup W] [--dump] [--print-graph]
+
+ output                     format
+ logits.bin                 count x 1000 float32, image order of the set; logits (pre-softmax), always fp32.
+ top5.bin                   count x 5 int32, descending by logit, lowest class index first on ties.
+ timing.json                device, precision, batch, per-iteration ms, median ms, images_per_s, emulation flag.
+ dump/<tensor>.bin          With --dump (set must fit in one batch): every manifest tensor except image_u8, count x [shape], float32 (top5
+                            int32).
+Timing rule: Compute only. All images are resident on the device before the clock starts; the timed region runs from the
+first normalize kernel to the last top-k kernel over all batches; D2H happens after. 1 warm-up iteration, then --iters timed
+iterations; the median is reported.
+The grader passes only these arguments: --pack, --set, --out, --batch (yours, from submission.json), --precision (your
+category), --iters, --warmup, plus any extra arguments you declare in submission.json (for example --conv igemm to
+select your own conv path). Everything else, including the default conv mode, is your engine's business.
+
+Build and run
+The course AWS T4 instances come with Visual Studio 2026, the CUDA toolkit, CMake, Git for Windows and the data
+pack (at C:\resnet18\resnet18_pack) pre-installed. Do not count on files left on an instance surviving to your next
+session: keep your team's engine in a private Git repository shared only with your teammates, clone it at the start of a
+session, and commit and push before logging out. The starter's .gitignore keeps build folders, outputs and submission
+zips out of the repository. On your own Windows machine, Visual Studio 2026 needs CUDA 13.2 or newer and CMake 4.2
+or newer (Visual Studio 2022 also works).
+Commands are for Windows (the x64 Native Tools Command Prompt for Visual Studio 2026), run from the kit root; on
+Linux use / in paths and starter/build/engine. GETTING_STARTED.md walks through the same steps with pass signals and
+troubleshooting.
+ cd starter
+ cmake -B build
+ cmake --build build --config Release -j
+ cd ..
+ python tools\check.py --pack PACK --out out\debug --set debug --layers
+        --engine starter\build\Release\engine.exe
+ python tools\check.py --pack PACK --out out\dev --set dev --batch 32 --iters 3 --warmup 1
+        --engine starter\build\Release\engine.exe
+ starter\build\Release\engine.exe --pack PACK --print-graph --set debug --out out\g --batch 8
+
+Each command is one line; indented lines continue the line above. The default build targets sm_75. To also get native code for your own
+GPU, add it at configure time and keep 75 in the list, for example cmake -B build -DCMAKE_CUDA_ARCHITECTURES="75;89".
+
+The starter is slow on purpose. Measured Tier 0 on the course T4: 18.5 images/s, median 212485.23 ms.
+
+
+7. Correctness: the per-layer check and the leaderboard gate
+Per-layer references were produced by running the folded PyTorch model on the debug images and recording every
+tensor in the manifest (conv outputs post-bias and post-ReLU as the graph defines them, block outputs post-residual).
+check.py --layers runs your engine with --dump on the debug set and compares each dump/<tensor>.bin with
+ref/<tensor>.bin, so a bug in one kernel is isolated from error accumulating across 18 layers. Use it before and after
+every change.
+ check                                                   fp32                                      fp16 reduced precision
+ per-layer max|err| / max|ref| (debug set)               ≤ 0.001                                   ≤ 0.02
+ top-1 agreement with the reference logits               ≥ 99.5%                                   ≥ 99.5%
+ top-1 and top-5 error vs. labels                        within ±0.5 pp of the reference           within ±0.5 pp of the reference
+ top5.bin consistent with your own logits (tie rule)     100% of rows                              100% of rows
+ all logits finite                                       yes                                       yes
+Why these numbers: an fp32 CUDA implementation differs from PyTorch only by summation order, so per-layer error of
+         −6                                                  −3
+about 10 relative is normal and logits agree to about 10 ; top-1 agreement should be 100%. An fp16 path lands
+           −3      −2
+around 10 to 10 on logits and above 99.5% agreement. The gate is therefore agreement plus a tolerance, not bit
+equality. A run that fails any line of the gate is not posted to the leaderboard at all: a fast wrong kernel scores zero.
+Categories
+ category                      rule                                                                    roofline ceiling (images/s, T4)
+ FP32                          single precision end to end                                             2,231
+ FP16 reduced precision        fp16 operands anywhere (tensor cores or not), fp32 accumulation;        17,906
+                               logits in fp32
+A team may hold a position in both categories. Using fp16 operands anywhere in the network (with or without tensor
+cores) places the run in the reduced-precision category; accumulation must be fp32 and the logits are written in fp32.
+
+
+8. Leaderboard, submissions and rules
+Each submission is graded on the same g4dn.xlarge T4 image with the course nvcc for sm_75, one submission at a time:
+unzip, static scan for forbidden libraries, cmake build, per-layer check on the debug set, a timed run on the dev set (500
+images; 1 warm-up pass, then 3 timed passes, of which the median is reported) while nvidia-smi samples the SM clock,
+then the end-to-end gate on the same set. Every round, from the Tier 0 smoke test to the freeze, uses this same
+protocol, so all entries on the board are directly comparable. You can reproduce the timed run on your own GPU with
+check.py --set dev --iters 3 --warmup 1.
+The leaderboard is published in two views built from the same results. The overall view ranks valid runs by images/s
+within each category. The by-tier view groups each category by tier, highest first, and ranks by images/s within the tier,
+keeping the overall rank as a column. Both include a secondary efficiency ranking (images/s as a fraction of the
+category's roofline ceiling, so a well-tuned fp32 engine is recognized next to a tensor-core engine) and a list of invalid
+submissions with the reason. Each team is represented by its best valid run. The tier shown is the one you declare with
+submit.py --tier; the staff verify tiers against your design specification and report and may reassign them, in which case
+the board marks the tier as verified.
+After each grading round every team receives a short report for each submission: for a valid run the measured figures;
+for an invalid one the stage that failed and where (the file and line of a scan hit, the end of the build log, the failing
+tensors in execution order, or the gate values).
+ column                          meaning
+ images/s                        primary metric, ranks the board (median of the 3 timed passes on the dev set)
+ % roofline                      images/s divided by the category ceiling
+ top-1 err %, top-5 err %        vs. labels, 1000-way, on the dev set
+ batch                           the batch size you asked the grader to use
+ tier                            the tier you declare at submission; verified by the staff against your design spec and report
+ SM MHz                          mean SM clock sampled during the timed run
+ submitted                       UTC time of the submission zip
+
+
+Submitting
+ python tools\submit.py --team "name" --members "A, B, C" --category fp32|fp16 --batch 64 --tier 3
+        --src starter --outdir submissions [--engine-args "--conv igemm"] [--notes "..."]
+
+submit.py zips CMakeLists.txt, src\, include\ and third_party\ (no build directories, binaries or data) together with
+submission.json (team, members, category, batch, tier, engine arguments, file hashes). The grader must be able to build
+your engine from that zip alone. The zip is named after your team, the tier you declare and a UTC time stamp (for
+example your-team_T2_20261124T031500Z.zip); do not rename it. The leaderboard is a public web page, so choose a
+team name that does not contain your real names, and keep one team name for the whole project: the board tracks
+each team's best valid run under that name.
+ Submitting
+ How to hand in the zip                     Use submit.py to create submission ZIP, upload to course Canvas assignment
+ Submitting
+ Leaderboard                                     overall: https://faculty.washington.edu/colinrei/au26-leaderboard/board.html ; by tier:
+                                                 https://faculty.washington.edu/colinrei/au26-leaderboard/board_by_tier.html
+ Tier 0 smoke test (the unmodified starter)      due 22 Nov, 11:59 PM; it tests your toolchain and the submission path, not your kernels
+ Tier 1 and above                                accepted during the leaderboard submission window in the timeline; your last valid submission
+                                                 before the freeze is your final project code
+
+
+Rules
+Allowed in the scored path: CUDA runtime, streams, events; cooperative groups; warp intrinsics (shuffle, vote, match);
+WMMA and mma.sync (inline PTX) tensor-core instructions; cuda_fp16.h conversions. Any GPU for development; the
+score is the T4's.
+Not allowed in the scored path: cublas, cudnn, cutlass, cub/, thrust, torch, onnxruntime, nvinfer, tensorrt, any
+framework or vendor inference library, and precomputed outputs of any kind. The checker and the reference use
+PyTorch; that is fine.
+The scan is a strict text search. The grader searches every source and CMake file in your submission, line by line and
+case-insensitively, for the identifiers above, and rejects the submission on any match. It does not parse code: a match in
+a comment or a string counts exactly like an #include or a call. Do not mention these names anywhere in your sources,
+not even in a comment such as "faster than ...". The report for a rejected submission lists the file and line of every match.
+The grader builds for sm_75 only. Instructions the T4 lacks (cp.async, bf16, the m16n8k16 fp16 MMA shape, wgmma,
+thread-block clusters) fail to assemble there even if they ran on your own GPU. Keep 75 in your architecture list so you
+see the failure first.
+
+
+9. Suggested optimization progression
+The ladder follows the lecture order for the rest of the quarter, so each tier arrives about when the proposal and the
+design spec need it. A solid team reaches Tier 3 with good Nsight Compute evidence; Tier 4 separates the top of the
+board.
+ tier                        when                    what
+ T0 Baseline                 L1–L6; smoke test       Build the starter, pass check.py, profile it: where do the 12 shape classes spend their time?
+                                                     Choose a batch size. Submit it unmodified as the smoke test.
+ T1 Batched GEMM path        L3–L6, 10 Nov           NHWC + batching; im2col + your SMEM-tiled SGEMM; bank-conflict-free tiles; bias/ReLU
+                                                     fused into the epilogue.
+ T2 Implicit GEMM            L7, 17 Nov              Drop the im2col buffer: compute the gather in the tile load. Residual add fused. Per-shape
+                                                     launch configurations.
+ T3 Register tiling          L8, 24 Nov              Thread coarsening, 2-D block/register tiles (Boehm kernels 4–5), float4 loads, tile sizes
+                                                     tuned per shape class.
+ T4 Tensor cores             L9, 1 Dec               FP16 WMMA / mma.sync with fp32 accumulation; fp16 weights and activations. Opens
+                                                     the reduced-precision category.
+ T5 Fusion and tuning        L10+, stretch           Stem conv + maxpool fused; downsample sharing the block input read; warp-shuffle
+                                                     avgpool and top-5; fewer, fatter launches; per-shape autotuning.
+Explicit im2col at batch 64 writes and reads back a 200,704 × 576 × 4 B ≈ 462 MB A matrix for each stage-1 convolution, about as much
+time as the GEMM itself at a healthy FP32 rate; that number, visible in Nsight Compute as a bandwidth-bound kernel next to a
+compute-bound one, is the case for implicit GEMM.
+Measure as you go: the Nsight Compute checklist
+ what                        metric or section                                               why
+ roofline position           sm__throughput / dram__throughput                               compute- or memory-bound, and did the tier move
+                             .avg.pct_of_peak_sustained_elapsed                              it?
+ achieved occupancy          sm__warps_active.avg.pct_of_peak_sustained_act                  registers, SMEM and block size decide it; register
+                             ive                                                             tiling trades it for ILP
+ warp stall reasons          Warp State Statistics section                                   long scoreboard = memory; MIO throttle = SMEM
+                                                                                             pressure; barrier = sync imbalance
+ SMEM bank conflicts         l1tex__data_bank_conflicts_pipe_lsu_mem_shared                  near zero after padding or swizzling
+                             .sum
+
+ global-load coalescing      l1tex__t_sectors / l1tex__t_requests                            sectors per request; 4 is ideal for 32-bit loads
+                             _pipe_lsu_mem_global_op_ld.sum
+
+ time breakdown              cudaEvent per layer, or nsys                                    which shape classes dominate; optimize the top
+                                                                                             three, re-measure
+
+
+
+10. Deliverables
+Dates are in the timeline in section 1; items marked there with * are not eligible for late days.
+
+Project proposal (2 pages; due 20 Nov, 11:59 PM). The team and its work breakdown: who owns which kernel, tier and
+task, and how the work is distributed across the three of you. Your Tier 0 baseline (images/s of the unmodified starter on
+the dev set, on your own GPU, with a per-layer time breakdown if you have it). The tier roadmap: what you expect to
+reach by the design specification (2 Dec) and by the leaderboard freeze (15 Dec). The batch size you plan to use and why.
+Tier 0 smoke-test submission (due 22 Nov, 11:59 PM). The unmodified starter, packaged with submit.py and handed in
+through the submission channel, appearing as a valid Tier 0 entry. It proves your toolchain and the submission path
+before any kernel work depends on them.
+Project design specification (due 2 Dec, 11:59 PM). For each kernel you are replacing: the decomposition (grid, block,
+tile sizes), data layouts and index math, the epilogue plan, predicted arithmetic intensity and roofline position per shape
+class, a memory plan, and risks with fallbacks. Update the work breakdown if it has changed since the proposal.
+Final project code = final leaderboard submission (due at the leaderboard freeze, 15 Dec, 5:00 PM). Your last valid
+submission before the freeze is the code that is graded. It must build for sm_75 and pass the gate; submissions after the
+freeze are not graded. Tier 1 and higher submissions are accepted throughout the window 22 Nov – 15 Dec.
+Team presentation (15–17 Dec, 6–9 PM; 10 minutes + 5 minutes of questions; sign up by 24 Nov, 5:59 PM). Present the
+design of the kernels you implemented, their performance (the measured progression tier by tier, in images/s and as a
+fraction of the roofline), and your profiling analysis of them (the Nsight Compute evidence from section 9: where each
+kernel sits on the roofline, what limits it). Discuss the major challenges, problems and issues you ran into and how you
+resolved them or worked around them, and what you would do with another week.
+Final report with code analysis (due 17 Dec, 11:59 PM, after the presentations). An analysis of the code as submitted at
+the freeze: the design of each kernel, the Nsight Compute reports and roofline plots per kernel per tier, an ablation table
+of tier → images/s, the per-layer time breakdown before and after, and a discussion of where the remaining gap to the
+roofline comes from. State plainly which kernels are still the starter's, and the final work breakdown across the team.
+
+References
+• K. He, X. Zhang, S. Ren, J. Sun. Deep Residual Learning for Image Recognition. CVPR 2016.
+  https://arxiv.org/abs/1512.03385
+• torchvision resnet18 and ResNet18_Weights.IMAGENET1K_V1 (weights, accuracy, inference transform).
+  https://docs.pytorch.org/vision/stable/models/generated/torchvision.models.resnet18.html
+• torchvision ResNet source (module names used in the manifest).
+  https://github.com/pytorch/vision/blob/main/torchvision/models/resnet.py
+• torch.nn.utils.fusion.fuse_conv_bn_eval (BatchNorm folding).
+  https://docs.pytorch.org/docs/stable/generated/torch.nn.utils.fusion.fuse_conv_bn_eval.html
+• J. Howard. Imagenette (fast.ai, Apache-2.0). https://github.com/fastai/imagenette — the project uses the full-size
+  release, https://s3.amazonaws.com/fast-ai-imageclas/imagenette2.tgz
+• NVIDIA T4 datasheet.
+  https://nvidia.com/content/dam/en-zz/Solutions/Data-Center/tesla-t4/t4-tensor-core-datasheet-951643.pdf ; Turing
+  Tuning Guide. https://docs.nvidia.com/cuda/turing-tuning-guide/ ; compute capabilities.
+  https://developer.nvidia.com/cuda-gpus
+• CUDA C++ Programming Guide (Warp Matrix Functions, WMMA).
+  https://docs.nvidia.com/cuda/cuda-c-programming-guide/ ; PTX ISA (mma.sync).
+  https://docs.nvidia.com/cuda/parallel-thread-execution/ ; CUDA Math API (half).
+  https://docs.nvidia.com/cuda/cuda-math-api/
+• NVIDIA Nsight Compute Kernel Profiling Guide (metrics and sections referenced above).
+  https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html
+• S. Boehm. How to Optimize a CUDA Matmul Kernel for cuBLAS-like Performance.
+  https://siboehm.com/articles/22/CUDA-MMM ; code: https://github.com/siboehm/SGEMM_CUDA
+• W. Hwu, D. Kirk, I. El Hajj. Programming Massively Parallel Processors, 4th ed. Morgan Kaufmann, 2022.
+• nlohmann/json (vendored, MIT). https://github.com/nlohmann/json
+

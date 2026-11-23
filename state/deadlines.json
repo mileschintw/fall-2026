@@ -119,14 +119,14 @@
  {
   "key": "gpu-t0",
   "course": "GPU",
-  "item": "Project T0 smoke test 交到 leaderboard",
+  "item": "Project T0 smoke test（submit.py ZIP 交到 Canvas Tier Submissions）",
   "kind": "專題",
   "due": "2026-11-22T23:59:00-08:00",
   "due_label": "11/22（日） 11:59 PM PST",
   "points": null,
   "status": "未交",
   "done": false,
-  "note": "build、過 check.py、profile、submit.py 拿第一筆 leaderboard（AWS T4）。來源：L7（11/17）講義 p53 時程表＋口述（gpu/lectures/2026-11-17/notes.md 第 14 點）",
+  "note": "原封不動的 starter，python tools\\submit.py --team \"Project Team 13\" --category fp32 --batch 32 --tier 0 產生 ZIP（不要改檔名），上傳到 Canvas 作業 11909772「Final Project Tier Submissions」並留言「Tier0」；grader 評完才出現在 leaderboard。一天只能交一次，組內協調由一人交。來源：專題 spec §8/§10（gpu/hw/final-project-tier-submissions/）、L7 講義 p53。canvas_id 故意留 null：Canvas 作業的 due_at 是 12/15，填了會被晨報同步蓋掉 11/22",
   "canvas_id": null
  },
  {

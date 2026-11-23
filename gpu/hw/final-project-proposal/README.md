@@ -1,6 +1,6 @@
 # GPU Final Project：Proposal（ResNet-18 inference engine）
 
-> 原文：[spec.md](spec.md)（[Canvas assignment 11810636](https://canvas.uw.edu/courses/1917398/assignments/11810636)）。專題本身的正式 spec 是 SharePoint `Final Project - ResNet18/Au26_GPUCompute_ResNet18_FinalProject_Spec.pdf`（11/16 8:53 PM PST 上傳），repo 裡還沒有存。摘要由排程「作業說明」整理，有疑問以原文為準。
+> 原文：[spec.md](spec.md)（[Canvas assignment 11810636](https://canvas.uw.edu/courses/1917398/assignments/11810636)）。專題本身的正式 spec 是 SharePoint `Final Project - ResNet18/Au26_GPUCompute_ResNet18_FinalProject_Spec.pdf`（11/16 8:53 PM PST 上傳，11/19 10:43 PM PST 更新），最新版已存在 [../final-project-tier-submissions/](../final-project-tier-submissions/Au26_GPUCompute_ResNet18_FinalProject_Spec.pdf)（文字版 [project_spec.txt](../final-project-tier-submissions/project_spec.txt)）。摘要由排程「作業說明」整理，有疑問以原文為準。
 
 | 項目 | 內容 |
 |---|---|
@@ -32,7 +32,7 @@ Tier 的大致樣子（11/10 口述，正式清單以專題 spec PDF 為準）�
 
 | Tier | 內容 |
 |---|---|
-| T0 | baseline smoke test：build、跑 `check.py`、profile、`submit.py`；**11/22 前**交到 leaderboard |
+| T0 | baseline smoke test：build、跑 `check.py`、profile、`submit.py`；**11/22 11:59 PM 前**把 ZIP 交到 Canvas 的 Tier Submissions 作業，grader 評完會出現在 leaderboard（spec §8，見 [../final-project-tier-submissions/README.md](../final-project-tier-submissions/README.md)） |
 | T1 | batched GEMM path，本質上是 SMEM tiled matrix multiply |
 | 中間幾個 | conv → GEMM（L7 的 im2col、implicit／explicit GEMM）等，大約一週一個 tier |
 | tensor core tier | 這時才用 FP16 |
@@ -56,7 +56,7 @@ Tier 的大致樣子（11/10 口述，正式清單以專題 spec PDF 為準）�
 - **References**：Reading Set #5 = PMPP 4th ed. Ch7（convolution）＋ Ch16 §16.1–16.4（deep learning），老師說對應 L6、L7 和 final project（`gpu/lectures/2026-11-10/notes.md` 開頭）。
 
 ## 還不確定的地方
-1. **專題 spec PDF 沒存進 repo**：`Au26_GPUCompute_ResNet18_FinalProject_Spec.pdf` 在 SharePoint，正式的 tier 清單、評分細節都在裡面；上面的 tier 表只是 11/10 口述。寫 proposal 前要先看 PDF。
+1. ~~專題 spec PDF 沒存進 repo~~：2026-11-22 已存進 `../final-project-tier-submissions/`。spec §10 對 proposal 的要求是：組員和分工、Tier 0 baseline（自己 GPU 上 dev set 的 images/s，有的話加 per-layer 時間）、到 design spec（12/2）和 freeze（12/15）的 tier 目標、batch size 和理由。已交的 v2 這幾項都有。正式 tier 表見 tier-submissions README（spec §9）。評分比重 spec 也沒寫（「announced separately by the instructor」）。
 2. **評分比重**：10/6 課堂說 proposal 10%、design spec 30%、final 60%；11/10 課堂說 final code、presentation、report「equally weighted」而且佔大部分，沒再提 proposal 的比例（`gpu/lectures/2026-11-10/notes.md` 還要釐清的問題第 3 點）。Canvas 上 Proposal 是 10 pts。
 3. **組員人數**：原文寫「should be 3」，課堂說不接受其他人數；11/18 重置後如果組裡不到 3 人怎麼處理，沒有說明。
 4. **Teams 上同學在問**：final project 程式碼要保留 T0–T3 各 tier 的 kernel，還是只交最後的版本（`digests/2026-11-18.md`，「Scheduled a meeting」thread，還沒有老師或 TA 回答）。這會影響 work breakdown 怎麼寫。
@@ -66,5 +66,6 @@ Tier 的大致樣子（11/10 口述，正式清單以專題 spec PDF 為準）�
 | 日期 | 變動 |
 |---|---|
 | 2026-11-18 | 第一次整理 |
+| 2026-11-22 | 專題 spec PDF 已存進 repo；T0 繳交方式改成 Canvas（spec §8） |
 
 GPU 課禁止用 AI 產生作業解答
