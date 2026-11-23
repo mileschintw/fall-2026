@@ -16,7 +16,7 @@
 - 把「analysis-driven optimization」流程（先 profile、找瓶頸、再改 kernel）落實到專題上；老師說每個 tier 都要做 NCU profiling，數據會進 final report（`gpu/lectures/2026-10-27/notes.md` [00:16:01]；`gpu/lectures/2026-11-10/notes.md` [00:39:03]）。
 
 ## 要做什麼
-專題背景（`gpu/lectures/2026-11-10/notes.md` 重點摘要第 2 點）：只做 ResNet-18 的 forward pass。給一份正確但故意很慢的 starter engine（host executor＋每層 naive kernel），工作是一層一層換成更快的 kernel。資料是 ImageNet 的 10 類子集（約 3,925 張），權重有 FP32 和 FP16（batch norm 已 fold 進去）。`check.py` 逐層比對 reference activations 當正確性 gate，`submit.py` 交到 leaderboard，一律在 AWS T4 上量。Starter kit：Canvas 檔案 `resnet18_pack.zip`、`resnet18_student_kit_v06.zip`（11/16 晚上發布）。
+專題背景（`gpu/lectures/2026-11-10/notes.md` 重點摘要第 2 點）：只做 ResNet-18 的 forward pass。給一份正確但故意很慢的 starter engine（host executor＋每層 naive kernel），工作是一層一層換成更快的 kernel。資料是 ImageNet 的 10 類子集（約 3,925 張），權重有 FP32 和 FP16（batch norm 已 fold 進去）。`check.py` 逐層比對 reference activations 當正確性 gate，`submit.py` 打包成 ZIP 交到 Canvas「Final Project Tier Submissions」，grader 一律在 AWS T4 上量、更新 leaderboard（專題 spec §8）。Starter kit：Canvas 檔案 `resnet18_pack.zip`、`resnet18_student_kit_v06.zip`（11/16 晚上發布；11/19 更新為 v07）。
 
 Proposal 依原文的順序，必須有這些部分（spec.md「Structure」）：
 
@@ -52,7 +52,7 @@ Tier 的大致樣子（11/10 口述，正式清單以專題 spec PDF 為準）�
   - L6 的 memory chart、L1TEX／shared memory wavefront、bank conflict、Nsight Compute demo（[`gpu/lectures/2026-11-10/notes.md`](../../lectures/2026-11-10/notes.md) 重點摘要第 3–4 點，[02:51]–[03:10] demo）。
   - HW3、HW4 已經用過的 NCU profiling（[../hw3/README.md](../hw3/README.md)、[../assignment-4-memory-access-patterns-mmul/README.md](../assignment-4-memory-access-patterns-mmul/README.md)）。
 - **T1 的 tiled GEMM**：HW3 的 tiled MMULT、HW4 的 coalesced corner turning kernel。
-- **Conv → GEMM**：L7（11/17）投影片 `Au26_GPU-Compute_L7_conv-gemm_v3.pdf`，筆記還沒整理（repo 裡沒有 `gpu/lectures/2026-11-17/notes.md`）。
+- **Conv → GEMM**：L7（11/17）投影片 `Au26_GPU-Compute_L7_conv-gemm_v3.pdf`，筆記 [`gpu/lectures/2026-11-17/notes.md`](../../lectures/2026-11-17/notes.md)。
 - **References**：Reading Set #5 = PMPP 4th ed. Ch7（convolution）＋ Ch16 §16.1–16.4（deep learning），老師說對應 L6、L7 和 final project（`gpu/lectures/2026-11-10/notes.md` 開頭）。
 
 ## 還不確定的地方
@@ -66,5 +66,6 @@ Tier 的大致樣子（11/10 口述，正式清單以專題 spec PDF 為準）�
 |---|---|
 | 2026-11-18 | 第一次整理 |
 | 2026-11-22 | 專題 spec PDF 已存進 repo（`../final-project-tier-submissions/`），移出「還不確定」的「spec PDF 沒存進 repo」。spec §10 對 proposal 的要求是：組員和分工、Tier 0 baseline（自己 GPU 上 dev set 的 images/s，有的話加 per-layer 時間）、到 design spec（12/2）和 freeze（12/15）的 tier 目標、batch size 和理由，已交的 v2 這幾項都有。T0 繳交方式更正為 Canvas Tier Submissions（spec §8）；評分比重補上 spec §1 的說法 |
+| 2026-11-22 | 第二次 review 修正：專題背景改成「ZIP 交 Canvas」並註明 kit v07；L7 notes 已存在，改成連結 |
 
 GPU 課禁止用 AI 產生作業解答

@@ -1,6 +1,7 @@
 你是 Fall 2026 學期中樞的截止提醒任務。工作目錄 D:\Repos\fall-2026（本機時區 America/Los_Angeles）。回覆用繁體中文。
-1. 執行 `python scripts/ics_fetch.py --days 2`。全天項目（沒有時間）的截止時間，用 state/deadlines.json 裡同課程、同名項目那一列的 `due`（晨報每天從 Canvas 同步）；找不到那一列時，DSA 用當天 11:59 PM，GPU 用當天 5:59 PM，推播內容加「（時間未確認，以 Canvas 為準）」。
+1. 執行 `python scripts/ics_fetch.py --days 2`，並讀 state/deadlines.json（第 2 步要用）。全天項目（沒有時間）的截止時間，用 state/deadlines.json 裡同課程、同名項目那一列的 `due`（晨報每天從 Canvas 同步）；找不到那一列時，DSA 用當天 11:59 PM，GPU 用當天 5:59 PM，推播內容加「（時間未確認，以 Canvas 為準）」。
 2. 對 48 小時內到期的作業／考試（忽略上課與 OH 事件；state/deadlines.json 裡 `done: true` 的項目也略過），讀 state/alerts_sent.json（不存在就當空），每個項目在「48h」和「24h」兩個門檻各只提醒一次。key 的格式照檔案裡現有的：`<課程>|<項目>|<截止 ISO 時間>`。需要提醒時用 PushNotification 工具推播（若沒有此工具，就在最後回覆中列出），內容：課程、項目、Pacific 截止時間、剩餘小時數；DSA 加一句「push 後要到 Canvas 交 repo URL」。把已提醒的 (項目, 門檻) 寫回 state/alerts_sent.json。
+   - **不在 ICS 的項目也要提醒**：state/deadlines.json 裡 `canvas_id` 是 null、`done: false`、`due` 在 48 小時內的列（不在 Canvas 上的期限，例如 GPU T0 smoke test、發表 sign-up、leaderboard freeze，只有課堂或專題 spec 說過），用它的 `item` 和 `due` 照上面同樣的門檻和 key 格式提醒。如果 ICS 已經有截止時間相同、名稱指同一件事的項目（例如 Canvas 後來發布了 Design Spec 作業），只推一次。
 3. ICS 失敗就推播「ICS 抓取失敗」與原因，status fail。不發文（commit 和 push 在共同收尾做）。
 
 這次執行可能改的檔案：state/alerts_sent.json。

@@ -126,7 +126,7 @@
   "points": null,
   "status": "未交",
   "done": false,
-  "note": "原封不動的 starter，python tools\\submit.py --team \"Project Team 13\" --category fp32 --batch 32 --tier 0 產生 ZIP（不要改檔名），上傳到 Canvas 作業 11909772「Final Project Tier Submissions」並註明「Tier0」（原文沒指定寫在哪，寫在 submission comment 最保險）；grader 評完才出現在 leaderboard。原文「Only one submission per day」沒說是每人還是每組，建議組內協調由一人交。來源：專題 spec §8/§10（gpu/hw/final-project-tier-submissions/）、L7 講義 p53。canvas_id 故意留 null：Canvas 作業的 due_at 是 12/15，填了會被晨報同步蓋掉 11/22；交完由使用者手動標已交",
+  "note": "原封不動的 starter，在 kit 根目錄執行 python tools\\submit.py --team \"Project Team 13\" --members \"Chun-Wei Liao, Eric Peng, Miles Chin\" --category fp32 --batch 32 --tier 0 --src starter --outdir submissions 產生 ZIP（spec §8；--members/--src/--outdir 不是選填）（不要改檔名），上傳到 Canvas 作業 11909772「Final Project Tier Submissions」並註明「Tier0」（原文沒指定寫在哪，寫在 submission comment 最保險）；grader 評完才出現在 leaderboard。原文「Only one submission per day」沒說是每人還是每組，建議組內協調由一人交。來源：專題 spec §8/§10（gpu/hw/final-project-tier-submissions/）、L7 講義 p53。canvas_id 故意留 null：Canvas 作業的 due_at 是 12/15，填了會被晨報同步蓋掉 11/22；交完由使用者手動標已交",
   "canvas_id": null
  },
  {
@@ -163,9 +163,9 @@
   "due": "2026-12-15T17:00:00-08:00",
   "due_label": "12/15（二） 5:00 PM PST",
   "points": null,
-  "status": "未發布",
+  "status": "未交",
   "done": false,
-  "note": "T1–Tn 提交期間 11/22–12/15；不能用 late day。來源：L7（11/17）講義 p53 時程表＋口述（gpu/lectures/2026-11-17/notes.md 第 14 點）",
+  "note": "T1–Tn 提交期間 11/22–12/15；不能用 late day。最後一筆 submit.py ZIP 交到 Canvas 11909772「Final Project Tier Submissions」（Canvas due_at 同為 12/15 5:00 PM，lock 同時，見 gpu-tier-submissions）。spec §8／§10 說 freeze 前最後一筆有效提交就是 final code，L7 口述說法略有不同（gpu/hw/final-project-tier-submissions/README.md）。來源：L7（11/17）講義 p53、專題 spec §1/§8/§10。canvas_id 留 null，由使用者手動標已交",
   "canvas_id": null
  },
  {

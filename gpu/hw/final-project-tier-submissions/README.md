@@ -6,8 +6,10 @@
 |---|---|
 | 截止 | **2026-12-15（二）5:00 PM PST**（Canvas `due_at` 2026-12-16T01:00:00Z，lock 同時，過了就交不了）；`gpu/assignments.md` 一致，也和 L7 講義 p53 的「Leaderboard freeze＋code 12/15 5 PM」相同，**不能用 late day** |
 | 分數 | 1 pt（Canvas）；實際分數應在 Final Project 的 code 部分，比重見「還不確定的地方」 |
-| 繳交方式 | Canvas online upload，**ZIP**（每個 tier 的 submission package）。spec §8「How to hand in the zip: Use submit.py to create submission ZIP, upload to course Canvas assignment」：leaderboard 由 grader 根據 Canvas 上的 ZIP 產生，**不是另外交到 leaderboard**。spec §8 只寫「course Canvas assignment」、§10 寫「the submission channel」，沒點名是哪個作業；對應到這個作業，是因為這個作業的原文寫「from tier0 through tier5」（spec.md） |
+| 繳交方式 | Canvas online upload，**ZIP**（每個 tier 的 submission package）。spec §8「How to hand in the zip: Use submit.py to create submission ZIP, upload to course Canvas assignment」：leaderboard 由 grader 根據 Canvas 上的 ZIP 產生，**不是另外交到 leaderboard**（為什麼是這個作業，見表格下方） |
 | 要交的東西 | 每個 tier（tier0–tier5）各一個 submission ZIP；每次提交都要**註明是哪個 tier**，例如「Tier0」「Tier2」（原文沒指定寫在哪，寫在 submission comment 最保險） |
+
+spec §8 只寫「course Canvas assignment」、§10 寫「the submission channel」，沒點名是哪個 Canvas 作業；對應到這個作業，是因為這個作業的原文寫「from tier0 through tier5」（spec.md）。
 
 ## 學習目標
 - 把 ResNet-18 forward pass 的 starter engine 一層一層換成更快的 kernel，每完成一個 tier 就提交一次，留下每個最佳化階段的成果（`gpu/lectures/2026-11-17/notes.md` 重點摘要 14）。
@@ -34,7 +36,7 @@ python tools\submit.py --team "name" --members "A, B, C" --category fp32|fp16 --
 - grader 只會傳 `--pack --set --out --batch --precision --iters --warmup`，加上 `submission.json` 裡宣告的額外參數（例如 `--conv igemm`）；預設 conv 路徑是 engine 自己決定。
 
 ### Grader 流程（spec §8，每一輪都一樣，T0 也是）
-解壓 → 禁用 library 的 static scan → cmake build（只 build sm_75）→ debug set per-layer check → dev set（500 張）計時：1 次 warm-up＋3 次計時取中位數，同時用 nvidia-smi 記 SM clock → end-to-end gate。任何一關沒過就不上榜，每次提交會收到一份短報告（有效的寫測量值；無效的寫哪一關、哪一行失敗）。
+解壓 → 禁用 library 的 static scan → cmake build（只 build sm_75）→ debug set per-layer check → dev set（500 張）計時：1 次 warm-up＋3 次計時取中位數，同時用 nvidia-smi 記 SM clock → end-to-end gate。任何一關沒過就不進排名，但會連同原因列在 board 的「invalid submissions」清單（spec §8：兩個 view 都有「a list of invalid submissions with the reason」），team name 一樣公開。每次提交會收到一份短報告（有效的寫測量值；無效的寫哪一關、哪一行失敗）。
 
 Leaderboard：[overall](https://faculty.washington.edu/colinrei/au26-leaderboard/board.html)、[by tier](https://faculty.washington.edu/colinrei/au26-leaderboard/board_by_tier.html)。欄位有 images/s、% roofline、top-1/top-5 err、batch、tier、SM MHz、提交時間（UTC）。spec 寫「Each team is represented by its best valid run」；FP32 和 FP16 兩個 category 可以各佔一席。by-tier view 是不是每個 tier 各留一筆，見「還不確定的地方」第 4 點。
 
@@ -53,13 +55,13 @@ L7 投影片 p56 的「Initial goals（by 22 NOV）」另外列了：starter 在
 | T4 Tensor cores | FP16 WMMA／`mma.sync`，FP32 累加；FP16 weight 和 activation；開啟 FP16 category | L9，12/1 |
 | T5 Fusion and tuning | stem conv＋maxpool fused；downsample 共用 block input 的讀取；warp-shuffle avgpool 和 top-5；減少 launch；per-shape autotune | L10+，stretch |
 
-spec 原文：「A solid team reaches Tier 3 with good Nsight Compute evidence; Tier 4 separates the top of the board.」by-tier view 依 tier 分組排名（spec §8；L7 [03:11:00]）。T1–Tn 的提交期間是 11/22–12/15；**freeze 前最後一筆有效提交就是被評分的 final code**（spec §8、§10）。
+spec 原文：「A solid team reaches Tier 3 with good Nsight Compute evidence; Tier 4 separates the top of the board.」by-tier view 依 tier 分組排名（spec §8；L7 [03:11:42]）。T1–Tn 的提交期間是 11/22–12/15。spec §8、§10 寫 freeze 前最後一筆有效提交就是被評分的 final code；L7 口述的說法不一樣，見「還不確定的地方」第 3 點。
 
 ## 注意事項
 - 每份提交都要標 tier（spec.md）。
 - **一天最多交一次**，同一個 tier 也一樣算（spec.md「Only one submission per day please!」）。最後幾天要排好，不能 12/15 下午一次交好幾個 tier。
 - 截止 12/15 5:00 PM，lock 同時；講義 p53 標 *，**不能用 late day**（`gpu/lectures/2026-11-17/notes.md` 重點摘要 14）。注意是下午 5 點，不是晚上 11:59。
-- 正確性 gate（spec §7）：debug set per-layer max|err|/max|ref| ≤ 0.001（FP16 ≤ 0.02）；top-1 和 reference 一致 ≥ 99.5%；top-1/top-5 error 在 reference（dev：19.20% / 3.20%）±0.5 pp 以內；`top5.bin` 和自己的 logits 100% 一致（同分取 class index 小的）；logits 全部是有限值。任一項沒過就不上榜。
+- 正確性 gate（spec §7）：debug set per-layer max|err|/max|ref| ≤ 0.001（FP16 ≤ 0.02）；top-1 和 reference 一致 ≥ 99.5%；top-1/top-5 error 在 reference（dev：19.20% / 3.20%）±0.5 pp 以內；`top5.bin` 和自己的 logits 100% 一致（同分取 class index 小的）；logits 全部是有限值。任一項沒過就不進排名（會列在 invalid 清單）。
 - 禁用 library（spec §8「Rules」）：cublas、cudnn、cutlass、cub/、thrust、torch、onnxruntime、nvinfer、tensorrt、任何 framework 或 vendor inference library、任何預先算好的輸出。**scan 是不分大小寫的逐行純文字搜尋**，註解和字串裡出現也會被拒，原始碼和 CMake 檔裡完全不要寫這些字（連「faster than ...」這種註解都不行）。
 - Grader 只 build sm_75：T4 沒有的指令（`cp.async`、bf16、FP16 `m16n8k16` MMA shape、wgmma、thread-block cluster）在自己的 GPU 上能跑也會組譯失敗。`CMAKE_CUDA_ARCHITECTURES` 一定要保留 75。spec §6 的例子是 `"75;89"`；本組的 RTX 3050 是 sm_86，所以用 `"75;86"`。
 - AWS T4 instance 上的檔案不保證留到下次：engine 放在組內 private Git repo，每次開 session 先 clone，登出前 commit＋push（spec §6）。pack 已預裝在 `C:\resnet18\resnet18_pack`。
@@ -78,8 +80,8 @@ spec 原文：「A solid team reaches Tier 3 with good Nsight Compute evidence; 
 ## 還不確定的地方
 1. **「一天一次」怎麼算**：是全隊一天一次還是每人一天一次、同一天交兩個不同 tier 算不算違規，原文沒說。另外原文沒說是一組交一份還是每個組員各交（spec 的流程是一隊一個 team name，看起來是一組交一份；建議由一個人交）。
 2. **分數**：Canvas 上只有 1 pt；Final Project 各部分比重，10/6 說 proposal 10%／design spec 30%／final 60%，11/10 改說 code、presentation、report 比重相同（`gpu/assignments.md`）。spec §1 也只寫「Grading weights and the late-day policy are announced separately by the instructor.」
-3. **各 tier 的 kernel 要不要保留**：Teams 上同學問過 final code 要保留 T0–T3 各 tier 的 kernel 還是只交最後版本，還沒有老師或 TA 回答（`digests/2026-11-18.md`）。spec §8、§10 說「your last valid submission before the freeze is your final project code」，看起來只評最後一筆。（推論）report 要有 tier → images/s 的 ablation table 和每個 tier 的 NCU 報告（spec §10），所以各 tier 的版本最好在 Git 裡留著（例如打 tag），但這不是老師的回答。
-4. **leaderboard 每隊每個 tier 是否各一筆**：L7 口述「同一隊每個 tier 都可以有一筆」（`gpu/lectures/2026-11-17/notes.md` [03:11:00]）；spec §8 寫「Each team is represented by its best valid run」，by-tier view 是「groups each category by tier」。兩者是否矛盾（by-tier view 只顯示最佳那筆所在的 tier，還是每個 tier 各顯示一筆），spec 沒講清楚。依可信度規則，課堂口述優先，但要看 board 實際長怎樣。
+3. **各 tier 的 kernel 要不要保留**：Teams 上同學問過 final code 要保留 T0–T3 各 tier 的 kernel 還是只交最後版本，還沒有老師或 TA 回答（`digests/2026-11-18.md`）。spec §8、§10 說「your last valid submission before the freeze is your final project code」，看起來只評最後一筆；但 L7 口述是「whatever your last submission will be, or whatever submissions you made for your various tiers will be used as your final project code」（[03:09:14]–[03:09:23]），兩者不一致。（推論）report 要有 tier → images/s 的 ablation table 和每個 tier 的 NCU 報告（spec §10），所以各 tier 的版本最好在 Git 裡留著（例如打 tag），但這不是老師的回答。
+4. **leaderboard 每隊每個 tier 是否各一筆**：L7 口述「a team can have an entry for each tier」（逐字稿 [03:11:42]，被誤轉成「A-team」；`gpu/lectures/2026-11-17/notes.md` 重點摘要 14）；spec §8 寫「Each team is represented by its best valid run」，by-tier view 是「groups each category by tier」。兩者是否矛盾（by-tier view 只顯示最佳那筆所在的 tier，還是每個 tier 各顯示一筆），spec 沒講清楚。CLAUDE.md 的可信度順序沒有涵蓋專題 spec PDF：口述（11/17，老師當時說細節「haven't finalized」，[03:08:18]）比較早，spec（11/19）比較新，以 board 實際顯示為準。
 5. **評分多久跑一輪**：spec 說「After each grading round」，沒寫一輪的頻率，所以 T0 交了之後不一定當晚就會出現在 board 上。
 6. **Kit 版本**：spec 是從「MASTER kit v09」產生的；Canvas 上的 student kit 最新記錄是 v07（11/19）。兩邊的版本號不一樣，交之前先看 Canvas Files 有沒有更新的版本。
 
@@ -89,5 +91,6 @@ spec 原文：「A solid team reaches Tier 3 with good Nsight Compute evidence; 
 | 2026-11-20 | 第一次整理 |
 | 2026-11-22 | 從 SharePoint 存入專題 spec PDF（＋文字版）；確認 T0 和各 tier 都是 `submit.py` → Canvas 這個作業；tier 表換成 spec §9；補上 submit.py 用法、grader 流程、gate 門檻、禁用字 scan、sm_75 限制 |
 | 2026-11-22 | 依 review 修正。解決並移出「還不確定」的 3 項：(a) T0 也交這個作業，11/22 11:59 PM PST 截止（spec §1、§8、§10＋spec.md「from tier0 through tier5」）；(b) ZIP 和 leaderboard 是同一套，grader 根據 Canvas 上的 ZIP 評分、更新 board，之前「交到 leaderboard，不是 Canvas」是錯的；(c) spec PDF 已存進 repo。另外把推論改標成推論，新增「每隊每個 tier 是否各一筆」，arch 例子註明 sm_86 |
+| 2026-11-22 | 第二次 review 修正：invalid 提交會公開列出（不是「不上榜」）；「只評最後一筆」補上 L7 口述的不同說法；口述 vs spec 不再套可信度規則，改以 board 實際顯示為準；時間戳改成 [03:11:42] |
 
 GPU 課禁止用 AI 產生作業解答
