@@ -9,6 +9,7 @@
 - 資料取得：Playwright CLI（session `uw`，skill 在 `.claude/skills/playwright-cli/`）+ 使用者自己登入的 cookie；排程用 Canvas ICS（`scripts/ics_fetch.py`）；DSA repo 用 `gh`。
   - 瀏覽器片段在 `scripts/browser/`，一律用 `python scripts/pw_run.py <snippet.js> <out.json> --url <URL>` 跑。它會自動開瀏覽器、載入登入狀態，結果直接寫成檔案，不經過聊天。exit 3 = 登入過期，什麼都不寫。所有呼叫共用同一個分頁，一次跑一個（同時跑的會排隊等）。
   - 片段沒涵蓋的 UI 操作（例如點開 Teams 摺疊的討論串）用 `python scripts/pw_run.py --cli <goto URL | snapshot | click e12 …>`，指令照 playwright-cli skill。**不要直接呼叫 `playwright-cli`**：它的 session 是依工作目錄區分的，主 checkout 和 worktree 會各開一個瀏覽器，搶同一個 profile 而失敗。
+  - GPU 專題 leaderboard 是公開網頁：`python scripts/leaderboard.py`（加 `--save` 才會更新 `state/leaderboard_seen.json`，晨報用）。
   - **不用內建瀏覽器（`mcp__Claude_Browser__*`）**：它擋 `idp.u.washington.edu`，開不了 UW 登入頁（2026-10-20 確認，不是 UW 封鎖）。
 - 自學：`/tutor <course>`，資料在 `learn/<course>/`。
 - 排程任務的 prompt 正本在 `automation/`（`~/.claude/scheduled-tasks/*/SKILL.md` 只是指向這裡）。學期至今版的報告放 `digests/semester-to-date/`。

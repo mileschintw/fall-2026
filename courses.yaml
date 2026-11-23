@@ -37,6 +37,11 @@ courses:
     textbook: PMPP 4th ed. (Hwu, Kirk, El Hajj)
     reading_page: weekly-reading-sets
     ics_env: CANVAS_ICS_GPU
+    project_team: Project Team 13          # Canvas group (People → Project Teams), 3 人：Chun-Wei Liao、Eric Peng、Miles Chin
+    leaderboard:                           # 公開網頁，不用登入；scripts/leaderboard.py 讀這裡
+      by_tier: https://faculty.washington.edu/colinrei/au26-leaderboard/board_by_tier.html
+      overall: https://faculty.washington.edu/colinrei/au26-leaderboard/board.html
+      team: Project-Team-13                # submit.py 把 --team "Project Team 13" 轉成的名字
   dsa:
     code: EE P 590 A
     title: Data Structures, Algorithms & Python (Advanced Topics In Digital Computers)

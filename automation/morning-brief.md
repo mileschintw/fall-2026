@@ -2,7 +2,7 @@
 
 步驟：
 1. 執行 `python scripts/digest_base.py`，取得無需登入的段落（到期、今天的課、新 repo、ICS/gh 狀態）。它會改寫 `state/last_digest_base.json` 和 `state/seen_repos.json`。
-2. 瀏覽器層：a–e 五個來源全部都要跑，用 Playwright（`python scripts/pw_run.py <scripts/browser/片段> state/_<名>.tmp --url <URL>`）。不用內建瀏覽器 mcp__Claude_Browser__*，它開不了 UW 登入頁。
+2. 瀏覽器層：a–e 五個來源全部都要跑（f 不需要瀏覽器，也要跑），用 Playwright（`python scripts/pw_run.py <scripts/browser/片段> state/_<名>.tmp --url <URL>`）。不用內建瀏覽器 mcp__Claude_Browser__*，它開不了 UW 登入頁。
    - pw_run.py 一次跑一個，等上一個結束再跑下一個。所有呼叫共用同一個瀏覽器分頁，同時跑會互相把頁面導走（pw_run.py 也會讓後來的呼叫排隊等）。
    - exit 3：登入過期（被導到 idp.u.washington.edu、login.microsoftonline.com、canvas.uw.edu/login/oauth2/confirm 或 Piazza 首頁的登入框）。該來源標「需要重新登入：<來源>」並跳過。排程中不開登入視窗。
    - exit 1（例如 EMPTY_FEED、NOT_LOADED、snippet error、playwright-cli not found）：同一個指令重跑一次；還是失敗就標「不通」，證據寫錯誤訊息的第一行。
@@ -25,6 +25,7 @@
       - reply `id` 不在該 thread 的清單，而且 `at` 晚於 `as_of` → 新回覆，報作者、時間、重點。老師（Colin N Reinhardt）和 TA（Diya Shetty、Devika Nair）的回覆要寫出內容；同學的回覆只寫人數和主題；
       - 作者是空的、內文是「This message has been deleted」或「已刪除此訊息」的 reply 不報。
       報告後把這次所有的 thread id 和 reply id 加回 state/teams_seen.json，`as_of` 改成這次輸出的 `now`。Teams 只載入最近有動靜的幾個 thread，每個 thread 也只顯示最後 3 則回覆，所以如果某個 thread 的 3 則回覆全都是新的，要註明「可能還有更早的新回覆沒載入」。
+   f. GPU leaderboard（公開網頁，不用登入，不經過 pw_run.py）：`python scripts/leaderboard.py --save`。輸出第一行 `STATUS:` 是資料來源狀態的證據；`- ` 開頭的幾行原樣放進「🏁 GPU leaderboard」段落；最後一行 `CHANGED: yes` 代表 board 有新一輪評分或本組名次變了，算「有新東西」。本組在 invalid 清單（⚠️ 那行）要放在晨報最前面的「🔴 今明兩天到期」段落也提一句，並寫出原因。exit 1（`FETCH_FAILED`／`PARSE_FAILED`）就重跑一次，還是失敗就標「不通」，這時 `--save` 不會寫 state。網址和隊名在 `courses.yaml` 的 `courses.gpu.leaderboard`。
 3. 合併成 digests/<今天日期>.md。
    - 檔案已經存在（同一天手動重跑）：保留原檔每段的內容，把這次的新發現加在對應段落最後，前面標「（HH:MM 更新）」；「今明兩天到期」「今天的課」「資料來源狀態」三段整段換成這次的結果。
    - 下面每個段落都要寫，沒有內容就寫「無」，不要刪掉段落；來源失敗造成的空白寫「（<來源> 不通，見資料來源狀態）」，不要寫「無」。格式：
@@ -33,10 +34,11 @@
    ## 📢 新公告（依課程）
    ## 💬 討論重點（過去 24h，含老師 / TA 的關鍵回覆）
    ## 🆕 新作業 / 新教材 / 新錄影 / 新 repo
+   ## 🏁 GPU leaderboard（本組 Project-Team-13 的名次與成績、board 有沒有新一輪評分、各 tier 第一名）
    ## 📅 今天的課（地點 / 線上）
-   ## ⚠️ 資料來源狀態（Canvas、Piazza、GPU SharePoint、Panopto、Teams、ICS GPU、ICS DSA、gh 八個來源每個都要列，標 通 / 不通 / 需要重新登入，附一行證據，例如筆數或 HTTP 狀態；**明確寫出 Playwright（pw_run.py）在這次排程執行中是否可用**）
+   ## ⚠️ 資料來源狀態（Canvas、Piazza、GPU SharePoint、Panopto、Teams、GPU leaderboard、ICS GPU、ICS DSA、gh 九個來源每個都要列，標 通 / 不通 / 需要重新登入，附一行證據，例如筆數或 HTTP 狀態；**明確寫出 Playwright（pw_run.py）在這次排程執行中是否可用**）
 4. 不在任何平台發文（commit 和 push 在共同收尾做）。最後一句回報：晨報路徑、各來源狀態一行摘要。
 
-這次執行可能寫或改的檔案（共同收尾 stage 時，只加其中真的有變動的）：digests/<今天日期>.md、state/last_digest_base.json、state/seen_repos.json、state/canvas_seen.json、state/piazza_seen.json、state/sharepoint_seen.json、state/teams_seen.json、state/deadlines.json、gpu/assignments.md、dsa/assignments.md。
+這次執行可能寫或改的檔案（共同收尾 stage 時，只加其中真的有變動的）：digests/<今天日期>.md、state/last_digest_base.json、state/seen_repos.json、state/canvas_seen.json、state/piazza_seen.json、state/sharepoint_seen.json、state/teams_seen.json、state/leaderboard_seen.json、state/deadlines.json、gpu/assignments.md、dsa/assignments.md。
 
 最後照 `automation/_finish.md` 做共同收尾：用 `scripts/log_run.py` 登記、更新 dashboard、有新東西就推播、commit 並 push。
