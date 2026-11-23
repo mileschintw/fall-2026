@@ -57,6 +57,11 @@ L7 投影片 p56 的「Initial goals（by 22 NOV）」另外列了：starter 在
 
 spec 原文：「A solid team reaches Tier 3 with good Nsight Compute evidence; Tier 4 separates the top of the board.」by-tier view 依 tier 分組排名（spec §8；L7 [03:11:42]）。T1–Tn 的提交期間是 11/22–12/15。spec §8、§10 寫 freeze 前最後一筆有效提交就是被評分的 final code；L7 口述的說法不一樣，見「還不確定的地方」第 3 點。
 
+## 繳交紀錄
+| Tier | 交件時間（Pacific） | 檔案 | 參數 | leaderboard |
+|---|---|---|---|---|
+| T0 | 11/22（日）9:43 PM PST（Canvas submitted_at 2026-11-23T05:43:59Z；attempt 1；Miles 代表 Project Team 13 交） | [submissions/Project-Team-13_T0_20261123T054313Z.zip](submissions/Project-Team-13_T0_20261123T054313Z.zip)（Canvas file 156598555，159,544 bytes，SHA-256 `FC78218D…6E17A6E`）；kit v07 原封不動的 `starter/`，comment「Tier0 - smoke test (unmodified starter), team Project-Team-13, fp32, batch 32」 | team `Project-Team-13`、fp32、batch 32、tier 0 | 交件時 board 最後更新 11/22 05:14 UTC，還沒出現；其他 6 組 T0 是 16.3–16.4 images/s、top-1/top-5 err 19.20%/3.20% |
+
 ## 注意事項
 - 每份提交都要標 tier（spec.md）。
 - **一天最多交一次**，同一個 tier 也一樣算（spec.md「Only one submission per day please!」）。最後幾天要排好，不能 12/15 下午一次交好幾個 tier。
@@ -92,5 +97,6 @@ spec 原文：「A solid team reaches Tier 3 with good Nsight Compute evidence; 
 | 2026-11-22 | 從 SharePoint 存入專題 spec PDF（＋文字版）；確認 T0 和各 tier 都是 `submit.py` → Canvas 這個作業；tier 表換成 spec §9；補上 submit.py 用法、grader 流程、gate 門檻、禁用字 scan、sm_75 限制 |
 | 2026-11-22 | 依 review 修正。解決並移出「還不確定」的 3 項：(a) T0 也交這個作業，11/22 11:59 PM PST 截止（spec §1、§8、§10＋spec.md「from tier0 through tier5」）；(b) ZIP 和 leaderboard 是同一套，grader 根據 Canvas 上的 ZIP 評分、更新 board，之前「交到 leaderboard，不是 Canvas」是錯的；(c) spec PDF 已存進 repo。另外把推論改標成推論，新增「每隊每個 tier 是否各一筆」，arch 例子註明 sm_86 |
 | 2026-11-22 | 第二次 review 修正：invalid 提交會公開列出（不是「不上榜」）；「只評最後一筆」補上 L7 口述的不同說法；口述 vs spec 不再套可信度規則，改以 board 實際顯示為準；時間戳改成 [03:11:42] |
+| 2026-11-22 | T0 已交（新增「繳交紀錄」，zip 存在 `submissions/`） |
 
 GPU 課禁止用 AI 產生作業解答

@@ -124,9 +124,9 @@
   "due": "2026-11-22T23:59:00-08:00",
   "due_label": "11/22（日） 11:59 PM PST",
   "points": null,
-  "status": "未交",
-  "done": false,
-  "note": "原封不動的 starter，在 kit 根目錄執行 python tools\\submit.py --team \"Project Team 13\" --members \"Chun-Wei Liao, Eric Peng, Miles Chin\" --category fp32 --batch 32 --tier 0 --src starter --outdir submissions 產生 ZIP（spec §8；--members/--src/--outdir 不是選填）（不要改檔名），上傳到 Canvas 作業 11909772「Final Project Tier Submissions」並註明「Tier0」（原文沒指定寫在哪，寫在 submission comment 最保險）；grader 評完才出現在 leaderboard。原文「Only one submission per day」沒說是每人還是每組，建議組內協調由一人交。來源：專題 spec §8/§10（gpu/hw/final-project-tier-submissions/）、L7 講義 p53。canvas_id 故意留 null：Canvas 作業的 due_at 是 12/15，填了會被晨報同步蓋掉 11/22；交完由使用者手動標已交",
+  "status": "已交",
+  "done": true,
+  "note": "原封不動的 starter，在 kit 根目錄執行 python tools\\submit.py --team \"Project Team 13\" --members \"Chun-Wei Liao, Eric Peng, Miles Chin\" --category fp32 --batch 32 --tier 0 --src starter --outdir submissions 產生 ZIP（spec §8；--members/--src/--outdir 不是選填）（不要改檔名），上傳到 Canvas 作業 11909772「Final Project Tier Submissions」並註明「Tier0」（原文沒指定寫在哪，寫在 submission comment 最保險）；grader 評完才出現在 leaderboard。原文「Only one submission per day」沒說是每人還是每組，建議組內協調由一人交。來源：專題 spec §8/§10（gpu/hw/final-project-tier-submissions/）、L7 講義 p53。canvas_id 故意留 null：Canvas 作業的 due_at 是 12/15，填了會被晨報同步蓋掉 11/22；交完由使用者手動標已交。11/22 9:43 PM PST 已交（Canvas submitted_at 2026-11-23T05:43:59Z，小組提交 Project Team 13，attempt 1，file 156598555 Project-Team-13_T0_20261123T054313Z.zip，comment「Tier0 - smoke test…」）；leaderboard 待下一輪評分",
   "canvas_id": null
  },
  {
