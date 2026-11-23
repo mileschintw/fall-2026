@@ -1,9 +1,9 @@
 {
- "fetched_at": "2026-11-15T21:04:34.341134-08:00",
+ "fetched_at": "2026-11-22T21:04:12.514519-08:00",
  "stats": {
   "GPU": {
-   "raw": 10,
-   "kept": 7
+   "raw": 11,
+   "kept": 9
   },
   "DSA": {
    "raw": 126,
@@ -318,6 +318,15 @@
    "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=11&year=2026#calendar_event_5120545"
   },
   {
+   "course": "GPU",
+   "summary": "Final Project - Proposal  [EE P 524 A]",
+   "start": "2026-11-20T00:00:00-08:00",
+   "all_day": true,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917398&month=11&year=2026#assignment_11810636"
+  },
+  {
    "course": "DSA",
    "summary": "Adrienne's OH  [EE P 590 A]",
    "start": "2026-11-21T09:30:00-08:00",
@@ -442,6 +451,15 @@
    "location": null,
    "kind": "event",
    "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917417&month=12&year=2026#calendar_event_5131642"
+  },
+  {
+   "course": "GPU",
+   "summary": "Final Project Tier Submissions [EE P 524 A]",
+   "start": "2026-12-15T17:00:00-08:00",
+   "all_day": false,
+   "location": null,
+   "kind": "due",
+   "url": "https://canvas.uw.edu/calendar?include_contexts=course_1917398&month=12&year=2026#assignment_11909772"
   }
  ]
 }
