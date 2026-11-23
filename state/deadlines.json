@@ -126,7 +126,7 @@
   "points": null,
   "status": "未交",
   "done": false,
-  "note": "原封不動的 starter，python tools\\submit.py --team \"Project Team 13\" --category fp32 --batch 32 --tier 0 產生 ZIP（不要改檔名），上傳到 Canvas 作業 11909772「Final Project Tier Submissions」並留言「Tier0」；grader 評完才出現在 leaderboard。一天只能交一次，組內協調由一人交。來源：專題 spec §8/§10（gpu/hw/final-project-tier-submissions/）、L7 講義 p53。canvas_id 故意留 null：Canvas 作業的 due_at 是 12/15，填了會被晨報同步蓋掉 11/22",
+  "note": "原封不動的 starter，python tools\\submit.py --team \"Project Team 13\" --category fp32 --batch 32 --tier 0 產生 ZIP（不要改檔名），上傳到 Canvas 作業 11909772「Final Project Tier Submissions」並註明「Tier0」（原文沒指定寫在哪，寫在 submission comment 最保險）；grader 評完才出現在 leaderboard。原文「Only one submission per day」沒說是每人還是每組，建議組內協調由一人交。來源：專題 spec §8/§10（gpu/hw/final-project-tier-submissions/）、L7 講義 p53。canvas_id 故意留 null：Canvas 作業的 due_at 是 12/15，填了會被晨報同步蓋掉 11/22；交完由使用者手動標已交",
   "canvas_id": null
  },
  {
@@ -178,7 +178,7 @@
   "points": 1,
   "status": "未交",
   "done": false,
-  "note": "11/20 晨報：Canvas 新作業（due_at 2026-12-16T01:00:00Z，lock 同時）；時間和 leaderboard freeze 相同",
+  "note": "11/20 晨報：Canvas 新作業（due_at 2026-12-16T01:00:00Z，lock 同時）；時間和 leaderboard freeze 相同。T0–T5 的 submit.py ZIP 都交這裡（spec §8＋作業原文）。Canvas submitted 只代表交過某個 tier，不可據此標 done（morning-brief 例外）；freeze 後手動標",
   "canvas_id": 11909772
  },
  {

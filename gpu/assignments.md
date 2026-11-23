@@ -14,16 +14,16 @@
 | Pop Quiz - Lecture 5 11/2/26 | 11/3（二）8:30 PM PST | 3 | 已發布（id 11881085，quiz 2460212），8:20–8:30 PM 開放 | graded（11/4 確認） | 課堂 pop quiz |
 | HW4 Memory access patterns & MMULT coalesced corner turning kernel | **11/15（日）11:59 PM PST**（Canvas due_at 2026-11-16T07:59:59Z） | 15 | 已發布（id 11810623），lock 12/13 | submitted | 11/3 發布；說明 PDF「Homework #4 (HW4) - Au26 - GPUCompute.pdf」（Canvas file 155723325）；原預估 11/10，以 Canvas 為準；11/11 晨報：Canvas due_at 由 11/13 改為 11/15 |
 | Final Project - Proposal | **11/20（五）11:59 PM PST**（Canvas due_at 2026-11-21T07:59:59Z） | 專題 10%（10 pts） | 已發布（id 11810636） | submitted（11/20 晨報確認） | 11/18 晨報：Canvas 發布，截止由原預估 11/17 延到 11/20；Team sign-up 重開到 11/18 11:59 PM PT，所有組別已重置，要到 People → Project Teams 重新加入（每組最多 3 人） |
-| Project T0 smoke test | **11/22（日）11:59 PM PST** | — | `submit.py` 產生 ZIP，上傳到 Canvas「Final Project Tier Submissions」（id 11909772），留言寫「Tier0」；grader 評完才上 leaderboard | — | 原封不動的 starter；`--category fp32 --batch 32 --tier 0`（proposal）；L7 講義 p53、專題 spec §8／§10（[gpu/hw/final-project-tier-submissions/](hw/final-project-tier-submissions/README.md)）；11/22 更正：之前寫「交到 leaderboard（不是 Canvas）」是錯的 |
+| Project T0 smoke test | **11/22（日）11:59 PM PST** | — | `submit.py` 產生 ZIP，上傳到 Canvas「Final Project Tier Submissions」（id 11909772），註明「Tier0」（原文只說要註明 tier，沒指定寫在哪，寫在 submission comment 最保險）；grader 評完才上 leaderboard | — | 原封不動的 starter；`--category fp32 --batch 32 --tier 0`（proposal）；L7 講義 p53、專題 spec §8／§10（[gpu/hw/final-project-tier-submissions/](hw/final-project-tier-submissions/README.md)）；11/22 更正：之前寫「交到 leaderboard（不是 Canvas）」是錯的 |
 | Project 發表 sign-up | 11/24（二）5:59 PM PST，不能用 late day | — | 未發布 | — | L7 講義 p53 |
 | Project Design Spec | **12/2（三）11:59 PM PST** | 未定 | 未發布 | — | L7 講義 p53；原記 12/1 5:59 PM（10/6 syllabus）作廢 |
-| Project leaderboard freeze＋code | **12/15（二）5:00 PM PST，不能用 late day** | 未定 | — | — | T1–Tn 提交期間 11/22–12/15，每個 tier 各自排名 |
-| Final Project Tier Submissions | **12/15（二）5:00 PM PST**（Canvas due_at 2026-12-16T01:00:00Z，lock 同時） | 1 pt | 已發布（id 11909772） | unsubmitted | 11/20 晨報：Canvas 新作業，時間和上一列 leaderboard freeze 相同，應是 code／tier 的 Canvas 繳交處 |
+| Project leaderboard freeze＋code | **12/15（二）5:00 PM PST，不能用 late day** | 未定 | — | — | T1–Tn 提交期間 11/22–12/15；freeze 前最後一筆有效提交就是被評分的 final code（spec §8、§10）。by-tier view 依 tier 分組排名，但每隊是每個 tier 各一筆還是只留最佳一筆，L7 口述和 spec 說法不同，見 tier-submissions README |
+| Final Project Tier Submissions | **12/15（二）5:00 PM PST**（Canvas due_at 2026-12-16T01:00:00Z，lock 同時） | 1 pt | 已發布（id 11909772） | unsubmitted | 11/20 晨報：Canvas 新作業，時間和上一列 leaderboard freeze 相同。11/22 依專題 spec §8 和本作業原文（「from tier0 through tier5」）確認：T0–T5 的 `submit.py` ZIP 都交這裡。Canvas 的 submitted 只代表交過某個 tier，**不代表 final code 已交**，晨報不會因此改這一列（`automation/morning-brief.md`），freeze 後手動標 |
 | Project 發表 | 12/15（二）～12/17（四）6–9 PM，不能用 late day | 未定 | — | — | 線上，3 天各 8 組，每組 10 分鐘＋5 分鐘 Q&A |
 | Project Final Report | **12/17（四）11:59 PM PST，不能用 late day** | 未定 | 未發布 | — | code 改在 12/15 隨 freeze 交 |
 
 - 成績：HW 50%、Final Project 50%，沒有考試。
-- **Final Project 是固定題目，不是自選專題**：全班都做 ResNet-18 inference engine（只做 forward pass），把 starter kit 的 naive kernel 一層層換成更快的版本，T0–T5 分 tier 提交到 leaderboard（AWS T4）。3 人一組。Starter kit 是 Canvas Files 的 `resnet18_pack.zip`、`resnet18_student_kit_v06.zip`；spec 在 Teams「Final Project ResNet 18」channel。時程以 L7（11/17）講義 p53 為準（`gpu/lectures/2026-11-17/notes.md` 第 14 點）。
+- **Final Project 是固定題目，不是自選專題**：全班都做 ResNet-18 inference engine（只做 forward pass），把 starter kit 的 naive kernel 一層層換成更快的版本，T0–T5 分 tier 用 `submit.py` 打包，ZIP 交到 Canvas「Final Project Tier Submissions」（id 11909772），grader 在 AWS T4 上評分後更新 leaderboard。3 人一組。Starter kit 是 Canvas Files 的 `resnet18_pack.zip`、`resnet18_student_kit_v07.zip`（11/19 起，原 v06）；spec PDF 在 SharePoint（Teams「Final Project - ResNet18」channel 的檔案），repo 存在 `gpu/hw/final-project-tier-submissions/`。時程以 L7（11/17）講義 p53 為準（`gpu/lectures/2026-11-17/notes.md` 第 14 點）。
 - Final Project 各階段比重未定：10/6 說 proposal 10%／design spec 30%／final 60%，11/10 改說 code、presentation、report 比重相同。Canvas 上 Proposal 是 10 pts。
 - 遲交 HW 最後期限 11/27（五）11:59 PM（L7 口述）。
 - 遲交：遲 1 天 -1，之後每 24h 再 -1，第 5 天累計 -6；第 10 天再 -2，之後每 5 天 -1。

@@ -12,7 +12,7 @@
       - 新公告：`ann` 的 id 不在 `gpu_announcement_ids`／`dsa_announcement_ids`（canvas.js 已經濾掉 posted_at 是 null 的去年公告）；
       - 新作業：`asg` 的 id 不在 `gpu_assignment_ids`／`dsa_assignment_ids`。報告，並在 gpu/assignments.md 或 dsa/assignments.md 和 state/deadlines.json 各加一列；
       - due_at 變動：`asg` 的 due_at 換成 Pacific 後，和 state/deadlines.json 同 `canvas_id` 那一列的 `due` 不同。報告，並改那一列的 `due`、`due_label`，以及 assignments.md 對應的列；
-      - 繳交狀態：每個作業的 `sub`（含已過截止的）和 state/deadlines.json 同 `canvas_id` 那一列比對。`submitted` / `pending_review` → `status: "已交"`、`done: true`；`graded` → `status: "已評分"`、`done: true`（原本已寫分數就保留）；`unsubmitted` 不動。以 Canvas 為準，不另外標遲交。有變動就同步改 gpu/assignments.md、dsa/assignments.md 的「繳交狀態」欄，並在晨報列出；
+      - 繳交狀態：每個作業的 `sub`（含已過截止的）和 state/deadlines.json 同 `canvas_id` 那一列比對。`submitted` / `pending_review` → `status: "已交"`、`done: true`；`graded` → `status: "已評分"`、`done: true`（原本已寫分數就保留）；`unsubmitted` 不動。以 Canvas 為準，不另外標遲交。有變動就同步改 gpu/assignments.md、dsa/assignments.md 的「繳交狀態」欄，並在晨報列出。**例外：GPU 11909772「Final Project Tier Submissions」**是 T0–T5 共用、可以交很多次的作業，Canvas 顯示 submitted 只代表交過某個 tier，不代表 12/15 freeze 的 final code 已交：這個 id 的 `submitted` / `pending_review` **不要**把 `gpu-tier-submissions` 標成已交或 `done: true`，只在晨報寫「Canvas 顯示 Tier Submissions 有提交（submitted_at …）」。這一列由使用者在 freeze 後手動標記。`gpu-t0`（`canvas_id` 是 null）也由使用者手動標；
       - GPU 新檔案（files 的 id 不在 gpu_file_ids，例如新講義 PDF、新 HW 說明）；
       - DSA 新 module item（item_id 不在 dsa_module_item_ids；ExternalTool = 新錄影、File = 新講義/筆記、Page = 新說明頁）；
       - syllabus_len 和 `syllabus_len.gpu`／`syllabus_len.dsa` 不同 → 標「syllabus 有修改，請人工比對」。
