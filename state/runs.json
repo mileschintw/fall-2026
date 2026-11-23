@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-23T07:08:17-08:00",
+  "task": "晨報",
+  "status": "new",
+  "summary": "GPU 發表 sign-up 明天 5:59 PM（Canvas 未見）；Tier Submissions 顯示已交；其餘無新",
+  "output": "digests/2026-11-23.md"
+ },
+ {
   "at": "2026-11-22T21:05:15-08:00",
   "task": "週規劃",
   "status": "ok",
