@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-22T16:15:27-08:00",
+  "task": "晨報",
+  "status": "warn",
+  "summary": "需要重新登入 Canvas；A5 今晚 11:59 PM 到期；新 repo A6",
+  "output": "digests/2026-11-22.md"
+ },
+ {
   "at": "2026-11-22T16:13:54-08:00",
   "task": "截止提醒",
   "status": "new",
