@@ -1,6 +1,6 @@
 # A5: BSTs and AVLs
 
-> 來源：Canvas assignment 11814818（https://canvas.uw.edu/courses/1917417/assignments/11814818），抓取 2026-11-18 07:44 PST。
+> 來源：Canvas assignment 11814818（https://canvas.uw.edu/courses/1917417/assignments/11814818），抓取 2026-11-23 07:44 PST。
 > 這個檔案由 `scripts/assignment_specs.py` 產生，內容是原文，每次來源有變動就整份重寫，不要手改。整理過的版本在 README.md。
 
 - 截止（Canvas `due_at`）：2026-11-22 (Sun) 11:59 PM PST
@@ -81,7 +81,7 @@ original files.
 - [`part1/bst_test.py`](repo/part1/bst_test.py)（4054 bytes，blob 8629750）
 - [`part1/compare.py`](repo/part1/compare.py)（1943 bytes，blob bf3aed8）
 - [`part1/tree_tools.py`](repo/part1/tree_tools.py)（1614 bytes，blob 63178a1）
-- [`part2/AI_NOTE.md`](repo/part2/AI_NOTE.md)（785 bytes，blob 96a9ef9）
+- [`part2/AI_NOTE.md`](repo/part2/AI_NOTE.md)（2330 bytes，blob 3c750d9）
 - [`part2/README.md`](repo/part2/README.md)（4679 bytes，blob 8b88601）
 - [`part2/bst_reference.py`](repo/part2/bst_reference.py)（2802 bytes，blob 248176e）
 - [`part2/check_tests.py`](repo/part2/check_tests.py)（9002 bytes，blob 30d89d9）
@@ -89,5 +89,5 @@ original files.
 - [`part2/practice_mutants/p2.py`](repo/part2/practice_mutants/p2.py)（2881 bytes，blob 409cf85）
 - [`part2/practice_mutants/p3.py`](repo/part2/practice_mutants/p3.py)（2756 bytes，blob 07afe5f）
 - [`part2/practice_mutants/p4.py`](repo/part2/practice_mutants/p4.py)（2839 bytes，blob 5cae3af）
-- [`part2/test_bst.py`](repo/part2/test_bst.py)（1148 bytes，blob bf96623）
+- [`part2/test_bst.py`](repo/part2/test_bst.py)（20371 bytes，blob afafd3e）
 - [`part2/tree_tools.py`](repo/part2/tree_tools.py)（1614 bytes，blob 63178a1）

@@ -9,9 +9,14 @@
 | 繳交方式 | commit 並 push 到 `uw-python-fall2026/assignment-5-mileschintw` 的 **`master`**（這個 repo 的預設分支確實是 `master`，`gh api` 2026-11-04 確認），一次 push 包含兩個 part；**以截止前最後一次 push 評分**。push 後看 repo 的 **Actions** 分頁。週規劃另外提醒要到 Canvas 交 repo URL（`digests/2026-11-01-weekly.md`；A4 也是這樣交） |
 | 要交的東西 | **Part 1**：`part1/bst.py`（6 個函式）、`part1/ANALYSIS.md`（6 節）<br>**Part 2**：`part2/test_bst.py`（你的 test，至少 8 個）、`part2/AI_NOTE.md`（4 題）<br>Part 2 只有這兩個檔案計分；不要改提供的 test、helper 和 `.github` workflow，老師跑的是原檔 |
 
-Repo 在 2026-11-04 5:13 AM PST 建立（`digests/2026-11-04.md`）。[repo/](repo/) 存的是 repo 目前的內容：**11/17 10:33 PM PST 你 push 了「Complete part1」**，所以 `repo/part1/bst.py`（blob 29befed）和 `repo/part1/ANALYSIS.md`（blob 9fe1a31）現在是你的作答，不是 starter；starter 版（blob 52d6268、fde4c02）在這個 repo 的 git 歷史裡。其他檔案仍是 starter。
+Repo 在 2026-11-04 5:13 AM PST 建立（`digests/2026-11-04.md`）。[repo/](repo/) 存的是 repo 目前的內容，四個要交的檔案現在都是你的作答，不是 starter：
+- **11/17 10:33 PM PST**「Complete part1」（d1a5fe0）：`part1/bst.py`（blob 29befed）、`part1/ANALYSIS.md`（blob 9fe1a31）
+- **11/21 3:50 PM PST**「Complete part2: mutant-hunt tests and AI note」（5e0ad2e）：`part2/test_bst.py`（blob afafd3e，23 個 test：對照 Python set 的 model-based fuzz 3 個，加上 edge、delete、5,000 層 chain、speed test）、`part2/AI_NOTE.md`
+- **11/21 4:26 PM PST**「Fill in AI note answer 4」（f6498b8，最後一次 push）：`part2/AI_NOTE.md`（blob 3c750d9，四題都填了；第 4 題選 p2）
 
-**進度（2026-11-18 檢查）**：Part 1 的 `bst_test` 在本機 17 個 test 全過；`ANALYSIS.md` 六節都填了。Part 2（`test_bst.py`、`AI_NOTE.md`）還是 starter。這次 push 的 Actions run 結果是 failure（失敗的步驟是 Autograding Reporter，應該是 Part 2 的檢查還沒過；只看了 job 摘要，沒看各項分數）。
+starter 版在這個 repo 的 git 歷史裡。
+
+**進度（2026-11-23 檢查）**：最後一次 push（f6498b8，截止前約 31 小時）的 Actions run 是 **success**；11/21 3:50 PM 那次 push 有兩個 run 是 failure、一個 success（只看了 run 清單，沒看各項分數）。依 commit 訊息，gate 過了、p1–p4 都抓到。A5 已在截止前交完；hidden mutant 的 60 分要等老師截止後跑。
 
 ## 學習目標
 （repo README、`part1/README.md`、`part2/README.md` 開頭）
@@ -176,5 +181,6 @@ autograder：GitHub Actions，Python 3.11，任何分支 push 都會跑（workfl
 |---|---|
 | 2026-11-04 | 第一次整理 |
 | 2026-11-18 | repo 檔案 `part1/ANALYSIS.md`、`part1/bst.py` 改了：是你 11/17 push 的「Complete part1」，不是作業說明改版（Canvas 說明、各 part README、tests、配分都沒變）。補上進度說明（Part 1 tests 本機全過、Part 2 未開始、Actions run failure） |
+| 2026-11-23 | repo 檔案 `part2/AI_NOTE.md`、`part2/test_bst.py` 改了：是你 11/21 push 的 Part 2 作答（5e0ad2e、f6498b8），不是作業說明改版（Canvas 說明、各 part README、tests、配分都沒變）。更新進度：四個檔案都交了，最後一次 push 的 Actions run success |
 
 DSA 課用了 AI 要附 chat session 或註明。

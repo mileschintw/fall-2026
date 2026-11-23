@@ -495,7 +495,7 @@
     "part1/bst_test.py": "8629750a83df6100cbd58db1279072d6aa42c6df",
     "part1/compare.py": "bf3aed81e359d67d5e44c3652de50064deab0918",
     "part1/tree_tools.py": "63178a168c5dbd97454d18797dc3894da3a25b66",
-    "part2/AI_NOTE.md": "96a9ef9bfb49ca1dc462f39497bb86f1e2948719",
+    "part2/AI_NOTE.md": "3c750d979dcb477d626ce313deb9b900df1e011d",
     "part2/README.md": "8b886015e77b1a1a6f74fb38779c8803f80165bf",
     "part2/bst_reference.py": "248176ec234a21eff09668a7a11cfad736b9d756",
     "part2/check_tests.py": "30d89d96e063b7a22ee43b34413c92b6f0f2158a",
@@ -503,7 +503,7 @@
     "part2/practice_mutants/p2.py": "409cf85196bb93af8281a3b5b1c2287eae1826cd",
     "part2/practice_mutants/p3.py": "07afe5f5abaf96682e3bf5814eb57207dd86e7e2",
     "part2/practice_mutants/p4.py": "5cae3af605ca3eea886571f2eabe66589f8460b2",
-    "part2/test_bst.py": "bf966230bcf17758ee6b2dcade9aff3df8a34076",
+    "part2/test_bst.py": "afafd3e6d31f4176426e83a92f9d16d3ddfca2d8",
     "part2/tree_tools.py": "63178a168c5dbd97454d18797dc3894da3a25b66"
    },
    "due_at": "2026-11-23T07:59:59Z"
@@ -530,11 +530,11 @@
    "repo/part2/tree_tools.py",
    "spec.md"
   ],
-  "archived_at": "2026-11-18T07:44:11-08:00",
+  "archived_at": "2026-11-23T07:44:12-08:00",
   "summary_done": true,
   "changes": [
-   "repo 檔案 part1/ANALYSIS.md 改了",
-   "repo 檔案 part1/bst.py 改了"
+   "repo 檔案 part2/AI_NOTE.md 改了",
+   "repo 檔案 part2/test_bst.py 改了"
   ],
   "history": [
    {
@@ -548,6 +548,13 @@
     "changes": [
      "repo 檔案 part1/ANALYSIS.md 改了",
      "repo 檔案 part1/bst.py 改了"
+    ]
+   },
+   {
+    "at": "2026-11-23T07:44:12-08:00",
+    "changes": [
+     "repo 檔案 part2/AI_NOTE.md 改了",
+     "repo 檔案 part2/test_bst.py 改了"
     ]
    }
   ]
@@ -608,6 +615,68 @@
   "history": [
    {
     "at": "2026-11-20T07:43:36-08:00",
+    "changes": [
+     "new"
+    ]
+   }
+  ]
+ },
+ "11814820": {
+  "course": "dsa",
+  "slug": "a6",
+  "dir": "dsa/hw/a6",
+  "name": "A6: Heaps",
+  "due_at": "2026-12-07T07:59:59Z",
+  "fp": {
+   "text": "e3b0c44298fc1c14",
+   "links": [],
+   "files": {},
+   "readme": "81d1834b01187ea1ce316c52e6deb29b705b39f1",
+   "repo_files": {
+    ".github/workflows/classroom.yml": "6a1151efb13b342f1e53986e91983bcd8487da0f",
+    ".gitignore": "538248f34953e769c570cef880094fed816d6831",
+    "AI_NOTE.md": "a7c0e28923c6223a46b3af1f81d32c47b5743aa3",
+    "ANALYSIS.md": "4a0498103a4cf51c587f9e882c0994467e0ee9ea",
+    "check_note.py": "d6f58106feddf4a2f04569d9780e367da1e0e98a",
+    "compare.py": "7af6b7d3b3352b61fad5cf177b932c5cf5982ca3",
+    "helpdesk_sim.py": "21ce89b970823b5ea7a6a1972a16a58c93739ffb",
+    "helpdesk_sim_test.py": "c1adc7744677a70f0d403b76bbee6d7622c91a43",
+    "helpdesk_tools.py": "4ff9d3bfbac96cf47d18d5b80be1ea01d44923ba",
+    "list_pq.py": "ce72c3d872c9fb9fa93223f34c36ab3b14747e4d",
+    "pq_checks.py": "9f1a9d837b5a705276217523b9a2b70040213e5d",
+    "priority_queue.py": "988cae68bdc394fc5d22481df3c88862bdc93b9b",
+    "priority_queue_test.py": "3d833128919db36ef39b33530047944d1fc3276a",
+    "scan_heap_pq.py": "004481fa782ae871047e86e38d50012947be41b4",
+    "scenarios.py": "92cd71eb588f0754e4885af1917c45b48a9849dd"
+   },
+   "due_at": "2026-12-07T07:59:59Z"
+  },
+  "files": [
+   "repo/.github/workflows/classroom.yml",
+   "repo/.gitignore",
+   "repo/AI_NOTE.md",
+   "repo/ANALYSIS.md",
+   "repo/check_note.py",
+   "repo/compare.py",
+   "repo/helpdesk_sim.py",
+   "repo/helpdesk_sim_test.py",
+   "repo/helpdesk_tools.py",
+   "repo/list_pq.py",
+   "repo/pq_checks.py",
+   "repo/priority_queue.py",
+   "repo/priority_queue_test.py",
+   "repo/scan_heap_pq.py",
+   "repo/scenarios.py",
+   "spec.md"
+  ],
+  "archived_at": "2026-11-23T07:44:20-08:00",
+  "summary_done": true,
+  "changes": [
+   "new"
+  ],
+  "history": [
+   {
+    "at": "2026-11-23T07:44:20-08:00",
     "changes": [
      "new"
     ]

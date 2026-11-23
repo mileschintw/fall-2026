@@ -1,0 +1,157 @@
+name: Autograding Tests
+on:
+  push:
+    branches:
+      - '**'   # run on any branch push in this repo
+  workflow_dispatch:
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: "Basics"
+      id: basics
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Basics"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest priority_queue_test.BasicsTest
+        timeout: 2
+        max-score: 6
+    - name: "Remove min"
+      id: remove-min
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Remove min"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest priority_queue_test.RemoveMinTest
+        timeout: 2
+        max-score: 10
+    - name: "Lookups"
+      id: lookups
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Lookups"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest priority_queue_test.LookupTest
+        timeout: 2
+        max-score: 4
+    - name: "Change priority"
+      id: change-priority
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Change priority"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest priority_queue_test.ChangePriorityTest
+        timeout: 2
+        max-score: 10
+    - name: "Remove"
+      id: remove
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Remove"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest priority_queue_test.RemoveTest
+        timeout: 2
+        max-score: 8
+    - name: "Errors"
+      id: errors
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Errors"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest priority_queue_test.ErrorsTest
+        timeout: 2
+        max-score: 4
+    - name: "Random operations"
+      id: random-operations
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Random operations"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest priority_queue_test.RandomTest
+        timeout: 2
+        max-score: 4
+    - name: "Speed"
+      id: speed
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Speed"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest priority_queue_test.SpeedTest
+        timeout: 2
+        max-score: 4
+    - name: "Help desk - one agent"
+      id: help-desk-one-agent
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Help desk - one agent"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest helpdesk_sim_test.OneAgentTest
+        timeout: 2
+        max-score: 5
+    - name: "Help desk - several agents"
+      id: help-desk-several-agents
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Help desk - several agents"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest helpdesk_sim_test.AgentsTest
+        timeout: 2
+        max-score: 4
+    - name: "Help desk - escalations"
+      id: help-desk-escalations
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Help desk - escalations"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest helpdesk_sim_test.EscalationTest
+        timeout: 2
+        max-score: 3
+    - name: "Help desk - one full day"
+      id: help-desk-one-full-day
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Help desk - one full day"
+        setup-command: ''
+        command: timeout 60 python3 -m unittest helpdesk_sim_test.OneDayTest
+        timeout: 2
+        max-score: 3
+    - name: "AI note"
+      id: ai-note
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "AI note"
+        setup-command: ''
+        command: timeout 60 python3 check_note.py
+        timeout: 2
+        max-score: 10
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        BASICS_RESULTS: "${{steps.basics.outputs.result}}"
+        REMOVE-MIN_RESULTS: "${{steps.remove-min.outputs.result}}"
+        LOOKUPS_RESULTS: "${{steps.lookups.outputs.result}}"
+        CHANGE-PRIORITY_RESULTS: "${{steps.change-priority.outputs.result}}"
+        REMOVE_RESULTS: "${{steps.remove.outputs.result}}"
+        ERRORS_RESULTS: "${{steps.errors.outputs.result}}"
+        RANDOM-OPERATIONS_RESULTS: "${{steps.random-operations.outputs.result}}"
+        SPEED_RESULTS: "${{steps.speed.outputs.result}}"
+        HELP-DESK-ONE-AGENT_RESULTS: "${{steps.help-desk-one-agent.outputs.result}}"
+        HELP-DESK-SEVERAL-AGENTS_RESULTS: "${{steps.help-desk-several-agents.outputs.result}}"
+        HELP-DESK-ESCALATIONS_RESULTS: "${{steps.help-desk-escalations.outputs.result}}"
+        HELP-DESK-ONE-FULL-DAY_RESULTS: "${{steps.help-desk-one-full-day.outputs.result}}"
+        AI-NOTE_RESULTS: "${{steps.ai-note.outputs.result}}"
+      with:
+        runners: basics,remove-min,lookups,change-priority,remove,errors,random-operations,speed,help-desk-one-agent,help-desk-several-agents,help-desk-escalations,help-desk-one-full-day,ai-note
