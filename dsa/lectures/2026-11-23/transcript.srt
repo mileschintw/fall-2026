@@ -1,0 +1,4437 @@
+1
+00:05:08,000 --> 00:05:09,000
+[該逐字稿自動產生。為清晰起見，可能已進行編輯。]
+Hey.
+
+2
+00:05:09,000 --> 00:05:11,000
+It's going to show
+
+3
+00:05:11,000 --> 00:05:14,000
+Might not
+
+4
+00:05:14,000 --> 00:05:30,000
+I have to do something else today.
+
+5
+00:05:30,000 --> 00:05:31,000
+Okay
+
+6
+00:05:31,000 --> 00:05:35,000
+Maybe it'll maybe it'll stick with us for a little while
+
+7
+00:05:35,000 --> 00:05:39,000
+Let me rearrange things. Okay.
+
+8
+00:05:39,000 --> 00:05:43,000
+We've got
+
+9
+00:05:43,000 --> 00:05:46,000
+Yep
+
+10
+00:05:46,000 --> 00:05:51,000
+We've got we are
+
+11
+00:05:51,000 --> 00:05:55,000
+recording, we've got video, we've got audio, we've got
+
+12
+00:05:55,000 --> 00:06:00,000
+Dribbles on the screen. Got a few friendly faces. How's everyone doing today?
+
+13
+00:06:00,000 --> 00:06:04,000
+Thanksgiving week, your big smiles. It's a short week.
+
+14
+00:06:04,000 --> 00:06:10,000
+Can't get better than that. Okay, so I will just remind everyone, Wednesday, no class.
+
+15
+00:06:10,000 --> 00:06:21,000
+And a recorded lecture, because whenever I record a lecture for the day before Thanksgiving, no one ever watches it. So we're not going to waste anyone's time pretending this this year.
+
+16
+00:06:21,000 --> 00:06:25,000
+What are we talking about today?
+
+17
+00:06:25,000 --> 00:06:27,000
+Same thing we talked about last Wednesday.
+
+18
+00:06:27,000 --> 00:06:31,000
+Anyone remember?
+
+19
+00:06:31,000 --> 00:06:33,000
+Hash tables, yes.
+
+20
+00:06:33,000 --> 00:06:38,000
+Hash tables.
+
+21
+00:06:38,000 --> 00:06:52,000
+And we started talking about hash tables. What do we like best about hash tables? Why do we even have hash tables? Why do we talk about them? What characteristic do they give us?
+
+22
+00:06:52,000 --> 00:06:55,000
+Anyone online want to
+
+23
+00:06:55,000 --> 00:07:02,000
+drop something in the chat as well. They give us efficiency
+
+24
+00:07:02,000 --> 00:07:05,000
+More than anything else, efficiency.
+
+25
+00:07:05,000 --> 00:07:07,000
+Efficiency
+
+26
+00:07:07,000 --> 00:07:09,000
+It's O of one
+
+27
+00:07:09,000 --> 00:07:22,000
+average time to put things into a hash table and take things out of a hash table. They also give us what is basically our key value pairs, key value storage.
+
+28
+00:07:22,000 --> 00:07:37,000
+Which is super convenient. We see this with our dictionaries. How many times have we used Python dicks, right? It's just we wrap it up. It's nice, lightweight way to have a data structure and store some data altogether. So
+
+29
+00:07:37,000 --> 00:07:41,000
+Our hash table gives us that key value
+
+30
+00:07:41,000 --> 00:07:43,000
+data storage
+
+31
+00:07:43,000 --> 00:07:56,000
+But more than anything, it's the efficiency. It's this O of 1. This is the magic of a hash table. And this is where all the thinking and understanding really needs to go.
+
+32
+00:07:56,000 --> 00:08:00,000
+We get O of one
+
+33
+00:08:00,000 --> 00:08:06,000
+insert and retrieve with a hash table with our
+
+34
+00:08:06,000 --> 00:08:11,000
+Our default array data structure
+
+35
+00:08:11,000 --> 00:08:15,000
+Because
+
+36
+00:08:15,000 --> 00:08:19,000
+With our array data structure
+
+37
+00:08:19,000 --> 00:08:21,000
+If we know the index
+
+38
+00:08:21,000 --> 00:08:29,000
+Of something in our array. We can go directly to that location in memory.
+
+39
+00:08:29,000 --> 00:08:40,000
+And either store something here or read something from here. This is a location in memory. So if we have that index, we can go directly there
+
+40
+00:08:40,000 --> 00:08:45,000
+And
+
+41
+00:08:45,000 --> 00:08:48,000
+Put something in or read something out.
+
+42
+00:08:48,000 --> 00:08:51,000
+So, when we hear O1
+
+43
+00:08:51,000 --> 00:09:04,000
+Runtime for data access or data writing, we think of an array. That's the only way we get O . because we know we can go directly to that location of memory.
+
+44
+00:09:04,000 --> 00:09:13,000
+But the question is, how do we get that with a hash table? So if we're thinking about, oh, we're just storing
+
+45
+00:09:13,000 --> 00:09:31,000
+We're gonna just stored numbers for now. We're going to keep it simple. We're not going to do the key value thing quite yet. We're just going to store numbers. So I want y'all to throw out some numbers for me. We will start with 42 because that's always a good number to start with
+
+46
+00:09:31,000 --> 00:09:36,000
+What's another number?
+
+47
+00:09:36,000 --> 00:09:39,000
+Well, 12.
+
+48
+00:09:39,000 --> 00:09:42,000
+You got a favorite number.
+
+49
+00:09:42,000 --> 00:09:44,000
+Five
+
+50
+00:09:44,000 --> 00:09:48,000
+Anyone else? I mean, if you 33.
+
+51
+00:09:48,000 --> 00:09:50,000
+Let's get a few more.
+
+52
+00:09:50,000 --> 00:09:52,000
+Seven
+
+53
+00:09:52,000 --> 00:09:54,000
+Let's get something like what?
+
+54
+00:09:54,000 --> 00:09:56,000
+2.
+
+55
+00:09:56,000 --> 00:10:00,000
+Let's get something big, like 80… 86
+
+56
+00:10:00,000 --> 00:10:08,000
+10. Okay. Okay, so we are going to take these numbers. We're going to put them into our hash table.
+
+57
+00:10:08,000 --> 00:10:23,000
+And if we had We can see we can look at these numbers. And the range of these numbers. We can, let's say they're in the range zero to, I don't know, 90.
+
+58
+00:10:23,000 --> 00:10:32,000
+We can be generous and say they're in the range of 0 to 100. In order to store them
+
+59
+00:10:32,000 --> 00:10:43,000
+With how we've used an array so far, we would have to have an array that is basically
+
+60
+00:10:43,000 --> 00:10:51,000
+This is 99, this is 98. This is 01. And then a whole bunch of things.
+
+61
+00:10:51,000 --> 00:10:55,000
+So if we were, if we had an array
+
+62
+00:10:55,000 --> 00:11:05,000
+That at 100 elements in it. And these are 100 spaces in it. And these are the numbers we are putting into our array.
+
+63
+00:11:05,000 --> 00:11:11,000
+We could just say, hey, we're going to use this value as the key, as the index.
+
+64
+00:11:11,000 --> 00:11:16,000
+So 42 would go and spot 4
+
+65
+00:11:16,000 --> 00:11:21,000
+12 would go in spot 12, 5 would go in spot 5, so on.
+
+66
+00:11:21,000 --> 00:11:22,000
+That make sense?
+
+67
+00:11:22,000 --> 00:11:24,000
+On the same board
+
+68
+00:11:24,000 --> 00:11:36,000
+Okay, great. And then we're going to take a little leap of faith here. And we're going to say when we're talking about our hash tables, let's say that these are those keys
+
+69
+00:11:36,000 --> 00:11:40,000
+And let's just say we have
+
+70
+00:11:40,000 --> 00:11:44,000
+For fun, we've got some value associated with it. We're not going to go
+
+71
+00:11:44,000 --> 00:11:47,000
+dive into that quite… quite yet.
+
+72
+00:11:47,000 --> 00:11:51,000
+But if these are the keys
+
+73
+00:11:51,000 --> 00:11:53,000
+And we have an array
+
+74
+00:11:53,000 --> 00:11:56,000
+that has spots for 100 items in it.
+
+75
+00:11:56,000 --> 00:12:00,000
+It's very easy for us to figure out where each of these items goes.
+
+76
+00:12:00,000 --> 00:12:03,000
+Because we're just going to go and put it in
+
+77
+00:12:03,000 --> 00:12:06,000
+Whatever that index is.
+
+78
+00:12:06,000 --> 00:12:18,000
+What are some pros and cons of doing this?
+
+79
+00:12:18,000 --> 00:12:28,000
+It is sorted. That's nice. Yes, because So by the time we put all of our items into the appropriate place, if we were to just rip through this
+
+80
+00:12:28,000 --> 00:12:32,000
+We would access them in a sorted way. That's really nice.
+
+81
+00:12:32,000 --> 00:12:39,000
+What else?
+
+82
+00:12:39,000 --> 00:12:45,000
+How many… how much storage do we have versus how many numbers are we storing?
+
+83
+00:12:45,000 --> 00:12:48,000
+We're storing about 10 numbers here.
+
+84
+00:12:48,000 --> 00:12:54,000
+And we have a space for 100. So we're using about 10% of the storage.
+
+85
+00:12:54,000 --> 00:12:55,000
+And that's not great
+
+86
+00:12:55,000 --> 00:12:58,000
+We're holding a bunch of space
+
+87
+00:12:58,000 --> 00:13:02,000
+But we're only using a small amount of it.
+
+88
+00:13:02,000 --> 00:13:09,000
+So that's one thing we're not crazy about. We're only using we're not being super, super efficient with our use of space.
+
+89
+00:13:09,000 --> 00:13:13,000
+What else?
+
+90
+00:13:13,000 --> 00:13:24,000
+What if I want to put something with a key of 175 in here
+
+91
+00:13:24,000 --> 00:13:26,000
+I can't do that anymore.
+
+92
+00:13:26,000 --> 00:13:34,000
+So by restricting this as kind of a
+
+93
+00:13:34,000 --> 00:13:36,000
+A direct map
+
+94
+00:13:36,000 --> 00:13:40,000
+The key to index
+
+95
+00:13:40,000 --> 00:13:45,000
+We're restricted to being able to have keys within this branch
+
+96
+00:13:45,000 --> 00:13:49,000
+So that doesn't mean that means we can't have just any random key we want.
+
+97
+00:13:49,000 --> 00:13:52,000
+So not super crazy about that.
+
+98
+00:13:52,000 --> 00:13:54,000
+But we can build on this
+
+99
+00:13:54,000 --> 00:13:59,000
+And this is where, what did we talk about last week? Hash function
+
+100
+00:13:59,000 --> 00:14:01,000
+This is where a hash function can come into play.
+
+101
+00:14:01,000 --> 00:14:10,000
+Our hash function
+
+102
+00:14:10,000 --> 00:14:17,000
+Our hash function takes is it's just a function takes in something
+
+103
+00:14:17,000 --> 00:14:22,000
+And it puts out a number
+
+104
+00:14:22,000 --> 00:14:31,000
+And so the input, it can be a string. It can be an image. It can be anything, any data type
+
+105
+00:14:31,000 --> 00:14:34,000
+And it's going to give us a number out.
+
+106
+00:14:34,000 --> 00:14:37,000
+And in particular, it's always going to give us the same number.
+
+107
+00:14:37,000 --> 00:14:42,000
+We'll talk about this a little bit more in a minute. But it's always going to give us the same number.
+
+108
+00:14:42,000 --> 00:14:49,000
+And then what we can do once we have a number, we can
+
+109
+00:14:49,000 --> 00:14:54,000
+Break it down, we can mod it down into the number of slots that we have
+
+110
+00:14:54,000 --> 00:14:57,000
+And then we, so we'll do mod
+
+111
+00:14:57,000 --> 00:14:59,000
+of hash.
+
+112
+00:14:59,000 --> 00:15:03,000
+of input
+
+113
+00:15:03,000 --> 00:15:08,000
+And we will mod it by however many buckets we have.
+
+114
+00:15:08,000 --> 00:15:16,000
+So these are the slots we have. And once we mod, then we can
+
+115
+00:15:16,000 --> 00:15:19,000
+Super easily calculate
+
+116
+00:15:19,000 --> 00:15:23,000
+which index this is going to go into
+
+117
+00:15:23,000 --> 00:15:27,000
+Okay, so if I
+
+118
+00:15:27,000 --> 00:15:32,000
+And putting these items into our hash table
+
+119
+00:15:32,000 --> 00:15:40,000
+which right now is just an array. But because we put this hash function in front of it that turns it into a hash table.
+
+120
+00:15:40,000 --> 00:15:44,000
+So if I insert 42
+
+121
+00:15:44,000 --> 00:15:47,000
+Into this table.
+
+122
+00:15:47,000 --> 00:15:55,000
+I'm going to mod nine. Someone needs some help with the math because I didn't draw the
+
+123
+00:15:55,000 --> 00:16:00,000
+And then draw a nice even number, a nice, nice division number
+
+124
+00:16:00,000 --> 00:16:05,000
+So what's 42 mod 9
+
+125
+00:16:05,000 --> 00:16:11,000
+36. Six
+
+126
+00:16:11,000 --> 00:16:21,000
+Okay, cool. So 42 mod 9 is 6. So we are going to put 42 in here.
+
+127
+00:16:21,000 --> 00:16:26,000
+12 mod 9 is 3
+
+128
+00:16:26,000 --> 00:16:29,000
+So we're going to put 12 in here.
+
+129
+00:16:29,000 --> 00:16:35,000
+5 mod 9 is 5. So I'm going to put five in here.
+
+130
+00:16:35,000 --> 00:16:42,000
+And I'm going to stop for just a second. Is everyone following along? Is this clear so far?
+
+131
+00:16:42,000 --> 00:16:56,000
+Okay, so when we insert into insert a new value into our hash table. We don't just go to that location. We don't go just to index 33. We're going to mod it
+
+132
+00:16:56,000 --> 00:17:00,000
+To get which index here
+
+133
+00:17:00,000 --> 00:17:03,000
+Because the mod is a cheap operation
+
+134
+00:17:03,000 --> 00:17:06,000
+That means it's quick to calculate
+
+135
+00:17:06,000 --> 00:17:13,000
+And once we calculate the index, we can go to that location in memory and either write or weave.
+
+136
+00:17:13,000 --> 00:17:17,000
+So 33 mod 9 is
+
+137
+00:17:17,000 --> 00:17:19,000
+6. Thank you.
+
+138
+00:17:19,000 --> 00:17:22,000
+Oh, we got a problem.
+
+139
+00:17:22,000 --> 00:17:31,000
+We've got a problem because 33 mod 9 is 6, that means this this key is supposed to go in spot six
+
+140
+00:17:31,000 --> 00:17:33,000
+But something's already there
+
+141
+00:17:33,000 --> 00:17:37,000
+I think someone said this last week. This is our collision.
+
+142
+00:17:37,000 --> 00:17:41,000
+We have a few options of what we can do here.
+
+143
+00:17:41,000 --> 00:17:50,000
+Last week, I started showing how we could chain. But I'm gonna do it a little bit simpler right now.
+
+144
+00:17:50,000 --> 00:17:55,000
+Instead of doing anything fancy, we're just going to say, hey, I'm going to come here
+
+145
+00:17:55,000 --> 00:17:58,000
+Oh, look, there's already something in that spot
+
+146
+00:17:58,000 --> 00:18:04,000
+It's something different. So I'm going to go to the next spot and say, hey
+
+147
+00:18:04,000 --> 00:18:08,000
+Is it open? Can I put something in here?
+
+148
+00:18:08,000 --> 00:18:13,000
+It is. So I'm going to put my 33 in here.
+
+149
+00:18:13,000 --> 00:18:16,000
+7. 7 mod 9.
+
+150
+00:18:16,000 --> 00:18:20,000
+is 7. I come here
+
+151
+00:18:20,000 --> 00:18:31,000
+I've got something here already. So instead of putting it directly in this location, I'm going to put it in the next open spot.
+
+152
+00:18:31,000 --> 00:18:37,000
+I'll go ahead with the last three here. We've got two.
+
+153
+00:18:37,000 --> 00:18:39,000
+goes right here
+
+154
+00:18:39,000 --> 00:18:44,000
+We've got 86, 86, mod 9
+
+155
+00:18:44,000 --> 00:18:47,000
+One, five
+
+156
+00:18:47,000 --> 00:18:54,000
+Okay, now it gets a little trickier, getting a little trickier here. So 86, 86 mod 9 is 5, right?
+
+157
+00:18:54,000 --> 00:19:07,000
+So I go here. It's taken, the spot is taken. Go to the next one taken next one taken, next one taken. Oh, there's not a next one. Now I have to roll back again to the beginning.
+
+158
+00:19:07,000 --> 00:19:09,000
+Okay.
+
+159
+00:19:09,000 --> 00:19:11,000
+We'll do that
+
+160
+00:19:11,000 --> 00:19:15,000
+We don't always… we don't always want to go around. We might
+
+161
+00:19:15,000 --> 00:19:18,000
+Do something else there, but that's okay.
+
+162
+00:19:18,000 --> 00:19:23,000
+And then 10 mod nine is one. So I'm gonna put 10 here
+
+163
+00:19:23,000 --> 00:19:32,000
+So now we've just populated our hash table by inserting each of these items one at a time.
+
+164
+00:19:32,000 --> 00:19:34,000
+Any questions?
+
+165
+00:19:34,000 --> 00:19:45,000
+We like this. Are we happy? You unhappy?
+
+166
+00:19:45,000 --> 00:19:48,000
+Okay, where's the end
+
+167
+00:19:48,000 --> 00:19:58,000
+We can only do this for so long, right? Right
+
+168
+00:19:58,000 --> 00:20:05,000
+Yeah, okay. So if we were to do something like
+
+169
+00:20:05,000 --> 00:20:11,000
+And I think there's a couple of ideas there, so we're going to tease them out one at a time.
+
+170
+00:20:11,000 --> 00:20:18,000
+One thing I'm hearing is, so if we've done something, let me see if I can do the math on this, right?
+
+171
+00:20:18,000 --> 00:20:20,000
+If I were to insert
+
+172
+00:20:20,000 --> 00:20:23,000
+9
+
+173
+00:20:23,000 --> 00:20:28,000
+You know, let's just do it, keep it easy. 18, 27
+
+174
+00:20:28,000 --> 00:20:33,000
+36. I know my 9's timetable 45.
+
+175
+00:20:33,000 --> 00:20:35,000
+54
+
+176
+00:20:35,000 --> 00:20:41,000
+63 plus 9, 72
+
+177
+00:20:41,000 --> 00:20:48,000
+Right. Okay, what's going to happen if we're putting this sequence of numbers into
+
+178
+00:20:48,000 --> 00:20:53,000
+into this hash table with this approach.
+
+179
+00:20:53,000 --> 00:21:11,000
+I'm gonna first nine mod nine zero. So I'll draw a second one.
+
+180
+00:21:11,000 --> 00:21:22,000
+012345678. If we were to put nine in nine would go right here.
+
+181
+00:21:22,000 --> 00:21:29,000
+In our 0, 1, 2, 3, 4, 5, 6, 7.
+
+182
+00:21:29,000 --> 00:21:32,000
+8. Okay, put a little extra in there.
+
+183
+00:21:32,000 --> 00:21:36,000
+We'll ignore this one
+
+184
+00:21:36,000 --> 00:21:49,000
+We then put 18 in. 18 goes in this spot right here. But we are just moving to the next item. Okay, 18. And now
+
+185
+00:21:49,000 --> 00:21:57,000
+27 goes here. It's taken. Go to the next spot. It's taken. We put it here
+
+186
+00:21:57,000 --> 00:22:01,000
+36. Again, right here
+
+187
+00:22:01,000 --> 00:22:06,000
+was taken, taken, taken, and then we put 36.
+
+188
+00:22:06,000 --> 00:22:16,000
+And then we do 45. Same thing over and over. 1, 2, 3, 4. And now we can put 45.
+
+189
+00:22:16,000 --> 00:22:20,000
+Okay, y'all following me with this one?
+
+190
+00:22:20,000 --> 00:22:23,000
+So what's happening here
+
+191
+00:22:23,000 --> 00:22:26,000
+Is this feeling like O of 1?
+
+192
+00:22:26,000 --> 00:22:31,000
+I feel like with this one
+
+193
+00:22:31,000 --> 00:22:37,000
+You might believe me when I say that inserting and reading is O .
+
+194
+00:22:37,000 --> 00:22:44,000
+Because we did this mod operation and then we went directly to that location.
+
+195
+00:22:44,000 --> 00:22:46,000
+But in this one
+
+196
+00:22:46,000 --> 00:22:53,000
+When everything's hashing to the same or when everything's falling into the same bucket
+
+197
+00:22:53,000 --> 00:22:57,000
+All of a sudden, it's not so efficient. It doesn't look like O of 1 anymore.
+
+198
+00:22:57,000 --> 00:23:04,000
+It looks like O of N because we keep on having to iterate through to find an empty spot
+
+199
+00:23:04,000 --> 00:23:07,000
+So that's one of the things we might not like.
+
+200
+00:23:07,000 --> 00:23:12,000
+And this is one of the challenges of a hash table.
+
+201
+00:23:12,000 --> 00:23:15,000
+of
+
+202
+00:23:15,000 --> 00:23:23,000
+Depending on what our data is, and as our data is coming in, you need to make sure that everything's not falling into the same bucket.
+
+203
+00:23:23,000 --> 00:23:30,000
+Because that's when we start to run into bad performance time. No matter how we're handling collisions.
+
+204
+00:23:30,000 --> 00:23:36,000
+So one of the things we want to make sure is how do we reduce the number of collisions?
+
+205
+00:23:36,000 --> 00:23:46,000
+We'll come back to that in just a minute. So that partly what you were one of the things. It feels like it's a little messy after a while.
+
+206
+00:23:46,000 --> 00:23:50,000
+Another thing, anyone else have thoughts on
+
+207
+00:23:50,000 --> 00:23:53,000
+This approach
+
+208
+00:23:53,000 --> 00:23:59,000
+Let's talk about what it means to take something out or to retrieve. To read from here.
+
+209
+00:23:59,000 --> 00:24:02,000
+If we're going to read 42.
+
+210
+00:24:02,000 --> 00:24:08,000
+We do 42 mod nine
+
+211
+00:24:08,000 --> 00:24:10,000
+Which is 6
+
+212
+00:24:10,000 --> 00:24:12,000
+Right?
+
+213
+00:24:12,000 --> 00:24:15,000
+Yeah.
+
+214
+00:24:15,000 --> 00:24:22,000
+And so we go to this location, we check, we see, okay, yeah, we have key 42. Great
+
+215
+00:24:22,000 --> 00:24:28,000
+I'm going to start from the back now, just because it started getting a little spicier at the end of our list here.
+
+216
+00:24:28,000 --> 00:24:34,000
+So key
+
+217
+00:24:34,000 --> 00:24:42,000
+10 mod 9 is one. We go to index one. We found our key 10. Okay, cool. That's easy.
+
+218
+00:24:42,000 --> 00:24:46,000
+We look up key 86
+
+219
+00:24:46,000 --> 00:24:50,000
+And that is five
+
+220
+00:24:50,000 --> 00:24:54,000
+86 mod 9 is 5.
+
+221
+00:24:54,000 --> 00:25:05,000
+So here we go to five, index five, and we check and see, is this the key we're looking for? No, it's not. So now we have to go to the next one
+
+222
+00:25:05,000 --> 00:25:11,000
+It's not there. Go to the next one. It's not there. Go to the next one. It's not there. And I have to
+
+223
+00:25:11,000 --> 00:25:14,000
+I have to wrap all the way around.
+
+224
+00:25:14,000 --> 00:25:17,000
+So now we're seeing
+
+225
+00:25:17,000 --> 00:25:26,000
+the case where when we have a bunch of our keys falling into the same bucket, no matter how we
+
+226
+00:25:26,000 --> 00:25:37,000
+figure out which bucket it is. That's when we start to have a lot of collisions, and it's the number of collisions we have that start to make this inefficient.
+
+227
+00:25:37,000 --> 00:25:41,000
+So
+
+228
+00:25:41,000 --> 00:25:49,000
+What
+
+229
+00:25:49,000 --> 00:25:57,000
+What we did here, this is one approach for a hash table.
+
+230
+00:25:57,000 --> 00:26:10,000
+Open addressing. This is open addressing.
+
+231
+00:26:10,000 --> 00:26:27,000
+And open addressing means we've got our array here and we've got our key, and we're just going to mod by however many. And the max number of items we can have in this hash table
+
+232
+00:26:27,000 --> 00:26:31,000
+The number of items that we have in our array.
+
+233
+00:26:31,000 --> 00:26:35,000
+We have no other storage
+
+234
+00:26:35,000 --> 00:26:41,000
+What we started to look at last week was another way of handling collisions.
+
+235
+00:26:41,000 --> 00:26:46,000
+Anyone remember remember that?
+
+236
+00:26:46,000 --> 00:26:51,000
+Are we on time?
+
+237
+00:26:51,000 --> 00:27:02,000
+So another way we can handle collisions
+
+238
+00:27:02,000 --> 00:27:06,000
+Actually, that's an alternative to
+
+239
+00:27:06,000 --> 00:27:11,000
+Collision handling
+
+240
+00:27:11,000 --> 00:27:17,000
+is chaining.
+
+241
+00:27:17,000 --> 00:27:24,000
+And with this looks like, we are going to… I'm going to draw it sideways this time.
+
+242
+00:27:24,000 --> 00:27:28,000
+And I'm going to give us… I'm going to give us 5 buckets to start
+
+243
+00:27:28,000 --> 00:27:39,000
+01234. And I typically, it's very common to call our array
+
+244
+00:27:39,000 --> 00:27:52,000
+However it is, we're using our open addressing direct addressing. Or what we're seeing here chaining. These are the buckets. Our array is the thing that holds buckets. You can think of this as just
+
+245
+00:27:52,000 --> 00:27:56,000
+It's the bucket.
+
+246
+00:27:56,000 --> 00:28:04,000
+But with chaining, instead of just putting one item in each of these buckets
+
+247
+00:28:04,000 --> 00:28:08,000
+We're going to put a list of items in the in these buckets.
+
+248
+00:28:08,000 --> 00:28:10,000
+So
+
+249
+00:28:10,000 --> 00:28:15,000
+Let's come up with
+
+250
+00:28:15,000 --> 00:28:20,000
+come up with a few numbers.
+
+251
+00:28:20,000 --> 00:28:28,000
+We'll start with 42, because why not? What else? Yeah, we got to throw some numbers out there. Good.
+
+252
+00:28:28,000 --> 00:28:31,000
+84
+
+253
+00:28:31,000 --> 00:28:34,000
+days today, 23.
+
+254
+00:28:34,000 --> 00:28:40,000
+11. Anyone have a favorite number you want me to put up here?
+
+255
+00:28:40,000 --> 00:28:45,000
+Put a 6 in there. Okay, so same idea.
+
+256
+00:28:45,000 --> 00:28:56,000
+Same idea. These numbers are going to be our keys. And we're going to use the mod operation once again to figure out which bucket
+
+257
+00:28:56,000 --> 00:28:59,000
+The key goes into
+
+258
+00:28:59,000 --> 00:29:16,000
+So Maude tells us
+
+259
+00:29:16,000 --> 00:29:21,000
+Okay, so here we're going to start with 42.
+
+260
+00:29:21,000 --> 00:29:24,000
+42 mod
+
+261
+00:29:24,000 --> 00:29:41,000
+We're going to mod by however many number of buckets we have, which in this case is 5. 42 mod… oh, that one's a little bit easier. I feel more confident about this one, too. 84 mod. I'm just going to do all these real quick, equals 4
+
+262
+00:29:41,000 --> 00:29:48,000
+Feel free to call me out when I get something wrong.
+
+263
+00:29:48,000 --> 00:29:49,000
+11 mod
+
+264
+00:29:49,000 --> 00:29:56,000
+5 equals 1, 6 mod 5 equals one. Okay, we got one collision here
+
+265
+00:29:56,000 --> 00:29:58,000
+because we have 2 keys
+
+266
+00:29:58,000 --> 00:30:03,000
+That mod to the same bucket. So we're going to have a collision.
+
+267
+00:30:03,000 --> 00:30:08,000
+But this time with our chaining approach
+
+268
+00:30:08,000 --> 00:30:12,000
+When we insert 42.
+
+269
+00:30:12,000 --> 00:30:16,000
+The key 42 into our hash table. We do our mod
+
+270
+00:30:16,000 --> 00:30:19,000
+And we say, okay, it's going to bucket 2.
+
+271
+00:30:19,000 --> 00:30:24,000
+So I go into bucket two. I don't directly put it right here.
+
+272
+00:30:24,000 --> 00:30:33,000
+Instead, I'm going to create a linked list. And I'm going to put a node here. It's not connected to anything.
+
+273
+00:30:33,000 --> 00:30:36,000
+and I'm going to put my value 42
+
+274
+00:30:36,000 --> 00:30:38,000
+And
+
+275
+00:30:38,000 --> 00:30:42,000
+We're going to start this list.
+
+276
+00:30:42,000 --> 00:30:45,000
+Now we're going to insert 84.
+
+277
+00:30:45,000 --> 00:30:50,000
+84 mod 5 is 4, so it's going to go into bucket four
+
+278
+00:30:50,000 --> 00:30:56,000
+So I come down to bucket four, nothing's in there. Create my linked list node
+
+279
+00:30:56,000 --> 00:30:59,000
+84
+
+280
+00:30:59,000 --> 00:31:02,000
+And you pop it in there
+
+281
+00:31:02,000 --> 00:31:10,000
+We're inserting 23. 23 mod 5 goes to bucket 3. Same thing.
+
+282
+00:31:10,000 --> 00:31:12,000
+New linked list
+
+283
+00:31:12,000 --> 00:31:17,000
+23. I'll pop it in there
+
+284
+00:31:17,000 --> 00:31:19,000
+Now we're going to insert 11
+
+285
+00:31:19,000 --> 00:31:22,000
+that goes to bucket one
+
+286
+00:31:22,000 --> 00:31:26,000
+So we come to bucket one, nothing's in there.
+
+287
+00:31:26,000 --> 00:31:29,000
+We put 11 in there.
+
+288
+00:31:29,000 --> 00:31:30,000
+And
+
+289
+00:31:30,000 --> 00:31:35,000
+We've now got a little list bucket one
+
+290
+00:31:35,000 --> 00:31:38,000
+Go to our next item 6.
+
+291
+00:31:38,000 --> 00:31:43,000
+6 mod 1, this goes into the same bucket, bucket one
+
+292
+00:31:43,000 --> 00:31:54,000
+So we come to bucket one and here we say, oh, look, we already got something in there already. Okay, that's cool though, because this is just a linked list.
+
+293
+00:31:54,000 --> 00:31:56,000
+We've got a linked list.
+
+294
+00:31:56,000 --> 00:32:02,000
+What's our runtime to add something to the front or head of a linked list
+
+295
+00:32:02,000 --> 00:32:03,000
+O of 1.
+
+296
+00:32:03,000 --> 00:32:06,000
+So cool. We can do that.
+
+297
+00:32:06,000 --> 00:32:08,000
+And I'm
+
+298
+00:32:08,000 --> 00:32:11,000
+Just pretend that this is
+
+299
+00:32:11,000 --> 00:32:13,000
+Python list
+
+300
+00:32:13,000 --> 00:32:16,000
+right now, and we're just gonna append it on the end.
+
+301
+00:32:16,000 --> 00:32:19,000
+Simple, easy, O of 1 behavior.
+
+302
+00:32:19,000 --> 00:32:20,000
+Okay
+
+303
+00:32:20,000 --> 00:32:28,000
+So now, if we're going to, or let me let me pause. Any questions on this?
+
+304
+00:32:28,000 --> 00:32:30,000
+General idea
+
+305
+00:32:30,000 --> 00:32:33,000
+Instead of just having buckets
+
+306
+00:32:33,000 --> 00:32:35,000
+Where we put a key directly
+
+307
+00:32:35,000 --> 00:32:40,000
+Instead, each bucket is going to hold a list of items.
+
+308
+00:32:40,000 --> 00:32:42,000
+When we have a collision
+
+309
+00:32:42,000 --> 00:32:47,000
+Instead of finding another open spot.
+
+310
+00:32:47,000 --> 00:32:49,000
+in our hash table
+
+311
+00:32:49,000 --> 00:32:57,000
+Another open bucket. We're just going to add onto the list here
+
+312
+00:32:57,000 --> 00:32:58,000
+Sound okay?
+
+313
+00:32:58,000 --> 00:33:00,000
+Questions
+
+314
+00:33:00,000 --> 00:33:03,000
+So what do we do when we retrieve them?
+
+315
+00:33:03,000 --> 00:33:05,000
+When we retrieve
+
+316
+00:33:05,000 --> 00:33:11,000
+We want to get the data element that is keyed by 42.
+
+317
+00:33:11,000 --> 00:33:14,000
+We're gonna mod to figure out which bucket
+
+318
+00:33:14,000 --> 00:33:20,000
+The key would be in if it's in the hash table. You know it's two. So we go to bucket two
+
+319
+00:33:20,000 --> 00:33:23,000
+And then we iterate through this list
+
+320
+00:33:23,000 --> 00:33:26,000
+And thankfully, it's the first item here.
+
+321
+00:33:26,000 --> 00:33:31,000
+So, boom, found our key. We can return this back.
+
+322
+00:33:31,000 --> 00:33:42,000
+And if we are in the case where we are retrieving one of these two items that had a collision. We have key 11. We're going to mod 5
+
+323
+00:33:42,000 --> 00:33:45,000
+That goes to bucket one
+
+324
+00:33:45,000 --> 00:33:49,000
+So I would go to bucket one and now we have to check, we have to go through this list
+
+325
+00:33:49,000 --> 00:33:55,000
+First item, this is keyed 11. Oh, cool. That's what we're looking for. Return it.
+
+326
+00:33:55,000 --> 00:33:57,000
+Excellent.
+
+327
+00:33:57,000 --> 00:33:59,000
+And if we're six
+
+328
+00:33:59,000 --> 00:34:04,000
+We calculate that it goes to bucket one. We go to bucket one
+
+329
+00:34:04,000 --> 00:34:11,000
+That's O of one, because bucket one is the index in an array which gives us to a direct location in memory.
+
+330
+00:34:11,000 --> 00:34:19,000
+And then we iterate through our list here to find the key we're looking for. We found 6
+
+331
+00:34:19,000 --> 00:34:23,000
+And we can return that, yes, we have
+
+332
+00:34:23,000 --> 00:34:24,000
+Okay.
+
+333
+00:34:24,000 --> 00:34:26,000
+Who are we feeling about this?
+
+334
+00:34:26,000 --> 00:34:29,000
+Questions, comments, observations?
+
+335
+00:34:29,000 --> 00:34:45,000
+Can you explain how it's that much different from before? If we have a list of numbers that would collide. In this version, you're still traversing to a list to find an open spot. Great question.
+
+336
+00:34:45,000 --> 00:34:57,000
+Okay, I'm going to make, let's do a couple more observations about this chaining approach, and then we'll make sure that we make sure that question gets answered. Is that okay, Brian?
+
+337
+00:34:57,000 --> 00:35:00,000
+So
+
+338
+00:35:00,000 --> 00:35:14,000
+One thing, let's make some observations about what we see. So so Brian's saying basically, how is this much different from what we just looked at? Because we still have to go to a location
+
+339
+00:35:14,000 --> 00:35:19,000
+and memory, but then we still have to do some iteration.
+
+340
+00:35:19,000 --> 00:35:33,000
+And we saw we had to do this up here when we came here, we had to go through and look at some things.
+
+341
+00:35:33,000 --> 00:35:39,000
+What are some, let's go through some more observations about this approach.
+
+342
+00:35:39,000 --> 00:35:45,000
+entertaining approach.
+
+343
+00:35:45,000 --> 00:35:47,000
+Any… anyone notice anything?
+
+344
+00:35:47,000 --> 00:35:56,000
+What are some other observations we can make about this approach versus the other approach?
+
+345
+00:35:56,000 --> 00:35:58,000
+I have a question
+
+346
+00:35:58,000 --> 00:35:59,000
+Yeah.
+
+347
+00:35:59,000 --> 00:36:09,000
+In the first, I wasn't here for the first 10 minutes of class, so pardon if I didn't quite understand, but the first approach, it's just an array, right? There's like nothing special about it.
+
+348
+00:36:09,000 --> 00:36:26,000
+Yes, it's an array. What makes it a hash table is that we're putting this hash function, this mod, this hash function plus the mod in front of it to take our key and map it to a
+
+349
+00:36:26,000 --> 00:36:27,000
+I see.
+
+350
+00:36:27,000 --> 00:36:31,000
+an index in that array, which gives it the ability to go directly to that location memory.
+
+351
+00:36:31,000 --> 00:36:47,000
+I see. So, I mean, a difference that I'm noticing is in this first approach, like you can obviously use the array and the hash function to do a direct map mapping of your values. But I think those values
+
+352
+00:36:47,000 --> 00:36:59,000
+Are limited to integer values, or, like, whatever type your array is versus the second approach where you use the link list, you can essentially put any type, any data type
+
+353
+00:36:59,000 --> 00:37:01,000
+In that linked list chain.
+
+354
+00:37:01,000 --> 00:37:16,000
+I'm gonna say no, not true. Sorry. So what the hash is going to let us go from any value, so any string or anything that can be represented digitally
+
+355
+00:37:16,000 --> 00:37:28,000
+To a number. So the hash function always gives us a number. And then the mod takes that number and puts it in the range of the array.
+
+356
+00:37:28,000 --> 00:37:32,000
+Yeah, I mean, that makes sense for the key, but like the value though is what I'm saying like
+
+357
+00:37:32,000 --> 00:37:47,000
+Oh, oh, oh, oh, yeah, okay, gotcha. Yes, so we are for the value, we're keeping it simple. We're assuming that, yeah, we have the value, the value stored to the key. I'm hiding that complexity right now.
+
+358
+00:37:47,000 --> 00:37:48,000
+I see, I see.
+
+359
+00:37:48,000 --> 00:37:53,000
+But yes, but that same thing, because we're not seeing the value here either.
+
+360
+00:37:53,000 --> 00:37:54,000
+Right, okay.
+
+361
+00:37:54,000 --> 00:38:05,000
+We're gonna assume… I'm gonna… I'm gonna ask you to trust me for now, just that the… the value we can… we can bring along for the ride. We're only going to worry about the keys right now.
+
+362
+00:38:05,000 --> 00:38:22,000
+I see. Okay, in that case, I guess another difference that I'm noticing is So like, I feel like there's more space for like there's more space in general with the second approach. In the first approach, you're kind of limited to
+
+363
+00:38:22,000 --> 00:38:39,000
+Just the pure size of the initial array. Just those boxes versus the second approach. You have those boxes that turn into chains that allow you to allocate like more space or allow you
+
+364
+00:38:39,000 --> 00:38:40,000
+Yes.
+
+365
+00:38:40,000 --> 00:38:42,000
+Take up more space. So I guess that's another difference.
+
+366
+00:38:42,000 --> 00:38:48,000
+Yeah. So one of the things with this first approach here
+
+367
+00:38:48,000 --> 00:38:54,000
+Is that the maximum number of items we can put in this list
+
+368
+00:38:54,000 --> 00:38:58,000
+is however many items we have allocated in this array.
+
+369
+00:38:58,000 --> 00:39:07,000
+So if this is 9 items, we can only ever put 9 items in this this first approach. We can't store more than 9 items.
+
+370
+00:39:07,000 --> 00:39:10,000
+But in this one
+
+371
+00:39:10,000 --> 00:39:25,000
+We can. We can store I don't know, we can. We can let these lists get bigger. We have more flexibility. We don't have an upper limit into how many items we can store in this list.
+
+372
+00:39:25,000 --> 00:39:26,000
+No
+
+373
+00:39:26,000 --> 00:39:31,000
+want to say that there is a point where
+
+374
+00:39:31,000 --> 00:39:36,000
+If these… if these chains get too long
+
+375
+00:39:36,000 --> 00:39:43,000
+It's not going to be as efficient. So there's going to be a point where we're not happy with how many
+
+376
+00:39:43,000 --> 00:39:46,000
+items we have in our hash table.
+
+377
+00:39:46,000 --> 00:39:54,000
+But we don't have a hard limit on the number of things that we can hold.
+
+378
+00:39:54,000 --> 00:39:55,000
+Yeah
+
+379
+00:39:55,000 --> 00:39:58,000
+What else? Anything else?
+
+380
+00:39:58,000 --> 00:40:04,000
+Check the farmhand
+
+381
+00:40:04,000 --> 00:40:05,000
+I have another quick question.
+
+382
+00:40:05,000 --> 00:40:06,000
+Yeah.
+
+383
+00:40:06,000 --> 00:40:21,000
+That limit at which we kind of I know at some point we're going to have to turn this array and like kind of double the size. Similar to how we did with the dynamic array, but that limit at which we do that
+
+384
+00:40:21,000 --> 00:40:31,000
+Is that the… the average of all of the nodes in the link list across all of the buckets, or is it when one of the buckets
+
+385
+00:40:31,000 --> 00:40:38,000
+reaches a limit, like, if, like, bucket one has like 9 chains or like 9 nodes
+
+386
+00:40:38,000 --> 00:40:48,000
+And we denote 9 nodes as being the limit. Is that the point where we, like, reallocate and double the size, or is it, like, taken across the average across all the buckets?
+
+387
+00:40:48,000 --> 00:40:50,000
+Okay
+
+388
+00:40:50,000 --> 00:40:57,000
+there's a lot in this question. Let's break this down, and I'm gonna take that as our next step, the next thing to look at.
+
+389
+00:40:57,000 --> 00:41:06,000
+Okay, so give me one moment. 1st we're going to look at. And there's
+
+390
+00:41:06,000 --> 00:41:17,000
+I think I mentioned this last week, and I'm gonna… I'm going to mention it again. I'm going to define something called the load factor
+
+391
+00:41:17,000 --> 00:41:22,000
+And the load factor is the number of items
+
+392
+00:41:22,000 --> 00:41:24,000
+In the hash table
+
+393
+00:41:24,000 --> 00:41:32,000
+Divided by the number of buckets.
+
+394
+00:41:32,000 --> 00:41:43,000
+So this gives us a measure, a specific measure of how full our hash table is.
+
+395
+00:41:43,000 --> 00:41:47,000
+Now, when we look at
+
+396
+00:41:47,000 --> 00:41:50,000
+This first hash table
+
+397
+00:41:50,000 --> 00:41:54,000
+We have nine buckets.
+
+398
+00:41:54,000 --> 00:41:56,000
+And
+
+399
+00:41:56,000 --> 00:42:00,000
+Let's see
+
+400
+00:42:00,000 --> 00:42:03,000
+Nine buckets
+
+401
+00:42:03,000 --> 00:42:09,000
+And we have How many items in our hash table?
+
+402
+00:42:09,000 --> 00:42:12,000
+8 items
+
+403
+00:42:12,000 --> 00:42:21,000
+And I know someone can turn that into a percentage for me or something if you want, but you know, we can look at this 8 out of nine
+
+404
+00:42:21,000 --> 00:42:29,000
+80 something, 80% ish 90 something ish right? So that's a pretty full table.
+
+405
+00:42:29,000 --> 00:42:43,000
+That's a pretty full table. And we know because with this approach, we can't ever bless you, have more than 100%, right? Once we hit 100%, we can't put anything else in this table. It's full.
+
+406
+00:42:43,000 --> 00:42:53,000
+If we were to come down here and this one, I did not put as many things in here. Our load factor is going to be
+
+407
+00:42:53,000 --> 00:43:00,000
+What is it? One, two, three, four, five, five items
+
+408
+00:43:00,000 --> 00:43:02,000
+divided by
+
+409
+00:43:02,000 --> 00:43:06,000
+5 buckets.
+
+410
+00:43:06,000 --> 00:43:11,000
+So our load factor is one.
+
+411
+00:43:11,000 --> 00:43:18,000
+But our load factor for the second one looks a little bit different. It means something a little bit different, right?
+
+412
+00:43:18,000 --> 00:43:23,000
+Because in the second case, this is really our load factor
+
+413
+00:43:23,000 --> 00:43:27,000
+is also the
+
+414
+00:43:27,000 --> 00:43:29,000
+Average
+
+415
+00:43:29,000 --> 00:43:33,000
+number of items
+
+416
+00:43:33,000 --> 00:43:39,000
+Per bucket.
+
+417
+00:43:39,000 --> 00:43:40,000
+Right?
+
+418
+00:43:40,000 --> 00:43:43,000
+Does that make sense?
+
+419
+00:43:43,000 --> 00:43:47,000
+So this is the average number of items per bucket
+
+420
+00:43:47,000 --> 00:43:55,000
+Here we have an average of one item per bucket. Most of our buckets have one item.
+
+421
+00:43:55,000 --> 00:43:58,000
+One of our buckets has two items
+
+422
+00:43:58,000 --> 00:44:04,000
+Why is this important for this chaining approach?
+
+423
+00:44:04,000 --> 00:44:07,000
+While our access time
+
+424
+00:44:07,000 --> 00:44:09,000
+If we don't know
+
+425
+00:44:09,000 --> 00:44:15,000
+We don't know exactly how our elements are put, are distributed across our buckets right here
+
+426
+00:44:15,000 --> 00:44:19,000
+Our access time is going to be
+
+427
+00:44:19,000 --> 00:44:26,000
+Oops, O to figure out which bucket something is in
+
+428
+00:44:26,000 --> 00:44:28,000
+And then
+
+429
+00:44:28,000 --> 00:44:37,000
+We have to iterate through the buckets in the buckets, the items in the bucket.
+
+430
+00:44:37,000 --> 00:44:39,000
+And the average
+
+431
+00:44:39,000 --> 00:44:43,000
+the length of that list
+
+432
+00:44:43,000 --> 00:44:46,000
+Is the average number of items per bucket.
+
+433
+00:44:46,000 --> 00:44:53,000
+Y'all with me.
+
+434
+00:44:53,000 --> 00:44:56,000
+So our load factor
+
+435
+00:44:56,000 --> 00:45:02,000
+tells us something different, a little bit different for our two different approaches of our hash table.
+
+436
+00:45:02,000 --> 00:45:10,000
+And it's that load factor that tells us when we want to resize our hash table.
+
+437
+00:45:10,000 --> 00:45:15,000
+Because when we have, oh, I don't know
+
+438
+00:45:15,000 --> 00:45:20,000
+less than about 3 or 4 items in one of these lists
+
+439
+00:45:20,000 --> 00:45:32,000
+It's pretty efficient to search through. Like, it's okay to we like this list, this chain to be less than about three or four items.
+
+440
+00:45:32,000 --> 00:45:38,000
+And so we use this load factor to tell us
+
+441
+00:45:38,000 --> 00:45:44,000
+If we have less than about 3 or 4 items per bucket
+
+442
+00:45:44,000 --> 00:45:54,000
+Then our hash table is probably good. We're going to leave it. But once we get to that point where we have more than about 3 or 4 items per chain
+
+443
+00:45:54,000 --> 00:45:58,000
+We're going to resize our hash table.
+
+444
+00:45:58,000 --> 00:46:02,000
+When we resize our hash table, we get more buckets.
+
+445
+00:46:02,000 --> 00:46:05,000
+When we have more buckets
+
+446
+00:46:05,000 --> 00:46:14,000
+We then distribute the same number of items per bucket. Or sorry, the same number of items across twice as many buckets.
+
+447
+00:46:14,000 --> 00:46:17,000
+So we're going to reduce our load factor
+
+448
+00:46:17,000 --> 00:46:26,000
+We're gonna have fewer items per bucket. And that search down a chain is going to be quicker again.
+
+449
+00:46:26,000 --> 00:46:28,000
+Are y'all following me so far?
+
+450
+00:46:28,000 --> 00:46:30,000
+We're gonna see an example of this.
+
+451
+00:46:30,000 --> 00:46:39,000
+I'm going to walk through this
+
+452
+00:46:39,000 --> 00:46:49,000
+Brian, I'm checking to see if I've given y'all enough to answer this question or not. Let's do our resize first and then come back to this.
+
+453
+00:46:49,000 --> 00:46:53,000
+So our resize
+
+454
+00:46:53,000 --> 00:46:54,000
+See
+
+455
+00:46:54,000 --> 00:47:04,000
+Let's put just a couple more things. Let's put a couple more things into this chained hash table. And then let's do a resize.
+
+456
+00:47:04,000 --> 00:47:11,000
+I need, give me like three more numbers.
+
+457
+00:47:11,000 --> 00:47:18,000
+I'll do 14
+
+458
+00:47:18,000 --> 00:47:21,000
+26.
+
+459
+00:47:21,000 --> 00:47:24,000
+One more, one more. Someone shout it out.
+
+460
+00:47:24,000 --> 00:47:26,000
+68. Okay.
+
+461
+00:47:26,000 --> 00:47:29,000
+And
+
+462
+00:47:29,000 --> 00:47:43,000
+Let's see when we 14, 14 mod five is 4. Okay, so if I'm going to put 14 into our hash bucket, our hash table, we go to bucket 4
+
+463
+00:47:43,000 --> 00:47:45,000
+And we add
+
+464
+00:47:45,000 --> 00:47:49,000
+14 on here.
+
+465
+00:47:49,000 --> 00:47:57,000
+And we're going to put 26 in here, 26 mod 5 is 1, so we go to our one bucket and
+
+466
+00:47:57,000 --> 00:48:01,000
+Put our whoops
+
+467
+00:48:01,000 --> 00:48:05,000
+Oops.
+
+468
+00:48:05,000 --> 00:48:08,000
+I'll put 26 here
+
+469
+00:48:08,000 --> 00:48:17,000
+And then 68, we're going to put in there 68 mod five is three. So that gives us here 68.
+
+470
+00:48:17,000 --> 00:48:31,000
+Okay, so this is what our slightly more crowded ash table looks like with Chani. And this gives us 1, 2, 3, 4, 5, 6, 7, 8, 8 divided by 5.
+
+471
+00:48:31,000 --> 00:48:42,000
+So what one point
+
+472
+00:48:42,000 --> 00:48:45,000
+We're getting a little bit closer to 2.
+
+473
+00:48:45,000 --> 00:48:55,000
+Average of two items per bucket. So now we're going to resize it.
+
+474
+00:48:55,000 --> 00:48:58,000
+When we resize
+
+475
+00:48:58,000 --> 00:49:01,000
+We have 5 buckets to start with.
+
+476
+00:49:01,000 --> 00:49:08,000
+We're gonna double that. Let's give ourselves 10 buckets.
+
+477
+00:49:08,000 --> 00:49:11,000
+So
+
+478
+00:49:11,000 --> 00:49:18,000
+type of resize here, and let's see if I can give myself 10 buckets.
+
+479
+00:49:18,000 --> 00:49:22,000
+5, let's see one
+
+480
+00:49:22,000 --> 00:49:27,000
+01234
+
+481
+00:49:27,000 --> 00:49:33,000
+5, 6, 7, 8, 9. Okay, we now have 9 buckets.
+
+482
+00:49:33,000 --> 00:49:37,000
+We are
+
+483
+00:49:37,000 --> 00:49:43,000
+Putting the same numbers in. Now, actually.
+
+484
+00:49:43,000 --> 00:49:47,000
+Let me do this a little bit different. We are going to go through
+
+485
+00:49:47,000 --> 00:49:55,000
+Now, pay attention to how I'm going through this resize process because you may have to implement it.
+
+486
+00:49:55,000 --> 00:50:00,000
+I am going to go through every item in our hash table.
+
+487
+00:50:00,000 --> 00:50:05,000
+And I'm going to put it into our new set of buckets.
+
+488
+00:50:05,000 --> 00:50:12,000
+So I'm going to go through and I'm going to go to bucket zero. Oh, look, there's nothing in bucket zero.
+
+489
+00:50:12,000 --> 00:50:18,000
+So now I'm going to go to bucket one. And the first thing I have in there is 11.
+
+490
+00:50:18,000 --> 00:50:25,000
+I'm going to take 11 and I'm going to put it in my new set of buckets, which means I take that 11. I mod 10
+
+491
+00:50:25,000 --> 00:50:28,000
+what bucket does it go to?
+
+492
+00:50:28,000 --> 00:50:29,000
+One.
+
+493
+00:50:29,000 --> 00:50:32,000
+Happens to be the same one.
+
+494
+00:50:32,000 --> 00:50:37,000
+And I'm putting we said 11, right?
+
+495
+00:50:37,000 --> 00:50:41,000
+I'm not going to put my mill terminator on here quite yet.
+
+496
+00:50:41,000 --> 00:50:42,000
+I'm back here
+
+497
+00:50:42,000 --> 00:50:44,000
+Okay, so we put 11 in there
+
+498
+00:50:44,000 --> 00:50:47,000
+Now we're going to put 6 in there.
+
+499
+00:50:47,000 --> 00:50:50,000
+6 mod 10
+
+500
+00:50:50,000 --> 00:50:52,000
+is 6
+
+501
+00:50:52,000 --> 00:50:56,000
+So we're going to put that in here.
+
+502
+00:50:56,000 --> 00:51:01,000
+In fact, I'm not even going to make my linked list nodes. I'm just
+
+503
+00:51:01,000 --> 00:51:05,000
+Keep it a little bit simpler.
+
+504
+00:51:05,000 --> 00:51:08,000
+Okay, six. Now 26
+
+505
+00:51:08,000 --> 00:51:11,000
+26 mod 10 is 6.
+
+506
+00:51:11,000 --> 00:51:17,000
+We are gonna put that here
+
+507
+00:51:17,000 --> 00:51:23,000
+We're done with this bucket. We go to bucket 2. We've got 42.
+
+508
+00:51:23,000 --> 00:51:31,000
+42 mod 10 is 2.
+
+509
+00:51:31,000 --> 00:51:39,000
+Okay, we're done with that bucket. We go to bucket three. We've got 23, 23 mod 10 is 3.
+
+510
+00:51:39,000 --> 00:51:43,000
+So we put 23 in here.
+
+511
+00:51:43,000 --> 00:51:52,000
+And then we've got this one, 68, 68 mod 10 is 8. So I go to bucket 8.
+
+512
+00:51:52,000 --> 00:51:55,000
+And I put 68 in here
+
+513
+00:51:55,000 --> 00:52:03,000
+We're done with this bucket. We go to our next bucket. We've got 84, 84 mod 10 is 4.
+
+514
+00:52:03,000 --> 00:52:07,000
+So go to bucket 4 and I put my 84 in there
+
+515
+00:52:07,000 --> 00:52:09,000
+And then
+
+516
+00:52:09,000 --> 00:52:13,000
+I've got the last item 14.
+
+517
+00:52:13,000 --> 00:52:16,000
+Also, 14 mod
+
+518
+00:52:16,000 --> 00:52:22,000
+10 is 4, so I go to bucket 4 again, and I've got my 14.
+
+519
+00:52:22,000 --> 00:52:24,000
+Okay.
+
+520
+00:52:24,000 --> 00:52:28,000
+So we have now resized our table.
+
+521
+00:52:28,000 --> 00:52:35,000
+My resizing our table, we're going to double the number of buckets we have
+
+522
+00:52:35,000 --> 00:52:40,000
+And then we're going to take everything from the original table
+
+523
+00:52:40,000 --> 00:52:52,000
+And we're going to put it in its new bucket. Because our bucket like which bucket it goes to, that calculation has changed because we now have more buckets.
+
+524
+00:52:52,000 --> 00:52:58,000
+And so we then go and put all those items into their new buckets and our new hash table.
+
+525
+00:52:58,000 --> 00:53:01,000
+And as we do that
+
+526
+00:53:01,000 --> 00:53:07,000
+They get distributed a little bit nicer, right? Because most of them go to different buckets.
+
+527
+00:53:07,000 --> 00:53:14,000
+And so when we do this, we've now changed our load factor
+
+528
+00:53:14,000 --> 00:53:22,000
+Our load factor is now Was it one, two, three, four, five, six, seven, eight. 8 out of 10.
+
+529
+00:53:22,000 --> 00:53:27,000
+Instead of
+
+530
+00:53:27,000 --> 00:53:30,000
+What did we say this was 1, 2, 8 out of 5
+
+531
+00:53:30,000 --> 00:53:33,000
+You know, 10 instead of 8 out of five
+
+532
+00:53:33,000 --> 00:53:36,000
+So it's less than one at this point.
+
+533
+00:53:36,000 --> 00:53:37,000
+And
+
+534
+00:53:37,000 --> 00:53:42,000
+By doing this, we've reduced the average number of
+
+535
+00:53:42,000 --> 00:53:45,000
+items in a chain
+
+536
+00:53:45,000 --> 00:53:48,000
+This is how we keep our chains short
+
+537
+00:53:48,000 --> 00:53:50,000
+Which means
+
+538
+00:53:50,000 --> 00:53:54,000
+Our chains are quick and easy
+
+539
+00:53:54,000 --> 00:53:56,000
+to read through
+
+540
+00:53:56,000 --> 00:53:57,000
+to search through
+
+541
+00:53:57,000 --> 00:54:04,000
+We keep our change short. We keep our access time O of 1.
+
+542
+00:54:04,000 --> 00:54:06,000
+Questions on the resize?
+
+543
+00:54:06,000 --> 00:54:09,000
+Yeah.
+
+544
+00:54:09,000 --> 00:54:13,000
+When should I do the resize? What a great question.
+
+545
+00:54:13,000 --> 00:54:16,000
+So usually what this looks like
+
+546
+00:54:16,000 --> 00:54:25,000
+Oh, the bell's gonna ring any second. When we come back, we will write some code. Your resize is going to vary depending on what kind of hash table you're doing
+
+547
+00:54:25,000 --> 00:54:32,000
+for a chaining one, we like to see a load factor of about 3 or 4 or less
+
+548
+00:54:32,000 --> 00:54:35,000
+That gives us about three or four items
+
+549
+00:54:35,000 --> 00:54:37,000
+per bucket
+
+550
+00:54:37,000 --> 00:54:39,000
+But
+
+551
+00:54:39,000 --> 00:54:47,000
+If you're doing this open addressing approach. You can't have a load factor greater than one.
+
+552
+00:54:47,000 --> 00:54:53,000
+So you're going to look at like 0.75 or 0.6. And then you're going to want to resize it.
+
+553
+00:54:53,000 --> 00:54:59,000
+And that resize is going to look a little bit different, but I'm not going to go into those details
+
+554
+00:54:59,000 --> 00:55:03,000
+So the load load factor in general
+
+555
+00:55:03,000 --> 00:55:10,000
+It'll depend on what kind of hash table collision approach you're using for your hash table.
+
+556
+00:55:10,000 --> 00:55:16,000
+And and then you'll have one defined for your hash table and
+
+557
+00:55:16,000 --> 00:55:30,000
+What it looks like is when you insert a new item into your hash table, you put it in, you check to see what's my current load factor. If my load factor is now too high, I'm going to resize
+
+558
+00:55:30,000 --> 00:55:32,000
+Which is going to be an expensive
+
+559
+00:55:32,000 --> 00:55:36,000
+operation. But then it gives you efficient
+
+560
+00:55:36,000 --> 00:55:38,000
+Access.
+
+561
+00:55:38,000 --> 00:55:40,000
+Any questions before we take the break?
+
+562
+00:55:40,000 --> 00:55:44,000
+Yeah.
+
+563
+00:55:44,000 --> 00:55:51,000
+What a great question. Okay, let's come back to that after the break. But the question is
+
+564
+00:55:51,000 --> 00:55:57,000
+What if you have a whole bunch of numbers that all land in the same bucket
+
+565
+00:55:57,000 --> 00:56:08,000
+Yeah. Okay, let's do it. We'll talk about it when we come back.
+
+566
+00:56:08,000 --> 00:56:22,000
+5.30.
+
+567
+00:56:49,000 --> 00:56:51,000
+Okay.
+
+568
+00:56:51,000 --> 00:56:53,000
+Before we left
+
+569
+00:56:53,000 --> 00:56:55,000
+Gas, right?
+
+570
+00:56:55,000 --> 00:57:06,000
+Gus asked the question of what if, in this case, we have a whole bunch of numbers that basically all hash to the same bucket
+
+571
+00:57:06,000 --> 00:57:11,000
+Put a pin in that, I'm going to answer Brian's question real quick. And then we're going to talk about that.
+
+572
+00:57:11,000 --> 00:57:14,000
+So Brian.
+
+573
+00:57:14,000 --> 00:57:23,000
+You asked, how is this chaining versus open address approach all that different
+
+574
+00:57:23,000 --> 00:57:29,000
+From each other, because if we have a bunch of
+
+575
+00:57:29,000 --> 00:57:35,000
+a bunch of keys that collide. We still have some traversal to do.
+
+576
+00:57:35,000 --> 00:57:48,000
+And it's kind of hard to know how do you know that it's kind of hard to say that one is much better than the other one all the time. So I will give you that. It really depends.
+
+577
+00:57:48,000 --> 00:57:54,000
+But what's what's common in that question and what Gus just asked is the number of collisions
+
+578
+00:57:54,000 --> 00:57:59,000
+We run into this problem when we have a high number of collisions.
+
+579
+00:57:59,000 --> 00:58:06,000
+So we're going to dive down that collisions
+
+580
+00:58:06,000 --> 00:58:07,000
+topic
+
+581
+00:58:07,000 --> 00:58:11,000
+a little bit more. But to your point.
+
+582
+00:58:11,000 --> 00:58:17,000
+What we see to the question that you asked specifically is
+
+583
+00:58:17,000 --> 00:58:20,000
+You
+
+584
+00:58:20,000 --> 00:58:25,000
+Apart from the size and the number of spots that we can utilize
+
+585
+00:58:25,000 --> 00:58:34,000
+It's hard to say that chaining versus that open addressing approach is always better or worse. They are just different.
+
+586
+00:58:34,000 --> 00:58:40,000
+And like all engineering decisions, there are trade-offs.
+
+587
+00:58:40,000 --> 00:58:47,000
+But what's key there is this idea of collisions.
+
+588
+00:58:47,000 --> 00:58:49,000
+So let's talk about collisions.
+
+589
+00:58:49,000 --> 00:58:57,000
+Now, I made a simplification when we started looking at our example hash tables.
+
+590
+00:58:57,000 --> 00:59:05,000
+I did the example here, or the simplification here with our open addressing approach. I said, okay
+
+591
+00:59:05,000 --> 00:59:09,000
+We are going to assume that our key
+
+592
+00:59:09,000 --> 00:59:12,000
+is a number
+
+593
+00:59:12,000 --> 00:59:20,000
+And we're going to assume that basically our hash function just returns the number itself.
+
+594
+00:59:20,000 --> 00:59:24,000
+So I said, we're putting numbers into our hash tables.
+
+595
+00:59:24,000 --> 00:59:31,000
+Just to keep it simple, just so I can say, okay, our hash function is just the identity function.
+
+596
+00:59:31,000 --> 00:59:35,000
+The number in is the number out.
+
+597
+00:59:35,000 --> 00:59:38,000
+So once we did our hash
+
+598
+00:59:38,000 --> 00:59:47,000
+Had no impact. And then we would take our mod to figure out which which location in the array that it's going to go into.
+
+599
+00:59:47,000 --> 00:59:50,000
+Let's talk about that hash function.
+
+600
+00:59:50,000 --> 00:59:52,000
+So
+
+601
+00:59:52,000 --> 00:59:55,000
+Our hash function
+
+602
+00:59:55,000 --> 00:59:57,000
+is just a function
+
+603
+00:59:57,000 --> 01:00:01,000
+that
+
+604
+01:00:01,000 --> 01:00:04,000
+When you have data in
+
+605
+01:00:04,000 --> 01:00:08,000
+You get a number out
+
+606
+01:00:08,000 --> 01:00:13,000
+So this hash function is key to everything.
+
+607
+01:00:13,000 --> 01:00:23,000
+This is what makes it work. Or a big part of it, right? That's what allows us to have a key that is something like onion
+
+608
+01:00:23,000 --> 01:00:38,000
+Or I don't know, head. What are some other things we put into our dictionaries that we've used, right? We've put a payload
+
+609
+01:00:38,000 --> 01:00:51,000
+Or our key could be 75. Or it could be some hex number, 0x beef
+
+610
+01:00:51,000 --> 01:00:52,000
+Right?
+
+611
+01:00:52,000 --> 01:00:55,000
+Anything in?
+
+612
+01:00:55,000 --> 01:01:08,000
+So our hash function is the thing that takes our random key and turns it into a number. And we use that number then we mod it down into the number of buckets
+
+613
+01:01:08,000 --> 01:01:11,000
+And that's the bucket that we go into.
+
+614
+01:01:11,000 --> 01:01:24,000
+Yeah
+
+615
+01:01:24,000 --> 01:01:40,000
+Yeah, so the key, that's the human friendly approach, right? We think of this is why we like using dicks and like why we like using keys is because it makes it easy for humans to know, hey, this is the piece of data that I'm going to
+
+616
+01:01:40,000 --> 01:01:47,000
+I know that I want to see the data that is associated with the head or the payload. But
+
+617
+01:01:47,000 --> 01:01:50,000
+That means nothing to a computer.
+
+618
+01:01:50,000 --> 01:01:57,000
+Because the data lives at a location in memory, which is a number
+
+619
+01:01:57,000 --> 01:01:59,000
+has to be a number.
+
+620
+01:01:59,000 --> 01:02:02,000
+Computers know nothing except for numbers
+
+621
+01:02:02,000 --> 01:02:06,000
+So that hash function turns it into a number.
+
+622
+01:02:06,000 --> 01:02:08,000
+Turns in anything we want
+
+623
+01:02:08,000 --> 01:02:10,000
+Into a number.
+
+624
+01:02:10,000 --> 01:02:19,000
+Which means we have some characteristics of this hash function. Our hash function must
+
+625
+01:02:19,000 --> 01:02:28,000
+Number one thing, deterministic
+
+626
+01:02:28,000 --> 01:02:32,000
+Same input always gives the same output.
+
+627
+01:02:32,000 --> 01:02:37,000
+Number one has to be our hash function has to be deterministic.
+
+628
+01:02:37,000 --> 01:02:42,000
+It has to be quick.
+
+629
+01:02:42,000 --> 01:02:45,000
+Because of our hash function is very slow
+
+630
+01:02:45,000 --> 01:02:55,000
+That means the if our we have to take our key, run it through a slow hash function
+
+631
+01:02:55,000 --> 01:03:03,000
+Mod it to get the bucket. If that's slow, this turns this whole whole exercise
+
+632
+01:03:03,000 --> 01:03:07,000
+And to something slow. So our hash function has to be fast.
+
+633
+01:03:07,000 --> 01:03:12,000
+Has to be deterministic. It has to be fast.
+
+634
+01:03:12,000 --> 01:03:14,000
+What else does it need to be?
+
+635
+01:03:14,000 --> 01:03:16,000
+Oh
+
+636
+01:03:16,000 --> 01:03:20,000
+What else does it need to be
+
+637
+01:03:20,000 --> 01:03:24,000
+We want it. Yeah.
+
+638
+01:03:24,000 --> 01:03:37,000
+Okay. I'll give you an example. Sorry, I'm pointing at you, not to put you on the spot. What if our hash function is
+
+639
+01:03:37,000 --> 01:03:42,000
+Age of X equals one.
+
+640
+01:03:42,000 --> 01:03:46,000
+Is it deterministic?
+
+641
+01:03:46,000 --> 01:03:47,000
+Yes.
+
+642
+01:03:47,000 --> 01:03:50,000
+means doesn't matter what is input
+
+643
+01:03:50,000 --> 01:03:59,000
+It always gives the same output. So if I give it… if I pass in 15, it's going to return one.
+
+644
+01:03:59,000 --> 01:04:02,000
+Every time I pass in 15, it's going to give me one.
+
+645
+01:04:02,000 --> 01:04:06,000
+By passing 26, it's going to give me one.
+
+646
+01:04:06,000 --> 01:04:10,000
+If I pass in onion, it's going to give me one.
+
+647
+01:04:10,000 --> 01:04:14,000
+It's deterministic. That's good. Is it fast?
+
+648
+01:04:14,000 --> 01:04:18,000
+Yes, it is, because it's just returning one.
+
+649
+01:04:18,000 --> 01:04:24,000
+Do we like this hash function
+
+650
+01:04:24,000 --> 01:04:27,000
+Why didn't we not like this hash function?
+
+651
+01:04:27,000 --> 01:04:31,000
+What question did you ask?
+
+652
+01:04:31,000 --> 01:04:37,000
+This hash function puts everything in the same bucket
+
+653
+01:04:37,000 --> 01:04:48,000
+So if it puts everything in the same bucket. It's not super helpful for us. If this is our hash function. We always put everything in bucket one
+
+654
+01:04:48,000 --> 01:04:50,000
+That is no good for us.
+
+655
+01:04:50,000 --> 01:04:55,000
+That means we do not get to take advantage of the benefits of a hash table.
+
+656
+01:04:55,000 --> 01:05:09,000
+So our hash function has to have some amount of distribution
+
+657
+01:05:09,000 --> 01:05:14,000
+And it's okay. The hash function. What is the hash function we've been using?
+
+658
+01:05:14,000 --> 01:05:20,000
+We have been using h of x equals X
+
+659
+01:05:20,000 --> 01:05:27,000
+That's the identity function. That's the hash function we've been using so far. And that's okay. That's fine
+
+660
+01:05:27,000 --> 01:05:33,000
+that keeps it simple for us to figure this out. And that gives us some nice distribution
+
+661
+01:05:33,000 --> 01:05:36,000
+As long as our input is distributed
+
+662
+01:05:36,000 --> 01:05:46,000
+nicely. So whenever we have a bunch of input that's going to all cluster into the same place, index into the same place
+
+663
+01:05:46,000 --> 01:05:50,000
+Yeah, we might have some trouble.
+
+664
+01:05:50,000 --> 01:05:58,000
+Absolutely. And the things that we looked at here having a good hash function
+
+665
+01:05:58,000 --> 01:06:03,000
+Paying attention to our load factor and resizing our hash table.
+
+666
+01:06:03,000 --> 01:06:09,000
+Those things, those are things we can do to
+
+667
+01:06:09,000 --> 01:06:15,000
+Best case scenario, you know, kind of help things out. But
+
+668
+01:06:15,000 --> 01:06:27,000
+There can be just a way that things hit just wrong so that it's going to everything hashes to the same bucket. And it's going to be super inefficient.
+
+669
+01:06:27,000 --> 01:06:30,000
+That can just happen sometimes.
+
+670
+01:06:30,000 --> 01:06:32,000
+It's unlikely
+
+671
+01:06:32,000 --> 01:06:38,000
+When we put all of our all of our pieces back pieces together to
+
+672
+01:06:38,000 --> 01:06:40,000
+Get our hash table to
+
+673
+01:06:40,000 --> 01:06:47,000
+behave nicely, but it is possible.
+
+674
+01:06:47,000 --> 01:06:49,000
+Okay, so
+
+675
+01:06:49,000 --> 01:06:51,000
+That answer your question
+
+676
+01:06:51,000 --> 01:06:57,000
+So our hash function super important.
+
+677
+01:06:57,000 --> 01:06:59,000
+We
+
+678
+01:06:59,000 --> 01:07:11,000
+Let's see. Anyone interested? Did you have a follow up?
+
+679
+01:07:11,000 --> 01:07:18,000
+should be keep a counter of are you saying like how many items we have in each list?
+
+680
+01:07:18,000 --> 01:07:23,000
+Is that what you're saying?
+
+681
+01:07:23,000 --> 01:07:32,000
+You know, I don't know
+
+682
+01:07:32,000 --> 01:07:37,000
+Yeah, so, our resize. What we do
+
+683
+01:07:37,000 --> 01:07:43,000
+So let's write out a little bit of actually
+
+684
+01:07:43,000 --> 01:07:45,000
+Yeah.
+
+685
+01:07:45,000 --> 01:07:49,000
+That's okay.
+
+686
+01:07:49,000 --> 01:07:54,000
+I'm building.
+
+687
+01:07:54,000 --> 01:07:56,000
+Yeah.
+
+688
+01:07:56,000 --> 01:08:02,000
+Okay.
+
+689
+01:08:02,000 --> 01:08:16,000
+So I'm going to repeat your question for everyone online. So do we have to, if, for example, in this case, this solution, this one right here, let's say this is a really long chain.
+
+690
+01:08:16,000 --> 01:08:20,000
+You're asking if when we do the resize
+
+691
+01:08:20,000 --> 01:08:26,000
+Do we have to pay attention and and do anything special about this long chain?
+
+692
+01:08:26,000 --> 01:08:33,000
+Is that what you're asking? To catch it and try to fix it. So no, we're not going to do anything special.
+
+693
+01:08:33,000 --> 01:08:35,000
+Because a lot of times
+
+694
+01:08:35,000 --> 01:08:43,000
+A lot of times, and again, there's always those weird cases that just fall through and are bad. That happens.
+
+695
+01:08:43,000 --> 01:08:55,000
+But most of the time when we resize and then rehash and remod and put them in new buckets. They usually start to to spread out
+
+696
+01:08:55,000 --> 01:09:00,000
+So usually, as we start resizing our hash table, things get distributed
+
+697
+01:09:00,000 --> 01:09:03,000
+But there are the cases that it doesn't.
+
+698
+01:09:03,000 --> 01:09:05,000
+Well, just that does happen.
+
+699
+01:09:05,000 --> 01:09:07,000
+But for the most part
+
+700
+01:09:07,000 --> 01:09:11,000
+That's taken care of.
+
+701
+01:09:11,000 --> 01:09:16,000
+Any other questions?
+
+702
+01:09:16,000 --> 01:09:29,000
+Okay, so we know our hash function needs to be deterministic. It needs to be quick. It needs to have a nice distribution of results.
+
+703
+01:09:29,000 --> 01:09:31,000
+We looked at
+
+704
+01:09:31,000 --> 01:09:41,000
+cache function h of x equals one. What about H of X equals rand
+
+705
+01:09:41,000 --> 01:09:46,000
+Is this a good hash function?
+
+706
+01:09:46,000 --> 01:09:53,000
+No, because it is not deterministic.
+
+707
+01:09:53,000 --> 01:09:55,000
+H of X
+
+708
+01:09:55,000 --> 01:10:06,000
+Equals next empty slot.
+
+709
+01:10:06,000 --> 01:10:08,000
+Good hash function.
+
+710
+01:10:08,000 --> 01:10:15,000
+No, it's not deterministic. If I insert multiple things
+
+711
+01:10:15,000 --> 01:10:19,000
+The same key, it's going to go to different locations.
+
+712
+01:10:19,000 --> 01:10:27,000
+What about H of X equals the length of x?
+
+713
+01:10:27,000 --> 01:10:31,000
+It's deterministic
+
+714
+01:10:31,000 --> 01:10:35,000
+As long as X is not too big
+
+715
+01:10:35,000 --> 01:10:38,000
+It's going to be relatively quick
+
+716
+01:10:38,000 --> 01:10:41,000
+Distribution might not be great.
+
+717
+01:10:41,000 --> 01:10:47,000
+But it also might depend on what the possible inputs are.
+
+718
+01:10:47,000 --> 01:10:56,000
+So we have a range of hash functions in Python, we usually use hash of x.
+
+719
+01:10:56,000 --> 01:11:00,000
+And the hash function hash
+
+720
+01:11:00,000 --> 01:11:09,000
+And for most ints, small ints, I forget what the cutoff is. It just returns back that same value.
+
+721
+01:11:09,000 --> 01:11:16,000
+And then for something like a string input. It will take that
+
+722
+01:11:16,000 --> 01:11:20,000
+Usually, if the string is something like
+
+723
+01:11:20,000 --> 01:11:22,000
+Head
+
+724
+01:11:22,000 --> 01:11:37,000
+There is a formula. We basically take the ASCII value of each character and sum it up with, I don't know, sum it up with some math stuff to get a little bit of distribution and
+
+725
+01:11:37,000 --> 01:11:38,000
+stuff on it.
+
+726
+01:11:38,000 --> 01:11:49,000
+Not super interested, but if anyone wants to dig into Python's hash formula and how that is calculated.
+
+727
+01:11:49,000 --> 01:11:56,000
+The details are published.
+
+728
+01:11:56,000 --> 01:12:06,000
+I would like to do some code, so we can… we've walked through kind of what this process is like. Let's write a little bit of code to show what it looks like.
+
+729
+01:12:06,000 --> 01:12:27,000
+Any questions before I switch to code?
+
+730
+01:12:27,000 --> 01:12:39,000
+Okay, so our hash table. First, we need to come up with a structure for our hash table. What does our hash table look like?
+
+731
+01:12:39,000 --> 01:12:43,000
+It really looks like, I don't know, buckets
+
+732
+01:12:43,000 --> 01:12:45,000
+It's a list of buckets
+
+733
+01:12:45,000 --> 01:12:52,000
+Sure. And in fact, I think I'd say
+
+734
+01:12:52,000 --> 01:12:55,000
+Should be let's see
+
+735
+01:12:55,000 --> 01:13:00,000
+Definitely hash table
+
+736
+01:13:00,000 --> 01:13:03,000
+Nothing… well, maybe we'll
+
+737
+01:13:03,000 --> 01:13:07,000
+Return
+
+738
+01:13:07,000 --> 01:13:09,000
+Can't tell today.
+
+739
+01:13:09,000 --> 01:13:17,000
+A dictionary. We're going to use a hash table to represent a hash table.
+
+740
+01:13:17,000 --> 01:13:21,000
+We're going to have buckets
+
+741
+01:13:21,000 --> 01:13:26,000
+Buckets, how many buckets do we want to start with?
+
+742
+01:13:26,000 --> 01:13:29,000
+Let's start with five
+
+743
+01:13:29,000 --> 01:13:32,000
+Thanks
+
+744
+01:13:32,000 --> 01:13:37,000
+Oh, I'm not even doing this right, am I
+
+745
+01:13:37,000 --> 01:13:51,000
+Okay, our buckets. What else do we want to keep track of? We want to keep track of how many things we have in our hash table so far.
+
+746
+01:13:51,000 --> 01:13:57,000
+I think that gets us. Well, we will add as we need to.
+
+747
+01:13:57,000 --> 01:14:06,000
+Okay, so we create our hash table. We have some buckets. We're going to start with five buckets. And actually, it is kind of nice to
+
+748
+01:14:06,000 --> 01:14:07,000
+Keep track of
+
+749
+01:14:07,000 --> 01:14:10,000
+How many buckets we have
+
+750
+01:14:10,000 --> 01:14:12,000
+So we'll do that.
+
+751
+01:14:12,000 --> 01:14:17,000
+Okay, 1st thing we want to do with our hash table.
+
+752
+01:14:17,000 --> 01:14:25,000
+We want to put things in it
+
+753
+01:14:25,000 --> 01:14:30,000
+And then we need a key
+
+754
+01:14:30,000 --> 01:14:32,000
+Do you want to
+
+755
+01:14:32,000 --> 01:14:40,000
+I'm going to stick with just the keys for now, and we can assume that we've got a value attached to it.
+
+756
+01:14:40,000 --> 01:14:47,000
+But we're going to stick with just our keys for now. So insert into our hash table.
+
+757
+01:14:47,000 --> 01:14:53,000
+First thing we need to do is we need to get our
+
+758
+01:14:53,000 --> 01:14:55,000
+Which bucket?
+
+759
+01:14:55,000 --> 01:14:59,000
+Yeah, figure out which bucket
+
+760
+01:14:59,000 --> 01:15:08,000
+We're going to hash the key. And then we're going to mod by HT of
+
+761
+01:15:08,000 --> 01:15:11,000
+num… buckets.
+
+762
+01:15:11,000 --> 01:15:17,000
+And then I'm going to say ht of buckets
+
+763
+01:15:17,000 --> 01:15:20,000
+Of which bucket.
+
+764
+01:15:20,000 --> 01:15:35,000
+Equals…
+
+765
+01:15:35,000 --> 01:15:39,000
+That's okay.
+
+766
+01:15:39,000 --> 01:15:46,000
+We'll get a start. It's not going to be okay, but it'll get us started.
+
+767
+01:15:46,000 --> 01:15:50,000
+Then
+
+768
+01:15:50,000 --> 01:15:57,000
+We probably want to do something like
+
+769
+01:15:57,000 --> 01:16:02,000
+Query.
+
+770
+01:16:02,000 --> 01:16:12,000
+This is, we just want to know if our hash table holds the key that we're looking for.
+
+771
+01:16:12,000 --> 01:16:16,000
+So once again, which bucket
+
+772
+01:16:16,000 --> 01:16:19,000
+Equals hash okay
+
+773
+01:16:19,000 --> 01:16:23,000
+person Ht of num.
+
+774
+01:16:23,000 --> 01:16:25,000
+Okay
+
+775
+01:16:25,000 --> 01:16:31,000
+Okay, is everything looking okay? Now feel free to call me out. It doesn't look right.
+
+776
+01:16:31,000 --> 01:16:37,000
+And then here
+
+777
+01:16:37,000 --> 01:16:39,000
+What did I get wrong
+
+778
+01:16:39,000 --> 01:16:53,000
+What kind of hash table am I implementing here? It's a good question.
+
+779
+01:16:53,000 --> 01:16:54,000
+Is that right?
+
+780
+01:16:54,000 --> 01:16:58,000
+Okay, that's not going to be right. You're looking confused. It's wrong.
+
+781
+01:16:58,000 --> 01:17:03,000
+Does that sit a little bit better if you know that that's wrong?
+
+782
+01:17:03,000 --> 01:17:08,000
+Because what's in our bucket?
+
+783
+01:17:08,000 --> 01:17:12,000
+What?
+
+784
+01:17:12,000 --> 01:17:14,000
+A value
+
+785
+01:17:14,000 --> 01:17:16,000
+Click list
+
+786
+01:17:16,000 --> 01:17:19,000
+It's gonna be a list. It's going to be a list of
+
+787
+01:17:19,000 --> 01:17:23,000
+We're going to pretend the keys equal the values right now
+
+788
+01:17:23,000 --> 01:17:27,000
+So we're just… we're just gonna worry about the keys right now. It's going to be a list
+
+789
+01:17:27,000 --> 01:17:31,000
+It's not going to be just it's not going to be
+
+790
+01:17:31,000 --> 01:17:33,000
+Just a value.
+
+791
+01:17:33,000 --> 01:17:37,000
+So we're going to have to say instead of
+
+792
+01:17:37,000 --> 01:17:41,000
+Instead of saying it equals Q, we're going to have to append.
+
+793
+01:17:41,000 --> 01:17:47,000
+I keep
+
+794
+01:17:47,000 --> 01:17:52,000
+Okay, I'm ignoring collisions right now.
+
+795
+01:17:52,000 --> 01:17:58,000
+We'll come back, we'll handle our collisions
+
+796
+01:17:58,000 --> 01:18:03,000
+Which bucket equals that and for I in
+
+797
+01:18:03,000 --> 01:18:06,000
+HT of buckets
+
+798
+01:18:06,000 --> 01:18:13,000
+Of which bucket
+
+799
+01:18:13,000 --> 01:18:15,000
+If
+
+800
+01:18:15,000 --> 01:18:19,000
+i equals t. We turn true
+
+801
+01:18:19,000 --> 01:18:23,000
+Otherwise, we come down here and say return false
+
+802
+01:18:23,000 --> 01:18:37,000
+Okay. We haven't dealt with collisions. We haven't dealt with resizing. Let's run this. Let's check it. Let's print it out a little bit, make sure we got everything right here.
+
+803
+01:18:37,000 --> 01:18:40,000
+My hash table equals create
+
+804
+01:18:40,000 --> 01:18:47,000
+Mesh table
+
+805
+01:18:47,000 --> 01:18:50,000
+And well, we had some
+
+806
+01:18:50,000 --> 01:18:53,000
+I had some
+
+807
+01:18:53,000 --> 01:18:58,000
+I'm going to insert the same numbers we did earlier.
+
+808
+01:18:58,000 --> 01:19:01,000
+We're going to insert 42.
+
+809
+01:19:01,000 --> 01:19:05,000
+And we're going to insert
+
+810
+01:19:05,000 --> 01:19:08,000
+84
+
+811
+01:19:08,000 --> 01:19:13,000
+And we are going to insert 23.
+
+812
+01:19:13,000 --> 01:19:19,000
+Now we're going to print our hash table
+
+813
+01:19:19,000 --> 01:19:22,000
+And then we're going to say print
+
+814
+01:19:22,000 --> 01:19:26,000
+Very Ht of
+
+815
+01:19:26,000 --> 01:19:28,000
+MyHC.
+
+816
+01:19:28,000 --> 01:19:45,000
+42, and hope that prints true. And also down here, I have to pass my HT.
+
+817
+01:19:45,000 --> 01:19:56,000
+I feel like I got something wrong somewhere, so I'm going to go ahead and run this.
+
+818
+01:19:56,000 --> 01:20:00,000
+Yes.
+
+819
+01:20:00,000 --> 01:20:07,000
+Let's… yes, this needs to be there's
+
+820
+01:20:07,000 --> 01:20:12,000
+I always get my Python syntax wrong on this. There is a way
+
+821
+01:20:12,000 --> 01:20:17,000
+Do I have this
+
+822
+01:20:17,000 --> 01:20:31,000
+I think there's a shortcut way to do this, but we'll just do it this way.
+
+823
+01:20:31,000 --> 01:20:37,000
+I guess this comprehension for
+
+824
+01:20:37,000 --> 01:20:39,000
+And
+
+825
+01:20:39,000 --> 01:20:41,000
+Range
+
+826
+01:20:41,000 --> 01:21:00,000
+Nom buckets
+
+827
+01:21:00,000 --> 01:21:05,000
+Oh, we're just going to put this in here.
+
+828
+01:21:05,000 --> 01:21:10,000
+How many buckets we start with. There we go.
+
+829
+01:21:10,000 --> 01:21:14,000
+Okay, so here we had to make sure
+
+830
+01:21:14,000 --> 01:21:22,000
+To create the number of buckets we have, but in each bucket, we have a list. So this gives us a list
+
+831
+01:21:22,000 --> 01:21:25,000
+An empty list in each bucket
+
+832
+01:21:25,000 --> 01:21:28,000
+Once we have an empty list in each bucket
+
+833
+01:21:28,000 --> 01:21:35,000
+We should be able to go to that bucket and append on there. And let's see if that
+
+834
+01:21:35,000 --> 01:21:40,000
+That runs
+
+835
+01:21:40,000 --> 01:21:51,000
+How many buckets can we start with here? We started with 5, so we'll start with five.
+
+836
+01:21:51,000 --> 01:21:53,000
+Okay.
+
+837
+01:21:53,000 --> 01:22:01,000
+So here we printed out our hash table and we were able to find
+
+838
+01:22:01,000 --> 01:22:03,000
+Our value 42.
+
+839
+01:22:03,000 --> 01:22:04,000
+In there
+
+840
+01:22:04,000 --> 01:22:07,000
+So, okay, looking okay so far.
+
+841
+01:22:07,000 --> 01:22:11,000
+But this is the easy part. We haven't done the hard part yet.
+
+842
+01:22:11,000 --> 01:22:14,000
+You ready for the hard part?
+
+843
+01:22:14,000 --> 01:22:19,000
+Okay, that's the hard part?
+
+844
+01:22:19,000 --> 01:22:22,000
+Oh, actually.
+
+845
+01:22:22,000 --> 01:22:24,000
+Yeah, let's start with the hard part
+
+846
+01:22:24,000 --> 01:22:26,000
+Hard part is collisions.
+
+847
+01:22:26,000 --> 01:22:30,000
+Collisions on insert.
+
+848
+01:22:30,000 --> 01:22:33,000
+With the chaining hash table
+
+849
+01:22:33,000 --> 01:22:40,000
+We actually don't have to worry about the collisions.
+
+850
+01:22:40,000 --> 01:22:41,000
+Right?
+
+851
+01:22:41,000 --> 01:22:46,000
+Because we're just putting things in that bucket. We're just adding it to the list.
+
+852
+01:22:46,000 --> 01:22:50,000
+We've handled our collisions there.
+
+853
+01:22:50,000 --> 01:22:52,000
+Yeah. Yeah
+
+854
+01:22:52,000 --> 01:22:54,000
+Yeah?
+
+855
+01:22:54,000 --> 01:22:55,000
+Yeah.
+
+856
+01:22:55,000 --> 01:23:03,000
+So we could go through and make sure we don't have duplicate keys. That would be a smart thing to do. I'm not going to waste time in class.
+
+857
+01:23:03,000 --> 01:23:15,000
+And on our query, we're not worried about collisions either because it's all okay. Because we're iterating through everything in the list.
+
+858
+01:23:15,000 --> 01:23:17,000
+And so that's okay
+
+859
+01:23:17,000 --> 01:23:21,000
+Sorry, collisions are handled by the fact that we have a list in each bucket.
+
+860
+01:23:21,000 --> 01:23:24,000
+Okay, I'm okay with that.
+
+861
+01:23:24,000 --> 01:23:26,000
+What's the other hard part?
+
+862
+01:23:26,000 --> 01:23:28,000
+Resize
+
+863
+01:23:28,000 --> 01:23:33,000
+So the
+
+864
+01:23:33,000 --> 01:23:36,000
+We are going to… I'm going to put in here
+
+865
+01:23:36,000 --> 01:23:41,000
+Because I'm going to copy the numbers that we did
+
+866
+01:23:41,000 --> 01:23:45,000
+Before six
+
+867
+01:23:45,000 --> 01:23:49,000
+14
+
+868
+01:23:49,000 --> 01:23:53,000
+26
+
+869
+01:23:53,000 --> 01:23:56,000
+68.
+
+870
+01:23:56,000 --> 01:24:01,000
+And I run this and we're going to see our hash table here.
+
+871
+01:24:01,000 --> 01:24:03,000
+And
+
+872
+01:24:03,000 --> 01:24:09,000
+So it printed out our hash table. We have five buckets, and in each bucket
+
+873
+01:24:09,000 --> 01:24:11,000
+Excuse me.
+
+874
+01:24:11,000 --> 01:24:27,000
+If we were to compare this to the hash table that we drew the chaining hash table that we drew this one for those in the classroom, I guess I don't know if anyone can see. This looks about the same
+
+875
+01:24:27,000 --> 01:24:31,000
+The order of the lists is might be different.
+
+876
+01:24:31,000 --> 01:24:39,000
+But nothing ended up in the first bucket. We had 11/626 ending up in the second bucket
+
+877
+01:24:39,000 --> 01:24:45,000
+Those are all the number mod five equals one
+
+878
+01:24:45,000 --> 01:24:52,000
+Here, this is mod 5 equals 2. This is each of these are mod 5 equal 3.
+
+879
+01:24:52,000 --> 01:24:56,000
+And these are all modified people four
+
+880
+01:24:56,000 --> 01:24:57,000
+Okay
+
+881
+01:24:57,000 --> 01:25:01,000
+We looked up
+
+882
+01:25:01,000 --> 01:25:05,000
+42 in there, and we found 42.
+
+883
+01:25:05,000 --> 01:25:06,000
+That's good
+
+884
+01:25:06,000 --> 01:25:09,000
+Should we look up something that doesn't exist in there?
+
+885
+01:25:09,000 --> 01:25:11,000
+confirm
+
+886
+01:25:11,000 --> 01:25:14,000
+Let's do
+
+887
+01:25:14,000 --> 01:25:18,000
+Print, let's see, 19.
+
+888
+01:25:18,000 --> 01:25:25,000
+So we should have false printout here
+
+889
+01:25:25,000 --> 01:25:29,000
+Okay, we got a false. 19 is not in the hash table. Okay.
+
+890
+01:25:29,000 --> 01:25:32,000
+So now
+
+891
+01:25:32,000 --> 01:25:41,000
+Let's do… every time we insert, let's check what the, load factor is.
+
+892
+01:25:41,000 --> 01:25:44,000
+So after we insert
+
+893
+01:25:44,000 --> 01:25:51,000
+Oh, something we did not do here that we probably should have done is ht of num
+
+894
+01:25:51,000 --> 01:25:53,000
+Elements
+
+895
+01:25:53,000 --> 01:25:55,000
+Plus equals 1.
+
+896
+01:25:55,000 --> 01:25:57,000
+And
+
+897
+01:25:57,000 --> 01:26:04,000
+Then we're gonna calculate load factor. This is sometimes referred to as alpha.
+
+898
+01:26:04,000 --> 01:26:06,000
+Load factor, alpha.
+
+899
+01:26:06,000 --> 01:26:13,000
+Ht of
+
+900
+01:26:13,000 --> 01:26:16,000
+num elements
+
+901
+01:26:16,000 --> 01:26:18,000
+Divided
+
+902
+01:26:18,000 --> 01:26:32,000
+Divided by HT of num. Yeah, numbuckets
+
+903
+01:26:32,000 --> 01:26:36,000
+If alpha
+
+904
+01:26:36,000 --> 01:26:39,000
+Is greater than
+
+905
+01:26:39,000 --> 01:26:46,000
+Let's say, let's keep it small. So we hit a resize
+
+906
+01:26:46,000 --> 01:27:02,000
+Print
+
+907
+01:27:02,000 --> 01:27:08,000
+load factor is big. Resize.
+
+908
+01:27:08,000 --> 01:27:10,000
+I was just complaining
+
+909
+01:27:10,000 --> 01:27:15,000
+Yeah. Okay.
+
+910
+01:27:15,000 --> 01:27:28,000
+Okay, we haven't hit that resize yet. I'm going to put a few more things in here just because I might need some numbers. Let's see. Let's put that 19 in here.
+
+911
+01:27:28,000 --> 01:27:31,000
+Let's put 44
+
+912
+01:27:31,000 --> 01:27:32,000
+Let's put
+
+913
+01:27:32,000 --> 01:27:36,000
+75.
+
+914
+01:27:36,000 --> 01:27:40,000
+Let's about 88
+
+915
+01:27:40,000 --> 01:28:04,000
+So now I'm just trying to… Okay, so now we've hit a couple of instances where we should be resizing the hash table. But let's look at how we resize that hash table.
+
+916
+01:28:04,000 --> 01:28:05,000
+Okay.
+
+917
+01:28:05,000 --> 01:28:12,000
+So, first things first. First things first, we want to create a new list
+
+918
+01:28:12,000 --> 01:28:21,000
+That's twice as long. So we have twice as many buckets
+
+919
+01:28:21,000 --> 01:28:26,000
+So we're going to say new buckets
+
+920
+01:28:26,000 --> 01:28:35,000
+We're going to do something basically like this.
+
+921
+01:28:35,000 --> 01:28:41,000
+But this number gets is HT of
+
+922
+01:28:41,000 --> 01:28:44,000
+Buckets
+
+923
+01:28:44,000 --> 01:28:46,000
+Times 2.
+
+924
+01:28:46,000 --> 01:28:49,000
+Let's just make it twice as big
+
+925
+01:28:49,000 --> 01:28:54,000
+So new buckets then is a new list of lists.
+
+926
+01:28:54,000 --> 01:28:56,000
+And now
+
+927
+01:28:56,000 --> 01:29:13,000
+What we're going to do is we're going to go through every element in our existing hash table. And we are going to put it into a new bucket. A new buckets.
+
+928
+01:29:13,000 --> 01:29:18,000
+So for bucket in HT of
+
+929
+01:29:18,000 --> 01:29:20,000
+buckets
+
+930
+01:29:20,000 --> 01:29:27,000
+Or item in bucket
+
+931
+01:29:27,000 --> 01:29:33,000
+We are going to have to do something like
+
+932
+01:29:33,000 --> 01:29:38,000
+There's a few different ways we can do this. But we're going to do something like
+
+933
+01:29:38,000 --> 01:29:46,000
+New bucket
+
+934
+01:29:46,000 --> 01:29:55,000
+New bucket equals item
+
+935
+01:29:55,000 --> 01:30:01,000
+Take our item. We're going to hash it.
+
+936
+01:30:01,000 --> 01:30:16,000
+And we're going to mod by the length of the number of the new number of buckets.
+
+937
+01:30:16,000 --> 01:30:19,000
+So you can see I'm already I'm a little clunky.
+
+938
+01:30:19,000 --> 01:30:30,000
+There's gonna be room to clean this up a little bit. It's okay.
+
+939
+01:30:30,000 --> 01:30:35,000
+And then we can say new buckets
+
+940
+01:30:35,000 --> 01:30:39,000
+New bucket.
+
+941
+01:30:39,000 --> 01:30:45,000
+Append. Item.
+
+942
+01:30:45,000 --> 01:30:49,000
+Are y'all following me here?
+
+943
+01:30:49,000 --> 01:30:58,000
+They're going to put it in that new bucket.
+
+944
+01:30:58,000 --> 01:31:02,000
+Just checking
+
+945
+01:31:02,000 --> 01:31:04,000
+see if
+
+946
+01:31:04,000 --> 01:31:07,000
+I think that looks okay.
+
+947
+01:31:07,000 --> 01:31:13,000
+And then now we have to update our hash table.
+
+948
+01:31:13,000 --> 01:31:21,000
+There's a fun way to do this in
+
+949
+01:31:21,000 --> 01:31:34,000
+There's a fun way to do this. Oh, well, yeah, okay.
+
+950
+01:31:34,000 --> 01:31:37,000
+I'm trying to remember
+
+951
+01:31:37,000 --> 01:31:49,000
+There's a few ways to do this in Python, I'm trying to… I'm trying to decide the best way to go about it.
+
+952
+01:31:49,000 --> 01:31:51,000
+I think
+
+953
+01:31:51,000 --> 01:31:56,000
+Because basically what we want, we want our hash table. We want to
+
+954
+01:31:56,000 --> 01:32:08,000
+Say something like
+
+955
+01:32:08,000 --> 01:32:15,000
+And something like this
+
+956
+01:32:15,000 --> 01:32:27,000
+I feel like this doesn't quite work in Python, but let me double check. Let's… let's check it and find out.
+
+957
+01:32:27,000 --> 01:32:30,000
+Oh, we need our hash table here
+
+958
+01:32:30,000 --> 01:32:34,000
+Hash table of num. Buckets
+
+959
+01:32:34,000 --> 01:32:38,000
+Those new num buckets.
+
+960
+01:32:38,000 --> 01:32:46,000
+And we still have the same number of items, so we don't have to update the number of items, so I think we'll be okay.
+
+961
+01:32:46,000 --> 01:32:49,000
+Does this look okay to everyone?
+
+962
+01:32:49,000 --> 01:32:59,000
+Let's run it and test it and see if it is okay. Sometimes we get weird. It can get weird in these references
+
+963
+01:32:59,000 --> 01:33:02,000
+But let's run it and see.
+
+964
+01:33:02,000 --> 01:33:05,000
+Make sure we got that right.
+
+965
+01:33:05,000 --> 01:33:07,000
+Oh, we didn't actually call it.
+
+966
+01:33:07,000 --> 01:33:15,000
+So now we want to say if our load factor gets too big, we're going to resize
+
+967
+01:33:15,000 --> 01:33:18,000
+The hash table.
+
+968
+01:33:18,000 --> 01:33:22,000
+And then we're going to over here, let's print
+
+969
+01:33:22,000 --> 01:33:41,000
+Catch table.
+
+970
+01:33:41,000 --> 01:33:46,000
+Oh, alright
+
+971
+01:33:46,000 --> 01:33:51,000
+One more time. Okay, let's see what happened. Not sure I forgot it right here.
+
+972
+01:33:51,000 --> 01:33:57,000
+Okay, so here we started putting things into our hash table
+
+973
+01:33:57,000 --> 01:33:59,000
+And
+
+974
+01:33:59,000 --> 01:34:07,000
+We got to a point where we had too many things in it, so we resized it
+
+975
+01:34:07,000 --> 01:34:26,000
+And this is what it looked like. I should have printed it before resizing. It's right before resize.
+
+976
+01:34:26,000 --> 01:34:35,000
+So before resizing, it looked like this. You can see we have one down here that's, you know, we've got four items in that list
+
+977
+01:34:35,000 --> 01:34:45,000
+Three items in this list. And then we resize it and we've got 10 buckets. And so 75 is over here
+
+978
+01:34:45,000 --> 01:34:56,000
+I'm gonna let this sit for a second so we can look and see what that resizing did. That resizing. We still had one
+
+979
+01:34:56,000 --> 01:34:59,000
+One list here
+
+980
+01:34:59,000 --> 01:35:01,000
+That had 3 items in it
+
+981
+01:35:01,000 --> 01:35:13,000
+That's okay. Those items happen to hash the same thing. If we were to change… Okay, so let's take a look at this for just a second and and look at
+
+982
+01:35:13,000 --> 01:35:16,000
+We want to look and see what this looks like
+
+983
+01:35:16,000 --> 01:35:19,000
+I'm going to change
+
+984
+01:35:19,000 --> 01:35:23,000
+The number of buckets we put in our hash table to start with.
+
+985
+01:35:23,000 --> 01:35:28,000
+So instead of having five, that then doubles to 10, which
+
+986
+01:35:28,000 --> 01:35:33,000
+Those… that has the same… we end up with a whole bunch of things that have the same
+
+987
+01:35:33,000 --> 01:35:36,000
+still land in the same bucket
+
+988
+01:35:36,000 --> 01:35:42,000
+Because 5 equals because of 5 and 10
+
+989
+01:35:42,000 --> 01:35:50,000
+Let's do this. Let's make this, I don't know what's a good number of buckets to start with? Like eight maybe
+
+990
+01:35:50,000 --> 01:35:56,000
+8, 9, 7. Let's start with seven.
+
+991
+01:35:56,000 --> 01:36:01,000
+I want it small enough that we still get a resize. I don't know if we got a resize.
+
+992
+01:36:01,000 --> 01:36:02,000
+Okay.
+
+993
+01:36:02,000 --> 01:36:09,000
+I'm gonna make it small enough we get a resize. Let's do 3
+
+994
+01:36:09,000 --> 01:36:13,000
+Okay, got a couple resizes here.
+
+995
+01:36:13,000 --> 01:36:16,000
+That didn't get us much better.
+
+996
+01:36:16,000 --> 01:36:20,000
+Yeah, we don't have enough items. Got to put more items in there.
+
+997
+01:36:20,000 --> 01:36:29,000
+We put more items in there. It'll start distributing a little bit nicer.
+
+998
+01:36:29,000 --> 01:36:34,000
+But that's what our resize looks like.
+
+999
+01:36:34,000 --> 01:36:41,000
+We pay attention every time we put something into our hash table
+
+1000
+01:36:41,000 --> 01:36:44,000
+We then calculate
+
+1001
+01:36:44,000 --> 01:36:50,000
+the load factor. And if our load factor is too high, then we're going to resize the table.
+
+1002
+01:36:50,000 --> 01:36:57,000
+We resize the table by going through every single thing in that table.
+
+1003
+01:36:57,000 --> 01:37:07,000
+And finding a new bucket for it and putting it in its new bucket.
+
+1004
+01:37:07,000 --> 01:37:13,000
+Any questions?
+
+1005
+01:37:13,000 --> 01:37:14,000
+I have a quick question
+
+1006
+01:37:14,000 --> 01:37:16,000
+Yeah.
+
+1007
+01:37:16,000 --> 01:37:20,000
+So on that, line 27, that hash function
+
+1008
+01:37:20,000 --> 01:37:21,000
+Yeah.
+
+1009
+01:37:21,000 --> 01:37:25,000
+Is that just returning the ASCII
+
+1010
+01:37:25,000 --> 01:37:26,000
+Yeah.
+
+1011
+01:37:26,000 --> 01:37:27,000
+representation that you mentioned
+
+1012
+01:37:27,000 --> 01:37:41,000
+Let's look at that. Yeah, I was going to pull this out a little bit. So let's look into that hash function because I'm just relying on Python's hash function right now. And so hash of 5 gives us 5.
+
+1013
+01:37:41,000 --> 01:37:51,000
+cache of 27 gives us 27 hash of, I don't know, let's give a big number
+
+1014
+01:37:51,000 --> 01:37:52,000
+Okay, still gives us
+
+1015
+01:37:52,000 --> 01:38:03,000
+There's a point where Python's hash function gives us something a little bit more interesting than just the number back. But for most just gives us the number back.
+
+1016
+01:38:03,000 --> 01:38:08,000
+A hash of head.
+
+1017
+01:38:08,000 --> 01:38:11,000
+gives us this nice big number event, right?
+
+1018
+01:38:11,000 --> 01:38:15,000
+So
+
+1019
+01:38:15,000 --> 01:38:28,000
+This is what it's doing and I don't have the calculation in front of me. But it's going through each character. It's using that ASCII value. It's summing up
+
+1020
+01:38:28,000 --> 01:38:40,000
+Over there's a power depending on where in the string the character is, and it's coming up with this nice number. And this is… it's a big number, but it's fast for computers to do
+
+1021
+01:38:40,000 --> 01:38:44,000
+And it gives us this nice
+
+1022
+01:38:44,000 --> 01:38:47,000
+Deterministic
+
+1023
+01:38:47,000 --> 01:38:50,000
+fast and distributed
+
+1024
+01:38:50,000 --> 01:38:53,000
+Set of values
+
+1025
+01:38:53,000 --> 01:38:58,000
+for our inputs. So hash of dog
+
+1026
+01:38:58,000 --> 01:39:09,000
+I'm gonna do a whole bunch of these. Ash of if there's a word you think I should put in, feel free to shout something out or put it in the chat.
+
+1027
+01:39:09,000 --> 01:39:14,000
+cache of
+
+1028
+01:39:14,000 --> 01:39:17,000
+payload
+
+1029
+01:39:17,000 --> 01:39:24,000
+Cash of 3.14159.
+
+1030
+01:39:24,000 --> 01:39:29,000
+So you can see here, these are big numbers and little numbers.
+
+1031
+01:39:29,000 --> 01:39:35,000
+But if I were to
+
+1032
+01:39:35,000 --> 01:39:44,000
+Give the same thing. Enter the pass the same value to the hash function. It's always going to give me the same thing in response.
+
+1033
+01:39:44,000 --> 01:39:51,000
+And so that hash value, Python's hash value is one that we could use
+
+1034
+01:39:51,000 --> 01:39:56,000
+to make our hash table a little bit easier, we can rely on that one.
+
+1035
+01:39:56,000 --> 01:40:00,000
+But if we were building our own hash table, we might use something else.
+
+1036
+01:40:00,000 --> 01:40:06,000
+Skype. There's a whole bunch of people who are smart about the math thing that might want to
+
+1037
+01:40:06,000 --> 01:40:14,000
+replace the hash functions. But Python's hash function is perfectly reasonable for this kind of work.
+
+1038
+01:40:14,000 --> 01:40:17,000
+Rudy, did that answer your question?
+
+1039
+01:40:17,000 --> 01:40:19,000
+Yeah, that was good.
+
+1040
+01:40:19,000 --> 01:40:22,000
+Let's see
+
+1041
+01:40:22,000 --> 01:40:30,000
+I used to, in my notes, show a slide that walked through how
+
+1042
+01:40:30,000 --> 01:40:34,000
+the hashing from a word to a number goes
+
+1043
+01:40:34,000 --> 01:40:37,000
+But then I decided
+
+1044
+01:40:37,000 --> 01:40:45,000
+No one really cares. So if you know that there is a process out there and you get to a point where you care, you can look it up.
+
+1045
+01:40:45,000 --> 01:40:53,000
+Any other questions?
+
+1046
+01:40:53,000 --> 01:41:01,000
+I'm always surprised at how quick the hash table implementation goes once we get to this point.
+
+1047
+01:41:01,000 --> 01:41:06,000
+Like, it felt like writing this out went very quickly.
+
+1048
+01:41:06,000 --> 01:41:09,000
+We've got to be missing something.
+
+1049
+01:41:09,000 --> 01:41:12,000
+But we've got our basic
+
+1050
+01:41:12,000 --> 01:41:19,000
+Create a hash table. And our hash table is really just it's we want to keep track of the number of buckets we have.
+
+1051
+01:41:19,000 --> 01:41:24,000
+We have to create our buckets, and then our keep track of the number of elements we have
+
+1052
+01:41:24,000 --> 01:41:27,000
+That's what we keep track of.
+
+1053
+01:41:27,000 --> 01:41:35,000
+Each bucket for a chained hash table. It's just a list of lists
+
+1054
+01:41:35,000 --> 01:41:37,000
+When we put something in
+
+1055
+01:41:37,000 --> 01:41:40,000
+We
+
+1056
+01:41:40,000 --> 01:41:44,000
+Take our key. And we
+
+1057
+01:41:44,000 --> 01:41:53,000
+Use our hash to turn it into a number. and then figure out which bucket it goes into just by modding by the number of buckets we have
+
+1058
+01:41:53,000 --> 01:41:59,000
+And then we put that key and the bucket
+
+1059
+01:41:59,000 --> 01:42:08,000
+We update the number of elements we have so we don't lose track of that. We check to see how many or what our load factor is.
+
+1060
+01:42:08,000 --> 01:42:13,000
+And then if our load factors over a certain amount, we resize
+
+1061
+01:42:13,000 --> 01:42:16,000
+When we resize
+
+1062
+01:42:16,000 --> 01:42:22,000
+We create we doubled the number of buckets we have
+
+1063
+01:42:22,000 --> 01:42:24,000
+Create a new list of lists.
+
+1064
+01:42:24,000 --> 01:42:29,000
+They go through everything in the current hash table.
+
+1065
+01:42:29,000 --> 01:42:31,000
+Calculate
+
+1066
+01:42:31,000 --> 01:42:34,000
+A new bucket for it to go in
+
+1067
+01:42:34,000 --> 01:42:40,000
+And put that item into the new buckets
+
+1068
+01:42:40,000 --> 01:42:46,000
+And that leads us to still having efficient
+
+1069
+01:42:46,000 --> 01:42:59,000
+Efficient insertion and retrieval of our hash table. Because our resize makes sure that our change tables are never too long
+
+1070
+01:42:59,000 --> 01:43:06,000
+And if our chain tables are never too long, the calculating of which bucket
+
+1071
+01:43:06,000 --> 01:43:08,000
+We're going to go look at
+
+1072
+01:43:08,000 --> 01:43:10,000
+That's fast
+
+1073
+01:43:10,000 --> 01:43:17,000
+And then we go to that location in our list. Which is an array. So we go to that location in memory.
+
+1074
+01:43:17,000 --> 01:43:28,000
+And then we go through our list, and because our list is small. We're going to find our key very quickly.
+
+1075
+01:43:28,000 --> 01:43:32,000
+Any questions?
+
+1076
+01:43:32,000 --> 01:43:33,000
+I have a quick question
+
+1077
+01:43:33,000 --> 01:43:34,000
+Yeah.
+
+1078
+01:43:34,000 --> 01:43:51,000
+So we've already kind of mentioned that one of the issues that we could potentially run into this that I mean, it gets resolved with like the resizing, but one of the issues is like you know a chain gets too long or like a bucket gets too full
+
+1079
+01:43:51,000 --> 01:43:55,000
+I'm wondering if there
+
+1080
+01:43:55,000 --> 01:44:00,000
+Is, like, the opposite problem, where a bucket just never gets failed because
+
+1081
+01:44:00,000 --> 01:44:12,000
+like our hashing function just doesn't evenly spread the items or like the elements across the entire hash table. Is there like
+
+1082
+01:44:12,000 --> 01:44:26,000
+a way to, like, prevent that, or, like, has there been a way to, like, like a standard way to prevent that from like all of the buckets not being used like utilized, or is it just like a
+
+1083
+01:44:26,000 --> 01:44:38,000
+We don't really care if a bucket's not being used. If a bucket is empty, that's okay. As long as none of the buckets being used are too long.
+
+1084
+01:44:38,000 --> 01:44:40,000
+And
+
+1085
+01:44:40,000 --> 01:44:42,000
+I guess
+
+1086
+01:44:42,000 --> 01:44:46,000
+Everything I've said is all probabilistic, right? It's
+
+1087
+01:44:46,000 --> 01:44:54,000
+We're calculating the average number of elements per bucket, not the exact number of elements per bucket
+
+1088
+01:44:54,000 --> 01:44:59,000
+So there could be a case where, hey, we have everything hashing to that same bucket
+
+1089
+01:44:59,000 --> 01:45:06,000
+Like we said, that hash function of H of X equals one. Everything hashes to the same bucket
+
+1090
+01:45:06,000 --> 01:45:17,000
+It doesn't matter how many buckets we get, we end up with everything in the same bucket, and that's not good
+
+1091
+01:45:17,000 --> 01:45:22,000
+I don't think
+
+1092
+01:45:22,000 --> 01:45:24,000
+So
+
+1093
+01:45:24,000 --> 01:45:32,000
+Most hash table implementations you come across and like our basic hash table implementation here for, let's say
+
+1094
+01:45:32,000 --> 01:45:53,000
+fairly typical inputs, you're probably going to be okay. But it is probabilistic. There could be a case where you find you're using a hash table implementation. It's always super inefficient. You dig into it, you see all the keys are hashing to the same bucket all the time over and over again, and that's giving you terrible performance
+
+1095
+01:45:53,000 --> 01:46:10,000
+That's the point where you say, okay, I'm going to change my hash function. I'm going to use a different hash function with this hash table, or I'm going to do something else. But that's when you start to get into the customization of your hash table.
+
+1096
+01:46:10,000 --> 01:46:16,000
+But that is something that in general, you don't need to worry about unless you see
+
+1097
+01:46:16,000 --> 01:46:19,000
+poor performance with your hash table.
+
+1098
+01:46:19,000 --> 01:46:21,000
+Does that make sense?
+
+1099
+01:46:21,000 --> 01:46:23,000
+That makes sense, yeah
+
+1100
+01:46:23,000 --> 01:46:34,000
+Yeah, yeah, and you'll notice this is kind of a theme with all of our data structures. We've looked at a bunch of data structures. There are trade-offs
+
+1101
+01:46:34,000 --> 01:46:40,000
+And there's always the case where there's a worst case scenario.
+
+1102
+01:46:40,000 --> 01:46:42,000
+And
+
+1103
+01:46:42,000 --> 01:46:55,000
+You don't always have to worry about the worst case scenario. It's only with like you're using it, and you notice that you've hit that worst case scenario. Then you need to do something different.
+
+1104
+01:46:55,000 --> 01:46:58,000
+Okay.
+
+1105
+01:46:58,000 --> 01:47:07,000
+I will put my notes up on Canvas. I did put the solution for the midterm on Canvas. So if anyone wants to look at it
+
+1106
+01:47:07,000 --> 01:47:13,000
+And check your… check your work, answer questions. You can. There's no class on Wednesday.
+
+1107
+01:47:13,000 --> 01:47:20,000
+No class on Wednesday. Happy Thanksgiving. Anyone need anything else?
+
+1108
+01:47:20,000 --> 01:47:22,000
+Okay
+
+1109
+01:47:22,000 --> 01:47:32,000
+Have a great week.
+

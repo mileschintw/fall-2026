@@ -18,6 +18,7 @@ Panopto folder：`Autumn 2026 - EE P 590 A Au 26`（`9b12e253-ce65-412c-837a-b4d
 | 2026-11-04（三） | Heaps, Midterm Review [Wed, Class 11] | 63942a74-515a-4069-9dc0-b4f90039f2f3 | 102 min | 945 |
 | 2026-11-16（一） | EEP 590A: Class Meeting（Panopto 預設標題；Module 7 Heaps，Class 12） | 67a9552d-b891-4cf3-9627-b50500303882 | 106 min | 622 |
 | 2026-11-18（三） | Heaps, Hashtable Intro [Wed, Class 13] | b6779590-a8a5-4d8b-9d98-b507003b7050 | 108 min | 944 |
+| 2026-11-23（一） | EEP 590A: Class Meeting（Panopto 預設標題；Module 5 Hashtables，Class 14） | a0beb1cc-fc97-40b3-b6b6-b50c00308b12 | 102 min | 1109 |
 
 - Class 1 在 Panopto 的 StartTime 是 10/02，應是上傳時間；上課日以 Canvas Module 0 與 BOOTSTRAP 為準（9/30）。
 - 資料夾內另有一支 9 秒的「EEP 590A: Class Meeting」（`0c21a835-…`），是空錄影，忽略。
@@ -27,3 +28,4 @@ Panopto folder：`Autumn 2026 - EE P 590 A Au 26`（`9b12e253-ce65-412c-837a-b4d
 - Class 12（11/16）的字幕從 00:52:07 才開始（前 52 分鐘沒有字幕），第一句同樣是 Panopto 插入的中文說明；長度以錄影 Duration 6392 秒計，最後一句 01:46:26。11/9 是 midterm、11/11 Veterans Day 停課，資料夾裡 11/11 有三支 1–7 分鐘的「EEP 590A: Class Meeting」（`a03a1152-…`、`46982037-…`、`e0a2fda0-…`），字幕是空的，忽略。
 - Class 13（11/18）的字幕從 00:07:27 才開始，第一句同樣是 Panopto 插入的中文說明；長度以最後一句 01:47:52 計。錄影掛在 Canvas 的 Module 5: Hashtables 底下。
 - Class 12（11/16）前 52 分鐘：Panopto 沒有字幕但有聲音。11/20 從 Panopto 的 HLS 串流（`DeliveryInfo.aspx` 的 `Streams[0].StreamUrl`）抓前 53 分鐘音訊，用 career-log 的 faster-whisper `large-v3-turbo`（`~/.career-log/speech/venv`，GPU，要把 venv 裡 `nvidia/*/bin` 加進 PATH；直接餵 16 kHz mono 的 numpy array）轉成 `2026-11-16/transcript.whisper.srt`（388 段，00:02:03–00:52:44，53 分鐘音訊跑 71 秒）。音訊檔不入 repo。
+- Class 14（11/23）的字幕從 00:05:08 才開始，第一句同樣是 Panopto 插入的中文說明；長度以最後一句 01:47:32 計。11/24 抓取時 Canvas 還沒掛這支錄影。同一次抓取另回傳 11/11 的空錄影 `e0a2fda0-…`（字幕 0 bytes），已丟棄。11/25（三）感恩節停課，老師說不錄補課影片。
