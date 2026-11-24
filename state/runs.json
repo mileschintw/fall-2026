@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-24T07:08:38-08:00",
+  "task": "晨報",
+  "status": "new",
+  "summary": "GPU 發表 sign-up 今天 5:59 PM；Teams：TA OH 改期；Panopto DSA 新錄影 1 部",
+  "output": "digests/2026-11-24.md"
+ },
+ {
   "at": "2026-11-23T18:09:33-08:00",
   "task": "截止提醒",
   "status": "new",
