@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-25T10:13:30-08:00",
+  "task": "上課筆記",
+  "status": "new",
+  "summary": "GPU 11/24 L8 筆記：thread coarsening、1-D/2-D register tiling（K4/K5）、NCU 分析",
+  "output": "gpu/lectures/2026-11-24/notes.md"
+ },
+ {
   "at": "2026-11-25T08:09:24-08:00",
   "task": "截止提醒",
   "status": "ok",

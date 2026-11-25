@@ -8,13 +8,14 @@
 - 晨報：11/25 三 07:09 🆕 GPU Design Spec 上 Canvas，12/4 截止；DSA 今天停課；L8 講義＋錄影；本組 T0 第 12 名 → [2026-11-25.md](2026-11-25.md)
 - 週規劃：11/22 日 21:05 ✅ 下週：11/24 5:59 PM GPU 發表 sign-up；Design Spec 12/2；A6 建議 11/28 開工 → [2026-11-22-weekly.md](2026-11-22-weekly.md)
 - 截止提醒：11/25 三 08:09 ✅ 沒有新東西 → —
-- 上課筆記：11/24 二 10:12 🆕 DSA 11/23 Class 14 筆記：hash table chaining／open addressing、load factor、resize（講義未發布） → [notes.md](../dsa/lectures/2026-11-23/notes.md)
+- 上課筆記：11/25 三 10:13 🆕 GPU 11/24 L8 筆記：thread coarsening、1-D/2-D register tiling（K4/K5）、NCU 分析 → [notes.md](../gpu/lectures/2026-11-24/notes.md)
 - 作業說明：11/25 三 07:45 🆕 新：gpu/project-design-specifications → [README.md](../gpu/hw/README.md)
 
 ## 紀錄
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 11/25 三 10:13 | 上課筆記 | 🆕 | GPU 11/24 L8 筆記：thread coarsening、1-D/2-D register tiling（K4/K5）、NCU 分析 | [notes.md](../gpu/lectures/2026-11-24/notes.md) |
 | 11/25 三 08:09 | 截止提醒 | ✅ | 沒有新東西 | — |
 | 11/25 三 07:45 | 作業說明 | 🆕 | 新：gpu/project-design-specifications | [README.md](../gpu/hw/README.md) |
 | 11/25 三 07:09 | 晨報 | 🆕 | GPU Design Spec 上 Canvas，12/4 截止；DSA 今天停課；L8 講義＋錄影；本組 T0 第 12 名 | [2026-11-25.md](2026-11-25.md) |
