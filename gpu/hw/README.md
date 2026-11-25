@@ -10,5 +10,6 @@
 | Homework #3 - Control Divergence & Tiled MMULT improvements & NCU profiling | 2026-11-06 (Fri) 11:59 PM PST | [README](hw3/README.md) | [spec.md](hw3/spec.md) |
 | Assignment #4 - Memory access patterns & MMULT coalesced corner turning kernel | 2026-11-15 (Sun) 11:59 PM PST | [README](assignment-4-memory-access-patterns-mmul/README.md) | [spec.md](assignment-4-memory-access-patterns-mmul/spec.md) |
 | Final Project - Proposal | 2026-11-20 (Fri) 11:59 PM PST | [README](final-project-proposal/README.md) | [spec.md](final-project-proposal/spec.md) |
+| Project - Design Specifications | 2026-12-04 (Fri) 11:59 PM PST | [README](project-design-specifications/README.md) | [spec.md](project-design-specifications/spec.md) |
 | Final Project Tier Submissions | 2026-12-15 (Tue) 05:00 PM PST | [README](final-project-tier-submissions/README.md) | [spec.md](final-project-tier-submissions/spec.md) |
 | Homework 0 - Preliminaries and Refreshers（不計分） | — | [README](hw0/README.md) | [spec.md](hw0/spec.md) |

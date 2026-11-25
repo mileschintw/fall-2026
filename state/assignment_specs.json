@@ -682,5 +682,36 @@
     ]
    }
   ]
+ },
+ "11810630": {
+  "course": "gpu",
+  "slug": "project-design-specifications",
+  "dir": "gpu/hw/project-design-specifications",
+  "name": "Project - Design Specifications",
+  "due_at": "2026-12-05T07:59:59Z",
+  "fp": {
+   "text": "9b66b43d0010dad4",
+   "links": [],
+   "files": {},
+   "readme": null,
+   "repo_files": {},
+   "due_at": "2026-12-05T07:59:59Z"
+  },
+  "files": [
+   "spec.md"
+  ],
+  "archived_at": "2026-11-25T07:43:45-08:00",
+  "summary_done": true,
+  "changes": [
+   "new"
+  ],
+  "history": [
+   {
+    "at": "2026-11-25T07:43:45-08:00",
+    "changes": [
+     "new"
+    ]
+   }
+  ]
  }
 }
