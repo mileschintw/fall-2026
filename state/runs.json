@@ -1,5 +1,12 @@
 [
  {
+  "at": "2026-11-25T07:09:53-08:00",
+  "task": "晨報",
+  "status": "new",
+  "summary": "GPU Design Spec 上 Canvas，12/4 截止；DSA 今天停課；L8 講義＋錄影；本組 T0 第 12 名",
+  "output": "digests/2026-11-25.md"
+ },
+ {
   "at": "2026-11-24T18:09:17-08:00",
   "task": "截止提醒",
   "status": "ok",

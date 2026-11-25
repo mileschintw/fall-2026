@@ -1,10 +1,25 @@
 {
- "updated_utc": "2026-11-22T05:14:00Z",
- "summary": "6 valid runs from 6 teams; 0 invalid submissions.",
- "ours": [],
+ "updated_utc": "2026-11-24T23:08:00Z",
+ "summary": "19 valid runs from 19 teams; 0 invalid submissions.",
+ "ours": [
+  {
+   "category": "FP32",
+   "tier": "Tier 0: Baseline",
+   "# in tier": "12",
+   "# overall": "12",
+   "Team": "Project-Team-13",
+   "images/s": "18.6",
+   "% roofline": "0.83",
+   "top-1 err %": "19.20",
+   "top-5 err %": "3.20",
+   "batch": "32",
+   "SM MHz": "1567",
+   "submitted": "11/23 05:43Z"
+  }
+ ],
  "invalid_ours": [],
  "leaders": [
-  "FP32 Tier 0: Baseline：Group-11 16.4 images/s（6 隊）"
+  "FP32 Tier 0: Baseline：Team-1 18.7 images/s（19 隊）"
  ],
- "saved_at": "2026-11-24T15:08:15+00:00"
+ "saved_at": "2026-11-25T15:09:20+00:00"
 }

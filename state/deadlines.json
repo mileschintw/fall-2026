@@ -78,6 +78,19 @@
   "canvas_id": 11881085
  },
  {
+  "key": "gpu-popquiz-l8",
+  "course": "GPU",
+  "item": "Popquiz Lecture 8 11/24",
+  "kind": "小考",
+  "due": "2026-11-24T20:15:00-08:00",
+  "due_label": "11/24（二） 8:15 PM PST",
+  "points": 3,
+  "status": "已評分",
+  "done": true,
+  "note": "課堂 pop quiz；11/25 晨報才在 Canvas 看到（已 graded）",
+  "canvas_id": 11919521
+ },
+ {
   "key": "gpu-hw3",
   "course": "GPU",
   "item": "HW3 Control Divergence & Tiled MMULT improvements & NCU profiling",
@@ -147,13 +160,13 @@
   "course": "GPU",
   "item": "Project Design Spec",
   "kind": "專題",
-  "due": "2026-12-02T23:59:00-08:00",
-  "due_label": "12/2（三） 11:59 PM PST",
-  "points": null,
-  "status": "未發布",
+  "due": "2026-12-04T23:59:59-08:00",
+  "due_label": "12/4（五） 11:59 PM PST",
+  "points": 21,
+  "status": "未交",
   "done": false,
-  "note": "原記 12/1 5:59 PM（10/6 syllabus），已作廢。來源：L7（11/17）講義 p53 時程表＋口述（gpu/lectures/2026-11-17/notes.md 第 14 點）。比重未定（原記 30% 是 10/6 舊說法）",
-  "canvas_id": null
+  "note": "11/25 晨報：Canvas 發布（id 11810630，due_at 2026-12-05T07:59:59Z，lock 12/15 11:59 PM PST，21 pts）。L7 講義 p53 寫 12/2 11:59 PM，依可信度規則 Canvas due_at > 投影片，改採 12/4；10/6 syllabus 的 12/1 5:59 PM 作廢",
+  "canvas_id": 11810630
  },
  {
   "key": "gpu-code-freeze",
