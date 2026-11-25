@@ -7,7 +7,7 @@
 ## 最新狀態
 - 晨報：11/24 二 07:08 🆕 GPU 發表 sign-up 今天 5:59 PM；Teams：TA OH 改期；Panopto DSA 新錄影 1 部 → [2026-11-24.md](2026-11-24.md)
 - 週規劃：11/22 日 21:05 ✅ 下週：11/24 5:59 PM GPU 發表 sign-up；Design Spec 12/2；A6 建議 11/28 開工 → [2026-11-22-weekly.md](2026-11-22-weekly.md)
-- 截止提醒：11/24 二 08:09 ✅ 沒有新東西 → —
+- 截止提醒：11/24 二 18:09 ✅ 沒有新東西 → —
 - 上課筆記：11/24 二 10:12 🆕 DSA 11/23 Class 14 筆記：hash table chaining／open addressing、load factor、resize（講義未發布） → [notes.md](../dsa/lectures/2026-11-23/notes.md)
 - 作業說明：11/24 二 07:44 ✅ 沒有新東西 → —
 
@@ -15,6 +15,7 @@
 
 | 時間（Pacific） | 任務 | 狀態 | 重點 | 輸出 |
 |---|---|---|---|---|
+| 11/24 二 18:09 | 截止提醒 | ✅ | 沒有新東西 | — |
 | 11/24 二 10:12 | 上課筆記 | 🆕 | DSA 11/23 Class 14 筆記：hash table chaining／open addressing、load factor、resize（講義未發布） | [notes.md](../dsa/lectures/2026-11-23/notes.md) |
 | 11/24 二 08:09 | 截止提醒 | ✅ | 沒有新東西 | — |
 | 11/24 二 07:44 | 作業說明 | ✅ | 沒有新東西 | — |
